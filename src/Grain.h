@@ -2,12 +2,6 @@
 
 #include <stdint.h>
 #include <stddef.h>
-#ifdef __cplusplus
-
-
-namespace daisysp
-{
-
 
 class Grain {
   public:
@@ -87,8 +81,3 @@ class Grain {
 
 
 };
-
-}
-
-
-#endif

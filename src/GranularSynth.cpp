@@ -1,11 +1,13 @@
+// TODO: make a .h file once somewhat done
+
 #include <stdio.h>
 #include "daisy_pod.h"
-#include "AudioFileManager.h"
+#include "Grain.h"
 
 using namespace daisy;
 
 DaisyPod pod;
-AudioFileManager filemgr; 
+// AudioFileManager filemgr; 
 
 /*
 

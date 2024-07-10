@@ -11,7 +11,6 @@ DaisyPod pod;
 FatFSInterface fsi;
 SdmmcHandler sd;
 FIL file;
-WavPlayer sampler;
 
 void blinkOnSDError(char type);
 bool scanWavFiles(const char* path);
@@ -30,25 +29,26 @@ bool scanWavFiles(const char* path);
 int main (void)
 {
   // init Daisy Pod
-  // size_t blocksize = 4;
   pod.Init();
   pod.seed.StartLog(true);
   pod.seed.PrintLine("log is working");
 
-  pod.SetAudioBlockSize(4);
+  size_t blocksize = 4;
+  pod.SetAudioBlockSize(blocksize);
+
+  // check block size/SR are as expected
   pod.seed.PrintLine("block size %d", int(pod.AudioBlockSize()));
   pod.seed.PrintLine("sr %d", int(pod.AudioSampleRate()));
 
   pod.led1.Set(255,255,255);
   pod.UpdateLeds();
 
-  // // init SD card
+  // init SD card
   SdmmcHandler::Config sd_cfg;
   sd_cfg.Defaults();
   sd.Init(sd_cfg);
 
-
-  // // handle SD card init error
+  // handle SD card init error
   if (sd.Init(sd_cfg) != SdmmcHandler::Result::OK) {
     blinkOnSDError('d');
     return 1;
@@ -70,6 +70,10 @@ int main (void)
   pod.seed.Print("sd path is:");
   pod.seed.Print("(%s)\n",path);
 
+// NOW PASS TO FILE MGR TO DO OTHER SD CARD OPS, LOAD FILES ETC
+// POSSIBLY TAKE ABOVE SD OPS OUT OF THIS FILE TOO ? WILL HAVE TO SEE - MAY HAVE TO STAY HERE
+
+
   if (scanWavFiles(path)){
     pod.seed.PrintLine("success reading filenames");
     pod.led1.SetGreen(1);
@@ -82,7 +86,10 @@ int main (void)
   // now pass to granular instrument or file mgr 
 }
 
+
+
 bool scanWavFiles(const char* path) {
+  /* TODO: change vector list to char* array to optimise */
   std::vector<std::string> files;
   DIR dir;
   FILINFO fno;
@@ -91,10 +98,10 @@ bool scanWavFiles(const char* path) {
   // size_t curr_index;
   // WavFileInfo info[16];
 
-  // TODO: return res code here for more error info 
-  // FRESULT res = FR_OK;
-  // res = f_opendir(&dir, path);
-  // if (res != FR_OK) {
+  /* TODO: return res code here for more error info 
+  FRESULT res = FR_OK;
+  res = f_opendir(&dir, path);
+  if (res != FR_OK) { */
   if (f_opendir(&dir,path)!=FR_OK){
     // pod.seed.PrintLine("failed to open dir: error %d",res);
     pod.seed.PrintLine("failed to open dir");
@@ -108,7 +115,7 @@ bool scanWavFiles(const char* path) {
 
       /* nb: below, we ignore AppleDouble metadata files starting with '._'
       so if a legit file starts with this prefix, it will be wrongly skipped
-      TODO: fix how this is handled */
+      TODO: fix how this is handled (or just stipulate filenames must be correctly formatted) */
       if (strncmp(name, "._",2)==0) continue;
       
       std::string fileName(name);
