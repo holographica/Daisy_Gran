@@ -113,7 +113,7 @@ bool scanWavFiles(const char* path) {
       // name = fno.fname;
       strcpy(name, fno.fname);
 
-      /* nb: below, we ignore AppleDouble metadata files starting with '._'
+      /* NOTE: below, we ignore AppleDouble metadata files starting with '._'
       so if a legit file starts with this prefix, it will be wrongly skipped
       TODO: fix how this is handled (or just stipulate filenames must be correctly formatted) */
       if (strncmp(name, "._",2)==0) continue;
