@@ -10,27 +10,30 @@ using namespace daisy;
 // FatFSInterface fsi;
 // SdmmcHandler sd;
 
-// functions i need
-
 // init function that takes sd card path, mounts  returns bool for successs?
 
 bool AudioFileManager::Init(){
   SdmmcHandler::Config sd_cfg;
   sd_cfg.Defaults();
   if (sd_->Init(sd_cfg) != SdmmcHandler::Result::OK) {
+    BlinkOnSDError('d');
     return false;
   }
+  pod_->seed.PrintLine("daisy sd init ok");
 
   fsi_->Init(FatFSInterface::Config::MEDIA_SD);
   if (f_mount(&fsi_->GetSDFileSystem(),"/",1) != FR_OK){
-    // TODO: return enums here + above
-    // for sd error blink function to print to log? 
+    BlinkOnSDError('f');
+    // TODO: change to enums here + above
+    // for sd error blink function
     return false;
   }
-
+  pod_->seed.PrintLine("fatfs init ok");
+  
   return true;
 }
 
+/* Scan SD card for wavs and save filenames */
 bool AudioFileManager::ScanWavFiles(){
   DIR dir;
   FILINFO fno;
@@ -85,11 +88,12 @@ bool AudioFileManager::ScanWavFiles(){
   for (int i=0; i<MAX_FILES; i++){
     /* stop if filename empty ie no more files */
     /* NOTE: this could poss break sth so double check it works */
-    if (names_[i][0]!='\0'){
+    if (names_[i][0]=='\0'){
       break;
     }
     pod_->seed.PrintLine(names_[i]);
   }
+
   pod_->seed.PrintLine("final count %d files", count);
   return true;
 }
@@ -106,8 +110,8 @@ bool AudioFileManager::LoadFile(int sel_idx) {
 
   if (sel_idx != curr_idx_) {
     f_close(&curr_file_);
-
   }
+  
   // NOTE: double check this
   return f_open(&curr_file_, names_[sel_idx], (FA_OPEN_EXISTING | FA_READ)) == FR_OK;
 }
@@ -121,3 +125,20 @@ bool AudioFileManager::CloseFile(){
 // getter for pointer to audio buffer that file is loaded into
 // getter for buffer size?
 
+// SD card init error! 
+void AudioFileManager::BlinkOnSDError (char type){
+  switch(type) {
+    case 'd': 
+      pod_->seed.PrintLine("Daisy SD init error");
+      break;
+    case 'f':
+      pod_->seed.PrintLine("FatFS SD error");
+  }
+  for (int x=0;x<20;x++){
+      System::Delay(500);
+      pod_->led1.Set(255,0,0);
+      pod_->UpdateLeds();
+      System::Delay(500);
+      pod_->led1.Set(255,255,255);
+    }
+}

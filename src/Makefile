@@ -1,11 +1,11 @@
 # Project Name
-TARGET = GranularSynth
+TARGET = Daisy_Gran
 
 # This is necessary if we want to use FatFS in our code
 USE_FATFS = 1
 
 # Sources
-CPP_SOURCES = main.cpp
+CPP_SOURCES = main.cpp AudioFileManager.cpp
 
 # Library Locations
 LIBDAISY_DIR = ../libDaisy
