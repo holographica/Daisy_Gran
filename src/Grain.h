@@ -28,21 +28,28 @@ class Grain {
   // not sure if should be public or private
 
     // audio sample rate
+    // NOTE: does this need to be in every grain?
     float sample_rate_;
-    // 
+    // NOTE: rename to eg wav_buffer for clarity?
     float sample_buffer_;
+    // NOTE: does every grain need this? 
     size_t buffer_size_;
 
+    // 0 to 1: 0==fully left, 1==fully right
+    float pan;
     // ie length, duration of grain
     float size_;
     /* position within audio sample/buffer 
        at which grain starts playback */
-    float start_pos_;
+    float start_pos_; // NOTE: rename to spawn pos?
     // ref to current absolute position within audio buffer
     float curr_pos_;
     // pitch is exposed to user - how many semitones shifted from original sample
     float pitch_;
     bool is_active_;
+
+    // loop time? ie grain (0.5s long) playing for 5s - could be ping pong
+
 
     /*
     - phase
@@ -77,7 +84,6 @@ class Grain {
         - this is calculated using ADSR values, curve shapes, etc
 
     */
-
 
 
 };
