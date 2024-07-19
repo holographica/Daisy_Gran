@@ -113,7 +113,11 @@ bool AudioFileManager::LoadFile(int sel_idx) {
   }
   pod_->seed.PrintLine("open file success: %s \n", names_[sel_idx]);
 
-  GetWavHeader(curr_file_);
+  if (!GetWavHeader(curr_file_)){
+    f_close(curr_file_);
+    pod_->seed.PrintLine("Closed file.");
+    return false;
+  }
 
   uint32_t end_time = System::GetNow();
   float load_time = (end_time-start_time)/1000.0f;
@@ -126,7 +130,6 @@ bool AudioFileManager::GetWavHeader(FIL *file){
   WAV_FormatTypeDef header;
   UINT bytes_read;
   // f_lseek(file,0); 
-
   FRESULT res = f_read(file, &header, sizeof(WAV_FormatTypeDef), &bytes_read);
 
   if (res != FR_OK || bytes_read != sizeof(WAV_FormatTypeDef)) {
@@ -140,7 +143,6 @@ bool AudioFileManager::GetWavHeader(FIL *file){
   /* check if audio data fits into pre-allocated 32mb buffer */
   if (header.SubCHunk2Size >= (2*ABS_CHNL_BUF_SIZE)) {
     pod_->seed.PrintLine("selected file exceeds max file size limit. Closing file.");
-    f_close(file);
     return false;
   }
   else curr_header_.file_size == header.SubCHunk2Size;
@@ -148,7 +150,6 @@ bool AudioFileManager::GetWavHeader(FIL *file){
   /* NOTE: checking bit depth here in case it breaks */
   if ((int)header.BitPerSample != BIT_DEPTH) {
     pod_->seed.PrintLine("File has wrong bit depth. Closing file.");
-    f_close(file);
     return false;
   }
   else curr_header_.bit_depth == header.BitPerSample;
@@ -156,6 +157,61 @@ bool AudioFileManager::GetWavHeader(FIL *file){
   /* NOTE: below we find the length of the audio in samples.  
     http://tiny.systems/software/soundProgrammer/WavFormatDocs.pdf */
   curr_header_.num_samples = (header.SubCHunk2Size) / (header.NbrChannels*(header.BitPerSample/8));
+  return true;
+}
+
+bool AudioFileManager::LoadAudioData(){
+  size_t samples_to_read = curr_header_.num_samples;
+  size_t bytes_to_read = samples_to_read * sizeof(int16_t);
+  size_t bytes2 = curr_header_.file_size;
+  pod_->seed.PrintLine("bytes to read: %d subchunk sz: %d", bytes_to_read, bytes2);
+
+  if (samples_to_read > ABS_CHNL_BUF_SIZE){
+    pod_->seed.PrintLine("selected file too large for buffer");
+    return false;
+  }
+  
+  const size_t chunk_size = 4096;
+  int16_t temp_buff[chunk_size];
+  size_t total_read = 0;
+  size_t left_idx = 0;
+  size_t right_idx = 0;
+
+  while (total_read < samples_to_read){
+    // get size of next chunk to be loaded
+    size_t chunk_bytes = (samples_to_read < chunk_size) ? samples_to_read : chunk_size;
+
+    UINT bytes_read;
+    FRESULT res = f_read(curr_file_, temp_buff, chunk_bytes, &bytes_read);
+
+    if (res != FR_OK || bytes_read != chunk_bytes){
+      pod_->seed.PrintLine("error reading audio chunk: %d", res);
+      return false;
+    }
+
+    size_t samples_in_chunk = bytes_read / sizeof(int16_t);
+
+    if (curr_header_.channels==1){
+      for (size_t i = 0; i< samples_in_chunk; i++){
+        float sample = s162f(temp_buff[i]);
+        left_channel[left_idx] = sample;
+        left_idx++;
+        right_channel[right_idx] = sample;
+        right_idx++;
+      }
+    }
+    else {
+      for (size_t i = 0; i<samples_in_chunk; i+=2){
+        left_channel[left_idx] = s162f(temp_buff[i]);
+        left_idx++;
+        right_channel[right_idx] = s162f(temp_buff[i+1]);
+        right_idx++;
+      }
+    }
+    total_read += samples_in_chunk;
+  }
+
+  pod_->seed.PrintLine("successfully loaded %zu samples", total_read);
   return true;
 }
 
