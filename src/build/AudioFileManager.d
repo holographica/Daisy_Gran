@@ -93,6 +93,10 @@ build/AudioFileManager.o: AudioFileManager.cpp \
  ../libDaisy/Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_usb.h \
  ../libDaisy/Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd_ex.h \
  ../libDaisy/Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_hcd.h \
+ AudioFileManager.h ../libDaisy/Middlewares/Third_Party/FatFs/src/ff.h \
+ ../libDaisy/Middlewares/Third_Party/FatFs/src/integer.h \
+ ../libDaisy/src/sys/ffconf.h ../libDaisy/src/util/bsp_sd_diskio.h \
+ ../libDaisy/Middlewares/Third_Party/FatFs/src/diskio.h \
  ../libDaisy/src/daisy_pod.h ../libDaisy/src/daisy_seed.h \
  ../libDaisy/src/daisy.h ../libDaisy/src/daisy_core.h \
  ../libDaisy/src/version.h ../libDaisy/src/sys/system.h \
@@ -117,19 +121,16 @@ build/AudioFileManager.o: AudioFileManager.cpp \
  ../libDaisy/src/hid/disp/display.h ../libDaisy/src/util/oled_fonts.h \
  ../libDaisy/src/hid/disp/graphics_common.h \
  ../libDaisy/src/hid/disp/oled_display.h ../libDaisy/src/hid/wavplayer.h \
- ../libDaisy/src/util/wav_format.h \
- ../libDaisy/Middlewares/Third_Party/FatFs/src/ff.h \
- ../libDaisy/Middlewares/Third_Party/FatFs/src/integer.h \
- ../libDaisy/src/sys/ffconf.h ../libDaisy/src/util/bsp_sd_diskio.h \
- ../libDaisy/src/hid/led.h ../libDaisy/src/hid/rgb_led.h \
- ../libDaisy/src/util/color.h ../libDaisy/src/dev/sr_595.h \
- ../libDaisy/src/dev/apds9960.h ../libDaisy/src/dev/codec_pcm3060.h \
- ../libDaisy/src/dev/codec_wm8731.h ../libDaisy/src/dev/dps310.h \
- ../libDaisy/src/dev/lcd_hd44780.h ../libDaisy/src/dev/mcp23x17.h \
- ../libDaisy/src/dev/max11300.h ../libDaisy/src/dev/tlv493d.h \
- ../libDaisy/src/dev/dotstar.h ../libDaisy/src/dev/neopixel.h \
- ../libDaisy/src/dev/neotrellis.h ../libDaisy/src/dev/icm20948.h \
- ../libDaisy/src/ui/ButtonMonitor.h ../libDaisy/src/ui/UiEventQueue.h \
+ ../libDaisy/src/util/wav_format.h ../libDaisy/src/hid/led.h \
+ ../libDaisy/src/hid/rgb_led.h ../libDaisy/src/util/color.h \
+ ../libDaisy/src/dev/sr_595.h ../libDaisy/src/dev/apds9960.h \
+ ../libDaisy/src/dev/codec_pcm3060.h ../libDaisy/src/dev/codec_wm8731.h \
+ ../libDaisy/src/dev/dps310.h ../libDaisy/src/dev/lcd_hd44780.h \
+ ../libDaisy/src/dev/mcp23x17.h ../libDaisy/src/dev/max11300.h \
+ ../libDaisy/src/dev/tlv493d.h ../libDaisy/src/dev/dotstar.h \
+ ../libDaisy/src/dev/neopixel.h ../libDaisy/src/dev/neotrellis.h \
+ ../libDaisy/src/dev/icm20948.h ../libDaisy/src/ui/ButtonMonitor.h \
+ ../libDaisy/src/ui/UiEventQueue.h \
  ../libDaisy/src/ui/../util/scopedirqblocker.h \
  ../libDaisy/Drivers/CMSIS/Include/cmsis_gcc.h \
  ../libDaisy/src/ui/../sys/system.h ../libDaisy/src/ui/PotMonitor.h \
@@ -141,7 +142,7 @@ build/AudioFileManager.o: AudioFileManager.cpp \
  ../libDaisy/src/util/PersistentStorage.h ../libDaisy/src/per/qspi.h \
  ../libDaisy/src/util/VoctCalibration.h \
  ../libDaisy/src/util/WaveTableLoader.h ../libDaisy/src/sys/fatfs.h \
- ../libDaisy/src/util/WavWriter.h AudioFileManager.h
+ ../libDaisy/src/util/WavWriter.h
 ../libDaisy/Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:
 ../libDaisy/Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h750xx.h:
 ../libDaisy/Drivers/CMSIS/Include/core_cm7.h:
@@ -236,6 +237,12 @@ build/AudioFileManager.o: AudioFileManager.cpp \
 ../libDaisy/Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_usb.h:
 ../libDaisy/Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd_ex.h:
 ../libDaisy/Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_hcd.h:
+AudioFileManager.h:
+../libDaisy/Middlewares/Third_Party/FatFs/src/ff.h:
+../libDaisy/Middlewares/Third_Party/FatFs/src/integer.h:
+../libDaisy/src/sys/ffconf.h:
+../libDaisy/src/util/bsp_sd_diskio.h:
+../libDaisy/Middlewares/Third_Party/FatFs/src/diskio.h:
 ../libDaisy/src/daisy_pod.h:
 ../libDaisy/src/daisy_seed.h:
 ../libDaisy/src/daisy.h:
@@ -284,10 +291,6 @@ build/AudioFileManager.o: AudioFileManager.cpp \
 ../libDaisy/src/hid/disp/oled_display.h:
 ../libDaisy/src/hid/wavplayer.h:
 ../libDaisy/src/util/wav_format.h:
-../libDaisy/Middlewares/Third_Party/FatFs/src/ff.h:
-../libDaisy/Middlewares/Third_Party/FatFs/src/integer.h:
-../libDaisy/src/sys/ffconf.h:
-../libDaisy/src/util/bsp_sd_diskio.h:
 ../libDaisy/src/hid/led.h:
 ../libDaisy/src/hid/rgb_led.h:
 ../libDaisy/src/util/color.h:
@@ -323,4 +326,3 @@ build/AudioFileManager.o: AudioFileManager.cpp \
 ../libDaisy/src/util/WaveTableLoader.h:
 ../libDaisy/src/sys/fatfs.h:
 ../libDaisy/src/util/WavWriter.h:
-AudioFileManager.h:

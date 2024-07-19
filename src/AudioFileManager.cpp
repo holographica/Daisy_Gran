@@ -1,20 +1,14 @@
 #include <stdio.h>
-#include "daisy_pod.h"
 #include "AudioFileManager.h"
-#include "ff.h"
+#include <vector>
 
 using namespace daisy;
-
-// should i init these here or in main class? 
-// here for now, move to main if i need to use them in other classes
-// FatFSInterface fsi;
-// SdmmcHandler sd;
-
-// init function that takes sd card path, mounts  returns bool for successs?
 
 bool AudioFileManager::Init(){
   SdmmcHandler::Config sd_cfg;
   sd_cfg.Defaults();
+  // sd_cfg.speed = SdmmcHandler::Speed::SLOW; // Uncomment if available
+  // sd_cfg.width = SdmmcHandler::BusWidth::BITS_1;
   if (sd_->Init(sd_cfg) != SdmmcHandler::Result::OK) {
     BlinkOnSDError('d');
     return false;
@@ -28,9 +22,7 @@ bool AudioFileManager::Init(){
     // for sd error blink function
     return false;
   }
-
-  pod_->seed.PrintLine("fatfs init ok");
-  
+  pod_->seed.PrintLine("fatfs init ok"); 
   return true;
 }
 
@@ -38,17 +30,9 @@ bool AudioFileManager::Init(){
 bool AudioFileManager::ScanWavFiles(){
   DIR dir;
   FILINFO fno;
-  /* NOTE: all file names must be less than 128 chars 
-    TODO: ask if this is fine or if i should actually
-          implement length checks + adding null terminator
-          (atm check is much easier but not as safe)
-  */
   char name[MAX_FNAME_LEN];
-
-  /* clear names array before use */
   memset(names_, '\0', sizeof(names_));
 
-  // do i need this? if just using "/"
   const char* path = fsi_->GetSDPath();
 
   if (f_opendir(&dir,path) != FR_OK){
@@ -67,11 +51,10 @@ bool AudioFileManager::ScanWavFiles(){
       strcpy(name, fno.fname);      
       if (strstr(name, ".wav") || strstr(name, ".WAV")){
         strcpy(names_[count],name);
-        // strncpy(names_[count],name, MAX_FNAME_LEN-1);
         count++;
       }
     } else {
-      // handle directories/hidden files
+      /* handle directories/hidden files */
       if (fno.fattrib & AM_DIR){
         pod_->seed.PrintLine("found dir: %s", fno.fname);
         continue;
@@ -87,12 +70,11 @@ bool AudioFileManager::ScanWavFiles(){
 
   // NOTE: converted to 1 index rather than 0 index
   file_count_ = count+1;
-  // set curr idx to first file in list
   curr_idx_ = 0;
 
   for (int i=0; i<MAX_FILES; i++){
     /* stop if filename empty ie no more files */
-    /* NOTE: this could poss break sth so double check it works */
+    /* NOTE: this could poss break sth */
     if (names_[i][0]=='\0'){
       break;
     }
@@ -100,15 +82,16 @@ bool AudioFileManager::ScanWavFiles(){
   }
 
   pod_->seed.PrintLine("final count %d files", count);
-  // NOTE: here return false if names array is empty
+  // TODO: return false if names array is empty
   return true;
 }
-
 
 /* TODO: atm i'm loading by index as this is easier than using the names.
         however i'm still saving names for (if/)when i get a screen ?
 */
 bool AudioFileManager::LoadFile(int sel_idx) {
+  uint32_t start_time = System::GetNow();
+
   // NOTE: do i want the index to wrap back around ? 
   // or will i do this within the UI? 
   // if (sel_idx >= file_count_) sel_idx %= file_count_;
@@ -120,94 +103,75 @@ bool AudioFileManager::LoadFile(int sel_idx) {
   if (sel_idx != curr_idx_) {
     pod_->seed.PrintLine("closing file in function");
     pod_->seed.PrintLine("selc: %d  curr: %d",sel_idx, curr_idx_);
-    f_close(&curr_file_);
+    f_close(curr_file_);
   }
 
-  pod_->seed.PrintLine("ok closed file in function");
+  FRESULT open_res = f_open(curr_file_, names_[sel_idx], (FA_OPEN_EXISTING | FA_READ));
+  if (open_res != FR_OK) {
+    pod_->seed.PrintLine("FAILED TO F_OPEN: %d", open_res);
+    return false;
+  }
+  pod_->seed.PrintLine("open file success: %s \n", names_[sel_idx]);
 
-  // NOTE: double check this (do i need open existing??)
-  if (f_open(&curr_file_, names_[sel_idx], (FA_OPEN_EXISTING | FA_READ)) != FR_OK) return false;
+  GetWavHeader(curr_file_);
 
-  if (!GetWavHeader(&curr_file_)) return false;
+  uint32_t end_time = System::GetNow();
+  float load_time = (end_time-start_time)/1000.0f;
+  pod_->seed.PrintLine("loaded in %.6f seconds", load_time);
 
-  // NOTE: now checks size + bit depth in wav header function 
-  // /* check if file fits into pre-allocated 32mb buffer */
-  // if (curr_header_.file_size>=WAV_BUFFER_SIZE){
-  //   pod_->seed.PrintLine("selected file exceeds max file size limit. Closing file.");
-  //   f_close(&curr_file_);
-  //   // NOTE: do i need to empty wav header here? 
-  //   return false;
-  // }
-
-  // if (curr_header_.bit_depth != BIT_DEPTH){
-  //   pod_->seed.PrintLine("File has wrong bit depth. Closing file.");
-  //   f_close(&curr_file_);
-  //   return false;
-  // }
-
-
-
-
-
-
-  // TODO: now load file into wav_buffer 
-  // NOTE: stipulate (for now) that all files MUST have 16 bit depth for simplicity
   return true;
 }
 
-bool AudioFileManager::GetWavHeader(FIL* file){
+bool AudioFileManager::GetWavHeader(FIL *file){
   WAV_FormatTypeDef header;
   UINT bytes_read;
+  // f_lseek(file,0); 
+
   FRESULT res = f_read(file, &header, sizeof(WAV_FormatTypeDef), &bytes_read);
 
-  if (res != FR_OK || bytes_read != sizeof(WAV_FormatTypeDef)) return false;
+  if (res != FR_OK || bytes_read != sizeof(WAV_FormatTypeDef)) {
+    pod_->seed.PrintLine("Failed to read WAV header. Error code: %d, Bytes read: %d", res, bytes_read);
+    return false;
+  }
+  // TODO: check if 48khz, if not then resample
+  curr_header_.sample_rate == (int)header.SampleRate;
+  curr_header_ .channels == (short)header.NbrChannels;
 
-  curr_header_.sample_rate == header.SampleRate;
-  curr_header_ .channels == header.NbrChannels;
-
-  /* check if file fits into pre-allocated 32mb buffer */
-  if (header.FileSize >= (2*CHNL_BUF_SIZE)) {
+  /* check if audio data fits into pre-allocated 32mb buffer */
+  if (header.SubCHunk2Size >= (2*ABS_CHNL_BUF_SIZE)) {
     pod_->seed.PrintLine("selected file exceeds max file size limit. Closing file.");
     f_close(file);
     return false;
   }
-  else curr_header_.file_size == header.FileSize;
+  else curr_header_.file_size == header.SubCHunk2Size;
 
   /* NOTE: checking bit depth here in case it breaks */
-  if (header.BitPerSample != BIT_DEPTH) {
+  if ((int)header.BitPerSample != BIT_DEPTH) {
     pod_->seed.PrintLine("File has wrong bit depth. Closing file.");
     f_close(file);
     return false;
   }
   else curr_header_.bit_depth == header.BitPerSample;
 
-  /* NOTE: below we find the length of the audio in samples. 
-  - we can just do (ChunkSize - 36) - see link below - here ChunkSize === FileSize 
-  - convert from bytes to samples (each sample is 16bits ie 2 bytes so divide by 2) 
-  - nb: each sample is 16bits because currently we only use 16bit WAV files
-  - http://tiny.systems/software/soundProgrammer/WavFormatDocs.pdf
-  */
-  curr_header_.len_samples == (header.FileSize - 36) / (header.NbrChannels*2);
-  pod_->seed.PrintLine("\n\nprinting header data");
-  pod_->seed.PrintLine("filesize - 36: %d", (header.FileSize-36));
-  pod_->seed.PrintLine("subchunk2size: %d", header.SubCHunk2Size);
+  /* NOTE: below we find the length of the audio in samples.  
+    http://tiny.systems/software/soundProgrammer/WavFormatDocs.pdf */
+  curr_header_.num_samples = (header.SubCHunk2Size) / (header.NbrChannels*(header.BitPerSample/8));
   return true;
 }
-
-
 
 bool AudioFileManager::CloseFile(){
   pod_->seed.Print("closing file: ");
   // curr_idx == index of current file
   pod_->seed.Print(names_[curr_idx_]);
   pod_->seed.PrintLine(" idx: %d "+ curr_idx_);
-  return f_close(&curr_file_) == FR_OK;
+  return f_close(curr_file_) == FR_OK;
 }
 
-// getters for wav file info
-
-// getter for pointer to audio buffer that file is loaded into
-// getter for buffer size?
+void AudioFileManager::SetBuffers(float *left, float *right, size_t buff_size){
+  left_channel = left;
+  right_channel = right;
+  buff_size_ = buff_size;
+}
 
 // SD card init error! 
 void AudioFileManager::BlinkOnSDError (char type){
@@ -227,8 +191,3 @@ void AudioFileManager::BlinkOnSDError (char type){
       pod_->led1.Set(255,255,255);
     }
 }
-
-// feature:
-
-// first button 
-
