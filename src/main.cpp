@@ -19,17 +19,25 @@ AudioFileManager filemgr(&sd, &fsi, &pod, &file);
 DSY_SDRAM_BSS float left_buf[CHANNEL_BUF_SIZE];
 DSY_SDRAM_BSS float right_buf[CHANNEL_BUF_SIZE];
 
+uint32_t wav_pos = 0;
 
-// void AudioCallback(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, size_t size)
-// {
-//   // NB: CAN USE daisy::AudioHandle::GetConfig() to get the global config for audio
-//           // (from daisy::AudioHandle class ref on libDaisy docs)
+// NB: CAN USE daisy::AudioHandle::GetConfig() to get the global config for audio
+// (from daisy::AudioHandle class ref on libDaisy docs)
+void AudioCallback(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, size_t size)
+{
+  for (size_t i = 0; i<size; i++){
+    if (wav_pos < filemgr.GetNumSamples()) {
+      out[0][i] = filemgr.GetLeftBuffer()[wav_pos]*0.5f;
+      out[1][i] = filemgr.GetRightBuffer()[wav_pos]*0.5f;
+      wav_pos++;
+    }
+    else {
+      out[0][i]=0.0f;
+      out[1][i]=0.0f;
+    }
+  }
+}
 
-//   // do something here ie loop over size, process samples, send them to output
-
-// }
-
-// functions: audiocallback, main, error handling functions? 
 
 int main (void)
 {
@@ -53,50 +61,57 @@ int main (void)
     pod.UpdateLeds();
   }
 
-
-  if (filemgr.LoadFile(3)){
-    pod.seed.PrintLine("success loading file 3");
+  if (filemgr.LoadFile(5)){
+    pod.seed.PrintLine("success loading file 0");
   } else {
-    pod.seed.PrintLine("loading file 3 failed");
+    pod.seed.PrintLine("loading file 0 failed");
   }
   
-
-  pod.seed.PrintLine("--------\n");
-  if (filemgr.CloseFile()){
-    pod.seed.PrintLine("success closing file 0");
-  } else {
-    pod.seed.PrintLine("closing file 0 failed");
+  pod.seed.PrintLine("now playing track 0");
+  pod.seed.PrintLine("callback rate: %.3f", pod.AudioCallbackRate());
+  for (int i =0; i<3000; i++) {
+    pod.seed.DelayMs(1);
+    if (i%1000==0) { pod.seed.PrintLine("%i seconds",(i/1000)); }
   }
-  pod.seed.PrintLine("first file load/close done\n");
 
-  if (filemgr.LoadFile(1)){
-    pod.seed.PrintLine("success loading file 1");
-  } else {
-    pod.seed.PrintLine("loading file 1 failed");
-  }
-  pod.seed.PrintLine("second file load done\n");
+  pod.StartAdc();
+  pod.StartAudio(AudioCallback);
+  pod.seed.PrintLine("got to final bit");
 
-  if (filemgr.LoadFile(2)){
-    pod.seed.PrintLine("success loading file 2");
-  } else {
-    pod.seed.PrintLine("loading file 2 failed");
-  }
-  if (filemgr.CloseFile()){
-    pod.seed.PrintLine("success closing file 2");
-  } else {
-    pod.seed.PrintLine("closing file 2 failed");
-  }
-  pod.seed.PrintLine("third file load/close done");
+} 
 
-  pod.led1.SetGreen(1);
-  pod.UpdateLeds();
+  // pod.seed.PrintLine("--------\n");
+  // if (filemgr.CloseFile()){
+  //   pod.seed.PrintLine("success closing file 0");
+  // } else {
+  //   pod.seed.PrintLine("closing file 0 failed");
+  // }
+  // pod.seed.PrintLine("first file load/close done\n");
+
+  // if (filemgr.LoadFile(1)){
+  //   pod.seed.PrintLine("success loading file 1");
+  // } else {
+  //   pod.seed.PrintLine("loading file 1 failed");
+  // }
+  // pod.seed.PrintLine("second file load done\n");
+
+  // if (filemgr.LoadFile(2)){
+  //   pod.seed.PrintLine("success loading file 2");
+  // } else {
+  //   pod.seed.PrintLine("loading file 2 failed");
+  // }
+  // if (filemgr.CloseFile()){
+  //   pod.seed.PrintLine("success closing file 2");
+  // } else {
+  //   pod.seed.PrintLine("closing file 2 failed");
+  // }
+  // pod.seed.PrintLine("third file load/close done");
+
+  // pod.led1.SetGreen(1);
+  // pod.UpdateLeds();
 
 
 
 
 
   // now pass to granular instrument or file mgr 
-}
-
-/* */
-
