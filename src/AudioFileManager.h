@@ -20,18 +20,23 @@ class AudioFileManager {
     void BlinkOnSDError (char type);  
     bool GetWavHeader(FIL *file);
 
+
+
+
     float* GetLeftBuffer() const { return left_channel; }
     float* GetRightBuffer() const { return right_channel; }
     size_t GetBufferSize() const { return buff_size_; } // do i need this? 
     int GetSampleRate() const { return curr_header_.sample_rate; }
     uint32_t GetNumSamples() const { return curr_header_.num_samples; }
     int GetNumChannels() const { return curr_header_.channels; }
+    int GetFileCount() const { return file_count_; }
+    void GetName(int idx, char* name) const { strcpy(name, names_[idx]); }
 
     static const int MAX_FILES = 32;                      
     static const int MAX_FNAME_LEN = 128;
     static const int ABS_CHNL_BUF_SIZE = 16 * 1024 * 1024;
     static const int BIT_DEPTH = 16;
-    
+
   private:
     struct WavHeader {
       int sample_rate;
@@ -64,7 +69,7 @@ class AudioFileManager {
     int file_count_;
 
     WavHeader curr_header_;
-
+    int audio_data_start_;
 
   // playback status? 
 };
