@@ -10,24 +10,23 @@ using namespace daisy;
 class AudioFileManager {
   public:
     AudioFileManager(SdmmcHandler *sd, FatFSInterface *fsi, DaisyPod *pod, FIL *file)
-      : sd_(sd), fsi_(fsi), pod_(pod), curr_file_(file), left_channel(nullptr), right_channel(nullptr), buff_size_(0) {};
+      : sd_(sd), fsi_(fsi), pod_(pod), curr_file_(file), left_channel(nullptr), right_channel(nullptr) {};
     
     bool Init();
     bool ScanWavFiles();
-    void SetBuffers(float *left, float *right, size_t buff_size);
+    void SetBuffers(int16_t *left, int16_t *right);
     bool LoadFile(int file_idx);
     bool CloseFile();
     void BlinkOnSDError (char type);  
     bool GetWavHeader(FIL *file);
+    bool CheckBufferIntegrity();
+    bool CheckChunkID(uint32_t chunkId, uint32_t targetVal);
 
-
-
-
-    float* GetLeftBuffer() const { return left_channel; }
-    float* GetRightBuffer() const { return right_channel; }
-    size_t GetBufferSize() const { return buff_size_; } // do i need this? 
+    int16_t* GetLeftBuffer() const { return left_channel; }
+    int16_t* GetRightBuffer() const { return right_channel; }
     int GetSampleRate() const { return curr_header_.sample_rate; }
-    uint32_t GetNumSamples() const { return curr_header_.num_samples; }
+    size_t GetSamplesPerChannel() const { return curr_header_.total_samples / curr_header_.channels; }
+    size_t GetTotalSamples() const { return curr_header_.total_samples; }
     int GetNumChannels() const { return curr_header_.channels; }
     int GetFileCount() const { return file_count_; }
     void GetName(int idx, char* name) const { strcpy(name, names_[idx]); }
@@ -43,7 +42,7 @@ class AudioFileManager {
       uint32_t file_size; // total size of audio data in wav file excl file/audio format info
       short channels;
       short bit_depth;
-      uint32_t num_samples; // no of samples/channel ie length of audio data in samples per channel
+      size_t total_samples;
     };
 
     bool LoadAudioData();
@@ -53,23 +52,17 @@ class AudioFileManager {
     FatFSInterface* fsi_;
     DaisyPod* pod_;
     FIL* curr_file_; 
-    float* left_channel;
-
-    float* right_channel;
-    size_t buff_size_;
+    // pointers to master left/right channel buffers
+    int16_t* left_channel;
+    int16_t* right_channel;
     // list of filenames for logging/screen
     char names_ [MAX_FILES][MAX_FNAME_LEN];
-
     // index of currently selected file
-    // NOTE: set to 0 here? or within init / scan func??
     int curr_idx_;
-
-    // total no of files scanned
-    // NOTE: 1 indexed not 0 indexed - do i need to do this?
     int file_count_;
-
+    // header data for currently selected file
     WavHeader curr_header_;
+    // byte in original wav file at which audio samples start
     int audio_data_start_;
-
-  // playback status? 
+    bool change_file_;
 };
