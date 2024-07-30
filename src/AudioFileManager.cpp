@@ -1,6 +1,4 @@
-#include <stdio.h>
 #include "AudioFileManager.h"
-#include <vector>
 
 using namespace daisy;
 
@@ -97,6 +95,8 @@ bool AudioFileManager::LoadFile(int sel_idx) {
     pod_->seed.PrintLine("Error parsing wav header: closed file.");
     return false;
   }
+
+  //TODO: CHECK IF SR = 48k? IF NOT RESAMPLE
 
   if (!LoadAudioData()) {
     pod_->seed.PrintLine("Failed to load audio data: Closing file");
@@ -210,12 +210,12 @@ bool AudioFileManager::LoadAudioData() {
   size_t samples_per_channel = GetSamplesPerChannel();
   pod_->seed.PrintLine("Total samples: %u || Samples per channel: %u", total_samples, samples_per_channel);
 
-  if (total_samples > ABS_CHNL_BUF_SIZE/sizeof(int16_t)) {
+  if (total_samples > ABS_CHNL_BUF_SIZE) {
     pod_->seed.PrintLine("Selected file too large for buffer");
     return false;
   }
 
-  size_t chunk_size = 4096;
+  size_t chunk_size = 16384;
   alignas(16) std::vector<int16_t> temp_buff(chunk_size*curr_header_.channels);
   size_t samples_read = 0;
   UINT bytes_read;
@@ -241,7 +241,7 @@ bool AudioFileManager::LoadAudioData() {
       }
     }
     samples_read += samples_in_chunk;
-    System::Delay(1);
+    // System::Delay(1);
   }
   pod_->seed.PrintLine("successfully read %u/%u samples per channel", samples_read, samples_per_channel);
   return true;

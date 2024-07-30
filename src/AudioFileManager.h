@@ -1,9 +1,12 @@
 #pragma once
 
 #include <stdio.h>
-#include "ff.h"
-#include "diskio.h"
+#include <stdint.h>
+#include <vector>
+// #include "ff.h"
+// #include "diskio.h"
 #include "daisy_pod.h"
+#include "audio_constants.h"
 
 using namespace daisy; 
 
@@ -24,7 +27,6 @@ class AudioFileManager {
 
     int16_t* GetLeftBuffer() const { return left_channel; }
     int16_t* GetRightBuffer() const { return right_channel; }
-    int GetSampleRate() const { return curr_header_.sample_rate; }
     size_t GetSamplesPerChannel() const { return curr_header_.total_samples / curr_header_.channels; }
     size_t GetTotalSamples() const { return curr_header_.total_samples; }
     int GetNumChannels() const { return curr_header_.channels; }
@@ -33,15 +35,13 @@ class AudioFileManager {
 
     static const int MAX_FILES = 32;                      
     static const int MAX_FNAME_LEN = 128;
-    static const int ABS_CHNL_BUF_SIZE = 16 * 1024 * 1024;
-    static const int BIT_DEPTH = 16;
 
   private:
     struct WavHeader {
       int sample_rate;
       uint32_t file_size; // total size of audio data in wav file excl file/audio format info
-      short channels;
-      short bit_depth;
+      int16_t channels;
+      int16_t bit_depth;
       size_t total_samples;
     };
 
