@@ -204,8 +204,8 @@ bool AudioFileManager::GetWavHeader(FIL* file){
 
 bool AudioFileManager::LoadAudioData() {
 
-  memset(left_channel, 0.0f, sizeof(&left_channel));
-  memset(right_channel, 0.0f, sizeof(&right_channel));
+  memset(left_channel_, 0.0f, sizeof(&left_channel_));
+  memset(right_channel_, 0.0f, sizeof(&right_channel_));
   size_t total_samples = GetTotalSamples();
   size_t samples_per_channel = GetSamplesPerChannel();
   pod_->seed.PrintLine("Total samples: %u || Samples per channel: %u", total_samples, samples_per_channel);
@@ -233,11 +233,11 @@ bool AudioFileManager::LoadAudioData() {
 
     for (size_t i=0; i<samples_in_chunk; i++){
       if (curr_header_.channels==1){
-        left_channel[i+samples_read] = right_channel[i+samples_read] = temp_buff[i];
+        left_channel_[i+samples_read] = right_channel_[i+samples_read] = temp_buff[i];
       }
       else {
-        left_channel[i+samples_read] = temp_buff[i * 2];
-        right_channel[i+samples_read] = temp_buff[i * 2 + 1];
+        left_channel_[i+samples_read] = temp_buff[i * 2];
+        right_channel_[i+samples_read] = temp_buff[i * 2 + 1];
       }
     }
     samples_read += samples_in_chunk;
@@ -255,8 +255,8 @@ bool AudioFileManager::CloseFile(){
 }
 
 void AudioFileManager::SetBuffers(int16_t *left, int16_t *right){
-  left_channel = left;
-  right_channel = right;
+  left_channel_ = left;
+  right_channel_ = right;
 }
 
 bool AudioFileManager::CheckBufferIntegrity(){
@@ -265,22 +265,22 @@ bool AudioFileManager::CheckBufferIntegrity(){
 
   for (size_t i = 0; i < GetSamplesPerChannel(); i++) {
     if (count>15) { break; }
-    if (std::isnan(left_channel[i])){
+    if (std::isnan(left_channel_[i])){
       pod_->seed.PrintLine("left NAN:invalid sample at idx %u", i);
       integrityOk = false;
       count++;
     }
-    else if (std::isnan(left_channel[i])){
+    else if (std::isnan(left_channel_[i])){
       pod_->seed.PrintLine("left inf:invalid sample at idx %u", i);
       integrityOk = false;
       count++;
     }
-    else if (std::isnan(right_channel[i])){
+    else if (std::isnan(right_channel_[i])){
       pod_->seed.PrintLine("right NAN:invalid sample at idx %u", i);
       integrityOk = false;
       count++;
     }
-    else if (std::isinf(right_channel[i])){
+    else if (std::isinf(right_channel_[i])){
       pod_->seed.PrintLine("right inf:invalid sample at idx %u", i);
       integrityOk = false;
       count++;

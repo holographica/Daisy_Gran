@@ -5,7 +5,7 @@
 // #include <stddef.h>
 #include "daisysp.h"
 // #include "daisy_pod.h"
-#include "audio_constants.h"
+#include "constants.h"
 #include "GrainPhasor.h"
 
 // using namespace daisy;
@@ -18,8 +18,9 @@ struct Sample {
 
 class Grain {
   public:
+    /* options for grain amplitude envelope type */
     enum class EnvelopeType {
-      /* Simple linear fade out ie: |\  */
+      /* Simple linear fade out: |\  */
       LinearDecay,
       /* Smooth symmetric increase/decrease
         ie linear fade in and out: /\  */
@@ -35,18 +36,18 @@ class Grain {
 
     // init with default values: 0.5s grain size, centre pan
     void Init(){
-      Init(500.0f, 0.5f);
+      Init(500.0f, 0.5f, GrainPhasor::Mode::OneShot);
     }
 
-    void Init(float size_ms, float pan){
-      phasor_.Init(0,1,GrainPhasor::Mode::OneShot);
+    void Init(float size_ms, float pan, GrainPhasor::Mode phasor_mode){
+      phasor_.Init(0,1,phasor_mode);
       SetSize(MsToSamples(size_ms));
       SetPan(pan);
     }
 
     void Trigger(float size_ms, float spawn_pos, float pitch_ratio, GrainPhasor::Mode mode){
       if (size_ms <= 0 || pitch_ratio <=0 || spawn_pos <0){
-        // invalid! 
+        // invalid vals
         DeactivateGrain();
         return;
       }
@@ -71,9 +72,11 @@ class Grain {
 
       /* approximate constant power panning - cheaper than using sin/cos
       https://www.cs.cmu.edu/~music/icm-online/readings/panlaws/panlaws.pdf
-      works because gain_l^2 + gain_r^2 = 1   */
-      float gain_left = Fast_Sqrt(1.0f-pan_);
-      float gain_right = Fast_Sqrt(pan_);
+      works since gain_l^2 + gain_r^2 = 1 */
+      float gain_left = std::sqrtf(1.0f-pan_);
+      // float gain_left = Fast_Sqrt(1.0f-pan_);
+      float gain_right = std::sqrtf(pan_);
+      // float gain_right = Fast_Sqrt(pan_);
       Sample out = {(left*env*gain_left),
                     (right*env*gain_right)};
 
@@ -95,7 +98,7 @@ class Grain {
     void DeactivateGrain() { is_active_ = false; }
 
   private:
-    /* simple phasor that handles phase management + incrementation */
+    /* simple phasor that handles phase management/incrementation */
     GrainPhasor phasor_;
     /* linear pan: 0 = fully left, 1 = fully right */
     float pan_;

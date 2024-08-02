@@ -2,13 +2,11 @@
 #include "daisysp.h"
 #include "daisy_pod.h"
 #include "AudioFileManager.h"
-#include "audio_constants.h"
+#include "constants.h"
 
 using namespace daisy;
 using namespace daisysp;
 
-/* max number of samples per channel
-  so allocate int16s - each is 2bytes -> 16mb */
 // constexpr size_t OUTPUT_BUFFER_SIZE = 48000*10 // 10seconds @ 48kHz
 
 SdmmcHandler sd;
@@ -24,7 +22,14 @@ size_t wav_pos = 0;
 bool change_file = false;
 bool now_playing = false;
 int curr_file_idx = 0;
-uint32_t numsamples = 0;
+uint32_t numsamples = 0; // NOTE: is this used for anything? 
+
+Color led1_colour;
+Color led2_colour;
+float k1v =0.0f;
+float k2v =0.0f;
+
+
 
 /* TODO here:
 - set up error message function so i can turn debug mode on/off with a bool
@@ -37,6 +42,15 @@ int16_t GetLeftBufData(size_t pos) {
 
 int16_t GetRightBufData(size_t pos) {
   return (pos < CHNL_BUF_SIZE_SAMPS) ? right_buf[pos] : 0;
+}
+
+void SetLedColours(Color::PresetColor color1, Color::PresetColor color2){
+  // pod.ClearLeds();
+  led1_colour.Init(color1);
+  led2_colour.Init(color2);
+  pod.led1.SetColor(led1_colour);
+  pod.led2.SetColor(led2_colour);
+  pod.UpdateLeds();
 }
 
 void LoadNewFile(){
@@ -80,6 +94,18 @@ void HandleButton2(){
     if (now_playing) { pod.seed.PrintLine("pause"); }
     if (!now_playing) { pod.seed.PrintLine("play"); }
     now_playing = !now_playing;
+  }
+}
+
+void HandleKnobs(){
+  float k1f = pod.knob1.GetRawFloat();
+  float k2f = pod.knob2.GetRawFloat();
+  float k1diff = fabsf(k1f-k1v);  
+  float k2diff = fabsf(k2f-k2v);  
+  if (k1diff > 0.002 || k2diff > 0.002 ){
+    pod.seed.PrintLine("knob floats: %.3f | %.3f", k1f,k2f);
+    k1v = k1f;
+    k2v = k2f;
   }
 }
 
@@ -128,7 +154,7 @@ int main (void){
   pod.Init();
   pod.seed.StartLog(true);
   pod.SetAudioBlockSize(48);
-  pod.SetAudioSampleRate(daisy::SaiHandle::Config::SampleRate::SAI_48KHZ);
+  pod.SetAudioSampleRate(SaiHandle::Config::SampleRate::SAI_48KHZ);
   pod.ProcessAllControls();
 
   filemgr.SetBuffers(left_buf, right_buf);
@@ -143,14 +169,22 @@ int main (void){
   }
   
   LoadNewFile();
+  SetLedColours(Color::PresetColor::GREEN, Color::PresetColor::GREEN);
+  System::Delay(3000);
 
+  pod.ClearLeds();
+  pod.UpdateLeds();
   pod.StartAdc();
   pod.StartAudio(AudioCallback);
+
   while(1){
     HandleEncoder();
     HandleButton1();
     HandleButton2();
+    HandleKnobs();
     System::Delay(1);
   }
 };
+
+
 

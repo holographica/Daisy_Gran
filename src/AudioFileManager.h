@@ -3,17 +3,15 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <vector>
-// #include "ff.h"
-// #include "diskio.h"
 #include "daisy_pod.h"
-#include "audio_constants.h"
+#include "constants.h"
 
 using namespace daisy; 
 
 class AudioFileManager {
   public:
     AudioFileManager(SdmmcHandler *sd, FatFSInterface *fsi, DaisyPod *pod, FIL *file)
-      : sd_(sd), fsi_(fsi), pod_(pod), curr_file_(file), left_channel(nullptr), right_channel(nullptr) {};
+      : sd_(sd), fsi_(fsi), pod_(pod), curr_file_(file), left_channel_(nullptr), right_channel_(nullptr) {};
     
     bool Init();
     bool ScanWavFiles();
@@ -25,8 +23,8 @@ class AudioFileManager {
     bool CheckBufferIntegrity();
     bool CheckChunkID(uint32_t chunkId, uint32_t targetVal);
 
-    int16_t* GetLeftBuffer() const { return left_channel; }
-    int16_t* GetRightBuffer() const { return right_channel; }
+    int16_t* GetLeftBuffer() const { return left_channel_; }
+    int16_t* GetRightBuffer() const { return right_channel_; }
     size_t GetSamplesPerChannel() const { return curr_header_.total_samples / curr_header_.channels; }
     size_t GetTotalSamples() const { return curr_header_.total_samples; }
     int GetNumChannels() const { return curr_header_.channels; }
@@ -53,8 +51,8 @@ class AudioFileManager {
     DaisyPod* pod_;
     FIL* curr_file_; 
     // pointers to master left/right channel buffers
-    int16_t* left_channel;
-    int16_t* right_channel;
+    int16_t* left_channel_;
+    int16_t* right_channel_;
     // list of filenames for logging/screen
     char names_ [MAX_FILES][MAX_FNAME_LEN];
     // index of currently selected file

@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,11 +58,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
   42              		.thumb
   43              		.thumb_func
   45              	_ZN16AudioFileManager12ScanWavFilesEv:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 2
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 2
 
 
   46              	.LVL0:
-  47              	.LFB3048:
+  47              	.LFB3049:
   48              		.file 1 "AudioFileManager.cpp"
    1:AudioFileManager.cpp **** #include "AudioFileManager.h"
    2:AudioFileManager.cpp **** 
@@ -118,7 +118,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
   69 0008 0746     		mov	r7, r0
   70 000a F2B0     		sub	sp, sp, #456
   71              		.cfi_def_cfa_offset 480
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 3
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 3
 
 
   72              		.loc 1 29 9 view .LVU8
@@ -178,7 +178,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
   41:../libDaisy/src/sys/fatfs.h ****     {
   42:../libDaisy/src/sys/fatfs.h ****         /** Selected Media that will be linked to FatFS 
   43:../libDaisy/src/sys/fatfs.h ****          *  These values can be OR'd together when multiple
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 4
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 4
 
 
   44:../libDaisy/src/sys/fatfs.h ****          *  volumes are desired 
@@ -238,7 +238,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
   93              		.loc 2 87 51 is_stmt 0 view .LVU15
   94 0018 7968     		ldr	r1, [r7, #4]
   95              	.LBE275:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 5
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 5
 
 
   96              	.LBE276:
@@ -298,7 +298,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  139              		.loc 1 43 13 is_stmt 0 view .LVU31
  140 0054 0DF13008 		add	r8, sp, #48
  141 0058 0DF1C601 		add	r1, sp, #198
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 6
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 6
 
 
  142 005c 4046     		mov	r0, r8
@@ -358,7 +358,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
   60:AudioFileManager.cpp ****   f_closedir(&dir);
  178              		.loc 1 60 3 view .LVU45
  179              		.loc 1 60 13 is_stmt 0 view .LVU46
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 7
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 7
 
 
  180 0088 6846     		mov	r0, sp
@@ -418,7 +418,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
   26:../libDaisy/src/daisy_seed.h ****      */
   27:../libDaisy/src/daisy_seed.h ****     void Configure();
   28:../libDaisy/src/daisy_seed.h **** 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 8
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 8
 
 
   29:../libDaisy/src/daisy_seed.h ****     /** 
@@ -478,7 +478,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
   83:../libDaisy/src/daisy_seed.h ****      */
   84:../libDaisy/src/daisy_seed.h ****     void SetAudioSampleRate(SaiHandle::Config::SampleRate samplerate);
   85:../libDaisy/src/daisy_seed.h **** 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 9
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 9
 
 
   86:../libDaisy/src/daisy_seed.h ****     /** Returns the audio sample rate in Hz as a floating point number.
@@ -538,7 +538,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  215              	.L14:
   65:AudioFileManager.cpp ****     /* NOTE: this could poss break sth */
   66:AudioFileManager.cpp ****     if (names_[i][0]=='\0'){
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 10
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 10
 
 
  216              		.loc 1 66 5 view .LVU58
@@ -598,7 +598,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  256              		.loc 1 73 3 is_stmt 1 view .LVU71
  257              		.loc 1 73 30 is_stmt 0 view .LVU72
  258 00b8 281E     		subs	r0, r5, #0
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 11
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 11
 
 
  259 00ba 18BF     		it	ne
@@ -658,7 +658,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  303              	.L4:
   60:AudioFileManager.cpp ****   file_count_ = count;
  304              		.loc 1 60 3 is_stmt 1 view .LVU86
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 12
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 12
 
 
   60:AudioFileManager.cpp ****   file_count_ = count;
@@ -718,7 +718,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  346 0106 0DF1C601 		add	r1, sp, #198
  347              	.LVL32:
  348              		.loc 3 128 23 view .LVU101
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 13
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 13
 
 
  349 010a 0848     		ldr	r0, .L41+16
@@ -751,7 +751,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  374 0128 0C000000 		.word	.LC2
  375 012c 14000000 		.word	.LC3
  376              		.cfi_endproc
- 377              	.LFE3048:
+ 377              	.LFE3049:
  379              		.section	.text._ZN16AudioFileManager12CheckChunkIDEmm,"ax",%progbits
  380              		.align	1
  381              		.p2align 2,,3
@@ -761,7 +761,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  385              		.thumb_func
  387              	_ZN16AudioFileManager12CheckChunkIDEmm:
  388              	.LVL36:
- 389              	.LFB3050:
+ 389              	.LFB3051:
   75:AudioFileManager.cpp **** 
   76:AudioFileManager.cpp **** bool AudioFileManager::LoadFile(int sel_idx) {
   77:AudioFileManager.cpp ****   uint32_t start_time = System::GetNow();
@@ -778,7 +778,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
   88:AudioFileManager.cpp ****   if (open_res != FR_OK) {
   89:AudioFileManager.cpp ****     pod_->seed.PrintLine("FatFS open error code: %d", open_res);
   90:AudioFileManager.cpp ****     return false;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 14
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 14
 
 
   91:AudioFileManager.cpp ****   }
@@ -823,7 +823,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  401 0006 4009     		lsrs	r0, r0, #5
  402 0008 7047     		bx	lr
  403              		.cfi_endproc
- 404              	.LFE3050:
+ 404              	.LFE3051:
  406 000a 00BF     		.section	.rodata._ZN16AudioFileManager12GetWavHeaderEP3FIL.str1.4,"aMS",%progbits,1
  407              		.align	2
  408              	.LC6:
@@ -838,7 +838,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  412      20636875 
  412      6E6B2073 
  412      697A653A 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 15
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 15
 
 
  412      20256400 
@@ -898,7 +898,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  436      43484E4C 
  436      533A2025 
  436      642C2042 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 16
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 16
 
 
  437              		.align	2
@@ -924,7 +924,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  449              		.thumb_func
  451              	_ZN16AudioFileManager12GetWavHeaderEP3FIL:
  452              	.LVL38:
- 453              	.LFB3051:
+ 453              	.LFB3052:
  119:AudioFileManager.cpp **** 
  120:AudioFileManager.cpp **** bool AudioFileManager::GetWavHeader(FIL* file){
  454              		.loc 1 120 47 is_stmt 1 view -0
@@ -958,7 +958,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  477              		.loc 1 123 23 view .LVU117
  478 000a 2C22     		movs	r2, #44
  479 000c 02AB     		add	r3, sp, #8
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 17
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 17
 
 
  480 000e 07A9     		add	r1, sp, #28
@@ -1018,7 +1018,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  138:AudioFileManager.cpp ****     // TODO: check if 48khz, if not then resample !!
  139:AudioFileManager.cpp ****     curr_header_.sample_rate = header.SampleRate;
  140:AudioFileManager.cpp ****     curr_header_.channels = header.NbrChannels;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 18
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 18
 
 
  141:AudioFileManager.cpp ****     curr_header_.bit_depth = header.BitPerSample;
@@ -1078,7 +1078,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  195:AudioFileManager.cpp ****   audio_data_start_ = f_tell(file); 
  196:AudioFileManager.cpp ****   pod_->seed.PrintLine("audio starts at idx %d", audio_data_start_);
  197:AudioFileManager.cpp ****   FRESULT seek_res = f_lseek(curr_file_, audio_data_start_);
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 19
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 19
 
 
  198:AudioFileManager.cpp ****     if (seek_res != FR_OK) {
@@ -1138,7 +1138,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  559              	.LVL48:
  560              	.LBB303:
  561              	.LBI297:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 20
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 20
 
 
  116:AudioFileManager.cpp ****     return chunkId == targetVal;
@@ -1198,7 +1198,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  601              	.LBE296:
  602              	.LBE310:
  137:AudioFileManager.cpp ****     // TODO: check if 48khz, if not then resample !!
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 21
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 21
 
 
  603              		.loc 1 137 3 is_stmt 1 view .LVU158
@@ -1258,7 +1258,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  648              		.loc 3 126 17 view .LVU169
  649              	.LBB317:
  650              		.loc 3 128 23 is_stmt 0 view .LVU170
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 22
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 22
 
 
  651 0066 5748     		ldr	r0, .L71+20
@@ -1318,7 +1318,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  698              	.LBE349:
  699              	.LBB350:
  700              	.LBB309:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 23
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 23
 
 
  701 0084 514A     		ldr	r2, .L71+28
@@ -1378,7 +1378,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  141:AudioFileManager.cpp ****     curr_header_.file_size = header.SubCHunk2Size;
  740              		.loc 1 141 5 is_stmt 1 view .LVU197
  142:AudioFileManager.cpp ****     /* below, we find the length of the audio in samples: 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 24
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 24
 
 
  741              		.loc 1 142 5 view .LVU198
@@ -1438,7 +1438,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  126:../libDaisy/src/daisy_seed.h ****     {
  781              		.loc 3 126 17 view .LVU213
  782              	.LBB356:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 25
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 25
 
 
  128:../libDaisy/src/daisy_seed.h ****     }
@@ -1498,7 +1498,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  823 00ec 9BE7     		b	.L47
  824              	.LVL70:
  825              	.L49:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 26
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 26
 
 
  149:AudioFileManager.cpp ****     curr_header_.sample_rate = header.SampleRate;
@@ -1558,7 +1558,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  151:AudioFileManager.cpp ****     curr_header_.bit_depth = header.BitPerSample;
  869              		.loc 1 151 5 is_stmt 1 view .LVU241
  151:AudioFileManager.cpp ****     curr_header_.bit_depth = header.BitPerSample;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 27
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 27
 
 
  870              		.loc 1 151 27 is_stmt 0 view .LVU242
@@ -1618,7 +1618,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  128:../libDaisy/src/daisy_seed.h ****     }
  912              		.loc 3 128 23 is_stmt 0 view .LVU255
  913 0136 2C48     		ldr	r0, .L71+56
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 28
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 28
 
 
  914 0138 05A9     		add	r1, sp, #20
@@ -1678,7 +1678,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  954 0156 1944     		add	r1, r1, r3
  955 0158 FFF7FEFF 		bl	f_lseek
  956              	.LVL83:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 29
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 29
 
 
  957              	.L56:
@@ -1738,7 +1738,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  998              		.loc 3 128 23 view .LVU282
  999 017c FFF7FEFF 		bl	_ZN5daisy6LoggerILNS_17LoggerDestinationE1EE9PrintLineEPKcz
  1000              	.LVL86:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 30
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 30
 
 
  128:../libDaisy/src/daisy_seed.h ****     }
@@ -1798,7 +1798,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  1044              	.LBB344:
  1045              	.LBB341:
  166:AudioFileManager.cpp ****         break;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 31
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 31
 
 
  1046              		.loc 1 166 9 is_stmt 1 view .LVU294
@@ -1838,7 +1838,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  1076              	.LBE347:
  1077              	.LBE364:
  1078              		.cfi_endproc
- 1079              	.LFE3051:
+ 1079              	.LFE3052:
  1081              		.section	.rodata._ZN16AudioFileManager13LoadAudioDataEv.str1.4,"aMS",%progbits,1
  1082              		.align	2
  1083              	.LC18:
@@ -1858,7 +1858,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  1089              	.LC20:
  1090 0054 63616E6E 		.ascii	"cannot create std::vector larger than max_size()\000"
  1090      6F742063 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 32
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 32
 
 
  1090      72656174 
@@ -1887,7 +1887,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  1103              		.thumb_func
  1105              	_ZN16AudioFileManager13LoadAudioDataEv:
  1106              	.LVL89:
- 1107              	.LFB3052:
+ 1107              	.LFB3053:
  204:AudioFileManager.cpp **** 
  205:AudioFileManager.cpp **** bool AudioFileManager::LoadAudioData() {
  1108              		.loc 1 205 40 view -0
@@ -1895,7 +1895,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  1110              		@ args = 0, pretend = 0, frame = 16
  1111              		@ frame_needed = 0, uses_anonymous_args = 0
  206:AudioFileManager.cpp **** 
- 207:AudioFileManager.cpp ****   memset(left_channel, 0.0f, sizeof(&left_channel));
+ 207:AudioFileManager.cpp ****   memset(left_channel_, 0.0f, sizeof(&left_channel_));
  1112              		.loc 1 207 3 view .LVU300
  205:AudioFileManager.cpp **** 
  1113              		.loc 1 205 40 is_stmt 0 view .LVU301
@@ -1918,39 +1918,37 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  1130              		.file 4 "AudioFileManager.h"
    1:AudioFileManager.h **** #pragma once
    2:AudioFileManager.h **** 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 33
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 33
 
 
    3:AudioFileManager.h **** #include <stdio.h>
    4:AudioFileManager.h **** #include <stdint.h>
    5:AudioFileManager.h **** #include <vector>
-   6:AudioFileManager.h **** #include "ff.h"
-   7:AudioFileManager.h **** #include "diskio.h"
-   8:AudioFileManager.h **** #include "daisy_pod.h"
-   9:AudioFileManager.h **** 
-  10:AudioFileManager.h **** using namespace daisy; 
-  11:AudioFileManager.h **** 
-  12:AudioFileManager.h **** class AudioFileManager {
-  13:AudioFileManager.h ****   public:
-  14:AudioFileManager.h ****     AudioFileManager(SdmmcHandler *sd, FatFSInterface *fsi, DaisyPod *pod, FIL *file)
-  15:AudioFileManager.h ****       : sd_(sd), fsi_(fsi), pod_(pod), curr_file_(file), left_channel(nullptr), right_channel(nullp
-  16:AudioFileManager.h ****     
-  17:AudioFileManager.h ****     bool Init();
-  18:AudioFileManager.h ****     bool ScanWavFiles();
-  19:AudioFileManager.h ****     void SetBuffers(int16_t *left, int16_t *right);
-  20:AudioFileManager.h ****     bool LoadFile(int file_idx);
-  21:AudioFileManager.h ****     bool CloseFile();
-  22:AudioFileManager.h ****     void BlinkOnSDError (char type);  
-  23:AudioFileManager.h ****     bool GetWavHeader(FIL *file);
-  24:AudioFileManager.h ****     bool CheckBufferIntegrity();
-  25:AudioFileManager.h ****     bool CheckChunkID(uint32_t chunkId, uint32_t targetVal);
-  26:AudioFileManager.h **** 
-  27:AudioFileManager.h ****     int16_t* GetLeftBuffer() const { return left_channel; }
-  28:AudioFileManager.h ****     int16_t* GetRightBuffer() const { return right_channel; }
-  29:AudioFileManager.h ****     int GetSampleRate() const { return curr_header_.sample_rate; }
-  30:AudioFileManager.h ****     size_t GetSamplesPerChannel() const { return curr_header_.total_samples / curr_header_.channels
-  31:AudioFileManager.h ****     size_t GetTotalSamples() const { return curr_header_.total_samples; }
- 1131              		.loc 4 31 58 view .LVU303
+   6:AudioFileManager.h **** #include "daisy_pod.h"
+   7:AudioFileManager.h **** #include "constants.h"
+   8:AudioFileManager.h **** 
+   9:AudioFileManager.h **** using namespace daisy; 
+  10:AudioFileManager.h **** 
+  11:AudioFileManager.h **** class AudioFileManager {
+  12:AudioFileManager.h ****   public:
+  13:AudioFileManager.h ****     AudioFileManager(SdmmcHandler *sd, FatFSInterface *fsi, DaisyPod *pod, FIL *file)
+  14:AudioFileManager.h ****       : sd_(sd), fsi_(fsi), pod_(pod), curr_file_(file), left_channel_(nullptr), right_channel_(nul
+  15:AudioFileManager.h ****     
+  16:AudioFileManager.h ****     bool Init();
+  17:AudioFileManager.h ****     bool ScanWavFiles();
+  18:AudioFileManager.h ****     void SetBuffers(int16_t *left, int16_t *right);
+  19:AudioFileManager.h ****     bool LoadFile(int file_idx);
+  20:AudioFileManager.h ****     bool CloseFile();
+  21:AudioFileManager.h ****     void BlinkOnSDError (char type);  
+  22:AudioFileManager.h ****     bool GetWavHeader(FIL *file);
+  23:AudioFileManager.h ****     bool CheckBufferIntegrity();
+  24:AudioFileManager.h ****     bool CheckChunkID(uint32_t chunkId, uint32_t targetVal);
+  25:AudioFileManager.h **** 
+  26:AudioFileManager.h ****     int16_t* GetLeftBuffer() const { return left_channel_; }
+  27:AudioFileManager.h ****     int16_t* GetRightBuffer() const { return right_channel_; }
+  28:AudioFileManager.h ****     size_t GetSamplesPerChannel() const { return curr_header_.total_samples / curr_header_.channels
+  29:AudioFileManager.h ****     size_t GetTotalSamples() const { return curr_header_.total_samples; }
+ 1131              		.loc 4 29 58 view .LVU303
  1132 000a 00F58055 		add	r5, r0, #4096
  1133              	.LBE451:
  1134              	.LBE450:
@@ -1960,7 +1958,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  1137              		.cfi_def_cfa_offset 56
  1138              		.loc 1 207 9 view .LVU305
  1139 0010 C3F80090 		str	r9, [r3]	@ unaligned
- 208:AudioFileManager.cpp ****   memset(right_channel, 0.0f, sizeof(&right_channel));
+ 208:AudioFileManager.cpp ****   memset(right_channel_, 0.0f, sizeof(&right_channel_));
  1140              		.loc 1 208 3 is_stmt 1 view .LVU306
  205:AudioFileManager.cpp **** 
  1141              		.loc 1 205 40 is_stmt 0 view .LVU307
@@ -1978,35 +1976,35 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  1151              	.LBE454:
  1152              	.LBE453:
  1153              		.loc 1 208 9 view .LVU311
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 34
-
-
  1154 001a C3F80090 		str	r9, [r3]	@ unaligned
  209:AudioFileManager.cpp ****   size_t total_samples = GetTotalSamples();
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 34
+
+
  1155              		.loc 1 209 3 is_stmt 1 view .LVU312
  1156              	.LVL91:
  1157              	.LBB457:
  1158              	.LBI450:
- 1159              		.loc 4 31 12 view .LVU313
+ 1159              		.loc 4 29 12 view .LVU313
  1160              	.LBB452:
- 1161              		.loc 4 31 38 view .LVU314
- 1162              		.loc 4 31 58 is_stmt 0 view .LVU315
+ 1161              		.loc 4 29 38 view .LVU314
+ 1162              		.loc 4 29 58 is_stmt 0 view .LVU315
  1163 001e EE6A     		ldr	r6, [r5, #44]
  1164              	.LVL92:
- 1165              		.loc 4 31 58 view .LVU316
+ 1165              		.loc 4 29 58 view .LVU316
  1166              	.LBE452:
  1167              	.LBE457:
  210:AudioFileManager.cpp ****   size_t samples_per_channel = GetSamplesPerChannel();
  1168              		.loc 1 210 3 is_stmt 1 view .LVU317
  1169              	.LBB458:
  1170              	.LBI458:
-  30:AudioFileManager.h ****     size_t GetTotalSamples() const { return curr_header_.total_samples; }
- 1171              		.loc 4 30 12 view .LVU318
+  28:AudioFileManager.h ****     size_t GetTotalSamples() const { return curr_header_.total_samples; }
+ 1171              		.loc 4 28 12 view .LVU318
  1172              	.LBB459:
-  30:AudioFileManager.h ****     size_t GetTotalSamples() const { return curr_header_.total_samples; }
- 1173              		.loc 4 30 43 view .LVU319
-  30:AudioFileManager.h ****     size_t GetTotalSamples() const { return curr_header_.total_samples; }
- 1174              		.loc 4 30 92 is_stmt 0 view .LVU320
+  28:AudioFileManager.h ****     size_t GetTotalSamples() const { return curr_header_.total_samples; }
+ 1173              		.loc 4 28 43 view .LVU319
+  28:AudioFileManager.h ****     size_t GetTotalSamples() const { return curr_header_.total_samples; }
+ 1174              		.loc 4 28 92 is_stmt 0 view .LVU320
  1175 0020 B5F928B0 		ldrsh	fp, [r5, #40]
  1176              	.LBE459:
  1177              	.LBE458:
@@ -2019,12 +2017,12 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  1183              	.LBE461:
  1184              	.LBB462:
  1185              	.LBB460:
-  30:AudioFileManager.h ****     size_t GetTotalSamples() const { return curr_header_.total_samples; }
- 1186              		.loc 4 30 92 view .LVU322
+  28:AudioFileManager.h ****     size_t GetTotalSamples() const { return curr_header_.total_samples; }
+ 1186              		.loc 4 28 92 view .LVU322
  1187 0026 B6FBFBF8 		udiv	r8, r6, fp
  1188              	.LVL93:
-  30:AudioFileManager.h ****     size_t GetTotalSamples() const { return curr_header_.total_samples; }
- 1189              		.loc 4 30 92 view .LVU323
+  28:AudioFileManager.h ****     size_t GetTotalSamples() const { return curr_header_.total_samples; }
+ 1189              		.loc 4 28 92 view .LVU323
  1190              	.LBE460:
  1191              	.LBE462:
  211:AudioFileManager.cpp ****   pod_->seed.PrintLine("Total samples: %u || Samples per channel: %u", total_samples, samples_per_c
@@ -2038,11 +2036,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  1197              		.loc 3 128 23 is_stmt 0 view .LVU326
  1198 002a 4246     		mov	r2, r8
  1199 002c FFF7FEFF 		bl	_ZN5daisy6LoggerILNS_17LoggerDestinationE1EE9PrintLineEPKcz
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 35
-
-
  1200              	.LVL94:
  128:../libDaisy/src/daisy_seed.h ****     }
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 35
+
+
  1201              		.loc 3 128 23 view .LVU327
  1202              	.LBE456:
  1203              	.LBE463:
@@ -2098,11 +2096,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
   28:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/allocator.h ****  *
   29:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/allocator.h ****  * Permission to use, copy, modify, distribute and sell this software
   30:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/allocator.h ****  * and its documentation for any purpose is hereby granted without fee,
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 36
-
-
   31:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/allocator.h ****  * provided that the above copyright notice appear in all copies and
   32:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/allocator.h ****  * that both that copyright notice and this permission notice appear
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 36
+
+
   33:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/allocator.h ****  * in supporting documentation.  Silicon Graphics makes no
   34:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/allocator.h ****  * representations about the suitability of this software for any
   35:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/allocator.h ****  * purpose.  It is provided "as is" without express or implied warranty.
@@ -2158,11 +2156,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
   85:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/allocator.h **** 	struct rebind
   86:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/allocator.h **** 	{ typedef allocator<_Tp1> other; };
   87:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/allocator.h **** #endif
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 37
-
-
   88:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/allocator.h **** 
   89:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/allocator.h **** #if __cplusplus >= 201103L
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 37
+
+
   90:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/allocator.h ****       // _GLIBCXX_RESOLVE_LIB_DEFECTS
   91:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/allocator.h ****       // 2103. std::allocator propagate_on_container_move_assignment
   92:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/allocator.h ****       typedef true_type propagate_on_container_move_assignment;
@@ -2218,11 +2216,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  142:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/allocator.h ****       // These were removed for C++20.
  143:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/allocator.h ****       typedef _Tp*       pointer;
  144:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/allocator.h ****       typedef const _Tp* const_pointer;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 38
-
-
  145:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/allocator.h ****       typedef _Tp&       reference;
  146:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/allocator.h ****       typedef const _Tp& const_reference;
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 38
+
+
  147:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/allocator.h **** 
  148:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/allocator.h ****       template<typename _Tp1>
  149:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/allocator.h **** 	struct rebind
@@ -2278,11 +2276,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
   31:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/ext/new_allocator.h **** 
   32:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/ext/new_allocator.h **** #include <bits/c++config.h>
   33:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/ext/new_allocator.h **** #include <new>
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 39
-
-
   34:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/ext/new_allocator.h **** #include <bits/functexcept.h>
   35:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/ext/new_allocator.h **** #include <bits/move.h>
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 39
+
+
   36:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/ext/new_allocator.h **** #if __cplusplus >= 201103L
   37:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/ext/new_allocator.h **** #include <type_traits>
   38:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/ext/new_allocator.h **** #endif
@@ -2338,11 +2336,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
    2:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 
    3:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** // Copyright (C) 2001-2020 Free Software Foundation, Inc.
    4:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** //
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 40
-
-
    5:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** // This file is part of the GNU ISO C++ Library.  This library is free
    6:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** // software; you can redistribute it and/or modify it under the
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 40
+
+
    7:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** // terms of the GNU General Public License as published by the
    8:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** // Free Software Foundation; either version 3, or (at your option)
    9:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** // any later version.
@@ -2398,11 +2396,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
   59:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** #include <bits/stl_iterator_base_funcs.h>
   60:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** #include <bits/functexcept.h>
   61:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** #include <bits/concept_check.h>
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 41
-
-
   62:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** #if __cplusplus >= 201103L
   63:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** #include <initializer_list>
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 41
+
+
   64:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** #endif
   65:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** #if __cplusplus > 201703L
   66:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** # include <compare>
@@ -2458,11 +2456,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  116:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	void
  117:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	_M_swap_data(_Vector_impl_data& __x) _GLIBCXX_NOEXCEPT
  118:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	{
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 42
-
-
  119:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	  // Do not use std::swap(_M_start, __x._M_start), etc as it loses
  120:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	  // information used by TBAA.
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 42
+
+
  121:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	  _Vector_impl_data __tmp;
  122:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	  __tmp._M_copy_data(*this);
  123:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	  _M_copy_data(__x);
@@ -2518,11 +2516,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  173:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	  };
  174:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 
  175:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	// Enable ASan annotations for memory obtained from std::allocator.
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 43
-
-
  176:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	template<typename _Up>
  177:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	  struct _Asan<allocator<_Up> >
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 43
+
+
  178:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	  {
  179:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	    typedef typename __gnu_cxx::__alloc_traits<_Tp_alloc_type>
  180:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	      ::size_type size_type;
@@ -2578,11 +2576,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  230:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 
  231:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	    // Tell ASan when unused capacity is initialized to be valid.
  232:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	    struct _Grow
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 44
-
-
  233:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	    {
  234:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	      _Grow(_Vector_impl& __impl, size_type __n)
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 44
+
+
  235:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	      : _M_impl(__impl), _M_n(__n)
  236:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	      { _S_grow(_M_impl, __n); }
  237:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 
@@ -2638,11 +2636,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  287:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** #if __cplusplus >= 201103L
  288:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       _Vector_base() = default;
  289:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** #else
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 45
-
-
  290:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       _Vector_base() { }
  291:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** #endif
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 45
+
+
  292:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 
  293:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       _Vector_base(const allocator_type& __a) _GLIBCXX_NOEXCEPT
  294:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       : _M_impl(__a) { }
@@ -2698,11 +2696,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  344:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       {
  345:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	typedef __gnu_cxx::__alloc_traits<_Tp_alloc_type> _Tr;
  346:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	return __n != 0 ? _Tr::allocate(_M_impl, __n) : pointer();
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 46
-
-
  347:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       }
  348:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 46
+
+
  349:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       void
  350:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       _M_deallocate(pointer __p, size_t __n)
  351:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       {
@@ -2758,11 +2756,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  401:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       static_assert(is_same<typename remove_cv<_Tp>::type, _Tp>::value,
  402:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	  "std::vector must have a non-const, non-volatile value_type");
  403:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** # if __cplusplus > 201703L || defined __STRICT_ANSI__
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 47
-
-
  404:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       static_assert(is_same<typename _Alloc::value_type, _Tp>::value,
  405:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	  "std::vector must have the same value_type as its allocator");
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 47
+
+
  406:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** # endif
  407:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** #endif
  408:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 
@@ -2818,11 +2816,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  458:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 
  459:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       static pointer
  460:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       _S_do_relocate(pointer, pointer, pointer __result,
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 48
-
-
  461:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 		     _Tp_alloc_type&, false_type) noexcept
  462:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       { return __result; }
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 48
+
+
  463:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 
  464:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       static pointer
  465:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       _S_relocate(pointer __first, pointer __last, pointer __result,
@@ -2878,11 +2876,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  512:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       { _M_default_initialize(__n); }
  513:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 
  514:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       /**
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 49
-
-
  515:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  @brief  Creates a %vector with copies of an exemplar element.
  516:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  @param  __n  The number of elements to initially create.
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 49
+
+
  517:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  @param  __value  An element to copy.
  518:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  @param  __a  An allocator.
  519:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *
@@ -2938,11 +2936,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  569:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  The contents of the moved instance are a valid, but unspecified
  570:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  %vector.
  571:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        */
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 50
-
-
  572:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       vector(vector&&) noexcept = default;
  573:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 50
+
+
  574:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       /// Copy constructor with alternative allocator
  575:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       vector(const vector& __x, const allocator_type& __a)
  576:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       : _Base(__x.size(), __a)
@@ -2998,11 +2996,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  626:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	     const allocator_type& __a = allocator_type())
  627:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       : _Base(__a)
  628:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       {
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 51
-
-
  629:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	_M_range_initialize(__l.begin(), __l.end(),
  630:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 			    random_access_iterator_tag());
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 51
+
+
  631:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       }
  632:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** #endif
  633:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 
@@ -3058,11 +3056,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  683:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       }
  684:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 
  685:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       /**
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 52
-
-
  686:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  @brief  %Vector assignment operator.
  687:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  @param  __x  A %vector of identical element and allocator types.
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 52
+
+
  688:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *
  689:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  All the elements of @a __x are copied, but any unused capacity in
  690:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  @a __x will not be copied.
@@ -3118,11 +3116,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  740:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  @param  __n  Number of elements to be assigned.
  741:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  @param  __val  Value to be assigned.
  742:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 53
-
-
  743:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  This function fills a %vector with @a __n copies of the given
  744:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  value.  Note that the assignment completely changes the
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 53
+
+
  745:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  %vector and that the resulting %vector's size is the same as
  746:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  the number of elements assigned.
  747:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        */
@@ -3178,11 +3176,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  797:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 			    random_access_iterator_tag());
  798:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       }
  799:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** #endif
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 54
-
-
  800:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 
  801:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       /// Get a copy of the memory allocation object.
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 54
+
+
  802:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       using _Base::get_allocator;
  803:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 
  804:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       // iterators
@@ -3238,11 +3236,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  854:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        */
  855:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       const_reverse_iterator
  856:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       rbegin() const _GLIBCXX_NOEXCEPT
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 55
-
-
  857:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       { return const_reverse_iterator(end()); }
  858:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 55
+
+
  859:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       /**
  860:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  Returns a read/write reverse iterator that points to one
  861:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  before the first element in the %vector.  Iteration is done
@@ -3298,11 +3296,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  911:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       crend() const noexcept
  912:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       { return const_reverse_iterator(begin()); }
  913:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** #endif
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 56
-
-
  914:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 
  915:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       // [23.2.4.2] capacity
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 56
+
+
  916:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       /**  Returns the number of elements in the %vector.  */
  917:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       size_type
  918:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       size() const _GLIBCXX_NOEXCEPT
@@ -3358,11 +3356,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  968:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  @param  __x  Data with which new elements should be populated.
  969:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *
  970:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  This function will %resize the %vector to the specified
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 57
-
-
  971:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  number of elements.  If the number is smaller than the
  972:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  %vector's current size the %vector is truncated, otherwise
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 57
+
+
  973:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  the %vector is extended and new elements are populated with
  974:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  given data.
  975:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        */
@@ -3418,11 +3416,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
 1025:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  and copying of %vector data.
 1026:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        */
 1027:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       void
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 58
-
-
 1028:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       reserve(size_type __n);
 1029:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 58
+
+
 1030:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       // element access
 1031:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       /**
 1032:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  @brief  Subscript access to the data contained in the %vector.
@@ -3478,11 +3476,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
 1082:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  @param __n The index of the element for which data should be
 1083:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  accessed.
 1084:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  @return  Read/write reference to data.
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 59
-
-
 1085:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  @throw  std::out_of_range  If @a __n is an invalid index.
 1086:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 59
+
+
 1087:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  This function provides for safer data access.  The parameter
 1088:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  is first checked that it is in the range of the vector.  The
 1089:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  function throws out_of_range if the check fails.
@@ -3538,11 +3536,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
 1139:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  Returns a read/write reference to the data at the last
 1140:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  element of the %vector.
 1141:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        */
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 60
-
-
 1142:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       reference
 1143:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       back() _GLIBCXX_NOEXCEPT
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 60
+
+
 1144:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       {
 1145:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	__glibcxx_requires_nonempty();
 1146:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	return *(end() - 1);
@@ -3598,11 +3596,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
 1196:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	  }
 1197:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	else
 1198:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	  _M_realloc_insert(end(), __x);
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 61
-
-
 1199:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       }
 1200:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 61
+
+
 1201:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** #if __cplusplus >= 201103L
 1202:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       void
 1203:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       push_back(value_type&& __x)
@@ -3658,11 +3656,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
 1253:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  @param  __position  A const_iterator into the %vector.
 1254:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  @param  __x  Data to be inserted.
 1255:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  @return  An iterator that points to the inserted data.
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 62
-
-
 1256:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *
 1257:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  This function will insert a copy of the given value before
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 62
+
+
 1258:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  the specified location.  Note that this kind of operation
 1259:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  could be expensive for a %vector and if it is frequently
 1260:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  used the user should consider using std::list.
@@ -3718,11 +3716,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
 1310:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       insert(const_iterator __position, initializer_list<value_type> __l)
 1311:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       {
 1312:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	auto __offset = __position - cbegin();
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 63
-
-
 1313:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	_M_range_insert(begin() + __offset, __l.begin(), __l.end(),
 1314:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 			std::random_access_iterator_tag());
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 63
+
+
 1315:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	return begin() + __offset;
 1316:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       }
 1317:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** #endif
@@ -3778,11 +3776,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
 1367:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *
 1368:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  This function will insert copies of the data in the range
 1369:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  [__first,__last) into the %vector before the location specified
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 64
-
-
 1370:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  by @a pos.
 1371:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 64
+
+
 1372:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  Note that this kind of operation could be expensive for a
 1373:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  %vector and if it is frequently used the user should
 1374:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  consider using std::list.
@@ -3838,11 +3836,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
 1424:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  the element, and that if the element is itself a pointer,
 1425:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  the pointed-to memory is not touched in any way.  Managing
 1426:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        *  the pointer is the user's responsibility.
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 65
-
-
 1427:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****        */
 1428:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       iterator
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 65
+
+
 1429:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** #if __cplusplus >= 201103L
 1430:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       erase(const_iterator __position)
 1431:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       { return _M_erase(begin() + (__position - cbegin())); }
@@ -3898,11 +3896,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
 1481:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       {
 1482:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** #if __cplusplus >= 201103L
 1483:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	__glibcxx_assert(_Alloc_traits::propagate_on_container_swap::value
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 66
-
-
 1484:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 			 || _M_get_Tp_allocator() == __x._M_get_Tp_allocator());
 1485:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** #endif
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 66
+
+
 1486:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	this->_M_impl._M_swap_data(__x._M_impl);
 1487:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	_Alloc_traits::_S_on_swap(_M_get_Tp_allocator(),
 1488:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 				  __x._M_get_Tp_allocator());
@@ -3958,11 +3956,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
 1538:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 		static_cast<size_type>(__n), _M_get_Tp_allocator()));
 1539:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	  this->_M_impl._M_end_of_storage =
 1540:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	    this->_M_impl._M_start + static_cast<size_type>(__n);
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 67
-
-
 1541:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	  _M_fill_initialize(static_cast<size_type>(__n), __value);
 1542:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	}
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 67
+
+
 1543:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 
 1544:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       // Called by the range constructor to implement [23.1.1]/9
 1545:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       template<typename _InputIterator>
@@ -4018,11 +4016,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
 1595:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	this->_M_impl._M_finish =
 1596:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	  std::__uninitialized_fill_n_a(this->_M_impl._M_start, __n, __value,
 1597:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 					_M_get_Tp_allocator());
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 68
-
-
 1598:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       }
 1599:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 68
+
+
 1600:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** #if __cplusplus >= 201103L
 1601:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       // Called by the vector(n) constructor.
 1602:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       void
@@ -4078,11 +4076,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
 1652:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       // 438. Ambiguity in the "do the right thing" clause
 1653:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       template<typename _Integer>
 1654:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	void
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 69
-
-
 1655:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	_M_insert_dispatch(iterator __pos, _Integer __n, _Integer __val,
 1656:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 			   __true_type)
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 69
+
+
 1657:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	{ _M_fill_insert(__pos, __n, __val); }
 1658:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 
 1659:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       // Called by the range insert to implement [23.1.1]/9
@@ -4138,11 +4136,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
 1709:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	  _Temporary_value(vector* __vec, _Args&&... __args) : _M_this(__vec)
 1710:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	  {
 1711:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	    _Alloc_traits::construct(_M_this->_M_impl, _M_ptr(),
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 70
-
-
 1712:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 				     std::forward<_Args>(__args)...);
 1713:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	  }
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 70
+
+
 1714:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 
 1715:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	~_Temporary_value()
 1716:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	{ _Alloc_traits::destroy(_M_this->_M_impl, _M_ptr()); }
@@ -4198,11 +4196,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
 1766:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       static size_type
 1767:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       _S_check_init_len(size_type __n, const allocator_type& __a)
  1232              		.loc 7 1767 7 view .LVU337
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 71
-
-
  1233              	.LBB468:
  1234              	.LBB469:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 71
+
+
  1235              	.LBI469:
  165:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/allocator.h **** 
  166:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/allocator.h ****       _GLIBCXX20_CONSTEXPR
@@ -4258,11 +4256,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  1257              	.LBE467:
  1258              	.LBB474:
  1259              	.LBI474:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 72
-
-
  303:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       : _M_impl(__a)
  1260              		.loc 7 303 7 is_stmt 1 view .LVU345
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 72
+
+
  1261              	.LBB475:
  1262              	.LBI475:
  136:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	: _Tp_alloc_type(__a)
@@ -4318,11 +4316,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
   11:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** // This library is distributed in the hope that it will be useful,
   12:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** // but WITHOUT ANY WARRANTY; without even the implied warranty of
   13:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 73
-
-
   14:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** // GNU General Public License for more details.
   15:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 73
+
+
   16:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** // Under Section 7 of GPL version 3, you are granted additional
   17:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** // permissions described in the GCC Runtime Library Exception, version
   18:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** // 3.1, as published by the Free Software Foundation.
@@ -4378,11 +4376,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
   68:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****       using __pocca = typename _Tp::propagate_on_container_copy_assignment;
   69:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****     template<typename _Tp>
   70:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****       using __pocma = typename _Tp::propagate_on_container_move_assignment;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 74
-
-
   71:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****     template<typename _Tp>
   72:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****       using __pocs = typename _Tp::propagate_on_container_swap;
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 74
+
+
   73:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****     template<typename _Tp>
   74:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****       using __equal = typename _Tp::is_always_equal;
   75:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****   };
@@ -4438,11 +4436,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  125:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 	struct _Size : make_unsigned<_DiffT> { };
  126:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 
  127:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****       template<typename _A2, typename _DiffT>
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 75
-
-
  128:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 	struct _Size<_A2, _DiffT, __void_t<typename _A2::size_type>>
  129:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 	{ using type = typename _A2::size_type; };
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 75
+
+
  130:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 
  131:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****     public:
  132:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****       /**
@@ -4498,11 +4496,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  182:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****        * @brief   How the allocator is propagated on move assignment
  183:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****        *
  184:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****        * @c Alloc::propagate_on_container_move_assignment if that type exists,
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 76
-
-
  185:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****        * otherwise @c false_type
  186:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****       */
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 76
+
+
  187:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****       using propagate_on_container_move_assignment
  188:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 	= __detected_or_t<false_type, __pocma, _Alloc>;
  189:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 
@@ -4558,11 +4556,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  239:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****       template<typename _Tp, typename... _Args>
  240:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 	using __has_construct
  241:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 	  = typename __construct_helper<_Tp, _Args...>::type;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 77
-
-
  242:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 
  243:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****       template<typename _Tp, typename... _Args>
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 77
+
+
  244:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 	static _GLIBCXX14_CONSTEXPR _Require<__has_construct<_Tp, _Args...>>
  245:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 	_S_construct(_Alloc& __a, _Tp* __p, _Args&&... __args)
  246:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 	noexcept(noexcept(__a.construct(__p, std::forward<_Args>(__args)...)))
@@ -4618,11 +4616,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  296:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 	{ return __a.select_on_container_copy_construction(); }
  297:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 
  298:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****       template<typename _Alloc2>
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 78
-
-
  299:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 	static constexpr _Alloc2
  300:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 	_S_select(_Alloc2& __a, ...)
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 78
+
+
  301:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 	{ return __a; }
  302:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 
  303:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****     public:
@@ -4678,11 +4676,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  353:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****       */
  354:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****       template<typename _Tp, typename... _Args>
  355:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 	static _GLIBCXX20_CONSTEXPR auto
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 79
-
-
  356:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 	construct(_Alloc& __a, _Tp* __p, _Args&&... __args)
  357:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 	noexcept(noexcept(_S_construct(__a, __p,
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 79
+
+
  358:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 				       std::forward<_Args>(__args)...)))
  359:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 	-> decltype(_S_construct(__a, __p, std::forward<_Args>(__args)...))
  360:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 	{ _S_construct(__a, __p, std::forward<_Args>(__args)...); }
@@ -4738,11 +4736,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  410:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****       using allocator_type = allocator<_Tp>;
  411:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 
  412:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****       /// The allocated type
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 80
-
-
  413:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****       using value_type = _Tp;
  414:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 80
+
+
  415:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****       /// The allocator's pointer type.
  416:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****       using pointer = _Tp*;
  417:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 
@@ -4798,11 +4796,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
   94:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/ext/new_allocator.h **** 
   95:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/ext/new_allocator.h ****       const_pointer
   96:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/ext/new_allocator.h ****       address(const_reference __x) const _GLIBCXX_NOEXCEPT
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 81
-
-
   97:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/ext/new_allocator.h ****       { return std::__addressof(__x); }
   98:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/ext/new_allocator.h **** #endif
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 81
+
+
   99:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/ext/new_allocator.h **** 
  100:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/ext/new_allocator.h ****       // NB: __n is permitted to be 0.  The C++ standard says nothing
  101:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/ext/new_allocator.h ****       // about what the return value is when __n == 0.
@@ -4858,11 +4856,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  1325              	.LBE490:
  363:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       }
  1326              		.loc 7 363 59 view .LVU361
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 82
-
-
  1327 005a 00EB020A 		add	r10, r0, r2
  1328              	.LVL101:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 82
+
+
  363:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       }
  1329              		.loc 7 363 59 view .LVU362
  1330              	.LBE480:
@@ -4918,11 +4916,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
   41:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****  *
   42:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****  * Permission to use, copy, modify, distribute and sell this software
   43:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****  * and its documentation for any purpose is hereby granted without fee,
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 83
-
-
   44:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****  * provided that the above copyright notice appear in all copies and
   45:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****  * that both that copyright notice and this permission notice appear
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 83
+
+
   46:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****  * in supporting documentation.  Silicon Graphics makes no
   47:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****  * representations about the suitability of this software for any
   48:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****  * purpose.  It is provided "as is" without express or implied warranty.
@@ -4978,11 +4976,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
   98:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 	    }
   99:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 	}
  100:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****     };
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 84
-
-
  101:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 
  102:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****   template<>
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 84
+
+
  103:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****     struct __uninitialized_copy<true>
  104:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****     {
  105:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****       template<typename _InputIterator, typename _ForwardIterator>
@@ -5038,11 +5036,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  155:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****   template<bool _TrivialValueType>
  156:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****     struct __uninitialized_fill
  157:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****     {
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 85
-
-
  158:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****       template<typename _ForwardIterator, typename _Tp>
  159:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****         static void
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 85
+
+
  160:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****         __uninit_fill(_ForwardIterator __first, _ForwardIterator __last,
  161:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 		      const _Tp& __x)
  162:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****         {
@@ -5098,11 +5096,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  212:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 
  213:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****       // Trivial types can have deleted assignment, so using std::fill
  214:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****       // would be ill-formed. Require assignability before using std::fill:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 86
-
-
  215:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****       const bool __assignable = is_copy_assignable<_ValueType>::value;
  216:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** #endif
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 86
+
+
  217:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 
  218:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****       std::__uninitialized_fill<__is_trivial(_ValueType) && __assignable>::
  219:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 	__uninit_fill(__first, __last, __x);
@@ -5158,11 +5156,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  269:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****   */
  270:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****   template<typename _ForwardIterator, typename _Size, typename _Tp>
  271:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****     inline _ForwardIterator
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 87
-
-
  272:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****     uninitialized_fill_n(_ForwardIterator __first, _Size __n, const _Tp& __x)
  273:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****     {
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 87
+
+
  274:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****       typedef typename iterator_traits<_ForwardIterator>::value_type
  275:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 	_ValueType;
  276:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** #if __cplusplus < 201103L
@@ -5218,11 +5216,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  326:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 
  327:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****   template<typename _InputIterator, typename _ForwardIterator,
  328:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 	   typename _Allocator>
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 88
-
-
  329:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****     inline _ForwardIterator
  330:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****     __uninitialized_move_a(_InputIterator __first, _InputIterator __last,
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 88
+
+
  331:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 			   _ForwardIterator __result, _Allocator& __alloc)
  332:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****     {
  333:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****       return std::__uninitialized_copy_a(_GLIBCXX_MAKE_MOVE_ITERATOR(__first),
@@ -5278,11 +5276,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  383:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****       __try
  384:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 	{
  385:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 	  typedef __gnu_cxx::__alloc_traits<_Allocator> __traits;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 89
-
-
  386:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 	  for (; __n > 0; --__n, (void) ++__cur)
  387:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 	    __traits::construct(__alloc, std::__addressof(*__cur), __x);
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 89
+
+
  388:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 	  return __cur;
  389:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 	}
  390:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****       __catch(...)
@@ -5338,11 +5336,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  440:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****   //  copies [first2, last2) into
  441:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****   //  [result, result + (last1 - first1) + (last2 - first2)).
  442:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****   template<typename _InputIterator1, typename _InputIterator2,
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 90
-
-
  443:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 	   typename _ForwardIterator, typename _Allocator>
  444:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****     inline _ForwardIterator
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 90
+
+
  445:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****     __uninitialized_move_copy(_InputIterator1 __first1,
  446:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 			      _InputIterator1 __last1,
  447:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 			      _InputIterator2 __first2,
@@ -5398,11 +5396,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  497:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 			      _Allocator& __alloc)
  498:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****     {
  499:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****       _ForwardIterator __mid2 = std::__uninitialized_move_a(__first1, __last1,
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 91
-
-
  500:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 							    __first2,
  501:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 							    __alloc);
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 91
+
+
  502:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****       __try
  503:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 	{
  504:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 	  std::__uninitialized_fill_a(__mid2, __last2, __x, __alloc);
@@ -5458,11 +5456,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  554:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****     };
  555:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 
  556:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****   template<bool _TrivialValueType>
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 92
-
-
  557:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****     struct __uninitialized_default_n_1
  558:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****     {
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 92
+
+
  559:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****       template<typename _ForwardIterator, typename _Size>
  560:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****         static _ForwardIterator
  561:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****         __uninit_default_n(_ForwardIterator __first, _Size __n)
@@ -5518,11 +5516,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  611:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****   // Fills [first, first + n) with n default constructed value_type(s).
  612:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****   template<typename _ForwardIterator, typename _Size>
  613:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****     inline _ForwardIterator
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 93
-
-
  614:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****     __uninitialized_default_n(_ForwardIterator __first, _Size __n)
  615:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****     {
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 93
+
+
  616:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****       typedef typename iterator_traits<_ForwardIterator>::value_type
  617:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 	_ValueType;
  618:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****       // trivial types can have deleted assignment
@@ -5578,11 +5576,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  668:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 	{
  669:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 	  typedef __gnu_cxx::__alloc_traits<_Allocator> __traits;
  670:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 	  for (; __n > 0; --__n, (void) ++__cur)
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 94
-
-
  671:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 	    __traits::construct(__alloc, std::__addressof(*__cur));
  672:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 	  return __cur;
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 94
+
+
  673:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 	}
  674:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h ****       __catch(...)
  675:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_uninitialized.h **** 	{
@@ -5638,11 +5636,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
   28:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****  * Hewlett-Packard Company
   29:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****  *
   30:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****  * Permission to use, copy, modify, distribute and sell this software
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 95
-
-
   31:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****  * and its documentation for any purpose is hereby granted without fee,
   32:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****  * provided that the above copyright notice appear in all copies and
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 95
+
+
   33:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****  * that both that copyright notice and this permission notice appear
   34:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****  * in supporting documentation.  Hewlett-Packard Company makes no
   35:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****  * representations about the suitability of this software for any
@@ -5698,11 +5696,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
   85:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    * @param __num The number of elements of type _Tp (not bytes).
   86:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    */
   87:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****   template<typename _Tp, typename _Up>
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 96
-
-
   88:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     _GLIBCXX14_CONSTEXPR
   89:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     inline int
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 96
+
+
   90:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     __memcmp(const _Tp* __first1, const _Up* __first2, size_t __num)
   91:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     {
   92:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** #if __cplusplus >= 201103L
@@ -5758,11 +5756,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  142:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    *  @param  __a  An iterator.
  143:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    *  @param  __b  Another iterator.
  144:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    *  @return   Nothing.
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 97
-
-
  145:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    *
  146:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    *  This function swaps the values pointed to by two iterators, not the
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 97
+
+
  147:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    *  iterators themselves.
  148:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****   */
  149:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****   template<typename _ForwardIterator1, typename _ForwardIterator2>
@@ -5818,11 +5816,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  199:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     _GLIBCXX20_CONSTEXPR
  200:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     _ForwardIterator2
  201:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     swap_ranges(_ForwardIterator1 __first1, _ForwardIterator1 __last1,
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 98
-
-
  202:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 		_ForwardIterator2 __first2)
  203:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     {
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 98
+
+
  204:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****       // concept requirements
  205:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****       __glibcxx_function_requires(_Mutable_ForwardIteratorConcept<
  206:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 				  _ForwardIterator1>)
@@ -5878,11 +5876,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  256:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****       // concept requirements
  257:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****       __glibcxx_function_requires(_LessThanComparableConcept<_Tp>)
  258:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****       //return  __a < __b ? __b : __a;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 99
-
-
  259:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****       if (__a < __b)
  260:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 	return __b;
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 99
+
+
  261:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****       return __a;
  262:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     }
  263:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 
@@ -5938,11 +5936,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  313:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     __niter_base(_Iterator __it)
  314:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     _GLIBCXX_NOEXCEPT_IF(std::is_nothrow_copy_constructible<_Iterator>::value)
  315:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     { return __it; }
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 100
-
-
  316:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 
  317:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****   // Reverse the __niter_base transformation to get a
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 100
+
+
  318:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****   // __normal_iterator back again (this assumes that __normal_iterator
  319:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****   // is only used to wrap random access iterators, like pointers).
  320:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****   template<typename _From, typename _To>
@@ -5998,11 +5996,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  370:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     struct __copy_move<false, false, random_access_iterator_tag>
  371:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     {
  372:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****       template<typename _II, typename _OI>
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 101
-
-
  373:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 	_GLIBCXX20_CONSTEXPR
  374:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 	static _OI
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 101
+
+
  375:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 	__copy_m(_II __first, _II __last, _OI __result)
  376:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 	{
  377:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 	  typedef typename iterator_traits<_II>::difference_type _Distance;
@@ -6058,11 +6056,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  427:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 	  return __result + _Num;
  428:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 	}
  429:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     };
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 102
-
-
  430:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 
  431:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****   // Helpers for streambuf iterators (either istream or ostream).
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 102
+
+
  432:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****   // NB: avoid including <iosfwd>, relatively large.
  433:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****   template<typename _CharT>
  434:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     struct char_traits;
@@ -6118,11 +6116,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  484:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     _OI
  485:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     __copy_move_a1(_GLIBCXX_STD_C::_Deque_iterator<_Tp, _Ref, _Ptr>,
  486:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 		   _GLIBCXX_STD_C::_Deque_iterator<_Tp, _Ref, _Ptr>,
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 103
-
-
  487:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 		   _OI);
  488:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 103
+
+
  489:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****   template<bool _IsMove,
  490:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 	   typename _ITp, typename _IRef, typename _IPtr, typename _OTp>
  491:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     _GLIBCXX_STD_C::_Deque_iterator<_OTp, _OTp&, _OTp*>
@@ -6178,11 +6176,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  541:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    *  @brief Copies the range [first,last) into result.
  542:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    *  @ingroup mutating_algorithms
  543:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    *  @param  __first  An input iterator.
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 104
-
-
  544:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    *  @param  __last   An input iterator.
  545:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    *  @param  __result An output iterator.
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 104
+
+
  546:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    *  @return   result + (last - first)
  547:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    *
  548:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    *  This inline function will boil down to a call to @c memmove whenever
@@ -6238,11 +6236,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  598:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 	    typename iterator_traits<_II>::value_type>)
  599:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****       __glibcxx_requires_can_increment_range(__first, __last, __result);
  600:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 105
-
-
  601:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****       return std::__copy_move_a<true>(std::__miter_base(__first),
  602:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 				      std::__miter_base(__last), __result);
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 105
+
+
  603:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     }
  604:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 
  605:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** #define _GLIBCXX_MOVE3(_Tp, _Up, _Vp) std::move(_Tp, _Up, _Vp)
@@ -6298,11 +6296,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  655:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 
  656:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** #if __cplusplus >= 201103L
  657:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****   template<>
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 106
-
-
  658:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     struct __copy_move_backward<true, false, random_access_iterator_tag>
  659:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     {
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 106
+
+
  660:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****       template<typename _BI1, typename _BI2>
  661:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 	_GLIBCXX20_CONSTEXPR
  662:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 	static _BI2
@@ -6358,11 +6356,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  712:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     }
  713:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 
  714:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****   template<bool _IsMove, typename _BI1, typename _BI2>
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 107
-
-
  715:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     _GLIBCXX20_CONSTEXPR
  716:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     inline _BI2
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 107
+
+
  717:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     __copy_move_backward_a1(_BI1 __first, _BI1 __last, _BI2 __result)
  718:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     { return std::__copy_move_backward_a2<_IsMove>(__first, __last, __result); }
  719:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 
@@ -6418,11 +6416,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  769:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 	   typename _OIte, typename _OSeq, typename _OCat>
  770:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     ::__gnu_debug::_Safe_iterator<_OIte, _OSeq, _OCat>
  771:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     __copy_move_backward_a(
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 108
-
-
  772:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 		const ::__gnu_debug::_Safe_iterator<_IIte, _ISeq, _ICat>&,
  773:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 		const ::__gnu_debug::_Safe_iterator<_IIte, _ISeq, _ICat>&,
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 108
+
+
  774:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 		const ::__gnu_debug::_Safe_iterator<_OIte, _OSeq, _OCat>&);
  775:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 
  776:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****   /**
@@ -6478,11 +6476,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  826:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    *
  827:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    *  Result may not be in the range (first,last].  Use move instead.  Note
  828:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    *  that the start of the output range may overlap [first,last).
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 109
-
-
  829:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****   */
  830:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****   template<typename _BI1, typename _BI2>
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 109
+
+
  831:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     _GLIBCXX20_CONSTEXPR
  832:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     inline _BI2
  833:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     move_backward(_BI1 __first, _BI1 __last, _BI2 __result)
@@ -6538,11 +6536,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  883:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****       const _Tp __tmp = __c;
  884:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** #if __cpp_lib_is_constant_evaluated
  885:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****       if (std::is_constant_evaluated())
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 110
-
-
  886:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 	{
  887:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 	  for (; __first != __last; ++__first)
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 110
+
+
  888:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 	    *__first = __tmp;
  889:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 	  return;
  890:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 	}
@@ -6598,11 +6596,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  940:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****       __glibcxx_function_requires(_Mutable_ForwardIteratorConcept<
  941:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 				  _ForwardIterator>)
  942:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****       __glibcxx_requires_valid_range(__first, __last);
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 111
-
-
  943:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 
  944:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****       std::__fill_a(__first, __last, __value);
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 111
+
+
  945:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     }
  946:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 
  947:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****   // Used by fill_n, generate_n, etc. to convert _Size to an integral type:
@@ -6658,11 +6656,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  997:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****   template<typename _OutputIterator, typename _Size, typename _Tp>
  998:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     _GLIBCXX20_CONSTEXPR
  999:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     inline typename
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 112
-
-
 1000:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     __gnu_cxx::__enable_if<!__is_scalar<_Tp>::__value, _OutputIterator>::__type
 1001:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     __fill_n_a1(_OutputIterator __first, _Size __n, const _Tp& __value)
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 112
+
+
 1002:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     {
 1003:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****       for (; __n > 0; --__n, (void) ++__first)
 1004:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 	*__first = __value;
@@ -6718,11 +6716,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
 1054:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     __fill_n_a(_OutputIterator __first, _Size __n, const _Tp& __value,
 1055:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 	       std::random_access_iterator_tag)
 1056:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     {
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 113
-
-
 1057:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** #if __cplusplus >= 201103L
 1058:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****       static_assert(is_integral<_Size>{}, "fill_n must pass integral size");
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 113
+
+
 1059:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** #endif
 1060:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****       if (__n <= 0)
 1061:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 	return __first;
@@ -6778,11 +6776,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  1371              	.LBI500:
 1054:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 	       std::random_access_iterator_tag)
  1372              		.loc 10 1054 5 view .LVU370
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 114
-
-
  1373              	.LBB501:
  1374              	.LBB502:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 114
+
+
  1375              	.LBB503:
  1376              	.LBB504:
  872:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 	*__first = __tmp;
@@ -6838,11 +6836,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  1418 0072 4FF00109 		movcc	r9, #1
  1419 0076 C268     		ldr	r2, [r0, #12]
  1420 0078 4369     		ldr	r3, [r0, #20]
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 115
-
-
  1421 007a 9A42     		cmp	r2, r3
  1422 007c 08BF     		it	eq
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 115
+
+
  1423 007e 49F00109 		orreq	r9, r9, #1
  1424 0082 B9F1000F 		cmp	r9, #0
  1425 0086 62D1     		bne	.L90
@@ -6898,11 +6896,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  232:AudioFileManager.cpp ****     size_t samples_in_chunk = bytes_read / (curr_header_.channels * sizeof(int16_t));
  1463              		.loc 1 232 5 view .LVU394
  1464              		.loc 1 232 58 is_stmt 0 view .LVU395
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 116
-
-
  1465 00ae B5F92820 		ldrsh	r2, [r5, #40]
  1466              		.loc 1 232 42 view .LVU396
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 116
+
+
  1467 00b2 0399     		ldr	r1, [sp, #12]
  1468              		.loc 1 232 67 view .LVU397
  1469 00b4 5300     		lsls	r3, r2, #1
@@ -6930,17 +6928,17 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  1488              	.LVL109:
  1489              	.L84:
  235:AudioFileManager.cpp ****       if (curr_header_.channels==1){
- 236:AudioFileManager.cpp ****         left_channel[i+samples_read] = right_channel[i+samples_read] = temp_buff[i];
+ 236:AudioFileManager.cpp ****         left_channel_[i+samples_read] = right_channel_[i+samples_read] = temp_buff[i];
  237:AudioFileManager.cpp ****       }
  238:AudioFileManager.cpp ****       else {
- 239:AudioFileManager.cpp ****         left_channel[i+samples_read] = temp_buff[i * 2];
+ 239:AudioFileManager.cpp ****         left_channel_[i+samples_read] = temp_buff[i * 2];
  1490              		.loc 1 239 9 is_stmt 1 view .LVU404
- 1491              		.loc 1 239 38 is_stmt 0 view .LVU405
+ 1491              		.loc 1 239 39 is_stmt 0 view .LVU405
  1492 00c8 34F92120 		ldrsh	r2, [r4, r1, lsl #2]
  1493 00cc 2EF80320 		strh	r2, [lr, r3]	@ movhi
- 240:AudioFileManager.cpp ****         right_channel[i+samples_read] = temp_buff[i * 2 + 1];
+ 240:AudioFileManager.cpp ****         right_channel_[i+samples_read] = temp_buff[i * 2 + 1];
  1494              		.loc 1 240 9 is_stmt 1 view .LVU406
- 1495              		.loc 1 240 39 is_stmt 0 view .LVU407
+ 1495              		.loc 1 240 40 is_stmt 0 view .LVU407
  1496 00d0 A21C     		adds	r2, r4, #2
  1497 00d2 32F92120 		ldrsh	r2, [r2, r1, lsl #2]
  234:AudioFileManager.cpp ****       if (curr_header_.channels==1){
@@ -6950,7 +6948,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  234:AudioFileManager.cpp ****       if (curr_header_.channels==1){
  1501              		.loc 1 234 23 view .LVU409
  1502 00d8 8C45     		cmp	ip, r1
- 1503              		.loc 1 240 39 view .LVU410
+ 1503              		.loc 1 240 40 view .LVU410
  1504 00da C252     		strh	r2, [r0, r3]	@ movhi
  234:AudioFileManager.cpp ****       if (curr_header_.channels==1){
  1505              		.loc 1 234 5 is_stmt 1 view .LVU411
@@ -6958,11 +6956,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  234:AudioFileManager.cpp ****       if (curr_header_.channels==1){
  1507              		.loc 1 234 23 view .LVU412
  1508 00dc 03F10203 		add	r3, r3, #2
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 117
-
-
  1509 00e0 0DD9     		bls	.L83
  1510              	.L102:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 117
+
+
  235:AudioFileManager.cpp ****       if (curr_header_.channels==1){
  1511              		.loc 1 235 24 is_stmt 0 view .LVU413
  1512 00e2 B5F92820 		ldrsh	r2, [r5, #40]
@@ -6975,7 +6973,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  236:AudioFileManager.cpp ****       }
  1518              		.loc 1 236 9 view .LVU415
  236:AudioFileManager.cpp ****       }
- 1519              		.loc 1 236 70 is_stmt 0 view .LVU416
+ 1519              		.loc 1 236 72 is_stmt 0 view .LVU416
  1520 00ea 34F91120 		ldrsh	r2, [r4, r1, lsl #1]
  234:AudioFileManager.cpp ****       if (curr_header_.channels==1){
  1521              		.loc 1 234 5 view .LVU417
@@ -6985,10 +6983,10 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  1524              		.loc 1 234 23 view .LVU418
  1525 00f0 8C45     		cmp	ip, r1
  236:AudioFileManager.cpp ****       }
- 1526              		.loc 1 236 70 view .LVU419
+ 1526              		.loc 1 236 72 view .LVU419
  1527 00f2 C252     		strh	r2, [r0, r3]	@ movhi
  236:AudioFileManager.cpp ****       }
- 1528              		.loc 1 236 38 view .LVU420
+ 1528              		.loc 1 236 39 view .LVU420
  1529 00f4 2EF80320 		strh	r2, [lr, r3]	@ movhi
  234:AudioFileManager.cpp ****       if (curr_header_.channels==1){
  1530              		.loc 1 234 5 is_stmt 1 view .LVU421
@@ -7018,11 +7016,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  1548              	.LBE540:
  221:AudioFileManager.cpp ****   
  1549              		.loc 1 221 3 is_stmt 1 view .LVU428
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 118
-
-
  223:AudioFileManager.cpp ****     size_t samples_to_read = std::min(chunk_size, samples_per_channel - samples_read);
  1550              		.loc 1 223 3 view .LVU429
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 118
+
+
  223:AudioFileManager.cpp ****     size_t samples_to_read = std::min(chunk_size, samples_per_channel - samples_read);
  1551              		.loc 1 223 29 view .LVU430
  1552 0102 4269     		ldr	r2, [r0, #20]
@@ -7078,11 +7076,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  461:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 
  462:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****       /**
  463:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****        *  @brief  Allocate memory.
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 119
-
-
  464:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****        *  @param  __a  An allocator.
  465:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****        *  @param  __n  The number of objects to allocate space for.
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 119
+
+
  466:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****        *  @param  __hint Aid to locality.
  467:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****        *  @return Memory of suitable size and alignment for @a n objects
  468:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****        *          of type @c value_type
@@ -7138,11 +7136,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  518:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****       /**
  519:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****        *  @brief  Destroy an object of type @a _Up
  520:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****        *  @param  __a  An allocator.
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 120
-
-
  521:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****        *  @param  __p  Pointer to the object to destroy
  522:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****        *
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 120
+
+
  523:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****        *  Calls @c __a.destroy(__p).
  524:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****       */
  525:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****       template<typename _Up>
@@ -7198,11 +7196,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  575:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****     _GLIBCXX14_CONSTEXPR inline void
  576:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****     __alloc_on_copy(_Alloc& __one, const _Alloc& __two)
  577:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****     {
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 121
-
-
  578:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****       typedef allocator_traits<_Alloc> __traits;
  579:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****       typedef typename __traits::propagate_on_container_copy_assignment __pocca;
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 121
+
+
  580:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** #if __cplusplus >= 201703L
  581:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****       if constexpr (__pocca::value)
  582:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 	__one = __two;
@@ -7258,11 +7256,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  632:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 
  633:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****   template<typename _Alloc>
  634:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****     _GLIBCXX14_CONSTEXPR inline void
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 122
-
-
  635:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****     __alloc_on_swap(_Alloc& __one, _Alloc& __two)
  636:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****     {
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 122
+
+
  637:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****       typedef allocator_traits<_Alloc> __traits;
  638:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****       typedef typename __traits::propagate_on_container_swap __pocs;
  639:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** #if __cplusplus >= 201703L
@@ -7318,11 +7316,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  689:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****   template<typename _Tp>
  690:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****     struct __is_move_insertable<allocator<_Tp>>
  691:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****     : is_move_constructible<_Tp>
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 123
-
-
  692:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****     { };
  693:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h **** 
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 123
+
+
  694:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****   // Trait to detect Allocator-like types.
  695:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****   template<typename _Alloc, typename = void>
  696:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/alloc_traits.h ****     struct __is_allocator : false_type { };
@@ -7378,11 +7376,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  350:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h ****       {
  1600              		.loc 7 350 7 view .LVU443
  1601              	.LBB551:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 124
-
-
  353:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_vector.h **** 	  _Tr::deallocate(_M_impl, __p, __n);
  1602              		.loc 7 353 2 is_stmt 0 view .LVU444
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 124
+
+
  1603 011c 24B1     		cbz	r4, .L91
  1604              	.LVL119:
  1605              	.LBB552:
@@ -7438,11 +7436,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
   89:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/ext/new_allocator.h **** 
  1635              		.loc 6 89 7 view .LVU452
  1636              	.L91:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 125
-
-
   89:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/ext/new_allocator.h **** 
  1637              		.loc 6 89 7 is_stmt 0 view .LVU453
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 125
+
+
  1638              	.LBE558:
  1639              	.LBE557:
  1640              	.LBE556:
@@ -7498,11 +7496,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  1684              	.LBE522:
  1685              	.LBE526:
  1686              	.LBE559:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 126
-
-
  951:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****   inline _GLIBCXX_CONSTEXPR long
  1687              		.loc 10 951 37 is_stmt 1 view .LVU463
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 126
+
+
  1688              	.LBB560:
  1689              	.LBB527:
  1690              	.LBB523:
@@ -7558,11 +7556,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  1733              		.cfi_restore_state
  1734              	.LBB563:
  228:AudioFileManager.cpp ****       return false;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 127
-
-
  1735              		.loc 1 228 7 is_stmt 1 view .LVU472
  1736              	.LBB538:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 127
+
+
  1737              	.LBI538:
  126:../libDaisy/src/daisy_seed.h ****     {
  1738              		.loc 3 126 17 view .LVU473
@@ -7618,11 +7616,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  1779              	.LBE473:
  1780              	.LBE528:
  1781              	.LBE564:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 128
-
-
  1782              		.cfi_endproc
- 1783              	.LFE3052:
+ 1783              	.LFE3053:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 128
+
+
  1785              		.section	.rodata._ZN16AudioFileManager8LoadFileEi.str1.4,"aMS",%progbits,1
  1786              		.align	2
  1787              	.LC23:
@@ -7678,14 +7676,14 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  1809              		.p2align 2,,3
  1810              		.global	_ZN16AudioFileManager8LoadFileEi
  1811              		.syntax unified
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 129
-
-
  1812              		.thumb
  1813              		.thumb_func
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 129
+
+
  1815              	_ZN16AudioFileManager8LoadFileEi:
  1816              	.LVL133:
- 1817              	.LFB3049:
+ 1817              	.LFB3050:
   76:AudioFileManager.cpp ****   uint32_t start_time = System::GetNow();
  1818              		.loc 1 76 46 is_stmt 1 view -0
  1819              		.cfi_startproc
@@ -7738,11 +7736,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  1858              	.L113:
  1859              		.cfi_restore_state
   82:AudioFileManager.cpp ****   if (sel_idx != curr_idx_) {
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 130
-
-
  1860              		.loc 1 82 3 is_stmt 1 view .LVU492
   82:AudioFileManager.cpp ****   if (sel_idx != curr_idx_) {
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 130
+
+
  1861              		.loc 1 82 58 is_stmt 0 view .LVU493
  1862 001e 04EBC511 		add	r1, r4, r5, lsl #7
  1863 0022 0646     		mov	r6, r0
@@ -7798,11 +7796,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  1902 0042 FFF7FEFF 		bl	f_open
  1903              	.LVL142:
   88:AudioFileManager.cpp ****     pod_->seed.PrintLine("FatFS open error code: %d", open_res);
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 131
-
-
  1904              		.loc 1 88 3 is_stmt 1 view .LVU505
  1905 0046 48BB     		cbnz	r0, .L114
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 131
+
+
   93:AudioFileManager.cpp ****     f_close(curr_file_);
  1906              		.loc 1 93 3 view .LVU506
   93:AudioFileManager.cpp ****     f_close(curr_file_);
@@ -7858,15 +7856,15 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  251:AudioFileManager.cpp ****   pod_->seed.Print("closing file: ");
  252:AudioFileManager.cpp ****   pod_->seed.Print(names_[curr_idx_]);
  253:AudioFileManager.cpp ****   pod_->seed.PrintLine(" idx: %d "+ curr_idx_);
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 132
-
-
  254:AudioFileManager.cpp ****   return f_close(curr_file_) == FR_OK;
  255:AudioFileManager.cpp **** }
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 132
+
+
  256:AudioFileManager.cpp **** 
  257:AudioFileManager.cpp **** void AudioFileManager::SetBuffers(int16_t *left, int16_t *right){
- 258:AudioFileManager.cpp ****   left_channel = left;
- 259:AudioFileManager.cpp ****   right_channel = right;
+ 258:AudioFileManager.cpp ****   left_channel_ = left;
+ 259:AudioFileManager.cpp ****   right_channel_ = right;
  260:AudioFileManager.cpp **** }
  261:AudioFileManager.cpp **** 
  262:AudioFileManager.cpp **** bool AudioFileManager::CheckBufferIntegrity(){
@@ -7883,27 +7881,27 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  1949              	.LBE572:
  1950              	.LBE571:
  1951              		.loc 1 266 24 is_stmt 1 view .LVU524
-  30:AudioFileManager.h ****     size_t GetTotalSamples() const { return curr_header_.total_samples; }
- 1952              		.loc 4 30 43 view .LVU525
+  28:AudioFileManager.h ****     size_t GetTotalSamples() const { return curr_header_.total_samples; }
+ 1952              		.loc 4 28 43 view .LVU525
  1953              	.LBB576:
  1954              	.LBB575:
  267:AudioFileManager.cpp ****     if (count>15) { break; }
- 268:AudioFileManager.cpp ****     if (std::isnan(left_channel[i])){
+ 268:AudioFileManager.cpp ****     if (std::isnan(left_channel_[i])){
  269:AudioFileManager.cpp ****       pod_->seed.PrintLine("left NAN:invalid sample at idx %u", i);
  270:AudioFileManager.cpp ****       integrityOk = false;
  271:AudioFileManager.cpp ****       count++;
  272:AudioFileManager.cpp ****     }
- 273:AudioFileManager.cpp ****     else if (std::isnan(left_channel[i])){
+ 273:AudioFileManager.cpp ****     else if (std::isnan(left_channel_[i])){
  274:AudioFileManager.cpp ****       pod_->seed.PrintLine("left inf:invalid sample at idx %u", i);
  275:AudioFileManager.cpp ****       integrityOk = false;
  276:AudioFileManager.cpp ****       count++;
  277:AudioFileManager.cpp ****     }
- 278:AudioFileManager.cpp ****     else if (std::isnan(right_channel[i])){
+ 278:AudioFileManager.cpp ****     else if (std::isnan(right_channel_[i])){
  279:AudioFileManager.cpp ****       pod_->seed.PrintLine("right NAN:invalid sample at idx %u", i);
  280:AudioFileManager.cpp ****       integrityOk = false;
  281:AudioFileManager.cpp ****       count++;
  282:AudioFileManager.cpp ****     }
- 283:AudioFileManager.cpp ****     else if (std::isinf(right_channel[i])){
+ 283:AudioFileManager.cpp ****     else if (std::isinf(right_channel_[i])){
  284:AudioFileManager.cpp ****       pod_->seed.PrintLine("right inf:invalid sample at idx %u", i);
  285:AudioFileManager.cpp ****       integrityOk = false;
  286:AudioFileManager.cpp ****       count++;
@@ -7918,11 +7916,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  1958              	.LBI573:
  126:../libDaisy/src/daisy_seed.h ****     {
  1959              		.loc 3 126 17 view .LVU528
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 133
-
-
  1960              	.LBB574:
  128:../libDaisy/src/daisy_seed.h ****     }
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 133
+
+
  1961              		.loc 3 128 23 is_stmt 0 view .LVU529
  1962 0064 1848     		ldr	r0, .L117+8
  1963 0066 FFF7FEFF 		bl	_ZN5daisy6LoggerILNS_17LoggerDestinationE1EE9PrintLineEPKcz
@@ -7978,11 +7976,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  111:AudioFileManager.cpp ****   pod_->seed.PrintLine("loaded in %.6f seconds", load_time);
  1999              		.loc 1 111 9 view .LVU544
  2000 007e 87EEA67A 		vdiv.f32	s14, s15, s13
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 134
-
-
  2001              	.LVL153:
  2002              	.LBB581:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 134
+
+
  2003              	.LBB579:
  128:../libDaisy/src/daisy_seed.h ****     }
  2004              		.loc 3 128 23 view .LVU545
@@ -8038,11 +8036,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  2043              	.LBB584:
  2044              	.LBI584:
  126:../libDaisy/src/daisy_seed.h ****     {
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 135
-
-
  2045              		.loc 3 126 17 view .LVU557
  2046              	.LBE584:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 135
+
+
   90:AudioFileManager.cpp ****   }
  2047              		.loc 1 90 12 is_stmt 0 view .LVU558
  2048 009c 0025     		movs	r5, #0
@@ -8098,11 +8096,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  2087              		.loc 3 128 23 view .LVU569
  2088              	.LBE588:
  2089              	.LBE587:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 136
-
-
   96:AudioFileManager.cpp ****   }
  2090              		.loc 1 96 5 is_stmt 1 view .LVU570
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 136
+
+
  114:AudioFileManager.cpp **** 
  2091              		.loc 1 114 1 is_stmt 0 view .LVU571
  2092 00b8 2846     		mov	r0, r5
@@ -8125,7 +8123,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  2108 00d8 14000000 		.word	.LC24
  2109 00dc 30000000 		.word	.LC25
  2110              		.cfi_endproc
- 2111              	.LFE3049:
+ 2111              	.LFE3050:
  2113              		.section	.rodata._ZN16AudioFileManager9CloseFileEv.str1.4,"aMS",%progbits,1
  2114              		.align	2
  2115              	.LC30:
@@ -8147,7 +8145,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  2126              		.thumb_func
  2128              	_ZN16AudioFileManager9CloseFileEv:
  2129              	.LVL166:
- 2130              	.LFB3053:
+ 2130              	.LFB3054:
  250:AudioFileManager.cpp ****   pod_->seed.Print("closing file: ");
  2131              		.loc 1 250 35 is_stmt 1 view -0
  2132              		.cfi_startproc
@@ -8158,11 +8156,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  2136              	.LBB589:
  2137              	.LBI589:
  118:../libDaisy/src/daisy_seed.h ****     {
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 137
-
-
  2138              		.loc 3 118 17 view .LVU575
  2139              	.LBE589:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 137
+
+
  250:AudioFileManager.cpp ****   pod_->seed.Print("closing file: ");
  2140              		.loc 1 250 35 is_stmt 0 view .LVU576
  2141 0000 38B5     		push	{r3, r4, r5, lr}
@@ -8218,11 +8216,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  2180              	.LBB595:
  2181              	.LBI595:
  126:../libDaisy/src/daisy_seed.h ****     {
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 138
-
-
  2182              		.loc 3 126 17 view .LVU588
  2183              	.LBE595:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 138
+
+
  253:AudioFileManager.cpp ****   return f_close(curr_file_) == FR_OK;
  2184              		.loc 1 253 23 is_stmt 0 view .LVU589
  2185 001a AB69     		ldr	r3, [r5, #24]
@@ -8259,7 +8257,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  2210 0034 00000000 		.word	.LC30
  2211 0038 10000000 		.word	.LC31
  2212              		.cfi_endproc
- 2213              	.LFE3053:
+ 2213              	.LFE3054:
  2215              		.section	.text._ZN16AudioFileManager10SetBuffersEPsS0_,"ax",%progbits
  2216              		.align	1
  2217              		.p2align 2,,3
@@ -8269,26 +8267,26 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  2221              		.thumb_func
  2223              	_ZN16AudioFileManager10SetBuffersEPsS0_:
  2224              	.LVL173:
- 2225              	.LFB3054:
- 257:AudioFileManager.cpp ****   left_channel = left;
+ 2225              	.LFB3055:
+ 257:AudioFileManager.cpp ****   left_channel_ = left;
  2226              		.loc 1 257 65 is_stmt 1 view -0
  2227              		.cfi_startproc
  2228              		@ args = 0, pretend = 0, frame = 0
  2229              		@ frame_needed = 0, uses_anonymous_args = 0
  2230              		@ link register save eliminated.
- 258:AudioFileManager.cpp ****   right_channel = right;
+ 258:AudioFileManager.cpp ****   right_channel_ = right;
  2231              		.loc 1 258 3 view .LVU597
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 139
-
-
  259:AudioFileManager.cpp **** }
- 2232              		.loc 1 259 17 is_stmt 0 view .LVU598
+ 2232              		.loc 1 259 18 is_stmt 0 view .LVU598
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 139
+
+
  2233 0000 C0E90412 		strd	r1, r2, [r0, #16]
  260:AudioFileManager.cpp **** 
  2234              		.loc 1 260 1 view .LVU599
  2235 0004 7047     		bx	lr
  2236              		.cfi_endproc
- 2237              	.LFE3054:
+ 2237              	.LFE3055:
  2239 0006 00BF     		.section	.text._ZN16AudioFileManager20CheckBufferIntegrityEv,"ax",%progbits
  2240              		.align	1
  2241              		.p2align 2,,3
@@ -8298,7 +8296,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  2245              		.thumb_func
  2247              	_ZN16AudioFileManager20CheckBufferIntegrityEv:
  2248              	.LVL174:
- 2249              	.LFB3055:
+ 2249              	.LFB3056:
  262:AudioFileManager.cpp ****   bool integrityOk = true;
  2250              		.loc 1 262 46 is_stmt 1 view -0
  2251              		.cfi_startproc
@@ -8312,8 +8310,8 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  2256              		.loc 1 266 3 view .LVU603
  266:AudioFileManager.cpp ****     if (count>15) { break; }
  2257              		.loc 1 266 24 view .LVU604
-  30:AudioFileManager.h ****     size_t GetTotalSamples() const { return curr_header_.total_samples; }
- 2258              		.loc 4 30 43 view .LVU605
+  28:AudioFileManager.h ****     size_t GetTotalSamples() const { return curr_header_.total_samples; }
+ 2258              		.loc 4 28 43 view .LVU605
  290:AudioFileManager.cpp ****     pod_->seed.PrintLine("audio buffer integrity check passed");
  2259              		.loc 1 290 3 view .LVU606
  291:AudioFileManager.cpp ****   }
@@ -8338,11 +8336,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  2274              		.cfi_offset 3, -8
  2275              		.cfi_offset 14, -4
  2276              	.LBB601:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 140
-
-
  2277              	.LBB600:
  128:../libDaisy/src/daisy_seed.h ****     }
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 140
+
+
  2278              		.loc 3 128 23 view .LVU612
  2279 0004 FFF7FEFF 		bl	_ZN5daisy6LoggerILNS_17LoggerDestinationE1EE9PrintLineEPKcz
  2280              	.LVL176:
@@ -8360,7 +8358,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  2290              	.L126:
  2291 000c 9C000000 		.word	.LC28
  2292              		.cfi_endproc
- 2293              	.LFE3055:
+ 2293              	.LFE3056:
  2295              		.section	.rodata._ZN16AudioFileManager14BlinkOnSDErrorEc.str1.4,"aMS",%progbits,1
  2296              		.align	2
  2297              	.LC32:
@@ -8385,7 +8383,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  2308              		.thumb_func
  2310              	_ZN16AudioFileManager14BlinkOnSDErrorEc:
  2311              	.LVL177:
- 2312              	.LFB3056:
+ 2312              	.LFB3057:
  295:AudioFileManager.cpp **** 
  296:AudioFileManager.cpp **** // SD card init error
  297:AudioFileManager.cpp **** void AudioFileManager::BlinkOnSDError (char type){
@@ -8398,11 +8396,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  2318 0000 6429     		cmp	r1, #100
  297:AudioFileManager.cpp ****   switch(type) {
  2319              		.loc 1 297 50 is_stmt 0 view .LVU618
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 141
-
-
  2320 0002 38B5     		push	{r3, r4, r5, lr}
  2321              		.cfi_def_cfa_offset 16
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 141
+
+
  2322              		.cfi_offset 3, -16
  2323              		.cfi_offset 4, -12
  2324              		.cfi_offset 5, -8
@@ -8458,11 +8456,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  308:AudioFileManager.cpp ****       pod_->led1.Set(255,0,0);
  2359              		.loc 1 308 7 is_stmt 1 discriminator 2 view .LVU630
  2360              		.loc 1 308 21 is_stmt 0 discriminator 2 view .LVU631
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 142
-
-
  2361 001c 9FED111A 		vldr.32	s2, .L135+4
  2362 0020 A068     		ldr	r0, [r4, #8]
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 142
+
+
  2363 0022 F0EE410A 		vmov.f32	s1, s2
  2364 0026 9FED100A 		vldr.32	s0, .L135+8
  2365 002a D830     		adds	r0, r0, #216
@@ -8518,11 +8516,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  128:../libDaisy/src/daisy_seed.h ****     }
  2404              		.loc 3 128 23 is_stmt 0 view .LVU645
  2405 0058 0448     		ldr	r0, .L135+12
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 143
-
-
  2406              	.LVL189:
  128:../libDaisy/src/daisy_seed.h ****     }
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 143
+
+
  2407              		.loc 3 128 23 view .LVU646
  2408 005a FFF7FEFF 		bl	_ZN5daisy6LoggerILNS_17LoggerDestinationE1EE9PrintLineEPKcz
  2409              	.LVL190:
@@ -8538,7 +8536,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  2419              	.LBE606:
  2420              	.LBE605:
  2421              		.cfi_endproc
- 2422              	.LFE3056:
+ 2422              	.LFE3057:
  2424              		.section	.rodata._ZN16AudioFileManager4InitEv.str1.4,"aMS",%progbits,1
  2425              		.align	2
  2426              	.LC34:
@@ -8565,7 +8563,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  2440              		.thumb_func
  2442              	_ZN16AudioFileManager4InitEv:
  2443              	.LVL191:
- 2444              	.LFB3047:
+ 2444              	.LFB3048:
    5:AudioFileManager.cpp ****   SdmmcHandler::Config sd_cfg;
  2445              		.loc 1 5 30 is_stmt 1 view -0
  2446              		.cfi_startproc
@@ -8578,11 +8576,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
    5:AudioFileManager.cpp ****   SdmmcHandler::Config sd_cfg;
  2451              		.loc 1 5 30 is_stmt 0 view .LVU651
  2452 0000 F0B5     		push	{r4, r5, r6, r7, lr}
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 144
-
-
  2453              		.cfi_def_cfa_offset 20
  2454              		.cfi_offset 4, -20
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 144
+
+
  2455              		.cfi_offset 5, -16
  2456              		.cfi_offset 6, -12
  2457              		.cfi_offset 7, -8
@@ -8638,11 +8636,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
   43:../libDaisy/src/per/sdmmc.h ****     {
   44:../libDaisy/src/per/sdmmc.h ****         BITS_1, /**< Only 1 bit of data per clock is transferred */
   45:../libDaisy/src/per/sdmmc.h ****         BITS_4, /**< 4-bits of parallel data for each clock pulse */
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 145
-
-
   46:../libDaisy/src/per/sdmmc.h ****     };
   47:../libDaisy/src/per/sdmmc.h **** 
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 145
+
+
   48:../libDaisy/src/per/sdmmc.h ****     /** 
   49:../libDaisy/src/per/sdmmc.h ****     Sets the desired clock speed of the SD card bus. \n 
   50:../libDaisy/src/per/sdmmc.h ****     Initialization is always done at or below 400kHz, and then the user speed is set.
@@ -8698,11 +8696,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
   72:../libDaisy/src/per/sdmmc.h ****             clock_powersave = false;
  2488              		.loc 11 72 29 view .LVU661
  2489 0014 CDE90135 		strd	r3, r5, [sp, #4]
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 146
-
-
  2490              		.loc 11 73 13 is_stmt 1 view .LVU662
  2491              	.LVL195:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 146
+
+
  2492              		.loc 11 73 13 is_stmt 0 view .LVU663
  2493              	.LBE609:
  2494              	.LBE610:
@@ -8758,11 +8756,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  2528 002e 6068     		ldr	r0, [r4, #4]
  2529              	.LBE614:
  2530              	.LBE613:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 147
-
-
   15:AudioFileManager.cpp ****     BlinkOnSDError('f');
  2531              		.loc 1 15 14 view .LVU677
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 147
+
+
  2532 0030 2A46     		mov	r2, r5
  2533 0032 0D49     		ldr	r1, .L144+4
  2534 0034 0430     		adds	r0, r0, #4
@@ -8818,11 +8816,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  2572 0050 3046     		mov	r0, r6
   22:AudioFileManager.cpp **** 
  2573              		.loc 1 22 1 view .LVU690
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 148
-
-
  2574 0052 05B0     		add	sp, sp, #20
  2575              		.cfi_remember_state
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 148
+
+
  2576              		.cfi_def_cfa_offset 20
  2577              		@ sp needed
  2578 0054 F0BD     		pop	{r4, r5, r6, r7, pc}
@@ -8858,7 +8856,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  2602 0068 14000000 		.word	.LC35
  2603 006c 18000000 		.word	.LC36
  2604              		.cfi_endproc
- 2605              	.LFE3047:
+ 2605              	.LFE3048:
  2607              		.text
  2608              	.Letext0:
  2609              		.file 12 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/machine/_default_types.h"
@@ -8878,11 +8876,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  2623              		.file 26 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdint"
  2624              		.file 27 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/algorithmfwd.h"
  2625              		.file 28 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/initializer_list"
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 149
-
-
  2626              		.file 29 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdarg"
  2627              		.file 30 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdio"
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 149
+
+
  2628              		.file 31 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstring"
  2629              		.file 32 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/vector.tcc"
  2630              		.file 33 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/predefined_ops.h
@@ -8897,80 +8895,81 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 1
  2639              		.file 42 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/math.h"
  2640              		.file 43 "/Library/DaisyToolchain/0.2.0/arm/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h"
  2641              		.file 44 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdio.h"
- 2642              		.file 45 "../libDaisy/Middlewares/Third_Party/FatFs/src/integer.h"
- 2643              		.file 46 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/stdlib.h"
- 2644              		.file 47 "../libDaisy/Middlewares/Third_Party/FatFs/src/ff.h"
- 2645              		.file 48 "../libDaisy/src/daisy_core.h"
- 2646              		.file 49 "../libDaisy/src/per/tim.h"
- 2647              		.file 50 "../libDaisy/src/sys/system.h"
- 2648              		.file 51 "../libDaisy/src/per/qspi.h"
- 2649              		.file 52 "../libDaisy/src/per/dac.h"
- 2650              		.file 53 "../libDaisy/src/per/sai.h"
- 2651              		.file 54 "../libDaisy/src/hid/audio.h"
- 2652              		.file 55 "../libDaisy/src/per/adc.h"
- 2653              		.file 56 "../libDaisy/src/per/uart.h"
- 2654              		.file 57 "../libDaisy/src/hid/MidiEvent.h"
- 2655              		.file 58 "../libDaisy/src/hid/midi_parser.h"
- 2656              		.file 59 "../libDaisy/src/hid/usb.h"
- 2657              		.file 60 "../libDaisy/src/hid/midi.h"
- 2658              		.file 61 "../libDaisy/src/util/FIFO.h"
- 2659              		.file 62 "../libDaisy/src/hid/switch.h"
- 2660              		.file 63 "../libDaisy/src/hid/encoder.h"
- 2661              		.file 64 "../libDaisy/src/hid/ctrl.h"
- 2662              		.file 65 "../libDaisy/src/hid/logger_impl.h"
- 2663              		.file 66 "../libDaisy/src/util/wav_format.h"
- 2664              		.file 67 "../libDaisy/src/hid/led.h"
- 2665              		.file 68 "../libDaisy/src/util/color.h"
- 2666              		.file 69 "../libDaisy/src/hid/rgb_led.h"
- 2667              		.file 70 "../libDaisy/src/dev/max11300.h"
- 2668              		.file 71 "../libDaisy/src/hid/logger.h"
- 2669              		.file 72 "../libDaisy/src/daisy_pod.h"
- 2670              		.file 73 "../libDaisy/src/per/gpio.h"
- 2671              		.file 74 "../libDaisy/src/dev/sdram.h"
+ 2642              		.file 45 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/stdlib.h"
+ 2643              		.file 46 "../libDaisy/src/daisy_core.h"
+ 2644              		.file 47 "../libDaisy/src/per/tim.h"
+ 2645              		.file 48 "../libDaisy/src/sys/system.h"
+ 2646              		.file 49 "../libDaisy/src/per/qspi.h"
+ 2647              		.file 50 "../libDaisy/src/per/dac.h"
+ 2648              		.file 51 "../libDaisy/src/per/sai.h"
+ 2649              		.file 52 "../libDaisy/src/hid/audio.h"
+ 2650              		.file 53 "../libDaisy/src/per/adc.h"
+ 2651              		.file 54 "../libDaisy/src/per/uart.h"
+ 2652              		.file 55 "../libDaisy/src/hid/MidiEvent.h"
+ 2653              		.file 56 "../libDaisy/src/hid/midi_parser.h"
+ 2654              		.file 57 "../libDaisy/src/hid/usb.h"
+ 2655              		.file 58 "../libDaisy/src/hid/midi.h"
+ 2656              		.file 59 "../libDaisy/src/util/FIFO.h"
+ 2657              		.file 60 "../libDaisy/src/hid/switch.h"
+ 2658              		.file 61 "../libDaisy/src/hid/encoder.h"
+ 2659              		.file 62 "../libDaisy/src/hid/ctrl.h"
+ 2660              		.file 63 "../libDaisy/src/hid/logger_impl.h"
+ 2661              		.file 64 "../libDaisy/src/util/wav_format.h"
+ 2662              		.file 65 "../libDaisy/src/hid/led.h"
+ 2663              		.file 66 "../libDaisy/src/util/color.h"
+ 2664              		.file 67 "../libDaisy/src/hid/rgb_led.h"
+ 2665              		.file 68 "../libDaisy/src/dev/max11300.h"
+ 2666              		.file 69 "../libDaisy/src/hid/logger.h"
+ 2667              		.file 70 "../libDaisy/src/daisy_pod.h"
+ 2668              		.file 71 "../libDaisy/src/per/gpio.h"
+ 2669              		.file 72 "../libDaisy/src/dev/sdram.h"
+ 2670              		.file 73 "../libDaisy/Middlewares/Third_Party/FatFs/src/integer.h"
+ 2671              		.file 74 "../libDaisy/Middlewares/Third_Party/FatFs/src/ff.h"
  2672              		.file 75 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/string.h"
  2673              		.file 76 "../libDaisy/src/dev/sr_595.h"
- 2674              		.file 77 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/functexcept.h"
- 2675              		.file 78 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/new"
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 150
+ 2674              		.file 77 "constants.h"
+ 2675              		.file 78 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/functexcept.h"
+ 2676              		.file 79 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/new"
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 150
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 AudioFileManager.cpp
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:19     .rodata._ZN16AudioFileManager12ScanWavFilesEv.str1.4:0000000000000000 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:38     .text._ZN16AudioFileManager12ScanWavFilesEv:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:45     .text._ZN16AudioFileManager12ScanWavFilesEv:0000000000000000 _ZN16AudioFileManager12ScanWavFilesEv
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:371    .text._ZN16AudioFileManager12ScanWavFilesEv:000000000000011c $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:380    .text._ZN16AudioFileManager12CheckChunkIDEmm:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:387    .text._ZN16AudioFileManager12CheckChunkIDEmm:0000000000000000 _ZN16AudioFileManager12CheckChunkIDEmm
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:407    .rodata._ZN16AudioFileManager12GetWavHeaderEP3FIL.str1.4:0000000000000000 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:444    .text._ZN16AudioFileManager12GetWavHeaderEP3FIL:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:451    .text._ZN16AudioFileManager12GetWavHeaderEP3FIL:0000000000000000 _ZN16AudioFileManager12GetWavHeaderEP3FIL
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:1059   .text._ZN16AudioFileManager12GetWavHeaderEP3FIL:00000000000001b0 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:1082   .rodata._ZN16AudioFileManager13LoadAudioDataEv.str1.4:0000000000000000 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:1098   .text._ZN16AudioFileManager13LoadAudioDataEv:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:1105   .text._ZN16AudioFileManager13LoadAudioDataEv:0000000000000000 _ZN16AudioFileManager13LoadAudioDataEv
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:1774   .text._ZN16AudioFileManager13LoadAudioDataEv:0000000000000158 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:1786   .rodata._ZN16AudioFileManager8LoadFileEi.str1.4:0000000000000000 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:1808   .text._ZN16AudioFileManager8LoadFileEi:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:1815   .text._ZN16AudioFileManager8LoadFileEi:0000000000000000 _ZN16AudioFileManager8LoadFileEi
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:2102   .text._ZN16AudioFileManager8LoadFileEi:00000000000000c0 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:2114   .rodata._ZN16AudioFileManager9CloseFileEv.str1.4:0000000000000000 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:2121   .text._ZN16AudioFileManager9CloseFileEv:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:2128   .text._ZN16AudioFileManager9CloseFileEv:0000000000000000 _ZN16AudioFileManager9CloseFileEv
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:2210   .text._ZN16AudioFileManager9CloseFileEv:0000000000000034 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:2216   .text._ZN16AudioFileManager10SetBuffersEPsS0_:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:2223   .text._ZN16AudioFileManager10SetBuffersEPsS0_:0000000000000000 _ZN16AudioFileManager10SetBuffersEPsS0_
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:2240   .text._ZN16AudioFileManager20CheckBufferIntegrityEv:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:2247   .text._ZN16AudioFileManager20CheckBufferIntegrityEv:0000000000000000 _ZN16AudioFileManager20CheckBufferIntegrityEv
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:2291   .text._ZN16AudioFileManager20CheckBufferIntegrityEv:000000000000000c $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:2296   .rodata._ZN16AudioFileManager14BlinkOnSDErrorEc.str1.4:0000000000000000 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:2303   .text._ZN16AudioFileManager14BlinkOnSDErrorEc:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:2310   .text._ZN16AudioFileManager14BlinkOnSDErrorEc:0000000000000000 _ZN16AudioFileManager14BlinkOnSDErrorEc
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:2415   .text._ZN16AudioFileManager14BlinkOnSDErrorEc:0000000000000060 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:2425   .rodata._ZN16AudioFileManager4InitEv.str1.4:0000000000000000 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:2435   .text._ZN16AudioFileManager4InitEv:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:2442   .text._ZN16AudioFileManager4InitEv:0000000000000000 _ZN16AudioFileManager4InitEv
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s:2601   .text._ZN16AudioFileManager4InitEv:0000000000000064 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:19     .rodata._ZN16AudioFileManager12ScanWavFilesEv.str1.4:0000000000000000 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:38     .text._ZN16AudioFileManager12ScanWavFilesEv:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:45     .text._ZN16AudioFileManager12ScanWavFilesEv:0000000000000000 _ZN16AudioFileManager12ScanWavFilesEv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:371    .text._ZN16AudioFileManager12ScanWavFilesEv:000000000000011c $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:380    .text._ZN16AudioFileManager12CheckChunkIDEmm:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:387    .text._ZN16AudioFileManager12CheckChunkIDEmm:0000000000000000 _ZN16AudioFileManager12CheckChunkIDEmm
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:407    .rodata._ZN16AudioFileManager12GetWavHeaderEP3FIL.str1.4:0000000000000000 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:444    .text._ZN16AudioFileManager12GetWavHeaderEP3FIL:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:451    .text._ZN16AudioFileManager12GetWavHeaderEP3FIL:0000000000000000 _ZN16AudioFileManager12GetWavHeaderEP3FIL
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:1059   .text._ZN16AudioFileManager12GetWavHeaderEP3FIL:00000000000001b0 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:1082   .rodata._ZN16AudioFileManager13LoadAudioDataEv.str1.4:0000000000000000 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:1098   .text._ZN16AudioFileManager13LoadAudioDataEv:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:1105   .text._ZN16AudioFileManager13LoadAudioDataEv:0000000000000000 _ZN16AudioFileManager13LoadAudioDataEv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:1774   .text._ZN16AudioFileManager13LoadAudioDataEv:0000000000000158 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:1786   .rodata._ZN16AudioFileManager8LoadFileEi.str1.4:0000000000000000 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:1808   .text._ZN16AudioFileManager8LoadFileEi:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:1815   .text._ZN16AudioFileManager8LoadFileEi:0000000000000000 _ZN16AudioFileManager8LoadFileEi
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:2102   .text._ZN16AudioFileManager8LoadFileEi:00000000000000c0 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:2114   .rodata._ZN16AudioFileManager9CloseFileEv.str1.4:0000000000000000 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:2121   .text._ZN16AudioFileManager9CloseFileEv:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:2128   .text._ZN16AudioFileManager9CloseFileEv:0000000000000000 _ZN16AudioFileManager9CloseFileEv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:2210   .text._ZN16AudioFileManager9CloseFileEv:0000000000000034 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:2216   .text._ZN16AudioFileManager10SetBuffersEPsS0_:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:2223   .text._ZN16AudioFileManager10SetBuffersEPsS0_:0000000000000000 _ZN16AudioFileManager10SetBuffersEPsS0_
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:2240   .text._ZN16AudioFileManager20CheckBufferIntegrityEv:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:2247   .text._ZN16AudioFileManager20CheckBufferIntegrityEv:0000000000000000 _ZN16AudioFileManager20CheckBufferIntegrityEv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:2291   .text._ZN16AudioFileManager20CheckBufferIntegrityEv:000000000000000c $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:2296   .rodata._ZN16AudioFileManager14BlinkOnSDErrorEc.str1.4:0000000000000000 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:2303   .text._ZN16AudioFileManager14BlinkOnSDErrorEc:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:2310   .text._ZN16AudioFileManager14BlinkOnSDErrorEc:0000000000000000 _ZN16AudioFileManager14BlinkOnSDErrorEc
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:2415   .text._ZN16AudioFileManager14BlinkOnSDErrorEc:0000000000000060 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:2425   .rodata._ZN16AudioFileManager4InitEv.str1.4:0000000000000000 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:2435   .text._ZN16AudioFileManager4InitEv:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:2442   .text._ZN16AudioFileManager4InitEv:0000000000000000 _ZN16AudioFileManager4InitEv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s:2601   .text._ZN16AudioFileManager4InitEv:0000000000000064 $d
 
 UNDEFINED SYMBOLS
 memset
@@ -8991,7 +8990,7 @@ f_close
 f_open
 _ZN5daisy6LoggerILNS_17LoggerDestinationE1EE5PrintEPKcz
 _ZN5daisy6System5DelayEm
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccgjXPgX.s 			page 151
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccMPQbs2.s 			page 151
 
 
 _ZN5daisy6RgbLed3SetEfff
