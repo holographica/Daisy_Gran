@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s 			page 1
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cccGtE98.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s 			page 1
   27:../libDaisy/Middlewares/Third_Party/FatFs/src/diskio.c **** 
   28:../libDaisy/Middlewares/Third_Party/FatFs/src/diskio.c **** /* Private function prototypes -----------------------------------------------*/
   29:../libDaisy/Middlewares/Third_Party/FatFs/src/diskio.c **** /* Private functions ---------------------------------------------------------*/
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s 			page 2
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cccGtE98.s 			page 2
 
 
   30:../libDaisy/Middlewares/Third_Party/FatFs/src/diskio.c **** 
@@ -118,7 +118,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s 			page 1
   46:../libDaisy/Middlewares/Third_Party/FatFs/src/diskio.c **** /**
   47:../libDaisy/Middlewares/Third_Party/FatFs/src/diskio.c ****   * @brief  Initializes a Drive
   48:../libDaisy/Middlewares/Third_Party/FatFs/src/diskio.c ****   * @param  pdrv: Physical drive number (0..)
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s 			page 3
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cccGtE98.s 			page 3
 
 
   49:../libDaisy/Middlewares/Third_Party/FatFs/src/diskio.c ****   * @retval DSTATUS: Operation status
@@ -178,7 +178,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s 			page 1
  107 001e 7047     		bx	lr
  108              	.L8:
  109              		.align	2
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s 			page 4
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cccGtE98.s 			page 4
 
 
  110              	.L7:
@@ -238,7 +238,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s 			page 1
  146              		.loc 1 82 9 view .LVU34
  147 000c 207B     		ldrb	r0, [r4, #12]	@ zero_extendqisi2
  148              	.LVL8:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s 			page 5
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cccGtE98.s 			page 5
 
 
  149              		.loc 1 82 9 view .LVU35
@@ -298,7 +298,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s 			page 1
  102:../libDaisy/Middlewares/Third_Party/FatFs/src/diskio.c ****   DRESULT res;
  184              		.loc 1 102 3 view .LVU40
  103:../libDaisy/Middlewares/Third_Party/FatFs/src/diskio.c **** 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s 			page 6
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cccGtE98.s 			page 6
 
 
  104:../libDaisy/Middlewares/Third_Party/FatFs/src/diskio.c ****   res = disk.drv[pdrv]->disk_write(disk.lun[pdrv], buff, sector, count);
@@ -358,7 +358,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s 			page 1
  110:../libDaisy/Middlewares/Third_Party/FatFs/src/diskio.c ****   * @brief  I/O control operation
  111:../libDaisy/Middlewares/Third_Party/FatFs/src/diskio.c ****   * @param  pdrv: Physical drive number (0..)
  112:../libDaisy/Middlewares/Third_Party/FatFs/src/diskio.c ****   * @param  cmd: Control code
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s 			page 7
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cccGtE98.s 			page 7
 
 
  113:../libDaisy/Middlewares/Third_Party/FatFs/src/diskio.c ****   * @param  *buff: Buffer to send/receive control data
@@ -418,7 +418,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s 			page 1
  130:../libDaisy/Middlewares/Third_Party/FatFs/src/diskio.c **** /**
  131:../libDaisy/Middlewares/Third_Party/FatFs/src/diskio.c ****   * @brief  Gets Time from RTC
  132:../libDaisy/Middlewares/Third_Party/FatFs/src/diskio.c ****   * @param  None
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s 			page 8
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cccGtE98.s 			page 8
 
 
  133:../libDaisy/Middlewares/Third_Party/FatFs/src/diskio.c ****   * @retval Time in DWORD
@@ -445,28 +445,28 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s 			page 1
  287              		.file 4 "../libDaisy/Middlewares/Third_Party/FatFs/src/integer.h"
  288              		.file 5 "../libDaisy/Middlewares/Third_Party/FatFs/src/diskio.h"
  289              		.file 6 "../libDaisy/Middlewares/Third_Party/FatFs/src/ff_gen_drv.h"
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s 			page 9
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cccGtE98.s 			page 9
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 diskio.c
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s:19     .text.disk_status:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s:26     .text.disk_status:0000000000000000 disk_status
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s:55     .text.disk_status:0000000000000010 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s:60     .text.disk_initialize:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s:67     .text.disk_initialize:0000000000000000 disk_initialize
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s:111    .text.disk_initialize:0000000000000020 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s:116    .text.disk_read:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s:123    .text.disk_read:0000000000000000 disk_read
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s:164    .text.disk_read:0000000000000018 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s:169    .text.disk_write:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s:176    .text.disk_write:0000000000000000 disk_write
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s:217    .text.disk_write:0000000000000018 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s:222    .text.disk_ioctl:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s:229    .text.disk_ioctl:0000000000000000 disk_ioctl
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s:257    .text.disk_ioctl:0000000000000014 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s:262    .text.get_fattime:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmRiJ2S.s:269    .text.get_fattime:0000000000000000 get_fattime
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cccGtE98.s:19     .text.disk_status:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cccGtE98.s:26     .text.disk_status:0000000000000000 disk_status
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cccGtE98.s:55     .text.disk_status:0000000000000010 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cccGtE98.s:60     .text.disk_initialize:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cccGtE98.s:67     .text.disk_initialize:0000000000000000 disk_initialize
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cccGtE98.s:111    .text.disk_initialize:0000000000000020 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cccGtE98.s:116    .text.disk_read:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cccGtE98.s:123    .text.disk_read:0000000000000000 disk_read
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cccGtE98.s:164    .text.disk_read:0000000000000018 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cccGtE98.s:169    .text.disk_write:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cccGtE98.s:176    .text.disk_write:0000000000000000 disk_write
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cccGtE98.s:217    .text.disk_write:0000000000000018 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cccGtE98.s:222    .text.disk_ioctl:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cccGtE98.s:229    .text.disk_ioctl:0000000000000000 disk_ioctl
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cccGtE98.s:257    .text.disk_ioctl:0000000000000014 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cccGtE98.s:262    .text.get_fattime:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cccGtE98.s:269    .text.get_fattime:0000000000000000 get_fattime
 
 UNDEFINED SYMBOLS
 disk

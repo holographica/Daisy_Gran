@@ -2,32 +2,48 @@
 #include "daisysp.h"
 #include "daisy_pod.h"
 #include "AudioFileManager.h"
+#include "GranularSynth.h"
 #include "constants.h"
+#include "../DaisySP/DaisySP-LGPL/Source/Dynamics/compressor.cpp"
 
 using namespace daisy;
 using namespace daisysp;
-
-// constexpr size_t OUTPUT_BUFFER_SIZE = 48000*10 // 10seconds @ 48kHz
+using namespace std;
 
 SdmmcHandler sd;
 FatFSInterface fsi;
 DaisyPod pod;
 FIL file;
-AudioFileManager filemgr(&sd, &fsi, &pod, &file);
+AudioFileManager filemgr(sd, fsi, pod, &file);
+
 
 DSY_SDRAM_BSS alignas(16) int16_t left_buf[CHNL_BUF_SIZE_SAMPS];
 DSY_SDRAM_BSS alignas(16) int16_t right_buf[CHNL_BUF_SIZE_SAMPS];
 
-size_t wav_pos = 0;
-bool change_file = false;
-bool now_playing = false;
-int curr_file_idx = 0;
-uint32_t numsamples = 0; // NOTE: is this used for anything? 
+GranularSynth granular(pod);
 
-Color led1_colour;
-Color led2_colour;
-float k1v =0.0f;
-float k2v =0.0f;
+Compressor comp;
+Limiter lim;
+size_t audio_len=0;
+
+/* track previous param values (start as defaults) */
+float prev_grain_size = 0.5f;
+float prev_pos = 0.5f;
+float prev_active_count = 0.5f;
+float prev_pitch = 0.5f;
+const float PARAM_CHANGE_THRESHOLD = 0.01f;
+
+bool k1_pass_thru_mode0 = false;
+bool k1_pass_thru_mode1 = false;
+bool k2_pass_thru_mode0 = false;
+bool k2_pass_thru_mode1 = false;
+float k1v_mode_0 = 0.5f;
+float k1v_mode_1 = 0.5f;
+float k2v_mode_0 = 0.5f;
+float k2v_mode_1 = 0.5f;
+
+uint file_idx = 1;
+int mode = 0;
 
 
 
@@ -36,155 +52,247 @@ float k2v =0.0f;
 - then change all pod prints to error msg so only prints if in debug mode
 */
 
-int16_t GetLeftBufData(size_t pos) {
-  return (pos < CHNL_BUF_SIZE_SAMPS) ? left_buf[pos] : 0;
-}
-
-int16_t GetRightBufData(size_t pos) {
-  return (pos < CHNL_BUF_SIZE_SAMPS) ? right_buf[pos] : 0;
-}
-
-void SetLedColours(Color::PresetColor color1, Color::PresetColor color2){
-  // pod.ClearLeds();
-  led1_colour.Init(color1);
-  led2_colour.Init(color2);
-  pod.led1.SetColor(led1_colour);
-  pod.led2.SetColor(led2_colour);
+void SetLed1(int r, int g, int b){
+  pod.led1.Set(r,g,b);
   pod.UpdateLeds();
+  System::Delay(100);
 }
 
-void LoadNewFile(){
-  memset(left_buf, 0, sizeof(left_buf));
-  memset(right_buf, 0, sizeof(right_buf));
-  pod.ClearLeds();
-  pod.UpdateLeds();
-  filemgr.LoadFile(curr_file_idx);
-  numsamples = filemgr.GetSamplesPerChannel();
-  wav_pos = 0;
-  change_file = false;
-  pod.seed.PrintLine("NOW PLAYING: %d", curr_file_idx);
+void BlinkLed1(int r, int g, int b){
+  SetLed1(r,g,b);
+  SetLed1(0,0,0);
 }
 
-void HandleEncoder(){
+void BlinkSetLed1(int r, int g, int b){
+  BlinkLed1(r,g,b);
+  BlinkLed1(r,g,b);
+  SetLed1(r,g,b);
+}
+
+void SetLed1Green(){
+  SetLed1(0,255,0);
+}
+
+void SetLed1Blue(){
+  SetLed1(0,0,255);
+}
+
+void BlinkLed1White(){
+  BlinkLed1(255,255,255);
+  BlinkLed1(255,255,255);
+}
+
+void BlinkLed1Green(){
+  BlinkLed1(0,255,0);
+  BlinkLed1(0,255,0);
+}
+
+void BlinkLed1Blue(){
+  BlinkLed1(0,0,255);
+  BlinkLed1(0,0,255);
+}
+
+
+
+/* knobs on the Pod have a small deadzone around the upper/lower bounds
+  (eg my knob1 only goes down to 0.003) -> assume knob is at 0 or 1 if it's very close */
+float MapKnobDeadzone(float knob_val){
+  if (knob_val<=0.01f) { knob_val = 0.0f; }
+  else if (knob_val>=0.99f) { knob_val = 1.0f; }
+  return knob_val;
+}
+
+float UpdateKnobPassThru(float curr_knob_val, float *stored_knob_val, float prev_param_val, bool *pass_thru){
+  if (!(*pass_thru)){
+    if ((curr_knob_val >= prev_param_val && (*stored_knob_val) <= (prev_param_val)) ||
+        (curr_knob_val <= prev_param_val && (*stored_knob_val) >= (prev_param_val))) {
+          (*pass_thru) = true;
+    }
+  }
+  if (*pass_thru){
+    (*stored_knob_val) = curr_knob_val;
+    return curr_knob_val;
+  }
+  return prev_param_val;
+}
+
+bool CheckParamDelta(float curr_val, float prev_val){
+  return (fabsf(curr_val - prev_val)>0.01f);
+}
+
+void UpdateKnob1(int mode){
+  float k1v = MapKnobDeadzone(pod.knob1.Process());
+  if (mode==0){
+    // use k1 to control grain size (10ms to 1s)
+    float grain_size = UpdateKnobPassThru(k1v, &k1v_mode_0, prev_grain_size, &k1_pass_thru_mode0);
+    if (CheckParamDelta(grain_size, prev_grain_size)){
+      granular.SetUserGrainSize(grain_size);
+      prev_grain_size = grain_size;
+      pod.seed.PrintLine("grain size set to %.3f ms", grain_size);
+    }
+  }
+  else if (mode ==1){
+    float pitch_ratio = UpdateKnobPassThru(k1v, &k1v_mode_1, prev_pitch, &k1_pass_thru_mode0);
+    if (CheckParamDelta(pitch_ratio, prev_pitch)){
+      granular.SetUserPitchRatio(pitch_ratio);
+      prev_pitch= pitch_ratio;
+      pod.seed.PrintLine("pitch ratio set to %.3f",pitch_ratio);
+    }
+  }
+}
+
+void UpdateKnob2(int mode){
+  float k2v = MapKnobDeadzone(pod.knob2.Process());
+  if (mode==0){
+    float spawn_pos = UpdateKnobPassThru(k2v, &k2v_mode_0, prev_pos, &k2_pass_thru_mode0);
+    if (CheckParamDelta(spawn_pos, prev_pos)){
+      granular.SetUserSpawnPos(spawn_pos);
+      prev_pos = spawn_pos;
+      pod.seed.PrintLine("spawn pos set to %.3f", spawn_pos);
+    }
+  }
+  else if (mode==1){
+    float active_count = UpdateKnobPassThru(k2v, &k2v_mode_1, prev_active_count, &k2_pass_thru_mode0);
+    if (CheckParamDelta(active_count, prev_active_count)){
+      granular.SetUserActiveGrains(active_count);
+      prev_active_count = active_count;
+      pod.seed.PrintLine("active grains set to %.3f",active_count);
+    }
+  }
+}
+
+void InitSynth(){
+  audio_len = filemgr.GetSamplesPerChannel();
+  pod.seed.PrintLine("File loaded: %d samples", audio_len);
+  granular.SetUserGrainSize(prev_grain_size);
+  granular.SetUserSpawnPos(prev_pos);
+  granular.SetActiveGrains(1);
+  granular.Init(left_buf, right_buf, audio_len);
+}
+
+void UpdateEncoder(){
   pod.encoder.Debounce();
   int32_t inc = pod.encoder.Increment();
-  char fname[128];
   if (inc!=0){
-    now_playing = false;
-    curr_file_idx+=inc;
-    if (curr_file_idx<0) { curr_file_idx = filemgr.GetFileCount() - 1; }
-    if (curr_file_idx >= filemgr.GetFileCount()) { curr_file_idx = 0; }
-    filemgr.GetName(curr_file_idx, fname);
-    pod.seed.PrintLine("selected new file idx %d %s", curr_file_idx, fname);
+    char fname[64];
+    file_idx+=inc;
+    if (file_idx<0) { file_idx = filemgr.GetFileCount() - 1; }
+    if (file_idx >= filemgr.GetFileCount()) { file_idx = 0; }
+    filemgr.GetName(file_idx, fname);
+    pod.seed.PrintLine("selected new file idx %d %s", file_idx, fname);
   }
-}
-
-void HandleButton1(){
-  pod.button1.Debounce();
-  if (pod.button1.RisingEdge()){
-      change_file = true;
-      now_playing = false;
-      LoadNewFile();
+  if (pod.encoder.FallingEdge()){
+    if (filemgr.LoadFile(file_idx)) {
+      InitSynth();
+    } 
+    else {
+      pod.seed.PrintLine("Failed to load audio file");
+      return;
     }
+  }
 }
 
-void HandleButton2(){
+void UpdateControls() {
   pod.button2.Debounce();
-  if (pod.button2.RisingEdge() && !change_file){
-    if (now_playing) { pod.seed.PrintLine("pause"); }
-    if (!now_playing) { pod.seed.PrintLine("play"); }
-    now_playing = !now_playing;
+  if (pod.button2.FallingEdge()){
+    mode++;
+    /* wrap around mode value */
+    if (mode>1) { mode = 0; }
+    if (mode==0){
+      k1v_mode_0 = MapKnobDeadzone(pod.knob1.GetRawFloat());
+      k2v_mode_0 = MapKnobDeadzone(pod.knob2.GetRawFloat());
+    }
+    if (mode==1){
+      k1v_mode_1 = MapKnobDeadzone(pod.knob1.GetRawFloat());
+      k2v_mode_1 = MapKnobDeadzone(pod.knob2.GetRawFloat());
+    }
+    k1_pass_thru_mode0 = false;
+    k1_pass_thru_mode1 = false;
+    k2_pass_thru_mode0 = false;
+    k2_pass_thru_mode1 = false;
+    mode==0 ? BlinkSetLed1(0,255,0) : BlinkSetLed1(0,0,255);
   }
+  UpdateKnob1(mode);
+  UpdateKnob2(mode);
+  UpdateEncoder();
 }
 
-void HandleKnobs(){
-  float k1f = pod.knob1.GetRawFloat();
-  float k2f = pod.knob2.GetRawFloat();
-  float k1diff = fabsf(k1f-k1v);  
-  float k2diff = fabsf(k2f-k2v);  
-  if (k1diff > 0.002 || k2diff > 0.002 ){
-    pod.seed.PrintLine("knob floats: %.3f | %.3f", k1f,k2f);
-    k1v = k1f;
-    k2v = k2f;
-  }
+void InitCompressor(){
+  comp.Init(pod.AudioSampleRate());
+  comp.SetRatio(3.0f);
+  comp.SetAttack(0.01f);
+  comp.SetRelease(0.1f);
+  comp.SetThreshold(-18.0f);
+  comp.AutoMakeup(true);
 }
+
+
+// uint32_t callback_count = 0;
+// uint32_t last_report =0;
 
 void AudioCallback(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, size_t size){
-  static uint32_t callback_count = 0;
-  static uint32_t last_report = 0;
-
-  if (wav_pos >= CHNL_BUF_SIZE_SAMPS) {
-    pod.seed.PrintLine("Error: wav_pos buffer overrun detected");
-    wav_pos = 0;
-  }
-  if (!now_playing){
-    for (size_t i=0; i<size;i++){
-      out[0][i]=out[1][i]=0.0f;
-    }
-    return;
-  }
-
-  for (size_t i = 0; i<size; i++){
-    if (wav_pos < filemgr.GetSamplesPerChannel()) {
-      const int16_t left_sample = GetLeftBufData(wav_pos);
-      const int16_t right_sample = GetRightBufData(wav_pos);
-
-      out[0][i] = s162f(left_sample) * 0.5f;
-      out[1][i] = s162f(right_sample) * 0.5f;
-      wav_pos++;
-    }
-    else {
-      now_playing = false;
-      out[0][i]=out[1][i]=0.0f;
-    }
-  }
-
-  callback_count++;
-  // print diagnostic
-  if (now_playing && (callback_count - last_report >= pod.AudioSampleRate() / size)) {
-    float total_len = filemgr.GetSamplesPerChannel() / pod.AudioSampleRate();
-    float elapsed = wav_pos / pod.AudioSampleRate();
-    // pod.seed.PrintLine("Playback position: %d / %d", wav_pos, filemgr.GetSamplesPerChannel());
-    pod.seed.PrintLine("Playback position: %.2fs / %.2fs", elapsed, total_len);
-    last_report = callback_count;
-  }
+  granular.ProcessGrains(out[0], out[1], size);
+  // lim.ProcessBlock(out[0],size,1.0f);
+  // lim.ProcessBlock(out[1],size,1.0f);
+  comp.ProcessBlock(out[0],out[0], size);
+  comp.ProcessBlock(out[1],out[1], size);
+  // for (size_t i = 0; i < size; i++) {
+  //   out[0][i] *= 0.5f;
+  //   out[1][i] = out[0][i];
+  // }
+  // callback_count++;
 }
+
+
 
 int main (void){
   pod.Init();
   pod.seed.StartLog(true);
-  pod.SetAudioBlockSize(48);
+  pod.SetAudioBlockSize(4);
   pod.SetAudioSampleRate(SaiHandle::Config::SampleRate::SAI_48KHZ);
-  pod.ProcessAllControls();
+  InitCompressor();
+  // lim.Init();
+  BlinkLed1White();
 
   filemgr.SetBuffers(left_buf, right_buf);
   if (!filemgr.Init()){
     pod.seed.PrintLine("filemgr init failed");
     return 1;
   }
-
+  BlinkLed1White();
   if (!filemgr.ScanWavFiles()){
     pod.seed.PrintLine("reading files failed");
     return 1;
   }
-  
-  LoadNewFile();
-  SetLedColours(Color::PresetColor::GREEN, Color::PresetColor::GREEN);
-  System::Delay(3000);
+  BlinkLed1White();
+  if (filemgr.LoadFile(6)) {
+    InitSynth();
+    BlinkLed1White();
+  } 
+  else {
+    pod.seed.PrintLine("Failed to load audio file");
+    return 1;
+  }
 
-  pod.ClearLeds();
-  pod.UpdateLeds();
   pod.StartAdc();
   pod.StartAudio(AudioCallback);
+  BlinkSetLed1(0,255,0);
 
   while(1){
-    HandleEncoder();
-    HandleButton1();
-    HandleButton2();
-    HandleKnobs();
-    System::Delay(1);
+    UpdateControls();
+    System::Delay(10);
   }
-};
+}
 
 
+
+
+// let grains through gate when button pressed 
+// use button to trigger grain instead of automatically generating it 
+// 
+
+
+// have a rng that chooses which order the notes of the chord are triggered
+// could have smal chance of playing random note
+// press button to choose random scale
 

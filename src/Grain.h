@@ -1,27 +1,19 @@
 #pragma once
 
-// #include <stdio.h>
-#include <stdint.h>
-// #include <stddef.h>
+#include "daisy_pod.h"
 #include "daisysp.h"
-// #include "daisy_pod.h"
-#include "constants.h"
 #include "GrainPhasor.h"
 
-// using namespace daisy;
+using namespace daisy;
 using namespace daisysp;
-
-struct Sample {
-  float left;
-  float right;
-};
 
 class Grain {
   public:
-    /* options for grain amplitude envelope type */
     enum class EnvelopeType {
-      /* Simple linear fade out: |\  */
+      /* basic linear fade out from start */
       LinearDecay,
+      /* Simple fade out starting at phase=0.8f ie: |‾\  */
+      Decay,
       /* Smooth symmetric increase/decrease
         ie linear fade in and out: /\  */
       Triangular,
@@ -30,90 +22,98 @@ class Grain {
       // could add option for ADSR where user sets params? 
     };
 
-    // Grain(): pan_(0.5f), size_(0.0f), spawn_pos_(0.0f), is_active_(false), envelope_(EnvelopeType::Linear) {}
-    Grain(): is_active_(false), envelope_type_(EnvelopeType::LinearDecay), envelope_phase_(0.0f) {}
-    ~Grain() {};
+    Grain():
+      pod_(nullptr), left_buf_(nullptr), right_buf_(nullptr), is_active_(false),
+      // audio_len_(0), phase_(0), phase_increment_(0), envelope_type_(EnvelopeType::Decay){}
+      audio_len_(0), envelope_type_(EnvelopeType::Decay){}
 
-    // init with default values: 0.5s grain size, centre pan
-    void Init(){
-      Init(500.0f, 0.5f, GrainPhasor::Mode::OneShot);
+    void Init(const int16_t *left, const int16_t *right, size_t len, DaisyPod *pod){
+      left_buf_ = left;
+      right_buf_ = right;
+      audio_len_ = len;
+      pod_ = pod;
+      SetPhasorMode(GrainPhasor::Mode::OneShot);
+      phasor_.Init(0.0f, 1.0f, phasor_mode_);
     }
 
-    void Init(float size_ms, float pan, GrainPhasor::Mode phasor_mode){
-      phasor_.Init(0,1,phasor_mode);
-      SetSize(MsToSamples(size_ms));
-      SetPan(pan);
+    void Trigger(size_t pos, size_t grain_size, float pitch_ratio=1.0f, float pan=0.5f) {
+      if (pos >= audio_len_){
+        pos = pos - audio_len_;
+      }
+      spawn_pos_ = pos;
+      grain_size_ = grain_size;
+      is_active_ = true;
+      phasor_.Init(grain_size, pitch_ratio, phasor_mode_);
+      pitch_ratio_ = pitch_ratio;
+      pan_ = pan;
     }
 
-    void Trigger(float size_ms, float spawn_pos, float pitch_ratio, GrainPhasor::Mode mode){
-      if (size_ms <= 0 || pitch_ratio <=0 || spawn_pos <0){
-        // invalid vals
+    void Process(float *sum_left, float *sum_right) {
+      if (!is_active_) return;
+      float phase = phasor_.Process();
+      if (phasor_.GrainFinished()){
         DeactivateGrain();
         return;
       }
-      SetSpawnPos(spawn_pos);
-      SetSize(MsToSamples(size_ms));
-      phasor_.Init(size_ms, pitch_ratio, mode);
-      envelope_phase_ =0.0f;
-      ActivateGrain();
-    }
+      size_t curr_idx = spawn_pos_ + static_cast<size_t>(phase*grain_size_*pitch_ratio_);
+      if (curr_idx>=audio_len_){
+        DeactivateGrain();
+        return;
+      }
 
-    Sample Process(const int16_t* left_buf, const int16_t* right_buf){
-      if (!is_active_) return { 0.0f,0.0f };
-      float phase = phasor_.Process();
-      /* find current position within overall audio sample */
-      float curr_pos = spawn_pos_ + (phase*size_);
-      /* mod by buffer size to keep within bounds */
-      size_t buf_idx = static_cast<size_t>(curr_pos) % CHNL_BUF_SIZE_SAMPS;
-
-      float left = s162f(left_buf[buf_idx]);
-      float right = s162f(right_buf[buf_idx]);
+      float left = s162f(left_buf_[curr_idx]);
+      float right = s162f(right_buf_[curr_idx]);
       float env = ApplyEnvelope(phase);
 
       /* approximate constant power panning - cheaper than using sin/cos
-      https://www.cs.cmu.edu/~music/icm-online/readings/panlaws/panlaws.pdf
-      works since gain_l^2 + gain_r^2 = 1 */
-      float gain_left = std::sqrtf(1.0f-pan_);
-      // float gain_left = Fast_Sqrt(1.0f-pan_);
-      float gain_right = std::sqrtf(pan_);
-      // float gain_right = Fast_Sqrt(pan_);
-      Sample out = {(left*env*gain_left),
-                    (right*env*gain_right)};
+      this works since gain_l^2 + gain_r^2 = 1
+      source: cs.cmu.edu/~music/icm-online/readings/panlaws/panlaws.pdf */
+      float gain_left = std::sqrt(1.0f-pan_);
+      float gain_right = std::sqrt(pan_);
+      *sum_left += (left*env*gain_left);
+      *sum_right += (right*env*gain_right);
 
-      /* keep envelope phase synced with grain phase */
-      envelope_phase_ = phase;
-      if (phase>=1.0f) { DeactivateGrain(); }
-      return out;
+      // if (phase>= 1.0f){
+      //   DeactivateGrain();
+      // }
     }
 
-    bool IsActive() const { return is_active_; }
-    void SetPan(float new_pan) { pan_ = fclamp(new_pan,0.0f,1.0f); }
-    void SetSize(float new_size) { size_ = new_size; }
-    void SetSpawnPos(float new_pos) { spawn_pos_ = new_pos; };
-    void SetPitchRatio(float ratio) { phasor_.SetPitchRatio(ratio, size_); }
+    void SetSpawnPos(size_t spawn_pos){ spawn_pos_ = spawn_pos; }
+    void SetGrainSize(size_t grain_size) { grain_size_ = grain_size; }
+    void SetPitchRatio(float pitch_ratio) { pitch_ratio_ = pitch_ratio; }
     void SetEnvelopeType(EnvelopeType type) { envelope_type_ = type; }
+
+    void SetPhasorPitchRatio(float pitch_ratio) { phasor_.SetPitchRatio(pitch_ratio, audio_len_); }
     void SetPhasorMode(GrainPhasor::Mode mode) { phasor_.SetMode(mode); }
-    void ResetPhasor() { phasor_.Reset(); }
+
+    bool IsActive() const { return is_active_; }
     void ActivateGrain() { is_active_ = true; }
     void DeactivateGrain() { is_active_ = false; }
 
   private:
-    /* simple phasor that handles phase management/incrementation */
-    GrainPhasor phasor_;
-    /* linear pan: 0 = fully left, 1 = fully right */
-    float pan_;
-    /* length of grain in samples */
-    float size_;
-    /* position in samples within audio buffer 
-      at which grain starts playback */
-    float spawn_pos_;
+    DaisyPod* pod_;
+    const int16_t *left_buf_;
+    const int16_t *right_buf_;
     bool is_active_;
+    size_t audio_len_;
+    GrainPhasor phasor_;
+    GrainPhasor::Mode phasor_mode_;
+    // float phase_;
+    // float phase_increment_;
+    float pan_;
+    size_t spawn_pos_;
+    size_t grain_size_;
+    float pitch_ratio_;
     EnvelopeType envelope_type_;
-    float envelope_phase_;
 
+    const float start_decay_ = 0.8f;
+    const float decay_rate_ = 5.0f;
 
     float ApplyEnvelope(float phase){
       switch(envelope_type_){
+        case EnvelopeType::Decay:
+          if (phase<=start_decay_) { return 1.0f; }
+          else { return 1.0f - ((phase - start_decay_) * decay_rate_); }
         case EnvelopeType::Triangular:
           return 1.0f - std::abs(2.0f*phase - 1.0f);
         /* formula from https://uk.mathworks.com/help/signal/ref/hann.html */
@@ -124,25 +124,5 @@ class Grain {
           return 1.0f - phase;
       }
     }
-
-
-
-    // loop time? ie grain (0.5s long) playing for 5s - could be ping pong
-    
-    /*
-    - (amplitude) envelope
-      - ie ADSR 
-      - helps avoid clicks/pops by smoothing playback start/stop 
-      - shapes the sound of the grain
-      - represented as a single float value == an amplitude multiplier
-        - this is calculated using ADSR values, curve shapes, etc
-      
-      - options
-      - built in ADSR class
-      - Hann aka Hanning - raised cosine
-      - Hamming - slightly diff to Hann
-      - Gaussian
-    */
-
 
 };

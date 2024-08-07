@@ -9,23 +9,25 @@ constexpr size_t CHNL_BUF_SIZE_SAMPS = 8*1024*1024;
   so we allocate int16s - each is 2bytes -> 16mb */
 const size_t ABS_CHNL_BUF_SIZE = 16*1024*1024;
 const int BIT_DEPTH = 16;
-/* maximum number of concurrent active grains */
+/* min/max number of concurrent active grains */
+const int MIN_GRAINS = 1;
 const int MAX_GRAINS = 20;
 
 constexpr float MIN_GRAIN_SIZE_MS = 10.0f;
-constexpr float MAX_GRAIN_SIZE_MS = 1000.0f;
+constexpr float MAX_GRAIN_SIZE_MS = 3000.0f;
 
 // TODO: how is this calculated? (min grains / size in ms)*1000.f ?
 constexpr float MIN_DENSITY = 1.0f;
+constexpr float MAX_DENSITY = 20.0f;
 
 /* converts milliseconds to number of samples */
-inline constexpr float MsToSamples(float ms){
-  return SAMPLE_RATE_FLOAT * (ms*0.001f);
+inline constexpr size_t MsToSamples(float ms){
+  return static_cast<size_t>(SAMPLE_RATE_FLOAT * (ms*0.001f));
 }
 
 /* converts number of samples to milliseconds */
-inline constexpr float SamplesToMs(float samples){
-  return (samples * 1000.0f) / SAMPLE_RATE_FLOAT; 
+inline constexpr float SamplesToMs(size_t samples){
+  return (static_cast<float>(samples) * 1000.0f) / SAMPLE_RATE_FLOAT; 
 }
 
 // TODO: is there a point in using this?
