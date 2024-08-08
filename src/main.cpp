@@ -42,7 +42,7 @@ float k1v_mode_1 = 0.5f;
 float k2v_mode_0 = 0.5f;
 float k2v_mode_1 = 0.5f;
 
-uint file_idx = 1;
+uint16_t file_idx = 1;
 int mode = 0;
 
 
@@ -108,7 +108,7 @@ float UpdateKnobPassThru(float curr_knob_val, float *stored_knob_val, float prev
         (curr_knob_val <= prev_param_val && (*stored_knob_val) >= (prev_param_val))) {
           (*pass_thru) = true;
     }
-  }
+} 
   if (*pass_thru){
     (*stored_knob_val) = curr_knob_val;
     return curr_knob_val;
@@ -222,25 +222,16 @@ void InitCompressor(){
   comp.SetRatio(3.0f);
   comp.SetAttack(0.01f);
   comp.SetRelease(0.1f);
-  comp.SetThreshold(-18.0f);
+  comp.SetThreshold(-12.0f);
   comp.AutoMakeup(true);
 }
 
 
-// uint32_t callback_count = 0;
-// uint32_t last_report =0;
 
 void AudioCallback(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, size_t size){
   granular.ProcessGrains(out[0], out[1], size);
-  // lim.ProcessBlock(out[0],size,1.0f);
-  // lim.ProcessBlock(out[1],size,1.0f);
   comp.ProcessBlock(out[0],out[0], size);
   comp.ProcessBlock(out[1],out[1], size);
-  // for (size_t i = 0; i < size; i++) {
-  //   out[0][i] *= 0.5f;
-  //   out[1][i] = out[0][i];
-  // }
-  // callback_count++;
 }
 
 
@@ -251,7 +242,7 @@ int main (void){
   pod.SetAudioBlockSize(4);
   pod.SetAudioSampleRate(SaiHandle::Config::SampleRate::SAI_48KHZ);
   InitCompressor();
-  // lim.Init();
+
   BlinkLed1White();
 
   filemgr.SetBuffers(left_buf, right_buf);

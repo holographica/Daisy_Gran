@@ -17,7 +17,7 @@ class AudioFileManager {
     bool Init();
     bool ScanWavFiles();
     void SetBuffers(int16_t *left, int16_t *right);
-    bool LoadFile(int file_idx);
+    bool LoadFile(uint16_t file_idx);
     bool CloseFile();
     bool GetWavHeader(FIL *file);
     bool CheckChunkID(uint32_t chunkId, uint32_t targetVal);
@@ -27,11 +27,11 @@ class AudioFileManager {
     size_t GetSamplesPerChannel() const { return curr_header_.total_samples / curr_header_.channels; }
     size_t GetTotalSamples() const { return curr_header_.total_samples; }
     int16_t GetNumChannels() const { return curr_header_.channels; }
-    uint GetFileCount() const { return file_count_; }
-    void GetName(int idx, char* name) const { strcpy(name, names_[idx]); }
+    uint16_t GetFileCount() const { return file_count_; }
+    void GetName(uint16_t idx, char* name) const { strcpy(name, names_[idx]); }
 
-    static const int MAX_FILES = 32;                      
-    static const int MAX_FNAME_LEN = 128;
+    static const uint16_t MAX_FILES = 32;                      
+    static const uint16_t MAX_FNAME_LEN = 128;
 
   private:
     struct WavHeader {
@@ -55,11 +55,11 @@ class AudioFileManager {
     // list of filenames for logging/screen
     char names_ [MAX_FILES][MAX_FNAME_LEN];
     // index of currently selected file
-    int curr_idx_;
-    int file_count_;
+    uint16_t curr_idx_;
+    uint16_t file_count_;
     // header data for currently selected file
     WavHeader curr_header_;
-    // byte in original wav file at which audio samples start
-    uint audio_data_start_;
+    // byte in original wav file at which audio samples start - normally 44
+    size_t audio_data_start_;
     bool change_file_;
 };

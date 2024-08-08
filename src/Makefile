@@ -5,7 +5,7 @@ TARGET = Daisy_Gran
 USE_FATFS = 1
 
 # Sources
-CPP_SOURCES = main.cpp AudioFileManager.cpp
+CPP_SOURCES = main.cpp AudioFileManager.cpp GranularSynth.cpp
 
 # Library Locations
 LIBDAISY_DIR = ../libDaisy

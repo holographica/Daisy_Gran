@@ -29,7 +29,7 @@ bool AudioFileManager::ScanWavFiles(){
     return false;
   }
 
-  int count=0;
+  uint16_t count=0;
   while (f_readdir(&dir, &fno) == FR_OK && fno.fname[0]!=0){
     if (!(fno.fattrib & (AM_HID|AM_DIR))){
       /* NOTE: below, we ignore AppleDouble metadata files starting with '._'
@@ -65,7 +65,7 @@ bool AudioFileManager::ScanWavFiles(){
   return (count!=0) ? true : false;
 }
 
-bool AudioFileManager::LoadFile(int sel_idx) {
+bool AudioFileManager::LoadFile(uint16_t sel_idx) {
 
 // NOTE: changed from 1 indexing -> 0 index of file count
   if (sel_idx > file_count_) return false;
