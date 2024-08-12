@@ -1,0 +1,42 @@
+UISchema
+
+State Selection:
+- State::Startup: led1 = flashing / pulsing white
+- State::SelectFile: led1 = flashing / pulsing blue
+- State::PlayWAV: led1 = flashing / pulsing cyan
+- State::Synthesis: led1 = flashing / pulsing green while synth loads then fades out
+- State::Error: led1 = flashing/solid red 
+
+Synth Mode Selection:
+- Mode::SizePosition: led1 = solid green, led2 = solid (or pulsing?) green
+    - Mode::SizePositionRnd: led 2 = red (solid? or pulsing)
+- Mode::PitchActiveGrains: led1 = solid yellow, led2 = solid (or pulsing?) green
+    - Mode::PitchActiveGrainsRnd: led 2 = red (solid? or pulsing)
+- Mode::PanPanRnd: led1 = solid blue, led2 = solid (or pulsing?) green
+- Mode::PhasorEnv: led1 = solid purple, led2 = solid (or pulsing?) green
+    - Mode::PhasorEnvRnd: led 2 = red (solid? or pulsing)
+
+
+
+    stuff to update:
+    UIManager:
+    - UpdateState
+    - UpdateSynthMode
+    - BlinkLed (or make a pulse function?)
+
+    - change functions like GranularSynth::InitSynth to return bool
+      so we can set state to error if they break
+    - start audiocallback when file selected
+    - implement playwav mode in between select file and synthesis
+    - 
+
+TODO TODAY:
+
+- add more pages for the synth parameters and hook them up
+  - env type, phasor type, pan, spray, randomness for grain size/spawn pos/etc
+
+- add granular app
+
+- add chord mode 
+
+- start mocking framework for tests???

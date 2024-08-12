@@ -1,60 +1,143 @@
 #include "UIManager.h"
 
 void UIManager::UpdateControls(){
+  // pod_.ProcessAllControls();
   UpdateKnobs();
-  UpdateEncoder();
+  // UpdateEncoder();
   UpdateState();
-  UpdateSynthMode();
+  // UpdateSynthMode();
 }
 
 void UIManager::UpdateKnobs(){
-  int mode_idx = static_cast<int>(synth_mode_);
-  float k1v = MapKnobDeadzone(GetKnob1Value());
-  float k2v = MapKnobDeadzone(GetKnob2Value());
+  if (current_state_ == AppState::Synthesis){
+    int mode_idx = static_cast<int>(synth_mode_);
+    float k1v = MapKnobDeadzone(GetKnob1Value());
+    float k2v = MapKnobDeadzone(GetKnob2Value());
 
-  /* here we pass the current knob value, pointer to the stored knob value for this mode,
-    and a pointer to the bool which tracks whether the knob value has been passed through */
-  k1v_[mode_idx] = UpdateKnobPassThru(k1v, &k1v_[mode_idx], &k1_pass_thru_[mode_idx]);
-  k2v_[mode_idx] = UpdateKnobPassThru(k2v, &k2v_[mode_idx], &k2_pass_thru_[mode_idx]);
+    /* here we pass the current knob value, pointer to the stored knob value for this mode,
+      and a pointer to the bool which tracks whether the knob value has been passed through */
+    k1v_[mode_idx] = UpdateKnobPassThru(k1v, &k1v_[mode_idx], &k1_pass_thru_[mode_idx]);
+    k2v_[mode_idx] = UpdateKnobPassThru(k2v, &k2v_[mode_idx], &k2_pass_thru_[mode_idx]);
+  }
 }
 
-void UIManager::UpdateEncoder(){
-  pod_.encoder.Debounce();
-}
+// void UIManager::UpdateEncoder(){
+//   pod_.encoder.Debounce();
+// }
+
+// use encoder to select states - led is flashing in state selection mode
+// or could slowly go from low - high - low brightness / pulsing
+//   startup led1 =white
+//   selectfile led1 = blue
+//   playwav led1 = cyan
+//   synthesis led1 = green
+//   error led1 = red
+
+// once synth loads it will be set to solid colour showing the synth mode
+// use button1 to select synth modes
+//   green for first mode? so it's easy to remember flash green = synth, solid green = first mode
+//   then maybe yellow / blue / purple or pink? 
+// led could flash when a mode is changed? 
+// use button2 to flip from controlling synth params to randomness of those params
+//   in param control mode, led2 is green
+//   in randomness mode, led2 is red
+
+
+
 
 void UIManager::UpdateState(){
-  pod_.button2.Debounce();
-  if (Button2Pressed()){
+  pod_.ProcessDigitalControls();
+  // pod_.button2.Debounce();
+  // TODO: change this to encoder pressed
+  if (Button1Pressed()){
     switch(current_state_){
       case AppState::Startup:
-        current_state_ = AppState::SelectFile;
+        // NOTE: state should auto change to select file once startup is finished
+        // can set this in GranularApp once built
+        current_state_ = AppState::SelectFile; 
         break;
       case AppState::SelectFile:
         current_state_ = AppState::PlayWAV;
+        // NOTE: need to start audiocallback once file is successfully selected/loaded
+        // NOTE: should i select next state (ie playwav) by clicking encoder? or pressing button1? 
         break;
       case AppState::PlayWAV:
         current_state_ = AppState::Synthesis;
+        synth_mode_ = SynthMode::Size_Position;
         break;
       case AppState::Synthesis:
-        // here i need to change the substates
-        // i'll use a different control to switch from synthesis mode back to file select
         UpdateSynthMode();
         break;
-
+      case AppState::Error:
+        // NOTE: do something here 
+        // ie flash led1 red 
+        // could flash led2 red if sd error, yellow if synth error etc etc
+        break;
+    }
+  }
+  if (Button2Pressed()){
+    switch(current_state_){
+      case AppState::Synthesis:
+        ToggleRandomnessControls();
+        break;
+      default:
+        break;
+    }
+  }
+  /* exit synthesis mode, return to file selection, stop audio. */
+  if (EncoderLongPress()){
+    switch (current_state_){
+      case AppState::Synthesis:
+        pod_.StopAudio();
+        current_state_ = AppState::SelectFile;
+        break;
     }
   }
 }
 
+// TODO: change this to button 1 being pressed
+// TODO: change randomness to button 2 pressed
 void UIManager::UpdateSynthMode(){
   switch(synth_mode_){
-    case SynthMode::SizePosition:
-      synth_mode_ = SynthMode::PitchGrains;
+    case SynthMode::Size_Position:
+      synth_mode_ = SynthMode::Pitch_ActiveGrains;
       break;
-    case SynthMode::PitchGrains:
-      synth_mode_ = SynthMode::SizePosition;
+    case SynthMode::Pitch_ActiveGrains:
+      synth_mode_ = SynthMode::Pan_PanRnd;
+      break;
+    case SynthMode::Pan_PanRnd:
+      synth_mode_ = SynthMode::PhasorMode_EnvType;
+      break;
+    case SynthMode::PhasorMode_EnvType:
+      synth_mode_ = SynthMode::Size_Position;
       break;
     // add more when i add more modes
   }
+}
+
+void UIManager::ToggleRandomnessControls(){
+  switch(synth_mode_){
+    case SynthMode::Size_Position:
+      synth_mode_ = SynthMode::Size_Position_Rnd;
+      break;
+    case SynthMode::Size_Position_Rnd:
+      synth_mode_ = SynthMode::Size_Position;
+      break;
+    case SynthMode::Pitch_ActiveGrains:
+      synth_mode_ = SynthMode::Pitch_ActiveGrains_Rnd;
+      break;
+    case SynthMode::Pitch_ActiveGrains_Rnd:
+      synth_mode_ = SynthMode::Pitch_ActiveGrains;
+      break;
+    case SynthMode::PhasorMode_EnvType:
+      synth_mode_ = SynthMode::PhasorMode_EnvType_Rnd;
+      break;      
+    case SynthMode::PhasorMode_EnvType_Rnd:
+      synth_mode_ = SynthMode::PhasorMode_EnvType;
+      break;
+    case SynthMode::Pan_PanRnd:
+      break;
+    }
 }
 
 float UIManager::GetKnob1Value(){
@@ -73,12 +156,20 @@ bool UIManager::EncoderPressed(){
   return pod_.encoder.FallingEdge();
 }
 
+bool UIManager::EncoderLongPress(){
+  return pod_.encoder.TimeHeldMs() > 1000.0f;
+}
+
 bool UIManager::Button1Pressed(){
   return pod_.button1.FallingEdge();
 }
 
 bool UIManager::Button2Pressed(){
   return pod_.button2.FallingEdge();
+}
+
+bool UIManager::Button2LongPress(){
+  return pod_.button2.TimeHeldMs() > 1000.0f;
 }
 
 void UIManager::SetLed1(int r, int g, int b){

@@ -20,7 +20,7 @@ AudioFileManager filemgr(sd, fsi, pod, &file);
 DSY_SDRAM_BSS alignas(16) int16_t left_buf[CHNL_BUF_SIZE_SAMPS];
 DSY_SDRAM_BSS alignas(16) int16_t right_buf[CHNL_BUF_SIZE_SAMPS];
 
-GranularSynth granular(pod);
+GranularSynth synth(pod);
 
 Compressor comp;
 Limiter lim;
@@ -126,7 +126,7 @@ void UpdateKnob1(int mode){
     // use k1 to control grain size (10ms to 1s)
     float grain_size = UpdateKnobPassThru(k1v, &k1v_mode_0, prev_grain_size, &k1_pass_thru_mode0);
     if (CheckParamDelta(grain_size, prev_grain_size)){
-      granular.SetUserGrainSize(grain_size);
+      synth.SetUserGrainSize(grain_size);
       prev_grain_size = grain_size;
       pod.seed.PrintLine("grain size set to %.3f ms", grain_size);
     }
@@ -134,7 +134,7 @@ void UpdateKnob1(int mode){
   else if (mode ==1){
     float pitch_ratio = UpdateKnobPassThru(k1v, &k1v_mode_1, prev_pitch, &k1_pass_thru_mode0);
     if (CheckParamDelta(pitch_ratio, prev_pitch)){
-      granular.SetUserPitchRatio(pitch_ratio);
+      synth.SetUserPitchRatio(pitch_ratio);
       prev_pitch= pitch_ratio;
       pod.seed.PrintLine("pitch ratio set to %.3f",pitch_ratio);
     }
@@ -146,7 +146,7 @@ void UpdateKnob2(int mode){
   if (mode==0){
     float spawn_pos = UpdateKnobPassThru(k2v, &k2v_mode_0, prev_pos, &k2_pass_thru_mode0);
     if (CheckParamDelta(spawn_pos, prev_pos)){
-      granular.SetUserSpawnPos(spawn_pos);
+      synth.SetUserSpawnPos(spawn_pos);
       prev_pos = spawn_pos;
       pod.seed.PrintLine("spawn pos set to %.3f", spawn_pos);
     }
@@ -154,7 +154,7 @@ void UpdateKnob2(int mode){
   else if (mode==1){
     float active_count = UpdateKnobPassThru(k2v, &k2v_mode_1, prev_active_count, &k2_pass_thru_mode0);
     if (CheckParamDelta(active_count, prev_active_count)){
-      granular.SetUserActiveGrains(active_count);
+      synth.SetUserActiveGrains(active_count);
       prev_active_count = active_count;
       pod.seed.PrintLine("active grains set to %.3f",active_count);
     }
@@ -164,14 +164,34 @@ void UpdateKnob2(int mode){
 void InitSynth(){
   audio_len = filemgr.GetSamplesPerChannel();
   pod.seed.PrintLine("File loaded: %d samples", audio_len);
-  granular.SetUserGrainSize(prev_grain_size);
-  granular.SetUserSpawnPos(prev_pos);
-  granular.SetActiveGrains(1);
-  granular.Init(left_buf, right_buf, audio_len);
+  synth.SetUserGrainSize(prev_grain_size);
+  synth.SetUserSpawnPos(prev_pos);
+  synth.SetActiveGrains(1);
+  synth.Init(left_buf, right_buf, audio_len);
 }
+
+bool stopped = false;
+
+void AudioCallback(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, size_t size){
+  synth.ProcessGrains(out[0], out[1], size);
+  comp.ProcessBlock(out[0],out[0], size);
+  comp.ProcessBlock(out[1],out[1], size);
+}
+
 
 void UpdateEncoder(){
   pod.encoder.Debounce();
+  if (pod.encoder.TimeHeldMs()>1000){
+    if (stopped){
+      pod.StartAudio(AudioCallback);
+      stopped = false;
+    }
+    else if (!stopped){
+      pod.StopAudio();
+      stopped = true;
+    }
+  }
+
   int32_t inc = pod.encoder.Increment();
   if (inc!=0){
     char fname[64];
@@ -186,6 +206,8 @@ void UpdateEncoder(){
       InitSynth();
     } 
     else {
+      // TODO !!! same for other errors
+      // NOTE: change state to AppState::Error here !!!! 
       pod.seed.PrintLine("Failed to load audio file");
       return;
     }
@@ -228,11 +250,7 @@ void InitCompressor(){
 
 
 
-void AudioCallback(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, size_t size){
-  granular.ProcessGrains(out[0], out[1], size);
-  comp.ProcessBlock(out[0],out[0], size);
-  comp.ProcessBlock(out[1],out[1], size);
-}
+
 
 
 
@@ -268,6 +286,7 @@ int main (void){
   pod.StartAdc();
   pod.StartAudio(AudioCallback);
   BlinkSetLed1(0,255,0);
+
 
   while(1){
     UpdateControls();

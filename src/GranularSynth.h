@@ -61,7 +61,7 @@ class GranularSynth{
     size_t active_count_;
     float pitch_ratio_;
     float pan_;
-    float density_;
+    // float density_;
     Grain grains_[MAX_GRAINS];
     GrainPhasor::Mode phasor_mode_;
     uint32_t rng_state_;
