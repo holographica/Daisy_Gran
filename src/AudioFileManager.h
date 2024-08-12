@@ -10,9 +10,9 @@ using namespace daisy;
 
 class AudioFileManager {
   public:
-    AudioFileManager(SdmmcHandler &sd, FatFSInterface &fsi, DaisyPod &pod, FIL *file):
-      sd_(sd), fsi_(fsi), pod_(pod), curr_file_(file), 
-      left_channel_(nullptr), right_channel_(nullptr) {};
+    AudioFileManager(SdmmcHandler &sd, FatFSInterface &fsi, DaisyPod &pod, FIL *file)
+      : sd_(sd), fsi_(fsi), pod_(pod), curr_file_(file), 
+        left_channel_(nullptr), right_channel_(nullptr) {};
     
     bool Init();
     bool ScanWavFiles();

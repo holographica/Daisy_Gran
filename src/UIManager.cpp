@@ -1,11 +1,14 @@
 #include "UIManager.h"
 
 void UIManager::UpdateControls(){
-  // pod_.ProcessAllControls();
-  UpdateKnobs();
-  // UpdateEncoder();
-  UpdateState();
-  // UpdateSynthMode();
+  if (!crash_error){
+    // pod_.ProcessAllControls();
+    UpdateKnobs();
+      
+    // UpdateEncoder();
+    UpdateState();
+    // UpdateSynthMode();
+  }
 }
 
 void UIManager::UpdateKnobs(){
@@ -36,24 +39,21 @@ void UIManager::UpdateKnobs(){
 // once synth loads it will be set to solid colour showing the synth mode
 // use button1 to select synth modes
 //   green for first mode? so it's easy to remember flash green = synth, solid green = first mode
-//   then maybe yellow / blue / purple or pink? 
+//   then maybe orange / blue / pink? 
 // led could flash when a mode is changed? 
 // use button2 to flip from controlling synth params to randomness of those params
 //   in param control mode, led2 is green
 //   in randomness mode, led2 is red
 
 
-
-
 void UIManager::UpdateState(){
   pod_.ProcessDigitalControls();
-  // pod_.button2.Debounce();
-  // TODO: change this to encoder pressed
+  // TODO: change this to encoder pressed?? 
   if (Button1Pressed()){
     switch(current_state_){
       case AppState::Startup:
         // NOTE: state should auto change to select file once startup is finished
-        // can set this in GranularApp once built
+        // TODO: set this in app once built
         current_state_ = AppState::SelectFile; 
         break;
       case AppState::SelectFile:
@@ -64,14 +64,12 @@ void UIManager::UpdateState(){
       case AppState::PlayWAV:
         current_state_ = AppState::Synthesis;
         synth_mode_ = SynthMode::Size_Position;
+        // StopLedPulse(); 
         break;
       case AppState::Synthesis:
         UpdateSynthMode();
         break;
-      case AppState::Error:
-        // NOTE: do something here 
-        // ie flash led1 red 
-        // could flash led2 red if sd error, yellow if synth error etc etc
+      default:
         break;
     }
   }
@@ -79,6 +77,7 @@ void UIManager::UpdateState(){
     switch(current_state_){
       case AppState::Synthesis:
         ToggleRandomnessControls();
+        SetLedRandomMode();
         break;
       default:
         break;
@@ -90,10 +89,22 @@ void UIManager::UpdateState(){
       case AppState::Synthesis:
         pod_.StopAudio();
         current_state_ = AppState::SelectFile;
+        StartLedPulse();
+        break;
+      default:
         break;
     }
   }
 }
+
+void UIManager::SetStateError(){
+  current_state_ = AppState::Error;
+  StopLedPulse();
+  SetLed(255,0,0,true);
+  SetLed(255,0,0,false);
+  crash_error = true;
+}
+
 
 // TODO: change this to button 1 being pressed
 // TODO: change randomness to button 2 pressed
@@ -111,10 +122,12 @@ void UIManager::UpdateSynthMode(){
     case SynthMode::PhasorMode_EnvType:
       synth_mode_ = SynthMode::Size_Position;
       break;
-    // add more when i add more modes
   }
 }
 
+/* each synth mode (apart from pan) has 2 submodes: 
+  knobs either change the named parameters themselves, or change the 
+  degree of randomness applied to these parameters in granulation */
 void UIManager::ToggleRandomnessControls(){
   switch(synth_mode_){
     case SynthMode::Size_Position:
@@ -172,24 +185,6 @@ bool UIManager::Button2LongPress(){
   return pod_.button2.TimeHeldMs() > 1000.0f;
 }
 
-void UIManager::SetLed1(int r, int g, int b){
-  pod_.led1.Set(r,g,b);
-  pod_.UpdateLeds();
-  System::Delay(100);
-}
-
-void UIManager::BlinkLed1(int r, int g, int b){
-  SetLed1(r,g,b);
-  SetLed1(0,0,0);
-}
-
-void UIManager::BlinkSetLed1(int r, int g, int b){
-  BlinkLed1(r,g,b);
-  BlinkLed1(r,g,b);
-  SetLed1(r,g,b);
-}
-
-
 float UIManager::MapKnobDeadzone(float knob_val ){
   if (knob_val<=0.01f) return 0.0f;
   if (knob_val>=0.99f) return 1.0f;
@@ -213,4 +208,149 @@ float UIManager::UpdateKnobPassThru(float curr_knob_val, float *stored_knob_val,
     return curr_knob_val;
   }
   return (*stored_knob_val);
+}
+
+
+
+
+// TODO
+// NOTE: COULD REFACTOR THIS INTO A SEPARATE CLASS ?? 
+void UIManager::SetupTimer(){
+  TimerHandle::Config cfg;
+  cfg.periph = TimerHandle::Config::Peripheral::TIM_5;
+  // /* set period for 200ms pulse (1MHz/200,000 == 200ms) */
+  // cfg.period = 200000;
+  /* set period for 10ms callback interval */
+  cfg.period = 10000;
+  cfg.enable_irq = true;
+  timer_.Init(cfg);
+  /* set 1Mhz tick frequency */
+  timer_.SetPrescaler(199);
+  pulse_increasing_ = true;
+  timer_.SetCallback(StaticLedCallback, this);
+}
+
+/* has to be static - timer won't take class member function in callback  */
+static void StaticLedCallback(void* data) {
+  UIManager* instance = static_cast<UIManager*>(data);
+  instance->LedPulseCallback();
+}
+
+void UIManager::LedPulseCallback(){
+  if (pulse_increasing_){
+    /* NOTE: increase step (in header) and period to reduce processing cost */
+    pulse_brightness_ += PULSE_STEP;
+    if (pulse_brightness_ >= 255 - PULSE_STEP){
+      pulse_brightness_ = 255;
+      pulse_increasing_ = false;
+    }
+  }
+  else {
+    pulse_brightness_ -= PULSE_STEP;
+    if (pulse_brightness_ <= PULSE_STEP){
+      pulse_count_++;
+      pulse_brightness_ = 0;
+      pulse_increasing_ = true;
+    }
+  }
+  switch(current_state_){
+    /* pulse white */
+    case AppState::Startup:
+      SetLed(pulse_brightness_, pulse_brightness_, pulse_brightness_, true);
+    /* pulse blue */
+    case AppState::SelectFile:
+      SetLed(0,0, pulse_brightness_, true);
+    /* pulse cyan */
+    case AppState::PlayWAV:
+      SetLed(0, pulse_brightness_, pulse_brightness_, true);
+    /* pulse red */
+    case AppState::Error:
+      
+    /* when switching to synth mode, pulse green twice, then solid;
+        otherwise pulses on synth mode switch */
+    case AppState::Synthesis:
+      if (pulse_count_ <= 2){
+        SetLed(0, pulse_brightness_, 0, true);
+      }
+      else {
+        StopLedPulse();
+        SetLedSynthMode();
+      }
+      break;
+  }
+} 
+
+void UIManager::SetLedSynthMode(){
+  switch(synth_mode_){
+    case SynthMode::Size_Position:
+      SetLed(0,255,0,true);
+      break;
+    case SynthMode::Pitch_ActiveGrains:
+    // orange: 100, 64, 0 or 255, 165, 0 or 255, 91, 31 (neon orange)
+      BlinkSetLed(255, 91, 31,true);
+      break;
+    case SynthMode::PhasorMode_EnvType:
+    // 0, 0, 255 blue
+      BlinkSetLed(0,0,255,true);
+      break;
+    case SynthMode::Pan_PanRnd:
+    // fuschia: 255,0,255
+      BlinkSetLed(255,0,255,true);
+      break;
+  }
+}
+
+void UIManager::SetLedRandomMode(){
+  switch(synth_mode_){
+    case SynthMode::Size_Position:
+    case SynthMode::Pitch_ActiveGrains:
+    case SynthMode::PhasorMode_EnvType:
+    case SynthMode::Pan_PanRnd:
+      /* set led 2 to green*/
+      SetLed(0,255,0,false);
+      break;
+    
+    case SynthMode::Size_Position_Rnd:
+    case SynthMode::Pitch_ActiveGrains_Rnd:
+    case SynthMode::PhasorMode_EnvType_Rnd:
+      /* set led 2 to red*/
+      SetLed(255,0,0,false);
+      break;
+  }
+}
+
+void UIManager::StartLedPulse(){
+  pulse_brightness_ = 0;
+  pulse_increasing_ = true;
+  pulse_count_ = 0;
+  timer_.Start();
+}
+
+void UIManager::StopLedPulse(){
+  timer_.Stop();
+}
+
+void UIManager::SetLed(int r, int g, int b, bool is_Led1){
+  if (is_Led1){
+    pod_.led1.Set(r,g,b);
+  }
+  else {
+    pod_.led2.Set(r,g,b);
+  }
+  pod_.UpdateLeds();
+  System::Delay(10);
+}
+
+void UIManager::BlinkLed(int r, int g, int b, bool is_Led1){
+  SetLed(r,g,b, is_Led1);
+  System::Delay(100);
+  SetLed(0,0,0, is_Led1);
+}
+
+void UIManager::BlinkSetLed(int r, int g, int b, bool is_Led1){
+  BlinkLed(r,g,b, is_Led1);
+  System::Delay(100);
+  BlinkLed(r,g,b, is_Led1);
+  System::Delay(100);
+  SetLed(r,g,b, is_Led1);
 }

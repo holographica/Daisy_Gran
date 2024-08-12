@@ -6,11 +6,11 @@
 
 class GranularSynth{
   public:
-    GranularSynth(DaisyPod& pod): 
-      pod_(pod), left_buf_(nullptr), right_buf_(nullptr), audio_len_(0),
-      grain_size_(4800), spawn_pos_(0), 
-      active_count_(1), pitch_ratio_(1.0f), pan_(0.5f),
-      grains_(), phasor_mode_(GrainPhasor::Mode::OneShot){}
+    GranularSynth(DaisyPod& pod) 
+      : pod_(pod), left_buf_(nullptr), right_buf_(nullptr), audio_len_(0),
+        grain_size_(4800), spawn_pos_(0), 
+        active_count_(1), pitch_ratio_(1.0f), pan_(0.5f),
+        grains_(), phasor_mode_(GrainPhasor::Mode::OneShot){}
 
     void Init(const int16_t *left, const int16_t *right, size_t audio_len);
     void SeedRng(uint32_t seed);
