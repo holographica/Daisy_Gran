@@ -17,22 +17,3 @@ Synth Mode Selection:
     - Mode::PhasorEnvRnd: led 2 = red (solid? or pulsing)
 
 
-
-    stuff to update:
-
-    - change functions like GranularSynth::InitSynth to return bool
-      so we can set state to error if they break
-    - start audiocallback when file selected
-    - implement playwav mode in between select file and synthesis
-    - 
-
-TODO TODAY:
-
-- add more pages for the synth parameters and hook them up
-  - env type, phasor type, pan, spray, randomness for grain size/spawn pos/etc
-
-- add granular app
-
-- add chord mode 
-
-- start mocking framework for tests???

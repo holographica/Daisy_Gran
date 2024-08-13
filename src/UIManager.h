@@ -1,6 +1,7 @@
 #pragma once
 #include "daisy_pod.h"
 #include "AppState.h"
+#include "constants.h"
 
 using namespace daisy;
 
@@ -8,26 +9,21 @@ class UIManager {
   public:
     UIManager(DaisyPod& pod): pod_(pod) {}
 
-    void Init(){
-      SetupTimer();
-      StartLedPulse();
-    }
+    void Init();
 
     AppState GetCurrentState() { return current_state_; }
-    SynthMode GetGranularMode() { return synth_mode_; }
+    SynthMode GetSynthMode() { return synth_mode_; }
     void SetStateError();
 
-    
+    void UpdateControls();
     bool EncoderPressed();
     bool EncoderLongPress();
     int32_t GetEncoderIncrement();
     bool Button1Pressed();
     bool Button2Pressed();
     bool Button2LongPress();
-    float GetKnob1Value();
-    float GetKnob2Value();
-
-
+    float GetKnob1Value(int mode_idx);
+    float GetKnob2Value(int mode_idx);
     void LedPulseCallback();
 
 
@@ -46,7 +42,7 @@ class UIManager {
 
     bool crash_error = false;
 
-    static const int NUM_SYNTH_MODES = 7;
+    // static const int NUM_SYNTH_MODES = 7;
     bool k1_pass_thru_[NUM_SYNTH_MODES] = {false};
     bool k2_pass_thru_[NUM_SYNTH_MODES] = {false};
     float k1v_[NUM_SYNTH_MODES] = {0.5f};
@@ -59,12 +55,12 @@ class UIManager {
     void UpdateSynthMode();
     void ToggleRandomnessControls();
 
-    void UpdateControls();
+
     
   
 
     void SetupTimer();
-    void LedPulseCallback();
+
     void StartLedPulse();
     void StopLedPulse();
     void SetLedRandomMode();

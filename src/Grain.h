@@ -56,9 +56,16 @@ class Grain {
         return;
       }
       size_t curr_idx = spawn_pos_ + static_cast<size_t>(phase*grain_size_*pitch_ratio_);
-      if (curr_idx>=audio_len_){
-        DeactivateGrain();
-        return;
+      
+      // NOTE: CHANGED THIS TO WRAP AROUND SO CHANGE BACK IF NEEDED
+      if (curr_idx>=audio_len_-1){
+        curr_idx %= audio_len_;
+        // DeactivateGrain();
+        // return;
+      }
+      else if (curr_idx<0){
+        curr_idx += audio_len_;
+        // return;
       }
 
       float left = s162f(left_buf_[curr_idx]);

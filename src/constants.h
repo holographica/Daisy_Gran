@@ -13,12 +13,12 @@ const int BIT_DEPTH = 16;
 const int MIN_GRAINS = 1;
 const int MAX_GRAINS = 20;
 
-constexpr float MIN_GRAIN_SIZE_MS = 10.0f;
+constexpr float MIN_GRAIN_SIZE_MS = 100.0f;
 constexpr float MAX_GRAIN_SIZE_MS = 3000.0f;
-
-// TODO: how is this calculated? (min grains / size in ms)*1000.f ?
-constexpr float MIN_DENSITY = 1.0f;
-constexpr float MAX_DENSITY = 20.0f;
+constexpr size_t MIN_GRAIN_SIZE_SAMPLES = 4800; // 100ms at 48kHz
+constexpr size_t MAX_GRAIN_SIZE_SAMPLES = 144000; // 3s at 48kHz
+constexpr float MIN_PITCH = 0.5f;
+constexpr float MAX_PITCH = 3.0f;
 
 /* converts milliseconds to number of samples */
 inline constexpr size_t MsToSamples(float ms){
@@ -29,6 +29,11 @@ inline constexpr size_t MsToSamples(float ms){
 inline constexpr float SamplesToMs(size_t samples){
   return (static_cast<float>(samples) * 1000.0f) / SAMPLE_RATE_FLOAT; 
 }
+
+static const int NUM_ENV_TYPES = 4;
+static const int NUM_PHASOR_MODES = 4;
+static const int NUM_SYNTH_MODES = 7;
+const float PARAM_CHANGE_THRESHOLD = 0.01f;
 
 // TODO: is there a point in using this?
 // need to actually test performance using both and compare

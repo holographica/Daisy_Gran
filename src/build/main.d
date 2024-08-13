@@ -186,7 +186,6 @@ build/main.o: main.cpp \
  ../libDaisy/src/util/WaveTableLoader.h ../libDaisy/src/sys/fatfs.h \
  ../libDaisy/src/util/WavWriter.h AudioFileManager.h constants.h \
  GranularSynth.h Grain.h GrainPhasor.h \
- ../DaisySP/DaisySP-LGPL/Source/Dynamics/compressor.cpp \
  ../DaisySP/DaisySP-LGPL/Source/Dynamics/compressor.h
 ../libDaisy/Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:
 ../libDaisy/Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h750xx.h:
@@ -429,5 +428,4 @@ constants.h:
 GranularSynth.h:
 Grain.h:
 GrainPhasor.h:
-../DaisySP/DaisySP-LGPL/Source/Dynamics/compressor.cpp:
 ../DaisySP/DaisySP-LGPL/Source/Dynamics/compressor.h:

@@ -8,25 +8,101 @@ void GrannyChordApp::Init(){
   if (!InitFileMgr()){
     return;
   }
-  // start audio callback in main function? 
-  // since i'll create an audiocallback fn in this class
-  // so just pass it to main?
-  // or start it here..? 
   if (!HandleFileSelection()){
     return;
   }
-  
-  
-  
-  
-  
   InitCompressor();
+
+  // init synth? or do that in main? 
+  InitPrevParamVals();
+
+
+
+  // pod_.StartAdc();
+  // pod_.StartAudio(AudioCallback);
 }
+
+// static void AudioCallback(){
+
+// }
 
 void GrannyChordApp::Run(){
-  // update ui state, handle controls, playback, synthesis, chords etc
+  while(true){
+    ui_.UpdateControls();
+    UpdateSynthParams();
+    // handle states, playback, chords
+    System::Delay(1);
+  }
 }
 
+void GrannyChordApp::UpdateSynthParams(){
+  AppState curr_state = ui_.GetCurrentState();
+  if (curr_state==AppState::Synthesis){
+    UpdateGranularParams();
+  }
+  // else if (curr_state==AppState::ChordMode){
+  //   UpdateChordParams();
+  // }
+}
+
+void GrannyChordApp::UpdateGranularParams(){
+  SynthMode mode = ui_.GetSynthMode();
+  int mode_idx = static_cast<int>(mode);
+  float knob1_val = ui_.GetKnob1Value(mode_idx);
+  float knob2_val = ui_.GetKnob2Value(mode_idx);
+  if (CheckParamDelta(knob1_val, prev_param_vals_k1[mode_idx])){
+    switch (mode){
+      case SynthMode::Size_Position:
+        synth_.SetUserGrainSize(knob1_val);
+        break;
+      case SynthMode::Pitch_ActiveGrains:
+        synth_.SetUserPitchRatio(knob1_val);
+        break;
+      case SynthMode::Pan_PanRnd:
+        synth_.SetPan(knob1_val);
+        break;
+      case SynthMode::PhasorMode_EnvType:
+        knob1_val = fmap(knob1_val, 0, NUM_PHASOR_MODES);
+        synth_.SetPhasorMode(static_cast<GrainPhasor::Mode>(knob1_val));
+        break;
+      case SynthMode::Size_Position_Rnd:
+        synth_.SetSizeRnd(knob1_val);
+        break;
+      case SynthMode::Pitch_ActiveGrains_Rnd:
+        synth_.SetPitchRnd(knob1_val);
+        break;
+      case SynthMode::PhasorMode_EnvType_Rnd:
+        synth_.SetPhasorRnd(knob1_val);
+        break;
+    }
+  prev_param_vals_k1[mode_idx] = knob1_val;
+  }
+  if (CheckParamDelta(knob2_val, prev_param_vals_k2[mode_idx])){
+    switch (mode){
+      case SynthMode::Size_Position:
+        synth_.SetUserSpawnPos(knob2_val);
+      case SynthMode::Pitch_ActiveGrains:
+        synth_.SetUserActiveGrains(knob2_val);
+      case SynthMode::Pan_PanRnd:
+        synth_.SetPanRnd(knob2_val);
+        break;
+      case SynthMode::PhasorMode_EnvType:
+        knob2_val = fmap(knob2_val, 0, NUM_ENV_TYPES);
+        synth_.SetEnvelopeType(static_cast<Grain::EnvelopeType>(knob2_val));
+        break;
+      case SynthMode::Size_Position_Rnd:
+        synth_.SetPositionRnd(knob2_val);
+        break;
+      case SynthMode::Pitch_ActiveGrains_Rnd:
+        synth_.SetCountRnd(knob2_val);
+        break;
+      case SynthMode::PhasorMode_EnvType_Rnd:
+        synth_.SetEnvRnd(knob2_val);
+        break;
+    }
+    prev_param_vals_k2[mode_idx] = knob2_val;
+  }
+}
 
 
 bool GrannyChordApp::InitFileMgr(){
@@ -87,6 +163,7 @@ bool GrannyChordApp::HandleFileSelection(){
       return false;
     }
   }
+  return true;
 }
 
 bool GrannyChordApp::CheckParamDelta(float curr_val, float prev_val){

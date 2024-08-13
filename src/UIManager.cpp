@@ -1,5 +1,10 @@
 #include "UIManager.h"
 
+void UIManager::Init(){
+  SetupTimer();
+  StartLedPulse();
+}
+
 void UIManager::UpdateControls(){
   if (!crash_error){
     // pod_.ProcessAllControls();
@@ -14,8 +19,8 @@ void UIManager::UpdateControls(){
 void UIManager::UpdateKnobs(){
   if (current_state_ == AppState::Synthesis){
     int mode_idx = static_cast<int>(synth_mode_);
-    float k1v = MapKnobDeadzone(GetKnob1Value());
-    float k2v = MapKnobDeadzone(GetKnob2Value());
+    float k1v = MapKnobDeadzone(pod_.knob1.Process());
+    float k2v = MapKnobDeadzone(pod_.knob2.Process());
 
     /* here we pass the current knob value, pointer to the stored knob value for this mode,
       and a pointer to the bool which tracks whether the knob value has been passed through */
@@ -122,12 +127,14 @@ void UIManager::UpdateSynthMode(){
     case SynthMode::PhasorMode_EnvType:
       synth_mode_ = SynthMode::Size_Position;
       break;
+    default:
+      break;
   }
 }
 
 /* each synth mode (apart from pan) has 2 submodes: 
-  knobs either change the named parameters themselves, or change the 
-  degree of randomness applied to these parameters in granulation */
+  knobs either change the named parameters themselves (modes above), 
+  or change the degree of randomness applied to these parameters in granulation */
 void UIManager::ToggleRandomnessControls(){
   switch(synth_mode_){
     case SynthMode::Size_Position:
@@ -153,12 +160,12 @@ void UIManager::ToggleRandomnessControls(){
     }
 }
 
-float UIManager::GetKnob1Value(){
-  return pod_.knob1.Process();
+float UIManager::GetKnob1Value(int mode_idx){
+  return k1v_[mode_idx];
 }
 
-float UIManager::GetKnob2Value(){
-  return pod_.knob2.Process();
+float UIManager::GetKnob2Value(int mode_idx){
+  return k2v_[mode_idx];
 }
 
 int32_t UIManager::GetEncoderIncrement(){
@@ -210,7 +217,11 @@ float UIManager::UpdateKnobPassThru(float curr_knob_val, float *stored_knob_val,
   return (*stored_knob_val);
 }
 
-
+/* has to be static - timer won't take class member function in callback  */
+static void StaticLedCallback(void* data) {
+  UIManager* instance = static_cast<UIManager*>(data);
+  instance->LedPulseCallback();
+}
 
 
 // TODO
@@ -230,11 +241,7 @@ void UIManager::SetupTimer(){
   timer_.SetCallback(StaticLedCallback, this);
 }
 
-/* has to be static - timer won't take class member function in callback  */
-static void StaticLedCallback(void* data) {
-  UIManager* instance = static_cast<UIManager*>(data);
-  instance->LedPulseCallback();
-}
+
 
 void UIManager::LedPulseCallback(){
   if (pulse_increasing_){
@@ -296,6 +303,8 @@ void UIManager::SetLedSynthMode(){
     case SynthMode::Pan_PanRnd:
     // fuschia: 255,0,255
       BlinkSetLed(255,0,255,true);
+      break;
+    default:
       break;
   }
 }

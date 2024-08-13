@@ -4,6 +4,7 @@
 #include "UIManager.h"
 #include "GranularSynth.h"
 #include "AudioFileManager.h"
+
 #include "../DaisySP/DaisySP-LGPL/Source/Dynamics/compressor.cpp"
 
 
@@ -30,11 +31,15 @@ class GrannyChordApp {
     Compressor comp;
 
     float file_idx_ = 0; 
-    const float PARAM_CHANGE_THRESHOLD = 0.01f;
-    float prev_grain_size = 0.5f;
-    float prev_pos = 0.5f;
-    float prev_active_count = 0.5f;
-    float prev_pitch = 0.5f;
+    // AppState curr_state_;
+    // const float PARAM_CHANGE_THRESHOLD = 0.01f;
+    float prev_grain_size_ = 0.5f;
+    float prev_pos_ = 0.5f;
+    float prev_active_count_ = 0.5f;
+    float prev_pitch_ = 0.5f;
+    /* previous values for parameters controlled by knob 1*/
+    float prev_param_vals_k1[NUM_SYNTH_MODES];
+    float prev_param_vals_k2[NUM_SYNTH_MODES];
 
 
     // initialise file manager, ui manager, do startup stuff
@@ -44,11 +49,21 @@ class GrannyChordApp {
     void InitCompressor();
     // handle file selection, playback, chord mode
 
-    bool HandleFileSelection();
+    // void AudioCallback(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, size_t size);
 
+    bool HandleFileSelection();
     void HandleGranulation();
+
     void UpdateSynthParams();
+    void UpdateGranularParams();
     bool CheckParamDelta(float curr_val, float prev_val);
+
+    void InitPrevParamVals(){
+      for (int i=0; i < NUM_SYNTH_MODES;i++){
+        prev_param_vals_k1[i] = 0.5f;
+        prev_param_vals_k2[i] = 0.5f;
+      } 
+    }
 
     // what else? need to update controls and states
 

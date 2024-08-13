@@ -22,21 +22,10 @@ float GranularSynth::RngFloat(){
   rng_state_ ^= rng_state_ << 13;
   rng_state_ ^= rng_state_ >> 17;
   rng_state_ ^= rng_state_ << 5;
-  /* ensures output is between 0 and 1 */
+  /* ensures output is between 0-1 */
   float out = static_cast<float>(rng_state_) / static_cast<float>(UINT32_MAX);
   return out;
 }
-
-/* don't need a separate user setter for this
-  since pan range is already 0-1 */
-void GranularSynth::SetPan(float pan){
-  pan_ = pan;
-}
-
-void GranularSynth::SetPhasorMode(GrainPhasor::Mode mode){
-  phasor_mode_ = mode;
-}
-
 
 /* these setters are used by the program
   in setup etc rather than controlled by user input */
@@ -60,7 +49,6 @@ void GranularSynth::SetPitchRatio(float ratio){
   pitch_ratio_ = ratio;
 }
 
-
 /* these setters take a normalised value (ie float from 0-1) 
   from the user input knobs and convert this to the correct units */
 
@@ -70,12 +58,12 @@ void GranularSynth::SetUserGrainSize(float knob_val){
 }
 
 void GranularSynth::SetUserSpawnPos(float knob_val){
-  // float npos = fclamp(knob_val, 0.0f, 1.0f);
   /* convert to samples */
   spawn_pos_ = static_cast<size_t>(knob_val * static_cast<float>(audio_len_-1));
 }
 
 void GranularSynth::SetUserActiveGrains(float knob_val){
+  // NOTE: set to max 5 grains atm - can change to 20 
   float count = round(fmap(knob_val, 1.0f, 5.0f));
   SetActiveGrains(static_cast<size_t>(count));
 }
@@ -93,12 +81,75 @@ void GranularSynth::UpdateGrainParams(){
   }
 }
 
+/* nb: */
+void GranularSynth::ApplyRandomness(){
+  // /* here we get a random number from 0:1, change the range to -0.5:0.5,
+  //     scale it by 2 so range is -1.0:1.0, multiply by randomness for
+  //     the param set by knob, then add 1 so range is 1.0f +/- randomness */
+  // grain_size_ *= (RngFloat()-0.5f) * 2.0f * rnd_size_ + 1.0f;
+
+  // /* same as above but we add result, multiply by audio len in samples */
+  // spawn_pos_ += (RngFloat()-0.5f) * 2.0f * rnd_spawn_pos_ * audio_len_;
+  // pitch_ratio_ *= (RngFloat()-0.5f) * 2.0f * rnd_pitch_ + 1.0f;
+  // pan_ += (RngFloat()-0.5f) * 2.0f * rnd_pan_;
+
+  if (rnd_size_>0){
+    float rnd_size_factor = fmap(RngFloat(),1.0f-rnd_size_, 1.0f+rnd_size_, Mapping::EXP);
+    float size_ms = SamplesToMs(grain_size_) * rnd_size_factor;
+    size_ms = fclamp(size_ms, MIN_GRAIN_SIZE_MS, MAX_GRAIN_SIZE_MS);
+    grain_size_ = MsToSamples(size_ms);
+  }
+  
+  if (rnd_spawn_pos_>0){
+    size_t rnd_offset = static_cast<size_t>(fmap(RngFloat(), -1.0f, 1.0f, Mapping::LINEAR));
+    spawn_pos_ += audio_len_ * static_cast<size_t>(rnd_spawn_pos_ * rnd_offset);
+    if (spawn_pos_<0){ spawn_pos_ = 0; }
+    if (spawn_pos_>=audio_len_) { spawn_pos_ = audio_len_ -1; }
+  }
+
+  if (rnd_pan_>0){
+    float rnd_pan_offset = fmap(RngFloat(), -rnd_pan_, rnd_pan_, Mapping::LINEAR);
+    pan_ = fclamp(pan_+rnd_pan_offset, 0.0f, 1.0f);
+  }
+
+  if (rnd_pitch_>0){
+    float rnd_pitch_factor = fmap(RngFloat(), 1.0f-rnd_pitch_, 1.0+rnd_pitch_, Mapping::EXP);
+    pitch_ratio_ = fclamp((pitch_ratio_*rnd_pitch_factor), MIN_PITCH, MAX_PITCH);
+  }
+
+  if (rnd_envelope_>0){
+    if (RngFloat() < rnd_envelope_){
+      int random_env_type =  static_cast<int>(RngFloat()) * NUM_ENV_TYPES;
+      env_type_ = static_cast<Grain::EnvelopeType>(random_env_type);
+    }
+  }
+
+  if (rnd_phasor_>0){
+    if (RngFloat() < rnd_phasor_){
+      int random_phasor_mode = static_cast<int>(RngFloat()) * NUM_PHASOR_MODES;
+      phasor_mode_ = static_cast<GrainPhasor::Mode>(random_phasor_mode);
+    }
+  }
+
+  if (rnd_count_>0){
+    float rnd_count_factor = fmap(RngFloat(),1.0f-rnd_count_,1.0f+rnd_count_, Mapping::EXP);
+    active_count_ *= static_cast<size_t>(rnd_count_factor);
+    if (active_count_<MIN_GRAINS) { active_count_ = 1; }
+    if (active_count_>MAX_GRAINS) { active_count_ = 20; } 
+  }
+}
+
+
+
+
 void GranularSynth::TriggerGrain(){
   size_t count = 0;
   for(Grain& grain:grains_){
     if (grain.IsActive()) { count++; }
     if (!grain.IsActive() && count<active_count_){
+      ApplyRandomness();
       grain.Trigger(spawn_pos_,grain_size_,pitch_ratio_,pan_);
+      count++;
       break;
     }
   }
