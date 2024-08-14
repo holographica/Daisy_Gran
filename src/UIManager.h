@@ -1,7 +1,7 @@
 #pragma once
 #include "daisy_pod.h"
 #include "AppState.h"
-#include "constants.h"
+#include "constants_utils.h"
 
 using namespace daisy;
 
@@ -42,7 +42,6 @@ class UIManager {
 
     bool crash_error = false;
 
-    // static const int NUM_SYNTH_MODES = 7;
     bool k1_pass_thru_[NUM_SYNTH_MODES] = {false};
     bool k2_pass_thru_[NUM_SYNTH_MODES] = {false};
     float k1v_[NUM_SYNTH_MODES] = {0.5f};
