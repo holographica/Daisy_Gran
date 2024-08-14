@@ -5,18 +5,17 @@ void UIManager::Init(){
   StartLedPulse();
 }
 
-void UIManager::UpdateControls(){
+void UIManager::UpdateUI(){
   if (!crash_error){
-    // pod_.ProcessAllControls();
     UpdateKnobs();
       
-    // UpdateEncoder();
     UpdateState();
     // UpdateSynthMode();
   }
 }
 
 void UIManager::UpdateKnobs(){
+  // NOTE: need to add stuff for chord mode here! 
   if (current_state_ == AppState::Synthesis){
     int mode_idx = static_cast<int>(synth_mode_);
     float k1v = MapKnobDeadzone(pod_.knob1.Process());
@@ -29,41 +28,16 @@ void UIManager::UpdateKnobs(){
   }
 }
 
-// void UIManager::UpdateEncoder(){
-//   pod_.encoder.Debounce();
-// }
-
-// use encoder to select states - led is flashing in state selection mode
-// or could slowly go from low - high - low brightness / pulsing
-//   startup led1 =white
-//   selectfile led1 = blue
-//   playwav led1 = cyan
-//   synthesis led1 = green
-//   error led1 = red
-
-// once synth loads it will be set to solid colour showing the synth mode
-// use button1 to select synth modes
-//   green for first mode? so it's easy to remember flash green = synth, solid green = first mode
-//   then maybe orange / blue / pink? 
-// led could flash when a mode is changed? 
-// use button2 to flip from controlling synth params to randomness of those params
-//   in param control mode, led2 is green
-//   in randomness mode, led2 is red
-
-
 void UIManager::UpdateState(){
   pod_.ProcessDigitalControls();
   // TODO: change this to encoder pressed?? 
   if (Button1Pressed()){
     switch(current_state_){
       case AppState::Startup:
-        // NOTE: state should auto change to select file once startup is finished
-        // TODO: set this in app once built
         current_state_ = AppState::SelectFile; 
         break;
       case AppState::SelectFile:
         current_state_ = AppState::PlayWAV;
-        // NOTE: need to start audiocallback once file is successfully selected/loaded
         // NOTE: should i select next state (ie playwav) by clicking encoder? or pressing button1? 
         break;
       case AppState::PlayWAV:
@@ -96,10 +70,22 @@ void UIManager::UpdateState(){
         current_state_ = AppState::SelectFile;
         StartLedPulse();
         break;
+      case AppState::SelectFile:
+        current_state_ = AppState::RecordIn;
+        break;
       default:
         break;
     }
   }
+  if (EncoderPressed()){
+    if (current_state_ == AppState::RecordIn){
+      current_state_ = AppState::Synthesis;
+    }
+  }
+}
+
+void UIManager::SetState(AppState state){
+  current_state_ = state;
 }
 
 void UIManager::SetStateError(){
@@ -110,9 +96,6 @@ void UIManager::SetStateError(){
   crash_error = true;
 }
 
-
-// TODO: change this to button 1 being pressed
-// TODO: change randomness to button 2 pressed
 void UIManager::UpdateSynthMode(){
   switch(synth_mode_){
     case SynthMode::Size_Position:
@@ -159,6 +142,13 @@ void UIManager::ToggleRandomnessControls(){
       break;
     }
 }
+
+bool UIManager::ToggleRecordOut(){//NOTE NEED TO DECIDE THiS!!
+  // TODO: need to decide what control input will toggle record out
+  return true; 
+}
+
+
 
 float UIManager::GetKnob1Value(int mode_idx){
   return k1v_[mode_idx];
@@ -226,6 +216,7 @@ static void StaticLedCallback(void* data) {
 
 // TODO
 // NOTE: COULD REFACTOR THIS INTO A SEPARATE CLASS ?? 
+// but then have to pass to this class..
 void UIManager::SetupTimer(){
   TimerHandle::Config cfg;
   cfg.periph = TimerHandle::Config::Peripheral::TIM_5;
@@ -261,18 +252,19 @@ void UIManager::LedPulseCallback(){
     }
   }
   switch(current_state_){
-    /* pulse white */
-    case AppState::Startup:
-      SetLed(pulse_brightness_, pulse_brightness_, pulse_brightness_, true);
     /* pulse blue */
     case AppState::SelectFile:
       SetLed(0,0, pulse_brightness_, true);
+    /* pulse white */
+    case AppState::RecordIn:
+      SetLed(pulse_brightness_, pulse_brightness_, pulse_brightness_, true);
     /* pulse cyan */
     case AppState::PlayWAV:
       SetLed(0, pulse_brightness_, pulse_brightness_, true);
     /* pulse red */
     case AppState::Error:
-      
+      SetLed(pulse_brightness_,0,0,true);
+
     /* when switching to synth mode, pulse green twice, then solid;
         otherwise pulses on synth mode switch */
     case AppState::Synthesis:
@@ -283,6 +275,8 @@ void UIManager::LedPulseCallback(){
         StopLedPulse();
         SetLedSynthMode();
       }
+      break;
+    default:
       break;
   }
 } 

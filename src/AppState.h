@@ -1,15 +1,17 @@
 #pragma once
 
-enum class AppState {
+enum class AppState{
   Startup,
   SelectFile,
   PlayWAV,
   Synthesis,
-  // Chords,
+  RecordIn,
+  // ChordMode
+  // RecordOut? would coexist with another state so maybe not? 
   Error
 };
 
-enum class SynthMode {
+enum class SynthMode{
   /* knob1 controls param 1, knob2 controls param 2 */
   Size_Position,        /* param 1 = grain size, param 2 = grain spawn position */
   Pitch_ActiveGrains,   /* param 1 = grain pitch, param 2 = num of active grains */

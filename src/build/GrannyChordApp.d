@@ -186,7 +186,8 @@ build/GrannyChordApp.o: GrannyChordApp.cpp \
  ../DaisySP/Source/Utility/looper.h ../DaisySP/Source/Utility/maytrig.h \
  ../DaisySP/Source/Utility/metro.h ../DaisySP/Source/Utility/samplehold.h \
  ../DaisySP/Source/Utility/smooth_random.h UIManager.h AppState.h \
- constants.h GranularSynth.h Grain.h GrainPhasor.h AudioFileManager.h \
+ constants_utils.h GranularSynth.h Grain.h GrainPhasor.h \
+ AudioFileManager.h \
  ../DaisySP/DaisySP-LGPL/Source/Dynamics/compressor.cpp \
  ../DaisySP/DaisySP-LGPL/Source/Dynamics/compressor.h
 ../libDaisy/Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:
@@ -428,7 +429,7 @@ GrannyChordApp.h:
 ../DaisySP/Source/Utility/smooth_random.h:
 UIManager.h:
 AppState.h:
-constants.h:
+constants_utils.h:
 GranularSynth.h:
 Grain.h:
 GrainPhasor.h:

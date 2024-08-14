@@ -185,7 +185,8 @@ build/GranularSynth.o: GranularSynth.cpp \
  ../DaisySP/Source/Synthesis/zoscillator.h \
  ../DaisySP/Source/Utility/looper.h ../DaisySP/Source/Utility/maytrig.h \
  ../DaisySP/Source/Utility/metro.h ../DaisySP/Source/Utility/samplehold.h \
- ../DaisySP/Source/Utility/smooth_random.h GrainPhasor.h constants.h
+ ../DaisySP/Source/Utility/smooth_random.h GrainPhasor.h \
+ constants_utils.h
 ../libDaisy/Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:
 ../libDaisy/Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h750xx.h:
 ../libDaisy/Drivers/CMSIS/Include/core_cm7.h:
@@ -425,4 +426,4 @@ Grain.h:
 ../DaisySP/Source/Utility/samplehold.h:
 ../DaisySP/Source/Utility/smooth_random.h:
 GrainPhasor.h:
-constants.h:
+constants_utils.h:

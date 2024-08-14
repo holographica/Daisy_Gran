@@ -1,5 +1,6 @@
 #pragma once
 #include "stddef.h"
+#include <time.h>
 
 const int SAMPLE_RATE = 48000;
 constexpr float SAMPLE_RATE_FLOAT = 48000.f;
@@ -34,6 +35,25 @@ static const int NUM_ENV_TYPES = 4;
 static const int NUM_PHASOR_MODES = 4;
 static const int NUM_SYNTH_MODES = 7;
 const float PARAM_CHANGE_THRESHOLD = 0.01f;
+
+extern uint32_t rng_state;
+
+inline void SeedRng(){
+  rng_state = static_cast<uint32_t>(time(nullptr));
+}
+
+inline float RngFloat(){
+  /* xorshift32 from https://en.wikipedia.org/wiki/Xorshift 
+  for simple fast random floats */
+  rng_state ^= rng_state << 13;
+  rng_state ^= rng_state >> 17;
+  rng_state ^= rng_state << 5;
+  /* ensures output is between 0-1 */
+  float out = static_cast<float>(rng_state) / static_cast<float>(UINT32_MAX);
+  return out;
+}
+
+
 
 // TODO: is there a point in using this?
 // need to actually test performance using both and compare

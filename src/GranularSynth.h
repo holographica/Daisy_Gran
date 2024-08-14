@@ -8,17 +8,11 @@ class GranularSynth{
   public:
     GranularSynth(DaisyPod& pod) 
       : pod_(pod), left_buf_(nullptr), right_buf_(nullptr), audio_len_(0),
-        grains_(), phasor_mode_(GrainPhasor::Mode::OneShot),
-        grain_size_(4800), spawn_pos_(0), 
-        active_count_(1), pitch_ratio_(1.0f), pan_(0.5f){}
+        grains_(){}
 
     void Init(const int16_t *left, const int16_t *right, size_t audio_len);
-    void SeedRng(uint32_t seed);
-    float RngFloat();
-
-    
+    void InitParams();
     /* internal setters */
-
     void SetGrainSize(float size_ms);
     void SetSpawnPosSamples(size_t pos);
     void SetActiveGrains(size_t count);
@@ -30,12 +24,10 @@ class GranularSynth{
     void SetPan(float pan){ pan_ = pan; }
     
     /* user setters that take normalised input */
-
     void SetUserGrainSize(float knob_val);
     void SetUserSpawnPos(float knob_val);
     void SetUserActiveGrains(float knob_val);
     void SetUserPitchRatio(float ratio);
-    
 
     void UpdateGrainParams();
     void ApplyRandomness();
@@ -50,7 +42,6 @@ class GranularSynth{
     void SetEnvRnd(float rnd){ rnd_envelope_ = rnd; }
     void SetPhasorRnd(float rnd){ rnd_phasor_ = rnd; }
 
-
   private:
     DaisyPod& pod_;
     /* pointers to SDRAM audio buffers */
@@ -58,11 +49,10 @@ class GranularSynth{
     const int16_t *right_buf_;
     size_t audio_len_;
     Grain grains_[MAX_GRAINS];
+
+    /* parameters affecting audio output */
     GrainPhasor::Mode phasor_mode_;
     Grain::EnvelopeType env_type_;
-    uint32_t rng_state_;
-
-    /* synth parameters affecting audio output */
     size_t grain_size_;
     size_t spawn_pos_;
     size_t active_count_;

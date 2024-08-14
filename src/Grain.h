@@ -23,15 +23,16 @@ class Grain {
     };
 
     Grain():
-      pod_(nullptr), left_buf_(nullptr), right_buf_(nullptr), is_active_(false),
+      // pod_(nullptr), left_buf_(nullptr), right_buf_(nullptr), is_active_(false),
+      left_buf_(nullptr), right_buf_(nullptr), is_active_(false),
       // audio_len_(0), phase_(0), phase_increment_(0), envelope_type_(EnvelopeType::Decay){}
       audio_len_(0), envelope_type_(EnvelopeType::Decay){}
 
-    void Init(const int16_t *left, const int16_t *right, size_t len, DaisyPod *pod){
+    void Init(const int16_t *left, const int16_t *right, size_t len){
+    // void Init(const int16_t *left, const int16_t *right, size_t len, DaisyPod *pod){
       left_buf_ = left;
       right_buf_ = right;
       audio_len_ = len;
-      pod_ = pod;
       SetPhasorMode(GrainPhasor::Mode::OneShot);
       phasor_.Init(0.0f, 1.0f, phasor_mode_);
     }
@@ -98,7 +99,7 @@ class Grain {
     void DeactivateGrain() { is_active_ = false; }
 
   private:
-    DaisyPod* pod_;
+    // DaisyPod* pod_;
     const int16_t *left_buf_;
     const int16_t *right_buf_;
     bool is_active_;

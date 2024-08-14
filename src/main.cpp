@@ -20,7 +20,7 @@ AudioFileManager filemgr(sd, fsi, pod, &file);
 DSY_SDRAM_BSS alignas(16) int16_t left_buf[CHNL_BUF_SIZE_SAMPS];
 DSY_SDRAM_BSS alignas(16) int16_t right_buf[CHNL_BUF_SIZE_SAMPS];
 
-GranularSynth synth(pod);
+static GranularSynth synth(pod);
 
 Compressor comp;
 Limiter lim;
@@ -44,6 +44,8 @@ float k2v_mode_1 = 0.5f;
 uint16_t file_idx = 1;
 int mode = 0;
 
+uint32_t rng_state;
+
 
 
 /* TODO here:
@@ -51,13 +53,13 @@ int mode = 0;
 - then change all pod prints to error msg so only prints if in debug mode
 */
 
-void SetLed1(int r, int g, int b){
+void SetLed1(int r, int g, int b){ // NOTE: DONE
   pod.led1.Set(r,g,b);
   pod.UpdateLeds();
   System::Delay(100);
 }
 
-void PulseLed1(){
+void PulseLed1(){// NOTE: DONE
   pod.led1.Set(0,0,0);
   pod.UpdateLeds();
   int cnt = 0;
@@ -74,36 +76,36 @@ void PulseLed1(){
 }
 
 
-void BlinkLed1(int r, int g, int b){
+void BlinkLed1(int r, int g, int b){ // NOTE: DONE
   SetLed1(r,g,b);
   SetLed1(0,0,0);
 }
 
-void BlinkSetLed1(int r, int g, int b){
+void BlinkSetLed1(int r, int g, int b){ // NOTE: DONE
   BlinkLed1(r,g,b);
   BlinkLed1(r,g,b);
   SetLed1(r,g,b);
 }
 
-void SetLed1Green(){
+void SetLed1Green(){ // NOTE: DONE
   SetLed1(0,255,0);
 }
 
-void SetLed1Blue(){
+void SetLed1Blue(){ // NOTE: DONE
   SetLed1(0,0,255);
 }
 
-void BlinkLed1White(){
+void BlinkLed1White(){ // NOTE: DONE
   BlinkLed1(255,255,255);
   BlinkLed1(255,255,255);
 }
 
-void BlinkLed1Green(){
+void BlinkLed1Green(){ // NOTE: DONE
   BlinkLed1(0,255,0);
   BlinkLed1(0,255,0);
 }
 
-void BlinkLed1Blue(){
+void BlinkLed1Blue(){// NOTE: DONE
   BlinkLed1(0,0,255);
   BlinkLed1(0,0,255);
 }
@@ -112,13 +114,13 @@ void BlinkLed1Blue(){
 
 /* knobs on the Pod have a small deadzone around the upper/lower bounds
   (eg my knob1 only goes down to 0.003) -> assume knob is at 0 or 1 if it's very close */
-float MapKnobDeadzone(float knob_val){
+float MapKnobDeadzone(float knob_val){ // NOTE: DONE 
   if (knob_val<=0.01f) { knob_val = 0.0f; }
   else if (knob_val>=0.99f) { knob_val = 1.0f; }
   return knob_val;
 }
 
-float UpdateKnobPassThru(float curr_knob_val, float *stored_knob_val, float prev_param_val, bool *pass_thru){
+float UpdateKnobPassThru(float curr_knob_val, float *stored_knob_val, float prev_param_val, bool *pass_thru){ // NOTE: DONE 
   if (!(*pass_thru)){
     if ((curr_knob_val >= prev_param_val && (*stored_knob_val) <= (prev_param_val)) ||
         (curr_knob_val <= prev_param_val && (*stored_knob_val) >= (prev_param_val))) {
@@ -136,7 +138,7 @@ bool CheckParamDelta(float curr_val, float prev_val){
   return (fabsf(curr_val - prev_val)>0.01f);
 }
 
-void UpdateKnob1(int mode){
+void UpdateKnob1(int mode){ // TODO: DOUBLE CHECK DONE
   float k1v = MapKnobDeadzone(pod.knob1.Process());
   if (mode==0){
     // use k1 to control grain size (10ms to 1s)
@@ -157,7 +159,7 @@ void UpdateKnob1(int mode){
   }
 }
 
-void UpdateKnob2(int mode){
+void UpdateKnob2(int mode){ // TODO: DOUBLE CHECK DONE
   float k2v = MapKnobDeadzone(pod.knob2.Process());
   if (mode==0){
     float spawn_pos = UpdateKnobPassThru(k2v, &k2v_mode_0, prev_pos, &k2_pass_thru_mode0);
@@ -177,7 +179,7 @@ void UpdateKnob2(int mode){
   }
 }
 
-void InitSynth(){
+void InitSynth(){// NOTE: DONE 
   audio_len = filemgr.GetSamplesPerChannel();
   pod.seed.PrintLine("File loaded: %d samples", audio_len);
   synth.SetUserGrainSize(prev_grain_size);
@@ -187,7 +189,7 @@ void InitSynth(){
 }
 
 
-void AudioCallback(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, size_t size){
+void AudioCallback(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, size_t size){// NOTE: DONE 
   synth.ProcessGrains(out[0], out[1], size);
   comp.ProcessBlock(out[0],out[0], size);
   comp.ProcessBlock(out[1],out[1], size);
@@ -195,7 +197,7 @@ void AudioCallback(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, s
 
 bool stopped = false;
 
-void UpdateEncoder(){
+void UpdateEncoder(){ // TODO: DOUBLE CHECK DONE
   pod.encoder.Debounce();
   if (pod.encoder.TimeHeldMs()>1000){
     if (stopped){
@@ -228,7 +230,7 @@ void UpdateEncoder(){
   }
 }
 
-void UpdateControls() {
+void UpdateControls() { // TODO: DOUBLE CHECK DONE 
   pod.button2.Debounce();
   if (pod.button2.FallingEdge()){
     mode++;
@@ -253,7 +255,7 @@ void UpdateControls() {
   UpdateEncoder();
 }
 
-void InitCompressor(){
+void InitCompressor(){ // NOTE: DONE
   comp.Init(pod.AudioSampleRate());
   comp.SetRatio(3.0f);
   comp.SetAttack(0.01f);
@@ -267,30 +269,31 @@ void InitCompressor(){
 int main (void){
   pod.Init();
   pod.seed.StartLog(true);
-  pod.SetAudioBlockSize(4);
-  pod.SetAudioSampleRate(SaiHandle::Config::SampleRate::SAI_48KHZ);
-  InitCompressor();
+
+  pod.SetAudioBlockSize(4); // NOTE : DONE
+  pod.SetAudioSampleRate(SaiHandle::Config::SampleRate::SAI_48KHZ); // NOTE : DONE
+  InitCompressor(); // NOTE : DONE
 
   PulseLed1();
   PulseLed1();
   // BlinkLed1White();
 
-  filemgr.SetBuffers(left_buf, right_buf);
-  if (!filemgr.Init()){
+  filemgr.SetBuffers(left_buf, right_buf); // NOTE : DONE
+  if (!filemgr.Init()){ // NOTE : DONE
     // TODO
     // NOTE: SET STATE TO ERROR
     pod.seed.PrintLine("filemgr init failed");
     return 1;
   }
   BlinkLed1White();
-  if (!filemgr.ScanWavFiles()){
+  if (!filemgr.ScanWavFiles()){ // NOTE : DONE
     // TODO
     // NOTE: SET STATE TO ERROR
     pod.seed.PrintLine("reading files failed");
     return 1;
   }
   BlinkLed1White();
-  if (filemgr.LoadFile(6)) {
+  if (filemgr.LoadFile(6)) { // NOTE : DONE
     InitSynth();
     // PulseLed1();
     // PulseLed1();
@@ -302,18 +305,15 @@ int main (void){
     pod.seed.PrintLine("Failed to load audio file");
     return 1;
   }
-
-  pod.StartAdc();
-  pod.StartAudio(AudioCallback);
+  SeedRng();// NOTE : DONE
+  pod.StartAdc();// NOTE : DONE
+  pod.StartAudio(AudioCallback);// NOTE : DONE
 
   while(1){    
-    UpdateControls();
+    UpdateControls();// NOTE : DONE
     System::Delay(10);
   }
 }
-
-
-
 
 // let grains through gate when button pressed 
 // use button to trigger grain instead of automatically generating it 
@@ -324,3 +324,5 @@ int main (void){
 // could have smal chance of playing random note
 // press button to choose random scale
 
+// have prompts for each day 
+// 

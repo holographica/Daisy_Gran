@@ -7,24 +7,19 @@ void GranularSynth::Init(const int16_t *left, const int16_t *right, size_t audio
   right_buf_ = right;
   audio_len_ = audio_len;
   for (Grain& grain: grains_){
-    grain.Init(left,right,audio_len,&pod_);
+    // grain.Init(left,right,audio_len,&pod_);
+    grain.Init(left,right,audio_len);
   }
-  SeedRng(static_cast<uint32_t>(rand()));
+  InitParams();
 }
 
-void GranularSynth::SeedRng(uint32_t seed){
-  rng_state_ = seed;
-}
-
-float GranularSynth::RngFloat(){
-  /* xorshift32 from https://en.wikipedia.org/wiki/Xorshift 
-  for simple fast random floats */
-  rng_state_ ^= rng_state_ << 13;
-  rng_state_ ^= rng_state_ >> 17;
-  rng_state_ ^= rng_state_ << 5;
-  /* ensures output is between 0-1 */
-  float out = static_cast<float>(rng_state_) / static_cast<float>(UINT32_MAX);
-  return out;
+void GranularSynth::InitParams(){
+  phasor_mode_ = GrainPhasor::Mode::OneShot;
+  grain_size_ = 4800;
+  spawn_pos_ = 0;
+  active_count_ =1;
+  pitch_ratio_ = 1.0f;
+  pan_ = 0.5f;
 }
 
 /* these setters are used by the program
@@ -81,18 +76,13 @@ void GranularSynth::UpdateGrainParams(){
   }
 }
 
-/* nb: */
+/* nb: in this function, we essentially get a random number, map it into a certain 
+    range determined by the user randomness setting for that parameter,
+    then clamp it so it stays in the correct range for the parameter */
+
 void GranularSynth::ApplyRandomness(){
-  // /* here we get a random number from 0:1, change the range to -0.5:0.5,
-  //     scale it by 2 so range is -1.0:1.0, multiply by randomness for
-  //     the param set by knob, then add 1 so range is 1.0f +/- randomness */
-  // grain_size_ *= (RngFloat()-0.5f) * 2.0f * rnd_size_ + 1.0f;
-
-  // /* same as above but we add result, multiply by audio len in samples */
-  // spawn_pos_ += (RngFloat()-0.5f) * 2.0f * rnd_spawn_pos_ * audio_len_;
-  // pitch_ratio_ *= (RngFloat()-0.5f) * 2.0f * rnd_pitch_ + 1.0f;
-  // pan_ += (RngFloat()-0.5f) * 2.0f * rnd_pan_;
-
+  /* here we map a randomly generated num between 1 +/- user randomness setting 
+      then convert it to ms so we can use fclamp to clamp it within the correct range */
   if (rnd_size_>0){
     float rnd_size_factor = fmap(RngFloat(),1.0f-rnd_size_, 1.0f+rnd_size_, Mapping::EXP);
     float size_ms = SamplesToMs(grain_size_) * rnd_size_factor;
@@ -100,6 +90,9 @@ void GranularSynth::ApplyRandomness(){
     grain_size_ = MsToSamples(size_ms);
   }
   
+  /* here we map a random num between -1/+1 and multiply by the audio sample 
+      length and user random setting to add spray to grain spawn position
+      if it overruns, wrap it back round to start/end of audio  */
   if (rnd_spawn_pos_>0){
     size_t rnd_offset = static_cast<size_t>(fmap(RngFloat(), -1.0f, 1.0f, Mapping::LINEAR));
     spawn_pos_ += audio_len_ * static_cast<size_t>(rnd_spawn_pos_ * rnd_offset);

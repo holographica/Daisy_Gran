@@ -14,8 +14,10 @@ class UIManager {
     AppState GetCurrentState() { return current_state_; }
     SynthMode GetSynthMode() { return synth_mode_; }
     void SetStateError();
+    void SetState(AppState state);
+    void UpdateUI();
+    bool ToggleRecordOut();
 
-    void UpdateControls();
     bool EncoderPressed();
     bool EncoderLongPress();
     int32_t GetEncoderIncrement();
@@ -54,12 +56,7 @@ class UIManager {
     void UpdateSynthMode();
     void ToggleRandomnessControls();
 
-
-    
-  
-
     void SetupTimer();
-
     void StartLedPulse();
     void StopLedPulse();
     void SetLedRandomMode();
