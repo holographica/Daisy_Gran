@@ -9,9 +9,12 @@ using namespace daisysp;
 
 class Grain {
   public:
+    /// @brief Enum class to store references to differen types of amplitude envelope
     enum class EnvelopeType {
-      /* basic linear fade out from start */
+      /* basic linear fade out from start ie |\ */
       LinearDecay,
+      /* No fade in or out */
+      Rectangular,
       /* Simple fade out starting at phase=0.8f ie: |‾\  */
       Decay,
       /* Smooth symmetric increase/decrease
@@ -23,13 +26,14 @@ class Grain {
     };
 
     Grain():
-      // pod_(nullptr), left_buf_(nullptr), right_buf_(nullptr), is_active_(false),
       left_buf_(nullptr), right_buf_(nullptr), is_active_(false),
-      // audio_len_(0), phase_(0), phase_increment_(0), envelope_type_(EnvelopeType::Decay){}
       audio_len_(0), envelope_type_(EnvelopeType::Decay){}
 
+    /// @brief Initialise the Grain instance and its Phasor object 
+    /// @param left Const pointer to the left audio data buffer
+    /// @param right Const pointer to the right audio data buffer
+    /// @param len Length in samples of the audio file loaded in the buffers
     void Init(const int16_t *left, const int16_t *right, size_t len){
-    // void Init(const int16_t *left, const int16_t *right, size_t len, DaisyPod *pod){
       left_buf_ = left;
       right_buf_ = right;
       audio_len_ = len;
@@ -37,6 +41,11 @@ class Grain {
       phasor_.Init(0.0f, 1.0f, phasor_mode_);
     }
 
+    /// @brief Causes a grain to start playing and assigns its parameters
+    /// @param pos Spawn position of the grain, within the audio buffer 
+    /// @param grain_size Length of the grain in samples
+    /// @param pitch_ratio Pitch of the grain - 1 plays the grain at its regular pitch
+    /// @param pan Position of the grain's audio output in the stereo field
     void Trigger(size_t pos, size_t grain_size, float pitch_ratio=1.0f, float pan=0.5f) {
       if (pos >= audio_len_){
         pos = pos - audio_len_;
@@ -49,6 +58,9 @@ class Grain {
       pan_ = pan;
     }
 
+    /// @brief Processes grain phase, applies envelope and panning and mixes into the output buffers
+    /// @param sum_left Pointer to variable storing total left channel audio output of all grains
+    /// @param sum_right Pointer to variable storing total right channel audio output of all grains
     void Process(float *sum_left, float *sum_right) {
       if (!is_active_) return;
       float phase = phasor_.Process();
@@ -99,27 +111,38 @@ class Grain {
     void DeactivateGrain() { is_active_ = false; }
 
   private:
-    // DaisyPod* pod_;
     const int16_t *left_buf_;
     const int16_t *right_buf_;
-    bool is_active_;
+
     size_t audio_len_;
+
+    /* Object that manages the phase of the grain */
     GrainPhasor phasor_;
     GrainPhasor::Mode phasor_mode_;
-    // float phase_;
-    // float phase_increment_;
+
+    /* Grain audio parameters */
     float pan_;
     size_t spawn_pos_;
     size_t grain_size_;
     float pitch_ratio_;
     EnvelopeType envelope_type_;
+    bool is_active_;
+
 
     const float start_decay_ = 0.8f;
     const float decay_rate_ = 5.0f;
 
+    /// @brief Applies selected amplitude envelope to grain based on its phase
+    /// @param phase Current playback position of the grain within its lifetime (from 0 - 1)
+    /// @return Amplitude of the grain after envelope has been applied
     float ApplyEnvelope(float phase){
       switch(envelope_type_){
+        case EnvelopeType::LinearDecay:
+          return 1.0f - phase;
+        case EnvelopeType::Rectangular:
+          return phase;
         case EnvelopeType::Decay:
+        default:
           if (phase<=start_decay_) { return 1.0f; }
           else { return 1.0f - ((phase - start_decay_) * decay_rate_); }
         case EnvelopeType::Triangular:
@@ -127,9 +150,6 @@ class Grain {
         /* formula from https://uk.mathworks.com/help/signal/ref/hann.html */
         case EnvelopeType::Hann:
           return 0.5f * (1.0f - std::cos(2.0f * M_PI * phase));
-        case EnvelopeType::LinearDecay:
-        default:
-          return 1.0f - phase;
       }
     }
 

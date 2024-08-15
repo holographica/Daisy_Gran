@@ -1,25 +1,40 @@
 #include "GrannyChordApp.h"
 
+/* this is required for AudioCallback as it needs a static object */
+GrannyChordApp* GrannyChordApp::instance_ = nullptr;
+
+/// @brief Initialises app state and members and goes through app startup process
+/// @param left Left channel audio data buffer
+/// @param right Right channel audio data buffer
 void GrannyChordApp::Init(int16_t *left, int16_t *right){
   left_buf_ = left;
   right_buf_ = right;
   pod_.SetAudioBlockSize(4);
   pod_.SetAudioSampleRate(SaiHandle::Config::SampleRate::SAI_48KHZ);
-
+  // DebugPrint(pod_,"set sample rate");
+  DebugPrint(pod_,"set sample rate");
   SeedRng();
   ui_.Init();
+  DebugPrint(pod_,"init ui");
   if (!InitFileMgr()){
+    ui_.SetStateError();
+    DebugPrint(pod_,"filemgr init error");
     return;
   }
   ui_.SetState(AppState::SelectFile);
+  DebugPrint(pod_,"selecting file now");
   InitFileSelection();
+  DebugPrint(pod_,"selected file ok");
   InitCompressor();
   InitPrevParamVals();
 
   pod_.StartAdc();
   pod_.StartAudio(AudioCallback);
+  DebugPrint(pod_,"started audio");
 }
 
+/// @brief Loops whilst app is running, updating state and UI, handling 
+///        state transitions, updating parameters and managing audio recordings
 void GrannyChordApp::Run(){
   while(true){
     AppState prev_state = ui_.GetCurrentState();
@@ -28,6 +43,10 @@ void GrannyChordApp::Run(){
 
     if (prev_state!=curr_state){
       HandleStateChange(prev_state, curr_state);
+      int p = static_cast<int>(prev_state);
+      int c = static_cast<int>(curr_state);
+      DebugPrint(pod_,"changed state");
+      DebugPrint(pod_,"prev: %d curr: %d",p,c);
     }
     UpdateSynthParams(curr_state);
 
@@ -39,6 +58,10 @@ void GrannyChordApp::Run(){
   }
 }
 
+/// @brief Master audio callback, called at audio rate, calls all audio processing methods
+/// @param in Audio input buffer
+/// @param out Audio output buffer
+/// @param size Number of samples to process in this call
 void GrannyChordApp::AudioCallback(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, size_t size){
   AppState curr_state = instance_->ui_.GetCurrentState();
   // if in RecordIn: clear channel buffers, send input straight to them
@@ -62,12 +85,18 @@ void GrannyChordApp::AudioCallback(AudioHandle::InputBuffer in, AudioHandle::Out
   }
 }
 
+/// @brief Outputs silence if app is in non audio output state
+/// @param out Output audio buffer
+/// @param size Number of samples to process in this call (irrelevant)
 void GrannyChordApp::AudioIdle(AudioHandle::OutputBuffer out, size_t size){
   for (size_t i=0; i<size; i++){
     out[0][i]=out[1][i]=0.0f;
   }
 }
 
+/// @brief Process audio for WAV playback mode and increment playback position
+/// @param out Output audio buffer
+/// @param size Number of samples to process in this call
 void GrannyChordApp::ProcessWAVPlayback(AudioHandle::OutputBuffer out, size_t size){
   if (wav_playhead_>=audio_len_){
     wav_playhead_ = 0;
@@ -84,6 +113,10 @@ void GrannyChordApp::ProcessWAVPlayback(AudioHandle::OutputBuffer out, size_t si
   }
 }
 
+/// @brief Process input audio when app is in RecordIn state
+/// @param in Input audio buffer
+/// @param out Output audio buffer
+/// @param size Number of samples to process in this call
 void GrannyChordApp::ProcessRecordIn(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, size_t size){
   static const size_t MAX_RECORDING_LEN = 60*48000; // 60s @ 48kHZ
   static size_t record_pos = 0;
@@ -103,6 +136,9 @@ void GrannyChordApp::ProcessRecordIn(AudioHandle::InputBuffer in, AudioHandle::O
   }
 }
 
+/// @brief Process audio through granular synth and mix to output buffer
+/// @param out Output audio buffer
+/// @param size Number of samples to process in this call
 void GrannyChordApp::ProcessSynthesis(AudioHandle::OutputBuffer out, size_t size){
   for (size_t i=0; i<size; i++){
     synth_.ProcessGrains(out[0],out[1],size);
@@ -111,6 +147,9 @@ void GrannyChordApp::ProcessSynthesis(AudioHandle::OutputBuffer out, size_t size
   }
 }
 
+/// @brief Process audio from chord mode and mix to output buffer
+/// @param out Output audio buffer
+/// @param size Number of samples to process in this call
 void GrannyChordApp::ProcessChordMode(AudioHandle::OutputBuffer out, size_t size){
   // if (UserTriggeredChord()) {
   //   synth_.TriggerChord(out[0], out[1], size);
@@ -120,6 +159,9 @@ void GrannyChordApp::ProcessChordMode(AudioHandle::OutputBuffer out, size_t size
   // }
 }
 
+/// @brief Record granular synth or chord output audio to SD card
+/// @param out Output audio buffer
+/// @param size Number of samples to process in this call
 void GrannyChordApp::RecordOutToSD(AudioHandle::OutputBuffer out, size_t size){
   // create file on sd card 
   // write in blocks
@@ -137,14 +179,19 @@ void GrannyChordApp::RecordOutToSD(AudioHandle::OutputBuffer out, size_t size){
   // update UI to show recording finished
 }
 
+/// @brief Helper function to mark when audio output recording starts
 void GrannyChordApp::StartRecordOut(){
   recording_out_=true;
 }
 
+/// @brief Helper function to mark when audio output recording starts
 void GrannyChordApp::StopRecordOut(){
   recording_out_ = false;
 }
 
+/// @brief Handles transitions between states, preparing to change to next state
+/// @param prev Previous state of the app
+/// @param curr State that the app is about to change to
 void GrannyChordApp::HandleStateChange(AppState prev, AppState curr){
   /* clean up from previous state */
   switch (prev){
@@ -208,6 +255,8 @@ void GrannyChordApp::HandleStateChange(AppState prev, AppState curr){
   }
 }
 
+/// @brief Initialises file manager, sets audio data buffers and scans SD card for WAV files
+/// @return True on successful initialisation, false if init fails or no WAV files found
 bool GrannyChordApp::InitFileMgr(){
   filemgr_.SetBuffers(left_buf_,right_buf_);
   if (!filemgr_.Init()){
@@ -221,10 +270,12 @@ bool GrannyChordApp::InitFileMgr(){
   return true;
 }
 
+/// @brief Calls synth initialisation function, passes audio data buffers and audio length
 void GrannyChordApp::InitSynth(){
   synth_.Init(left_buf_, right_buf_, audio_len_);
 }
 
+/// @brief Initialise compressor object with desired parameters
 void GrannyChordApp::InitCompressor(){
   comp_.Init(pod_.AudioSampleRate());
   comp_.SetRatio(3.0f);
@@ -234,63 +285,79 @@ void GrannyChordApp::InitCompressor(){
   comp_.AutoMakeup(true);
 }
 
+/// @brief Resets current file index and audio data buffers
+///        Calls method to handle WAV file selection
 void GrannyChordApp::InitFileSelection(){
   file_idx_ =0;
-  memset(left_buf_, 0, sizeof(left_buf_));
-  memset(right_buf_, 0, sizeof(right_buf_));
+  memset(left_buf_, 0, CHNL_BUF_SIZE_ABS);
+  memset(right_buf_, 0, CHNL_BUF_SIZE_ABS);
   if (!HandleFileSelection()){
     ui_.SetStateError();
   }
 }
 
+/// @brief Initialises WAV playback state, resets playhead, sets current file audio length
 void GrannyChordApp::InitPlayback(){
   wav_playhead_ = 0;
   audio_len_ = filemgr_.GetSamplesPerChannel();
   float  total_secs = static_cast<float>(audio_len_)/48000.0f;
   int mins = static_cast<int>(total_secs/60.0f);
   int secs = static_cast<int>(total_secs)%60;
-  pod_.seed.PrintLine("File loaded: %d:%d ", mins,secs);
+  DebugPrint(pod_,"File loaded: %d:%d ", mins,secs);
 }
 
+/// @brief Initialises RecordIn state, clears audio buffers
 void GrannyChordApp::InitRecordIn(){
-  memset(left_buf_, 0, sizeof(left_buf_));
-  memset(right_buf_, 0, sizeof(right_buf_));
+  memset(left_buf_, 0, CHNL_BUF_SIZE_ABS);
+  memset(right_buf_, 0, CHNL_BUF_SIZE_ABS);
 }
 
-
+/// @brief Handles file selection. Processes hardware input controls on loop
+///        until a file has been selected and loaded, then starts playback
+/// @return True if file loads ok. False if called in wrong state, or file doesn't load
 bool GrannyChordApp::HandleFileSelection(){
   if (ui_.GetCurrentState() != AppState::SelectFile){
+    DebugPrint(pod_,"not in select file state");
     return false;
   }
-  int32_t inc = ui_.GetEncoderIncrement();
-  uint16_t file_count = filemgr_.GetFileCount();
-  if (inc!=0){
-    // char fname[64];
-    file_idx_ += inc;
-    /* wrap around list of files */
-    if (file_idx_<0){ 
-      file_idx_ = file_count - 1; 
+  bool selected = false;
+  while (!selected){
+    pod_.ProcessDigitalControls();
+    int32_t inc = ui_.GetEncoderIncrement();
+    uint16_t file_count = filemgr_.GetFileCount();
+    if (inc!=0){
+      char fname[64];
+      file_idx_ += inc;
+      /* wrap around list of files */
+      if (file_idx_<0){ 
+        file_idx_ = file_count - 1; 
+      }
+      if (file_idx_ >= file_count){ 
+        file_idx_ = 0; 
+      }
+      filemgr_.GetName(file_idx_, fname);
+      DebugPrint(pod_,"selected new file idx %d %s", file_idx_, fname);
     }
-    if (file_idx_ >= file_count){ 
-      file_idx_ = 0; 
+    if (ui_.EncoderPressed()){
+      if (filemgr_.LoadFile(file_idx_)){
+        InitPlayback();
+        selected = true;
+        return true;
+      } 
+      else {
+        ui_.SetStateError();
+        DebugPrint(pod_,"Failed to load audio file");
+        return false;
+      }
     }
-    // filemgr_.GetName(file_idx_, fname);
-    // pod_.seed.PrintLine("selected new file idx %d %s", file_idx_, fname);
   }
-  if (ui_.Button1Pressed()){
-    if (filemgr_.LoadFile(file_idx_)){
-      InitPlayback();
-      return true;
-    } 
-    else {
-      ui_.SetStateError();
-      // pod.seed.PrintLine("Failed to load audio file");
-      return false;
-    }
-  }
-  return true;
+  ui_.SetStateError();
+  DebugPrint(pod_,"exited while loop strangely");
+  return false;
 }
 
+/// @brief Updates granular synth or chord parameters if in Synthesis/ChordMode state
+/// @param curr_state Current app state
 void GrannyChordApp::UpdateSynthParams(AppState curr_state){
   if (curr_state==AppState::Synthesis){
     UpdateGranularParams();
@@ -300,11 +367,13 @@ void GrannyChordApp::UpdateSynthParams(AppState curr_state){
   // }
 }
 
+/// @brief Updates granular synth parameters based on hardware input and current synth mode
 void GrannyChordApp::UpdateGranularParams(){
   SynthMode mode = ui_.GetSynthMode();
   int mode_idx = static_cast<int>(mode);
   float knob1_val = ui_.GetKnob1Value(mode_idx);
   float knob2_val = ui_.GetKnob2Value(mode_idx);
+  /* Set parameter for knob 1 depending on current synth mode */
   if (CheckParamDelta(knob1_val, prev_param_vals_k1[mode_idx])){
     switch (mode){
       case SynthMode::Size_Position:
@@ -330,8 +399,10 @@ void GrannyChordApp::UpdateGranularParams(){
         synth_.SetPhasorRnd(knob1_val);
         break;
     }
+    /* Update previous parameter value for pass-thru mode */
     prev_param_vals_k1[mode_idx] = knob1_val;
   }
+  /* Set parameter for knob 1 depending on current synth mode */
   if (CheckParamDelta(knob2_val, prev_param_vals_k2[mode_idx])){
     switch (mode){
       case SynthMode::Size_Position:
@@ -355,14 +426,20 @@ void GrannyChordApp::UpdateGranularParams(){
         synth_.SetEnvRnd(knob2_val);
         break;
     }
+    /* Update previous parameter value for pass-thru mode */
     prev_param_vals_k2[mode_idx] = knob2_val;
   }
 }
 
+/// @brief Check parameter value change is over a certain level, due to knob jitter
+/// @param curr_val Current value of hardware input knob
+/// @param prev_val Previous value of hardware input knob
+/// @return True if parameter change is significant, else false
 bool GrannyChordApp::CheckParamDelta(float curr_val, float prev_val){
   return (fabsf(curr_val - prev_val)>0.01f);
 }
 
+/// @brief Initialise previous parameter value arrays to defaults
 void GrannyChordApp::InitPrevParamVals(){
       for (int i=0; i < NUM_SYNTH_MODES;i++){
         prev_param_vals_k1[i] = 0.5f;

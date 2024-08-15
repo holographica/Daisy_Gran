@@ -11,6 +11,7 @@ class UIManager {
 
     void Init();
 
+    /* methods relating to states and modes of the app and UI */
     AppState GetCurrentState() { return current_state_; }
     SynthMode GetSynthMode() { return synth_mode_; }
     void SetStateError();
@@ -18,6 +19,7 @@ class UIManager {
     void UpdateUI();
     bool ToggleRecordOut();
 
+    /* hardware input helper methods */
     bool EncoderPressed();
     bool EncoderLongPress();
     int32_t GetEncoderIncrement();
@@ -44,18 +46,26 @@ class UIManager {
 
     bool crash_error = false;
 
+    /* Stores current and previous values of hardware knobs 
+      to implement 'pass-thru' mode - if synth mode changes, the
+      parameter that the knob was previously controlling (eg grain size)
+      won't be updated until 1) the synth is in that mode again,
+      and 2) the knob passes through that value again */
     bool k1_pass_thru_[NUM_SYNTH_MODES] = {false};
     bool k2_pass_thru_[NUM_SYNTH_MODES] = {false};
     float k1v_[NUM_SYNTH_MODES] = {0.5f};
     float k2v_[NUM_SYNTH_MODES] = {0.5f};
 
+    void UpdateState();
+
+    /* Methods relating to synth parameters and hardware input */
+    void UpdateKnobs();
     float MapKnobDeadzone(float knob_val);
     float UpdateKnobPassThru(float curr_knob_val, float *stored_knob_val, bool *pass_thru);
-    void UpdateKnobs();
-    void UpdateState();
     void UpdateSynthMode();
     void ToggleRandomnessControls();
 
+    /* LED callback, update and color-setting methods */
     void SetupTimer();
     void StartLedPulse();
     void StopLedPulse();

@@ -12,6 +12,11 @@ class GranularSynth{
 
     void Init(const int16_t *left, const int16_t *right, size_t audio_len);
     void InitParams();
+    void UpdateGrainParams();
+    void ApplyRandomness();
+    void TriggerGrain();
+    void ProcessGrains(float *out_left, float *out_right, size_t size);
+
     /* internal setters */
     void SetGrainSize(float size_ms);
     void SetSpawnPosSamples(size_t pos);
@@ -29,10 +34,6 @@ class GranularSynth{
     void SetUserActiveGrains(float knob_val);
     void SetUserPitchRatio(float ratio);
 
-    void UpdateGrainParams();
-    void ApplyRandomness();
-    void TriggerGrain();
-    void ProcessGrains(float *out_left, float *out_right, size_t size);
 
     void SetSizeRnd(float rnd){ rnd_size_ = rnd; }
     void SetPositionRnd(float rnd){ rnd_spawn_pos_ = rnd; }
@@ -47,6 +48,7 @@ class GranularSynth{
     /* pointers to SDRAM audio buffers */
     const int16_t *left_buf_;
     const int16_t *right_buf_;
+    /* length of audio in samples */
     size_t audio_len_;
     Grain grains_[MAX_GRAINS];
 

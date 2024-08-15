@@ -1,10 +1,12 @@
 #include "UIManager.h"
 
+/// @brief Initialise UI, set up timer for LED pulse callbacks
 void UIManager::Init(){
   SetupTimer();
-  StartLedPulse();
+  // StartLedPulse();
 }
 
+/// @brief Called on loop to continually update knob inputs and current app state
 void UIManager::UpdateUI(){
   if (!crash_error){
     UpdateKnobs();
@@ -14,6 +16,7 @@ void UIManager::UpdateUI(){
   }
 }
 
+/// @brief Updates hardware input knob values and assigns to correct array indices 
 void UIManager::UpdateKnobs(){
   // NOTE: need to add stuff for chord mode here! 
   if (current_state_ == AppState::Synthesis){
@@ -28,6 +31,7 @@ void UIManager::UpdateKnobs(){
   }
 }
 
+/// @brief Updates current UI/app state based on hardware inputs
 void UIManager::UpdateState(){
   pod_.ProcessDigitalControls();
   // TODO: change this to encoder pressed?? 
@@ -68,7 +72,7 @@ void UIManager::UpdateState(){
       case AppState::Synthesis:
         pod_.StopAudio();
         current_state_ = AppState::SelectFile;
-        StartLedPulse();
+        // StartLedPulse();
         break;
       case AppState::SelectFile:
         current_state_ = AppState::RecordIn;
@@ -84,10 +88,13 @@ void UIManager::UpdateState(){
   }
 }
 
+/// @brief Helper method to externally set current app state
+/// @param state 
 void UIManager::SetState(AppState state){
   current_state_ = state;
 }
 
+/// @brief Helper method to set current app state to Error and start red error LEDs
 void UIManager::SetStateError(){
   current_state_ = AppState::Error;
   StopLedPulse();
@@ -96,6 +103,7 @@ void UIManager::SetStateError(){
   crash_error = true;
 }
 
+/// @brief Cycles through synth parameter update modes
 void UIManager::UpdateSynthMode(){
   switch(synth_mode_){
     case SynthMode::Size_Position:
@@ -143,11 +151,11 @@ void UIManager::ToggleRandomnessControls(){
     }
 }
 
+
 bool UIManager::ToggleRecordOut(){//NOTE NEED TO DECIDE THiS!!
   // TODO: need to decide what control input will toggle record out
   return true; 
 }
-
 
 
 float UIManager::GetKnob1Value(int mode_idx){
@@ -223,7 +231,7 @@ void UIManager::SetupTimer(){
   // /* set period for 200ms pulse (1MHz/200,000 == 200ms) */
   // cfg.period = 200000;
   /* set period for 10ms callback interval */
-  cfg.period = 10000;
+  cfg.period = 1000000;
   cfg.enable_irq = true;
   timer_.Init(cfg);
   /* set 1Mhz tick frequency */

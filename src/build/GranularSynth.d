@@ -185,7 +185,26 @@ build/GranularSynth.o: GranularSynth.cpp \
  ../DaisySP/Source/Synthesis/zoscillator.h \
  ../DaisySP/Source/Utility/looper.h ../DaisySP/Source/Utility/maytrig.h \
  ../DaisySP/Source/Utility/metro.h ../DaisySP/Source/Utility/samplehold.h \
- ../DaisySP/Source/Utility/smooth_random.h GrainPhasor.h \
+ ../DaisySP/Source/Utility/smooth_random.h \
+ ../DaisySP/Source/../DaisySP-LGPL/Source/daisysp-lgpl.h \
+ ../DaisySP/Source/../DaisySP-LGPL/Source/Control/line.h \
+ ../DaisySP/Source/../DaisySP-LGPL/Source/Dynamics/balance.h \
+ ../DaisySP/Source/../DaisySP-LGPL/Source/Dynamics/compressor.h \
+ ../DaisySP/Source/../DaisySP-LGPL/Source/Effects/bitcrush.h \
+ ../DaisySP/Source/../DaisySP-LGPL/Source/Effects/fold.h \
+ ../DaisySP/Source/../DaisySP-LGPL/Source/Effects/reverbsc.h \
+ ../DaisySP/Source/../DaisySP-LGPL/Source/Filters/allpass.h \
+ ../DaisySP/Source/../DaisySP-LGPL/Source/Filters/atone.h \
+ ../DaisySP/Source/../DaisySP-LGPL/Source/Filters/biquad.h \
+ ../DaisySP/Source/../DaisySP-LGPL/Source/Filters/comb.h \
+ ../DaisySP/Source/../DaisySP-LGPL/Source/Filters/mode.h \
+ ../DaisySP/Source/../DaisySP-LGPL/Source/Filters/moogladder.h \
+ ../DaisySP/Source/../DaisySP-LGPL/Source/Filters/nlfilt.h \
+ ../DaisySP/Source/../DaisySP-LGPL/Source/Filters/tone.h \
+ ../DaisySP/Source/../DaisySP-LGPL/Source/PhysicalModeling/pluck.h \
+ ../DaisySP/Source/../DaisySP-LGPL/Source/Synthesis/blosc.h \
+ ../DaisySP/Source/../DaisySP-LGPL/Source/Utility/jitter.h \
+ ../DaisySP/Source/../DaisySP-LGPL/Source/Utility/port.h GrainPhasor.h \
  constants_utils.h
 ../libDaisy/Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:
 ../libDaisy/Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h750xx.h:
@@ -425,5 +444,24 @@ Grain.h:
 ../DaisySP/Source/Utility/metro.h:
 ../DaisySP/Source/Utility/samplehold.h:
 ../DaisySP/Source/Utility/smooth_random.h:
+../DaisySP/Source/../DaisySP-LGPL/Source/daisysp-lgpl.h:
+../DaisySP/Source/../DaisySP-LGPL/Source/Control/line.h:
+../DaisySP/Source/../DaisySP-LGPL/Source/Dynamics/balance.h:
+../DaisySP/Source/../DaisySP-LGPL/Source/Dynamics/compressor.h:
+../DaisySP/Source/../DaisySP-LGPL/Source/Effects/bitcrush.h:
+../DaisySP/Source/../DaisySP-LGPL/Source/Effects/fold.h:
+../DaisySP/Source/../DaisySP-LGPL/Source/Effects/reverbsc.h:
+../DaisySP/Source/../DaisySP-LGPL/Source/Filters/allpass.h:
+../DaisySP/Source/../DaisySP-LGPL/Source/Filters/atone.h:
+../DaisySP/Source/../DaisySP-LGPL/Source/Filters/biquad.h:
+../DaisySP/Source/../DaisySP-LGPL/Source/Filters/comb.h:
+../DaisySP/Source/../DaisySP-LGPL/Source/Filters/mode.h:
+../DaisySP/Source/../DaisySP-LGPL/Source/Filters/moogladder.h:
+../DaisySP/Source/../DaisySP-LGPL/Source/Filters/nlfilt.h:
+../DaisySP/Source/../DaisySP-LGPL/Source/Filters/tone.h:
+../DaisySP/Source/../DaisySP-LGPL/Source/PhysicalModeling/pluck.h:
+../DaisySP/Source/../DaisySP-LGPL/Source/Synthesis/blosc.h:
+../DaisySP/Source/../DaisySP-LGPL/Source/Utility/jitter.h:
+../DaisySP/Source/../DaisySP-LGPL/Source/Utility/port.h:
 GrainPhasor.h:
 constants_utils.h:

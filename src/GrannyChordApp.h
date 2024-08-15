@@ -4,7 +4,7 @@
 #include "UIManager.h"
 #include "GranularSynth.h"
 #include "AudioFileManager.h"
-#include "../DaisySP/DaisySP-LGPL/Source/Dynamics/compressor.cpp"
+#include "debug_print.h"
 
 using namespace daisy;
 using namespace daisysp;
@@ -13,7 +13,9 @@ class GrannyChordApp {
   public:
   GrannyChordApp(DaisyPod& pod, GranularSynth& synth, AudioFileManager& filemgr)
         : pod_(pod), synth_(synth), 
-          filemgr_(filemgr), ui_(pod), left_buf_(nullptr), right_buf_(nullptr) {};
+          filemgr_(filemgr), ui_(pod), left_buf_(nullptr), right_buf_(nullptr) {
+            instance_ = this;
+          };
 
     void Init(int16_t *left, int16_t *right);
     void Run();
@@ -32,7 +34,7 @@ class GrannyChordApp {
     int16_t *left_buf_;
     int16_t *right_buf_;
 
-    float file_idx_ = 0;
+    int file_idx_ = 0;
     size_t wav_playhead_ = 0;
     uint32_t audio_len_ = 0;
     // AppState curr_app_state_;

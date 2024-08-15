@@ -2,17 +2,24 @@
 #include "stddef.h"
 #include <time.h>
 
-const int SAMPLE_RATE = 48000;
+constexpr int SAMPLE_RATE = 48000;
 constexpr float SAMPLE_RATE_FLOAT = 48000.f;
 
+/* 16mb - max size of one stereo channel to be loaded into buffers */
+constexpr size_t CHNL_BUF_SIZE_ABS = 16*1024*1024;
+/* above is absolute size - each sample needs an int16 (2 bytes) so we do (abs_size)/2 */
 constexpr size_t CHNL_BUF_SIZE_SAMPS = 8*1024*1024;
-/* above is max number of samples per channel
-  so we allocate int16s - each is 2bytes -> 16mb */
-const size_t ABS_CHNL_BUF_SIZE = 16*1024*1024;
-const int BIT_DEPTH = 16;
+
+/* this is 60s @ 48kHz * 2 channels 
+nb: we can return out into one channel by interleaving the channels */
+constexpr size_t RECORD_OUT_BUF_SIZE_SAMPS = 60*48000*2;
+/* we need 2 bytes for each sample so we do (buf_samps_size)*2 */
+constexpr size_t RECORD_OUT_BUF_SIZE_ABS = 60*48000*2*2;
+
+constexpr int BIT_DEPTH = 16;
 /* min/max number of concurrent active grains */
-const int MIN_GRAINS = 1;
-const int MAX_GRAINS = 20;
+constexpr int MIN_GRAINS = 1;
+constexpr int MAX_GRAINS = 20;
 
 constexpr float MIN_GRAIN_SIZE_MS = 100.0f;
 constexpr float MAX_GRAIN_SIZE_MS = 3000.0f;
@@ -31,10 +38,10 @@ inline constexpr float SamplesToMs(size_t samples){
   return (static_cast<float>(samples) * 1000.0f) / SAMPLE_RATE_FLOAT; 
 }
 
-static const int NUM_ENV_TYPES = 4;
-static const int NUM_PHASOR_MODES = 4;
-static const int NUM_SYNTH_MODES = 7;
-const float PARAM_CHANGE_THRESHOLD = 0.01f;
+static constexpr int NUM_ENV_TYPES = 4;
+static constexpr int NUM_PHASOR_MODES = 4;
+static constexpr int NUM_SYNTH_MODES = 7;
+constexpr float PARAM_CHANGE_THRESHOLD = 0.01f;
 
 extern uint32_t rng_state;
 
