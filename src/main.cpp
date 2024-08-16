@@ -39,7 +39,6 @@ GrannyChordApp app(pod, synth, filemgr);
 /* we set rng state here so we can use RNG fns across classes */
 uint32_t rng_state;
 
-
 int main (void){
   pod.Init();
   pod.seed.StartLog(true);

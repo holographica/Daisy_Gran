@@ -70,25 +70,32 @@ bool AudioFileManager::ScanWavFiles(){
 ///         - Bit depth or sample rate values are not supported 
 ///         - Audio data fails to load 
 bool AudioFileManager::LoadFile(uint16_t sel_idx) {
-  if (sel_idx > file_count_) return false;
+  if (sel_idx > file_count_) {
+    DebugPrint(pod_, "sel idx out of range");
+    return false;
+  }
   if (sel_idx != curr_idx_) {
     f_close(curr_file_);
   }
 
   FRESULT open_res = f_open(curr_file_, names_[sel_idx], (FA_OPEN_EXISTING | FA_READ));
   if (open_res != FR_OK) {
+    DebugPrint(pod_, "fopen didn't work");
     return false;
   }
   if (!GetWavHeader(curr_file_)){
+    DebugPrint(pod_, "wav header parse failed");
     f_close(curr_file_);
     return false;
   }
   if (curr_header_.bit_depth != 16 || curr_header_.sample_rate!=48000){
+    DebugPrint(pod_, "wrong file format");
     return false;
   }
   //TODO: RESAMPLE - prob needs outside library for decent sound quality..
-
+  DebugPrint(pod_, "loading audio data now");
   if (!LoadAudioData()) {
+    DebugPrint(pod_, "failed to load audio data");
     return false;
   } 
   return true;
@@ -187,31 +194,41 @@ bool AudioFileManager::LoadAudioData() {
   if (total_samples > CHNL_BUF_SIZE_SAMPS * 2) {
     return false;
   }
-
+  DebugPrint(pod_,"loading 16bit");
   if (curr_header_.bit_depth==16){
+    DebugPrint(pod_,"bitdepth ok");
     return Load16BitAudio(samples_per_channel);
   }
-  else return false; // TODO: add bitdepth/SR resample fns if time
+  else {
+    DebugPrint(pod_,"loading 16bit failed");
+    return false;
+  } // TODO: add bitdepth/SR resample fns if time
 }
 
 /// @brief Reads chunks of bytes from audio file into temporary buffer, then into SDRAM
 /// @param samples_per_channel Length of audio in samples, per channel 
 /// @return True if audio is loaded. False if file fails to read
 bool AudioFileManager::Load16BitAudio(size_t samples_per_channel){
-  alignas(16) std::vector<int16_t> temp_buf(BUF_CHUNK_SZ*curr_header_.channels);
+  DebugPrint(pod_,"before buf");
+  // alignas(32) std::vector<int16_t> temp_buf(BUF_CHUNK_SZ*curr_header_.channels);
+  // std::vector<int16_t> temp_buf(BUF_CHUNK_SZ*curr_header_.channels);
+  int16_t temp_buf[BUF_CHUNK_SZ];
+  DebugPrint(pod_,"after buf");
   size_t samples_read = 0;
   UINT bytes_read;
-
+  DebugPrint(pod_,"starting loading loop");
   while (!f_eof(curr_file_) && samples_read<samples_per_channel){
+    DebugPrint(pod_,"first bit of loading loop");
     size_t samples_to_read = std::min(BUF_CHUNK_SZ, (samples_per_channel-samples_read));
     size_t bytes_per_sample = GetBytesPerSample();
     size_t bytes_to_read = samples_to_read * curr_header_.channels * bytes_per_sample;
-
-    FRESULT res = f_read(curr_file_, temp_buf.data(), bytes_to_read, &bytes_read);
+    DebugPrint(pod_,"about to fread in loop");
+    FRESULT res = f_read(curr_file_, temp_buf, bytes_to_read, &bytes_read);
     if (res!=FR_OK){
+      DebugPrint(pod_,"failed reading file in loading loop");
       return false;
     }
-
+    DebugPrint(pod_,"about to copy to bufs in loop");
     size_t samples_in_chunk = GetSamplesInChunk(bytes_read, bytes_per_sample);
     for (size_t i=0; i<samples_in_chunk; i++){
       if (curr_header_.channels == 1){
@@ -224,6 +241,7 @@ bool AudioFileManager::Load16BitAudio(size_t samples_per_channel){
     }
     samples_read += samples_in_chunk;
   }
+  DebugPrint(pod_,"end of loading loop");
   return true;
 }
 

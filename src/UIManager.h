@@ -37,9 +37,10 @@ class UIManager {
     bool Button2LongPress();
     float GetKnob1Value(int mode_idx);
     float GetKnob2Value(int mode_idx);
-    void LedPulseCallback();
+    void LedCallback();
     
-    void PrintState();
+    void DebugPrintState();
+    void DebugPrintSynthMode();
 
   private:
     DaisyPod& pod_;
@@ -48,12 +49,10 @@ class UIManager {
     TimerHandle timer_;
     SynthMode prev_synth_mode_;
 
-    /* track if LED brightness is increasing
-      or decreasing for LED pulse callback */
-    bool pulse_increasing_;
-    uint8_t pulse_brightness_;
-    uint8_t pulse_count_=0;
-    static const uint8_t PULSE_STEP = 5;
+
+    uint8_t led_brightness_;
+    bool led_state_ = false;
+    daisy::Color led_colours_[8];
 
     bool crash_error = false;
 
@@ -79,6 +78,7 @@ class UIManager {
     void ToggleFilterControls();
 
     /* LED callback, update and color-setting methods */
+
     void SetupTimer();
     void StartLedPulse();
     void StopLedPulse();

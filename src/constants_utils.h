@@ -5,6 +5,9 @@
 constexpr int SAMPLE_RATE = 48000;
 constexpr float SAMPLE_RATE_FLOAT = 48000.f;
 
+constexpr uint16_t MAX_FILES = 32;                      
+constexpr uint16_t MAX_FNAME_LEN = 64;
+
 /* 16mb - max size of one stereo channel to be loaded into buffers */
 constexpr size_t CHNL_BUF_SIZE_ABS = 16*1024*1024;
 /* above is absolute size - each sample needs an int16 (2 bytes) so we do (abs_size)/2 */

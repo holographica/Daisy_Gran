@@ -2,6 +2,7 @@
 
 #include "Grain.h"
 #include "daisy_pod.h"
+#include "debug_print.h"
 #include <vector>
 
 class GranularSynth{
@@ -22,11 +23,11 @@ class GranularSynth{
     void SetSpawnPosSamples(size_t pos);
     void SetActiveGrains(size_t count);
     void SetPitchRatio(float ratio);
-    void SetEnvelopeType(Grain::EnvelopeType type){ env_type_ = type; }
-    void SetPhasorMode(GrainPhasor::Mode mode){ phasor_mode_ = mode;}
+    void SetEnvelopeType(Grain::EnvelopeType type);
+    void SetPhasorMode(GrainPhasor::Mode mode);
     /* don't need a user setter for this
     since pan range is already 0-1 */
-    void SetPan(float pan){ pan_ = pan; }
+    void SetPan(float pan);
     
     /* user setters that take normalised input */
     void SetUserGrainSize(float knob_val);

@@ -11,11 +11,14 @@ CPP_SOURCES = main.cpp AudioFileManager.cpp GranularSynth.cpp UIManager.cpp Gran
 # Library locations
 LIBDAISY_DIR = ../libDaisy
 DAISYSP_DIR = ../DaisySP
+APP_TYPE = BOOT_QSPI
 
 # Core location, and generic Makefile
 SYSTEM_FILES_DIR = $(LIBDAISY_DIR)/core
 include $(SYSTEM_FILES_DIR)/Makefile
 
 LDFLAGS += -u _printf_float
-OPT += -Os
+OPT += -Ofast
 CFLAGS += -DDEBUG_MODE=1
+
+

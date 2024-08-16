@@ -3,14 +3,14 @@
 /// @brief Initialise UI, set up timer for LED pulse callbacks
 void UIManager::Init(){
   SetupTimer();
-  // StartLedPulse();
+  SetState(AppState::Startup);
+  StartLedPulse();
 }
 
 /// @brief Called on loop to continually update knob inputs and current app state
 void UIManager::UpdateUI(){
   if (!crash_error){
     UpdateKnobs();
-      
     UpdateState();
     // UpdateSynthMode();
   }
@@ -41,12 +41,22 @@ void UIManager::UpdateState(){
   if (Button2Pressed()){
     HandleButton2();
   }
+  if (Button1LongPress()){
+    HandleButton1LongPress();
+  }
+  if (Button2LongPress()){
+    HandleButton2LongPress();
+  }
   if (EncoderPressed()){
     HandleEncoderPressed();
   }
-  /* exit synthesis mode, return to file selection, stop audio. */
   if (EncoderLongPress()){
-    
+    HandleEncoderLongPress();
+  }
+  if (GetEncoderIncrement()>0){
+    if (current_state_ == AppState::Startup){
+      current_state_ = AppState::SelectFile;
+    }
   }
 }
 
@@ -55,10 +65,10 @@ void UIManager::HandleButton1(){
     case AppState::Startup:
       current_state_ = AppState::SelectFile; 
       break;
-    case AppState::SelectFile:
-      current_state_ = AppState::PlayWAV;
-      // NOTE: should i select next state (ie playwav) by clicking encoder? or pressing button1? 
-      break;
+    // case AppState::SelectFile:
+    //   current_state_ = AppState::PlayWAV;
+    //   // NOTE: should i select next state (ie playwav) by clicking encoder? or pressing button1? 
+    //   break;
     case AppState::PlayWAV:
       current_state_ = AppState::Synthesis;
       current_synth_mode_ = SynthMode::Size_Position;
@@ -66,6 +76,7 @@ void UIManager::HandleButton1(){
       break;
     case AppState::Synthesis:
       UpdateSynthMode();
+      DebugPrintSynthMode();
       break;
     default:
       break;
@@ -95,6 +106,8 @@ void UIManager::HandleButton2LongPress(){
 
 void UIManager::HandleEncoderPressed(){
   switch(current_state_){
+    case AppState::SelectFile:
+      current_state_ = AppState::PlayWAV;
     case AppState::RecordIn:
       current_state_ = AppState::PlayWAV;
     case AppState::PlayWAV:
@@ -107,13 +120,18 @@ void UIManager::HandleEncoderPressed(){
 
 void UIManager::HandleEncoderLongPress(){
   switch (current_state_){
+     /* exit synthesis mode, return to file selection */
     case AppState::Synthesis:
       current_state_ = AppState::SelectFile;
       // StartLedPulse();
       break;
+      /* enter RecordIn mode */
     case AppState::SelectFile:
     case AppState::PlayWAV:
       current_state_ = AppState::RecordIn;
+      break;
+    case AppState::RecordIn:
+      current_state_ = AppState::SelectFile;
       break;
     default:
       break;
@@ -272,67 +290,82 @@ float UIManager::UpdateKnobPassThru(float curr_knob_val, float *stored_knob_val,
 /* has to be static - timer won't take class member function in callback  */
 static void StaticLedCallback(void* data) {
   UIManager* instance = static_cast<UIManager*>(data);
-  instance->LedPulseCallback();
+  instance->LedCallback();
 }
 
 void UIManager::SetupTimer(){
   TimerHandle::Config cfg;
   cfg.periph = TimerHandle::Config::Peripheral::TIM_5;
-  // /* set period for 200ms pulse (1MHz/200,000 == 200ms) */
-  // cfg.period = 200000;
-  /* set period for 10ms callback interval */
-  cfg.period = 20000;
+  cfg.period = 10000;
   cfg.enable_irq = true;
   timer_.Init(cfg);
-  /* set 1Mhz tick frequency */
-  timer_.SetPrescaler(199);
-  pulse_increasing_ = true;
+  timer_.SetPrescaler(9999);
   timer_.SetCallback(StaticLedCallback, this);
 }
 
 
+void UIManager::LedCallback(){
+  switch(current_state_){
 
-void UIManager::LedPulseCallback(){
-  if (pulse_increasing_){
-    /* NOTE: increase step (in header) and period to reduce processing cost */
-    pulse_brightness_ += PULSE_STEP;
-    if (pulse_brightness_ >= 255 - PULSE_STEP){
-      pulse_brightness_ = 255;
-      pulse_increasing_ = false;
-    }
   }
-  else {
-    pulse_brightness_ -= PULSE_STEP;
-    if (pulse_brightness_ <= PULSE_STEP){
-      pulse_count_++;
-      pulse_brightness_ = 0;
-      pulse_increasing_ = true;
-    }
-  }
+}
+
+
+/* 
+SelectFile: BLUE
+RecordIn: WHITE
+PlayWAV: CYAN
+Synthesis: GREEN
+ChordMode: GOLD (orange)
+
+Error: solid RED
+RecordIn: seed led flashing red (ie pod.seed.SetLed(1/0)
+
+don't use purple - looks like blue
+can use magenta (255,0,255)
+can use yellow (255,255,0)
+*/
+
+/*
+#define OFF	0, 0, 0
+#define RED 	1, 0, 0
+#define GREEN	0, 1, 0
+#define BLUE	0, 0, 1
+#define LBLUE	0, 0.7f, 1
+#define LGREEN	0, 1, 0.7f
+#define WHITE   0.7f, 0.7f, 0.7f  
+#define YELLOW  0.7f, 0.7f, 0  
+#define ORANGE  1, 0.7f, 0  
+#define ROSE    1, 0, 0.7f
+#define VIOLET  0.7f, 0, 1
+#define PURPLE  0.7f, 0, 0.7f  
+#define CYAN	0, 0.7f, 0.7f  
+
+*/
+
+
+
+void UIManager::LedCallback(){
   switch(current_state_){
     /* pulse blue */
     case AppState::SelectFile:
-      SetLed(0, 0, pulse_brightness_, true);
+      SetLed(0, 0, led_brightness_, true);
     /* pulse white */
     case AppState::RecordIn:
-      SetLed(pulse_brightness_, pulse_brightness_, pulse_brightness_, true);
+      SetLed(led_brightness_, led_brightness_, led_brightness_, true);
     /* pulse cyan */
     case AppState::PlayWAV:
-      SetLed(0, pulse_brightness_, pulse_brightness_, true);
+      SetLed(0, led_brightness_, led_brightness_, true);
     /* pulse red */
     case AppState::Error:
-      SetLed(pulse_brightness_,0, 0, true);
+      SetLed(led_brightness_,0, 0, true);
 
     /* when switching to synth mode, pulse green twice, then solid;
         otherwise pulses on synth mode switch */
     case AppState::Synthesis:
-      if (pulse_count_ <= 2){
-        SetLed(0, pulse_brightness_, 0, true);
-      }
-      else {
+        SetLed(0, led_brightness_, 0, true);
         StopLedPulse();
         SetLedSynthMode();
-      }
       break;
     default:
       break;
@@ -343,10 +376,11 @@ void UIManager::SetLedSynthMode(){
   if (current_state_ == AppState::Synthesis){
     switch(current_synth_mode_){
       case SynthMode::Size_Position:
-        SetLed(0,255,0,true);
+        pod_.led1.SetColor();
         break;
       case SynthMode::Pitch_ActiveGrains:
       // orange: 100, 64, 0 or 255, 165, 0 or 255, 91, 31 (neon orange)
+        pod_.led1.Set(255,91,31);
         BlinkSetLed(255, 91, 31,true);
         break;
       case SynthMode::PhasorMode_EnvType:
@@ -404,9 +438,7 @@ void UIManager::SetLedFXMode(){
 }
 
 void UIManager::StartLedPulse(){
-  pulse_brightness_ = 0;
-  pulse_increasing_ = true;
-  pulse_count_ = 0;
+  led_brightness_ = 0;
   timer_.Start();
 }
 
@@ -414,53 +446,64 @@ void UIManager::StopLedPulse(){
   timer_.Stop();
 }
 
-void UIManager::SetLed(int r, int g, int b, bool is_Led1){
-  if (is_Led1){
-    pod_.led1.Set(r,g,b);
-  }
-  else {
-    pod_.led2.Set(r,g,b);
-  }
-  pod_.UpdateLeds();
-  System::Delay(10);
-}
 
-void UIManager::BlinkLed(int r, int g, int b, bool is_Led1){
-  SetLed(r,g,b, is_Led1);
-  System::Delay(100);
-  SetLed(0,0,0, is_Led1);
-}
-
-void UIManager::BlinkSetLed(int r, int g, int b, bool is_Led1){
-  BlinkLed(r,g,b, is_Led1);
-  System::Delay(100);
-  BlinkLed(r,g,b, is_Led1);
-  System::Delay(100);
-  SetLed(r,g,b, is_Led1);
-}
-
-void UIManager::PrintState(){
+void UIManager::DebugPrintState(){
   switch(current_state_){
     case AppState::Startup:
-      DebugPrint(pod_, "State: Startup");
+      DebugPrint(pod_, "State now in: Startup");
         break;
     case AppState::SelectFile:
-      DebugPrint(pod_, "State: SelectFile");
+      DebugPrint(pod_, "State now in: SelectFile");
         break;
     case AppState::RecordIn:
-      DebugPrint(pod_, "State: RecordIn");
+      DebugPrint(pod_, "State now in: RecordIn");
         break;
     case AppState::PlayWAV:
-      DebugPrint(pod_, "State: PlayWAV");
+      DebugPrint(pod_, "State now in: PlayWAV");
         break;
     case AppState::Synthesis:
-      DebugPrint(pod_, "State: Synthesis");
+      DebugPrint(pod_, "State now in: Synthesis");
         break;
     // case AppState::ChordMode:
-      // DebugPrint(pod_, "State: ChordMode");
+      // DebugPrint(pod_, "State now in: ChordMode");
     case AppState::Error:
-      DebugPrint(pod_, "State: Error");
+      DebugPrint(pod_, "State now in: Error");
         break;
+    default:
+      DebugPrint(pod_, "default state??");
+      break;
+  }
+}
+
+void UIManager::DebugPrintSynthMode(){
+  switch(current_synth_mode_){
+    case SynthMode::Size_Position:
+      DebugPrint(pod_, "Synth mode now in: Size_Position");
+        break;
+    case SynthMode::Size_Position_Rnd:
+      DebugPrint(pod_, "Synth mode now in: Size_Position_Rnd");
+        break;
+    case SynthMode::Pitch_ActiveGrains:
+      DebugPrint(pod_, "Synth mode now in: Pitch_ActiveGrains");
+        break;
+    case SynthMode::Pitch_ActiveGrains_Rnd:
+      DebugPrint(pod_, "Synth mode now in: Pitch_ActiveGrains_Rnd");
+        break;
+    case SynthMode::PhasorMode_EnvType:
+      DebugPrint(pod_, "Synth mode now in: PhasorMode_EnvType");
+        break;
+    case SynthMode::PhasorMode_EnvType_Rnd:
+      DebugPrint(pod_, "Synth mode now in: PhasorMode_EnvType_Rnd");
+        break;
+    case SynthMode::Pan_PanRnd:
+      DebugPrint(pod_, "Synth mode now in: Pan_PanRnd");
+      break;
+    case SynthMode::Reverb:
+      DebugPrint(pod_, "Synth mode now in: Reverb");
+      break;
+    case SynthMode::Filter:
+      DebugPrint(pod_, "Synth mode now in: Filter");
+      break;
   }
 }
 

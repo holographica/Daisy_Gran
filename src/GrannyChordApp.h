@@ -28,7 +28,12 @@ class GrannyChordApp {
     GranularSynth synth_;
     AudioFileManager &filemgr_;
     FIL *file_;
+
+    /* UI and state objects */
     UIManager ui_;
+    AppState curr_state_;
+    AppState prev_state_;
+    bool changing_state_ = false;
 
     /* audio FX */
     Compressor comp_;
@@ -43,6 +48,7 @@ class GrannyChordApp {
     int16_t *right_buf_;
 
     int file_idx_ = 0;
+    char fname[MAX_FNAME_LEN];
     size_t wav_playhead_ = 0;
     uint32_t audio_len_ = 0;
 
@@ -51,6 +57,9 @@ class GrannyChordApp {
     float prev_param_vals_k2[NUM_SYNTH_MODES];
 
     bool recording_out_ = false;
+    WavWriter<16384> sd_out_writer_;
+    int recording_count_;
+    char recording_fname_[16];
 
     /* audio input/output/recording methods based on state */
     void AudioIdle(AudioHandle::OutputBuffer out, size_t size);
@@ -69,17 +78,19 @@ class GrannyChordApp {
     void InitCompressor();
     void InitFileSelection();
     void InitRecordIn();
+    void InitWavWriter();
 
-    void HandleStateChange(AppState prev, AppState curr);
-    bool HandleFileSelection();
+    void RequestStateChange(AppState next_state);
+    void HandleStateChange();
+    void HandleFileSelection();
 
     /* methods to update/init synth parameters */
-    void UpdateSynthParams(AppState curr_state);
+    void UpdateSynthParams();
     void UpdateGranularParams();
     void UpdateKnob1Params(float knob1_val, SynthMode mode);
     void UpdateKnob2Params(float knob2_val, SynthMode mode);
     // void UpdateChordParams();
-    void UpdateFXParams();
+    // void UpdateFXParams();
     bool CheckParamDelta(float curr_val, float prev_val);
     void InitReverb();
     void InitFilters();

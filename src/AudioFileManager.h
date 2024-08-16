@@ -31,9 +31,6 @@ class AudioFileManager {
     uint16_t GetFileCount() const { return file_count_; }
     void GetName(uint16_t idx, char* name) const { strcpy(name, names_[idx]); }
 
-    static const uint16_t MAX_FILES = 32;                      
-    static const uint16_t MAX_FNAME_LEN = 128;
-
   private:
     bool LoadAudioData();
     /* helper functions for loading WAV audio based on bit depth */

@@ -32,20 +32,39 @@ void GranularSynth::InitParams(){
 void GranularSynth::SetGrainSize(float size_ms){
   size_ms = fclamp(size_ms, MIN_GRAIN_SIZE_MS, MAX_GRAIN_SIZE_MS);
   grain_size_ = MsToSamples(size_ms);
+  DebugPrint(pod_, "set grain size to %u", grain_size_); 
 }
 
 void GranularSynth::SetSpawnPosSamples(size_t pos){
   spawn_pos_ = std::min(pos, audio_len_-1);
+  DebugPrint(pod_, "set spawn pos to %u", spawn_pos_);
 }
 
 void GranularSynth::SetActiveGrains(size_t count){
   if (count<0) { count=0; }
   if (count>20) { count=20; }
   active_count_ = count;
+  DebugPrint(pod_, "set count to %u", active_count_);
 }
 
 void GranularSynth::SetPitchRatio(float ratio){
   pitch_ratio_ = ratio;
+  DebugPrint(pod_, "set pitch to %.2f", pitch_ratio_);
+}
+
+void GranularSynth::SetEnvelopeType(Grain::EnvelopeType type){ 
+  env_type_ = type; 
+  DebugPrint(pod_, "set env to %u", static_cast<int>(type));
+}
+
+void GranularSynth::SetPhasorMode(GrainPhasor::Mode mode){ 
+  phasor_mode_ = mode;
+  DebugPrint(pod_, "set phasor to %u", static_cast<int>(mode));
+}
+
+void GranularSynth::SetPan(float pan){ 
+  pan_ = pan;
+  DebugPrint(pod_, "set pan to %.2f", pan);
 }
 
 /* these setters take a normalised value (ie float from 0-1) 
@@ -82,12 +101,13 @@ void GranularSynth::UpdateGrainParams(){
   }
 }
 
-
-
 /// @brief We take a random number, map it into a certain range
 ///        determined by the user randomness setting for that parameter,
 ///        then clamp it so it stays in the correct range for the parameter 
 void GranularSynth::ApplyRandomness(){
+  static int cnt = 0;
+  cnt++;
+  if (cnt==10000) cnt =0;
   /* here we map a randomly generated num between 1 +/- user randomness setting 
       then convert it to ms so we can use fclamp to clamp it within the correct range */
   if (rnd_size_>0){
@@ -95,6 +115,8 @@ void GranularSynth::ApplyRandomness(){
     float size_ms = SamplesToMs(grain_size_) * rnd_size_factor;
     size_ms = fclamp(size_ms, MIN_GRAIN_SIZE_MS, MAX_GRAIN_SIZE_MS);
     grain_size_ = MsToSamples(size_ms);
+
+    if (cnt % 5000==0) DebugPrint(pod_, "set rnd size to %u", grain_size_);
   }
   
   /* here we map a random num between -1/+1 and multiply by the audio sample 
@@ -105,22 +127,32 @@ void GranularSynth::ApplyRandomness(){
     spawn_pos_ += audio_len_ * static_cast<size_t>(rnd_spawn_pos_ * rnd_offset);
     if (spawn_pos_<0){ spawn_pos_ = 0; }
     if (spawn_pos_>=audio_len_) { spawn_pos_ = audio_len_ -1; }
+
+    if (cnt % 5000==0) DebugPrint(pod_, "set rnd spawn pos to %u", spawn_pos_);
   }
 
   if (rnd_pan_>0){
     float rnd_pan_offset = fmap(RngFloat(), -rnd_pan_, rnd_pan_, Mapping::LINEAR);
     pan_ = fclamp(pan_+rnd_pan_offset, 0.0f, 1.0f);
+    if (cnt % 5000==0) DebugPrint(pod_, "set rnd pan to %.2f", pan_);
+
   }
 
   if (rnd_pitch_>0){
     float rnd_pitch_factor = fmap(RngFloat(), 1.0f-rnd_pitch_, 1.0+rnd_pitch_, Mapping::EXP);
     pitch_ratio_ = fclamp((pitch_ratio_*rnd_pitch_factor), MIN_PITCH, MAX_PITCH);
+    
+    if (cnt % 5000==0) DebugPrint(pod_, "set rnd pitch to %.2f", pitch_ratio_);
+
   }
 
   if (rnd_envelope_>0){
     if (RngFloat() < rnd_envelope_){
       int random_env_type =  static_cast<int>(RngFloat()) * NUM_ENV_TYPES;
       env_type_ = static_cast<Grain::EnvelopeType>(random_env_type);
+      
+      if (cnt % 5000==0) DebugPrint(pod_, "set env to %u", static_cast<int>(env_type_));
+
     }
   }
 
@@ -128,6 +160,7 @@ void GranularSynth::ApplyRandomness(){
     if (RngFloat() < rnd_phasor_){
       int random_phasor_mode = static_cast<int>(RngFloat()) * NUM_PHASOR_MODES;
       phasor_mode_ = static_cast<GrainPhasor::Mode>(random_phasor_mode);
+      if (cnt % 5000==0) DebugPrint(pod_, "set rnd phasor to %u", static_cast<int>(phasor_mode_));
     }
   }
 
@@ -136,6 +169,7 @@ void GranularSynth::ApplyRandomness(){
     active_count_ *= static_cast<size_t>(rnd_count_factor);
     if (active_count_<MIN_GRAINS) { active_count_ = 1; }
     if (active_count_>MAX_GRAINS) { active_count_ = 20; } 
+    if (cnt % 5000==0) DebugPrint(pod_, "set rnd count to %u", active_count_);
   }
 }
 
