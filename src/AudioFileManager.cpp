@@ -244,7 +244,7 @@ size_t AudioFileManager::GetSamplesInChunk(UINT bytes_read, size_t bytes_per_sam
 /// @brief Closes currently open file
 /// @return True if file was successfully closed, else false
 bool AudioFileManager::CloseFile(){
-  DebugPrint((pod_), "Closing file: %d",names_[curr_idx_]);
+  DebugPrint(pod_, "Closing file: %d",names_[curr_idx_]);
   return f_close(curr_file_) == FR_OK;
 }
 

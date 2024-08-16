@@ -141,7 +141,8 @@ build/UIManager.o: UIManager.cpp \
  ../libDaisy/src/util/PersistentStorage.h ../libDaisy/src/per/qspi.h \
  ../libDaisy/src/util/VoctCalibration.h \
  ../libDaisy/src/util/WaveTableLoader.h ../libDaisy/src/sys/fatfs.h \
- ../libDaisy/src/util/WavWriter.h AppState.h constants_utils.h
+ ../libDaisy/src/util/WavWriter.h AppState.h constants_utils.h \
+ debug_print.h
 ../libDaisy/Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:
 ../libDaisy/Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h750xx.h:
 ../libDaisy/Drivers/CMSIS/Include/core_cm7.h:
@@ -326,3 +327,4 @@ UIManager.h:
 ../libDaisy/src/util/WavWriter.h:
 AppState.h:
 constants_utils.h:
+debug_print.h:

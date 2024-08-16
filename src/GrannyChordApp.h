@@ -76,7 +76,13 @@ class GrannyChordApp {
     /* methods to update/init synth parameters */
     void UpdateSynthParams(AppState curr_state);
     void UpdateGranularParams();
+    void UpdateKnob1Params(float knob1_val, SynthMode mode);
+    void UpdateKnob2Params(float knob2_val, SynthMode mode);
     // void UpdateChordParams();
+    void UpdateFXParams();
     bool CheckParamDelta(float curr_val, float prev_val);
+    void InitReverb();
+    void InitFilters();
     void InitPrevParamVals();
+
 };

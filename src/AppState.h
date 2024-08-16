@@ -23,4 +23,6 @@ enum class SynthMode{
   /* knob1 controls pan, knob2 controls randomness of pan */
   // NOTE: this is diff to other modes - couldn't think of another param for knob2 to control atm
   Pan_PanRnd,
+  Reverb,
+  Filter
 };

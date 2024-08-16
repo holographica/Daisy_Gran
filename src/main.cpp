@@ -23,7 +23,7 @@ DSY_SDRAM_BSS alignas(16) int16_t right_buf[CHNL_BUF_SIZE_SAMPS];
 
 /* SDRAM buffer for temporarily storing recorded output audio
     before it's written to SD card */
-DSY_SDRAM_BSS alignas(16) int16_t record_out_buf[RECORD_OUT_BUF_SIZE_SAMPS];
+// DSY_SDRAM_BSS alignas(16) int16_t record_out_buf[RECORD_OUT_BUF_SIZE_SAMPS];
 
 /* hardware interfaces */
 SdmmcHandler sd;

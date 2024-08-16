@@ -29,8 +29,8 @@ void GrannyChordApp::Init(int16_t *left, int16_t *right){
   InitCompressor();
   InitPrevParamVals();
 
-  pod_.StartAdc();
-  pod_.StartAudio(AudioCallback);
+  // pod_.StartAdc();
+  // pod_.StartAudio(AudioCallback);
   DebugPrint(pod_,"started audio");
 }
 
@@ -43,6 +43,7 @@ void GrannyChordApp::Run(){
     AppState curr_state = ui_.GetCurrentState();
 
     if (prev_state!=curr_state){
+      // ui_.PrintState();
       HandleStateChange(prev_state, curr_state);
       int p = static_cast<int>(prev_state);
       int c = static_cast<int>(curr_state);
@@ -383,65 +384,97 @@ void GrannyChordApp::UpdateSynthParams(AppState curr_state){
 
 /// @brief Updates granular synth parameters based on hardware input and current synth mode
 void GrannyChordApp::UpdateGranularParams(){
-  SynthMode mode = ui_.GetSynthMode();
+  SynthMode mode = ui_.GetCurrentSynthMode();
   int mode_idx = static_cast<int>(mode);
   float knob1_val = ui_.GetKnob1Value(mode_idx);
   float knob2_val = ui_.GetKnob2Value(mode_idx);
-  /* Set parameter for knob 1 depending on current synth mode */
+  /* Check knob has moved a significant amount to avoid changes due to knob jitter */
   if (CheckParamDelta(knob1_val, prev_param_vals_k1[mode_idx])){
-    switch (mode){
-      case SynthMode::Size_Position:
-        synth_.SetUserGrainSize(knob1_val);
-        break;
-      case SynthMode::Pitch_ActiveGrains:
-        synth_.SetUserPitchRatio(knob1_val);
-        break;
-      case SynthMode::Pan_PanRnd:
-        synth_.SetPan(knob1_val);
-        break;
-      case SynthMode::PhasorMode_EnvType:
-        knob1_val = fmap(knob1_val, 0, NUM_PHASOR_MODES);
-        synth_.SetPhasorMode(static_cast<GrainPhasor::Mode>(knob1_val));
-        break;
-      case SynthMode::Size_Position_Rnd:
-        synth_.SetSizeRnd(knob1_val);
-        break;
-      case SynthMode::Pitch_ActiveGrains_Rnd:
-        synth_.SetPitchRnd(knob1_val);
-        break;
-      case SynthMode::PhasorMode_EnvType_Rnd:
-        synth_.SetPhasorRnd(knob1_val);
-        break;
-    }
+    /* Set parameter for knob 1 depending on current synth mode */
+    UpdateKnob1Params(knob1_val, mode);
     /* Update previous parameter value for pass-thru mode */
     prev_param_vals_k1[mode_idx] = knob1_val;
   }
-  /* Set parameter for knob 1 depending on current synth mode */
   if (CheckParamDelta(knob2_val, prev_param_vals_k2[mode_idx])){
-    switch (mode){
-      case SynthMode::Size_Position:
-        synth_.SetUserSpawnPos(knob2_val);
-      case SynthMode::Pitch_ActiveGrains:
-        synth_.SetUserActiveGrains(knob2_val);
-      case SynthMode::Pan_PanRnd:
-        synth_.SetPanRnd(knob2_val);
-        break;
-      case SynthMode::PhasorMode_EnvType:
-        knob2_val = fmap(knob2_val, 0, NUM_ENV_TYPES);
-        synth_.SetEnvelopeType(static_cast<Grain::EnvelopeType>(knob2_val));
-        break;
-      case SynthMode::Size_Position_Rnd:
-        synth_.SetPositionRnd(knob2_val);
-        break;
-      case SynthMode::Pitch_ActiveGrains_Rnd:
-        synth_.SetCountRnd(knob2_val);
-        break;
-      case SynthMode::PhasorMode_EnvType_Rnd:
-        synth_.SetEnvRnd(knob2_val);
-        break;
-    }
+    /* Set parameter for knob 2 depending on current synth mode */
+    UpdateKnob2Params(knob2_val, mode);
     /* Update previous parameter value for pass-thru mode */
     prev_param_vals_k2[mode_idx] = knob2_val;
+  }
+}
+
+void GrannyChordApp::UpdateKnob1Params(float knob1_val, SynthMode mode){
+  switch (mode){
+    case SynthMode::Size_Position:
+      synth_.SetUserGrainSize(knob1_val);
+      break;
+    case SynthMode::Pitch_ActiveGrains:
+      synth_.SetUserPitchRatio(knob1_val);
+      break;
+    case SynthMode::Pan_PanRnd:
+      synth_.SetPan(knob1_val);
+      break;
+    case SynthMode::PhasorMode_EnvType:
+      knob1_val = fmap(knob1_val, 0, NUM_PHASOR_MODES);
+      synth_.SetPhasorMode(static_cast<GrainPhasor::Mode>(knob1_val));
+      break;
+    case SynthMode::Size_Position_Rnd:
+      synth_.SetSizeRnd(knob1_val);
+      break;
+    case SynthMode::Pitch_ActiveGrains_Rnd:
+      synth_.SetPitchRnd(knob1_val);
+      break;
+    case SynthMode::PhasorMode_EnvType_Rnd:
+      synth_.SetPhasorRnd(knob1_val);
+      break;
+    case SynthMode::Reverb:
+      /* set reverb feedback ie tail length */
+      reverb_.SetFeedback(knob1_val); // NOTE check it doesn't clip
+      break;
+    case SynthMode::Filter:
+      // knob1_val = fmap(knob1_val, 20.0f, 20000.0f, daisysp::Mapping::EXP);
+      /* map knob value to frequency range with an exponential curve */
+      knob1_val = fmap(knob1_val, 20.0f, 5000.0f, daisysp::Mapping::EXP);
+      /* set cutoff frequency of low pass moog filter */
+      lowpass_moog_.SetFreq(knob1_val);
+      break;
+  }
+}
+
+void GrannyChordApp::UpdateKnob2Params(float knob2_val, SynthMode mode){
+  switch (mode){
+    case SynthMode::Size_Position:
+      synth_.SetUserSpawnPos(knob2_val);
+    case SynthMode::Pitch_ActiveGrains:
+      synth_.SetUserActiveGrains(knob2_val);
+    case SynthMode::Pan_PanRnd:
+      synth_.SetPanRnd(knob2_val);
+      break;
+    case SynthMode::PhasorMode_EnvType:
+      knob2_val = fmap(knob2_val, 0, NUM_ENV_TYPES);
+      synth_.SetEnvelopeType(static_cast<Grain::EnvelopeType>(knob2_val));
+      break;
+    case SynthMode::Size_Position_Rnd:
+      synth_.SetPositionRnd(knob2_val);
+      break;
+    case SynthMode::Pitch_ActiveGrains_Rnd:
+      synth_.SetCountRnd(knob2_val);
+      break;
+    case SynthMode::PhasorMode_EnvType_Rnd:
+      synth_.SetEnvRnd(knob2_val);
+      break;
+    case SynthMode::Reverb:
+      /* map knob value to frequency range with an exponential curve */
+      knob2_val = fmap(knob2_val, 100.0f, 20000.0f, daisysp::Mapping::EXP);
+      /* set reverb low pass frequency */
+      reverb_.SetLpFreq(knob2_val);
+      break;
+    case SynthMode::Filter:
+      /* again, map knob value to frequency range with an exponential curve */
+      knob2_val = fmap(knob2_val, 0.001f, 0.497f, daisysp::Mapping::EXP);
+      /* set cutoff frequency for high pass filter */
+      hipass_onepole_.SetFrequency(knob2_val);
+      break;
   }
 }
 
@@ -452,6 +485,24 @@ void GrannyChordApp::UpdateGranularParams(){
 bool GrannyChordApp::CheckParamDelta(float curr_val, float prev_val){
   return (fabsf(curr_val - prev_val)>0.01f);
 }
+
+void GrannyChordApp::InitReverb(){
+  reverb_.Init(SAMPLE_RATE_FLOAT);
+}
+
+void GrannyChordApp::InitFilters(){
+  lowpass_moog_.Init(SAMPLE_RATE_FLOAT);
+  lowpass_moog_.SetFreq(20000.0f);
+  lowpass_moog_.SetRes(0.7f);
+  hipass_onepole_.Init();
+  hipass_onepole_.SetFilterMode(daisysp::OnePole::FilterMode::FILTER_MODE_HIGH_PASS);
+  hipass_onepole_.SetFrequency(0.0f); // NOTE: CHECK THIS
+}
+
+// void GrannyChordApp::UpdateFXParams(){
+
+// }
+
 
 /// @brief Initialise previous parameter value arrays to defaults
 void GrannyChordApp::InitPrevParamVals(){

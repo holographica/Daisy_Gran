@@ -20,7 +20,7 @@ void UIManager::UpdateUI(){
 void UIManager::UpdateKnobs(){
   // NOTE: need to add stuff for chord mode here! 
   if (current_state_ == AppState::Synthesis){
-    int mode_idx = static_cast<int>(synth_mode_);
+    int mode_idx = static_cast<int>(current_synth_mode_);
     float k1v = MapKnobDeadzone(pod_.knob1.Process());
     float k2v = MapKnobDeadzone(pod_.knob2.Process());
 
@@ -36,55 +36,87 @@ void UIManager::UpdateState(){
   pod_.ProcessDigitalControls();
   // TODO: change this to encoder pressed?? 
   if (Button1Pressed()){
-    switch(current_state_){
-      case AppState::Startup:
-        current_state_ = AppState::SelectFile; 
-        break;
-      case AppState::SelectFile:
-        current_state_ = AppState::PlayWAV;
-        // NOTE: should i select next state (ie playwav) by clicking encoder? or pressing button1? 
-        break;
-      case AppState::PlayWAV:
-        current_state_ = AppState::Synthesis;
-        synth_mode_ = SynthMode::Size_Position;
-        // StopLedPulse(); 
-        break;
-      case AppState::Synthesis:
-        UpdateSynthMode();
-        break;
-      default:
-        break;
-    }
+    HandleButton1();
   }
   if (Button2Pressed()){
-    switch(current_state_){
-      case AppState::Synthesis:
-        ToggleRandomnessControls();
-        SetLedRandomMode();
-        break;
-      default:
-        break;
-    }
+    HandleButton2();
+  }
+  if (EncoderPressed()){
+    HandleEncoderPressed();
   }
   /* exit synthesis mode, return to file selection, stop audio. */
   if (EncoderLongPress()){
-    switch (current_state_){
-      case AppState::Synthesis:
-        pod_.StopAudio();
-        current_state_ = AppState::SelectFile;
-        // StartLedPulse();
-        break;
-      case AppState::SelectFile:
-        current_state_ = AppState::RecordIn;
-        break;
-      default:
-        break;
-    }
+    
   }
-  if (EncoderPressed()){
-    if (current_state_ == AppState::RecordIn){
+}
+
+void UIManager::HandleButton1(){
+  switch(current_state_){
+    case AppState::Startup:
+      current_state_ = AppState::SelectFile; 
+      break;
+    case AppState::SelectFile:
+      current_state_ = AppState::PlayWAV;
+      // NOTE: should i select next state (ie playwav) by clicking encoder? or pressing button1? 
+      break;
+    case AppState::PlayWAV:
       current_state_ = AppState::Synthesis;
+      current_synth_mode_ = SynthMode::Size_Position;
+      // StopLedPulse(); 
+      break;
+    case AppState::Synthesis:
+      UpdateSynthMode();
+      break;
+    default:
+      break;
+  }
+}
+
+void UIManager::HandleButton2(){
+    if (current_state_ == AppState::Synthesis){
+      ToggleRandomnessControls();
+      SetLedRandomMode();
     }
+}
+
+void UIManager::HandleButton1LongPress(){
+  if (current_state_ == AppState::Synthesis){
+    ToggleReverbControls();
+    SetLedFXMode();
+  }
+}
+
+void UIManager::HandleButton2LongPress(){
+  if (current_state_ == AppState::Synthesis){
+    ToggleFilterControls();
+    SetLedFXMode();
+  }
+}
+
+void UIManager::HandleEncoderPressed(){
+  switch(current_state_){
+    case AppState::RecordIn:
+      current_state_ = AppState::PlayWAV;
+    case AppState::PlayWAV:
+      current_state_ = AppState::Synthesis;
+      break;
+    default:
+      break;
+  }
+}
+
+void UIManager::HandleEncoderLongPress(){
+  switch (current_state_){
+    case AppState::Synthesis:
+      current_state_ = AppState::SelectFile;
+      // StartLedPulse();
+      break;
+    case AppState::SelectFile:
+    case AppState::PlayWAV:
+      current_state_ = AppState::RecordIn;
+      break;
+    default:
+      break;
   }
 }
 
@@ -105,18 +137,18 @@ void UIManager::SetStateError(){
 
 /// @brief Cycles through synth parameter update modes
 void UIManager::UpdateSynthMode(){
-  switch(synth_mode_){
+  switch(current_synth_mode_){
     case SynthMode::Size_Position:
-      synth_mode_ = SynthMode::Pitch_ActiveGrains;
+      current_synth_mode_ = SynthMode::Pitch_ActiveGrains;
       break;
     case SynthMode::Pitch_ActiveGrains:
-      synth_mode_ = SynthMode::PhasorMode_EnvType;
+      current_synth_mode_ = SynthMode::PhasorMode_EnvType;
       break;
     case SynthMode::PhasorMode_EnvType:
-      synth_mode_ = SynthMode::Pan_PanRnd;
+      current_synth_mode_ = SynthMode::Pan_PanRnd;
       break;
     case SynthMode::Pan_PanRnd:
-      synth_mode_ = SynthMode::Size_Position;
+      current_synth_mode_ = SynthMode::Size_Position;
       break;
     default:
       break;
@@ -127,36 +159,54 @@ void UIManager::UpdateSynthMode(){
   knobs either change the named parameters themselves (modes above), 
   or change the degree of randomness applied to these parameters in granulation */
 void UIManager::ToggleRandomnessControls(){
-  switch(synth_mode_){
+  switch(current_synth_mode_){
     case SynthMode::Size_Position:
-      synth_mode_ = SynthMode::Size_Position_Rnd;
+      current_synth_mode_ = SynthMode::Size_Position_Rnd;
       break;
     case SynthMode::Size_Position_Rnd:
-      synth_mode_ = SynthMode::Size_Position;
+      current_synth_mode_ = SynthMode::Size_Position;
       break;
     case SynthMode::Pitch_ActiveGrains:
-      synth_mode_ = SynthMode::Pitch_ActiveGrains_Rnd;
+      current_synth_mode_ = SynthMode::Pitch_ActiveGrains_Rnd;
       break;
     case SynthMode::Pitch_ActiveGrains_Rnd:
-      synth_mode_ = SynthMode::Pitch_ActiveGrains;
+      current_synth_mode_ = SynthMode::Pitch_ActiveGrains;
       break;
     case SynthMode::PhasorMode_EnvType:
-      synth_mode_ = SynthMode::PhasorMode_EnvType_Rnd;
+      current_synth_mode_ = SynthMode::PhasorMode_EnvType_Rnd;
       break;      
     case SynthMode::PhasorMode_EnvType_Rnd:
-      synth_mode_ = SynthMode::PhasorMode_EnvType;
+      current_synth_mode_ = SynthMode::PhasorMode_EnvType;
       break;
-    case SynthMode::Pan_PanRnd:
+    default:
       break;
-    }
+  }
 }
 
+void UIManager::ToggleReverbControls(){
+  if (current_synth_mode_==SynthMode::Reverb){
+    current_synth_mode_ = prev_synth_mode_;
+  }
+  else {
+    prev_synth_mode_ = current_synth_mode_;
+    current_synth_mode_ = SynthMode::Reverb;
+  }
+}
+
+void UIManager::ToggleFilterControls(){
+  if (current_synth_mode_==SynthMode::Filter){
+    current_synth_mode_ = prev_synth_mode_;
+  }
+  else {
+    prev_synth_mode_ = current_synth_mode_;
+    current_synth_mode_ = SynthMode::Filter;
+  }
+}
 
 bool UIManager::ToggleRecordOut(){//NOTE NEED TO DECIDE THiS!!
   // TODO: need to decide what control input will toggle record out
   return true; 
 }
-
 
 float UIManager::GetKnob1Value(int mode_idx){
   return k1v_[mode_idx];
@@ -180,6 +230,10 @@ bool UIManager::EncoderLongPress(){
 
 bool UIManager::Button1Pressed(){
   return pod_.button1.FallingEdge();
+}
+
+bool UIManager::Button1LongPress(){
+  return pod_.button1.TimeHeldMs() > 1000.0f;
 }
 
 bool UIManager::Button2Pressed(){
@@ -221,17 +275,13 @@ static void StaticLedCallback(void* data) {
   instance->LedPulseCallback();
 }
 
-
-// TODO
-// NOTE: COULD REFACTOR THIS INTO A SEPARATE CLASS ?? 
-// but then have to pass to this class..
 void UIManager::SetupTimer(){
   TimerHandle::Config cfg;
   cfg.periph = TimerHandle::Config::Peripheral::TIM_5;
   // /* set period for 200ms pulse (1MHz/200,000 == 200ms) */
   // cfg.period = 200000;
   /* set period for 10ms callback interval */
-  cfg.period = 1000000;
+  cfg.period = 20000;
   cfg.enable_irq = true;
   timer_.Init(cfg);
   /* set 1Mhz tick frequency */
@@ -262,7 +312,7 @@ void UIManager::LedPulseCallback(){
   switch(current_state_){
     /* pulse blue */
     case AppState::SelectFile:
-      SetLed(0,0, pulse_brightness_, true);
+      SetLed(0, 0, pulse_brightness_, true);
     /* pulse white */
     case AppState::RecordIn:
       SetLed(pulse_brightness_, pulse_brightness_, pulse_brightness_, true);
@@ -271,7 +321,7 @@ void UIManager::LedPulseCallback(){
       SetLed(0, pulse_brightness_, pulse_brightness_, true);
     /* pulse red */
     case AppState::Error:
-      SetLed(pulse_brightness_,0,0,true);
+      SetLed(pulse_brightness_,0, 0, true);
 
     /* when switching to synth mode, pulse green twice, then solid;
         otherwise pulses on synth mode switch */
@@ -290,43 +340,66 @@ void UIManager::LedPulseCallback(){
 } 
 
 void UIManager::SetLedSynthMode(){
-  switch(synth_mode_){
-    case SynthMode::Size_Position:
-      SetLed(0,255,0,true);
-      break;
-    case SynthMode::Pitch_ActiveGrains:
-    // orange: 100, 64, 0 or 255, 165, 0 or 255, 91, 31 (neon orange)
-      BlinkSetLed(255, 91, 31,true);
-      break;
-    case SynthMode::PhasorMode_EnvType:
-    // 0, 0, 255 blue
-      BlinkSetLed(0,0,255,true);
-      break;
-    case SynthMode::Pan_PanRnd:
-    // fuschia: 255,0,255
-      BlinkSetLed(255,0,255,true);
-      break;
-    default:
-      break;
+  if (current_state_ == AppState::Synthesis){
+    switch(current_synth_mode_){
+      case SynthMode::Size_Position:
+        SetLed(0,255,0,true);
+        break;
+      case SynthMode::Pitch_ActiveGrains:
+      // orange: 100, 64, 0 or 255, 165, 0 or 255, 91, 31 (neon orange)
+        BlinkSetLed(255, 91, 31,true);
+        break;
+      case SynthMode::PhasorMode_EnvType:
+      // 0, 0, 255 blue
+        BlinkSetLed(0,0,255,true);
+        break;
+      case SynthMode::Pan_PanRnd:
+      // fuschia: 255,0,255
+        BlinkSetLed(255,0,255,true);
+        break;
+      default:
+        break;
+    }
   }
 }
 
 void UIManager::SetLedRandomMode(){
-  switch(synth_mode_){
-    case SynthMode::Size_Position:
-    case SynthMode::Pitch_ActiveGrains:
-    case SynthMode::PhasorMode_EnvType:
-    case SynthMode::Pan_PanRnd:
-      /* set led 2 to green*/
-      SetLed(0,255,0,false);
-      break;
-    
-    case SynthMode::Size_Position_Rnd:
-    case SynthMode::Pitch_ActiveGrains_Rnd:
-    case SynthMode::PhasorMode_EnvType_Rnd:
-      /* set led 2 to red*/
-      SetLed(255,0,0,false);
-      break;
+  if (current_state_==AppState::Synthesis){
+    switch(current_synth_mode_){
+      case SynthMode::Size_Position:
+      case SynthMode::Pitch_ActiveGrains:
+      case SynthMode::PhasorMode_EnvType:
+      case SynthMode::Pan_PanRnd:
+        /* set led 2 to green*/
+        SetLed(0,255,0,false);
+        break;
+      
+      case SynthMode::Size_Position_Rnd:
+      case SynthMode::Pitch_ActiveGrains_Rnd:
+      case SynthMode::PhasorMode_EnvType_Rnd:
+        /* set led 2 to red*/
+        SetLed(255,0,0,false);
+        break;
+      default:
+        break;
+    }
+  }
+}
+
+void UIManager::SetLedFXMode(){
+  if (current_state_ == AppState::Synthesis){
+    switch(current_synth_mode_){
+      case SynthMode::Reverb:
+        /* set led 2 to cyan */
+        SetLed(0, 255, 255, false);
+        break;
+      case SynthMode::Filter:
+        /* set led 2 to yellow */
+        SetLed(255, 255, 0, false);
+        break;
+      default:
+        break;
+    }
   }
 }
 
@@ -365,3 +438,29 @@ void UIManager::BlinkSetLed(int r, int g, int b, bool is_Led1){
   System::Delay(100);
   SetLed(r,g,b, is_Led1);
 }
+
+void UIManager::PrintState(){
+  switch(current_state_){
+    case AppState::Startup:
+      DebugPrint(pod_, "State: Startup");
+        break;
+    case AppState::SelectFile:
+      DebugPrint(pod_, "State: SelectFile");
+        break;
+    case AppState::RecordIn:
+      DebugPrint(pod_, "State: RecordIn");
+        break;
+    case AppState::PlayWAV:
+      DebugPrint(pod_, "State: PlayWAV");
+        break;
+    case AppState::Synthesis:
+      DebugPrint(pod_, "State: Synthesis");
+        break;
+    // case AppState::ChordMode:
+      // DebugPrint(pod_, "State: ChordMode");
+    case AppState::Error:
+      DebugPrint(pod_, "State: Error");
+        break;
+  }
+}
+
