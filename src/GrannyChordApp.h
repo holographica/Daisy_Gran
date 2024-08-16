@@ -29,15 +29,23 @@ class GrannyChordApp {
     AudioFileManager &filemgr_;
     FIL *file_;
     UIManager ui_;
-    Compressor comp_;
 
+    /* audio FX */
+    Compressor comp_;
+    ReverbSc reverb_;
+    
+    /* audio filters */
+    MoogLadder lowpass_moog_;
+    OnePole hipass_onepole_;
+
+    /* audio data channel buffers */
     int16_t *left_buf_;
     int16_t *right_buf_;
 
     int file_idx_ = 0;
     size_t wav_playhead_ = 0;
     uint32_t audio_len_ = 0;
-    // AppState curr_app_state_;
+
     /* previous values for parameters controlled by knob 1*/
     float prev_param_vals_k1[NUM_SYNTH_MODES];
     float prev_param_vals_k2[NUM_SYNTH_MODES];

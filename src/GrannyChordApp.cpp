@@ -11,7 +11,7 @@ void GrannyChordApp::Init(int16_t *left, int16_t *right){
   right_buf_ = right;
   pod_.SetAudioBlockSize(4);
   pod_.SetAudioSampleRate(SaiHandle::Config::SampleRate::SAI_48KHZ);
-  // DebugPrint(pod_,"set sample rate");
+
   DebugPrint(pod_,"set sample rate");
   SeedRng();
   ui_.Init();
@@ -21,6 +21,7 @@ void GrannyChordApp::Init(int16_t *left, int16_t *right){
     DebugPrint(pod_,"filemgr init error");
     return;
   }
+  
   ui_.SetState(AppState::SelectFile);
   DebugPrint(pod_,"selecting file now");
   InitFileSelection();
@@ -140,11 +141,19 @@ void GrannyChordApp::ProcessRecordIn(AudioHandle::InputBuffer in, AudioHandle::O
 /// @param out Output audio buffer
 /// @param size Number of samples to process in this call
 void GrannyChordApp::ProcessSynthesis(AudioHandle::OutputBuffer out, size_t size){
-  for (size_t i=0; i<size; i++){
-    synth_.ProcessGrains(out[0],out[1],size);
+  // for (size_t i=0; i<size; i++){ // NOTE: is this correct? do i need to loop? don't think so
+    synth_.ProcessGrains(out[0],out[1],size); 
     comp_.ProcessBlock(out[0],out[0],size);
     comp_.ProcessBlock(out[1],out[1],size);
-  }
+
+    float temp_left[size];
+    float temp_right[size];
+    
+    for (size_t i=0; i<size; i++){
+      temp_left[i] = out[0][i];
+      temp_right[i] = out[1][i];
+      reverb_.Process(temp_left[i],temp_right[i],&out[0][i],&out[1][i]); // NOTE: check this works
+    }
 }
 
 /// @brief Process audio from chord mode and mix to output buffer
@@ -163,8 +172,13 @@ void GrannyChordApp::ProcessChordMode(AudioHandle::OutputBuffer out, size_t size
 /// @param out Output audio buffer
 /// @param size Number of samples to process in this call
 void GrannyChordApp::RecordOutToSD(AudioHandle::OutputBuffer out, size_t size){
+
+// NOTE: 
+// USE THIS 
+// https://electro-smith.github.io/libDaisy/classdaisy_1_1_wav_writer.html
+
   // create file on sd card 
-  // write in blocks
+  // write in blocks]
   // will have to f2s16 to conv back to int16 
   // max recording duration should be 120*48000*sizeof(float)*2(channels)??
   // wrap around index ? or just stop recording at max length

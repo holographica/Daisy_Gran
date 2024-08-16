@@ -110,12 +110,12 @@ void UIManager::UpdateSynthMode(){
       synth_mode_ = SynthMode::Pitch_ActiveGrains;
       break;
     case SynthMode::Pitch_ActiveGrains:
-      synth_mode_ = SynthMode::Pan_PanRnd;
-      break;
-    case SynthMode::Pan_PanRnd:
       synth_mode_ = SynthMode::PhasorMode_EnvType;
       break;
     case SynthMode::PhasorMode_EnvType:
+      synth_mode_ = SynthMode::Pan_PanRnd;
+      break;
+    case SynthMode::Pan_PanRnd:
       synth_mode_ = SynthMode::Size_Position;
       break;
     default:

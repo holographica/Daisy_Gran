@@ -26,8 +26,8 @@ class Grain {
     };
 
     Grain():
-      left_buf_(nullptr), right_buf_(nullptr), is_active_(false),
-      audio_len_(0), envelope_type_(EnvelopeType::Decay){}
+      left_buf_(nullptr), right_buf_(nullptr), audio_len_(0),
+      envelope_type_(EnvelopeType::Decay), is_active_(false){}
 
     /// @brief Initialise the Grain instance and its Phasor object 
     /// @param left Const pointer to the left audio data buffer

@@ -51,8 +51,6 @@ int main (void){
 
 // let grains through gate when button pressed 
 // use button to trigger grain instead of automatically generating it 
-// 
-
 
 // have a rng that chooses which order the notes of the chord are triggered
 // could have smal chance of playing random note

@@ -63,12 +63,13 @@ void GranularSynth::SetUserSpawnPos(float knob_val){
 
 void GranularSynth::SetUserActiveGrains(float knob_val){
   // NOTE: set to max 5 grains atm - can change to 20 
-  float count = round(fmap(knob_val, 1.0f, 5.0f));
+  float count = round(fmap(knob_val, 1.0f, 20.0f));
   SetActiveGrains(static_cast<size_t>(count));
 }
 
 void GranularSynth::SetUserPitchRatio(float ratio){
-  float pitch = fmap(ratio, 0.5, 2, daisysp::Mapping::LOG);
+  // NOTE CHANGED MAPPING FROM LOG TO LINEAR 
+  float pitch = fmap(ratio, 0.5, 2, daisysp::Mapping::LINEAR);
   SetPitchRatio(pitch);
 }
 

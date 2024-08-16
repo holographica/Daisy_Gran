@@ -204,8 +204,8 @@ build/main.o: main.cpp \
  ../libDaisy/src/util/VoctCalibration.h \
  ../libDaisy/src/util/WaveTableLoader.h ../libDaisy/src/sys/fatfs.h \
  ../libDaisy/src/util/WavWriter.h AudioFileManager.h constants_utils.h \
- GranularSynth.h Grain.h GrainPhasor.h GrannyChordApp.h UIManager.h \
- AppState.h debug_print.h
+ debug_print.h GranularSynth.h Grain.h GrainPhasor.h GrannyChordApp.h \
+ UIManager.h AppState.h
 ../libDaisy/Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:
 ../libDaisy/Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h750xx.h:
 ../libDaisy/Drivers/CMSIS/Include/core_cm7.h:
@@ -463,10 +463,10 @@ build/main.o: main.cpp \
 ../libDaisy/src/util/WavWriter.h:
 AudioFileManager.h:
 constants_utils.h:
+debug_print.h:
 GranularSynth.h:
 Grain.h:
 GrainPhasor.h:
 GrannyChordApp.h:
 UIManager.h:
 AppState.h:
-debug_print.h:

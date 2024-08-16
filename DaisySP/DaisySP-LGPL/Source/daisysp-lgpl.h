@@ -26,7 +26,7 @@
 
 /** Physical Modeling Modules */
 #include "PhysicalModeling/pluck.h"
-#include "PhysicalModeling/PolyPluck.h"
+// #include "PhysicalModeling/PolyPluck.h"
 
 /** Synthesis Modules */
 #include "Synthesis/blosc.h"
