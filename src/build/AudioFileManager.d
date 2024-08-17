@@ -142,7 +142,8 @@ build/AudioFileManager.o: AudioFileManager.cpp \
  ../libDaisy/src/util/PersistentStorage.h ../libDaisy/src/per/qspi.h \
  ../libDaisy/src/util/VoctCalibration.h \
  ../libDaisy/src/util/WaveTableLoader.h ../libDaisy/src/sys/fatfs.h \
- ../libDaisy/src/util/WavWriter.h constants_utils.h debug_print.h
+ ../libDaisy/src/util/WavWriter.h constants_utils.h debug_print.h \
+ wavheader.h
 ../libDaisy/Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:
 ../libDaisy/Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h750xx.h:
 ../libDaisy/Drivers/CMSIS/Include/core_cm7.h:
@@ -327,3 +328,4 @@ AudioFileManager.h:
 ../libDaisy/src/util/WavWriter.h:
 constants_utils.h:
 debug_print.h:
+wavheader.h:

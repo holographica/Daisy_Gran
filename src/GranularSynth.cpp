@@ -2,6 +2,33 @@
 
 using namespace daisy;
 
+/* define all static variables before initialisation */
+
+DTCMRAM_BSS const int16_t* GranularSynth::left_buf_ = nullptr;
+DTCMRAM_BSS const int16_t* GranularSynth::right_buf_ = nullptr;
+/* length of audio in samples */
+DTCMRAM_BSS size_t GranularSynth::audio_len_;
+DTCMRAM_BSS Grain GranularSynth::grains_[MAX_GRAINS];
+
+/* parameters affecting audio output */
+DTCMRAM_BSS GrainPhasor::Mode GranularSynth::phasor_mode_;
+DTCMRAM_BSS Grain::EnvelopeType GranularSynth::env_type_;
+DTCMRAM_BSS size_t GranularSynth::grain_size_;
+DTCMRAM_BSS size_t GranularSynth::spawn_pos_;
+DTCMRAM_BSS size_t GranularSynth::active_count_;
+DTCMRAM_BSS float GranularSynth::pitch_ratio_;
+DTCMRAM_BSS float GranularSynth::pan_;
+
+/* amount of randomness to apply to synth/grain parameters*/
+DTCMRAM_BSS float GranularSynth::rnd_size_;
+DTCMRAM_BSS float GranularSynth::rnd_spawn_pos_;;
+DTCMRAM_BSS float GranularSynth::rnd_count_;
+DTCMRAM_BSS float GranularSynth::rnd_pitch_;
+DTCMRAM_BSS float GranularSynth::rnd_pan_;
+DTCMRAM_BSS float GranularSynth::rnd_envelope_;
+DTCMRAM_BSS float GranularSynth::rnd_phasor_;
+
+
 /// @brief Initialise granular synth object and assign audio buffers
 /// @param left Left channel audio data buffer
 /// @param right Right channel audio data buffer
@@ -11,28 +38,39 @@ void GranularSynth::Init(const int16_t *left, const int16_t *right, size_t audio
   right_buf_ = right;
   audio_len_ = audio_len;
   for (Grain& grain: grains_){
-    // grain.Init(left,right);
     grain.Init();
   }
   Grain::left_buf_ = left;
   Grain::right_buf_ = right;
   Grain::audio_len_ = audio_len;
+
+  /* initialise grain params */
   phasor_mode_ = GrainPhasor::Mode::OneShot;
+  env_type_ = Grain::EnvelopeType::Decay;
   grain_size_ = 4800;
   spawn_pos_ = 0;
   active_count_ =1;
   pitch_ratio_ = 1.0f;
   pan_ = 0.5f;
+
+  /* initialise random params */
+  rnd_size_=0.0f;
+  rnd_spawn_pos_=0.0f;
+  rnd_count_=0.0f;
+  rnd_pitch_=0.0f;
+  rnd_pan_=0.0f;
+  rnd_envelope_=0.0f;
+  rnd_phasor_=0.0f;
 }
 
 void GranularSynth::SetEnvelopeType(Grain::EnvelopeType type){ 
   env_type_ = type; 
-  DebugPrint(pod_, "set env to %u", static_cast<int>(type));
+  // DebugPrint(pod_, "set env to %u", static_cast<int>(type));
 }
 
 void GranularSynth::SetPhasorMode(GrainPhasor::Mode mode){ 
   phasor_mode_ = mode;
-  DebugPrint(pod_, "set phasor to %u", static_cast<int>(mode));
+  // DebugPrint(pod_, "set phasor to %u", static_cast<int>(mode));
 }
 
 /* these setters take a normalised value (ie float from 0-1) 
@@ -50,7 +88,7 @@ void GranularSynth::SetSpawnPos(float knob_val){
 
 void GranularSynth::SetActiveGrains(float knob_val){
   float count = round(fmap(knob_val, 1.0f, 20.0f));
-  SetActiveGrains(static_cast<size_t>(count));
+  active_count_ = (static_cast<size_t>(count));
 }
 
 void GranularSynth::SetPitchRatio(float ratio){
@@ -103,19 +141,19 @@ void GranularSynth::ApplyRandomness(){
 
   }
 
-  if (rnd_envelope_>0){
-    if (RngFloat() < rnd_envelope_){
-      int random_env_type =  static_cast<int>(RngFloat()) * NUM_ENV_TYPES;
-      env_type_ = static_cast<Grain::EnvelopeType>(random_env_type);
-    }
-  }
+  // if (rnd_envelope_>0){
+  //   if (RngFloat() < rnd_envelope_){
+  //     int random_env_type =  static_cast<int>(RngFloat()) * NUM_ENV_TYPES;
+  //     env_type_ = static_cast<Grain::EnvelopeType>(random_env_type);
+  //   }
+  // }
 
-  if (rnd_phasor_>0){
-    if (RngFloat() < rnd_phasor_){
-      int random_phasor_mode = static_cast<int>(RngFloat()) * NUM_PHASOR_MODES;
-      phasor_mode_ = static_cast<GrainPhasor::Mode>(random_phasor_mode);
-    }
-  }
+  // if (rnd_phasor_>0){
+  //   if (RngFloat() < rnd_phasor_){
+  //     int random_phasor_mode = static_cast<int>(RngFloat()) * NUM_PHASOR_MODES;
+  //     phasor_mode_ = static_cast<GrainPhasor::Mode>(random_phasor_mode);
+  //   }
+  // }
 
   if (rnd_count_>0){
     float rnd_count_factor = fmap(RngFloat(),1.0f-rnd_count_,1.0f+rnd_count_, Mapping::EXP);
@@ -128,8 +166,8 @@ void GranularSynth::ApplyRandomness(){
 void GranularSynth::TriggerGrain(){
   size_t count = 0;
   for(Grain& grain:grains_){
-    if (grain.is_active_==true) { count++; }
-    if (!grain.is_active_==false && count<active_count_){
+    if (grain.is_active_) { count++; }
+    else if (count<active_count_){
       ApplyRandomness();
       grain.Trigger(spawn_pos_,grain_size_,pitch_ratio_,pan_);
       count++;
@@ -145,24 +183,13 @@ void GranularSynth::TriggerGrain(){
 void GranularSynth::ProcessGrains(float *out_left, float *out_right, size_t size){
   for (size_t i=0; i<size;i++){
     TriggerGrain();
-    float sum_left = 0.0f;
-    float sum_right = 0.0f;
-    size_t active = 0;
+    float sum_left = 0.0f, sum_right = 0.0f;
     for (Grain& grain:grains_){
-      if (grain.is_active_==true){
+      if (grain.is_active_){
         grain.Process(&sum_left,&sum_right);
-        active++;
       }
     }
-    if (active>0){
-      out_left[i]=sum_left;
-      out_right[i]=sum_right;
-      // out_left[i]=(sum_left/active); // NOTE changed these
-      // out_right[i]=(sum_right/active); //NOTE now using compressor instead of dividing
-    } 
-    else {
-      out_left[i]=0.0f;
-      out_right[i]=0.0f;
-    }
+    out_left[i]=sum_left;
+    out_right[i]=sum_right;
   }
 }

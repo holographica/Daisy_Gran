@@ -3,32 +3,50 @@
 /* this is required for AudioCallback as it needs a static object */
 GrannyChordApp* GrannyChordApp::instance_ = nullptr;
 
+/* declare / initialise static members */
+int16_t* GrannyChordApp::left_buf_=nullptr;
+int16_t* GrannyChordApp::right_buf_=nullptr;
+DTCMRAM_BSS AppState GrannyChordApp::curr_state_;
+DTCMRAM_BSS SynthMode GrannyChordApp::curr_synth_mode_;
+DTCMRAM_BSS SynthMode GrannyChordApp::prev_synth_mode_;
+SRAM_BSS ReverbSc GrannyChordApp::reverb_;
+DTCMRAM_BSS Compressor GrannyChordApp::comp_;
+DTCMRAM_BSS MoogLadder GrannyChordApp::lowpass_moog_;
+DTCMRAM_BSS OnePole GrannyChordApp::hipass_;
+DTCMRAM_BSS int GrannyChordApp::file_idx_=0;
+DTCMRAM_BSS size_t GrannyChordApp::wav_playhead_=0;
+DTCMRAM_BSS uint32_t GrannyChordApp::audio_len_=0;
+DTCMRAM_BSS float GrannyChordApp::prev_param_vals_k1[NUM_SYNTH_MODES];
+DTCMRAM_BSS float GrannyChordApp::prev_param_vals_k2[NUM_SYNTH_MODES];
+DTCMRAM_BSS int GrannyChordApp::recording_count_=0;
+
 /// @brief Initialises app state and members and goes through app startup process
 /// @param left Left channel audio data buffer
 /// @param right Right channel audio data buffer
-void GrannyChordApp::Init(int16_t *left, int16_t *right, ReverbSc* reverb){
+void GrannyChordApp::Init(int16_t *left, int16_t *right){
   left_buf_ = left;
   right_buf_ = right;
-  reverb_ = reverb;
   pod_.SetAudioBlockSize(4);
   pod_.SetAudioSampleRate(SaiHandle::Config::SampleRate::SAI_48KHZ);
+  curr_state_ = AppState::SelectFile;
   if (!InitFileMgr()){
-    DebugPrint(pod_,"File manager failed to init - can't read SD card");
+    // DebugPrint(pod_,"File manager failed to init - can't read SD card");
     pod_.led1.SetRed(1);
   }
 
   InitFX();
-  // InitPrevParamVals();
+  InitPrevParamVals();
   SeedRng();
-  
   pod_.StartAdc();
   pod_.StartAudio(AudioCallback);
+  // DebugPrint(pod_, "started audiocb");
 }
 
 
 /// @brief Loops whilst app is running, updating state and UI, handling 
 ///        state transitions, updating parameters and managing audio recordings
 void GrannyChordApp::Run(){
+  // DebugPrint(pod_, "started running");
   while(true){
     UpdateUI();
     UpdateSynthParams();
@@ -129,7 +147,7 @@ void GrannyChordApp::HandleFileSelection(int32_t encoder_inc){
   int file_count = filemgr_.GetFileCount();
   file_idx_ = (file_idx_ + encoder_inc + file_count) % file_count;
   // filemgr_.GetName(file_idx_,fname);
-  DebugPrint(pod_, "selected file %d",file_idx_);
+  // DebugPrint(pod_, "selected file %d",file_idx_);
 }
 
 /// @brief iterates through synth parameter control modes
@@ -192,18 +210,9 @@ void GrannyChordApp::ToggleFX(bool which_fx){
 /// @return True on successful initialisation, false if init fails or no WAV files found
 bool GrannyChordApp::InitFileMgr(){
   filemgr_.SetBuffers(left_buf_,right_buf_);
-  if (filemgr_.Init()==false){
-      pod_.seed.PrintLine("init in app failed ret false");
-      // curr_state_ = AppState::Error;
-      return false;
-  }
+  if (!filemgr_.Init())return false;
   pod_.seed.PrintLine("scanning wavs now");
-  if (!filemgr_.ScanWavFiles()){
-    pod_.seed.PrintLine("failed to scan wavs");
-    // curr_state_ = AppState::Error;
-    return false;
-  }
-  return true;
+  return filemgr_.ScanWavFiles();
 }
 
 /// @brief Calls synth initialisation function, passes audio data buffers and audio length
@@ -228,8 +237,10 @@ void GrannyChordApp::InitPlayback(){
 
 /// @brief Initialises RecordIn state, clears audio buffers
 void GrannyChordApp::InitRecordIn(){
+  memset(left_buf_, 0, CHNL_BUF_SIZE_ABS);
+  memset(right_buf_, 0, CHNL_BUF_SIZE_ABS);
 
-  DebugPrint(pod_, "cleared audio buffers for recording in");
+  // DebugPrint(pod_, "cleared audio buffers for recording in");
 }
 
 /// @brief Initialise object for recording out to SD card
@@ -245,7 +256,7 @@ void GrannyChordApp::InitWavWriter(){
 /// @brief initialise reverb, compressor, filter configs for FX section 
 void GrannyChordApp::InitFX(){
   comp_.Init(pod_.AudioSampleRate());
-  reverb_->Init(SAMPLE_RATE_FLOAT);
+  reverb_.Init(SAMPLE_RATE_FLOAT);
   lowpass_moog_.Init(SAMPLE_RATE_FLOAT);
   lowpass_moog_.SetFreq(20000.0f);
   lowpass_moog_.SetRes(0.7f);
@@ -353,7 +364,7 @@ void GrannyChordApp::ProcessSynthesis(AudioHandle::OutputBuffer out, size_t size
     for (size_t i=0; i<size; i++){
       temp_left[i] = out[0][i];
       temp_right[i] = out[1][i];
-      reverb_->Process(temp_left[i],temp_right[i],&out[0][i],&out[1][i]); // NOTE: check this works
+      reverb_.Process(temp_left[i],temp_right[i],&out[0][i],&out[1][i]); // NOTE: check this works
     }
 }
 
@@ -434,11 +445,11 @@ void GrannyChordApp::UpdateKnob1Params(float knob1_val, SynthMode mode){
       synth_.SetPitchRnd(knob1_val);
       break;
     case SynthMode::PhasorMode_EnvType_Rnd:
-      synth_.SetPhasorRnd(knob1_val);
+      synth_.SetPhasorRnd(knob1_val); 
       break;
     case SynthMode::Reverb:
       /* set reverb feedback ie tail length */
-      reverb_->SetFeedback(knob1_val); // NOTE check it doesn't clip
+      reverb_.SetFeedback(knob1_val); // NOTE check it doesn't clip
       break;
     case SynthMode::Filter:
       // knob1_val = fmap(knob1_val, 20.0f, 20000.0f, daisysp::Mapping::EXP);
@@ -476,7 +487,7 @@ void GrannyChordApp::UpdateKnob2Params(float knob2_val, SynthMode mode){
       /* map knob value to frequency range with an exponential curve */
       knob2_val = fmap(knob2_val, 100.0f, 20000.0f, daisysp::Mapping::EXP);
       /* set reverb low pass frequency */
-      reverb_->SetLpFreq(knob2_val);
+      reverb_.SetLpFreq(knob2_val);
       break;
     case SynthMode::Filter:
       /* again, map knob value to frequency range with an exponential curve */
@@ -582,27 +593,27 @@ CYAN	0, 0.7f, 0.7f
 // void GrannyChordApp::DebugPrintState(){
 //   switch(current_state_){
 //     case AppState::Startup:
-//       DebugPrint(pod_, "State now in: Startup");
+      // DebugPrint(pod_, "State now in: Startup");
 //         break;
 //     case AppState::SelectFile:
-//       DebugPrint(pod_, "State now in: SelectFile");
+      // DebugPrint(pod_, "State now in: SelectFile");
 //         break;
 //     case AppState::RecordIn:
-//       DebugPrint(pod_, "State now in: RecordIn");
+      // DebugPrint(pod_, "State now in: RecordIn");
 //         break;
 //     case AppState::PlayWAV:
-//       DebugPrint(pod_, "State now in: PlayWAV");
+      // DebugPrint(pod_, "State now in: PlayWAV");
 //         break;
 //     case AppState::Synthesis:
-//       DebugPrint(pod_, "State now in: Synthesis");
+      // DebugPrint(pod_, "State now in: Synthesis");
 //         break;
 //     // case AppState::ChordMode:
-//       // DebugPrint(pod_, "State now in: ChordMode");
+      // DebugPrint(pod_, "State now in: ChordMode");
 //     case AppState::Error:
-//       DebugPrint(pod_, "State now in: Error");
+      // DebugPrint(pod_, "State now in: Error");
 //         break;
 //     default:
-//       DebugPrint(pod_, "default state??");
+      // DebugPrint(pod_, "default state??");
 //       break;
 //   }
 // }
@@ -610,31 +621,31 @@ CYAN	0, 0.7f, 0.7f
 // void GrannyChordApp::DebugPrintSynthMode(){
 //   switch(current_synth_mode_){
 //     case SynthMode::Size_Position:
-//       DebugPrint(pod_, "Synth mode now in: Size_Position");
+      // DebugPrint(pod_, "Synth mode now in: Size_Position");
 //         break;
 //     case SynthMode::Size_Position_Rnd:
-//       DebugPrint(pod_, "Synth mode now in: Size_Position_Rnd");
+      // DebugPrint(pod_, "Synth mode now in: Size_Position_Rnd");
 //         break;
 //     case SynthMode::Pitch_ActiveGrains:
-//       DebugPrint(pod_, "Synth mode now in: Pitch_ActiveGrains");
+      // DebugPrint(pod_, "Synth mode now in: Pitch_ActiveGrains");
 //         break;
 //     case SynthMode::Pitch_ActiveGrains_Rnd:
-//       DebugPrint(pod_, "Synth mode now in: Pitch_ActiveGrains_Rnd");
+      // DebugPrint(pod_, "Synth mode now in: Pitch_ActiveGrains_Rnd");
 //         break;
 //     case SynthMode::PhasorMode_EnvType:
-//       DebugPrint(pod_, "Synth mode now in: PhasorMode_EnvType");
+      // DebugPrint(pod_, "Synth mode now in: PhasorMode_EnvType");
 //         break;
 //     case SynthMode::PhasorMode_EnvType_Rnd:
-//       DebugPrint(pod_, "Synth mode now in: PhasorMode_EnvType_Rnd");
+      // DebugPrint(pod_, "Synth mode now in: PhasorMode_EnvType_Rnd");
 //         break;
 //     case SynthMode::Pan_PanRnd:
-//       DebugPrint(pod_, "Synth mode now in: Pan_PanRnd");
+      // DebugPrint(pod_, "Synth mode now in: Pan_PanRnd");
 //       break;
 //     case SynthMode::Reverb:
-//       DebugPrint(pod_, "Synth mode now in: Reverb");
+      // DebugPrint(pod_, "Synth mode now in: Reverb");
 //       break;
 //     case SynthMode::Filter:
-//       DebugPrint(pod_, "Synth mode now in: Filter");
+      // DebugPrint(pod_, "Synth mode now in: Filter");
 //       break;
 //   }
 // }

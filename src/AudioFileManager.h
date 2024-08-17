@@ -1,24 +1,22 @@
 #pragma once
 #include <stdio.h>
 #include <stdint.h>
-// #include <vector>
 #include "daisy_pod.h"
 #include "constants_utils.h"
 #include "debug_print.h"
+#include "wavheader.h"
 
 using namespace daisy; 
 
 class AudioFileManager {
   public:
     AudioFileManager(SdmmcHandler &sd, FatFSInterface &fsi, DaisyPod &pod, FIL *file)
-      : sd_(sd), fsi_(fsi), pod_(pod), curr_file_(file), 
-        left_buf_(nullptr), right_buf_(nullptr) {};
+      : sd_(sd), fsi_(fsi), pod_(pod), curr_file_(file){};
     
     bool Init();
     bool ScanWavFiles();
     void SetBuffers(int16_t *left, int16_t *right);
     bool LoadFile(uint16_t file_idx);
-    
     bool CloseFile();
     bool GetWavHeader(FIL *file);
 
@@ -31,18 +29,9 @@ class AudioFileManager {
     void GetName(uint16_t idx, char* name) const { strcpy(name, names_[idx]); }
 
   private:
+    /* methods for loading WAV audio data */
     bool LoadAudioData();
-    /* helper functions for loading WAV audio based on bit depth */
     bool Load16BitAudio(size_t samples_per_channel);
-
-    struct WavHeader {
-      int sample_rate;
-      /* total size of audio data in wav file excl file/audio format info */
-      uint32_t file_size; 
-      int16_t channels;
-      int16_t bit_depth;
-      size_t total_samples;
-    };
 
     /* references to hardware interfaces */
     SdmmcHandler& sd_;
@@ -50,18 +39,16 @@ class AudioFileManager {
     DaisyPod& pod_;
     FIL* curr_file_; 
     /* pointers to master left/right channel buffers */
-    int16_t* left_buf_;
-    int16_t* right_buf_;
+    static int16_t* left_buf_;
+    static int16_t* right_buf_;
     /* list of filenames for logging */
-    int16_t file_indices[MAX_FILES];
-    char names_ [MAX_FILES][MAX_FNAME_LEN];
+    static DTCMRAM_BSS char names_ [MAX_FILES][MAX_FNAME_LEN];
     /* index of currently selected file */
-    uint16_t curr_idx_;
-    uint16_t file_count_;
+    static DTCMRAM_BSS uint16_t curr_idx_;
+    static DTCMRAM_BSS uint16_t file_count_;
     /* header data for currently selected file */
-    WavHeader header_;;
+    static DTCMRAM_BSS WavHeader header_;
     /* byte in original wav file at which audio samples start - usually 44 */
-    size_t audio_data_start_;
+    static DTCMRAM_BSS uint8_t audio_data_start_;
     /* chunk size for reading audio into temporary buffer */
-    // const size_t BUF_CHUNK_SZ = 16384;
 };

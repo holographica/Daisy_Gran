@@ -1,19 +1,17 @@
 #include "Grain.h"
 
 
-size_t Grain::audio_len_ = 0;
-const int16_t* Grain::left_buf_ = 0;
-const int16_t* Grain::right_buf_ = 0;
-
+size_t Grain::audio_len_;
+const int16_t* Grain::left_buf_;
+const int16_t* Grain::right_buf_;
+const float Grain::start_decay_ = 0.8f;
+const float Grain::decay_rate_ = 5.0f;
 
 /// @brief Initialise the Grain instance and its Phasor object 
 /// @param left Const pointer to the left audio data buffer
 /// @param right Const pointer to the right audio data buffer
 /// @param len Length in samples of the audio file loaded in the buffers
 void Grain::Init(){
-// void Grain::Init(const int16_t *left, const int16_t *right){
-  // left_buf_ = left;
-  // right_buf_ = right;
   SetPhasorMode(GrainPhasor::Mode::OneShot);
   phasor_.Init(0.0f, 1.0f, phasor_mode_);
 }
@@ -89,7 +87,6 @@ float Grain::ApplyEnvelope(float phase){
   }
 }
 
-
 void Grain::SetSpawnPos(size_t spawn_pos){ spawn_pos_ = spawn_pos; }
 void Grain::SetGrainSize(size_t grain_size) { grain_size_ = grain_size; }
 void Grain::SetPitchRatio(float pitch_ratio) { pitch_ratio_ = pitch_ratio; }
@@ -97,5 +94,3 @@ void Grain::SetEnvelopeType(EnvelopeType type) { envelope_type_ = type; }
 
 void Grain::SetPhasorPitchRatio(float pitch_ratio) { phasor_.SetPitchRatio(pitch_ratio, audio_len_); }
 void Grain::SetPhasorMode(GrainPhasor::Mode mode) { phasor_.SetMode(mode); }
-
-// bool Grain::IsActive() { return is_active_; }

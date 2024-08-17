@@ -1,8 +1,8 @@
 #pragma once 
 #include "daisy_pod.h"
+#include "AppState.h"
 #include "daisysp.h"
-// #include "constants_utils.h"
-#include "UIManager.h"
+#include "constants_utils.h"
 #include "GranularSynth.h"
 #include "AudioFileManager.h"
 #include "debug_print.h"
@@ -16,12 +16,11 @@ using namespace daisysp;
 class GrannyChordApp {
   public:
   GrannyChordApp(DaisyPod& pod, GranularSynth& synth, AudioFileManager& filemgr)
-        : pod_(pod), synth_(synth), 
-          filemgr_(filemgr), ui_(pod), left_buf_(nullptr), right_buf_(nullptr) {
-            instance_ = this;
-          };
+    : pod_(pod), synth_(synth), filemgr_(filemgr){
+      instance_ = this;
+    };
 
-    void Init(int16_t *left, int16_t *right, ReverbSc* reverb);
+    void Init(int16_t *left, int16_t *right);
     void Run();
 
     static void AudioCallback(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, size_t size);
@@ -34,36 +33,32 @@ class GrannyChordApp {
     FIL *file_;
 
     /* UI and state objects */
-    UIManager ui_;
-    AppState curr_state_;
-    AppState prev_state_;
-    SynthMode curr_synth_mode_;
-    SynthMode prev_synth_mode_;
+    static DTCMRAM_BSS AppState curr_state_;
+    static DTCMRAM_BSS SynthMode curr_synth_mode_;
+    static DTCMRAM_BSS SynthMode prev_synth_mode_;
     
-    bool changing_state_ = false;
-
     /* audio FX and filters */
-    Compressor comp_;
-    ReverbSc* reverb_;
-    MoogLadder lowpass_moog_;
-    OnePole hipass_;
+    static DTCMRAM_BSS Compressor comp_;
+    static SRAM_BSS ReverbSc reverb_;
+    static DTCMRAM_BSS MoogLadder lowpass_moog_;
+    static DTCMRAM_BSS OnePole hipass_;
 
     /* audio data channel buffers */
-    int16_t *left_buf_;
-    int16_t *right_buf_;
+    static int16_t *left_buf_;
+    static int16_t *right_buf_;
 
-    int file_idx_ = 0;
-    size_t wav_playhead_ = 0;
-    uint32_t audio_len_ = 0;
+    static DTCMRAM_BSS int file_idx_;
+    static DTCMRAM_BSS size_t wav_playhead_;
+    static DTCMRAM_BSS uint32_t audio_len_;
 
     /* previous values for parameters controlled by knob 1*/
-    float prev_param_vals_k1[NUM_SYNTH_MODES];
-    float prev_param_vals_k2[NUM_SYNTH_MODES];
+    static DTCMRAM_BSS float prev_param_vals_k1[NUM_SYNTH_MODES];
+    static DTCMRAM_BSS float prev_param_vals_k2[NUM_SYNTH_MODES];
 
+    bool changing_state_ = false;
     bool recording_out_ = false;
     WavWriter<16384> sd_out_writer_;
-    int recording_count_;
-
+    static DTCMRAM_BSS int recording_count_;
 
     void UpdateUI();
     void UpdateSynthMode();
@@ -87,7 +82,6 @@ class GrannyChordApp {
     void ToggleRandomnessControls();
     void ToggleFX(bool which_fx);
 
-
     /* methods to init / prepare for state change */
     void ClearAudioBuffers();
     bool InitFileMgr();
@@ -109,5 +103,4 @@ class GrannyChordApp {
     inline constexpr bool CheckParamDelta(float curr_val, float prev_val);
     inline constexpr float MapKnobDeadzone(float knob_val);
     inline constexpr float UpdateKnobPassThru(float curr_knob_val, float *stored_knob_val, bool *pass_thru);
-
 };

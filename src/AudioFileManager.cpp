@@ -2,28 +2,25 @@
 
 using namespace daisy;
 
+/* declare / initialise static members */
+DTCMRAM_BSS char AudioFileManager::names_[MAX_FILES][MAX_FNAME_LEN];
+DTCMRAM_BSS uint16_t AudioFileManager::curr_idx_ = 0;
+DTCMRAM_BSS uint16_t AudioFileManager::file_count_ = 0;
+DTCMRAM_BSS WavHeader AudioFileManager::header_;
+DTCMRAM_BSS uint8_t AudioFileManager::audio_data_start_ = 0;
+int16_t* AudioFileManager::left_buf_ = nullptr;
+int16_t* AudioFileManager::right_buf_ = nullptr;
+
 /// @brief Initialises sd card and file system interfaces
 /// @return True if initialisation succeeds, else false
 bool AudioFileManager::Init(){
-  pod_.seed.PrintLine("got to here");
   SdmmcHandler::Config sd_cfg;
   sd_cfg.Defaults();
   if (sd_.Init(sd_cfg) != SdmmcHandler::Result::OK) {
     return false;
   }
-  else pod_.seed.PrintLine("sd init ok");
-
   fsi_.Init(FatFSInterface::Config::MEDIA_SD);
-  pod_.seed.PrintLine("init fsi okay");
   return (f_mount(&fsi_.GetSDFileSystem(),"/",1) == FR_OK);
-  // if (f_mount(&fsi_.GetSDFileSystem(),"/",1) != FR_OK){
-  //   pod_.seed.PrintLine("can't mount fsi");
-  //   return false;
-  // }
-  // else {
-  //   pod_.seed.PrintLine("returning true");
-  //   return true;
-  // }
 }
 
 /// @brief Scans for list of WAVs on SD card and stores filenames
@@ -31,37 +28,28 @@ bool AudioFileManager::Init(){
 bool AudioFileManager::ScanWavFiles(){
   DIR dir;
   FILINFO fno;
-  // memset(names_, '\0', sizeof(names_));
   file_count_=0;
 
-  const char* path = fsi_.GetSDPath();
-  if (f_opendir(&dir,path) != FR_OK){
-    DebugPrint(pod_, "failed to open SD card directory");
+  if (f_opendir(&dir,fsi_.GetSDPath()) != FR_OK){
+    // DebugPrint(pod_, "failed to open SD card directory");
     // TODO log error? 
     return false;
   }
-  int16_t curr_dir_idx = 0;
   /* loop over files in SD card root directory */
   while (f_readdir(&dir, &fno) == FR_OK && fno.fname[0]!=0 && file_count_<MAX_FILES){
     /* skip hidden files / directories */
     if (!(fno.fattrib & (AM_HID|AM_DIR)) &&
-      strncmp(fno.fname,"._",2)!= 0 && /* ignore metadata files starting with '._' */
+      /* ignore metadata files starting with '._' */
+      strncmp(fno.fname,"._",2)!= 0 && 
       (strstr(fno.fname,".wav") || strstr(fno.fname,".WAV"))){
-          // strncpy(names_[file_count_++],fno.fname, MAX_FNAME_LEN-1);
-        file_indices[file_count_] = curr_dir_idx;
-        file_count_++;
+          strncpy(names_[file_count_],fno.fname, MAX_FNAME_LEN-1);
+          names_[file_count_++][MAX_FNAME_LEN-1]='\0';
     }
-    curr_dir_idx++;
   }
   f_closedir(&dir);
-  DebugPrint(pod_, "file count is %d",file_count_);
+  // DebugPrint(pod_, "file count is %d",file_count_);
   return file_count_ >0;
 }
-
-
-// bool AudioFileManger::OpenFileByIndex(uint16_t sel_idx){
-
-// }
 
 /// @brief Opens a WAV file, gets its header data and loads the audio data
 /// @param sel_idx The index of the selected file in the list of files on the SD card
@@ -75,16 +63,13 @@ bool AudioFileManager::LoadFile(uint16_t sel_idx) {
   if (sel_idx > file_count_) return false;
   if (sel_idx != curr_idx_) f_close(curr_file_);
 
-
   if (f_open(curr_file_, names_[sel_idx], (FA_OPEN_EXISTING | FA_READ))!=FR_OK) return false;
-
   if (!GetWavHeader(curr_file_)||header_.bit_depth!=16||header_.sample_rate!=48000){
-    DebugPrint(pod_, "wav header parse failed");
+    // DebugPrint(pod_, "wav header parse failed");
     f_close(curr_file_);
     return false;
   }
-
-  DebugPrint(pod_, "loading audio data now");
+  // DebugPrint(pod_, "loading audio data now");
   return LoadAudioData();
 }
 
@@ -187,27 +172,25 @@ bool AudioFileManager::LoadAudioData() {
 /// @param samples_per_channel Length of audio in samples, per channel 
 /// @return True if audio is loaded. False if file fails to read
 bool AudioFileManager::Load16BitAudio(size_t samples_per_channel){
-  DebugPrint(pod_,"before buf");
+  // DebugPrint(pod_,"before buf");
   // alignas(32) std::vector<int16_t> temp_buf(BUF_CHUNK_SZ*header_.channels);
   // std::vector<int16_t> temp_buf(BUF_CHUNK_SZ*header_.channels);
   // int16_t temp_buf[16384]; // stack buffer
   int16_t* temp_buf = new int16_t[16384]; // heap buffer? try it 
-  // DebugPrint(pod_,"after buf");
   size_t samples_read = 0;
   UINT bytes_read;
   // DebugPrint(pod_,"starting loading loop");
   while (!f_eof(curr_file_) && samples_read<samples_per_channel){
-    DebugPrint(pod_,"first bit of loading loop");
+    // DebugPrint(pod_,"first bit of loading loop");
     size_t samples_to_read = std::min(static_cast<size_t>(16384), (samples_per_channel-samples_read));
     // size_t bytes_to_read = samples_to_read * header_.channels * sizeof(int16_t);
     
-    // DebugPrint(pod_,"about to fread in loop");
-    if (f_read(curr_file_, temp_buf, samples_to_read*header_.channels * sizeof(int16_t), &bytes_read)) {
+    if (f_read(curr_file_, temp_buf, samples_to_read*header_.channels * sizeof(int16_t), &bytes_read)!=FR_OK) {
       delete[] temp_buf;
+      // DebugPrint(pod_, "failed to fread");
       return false;
     }
 
-    // DebugPrint(pod_,"about to copy to bufs in loop");
     size_t samples_in_chunk = bytes_read / (header_.channels * sizeof(int16_t));
     for (size_t i=0; i<samples_in_chunk; i++){
       if (header_.channels == 1){
@@ -220,7 +203,7 @@ bool AudioFileManager::Load16BitAudio(size_t samples_per_channel){
     }
     samples_read += samples_in_chunk;
   }
-  // DebugPrint(pod_,"end of loading loop");
+  // DebugPrint(pod_,"end of loading loop - loaded ok");
   delete[] temp_buf;
   return true;
 }

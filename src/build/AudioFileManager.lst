@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 1
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -20,227 +20,62 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 1
   17              		.cfi_sections	.debug_frame
   18              		.section	.rodata._ZN16AudioFileManager4InitEv.str1.1,"aMS",%progbits,1
   19              	.LC0:
-  20 0000 676F7420 		.ascii	"got to here\000"
-  20      746F2068 
-  20      65726500 
-  21              	.LC1:
-  22 000c 73642069 		.ascii	"sd init ok\000"
-  22      6E697420 
-  22      6F6B00
-  23              	.LC2:
-  24 0017 696E6974 		.ascii	"init fsi okay\000"
-  24      20667369 
-  24      206F6B61 
-  24      7900
-  25              	.LC3:
-  26 0025 2F00     		.ascii	"/\000"
-  27              	.LC4:
-  28 0027 63616E27 		.ascii	"can't mount fsi\000"
-  28      74206D6F 
-  28      756E7420 
-  28      66736900 
-  29              	.LC5:
-  30 0037 72657475 		.ascii	"returning true\000"
-  30      726E696E 
-  30      67207472 
-  30      756500
-  31              		.section	.text._ZN16AudioFileManager4InitEv,"ax",%progbits
-  32              		.align	1
-  33              		.global	_ZN16AudioFileManager4InitEv
-  34              		.syntax unified
-  35              		.thumb
-  36              		.thumb_func
-  38              	_ZN16AudioFileManager4InitEv:
-  39              	.LVL0:
-  40              	.LFB2583:
-  41              		.file 1 "AudioFileManager.cpp"
+  20 0000 2F00     		.ascii	"/\000"
+  21              		.section	.text._ZN16AudioFileManager4InitEv,"ax",%progbits
+  22              		.align	1
+  23              		.global	_ZN16AudioFileManager4InitEv
+  24              		.syntax unified
+  25              		.thumb
+  26              		.thumb_func
+  28              	_ZN16AudioFileManager4InitEv:
+  29              	.LVL0:
+  30              	.LFB2583:
+  31              		.file 1 "AudioFileManager.cpp"
    1:AudioFileManager.cpp **** #include "AudioFileManager.h"
    2:AudioFileManager.cpp **** 
    3:AudioFileManager.cpp **** using namespace daisy;
    4:AudioFileManager.cpp **** 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 2
+   5:AudioFileManager.cpp **** /* declare / initialise static members */
+   6:AudioFileManager.cpp **** DTCMRAM_BSS char AudioFileManager::names_[MAX_FILES][MAX_FNAME_LEN];
+   7:AudioFileManager.cpp **** DTCMRAM_BSS uint16_t AudioFileManager::curr_idx_ = 0;
+   8:AudioFileManager.cpp **** DTCMRAM_BSS uint16_t AudioFileManager::file_count_ = 0;
+   9:AudioFileManager.cpp **** DTCMRAM_BSS WavHeader AudioFileManager::header_;
+  10:AudioFileManager.cpp **** DTCMRAM_BSS uint8_t AudioFileManager::audio_data_start_ = 0;
+  11:AudioFileManager.cpp **** int16_t* AudioFileManager::left_buf_ = nullptr;
+  12:AudioFileManager.cpp **** int16_t* AudioFileManager::right_buf_ = nullptr;
+  13:AudioFileManager.cpp **** 
+  14:AudioFileManager.cpp **** /// @brief Initialises sd card and file system interfaces
+  15:AudioFileManager.cpp **** /// @return True if initialisation succeeds, else false
+  16:AudioFileManager.cpp **** bool AudioFileManager::Init(){
+  32              		.loc 1 16 30 view -0
+  33              		.cfi_startproc
+  34              		@ args = 0, pretend = 0, frame = 16
+  35              		@ frame_needed = 0, uses_anonymous_args = 0
+  17:AudioFileManager.cpp ****   SdmmcHandler::Config sd_cfg;
+  36              		.loc 1 17 3 view .LVU1
+  18:AudioFileManager.cpp ****   sd_cfg.Defaults();
+  37              		.loc 1 18 3 view .LVU2
+  16:AudioFileManager.cpp ****   SdmmcHandler::Config sd_cfg;
+  38              		.loc 1 16 30 is_stmt 0 view .LVU3
+  39 0000 7FB5     		push	{r0, r1, r2, r3, r4, r5, r6, lr}
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 2
 
 
-   5:AudioFileManager.cpp **** /// @brief Initialises sd card and file system interfaces
-   6:AudioFileManager.cpp **** /// @return True if initialisation succeeds, else false
-   7:AudioFileManager.cpp **** bool AudioFileManager::Init(){
-  42              		.loc 1 7 30 view -0
-  43              		.cfi_startproc
-  44              		@ args = 0, pretend = 0, frame = 16
-  45              		@ frame_needed = 0, uses_anonymous_args = 0
-   8:AudioFileManager.cpp ****   pod_.seed.PrintLine("got to here");
-  46              		.loc 1 8 3 view .LVU1
-  47              	.LBB36:
-  48              	.LBI36:
-  49              		.file 2 "../libDaisy/src/daisy_seed.h"
-   1:../libDaisy/src/daisy_seed.h **** #pragma once
-   2:../libDaisy/src/daisy_seed.h **** #ifndef DSY_SEED_H
-   3:../libDaisy/src/daisy_seed.h **** #define DSY_SEED_H
-   4:../libDaisy/src/daisy_seed.h **** 
-   5:../libDaisy/src/daisy_seed.h **** #include "daisy.h"
-   6:../libDaisy/src/daisy_seed.h **** 
-   7:../libDaisy/src/daisy_seed.h **** //Uncomment this out if you're still using the rev2 hardware
-   8:../libDaisy/src/daisy_seed.h **** //#define SEED_REV2
-   9:../libDaisy/src/daisy_seed.h **** 
-  10:../libDaisy/src/daisy_seed.h **** namespace daisy
-  11:../libDaisy/src/daisy_seed.h **** {
-  12:../libDaisy/src/daisy_seed.h **** /**
-  13:../libDaisy/src/daisy_seed.h ****    @brief This is the higher-level interface for the Daisy board. \n 
-  14:../libDaisy/src/daisy_seed.h ****     All basic peripheral configuration/initialization is setup here. \n
-  15:../libDaisy/src/daisy_seed.h **** 
-  16:../libDaisy/src/daisy_seed.h ****    @ingroup boards
-  17:../libDaisy/src/daisy_seed.h **** */
-  18:../libDaisy/src/daisy_seed.h **** class DaisySeed
-  19:../libDaisy/src/daisy_seed.h **** {
-  20:../libDaisy/src/daisy_seed.h ****   public:
-  21:../libDaisy/src/daisy_seed.h ****     DaisySeed() {}
-  22:../libDaisy/src/daisy_seed.h ****     ~DaisySeed() {}
-  23:../libDaisy/src/daisy_seed.h **** 
-  24:../libDaisy/src/daisy_seed.h ****     /** This function used to provide a pre-initialization configuraiton 
-  25:../libDaisy/src/daisy_seed.h ****      *  it has since been deprecated, and does nothing.
-  26:../libDaisy/src/daisy_seed.h ****      */
-  27:../libDaisy/src/daisy_seed.h ****     void Configure();
-  28:../libDaisy/src/daisy_seed.h **** 
-  29:../libDaisy/src/daisy_seed.h ****     /** 
-  30:../libDaisy/src/daisy_seed.h ****     Initializes the Daisy Seed and the following peripherals:
-  31:../libDaisy/src/daisy_seed.h ****     SDRAM, QSPI, 24-bit 48kHz Audio via AK4556, Internal USB,
-  32:../libDaisy/src/daisy_seed.h ****     as well as the built-in LED and Testpoint.
-  33:../libDaisy/src/daisy_seed.h **** 
-  34:../libDaisy/src/daisy_seed.h ****     ADCs, DACs, and other special peripherals (such as I2C, SPI, etc.)
-  35:../libDaisy/src/daisy_seed.h ****     can be initialized using their specific initializers within libdaisy
-  36:../libDaisy/src/daisy_seed.h ****     for a specific application.
-  37:../libDaisy/src/daisy_seed.h ****     */
-  38:../libDaisy/src/daisy_seed.h ****     void Init(bool boost = false);
-  39:../libDaisy/src/daisy_seed.h **** 
-  40:../libDaisy/src/daisy_seed.h ****     /** 
-  41:../libDaisy/src/daisy_seed.h ****     Deinitializes all peripherals automatically handled by `Init`.
-  42:../libDaisy/src/daisy_seed.h ****     */
-  43:../libDaisy/src/daisy_seed.h ****     void DeInit();
-  44:../libDaisy/src/daisy_seed.h **** 
-  45:../libDaisy/src/daisy_seed.h ****     /** 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 3
-
-
-  46:../libDaisy/src/daisy_seed.h ****     Wait some ms before going on.
-  47:../libDaisy/src/daisy_seed.h ****     \param del Delay time in ms.
-  48:../libDaisy/src/daisy_seed.h ****     */
-  49:../libDaisy/src/daisy_seed.h ****     void DelayMs(size_t del);
-  50:../libDaisy/src/daisy_seed.h **** 
-  51:../libDaisy/src/daisy_seed.h ****     /** 
-  52:../libDaisy/src/daisy_seed.h ****     Returns the gpio_pin corresponding to the index 0-31.
-  53:../libDaisy/src/daisy_seed.h ****     For the given GPIO on the Daisy Seed (labeled 1-32 in docs).
-  54:../libDaisy/src/daisy_seed.h ****     */
-  55:../libDaisy/src/daisy_seed.h ****     static dsy_gpio_pin GetPin(uint8_t pin_idx);
-  56:../libDaisy/src/daisy_seed.h **** 
-  57:../libDaisy/src/daisy_seed.h ****     /** Begins the audio for the seeds builtin audio.
-  58:../libDaisy/src/daisy_seed.h ****     the specified callback will get called whenever
-  59:../libDaisy/src/daisy_seed.h ****     new data is ready to be prepared.
-  60:../libDaisy/src/daisy_seed.h ****     */
-  61:../libDaisy/src/daisy_seed.h ****     void StartAudio(AudioHandle::InterleavingAudioCallback cb);
-  62:../libDaisy/src/daisy_seed.h **** 
-  63:../libDaisy/src/daisy_seed.h ****     /** Begins the audio for the seeds builtin audio.
-  64:../libDaisy/src/daisy_seed.h ****     the specified callback will get called whenever
-  65:../libDaisy/src/daisy_seed.h ****     new data is ready to be prepared.
-  66:../libDaisy/src/daisy_seed.h ****     This will use the newer non-interleaved callback.
-  67:../libDaisy/src/daisy_seed.h ****     */
-  68:../libDaisy/src/daisy_seed.h ****     void StartAudio(AudioHandle::AudioCallback cb);
-  69:../libDaisy/src/daisy_seed.h **** 
-  70:../libDaisy/src/daisy_seed.h ****     /** Changes to a new interleaved callback
-  71:../libDaisy/src/daisy_seed.h ****      */
-  72:../libDaisy/src/daisy_seed.h ****     void ChangeAudioCallback(AudioHandle::InterleavingAudioCallback cb);
-  73:../libDaisy/src/daisy_seed.h **** 
-  74:../libDaisy/src/daisy_seed.h ****     /** Changes to a new multichannel callback
-  75:../libDaisy/src/daisy_seed.h ****      */
-  76:../libDaisy/src/daisy_seed.h ****     void ChangeAudioCallback(AudioHandle::AudioCallback cb);
-  77:../libDaisy/src/daisy_seed.h **** 
-  78:../libDaisy/src/daisy_seed.h ****     /** Stops the audio if it is running. */
-  79:../libDaisy/src/daisy_seed.h ****     void StopAudio();
-  80:../libDaisy/src/daisy_seed.h **** 
-  81:../libDaisy/src/daisy_seed.h ****     /** Updates the Audio Sample Rate, and reinitializes.
-  82:../libDaisy/src/daisy_seed.h ****      ** Audio must be stopped for this to work.
-  83:../libDaisy/src/daisy_seed.h ****      */
-  84:../libDaisy/src/daisy_seed.h ****     void SetAudioSampleRate(SaiHandle::Config::SampleRate samplerate);
-  85:../libDaisy/src/daisy_seed.h **** 
-  86:../libDaisy/src/daisy_seed.h ****     /** Returns the audio sample rate in Hz as a floating point number.
-  87:../libDaisy/src/daisy_seed.h ****      */
-  88:../libDaisy/src/daisy_seed.h ****     float AudioSampleRate();
-  89:../libDaisy/src/daisy_seed.h **** 
-  90:../libDaisy/src/daisy_seed.h ****     /** Sets the number of samples processed per channel by the audio callback.
-  91:../libDaisy/src/daisy_seed.h ****      */
-  92:../libDaisy/src/daisy_seed.h ****     void SetAudioBlockSize(size_t blocksize);
-  93:../libDaisy/src/daisy_seed.h **** 
-  94:../libDaisy/src/daisy_seed.h ****     /** Returns the number of samples per channel in a block of audio. */
-  95:../libDaisy/src/daisy_seed.h ****     size_t AudioBlockSize();
-  96:../libDaisy/src/daisy_seed.h **** 
-  97:../libDaisy/src/daisy_seed.h ****     /** Returns the rate in Hz that the Audio callback is called */
-  98:../libDaisy/src/daisy_seed.h ****     float AudioCallbackRate() const;
-  99:../libDaisy/src/daisy_seed.h **** 
- 100:../libDaisy/src/daisy_seed.h ****     /** Returns the SAI Handle for the Daisy Seed 
- 101:../libDaisy/src/daisy_seed.h ****      *  This can be useful when adding a secondary codec,
- 102:../libDaisy/src/daisy_seed.h ****      *  the result of this function can be passed to the audio reinit 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 4
-
-
- 103:../libDaisy/src/daisy_seed.h ****      *  with an SAI2 configuration
- 104:../libDaisy/src/daisy_seed.h ****      */
- 105:../libDaisy/src/daisy_seed.h ****     const SaiHandle& AudioSaiHandle() const;
- 106:../libDaisy/src/daisy_seed.h **** 
- 107:../libDaisy/src/daisy_seed.h ****     /** Sets the state of the built in LED
- 108:../libDaisy/src/daisy_seed.h ****      */
- 109:../libDaisy/src/daisy_seed.h ****     void SetLed(bool state);
- 110:../libDaisy/src/daisy_seed.h **** 
- 111:../libDaisy/src/daisy_seed.h ****     /** Sets the state of the test point near pin 10
- 112:../libDaisy/src/daisy_seed.h ****      */
- 113:../libDaisy/src/daisy_seed.h ****     void SetTestPoint(bool state);
- 114:../libDaisy/src/daisy_seed.h **** 
- 115:../libDaisy/src/daisy_seed.h ****     /** Print formatted debug log message
- 116:../libDaisy/src/daisy_seed.h ****      */
- 117:../libDaisy/src/daisy_seed.h ****     template <typename... VA>
- 118:../libDaisy/src/daisy_seed.h ****     static void Print(const char* format, VA... va)
- 119:../libDaisy/src/daisy_seed.h ****     {
- 120:../libDaisy/src/daisy_seed.h ****         Log::Print(format, va...);
- 121:../libDaisy/src/daisy_seed.h ****     }
- 122:../libDaisy/src/daisy_seed.h **** 
- 123:../libDaisy/src/daisy_seed.h ****     /** Print formatted debug log message with automatic line termination
- 124:../libDaisy/src/daisy_seed.h ****     */
- 125:../libDaisy/src/daisy_seed.h ****     template <typename... VA>
- 126:../libDaisy/src/daisy_seed.h ****     static void PrintLine(const char* format, VA... va)
-  50              		.loc 2 126 17 view .LVU2
-  51              	.LBE36:
-   7:AudioFileManager.cpp ****   pod_.seed.PrintLine("got to here");
-  52              		.loc 1 7 30 is_stmt 0 view .LVU3
-  53 0000 F0B5     		push	{r4, r5, r6, r7, lr}
-  54              		.cfi_def_cfa_offset 20
-  55              		.cfi_offset 4, -20
-  56              		.cfi_offset 5, -16
-  57              		.cfi_offset 6, -12
-  58              		.cfi_offset 7, -8
-  59              		.cfi_offset 14, -4
-  60 0002 0546     		mov	r5, r0
-  61 0004 85B0     		sub	sp, sp, #20
-  62              		.cfi_def_cfa_offset 40
-  63              	.LBB39:
-  64              	.LBB37:
- 127:../libDaisy/src/daisy_seed.h ****     {
- 128:../libDaisy/src/daisy_seed.h ****         Log::PrintLine(format, va...);
-  65              		.loc 2 128 23 view .LVU4
-  66 0006 1748     		ldr	r0, .L5
-  67              	.LVL1:
-  68              		.loc 2 128 23 view .LVU5
-  69              	.LBE37:
-  70              	.LBE39:
-  71              	.LBB40:
-  72              	.LBB41:
-  73              		.file 3 "../libDaisy/src/per/sdmmc.h"
+  40              		.cfi_def_cfa_offset 32
+  41              		.cfi_offset 4, -16
+  42              		.cfi_offset 5, -12
+  43              		.cfi_offset 6, -8
+  44              		.cfi_offset 14, -4
+  45              	.LVL1:
+  46              	.LBB14:
+  47              	.LBI14:
+  48              		.file 2 "../libDaisy/src/per/sdmmc.h"
    1:../libDaisy/src/per/sdmmc.h **** /*
    2:../libDaisy/src/per/sdmmc.h **** TODO: 
    3:../libDaisy/src/per/sdmmc.h **** - Implement configuration (currently all settings are fixed).
    4:../libDaisy/src/per/sdmmc.h **** */
    5:../libDaisy/src/per/sdmmc.h **** #pragma once
    6:../libDaisy/src/per/sdmmc.h **** #ifndef DSY_SDMMC_H
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 5
-
-
    7:../libDaisy/src/per/sdmmc.h **** #define DSY_SDMMC_H /**< macro */
    8:../libDaisy/src/per/sdmmc.h **** 
    9:../libDaisy/src/per/sdmmc.h **** #include <stdint.h>
@@ -283,6 +118,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 1
   46:../libDaisy/src/per/sdmmc.h ****     };
   47:../libDaisy/src/per/sdmmc.h **** 
   48:../libDaisy/src/per/sdmmc.h ****     /** 
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 3
+
+
   49:../libDaisy/src/per/sdmmc.h ****     Sets the desired clock speed of the SD card bus. \n 
   50:../libDaisy/src/per/sdmmc.h ****     Initialization is always done at or below 400kHz, and then the user speed is set.
   51:../libDaisy/src/per/sdmmc.h ****     */
@@ -298,129 +136,75 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 1
   61:../libDaisy/src/per/sdmmc.h ****     struct Config
   62:../libDaisy/src/per/sdmmc.h ****     {
   63:../libDaisy/src/per/sdmmc.h ****         Speed    speed;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 6
-
-
   64:../libDaisy/src/per/sdmmc.h ****         BusWidth width;
   65:../libDaisy/src/per/sdmmc.h ****         bool
   66:../libDaisy/src/per/sdmmc.h ****             clock_powersave; /**< When true, the clock will stop between transfers to save power. *
   67:../libDaisy/src/per/sdmmc.h **** 
   68:../libDaisy/src/per/sdmmc.h ****         /** Configures settings to their default settings */
   69:../libDaisy/src/per/sdmmc.h ****         void Defaults()
+  49              		.loc 2 69 14 is_stmt 1 view .LVU4
+  50              	.LBB15:
   70:../libDaisy/src/per/sdmmc.h ****         {
   71:../libDaisy/src/per/sdmmc.h ****             speed           = Speed::FAST;
+  51              		.loc 2 71 13 view .LVU5
   72:../libDaisy/src/per/sdmmc.h ****             width           = BusWidth::BITS_4;
-  74              		.loc 3 72 29 view .LVU6
-  75 0008 0126     		movs	r6, #1
-  76              	.LBE41:
-  77              	.LBE40:
-  78              	.LBB44:
-  79              	.LBB38:
-  80              		.loc 2 128 23 view .LVU7
-  81 000a FFF7FEFF 		bl	_ZN5daisy6LoggerILNS_17LoggerDestinationE1EE9PrintLineEPKcz
-  82              	.LVL2:
-  83              		.loc 2 128 23 view .LVU8
-  84              	.LBE38:
-  85              	.LBE44:
-   9:AudioFileManager.cpp ****   SdmmcHandler::Config sd_cfg;
-  86              		.loc 1 9 3 is_stmt 1 view .LVU9
-  10:AudioFileManager.cpp ****   sd_cfg.Defaults();
-  87              		.loc 1 10 3 view .LVU10
-  88              	.LBB45:
-  89              	.LBI40:
-  69:../libDaisy/src/per/sdmmc.h ****         {
-  90              		.loc 3 69 14 view .LVU11
-  91              	.LBB42:
-  71:../libDaisy/src/per/sdmmc.h ****             width           = BusWidth::BITS_4;
-  92              		.loc 3 71 13 view .LVU12
+  52              		.loc 2 72 29 is_stmt 0 view .LVU6
+  53 0002 0323     		movs	r3, #3
+  54 0004 0126     		movs	r6, #1
   73:../libDaisy/src/per/sdmmc.h ****             clock_powersave = false;
-  93              		.loc 3 73 29 is_stmt 0 view .LVU13
-  94 000e 0024     		movs	r4, #0
+  55              		.loc 2 73 29 view .LVU7
+  56 0006 0024     		movs	r4, #0
+  57              	.LBE15:
+  58              	.LBE14:
+  16:AudioFileManager.cpp ****   SdmmcHandler::Config sd_cfg;
+  59              		.loc 1 16 30 view .LVU8
+  60 0008 0546     		mov	r5, r0
+  19:AudioFileManager.cpp ****   if (sd_.Init(sd_cfg) != SdmmcHandler::Result::OK) {
+  61              		.loc 1 19 15 view .LVU9
+  62 000a 01A9     		add	r1, sp, #4
+  63              	.LVL2:
+  64              		.loc 1 19 15 view .LVU10
+  65 000c 0068     		ldr	r0, [r0]
+  66              	.LVL3:
+  67              	.LBB17:
+  68              	.LBB16:
+  69              		.loc 2 73 29 view .LVU11
+  70 000e 8DF80C40 		strb	r4, [sp, #12]
   72:../libDaisy/src/per/sdmmc.h ****             clock_powersave = false;
-  95              		.loc 3 72 29 view .LVU14
-  96 0010 0323     		movs	r3, #3
-  97              	.LBE42:
-  98              	.LBE45:
-  11:AudioFileManager.cpp ****   if (sd_.Init(sd_cfg) != SdmmcHandler::Result::OK) {
-  99              		.loc 1 11 15 view .LVU15
- 100 0012 01A9     		add	r1, sp, #4
- 101              	.LVL3:
- 102              		.loc 1 11 15 view .LVU16
- 103 0014 2868     		ldr	r0, [r5]
- 104              	.LBB46:
- 105              	.LBB43:
- 106              		.loc 3 73 29 view .LVU17
- 107 0016 8DF80C40 		strb	r4, [sp, #12]
-  72:../libDaisy/src/per/sdmmc.h ****             clock_powersave = false;
- 108              		.loc 3 72 29 view .LVU18
- 109 001a CDE90136 		strd	r3, r6, [sp, #4]
- 110              		.loc 3 73 13 is_stmt 1 view .LVU19
- 111              	.LVL4:
- 112              		.loc 3 73 13 is_stmt 0 view .LVU20
- 113              	.LBE43:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 7
+  71              		.loc 2 72 29 view .LVU12
+  72 0012 CDE90136 		strd	r3, r6, [sp, #4]
+  73              		.loc 2 73 13 is_stmt 1 view .LVU13
+  74              	.LVL4:
+  75              		.loc 2 73 13 is_stmt 0 view .LVU14
+  76              	.LBE16:
+  77              	.LBE17:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 4
 
 
- 114              	.LBE46:
- 115              		.loc 1 11 3 is_stmt 1 view .LVU21
- 116              		.loc 1 11 15 is_stmt 0 view .LVU22
- 117 001e FFF7FEFF 		bl	_ZN5daisy12SdmmcHandler4InitERKNS0_6ConfigE
- 118              	.LVL5:
- 119              		.loc 1 11 3 view .LVU23
- 120 0022 0746     		mov	r7, r0
- 121 0024 D8B9     		cbnz	r0, .L4
-  12:AudioFileManager.cpp ****     return false;
-  13:AudioFileManager.cpp ****   }
-  14:AudioFileManager.cpp ****   else pod_.seed.PrintLine("sd init ok");
- 122              		.loc 1 14 8 is_stmt 1 view .LVU24
- 123              	.LVL6:
- 124              	.LBB47:
- 125              	.LBI47:
- 126:../libDaisy/src/daisy_seed.h ****     {
- 126              		.loc 2 126 17 view .LVU25
- 127              	.LBB48:
- 128              		.loc 2 128 23 is_stmt 0 view .LVU26
- 129 0026 1048     		ldr	r0, .L5+4
- 130 0028 FFF7FEFF 		bl	_ZN5daisy6LoggerILNS_17LoggerDestinationE1EE9PrintLineEPKcz
- 131              	.LVL7:
- 132              		.loc 2 128 23 view .LVU27
- 133              	.LBE48:
- 134              	.LBE47:
-  15:AudioFileManager.cpp **** 
-  16:AudioFileManager.cpp ****   fsi_.Init(FatFSInterface::Config::MEDIA_SD);
- 135              		.loc 1 16 3 is_stmt 1 view .LVU28
- 136              		.loc 1 16 12 is_stmt 0 view .LVU29
- 137 002c 3146     		mov	r1, r6
- 138 002e 6868     		ldr	r0, [r5, #4]
- 139 0030 FFF7FEFF 		bl	_ZN5daisy14FatFSInterface4InitEh
- 140              	.LVL8:
-  17:AudioFileManager.cpp ****   pod_.seed.PrintLine("init fsi okay");
- 141              		.loc 1 17 3 is_stmt 1 view .LVU30
- 142              	.LBB49:
- 143              	.LBI49:
- 126:../libDaisy/src/daisy_seed.h ****     {
- 144              		.loc 2 126 17 view .LVU31
- 145              	.LBB50:
- 146              		.loc 2 128 23 is_stmt 0 view .LVU32
- 147 0034 0D48     		ldr	r0, .L5+8
- 148 0036 FFF7FEFF 		bl	_ZN5daisy6LoggerILNS_17LoggerDestinationE1EE9PrintLineEPKcz
- 149              	.LVL9:
- 150              		.loc 2 128 23 view .LVU33
- 151              	.LBE50:
- 152              	.LBE49:
-  18:AudioFileManager.cpp ****   // return (f_mount(&fsi_.GetSDFileSystem(),"/",1) != FR_OK);
-  19:AudioFileManager.cpp ****   if (f_mount(&fsi_.GetSDFileSystem(),"/",1) != FR_OK){
- 153              		.loc 1 19 3 is_stmt 1 view .LVU34
- 154              	.LBB51:
- 155              	.LBI51:
- 156              		.file 4 "../libDaisy/src/sys/fatfs.h"
+  78              		.loc 1 19 3 is_stmt 1 view .LVU15
+  79              		.loc 1 19 15 is_stmt 0 view .LVU16
+  80 0016 FFF7FEFF 		bl	_ZN5daisy12SdmmcHandler4InitERKNS0_6ConfigE
+  81              	.LVL5:
+  82              		.loc 1 19 3 view .LVU17
+  83 001a 70B9     		cbnz	r0, .L3
+  20:AudioFileManager.cpp ****     return false;
+  21:AudioFileManager.cpp ****   }
+  22:AudioFileManager.cpp ****   fsi_.Init(FatFSInterface::Config::MEDIA_SD);
+  84              		.loc 1 22 3 is_stmt 1 view .LVU18
+  85              		.loc 1 22 12 is_stmt 0 view .LVU19
+  86 001c 3146     		mov	r1, r6
+  87 001e 6868     		ldr	r0, [r5, #4]
+  88 0020 FFF7FEFF 		bl	_ZN5daisy14FatFSInterface4InitEh
+  89              	.LVL6:
+  23:AudioFileManager.cpp ****   return (f_mount(&fsi_.GetSDFileSystem(),"/",1) == FR_OK);
+  90              		.loc 1 23 3 is_stmt 1 view .LVU20
+  91              	.LBB18:
+  92              	.LBI18:
+  93              		.file 3 "../libDaisy/src/sys/fatfs.h"
    1:../libDaisy/src/sys/fatfs.h **** #ifndef __fatfs_H
    2:../libDaisy/src/sys/fatfs.h **** #define __fatfs_H /**< & */
    3:../libDaisy/src/sys/fatfs.h **** 
    4:../libDaisy/src/sys/fatfs.h **** #include "ff.h"
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 8
-
-
    5:../libDaisy/src/sys/fatfs.h **** 
    6:../libDaisy/src/sys/fatfs.h **** namespace daisy
    7:../libDaisy/src/sys/fatfs.h **** {
@@ -454,6 +238,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 1
   35:../libDaisy/src/sys/fatfs.h ****         ERR_NO_MEDIA_SELECTED,
   36:../libDaisy/src/sys/fatfs.h ****         ERR_GENERIC,
   37:../libDaisy/src/sys/fatfs.h ****     };
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 5
+
+
   38:../libDaisy/src/sys/fatfs.h **** 
   39:../libDaisy/src/sys/fatfs.h ****     /** Config structure for configuring Daisy to FatFS */
   40:../libDaisy/src/sys/fatfs.h ****     struct Config
@@ -478,9 +265,6 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 1
   59:../libDaisy/src/sys/fatfs.h ****         };
   60:../libDaisy/src/sys/fatfs.h **** 
   61:../libDaisy/src/sys/fatfs.h ****         uint8_t media;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 9
-
-
   62:../libDaisy/src/sys/fatfs.h ****     };
   63:../libDaisy/src/sys/fatfs.h **** 
   64:../libDaisy/src/sys/fatfs.h ****     FatFSInterface() {}
@@ -513,834 +297,637 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 1
   91:../libDaisy/src/sys/fatfs.h **** 
   92:../libDaisy/src/sys/fatfs.h ****     /** Returns reference to filesystem object for the SD volume. */
   93:../libDaisy/src/sys/fatfs.h ****     FATFS& GetSDFileSystem() { return fs_[0]; }
- 157              		.loc 4 93 12 view .LVU35
- 158              	.LBB52:
- 159              		.loc 4 93 32 view .LVU36
- 160              		.loc 4 93 44 is_stmt 0 view .LVU37
- 161 003a 6868     		ldr	r0, [r5, #4]
- 162              	.LBE52:
- 163              	.LBE51:
- 164              		.loc 1 19 14 view .LVU38
- 165 003c 3246     		mov	r2, r6
- 166 003e 0C49     		ldr	r1, .L5+12
- 167 0040 0430     		adds	r0, r0, #4
- 168 0042 FFF7FEFF 		bl	f_mount
- 169              	.LVL10:
- 170              		.loc 1 19 3 view .LVU39
- 171 0046 28B1     		cbz	r0, .L3
-  20:AudioFileManager.cpp ****     pod_.seed.PrintLine("can't mount fsi");
- 172              		.loc 1 20 5 is_stmt 1 view .LVU40
- 173              	.LVL11:
- 174              	.LBB53:
- 175              	.LBI53:
- 126:../libDaisy/src/daisy_seed.h ****     {
- 176              		.loc 2 126 17 view .LVU41
- 177              	.LBB54:
- 178              		.loc 2 128 23 is_stmt 0 view .LVU42
- 179 0048 0A48     		ldr	r0, .L5+16
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 10
+  94              		.loc 3 93 12 view .LVU21
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 6
 
 
- 180 004a FFF7FEFF 		bl	_ZN5daisy6LoggerILNS_17LoggerDestinationE1EE9PrintLineEPKcz
- 181              	.LVL12:
- 182              		.loc 2 128 23 view .LVU43
- 183              	.LBE54:
- 184              	.LBE53:
-  21:AudioFileManager.cpp ****     return false;
- 185              		.loc 1 21 5 is_stmt 1 view .LVU44
- 186              		.loc 1 21 12 is_stmt 0 view .LVU45
- 187 004e 3846     		mov	r0, r7
- 188              	.L2:
-  22:AudioFileManager.cpp ****   }
-  23:AudioFileManager.cpp ****   else {
-  24:AudioFileManager.cpp ****     pod_.seed.PrintLine("returning true");
-  25:AudioFileManager.cpp ****     return true;
-  26:AudioFileManager.cpp ****   }
-  27:AudioFileManager.cpp **** }
- 189              		.loc 1 27 1 view .LVU46
- 190 0050 05B0     		add	sp, sp, #20
- 191              		.cfi_remember_state
- 192              		.cfi_def_cfa_offset 20
- 193              		@ sp needed
- 194 0052 F0BD     		pop	{r4, r5, r6, r7, pc}
- 195              	.LVL13:
- 196              	.L3:
- 197              		.cfi_restore_state
-  24:AudioFileManager.cpp ****     return true;
- 198              		.loc 1 24 5 is_stmt 1 view .LVU47
- 199              	.LBB55:
- 200              	.LBI55:
- 126:../libDaisy/src/daisy_seed.h ****     {
- 201              		.loc 2 126 17 view .LVU48
- 202              	.LBB56:
- 203              		.loc 2 128 23 is_stmt 0 view .LVU49
- 204 0054 0848     		ldr	r0, .L5+20
- 205 0056 FFF7FEFF 		bl	_ZN5daisy6LoggerILNS_17LoggerDestinationE1EE9PrintLineEPKcz
- 206              	.LVL14:
- 207              		.loc 2 128 23 view .LVU50
- 208              	.LBE56:
- 209              	.LBE55:
-  25:AudioFileManager.cpp ****   }
- 210              		.loc 1 25 5 is_stmt 1 view .LVU51
-  25:AudioFileManager.cpp ****   }
- 211              		.loc 1 25 12 is_stmt 0 view .LVU52
- 212 005a 3046     		mov	r0, r6
- 213 005c F8E7     		b	.L2
- 214              	.L4:
-  12:AudioFileManager.cpp ****   }
- 215              		.loc 1 12 12 view .LVU53
- 216 005e 2046     		mov	r0, r4
- 217 0060 F6E7     		b	.L2
- 218              	.L6:
- 219 0062 00BF     		.align	2
- 220              	.L5:
- 221 0064 00000000 		.word	.LC0
- 222 0068 0C000000 		.word	.LC1
- 223 006c 17000000 		.word	.LC2
- 224 0070 25000000 		.word	.LC3
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 11
+  95              	.LBB19:
+  96              		.loc 3 93 32 view .LVU22
+  97              		.loc 3 93 44 is_stmt 0 view .LVU23
+  98 0024 6868     		ldr	r0, [r5, #4]
+  99              	.LBE19:
+ 100              	.LBE18:
+ 101              		.loc 1 23 18 view .LVU24
+ 102 0026 3246     		mov	r2, r6
+ 103 0028 0549     		ldr	r1, .L4
+ 104 002a 0430     		adds	r0, r0, #4
+ 105 002c FFF7FEFF 		bl	f_mount
+ 106              	.LVL7:
+ 107              		.loc 1 23 58 view .LVU25
+ 108 0030 B0FA80F0 		clz	r0, r0
+ 109 0034 4009     		lsrs	r0, r0, #5
+ 110              	.L2:
+  24:AudioFileManager.cpp **** }
+ 111              		.loc 1 24 1 view .LVU26
+ 112 0036 04B0     		add	sp, sp, #16
+ 113              		.cfi_remember_state
+ 114              		.cfi_def_cfa_offset 16
+ 115              		@ sp needed
+ 116 0038 70BD     		pop	{r4, r5, r6, pc}
+ 117              	.LVL8:
+ 118              	.L3:
+ 119              		.cfi_restore_state
+  20:AudioFileManager.cpp ****   }
+ 120              		.loc 1 20 12 view .LVU27
+ 121 003a 2046     		mov	r0, r4
+ 122 003c FBE7     		b	.L2
+ 123              	.L5:
+ 124 003e 00BF     		.align	2
+ 125              	.L4:
+ 126 0040 00000000 		.word	.LC0
+ 127              		.cfi_endproc
+ 128              	.LFE2583:
+ 130              		.section	.rodata._ZN16AudioFileManager12ScanWavFilesEv.str1.1,"aMS",%progbits,1
+ 131              	.LC1:
+ 132 0000 2E5F00   		.ascii	"._\000"
+ 133              	.LC2:
+ 134 0003 2E776176 		.ascii	".wav\000"
+ 134      00
+ 135              	.LC3:
+ 136 0008 2E574156 		.ascii	".WAV\000"
+ 136      00
+ 137              		.section	.text._ZN16AudioFileManager12ScanWavFilesEv,"ax",%progbits
+ 138              		.align	1
+ 139              		.global	_ZN16AudioFileManager12ScanWavFilesEv
+ 140              		.syntax unified
+ 141              		.thumb
+ 142              		.thumb_func
+ 144              	_ZN16AudioFileManager12ScanWavFilesEv:
+ 145              	.LVL9:
+ 146              	.LFB2584:
+  25:AudioFileManager.cpp **** 
+  26:AudioFileManager.cpp **** /// @brief Scans for list of WAVs on SD card and stores filenames
+  27:AudioFileManager.cpp **** /// @return False if directory fails to open or there are no valid files, else true
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 7
 
 
- 225 0074 27000000 		.word	.LC4
- 226 0078 37000000 		.word	.LC5
- 227              		.cfi_endproc
- 228              	.LFE2583:
- 230              		.section	.rodata._ZN16AudioFileManager12ScanWavFilesEv.str1.1,"aMS",%progbits,1
- 231              	.LC6:
- 232 0000 6661696C 		.ascii	"failed to open SD card directory\000"
- 232      65642074 
- 232      6F206F70 
- 232      656E2053 
- 232      44206361 
- 233              	.LC7:
- 234 0021 66696C65 		.ascii	"file count is %d\000"
- 234      20636F75 
- 234      6E742069 
- 234      73202564 
- 234      00
- 235              	.LC8:
- 236 0032 2E5F00   		.ascii	"._\000"
- 237              	.LC9:
- 238 0035 2E776176 		.ascii	".wav\000"
- 238      00
- 239              	.LC10:
- 240 003a 2E574156 		.ascii	".WAV\000"
- 240      00
- 241              		.section	.text._ZN16AudioFileManager12ScanWavFilesEv,"ax",%progbits
- 242              		.align	1
- 243              		.global	_ZN16AudioFileManager12ScanWavFilesEv
- 244              		.syntax unified
- 245              		.thumb
- 246              		.thumb_func
- 248              	_ZN16AudioFileManager12ScanWavFilesEv:
- 249              	.LVL15:
- 250              	.LFB2584:
-  28:AudioFileManager.cpp **** 
-  29:AudioFileManager.cpp **** /// @brief Scans for list of WAVs on SD card and stores filenames
-  30:AudioFileManager.cpp **** /// @return False if directory fails to open or there are no valid files, else true
-  31:AudioFileManager.cpp **** bool AudioFileManager::ScanWavFiles(){
- 251              		.loc 1 31 38 is_stmt 1 view -0
- 252              		.cfi_startproc
- 253              		@ args = 0, pretend = 0, frame = 328
- 254              		@ frame_needed = 0, uses_anonymous_args = 0
-  32:AudioFileManager.cpp ****   DIR dir;
- 255              		.loc 1 32 3 view .LVU55
-  33:AudioFileManager.cpp ****   FILINFO fno;
- 256              		.loc 1 33 3 view .LVU56
-  34:AudioFileManager.cpp ****   // memset(names_, '\0', sizeof(names_));
-  35:AudioFileManager.cpp ****   file_count_=0;
- 257              		.loc 1 35 3 view .LVU57
-  31:AudioFileManager.cpp ****   DIR dir;
- 258              		.loc 1 31 38 is_stmt 0 view .LVU58
- 259 0000 F0B5     		push	{r4, r5, r6, r7, lr}
- 260              		.cfi_def_cfa_offset 20
- 261              		.cfi_offset 4, -20
- 262              		.cfi_offset 5, -16
- 263              		.cfi_offset 6, -12
- 264              		.cfi_offset 7, -8
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 12
-
-
- 265              		.cfi_offset 14, -4
- 266              	.LBB57:
- 267              	.LBB58:
+  28:AudioFileManager.cpp **** bool AudioFileManager::ScanWavFiles(){
+ 147              		.loc 1 28 38 is_stmt 1 view -0
+ 148              		.cfi_startproc
+ 149              		@ args = 0, pretend = 0, frame = 328
+ 150              		@ frame_needed = 0, uses_anonymous_args = 0
+  29:AudioFileManager.cpp ****   DIR dir;
+ 151              		.loc 1 29 3 view .LVU29
+  30:AudioFileManager.cpp ****   FILINFO fno;
+ 152              		.loc 1 30 3 view .LVU30
+  31:AudioFileManager.cpp ****   file_count_=0;
+ 153              		.loc 1 31 3 view .LVU31
+  28:AudioFileManager.cpp ****   DIR dir;
+ 154              		.loc 1 28 38 is_stmt 0 view .LVU32
+ 155 0000 70B5     		push	{r4, r5, r6, lr}
+ 156              		.cfi_def_cfa_offset 16
+ 157              		.cfi_offset 4, -16
+ 158              		.cfi_offset 5, -12
+ 159              		.cfi_offset 6, -8
+ 160              		.cfi_offset 14, -4
+ 161              	.LBB20:
+ 162              	.LBB21:
   87:../libDaisy/src/sys/fatfs.h **** 
- 268              		.loc 4 87 51 view .LVU59
- 269 0002 4168     		ldr	r1, [r0, #4]
- 270              	.LBE58:
- 271              	.LBE57:
-  31:AudioFileManager.cpp ****   DIR dir;
- 272              		.loc 1 31 38 view .LVU60
- 273 0004 D3B0     		sub	sp, sp, #332
- 274              		.cfi_def_cfa_offset 352
- 275              		.loc 1 35 14 view .LVU61
- 276 0006 0026     		movs	r6, #0
-  31:AudioFileManager.cpp ****   DIR dir;
- 277              		.loc 1 31 38 view .LVU62
- 278 0008 0446     		mov	r4, r0
-  36:AudioFileManager.cpp **** 
-  37:AudioFileManager.cpp ****   const char* path = fsi_.GetSDPath();
-  38:AudioFileManager.cpp ****   if (f_opendir(&dir,path) != FR_OK){
- 279              		.loc 1 38 16 view .LVU63
- 280 000a 01F27441 		addw	r1, r1, #1140
-  35:AudioFileManager.cpp **** 
- 281              		.loc 1 35 14 view .LVU64
- 282 000e A0F85A68 		strh	r6, [r0, #2138]	@ movhi
-  37:AudioFileManager.cpp ****   if (f_opendir(&dir,path) != FR_OK){
- 283              		.loc 1 37 3 is_stmt 1 view .LVU65
- 284              	.LVL16:
- 285              	.LBB60:
- 286              	.LBI57:
+ 163              		.loc 3 87 51 view .LVU33
+ 164 0002 4168     		ldr	r1, [r0, #4]
+ 165              	.LBE21:
+ 166              	.LBE20:
+  28:AudioFileManager.cpp ****   DIR dir;
+ 167              		.loc 1 28 38 view .LVU34
+ 168 0004 D2B0     		sub	sp, sp, #328
+ 169              		.cfi_def_cfa_offset 344
+ 170              		.loc 1 31 14 view .LVU35
+ 171 0006 254D     		ldr	r5, .L23
+ 172 0008 0024     		movs	r4, #0
+  32:AudioFileManager.cpp **** 
+  33:AudioFileManager.cpp ****   if (f_opendir(&dir,fsi_.GetSDPath()) != FR_OK){
+ 173              		.loc 1 33 16 view .LVU36
+ 174 000a 01F27441 		addw	r1, r1, #1140
+ 175 000e 6846     		mov	r0, sp
+ 176              	.LVL10:
+  31:AudioFileManager.cpp **** 
+ 177              		.loc 1 31 14 view .LVU37
+ 178 0010 2C80     		strh	r4, [r5]	@ movhi
+ 179              		.loc 1 33 3 is_stmt 1 view .LVU38
+ 180              	.LBB23:
+ 181              	.LBI20:
   87:../libDaisy/src/sys/fatfs.h **** 
- 287              		.loc 4 87 17 view .LVU66
- 288              	.LBB59:
+ 182              		.loc 3 87 17 view .LVU39
+ 183              	.LBB22:
   87:../libDaisy/src/sys/fatfs.h **** 
- 289              		.loc 4 87 37 view .LVU67
-  87:../libDaisy/src/sys/fatfs.h **** 
- 290              		.loc 4 87 37 is_stmt 0 view .LVU68
- 291              	.LBE59:
- 292              	.LBE60:
- 293              		.loc 1 38 3 is_stmt 1 view .LVU69
- 294              		.loc 1 38 16 is_stmt 0 view .LVU70
- 295 0012 6846     		mov	r0, sp
- 296              	.LVL17:
- 297              		.loc 1 38 16 view .LVU71
- 298 0014 FFF7FEFF 		bl	f_opendir
- 299              	.LVL18:
- 300              		.loc 1 38 3 view .LVU72
- 301 0018 28B1     		cbz	r0, .L14
-  39:AudioFileManager.cpp ****     DebugPrint(pod_, "failed to open SD card directory");
- 302              		.loc 1 39 5 is_stmt 1 view .LVU73
- 303              		.loc 1 39 5 view .LVU74
- 304              	.LVL19:
- 305              	.LBB61:
- 306              	.LBI61:
- 126:../libDaisy/src/daisy_seed.h ****     {
- 307              		.loc 2 126 17 view .LVU75
- 308              	.LBB62:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 13
+ 184              		.loc 3 87 37 view .LVU40
+ 185              	.LBE22:
+ 186              	.LBE23:
+ 187              		.loc 1 33 16 is_stmt 0 view .LVU41
+ 188 0012 FFF7FEFF 		bl	f_opendir
+ 189              	.LVL11:
+ 190              		.loc 1 33 3 view .LVU42
+ 191 0016 0028     		cmp	r0, #0
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 8
 
 
- 309              		.loc 2 128 23 is_stmt 0 view .LVU76
- 310 001a 2348     		ldr	r0, .L24
- 311 001c FFF7FEFF 		bl	_ZN5daisy6LoggerILNS_17LoggerDestinationE1EE9PrintLineEPKcz
- 312              	.LVL20:
- 313              		.loc 2 128 23 view .LVU77
- 314              	.LBE62:
- 315              	.LBE61:
-  40:AudioFileManager.cpp ****     // TODO log error? 
-  41:AudioFileManager.cpp ****     return false;
- 316              		.loc 1 41 5 is_stmt 1 view .LVU78
- 317              		.loc 1 41 12 is_stmt 0 view .LVU79
- 318 0020 3046     		mov	r0, r6
- 319              	.L9:
-  42:AudioFileManager.cpp ****   }
-  43:AudioFileManager.cpp ****   int16_t curr_dir_idx = 0;
-  44:AudioFileManager.cpp ****   /* loop over files in SD card root directory */
-  45:AudioFileManager.cpp ****   while (f_readdir(&dir, &fno) == FR_OK && fno.fname[0]!=0 && file_count_<MAX_FILES){
-  46:AudioFileManager.cpp ****     /* skip hidden files / directories */
-  47:AudioFileManager.cpp ****     if (!(fno.fattrib & (AM_HID|AM_DIR)) &&
-  48:AudioFileManager.cpp ****       strncmp(fno.fname,"._",2)!= 0 && /* ignore metadata files starting with '._' */
-  49:AudioFileManager.cpp ****       (strstr(fno.fname,".wav") || strstr(fno.fname,".WAV"))){
-  50:AudioFileManager.cpp ****           // strncpy(names_[file_count_++],fno.fname, MAX_FNAME_LEN-1);
-  51:AudioFileManager.cpp ****         file_indices[file_count_] = curr_dir_idx;
-  52:AudioFileManager.cpp ****         file_count_++;
-  53:AudioFileManager.cpp ****     }
-  54:AudioFileManager.cpp ****     curr_dir_idx++;
-  55:AudioFileManager.cpp ****   }
-  56:AudioFileManager.cpp ****   f_closedir(&dir);
-  57:AudioFileManager.cpp ****   DebugPrint(pod_, "file count is %d",file_count_);
-  58:AudioFileManager.cpp ****   return file_count_ >0;
-  59:AudioFileManager.cpp **** }
- 320              		.loc 1 59 1 view .LVU80
- 321 0022 53B0     		add	sp, sp, #332
- 322              		.cfi_remember_state
- 323              		.cfi_def_cfa_offset 20
- 324              		@ sp needed
- 325 0024 F0BD     		pop	{r4, r5, r6, r7, pc}
- 326              	.LVL21:
- 327              	.L14:
- 328              		.cfi_restore_state
- 329              		.loc 1 59 1 view .LVU81
- 330 0026 0546     		mov	r5, r0
- 331              	.L8:
-  45:AudioFileManager.cpp ****     /* skip hidden files / directories */
- 332              		.loc 1 45 19 view .LVU82
- 333 0028 0CA9     		add	r1, sp, #48
- 334 002a 6846     		mov	r0, sp
- 335 002c 2FB2     		sxth	r7, r5
- 336              	.LVL22:
-  45:AudioFileManager.cpp ****     /* skip hidden files / directories */
- 337              		.loc 1 45 3 is_stmt 1 view .LVU83
-  45:AudioFileManager.cpp ****     /* skip hidden files / directories */
- 338              		.loc 1 45 60 view .LVU84
-  45:AudioFileManager.cpp ****     /* skip hidden files / directories */
- 339              		.loc 1 45 19 is_stmt 0 view .LVU85
- 340 002e FFF7FEFF 		bl	f_readdir
- 341              	.LVL23:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 14
+ 192 0018 3DD1     		bne	.L13
+ 193              	.L8:
+  34:AudioFileManager.cpp ****     // DebugPrint(pod_, "failed to open SD card directory");
+  35:AudioFileManager.cpp ****     // TODO log error? 
+  36:AudioFileManager.cpp ****     return false;
+  37:AudioFileManager.cpp ****   }
+  38:AudioFileManager.cpp ****   /* loop over files in SD card root directory */
+  39:AudioFileManager.cpp ****   while (f_readdir(&dir, &fno) == FR_OK && fno.fname[0]!=0 && file_count_<MAX_FILES){
+ 194              		.loc 1 39 3 is_stmt 1 view .LVU43
+ 195              		.loc 1 39 60 view .LVU44
+ 196              		.loc 1 39 19 is_stmt 0 view .LVU45
+ 197 001a 0CA9     		add	r1, sp, #48
+ 198 001c 6846     		mov	r0, sp
+ 199 001e FFF7FEFF 		bl	f_readdir
+ 200              	.LVL12:
+ 201              		.loc 1 39 60 view .LVU46
+ 202 0022 78BB     		cbnz	r0, .L9
+ 203              		.loc 1 39 41 discriminator 1 view .LVU47
+ 204 0024 9DF84630 		ldrb	r3, [sp, #70]	@ zero_extendqisi2
+ 205 0028 63B3     		cbz	r3, .L9
+ 206              		.loc 1 39 74 discriminator 3 view .LVU48
+ 207 002a 2C88     		ldrh	r4, [r5]
+ 208              		.loc 1 39 60 discriminator 3 view .LVU49
+ 209 002c 1F2C     		cmp	r4, #31
+ 210 002e 29D8     		bhi	.L9
+  40:AudioFileManager.cpp ****     /* skip hidden files / directories */
+  41:AudioFileManager.cpp ****     if (!(fno.fattrib & (AM_HID|AM_DIR)) &&
+ 211              		.loc 1 41 5 is_stmt 1 view .LVU50
+ 212 0030 9DF83830 		ldrb	r3, [sp, #56]	@ zero_extendqisi2
+ 213 0034 13F0120F 		tst	r3, #18
+ 214 0038 EFD1     		bne	.L8
+  42:AudioFileManager.cpp ****       /* ignore metadata files starting with '._' */
+  43:AudioFileManager.cpp ****       strncmp(fno.fname,"._",2)!= 0 && 
+ 215              		.loc 1 43 14 is_stmt 0 discriminator 1 view .LVU51
+ 216 003a 0222     		movs	r2, #2
+ 217 003c 1849     		ldr	r1, .L23+4
+ 218 003e 0DF14600 		add	r0, sp, #70
+ 219 0042 FFF7FEFF 		bl	strncmp
+ 220              	.LVL13:
+  41:AudioFileManager.cpp ****       /* ignore metadata files starting with '._' */
+ 221              		.loc 1 41 42 discriminator 1 view .LVU52
+ 222 0046 0028     		cmp	r0, #0
+ 223 0048 E7D0     		beq	.L8
+  44:AudioFileManager.cpp ****       (strstr(fno.fname,".wav") || strstr(fno.fname,".WAV"))){
+ 224              		.loc 1 44 14 view .LVU53
+ 225 004a 1649     		ldr	r1, .L23+8
+ 226 004c 0DF14600 		add	r0, sp, #70
+ 227 0050 FFF7FEFF 		bl	strstr
+ 228              	.LVL14:
+  43:AudioFileManager.cpp ****       (strstr(fno.fname,".wav") || strstr(fno.fname,".WAV"))){
+ 229              		.loc 1 43 37 view .LVU54
+ 230 0054 30B9     		cbnz	r0, .L12
+ 231              		.loc 1 44 42 view .LVU55
+ 232 0056 1449     		ldr	r1, .L23+12
+ 233 0058 0DF14600 		add	r0, sp, #70
+ 234 005c FFF7FEFF 		bl	strstr
+ 235              	.LVL15:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 9
 
 
-  45:AudioFileManager.cpp ****     /* skip hidden files / directories */
- 342              		.loc 1 45 60 view .LVU86
- 343 0032 68B9     		cbnz	r0, .L10
-  45:AudioFileManager.cpp ****     /* skip hidden files / directories */
- 344              		.loc 1 45 41 discriminator 1 view .LVU87
- 345 0034 9DF84630 		ldrb	r3, [sp, #70]	@ zero_extendqisi2
- 346 0038 53B1     		cbz	r3, .L10
-  45:AudioFileManager.cpp ****     /* skip hidden files / directories */
- 347              		.loc 1 45 63 discriminator 3 view .LVU88
- 348 003a B4F85A68 		ldrh	r6, [r4, #2138]
-  45:AudioFileManager.cpp ****     /* skip hidden files / directories */
- 349              		.loc 1 45 60 discriminator 3 view .LVU89
- 350 003e 1F2E     		cmp	r6, #31
- 351 0040 06D8     		bhi	.L10
-  47:AudioFileManager.cpp ****       strncmp(fno.fname,"._",2)!= 0 && /* ignore metadata files starting with '._' */
- 352              		.loc 1 47 5 is_stmt 1 view .LVU90
- 353 0042 9DF83830 		ldrb	r3, [sp, #56]	@ zero_extendqisi2
- 354 0046 13F0120F 		tst	r3, #18
- 355 004a 0FD0     		beq	.L11
- 356              	.L12:
-  54:AudioFileManager.cpp ****   }
- 357              		.loc 1 54 5 view .LVU91
- 358              	.LVL24:
-  54:AudioFileManager.cpp ****   }
- 359              		.loc 1 54 5 is_stmt 0 view .LVU92
- 360 004c 0135     		adds	r5, r5, #1
- 361              	.LVL25:
-  45:AudioFileManager.cpp ****     /* skip hidden files / directories */
- 362              		.loc 1 45 3 view .LVU93
- 363 004e EBE7     		b	.L8
- 364              	.LVL26:
- 365              	.L10:
-  56:AudioFileManager.cpp ****   DebugPrint(pod_, "file count is %d",file_count_);
- 366              		.loc 1 56 3 is_stmt 1 view .LVU94
-  56:AudioFileManager.cpp ****   DebugPrint(pod_, "file count is %d",file_count_);
- 367              		.loc 1 56 13 is_stmt 0 view .LVU95
- 368 0050 6846     		mov	r0, sp
- 369 0052 FFF7FEFF 		bl	f_closedir
- 370              	.LVL27:
-  57:AudioFileManager.cpp ****   return file_count_ >0;
- 371              		.loc 1 57 3 is_stmt 1 view .LVU96
-  57:AudioFileManager.cpp ****   return file_count_ >0;
- 372              		.loc 1 57 3 view .LVU97
- 373              	.LBB63:
- 374              	.LBI63:
- 126:../libDaisy/src/daisy_seed.h ****     {
- 375              		.loc 2 126 17 view .LVU98
- 376              	.LBB64:
- 377              		.loc 2 128 23 is_stmt 0 view .LVU99
- 378 0056 1548     		ldr	r0, .L24+4
- 379 0058 B4F85A18 		ldrh	r1, [r4, #2138]
- 380 005c FFF7FEFF 		bl	_ZN5daisy6LoggerILNS_17LoggerDestinationE1EE9PrintLineEPKcz
- 381              	.LVL28:
- 382              		.loc 2 128 23 view .LVU100
- 383              	.LBE64:
- 384              	.LBE63:
-  58:AudioFileManager.cpp **** }
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 15
+ 236              		.loc 1 44 33 view .LVU56
+ 237 0060 0028     		cmp	r0, #0
+ 238 0062 DAD0     		beq	.L8
+ 239              	.L12:
+  45:AudioFileManager.cpp ****           strncpy(names_[file_count_],fno.fname, MAX_FNAME_LEN-1);
+ 240              		.loc 1 45 11 is_stmt 1 view .LVU57
+ 241              		.loc 1 45 18 is_stmt 0 view .LVU58
+ 242 0064 1148     		ldr	r0, .L23+16
+ 243              		.loc 1 45 37 view .LVU59
+ 244 0066 A601     		lsls	r6, r4, #6
+ 245              		.loc 1 45 18 view .LVU60
+ 246 0068 3F22     		movs	r2, #63
+ 247 006a 0DF14601 		add	r1, sp, #70
+ 248 006e 00EB8410 		add	r0, r0, r4, lsl #6
+  46:AudioFileManager.cpp ****           names_[file_count_++][MAX_FNAME_LEN-1]='\0';
+ 249              		.loc 1 46 49 view .LVU61
+ 250 0072 2E44     		add	r6, r6, r5
+  45:AudioFileManager.cpp ****           strncpy(names_[file_count_],fno.fname, MAX_FNAME_LEN-1);
+ 251              		.loc 1 45 18 view .LVU62
+ 252 0074 FFF7FEFF 		bl	strncpy
+ 253              	.LVL16:
+ 254              		.loc 1 46 11 is_stmt 1 view .LVU63
+ 255              		.loc 1 46 29 is_stmt 0 view .LVU64
+ 256 0078 0134     		adds	r4, r4, #1
+ 257              		.loc 1 46 49 view .LVU65
+ 258 007a 0023     		movs	r3, #0
+ 259              		.loc 1 46 29 view .LVU66
+ 260 007c 2C80     		strh	r4, [r5]	@ movhi
+ 261              		.loc 1 46 49 view .LVU67
+ 262 007e 86F84130 		strb	r3, [r6, #65]
+ 263 0082 CAE7     		b	.L8
+ 264              	.L9:
+  47:AudioFileManager.cpp ****     }
+  48:AudioFileManager.cpp ****   }
+  49:AudioFileManager.cpp ****   f_closedir(&dir);
+ 265              		.loc 1 49 3 is_stmt 1 view .LVU68
+ 266              		.loc 1 49 13 is_stmt 0 view .LVU69
+ 267 0084 6846     		mov	r0, sp
+ 268 0086 FFF7FEFF 		bl	f_closedir
+ 269              	.LVL17:
+  50:AudioFileManager.cpp ****   // DebugPrint(pod_, "file count is %d",file_count_);
+  51:AudioFileManager.cpp ****   return file_count_ >0;
+ 270              		.loc 1 51 3 is_stmt 1 view .LVU70
+ 271              		.loc 1 51 23 is_stmt 0 view .LVU71
+ 272 008a 2888     		ldrh	r0, [r5]
+ 273 008c 0038     		subs	r0, r0, #0
+ 274 008e 18BF     		it	ne
+ 275 0090 0120     		movne	r0, #1
+ 276              	.L7:
+  52:AudioFileManager.cpp **** }
+ 277              		.loc 1 52 1 view .LVU72
+ 278 0092 52B0     		add	sp, sp, #328
+ 279              		.cfi_remember_state
+ 280              		.cfi_def_cfa_offset 16
+ 281              		@ sp needed
+ 282 0094 70BD     		pop	{r4, r5, r6, pc}
+ 283              	.L13:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 10
 
 
- 385              		.loc 1 58 3 is_stmt 1 view .LVU101
-  58:AudioFileManager.cpp **** }
- 386              		.loc 1 58 23 is_stmt 0 view .LVU102
- 387 0060 B4F85A08 		ldrh	r0, [r4, #2138]
- 388 0064 0038     		subs	r0, r0, #0
- 389 0066 18BF     		it	ne
- 390 0068 0120     		movne	r0, #1
- 391 006a DAE7     		b	.L9
- 392              	.L11:
-  48:AudioFileManager.cpp ****       (strstr(fno.fname,".wav") || strstr(fno.fname,".WAV"))){
- 393              		.loc 1 48 14 discriminator 1 view .LVU103
- 394 006c 0222     		movs	r2, #2
- 395 006e 1049     		ldr	r1, .L24+8
- 396 0070 0DF14600 		add	r0, sp, #70
- 397 0074 FFF7FEFF 		bl	strncmp
- 398              	.LVL29:
-  47:AudioFileManager.cpp ****       strncmp(fno.fname,"._",2)!= 0 && /* ignore metadata files starting with '._' */
- 399              		.loc 1 47 42 discriminator 1 view .LVU104
- 400 0078 0028     		cmp	r0, #0
- 401 007a E7D0     		beq	.L12
-  49:AudioFileManager.cpp ****           // strncpy(names_[file_count_++],fno.fname, MAX_FNAME_LEN-1);
- 402              		.loc 1 49 14 view .LVU105
- 403 007c 0D49     		ldr	r1, .L24+12
- 404 007e 0DF14600 		add	r0, sp, #70
- 405 0082 FFF7FEFF 		bl	strstr
- 406              	.LVL30:
-  48:AudioFileManager.cpp ****       (strstr(fno.fname,".wav") || strstr(fno.fname,".WAV"))){
- 407              		.loc 1 48 37 view .LVU106
- 408 0086 30B9     		cbnz	r0, .L13
-  49:AudioFileManager.cpp ****           // strncpy(names_[file_count_++],fno.fname, MAX_FNAME_LEN-1);
- 409              		.loc 1 49 42 view .LVU107
- 410 0088 0B49     		ldr	r1, .L24+16
- 411 008a 0DF14600 		add	r0, sp, #70
- 412 008e FFF7FEFF 		bl	strstr
- 413              	.LVL31:
-  49:AudioFileManager.cpp ****           // strncpy(names_[file_count_++],fno.fname, MAX_FNAME_LEN-1);
- 414              		.loc 1 49 33 view .LVU108
- 415 0092 0028     		cmp	r0, #0
- 416 0094 DAD0     		beq	.L12
- 417              	.L13:
-  51:AudioFileManager.cpp ****         file_count_++;
- 418              		.loc 1 51 9 is_stmt 1 view .LVU109
-  51:AudioFileManager.cpp ****         file_count_++;
- 419              		.loc 1 51 35 is_stmt 0 view .LVU110
- 420 0096 06F10C03 		add	r3, r6, #12
-  52:AudioFileManager.cpp ****     }
- 421              		.loc 1 52 20 view .LVU111
- 422 009a 0136     		adds	r6, r6, #1
-  51:AudioFileManager.cpp ****         file_count_++;
- 423              		.loc 1 51 35 view .LVU112
- 424 009c 24F81370 		strh	r7, [r4, r3, lsl #1]	@ movhi
-  52:AudioFileManager.cpp ****     }
- 425              		.loc 1 52 9 is_stmt 1 view .LVU113
-  52:AudioFileManager.cpp ****     }
- 426              		.loc 1 52 20 is_stmt 0 view .LVU114
- 427 00a0 A4F85A68 		strh	r6, [r4, #2138]	@ movhi
- 428 00a4 D2E7     		b	.L12
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 16
-
-
- 429              	.L25:
- 430 00a6 00BF     		.align	2
- 431              	.L24:
- 432 00a8 00000000 		.word	.LC6
- 433 00ac 21000000 		.word	.LC7
- 434 00b0 32000000 		.word	.LC8
- 435 00b4 35000000 		.word	.LC9
- 436 00b8 3A000000 		.word	.LC10
- 437              		.cfi_endproc
- 438              	.LFE2584:
- 440              		.section	.text._ZN16AudioFileManager12GetWavHeaderEP3FIL,"ax",%progbits
- 441              		.align	1
- 442              		.global	_ZN16AudioFileManager12GetWavHeaderEP3FIL
- 443              		.syntax unified
- 444              		.thumb
- 445              		.thumb_func
- 447              	_ZN16AudioFileManager12GetWavHeaderEP3FIL:
- 448              	.LVL32:
- 449              	.LFB2586:
-  60:AudioFileManager.cpp **** 
-  61:AudioFileManager.cpp **** 
-  62:AudioFileManager.cpp **** // bool AudioFileManger::OpenFileByIndex(uint16_t sel_idx){
-  63:AudioFileManager.cpp **** 
-  64:AudioFileManager.cpp **** // }
+ 284              		.cfi_restore_state
+  36:AudioFileManager.cpp ****   }
+ 285              		.loc 1 36 12 view .LVU73
+ 286 0096 2046     		mov	r0, r4
+ 287 0098 FBE7     		b	.L7
+ 288              	.L24:
+ 289 009a 00BF     		.align	2
+ 290              	.L23:
+ 291 009c 00000000 		.word	.LANCHOR0
+ 292 00a0 00000000 		.word	.LC1
+ 293 00a4 03000000 		.word	.LC2
+ 294 00a8 08000000 		.word	.LC3
+ 295 00ac 02000000 		.word	.LANCHOR0+2
+ 296              		.cfi_endproc
+ 297              	.LFE2584:
+ 299              		.section	.text._ZN16AudioFileManager12GetWavHeaderEP3FIL,"ax",%progbits
+ 300              		.align	1
+ 301              		.global	_ZN16AudioFileManager12GetWavHeaderEP3FIL
+ 302              		.syntax unified
+ 303              		.thumb
+ 304              		.thumb_func
+ 306              	_ZN16AudioFileManager12GetWavHeaderEP3FIL:
+ 307              	.LVL18:
+ 308              	.LFB2586:
+  53:AudioFileManager.cpp **** 
+  54:AudioFileManager.cpp **** /// @brief Opens a WAV file, gets its header data and loads the audio data
+  55:AudioFileManager.cpp **** /// @param sel_idx The index of the selected file in the list of files on the SD card
+  56:AudioFileManager.cpp **** /// @return True if file audio data is loaded succesfully
+  57:AudioFileManager.cpp **** /// @return False if file fails to load - this could be because:
+  58:AudioFileManager.cpp **** ///         - File index is invalid
+  59:AudioFileManager.cpp **** ///         - File can't be opened from SD card
+  60:AudioFileManager.cpp **** ///         - Bit depth or sample rate values are not supported 
+  61:AudioFileManager.cpp **** ///         - Audio data fails to load 
+  62:AudioFileManager.cpp **** bool AudioFileManager::LoadFile(uint16_t sel_idx) {
+  63:AudioFileManager.cpp ****   if (sel_idx > file_count_) return false;
+  64:AudioFileManager.cpp ****   if (sel_idx != curr_idx_) f_close(curr_file_);
   65:AudioFileManager.cpp **** 
-  66:AudioFileManager.cpp **** /// @brief Opens a WAV file, gets its header data and loads the audio data
-  67:AudioFileManager.cpp **** /// @param sel_idx The index of the selected file in the list of files on the SD card
-  68:AudioFileManager.cpp **** /// @return True if file audio data is loaded succesfully
-  69:AudioFileManager.cpp **** /// @return False if file fails to load - this could be because:
-  70:AudioFileManager.cpp **** ///         - File index is invalid
-  71:AudioFileManager.cpp **** ///         - File can't be opened from SD card
-  72:AudioFileManager.cpp **** ///         - Bit depth or sample rate values are not supported 
-  73:AudioFileManager.cpp **** ///         - Audio data fails to load 
-  74:AudioFileManager.cpp **** bool AudioFileManager::LoadFile(uint16_t sel_idx) {
-  75:AudioFileManager.cpp ****   if (sel_idx > file_count_) return false;
-  76:AudioFileManager.cpp ****   if (sel_idx != curr_idx_) f_close(curr_file_);
-  77:AudioFileManager.cpp **** 
-  78:AudioFileManager.cpp **** 
-  79:AudioFileManager.cpp ****   if (f_open(curr_file_, names_[sel_idx], (FA_OPEN_EXISTING | FA_READ))!=FR_OK) return false;
-  80:AudioFileManager.cpp **** 
-  81:AudioFileManager.cpp ****   if (!GetWavHeader(curr_file_)||header_.bit_depth!=16||header_.sample_rate!=48000){
-  82:AudioFileManager.cpp ****     DebugPrint(pod_, "wav header parse failed");
-  83:AudioFileManager.cpp ****     f_close(curr_file_);
-  84:AudioFileManager.cpp ****     return false;
+  66:AudioFileManager.cpp ****   if (f_open(curr_file_, names_[sel_idx], (FA_OPEN_EXISTING | FA_READ))!=FR_OK) return false;
+  67:AudioFileManager.cpp ****   if (!GetWavHeader(curr_file_)||header_.bit_depth!=16||header_.sample_rate!=48000){
+  68:AudioFileManager.cpp ****     // DebugPrint(pod_, "wav header parse failed");
+  69:AudioFileManager.cpp ****     f_close(curr_file_);
+  70:AudioFileManager.cpp ****     return false;
+  71:AudioFileManager.cpp ****   }
+  72:AudioFileManager.cpp ****   // DebugPrint(pod_, "loading audio data now");
+  73:AudioFileManager.cpp ****   return LoadAudioData();
+  74:AudioFileManager.cpp **** }
+  75:AudioFileManager.cpp **** 
+  76:AudioFileManager.cpp **** /// @brief Parses audio format data from a WAV file header
+  77:AudioFileManager.cpp **** /// @param file The WAV file to be parsed
+  78:AudioFileManager.cpp **** /// @return True if all data is successfully parsed
+  79:AudioFileManager.cpp **** /// @return False if file can't be read or data is missing
+  80:AudioFileManager.cpp **** bool AudioFileManager::GetWavHeader(FIL* file){
+ 309              		.loc 1 80 47 is_stmt 1 view -0
+ 310              		.cfi_startproc
+ 311              		@ args = 0, pretend = 0, frame = 48
+ 312              		@ frame_needed = 0, uses_anonymous_args = 0
+  81:AudioFileManager.cpp ****   WAV_FormatTypeDef header;
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 11
+
+
+ 313              		.loc 1 81 3 view .LVU75
+  82:AudioFileManager.cpp ****   UINT bytes_read;
+ 314              		.loc 1 82 3 view .LVU76
+  83:AudioFileManager.cpp ****   FRESULT res = f_read(file, &header, sizeof(WAV_FormatTypeDef),&bytes_read);
+ 315              		.loc 1 83 3 view .LVU77
+  80:AudioFileManager.cpp ****   WAV_FormatTypeDef header;
+ 316              		.loc 1 80 47 is_stmt 0 view .LVU78
+ 317 0000 10B5     		push	{r4, lr}
+ 318              		.cfi_def_cfa_offset 8
+ 319              		.cfi_offset 4, -8
+ 320              		.cfi_offset 14, -4
+ 321 0002 8CB0     		sub	sp, sp, #48
+ 322              		.cfi_def_cfa_offset 56
+  80:AudioFileManager.cpp ****   WAV_FormatTypeDef header;
+ 323              		.loc 1 80 47 view .LVU79
+ 324 0004 0446     		mov	r4, r0
+ 325              		.loc 1 83 23 view .LVU80
+ 326 0006 2C22     		movs	r2, #44
+  80:AudioFileManager.cpp ****   WAV_FormatTypeDef header;
+ 327              		.loc 1 80 47 view .LVU81
+ 328 0008 0846     		mov	r0, r1
+ 329              	.LVL19:
+ 330              		.loc 1 83 23 view .LVU82
+ 331 000a 6B46     		mov	r3, sp
+ 332 000c 01A9     		add	r1, sp, #4
+ 333              	.LVL20:
+ 334              		.loc 1 83 23 view .LVU83
+ 335 000e FFF7FEFF 		bl	f_read
+ 336              	.LVL21:
+  84:AudioFileManager.cpp ****   if (res != FR_OK || bytes_read != sizeof(WAV_FormatTypeDef)){
+ 337              		.loc 1 84 3 is_stmt 1 view .LVU84
+ 338 0012 0028     		cmp	r0, #0
+ 339 0014 3ED1     		bne	.L28
+ 340              		.loc 1 84 20 is_stmt 0 discriminator 1 view .LVU85
+ 341 0016 009B     		ldr	r3, [sp]
+ 342 0018 2C2B     		cmp	r3, #44
+ 343 001a 39D1     		bne	.L26
+  85:AudioFileManager.cpp ****     return false;
+  86:AudioFileManager.cpp ****   }
+  87:AudioFileManager.cpp ****   /* here we check each subchunk of the wav file is in the correct location and
+  88:AudioFileManager.cpp ****     has the correct identifier - had some problems with weirdly formatted wav files
+  89:AudioFileManager.cpp ****     NB: id values here/below are in little endian (usually big endian) */
+  90:AudioFileManager.cpp ****   bool checkRIFF = (header.ChunkId == 0x46464952);
+ 344              		.loc 1 90 3 is_stmt 1 view .LVU86
+ 345              	.LVL22:
+  91:AudioFileManager.cpp ****   bool checkWAV = (header.FileFormat == 0x45564157);
+ 346              		.loc 1 91 3 view .LVU87
+  92:AudioFileManager.cpp ****   bool checkFmt = (header.SubChunk1ID == 0x20746D66);
+ 347              		.loc 1 92 3 view .LVU88
+  93:AudioFileManager.cpp ****   bool checkData = (header.SubChunk2ID == 0x61746164);
+ 348              		.loc 1 93 3 view .LVU89
+  94:AudioFileManager.cpp **** 
+  95:AudioFileManager.cpp ****   /* ignore files with invalid riff/fmt header info - not compliant with WAV spec */
+  96:AudioFileManager.cpp ****   if (!checkRIFF || !checkWAV) return false;
+ 349              		.loc 1 96 3 view .LVU90
+ 350 001c 1E4B     		ldr	r3, .L34
+ 351 001e 019A     		ldr	r2, [sp, #4]
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 12
+
+
+ 352 0020 9A42     		cmp	r2, r3
+ 353 0022 35D1     		bne	.L26
+ 354              		.loc 1 96 18 is_stmt 0 discriminator 2 view .LVU91
+ 355 0024 A3F57003 		sub	r3, r3, #15728640
+ 356 0028 039A     		ldr	r2, [sp, #12]
+ 357 002a A3F2FB73 		subw	r3, r3, #2043
+ 358 002e 9A42     		cmp	r2, r3
+ 359 0030 2ED1     		bne	.L26
+  97:AudioFileManager.cpp ****   if (checkFmt && checkData){
+ 360              		.loc 1 97 3 is_stmt 1 view .LVU92
+ 361 0032 03F15B43 		add	r3, r3, #-620756992
+ 362 0036 049A     		ldr	r2, [sp, #16]
+ 363 0038 03F5F113 		add	r3, r3, #1974272
+ 364 003c 03F60F43 		addw	r3, r3, #3087
+ 365 0040 9A42     		cmp	r2, r3
+ 366 0042 25D1     		bne	.L26
+ 367              		.loc 1 97 16 is_stmt 0 discriminator 1 view .LVU93
+ 368 0044 03F18243 		add	r3, r3, #1090519040
+ 369 0048 0A9A     		ldr	r2, [sp, #40]
+ 370 004a A3F60243 		subw	r3, r3, #3074
+ 371 004e 9A42     		cmp	r2, r3
+ 372 0050 1ED1     		bne	.L26
+  98:AudioFileManager.cpp ****     header_.sample_rate = header.SampleRate;
+ 373              		.loc 1 98 5 is_stmt 1 view .LVU94
+ 374              		.loc 1 98 25 is_stmt 0 view .LVU95
+ 375 0052 124A     		ldr	r2, .L34+4
+ 376 0054 079B     		ldr	r3, [sp, #28]
+  99:AudioFileManager.cpp ****     header_.channels = header.NbrChannels;
+ 100:AudioFileManager.cpp ****     header_.bit_depth = header.BitPerSample;
+ 101:AudioFileManager.cpp ****     header_.file_size = header.SubCHunk2Size;
+ 377              		.loc 1 101 32 view .LVU96
+ 378 0056 0B99     		ldr	r1, [sp, #44]
+  98:AudioFileManager.cpp ****     header_.sample_rate = header.SampleRate;
+ 379              		.loc 1 98 25 view .LVU97
+ 380 0058 C2F80438 		str	r3, [r2, #2052]
+  99:AudioFileManager.cpp ****     header_.channels = header.NbrChannels;
+ 381              		.loc 1 99 5 is_stmt 1 view .LVU98
+  99:AudioFileManager.cpp ****     header_.channels = header.NbrChannels;
+ 382              		.loc 1 99 22 is_stmt 0 view .LVU99
+ 383 005c BDF81A30 		ldrh	r3, [sp, #26]
+ 384              		.loc 1 101 23 view .LVU100
+ 385 0060 C2F80818 		str	r1, [r2, #2056]
+  99:AudioFileManager.cpp ****     header_.channels = header.NbrChannels;
+ 386              		.loc 1 99 22 view .LVU101
+ 387 0064 A2F80C38 		strh	r3, [r2, #2060]	@ movhi
+ 100:AudioFileManager.cpp ****     header_.file_size = header.SubCHunk2Size;
+ 388              		.loc 1 100 5 is_stmt 1 view .LVU102
+ 100:AudioFileManager.cpp ****     header_.file_size = header.SubCHunk2Size;
+ 389              		.loc 1 100 32 is_stmt 0 view .LVU103
+ 390 0068 BDF92630 		ldrsh	r3, [sp, #38]
+ 102:AudioFileManager.cpp ****     header_.total_samples = header_.file_size / (header_.bit_depth/8);
+ 103:AudioFileManager.cpp ****     return f_lseek(curr_file_,audio_data_start_) == FR_OK;
+ 391              		.loc 1 103 19 view .LVU104
+ 392 006c E068     		ldr	r0, [r4, #12]
+ 393              	.LVL23:
+ 100:AudioFileManager.cpp ****     header_.file_size = header.SubCHunk2Size;
+ 394              		.loc 1 100 23 view .LVU105
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 13
+
+
+ 395 006e A2F80E38 		strh	r3, [r2, #2062]	@ movhi
+ 101:AudioFileManager.cpp ****     header_.total_samples = header_.file_size / (header_.bit_depth/8);
+ 396              		.loc 1 101 5 is_stmt 1 view .LVU106
+ 102:AudioFileManager.cpp ****     header_.total_samples = header_.file_size / (header_.bit_depth/8);
+ 397              		.loc 1 102 5 view .LVU107
+ 102:AudioFileManager.cpp ****     header_.total_samples = header_.file_size / (header_.bit_depth/8);
+ 398              		.loc 1 102 67 is_stmt 0 view .LVU108
+ 399 0072 002B     		cmp	r3, #0
+ 400 0074 B8BF     		it	lt
+ 401 0076 0733     		addlt	r3, r3, #7
+ 402 0078 DB10     		asrs	r3, r3, #3
+ 102:AudioFileManager.cpp ****     header_.total_samples = header_.file_size / (header_.bit_depth/8);
+ 403              		.loc 1 102 47 view .LVU109
+ 404 007a B1FBF3F3 		udiv	r3, r1, r3
+ 405              		.loc 1 103 19 view .LVU110
+ 406 007e 92F81418 		ldrb	r1, [r2, #2068]	@ zero_extendqisi2
+ 102:AudioFileManager.cpp ****     header_.total_samples = header_.file_size / (header_.bit_depth/8);
+ 407              		.loc 1 102 27 view .LVU111
+ 408 0082 C2F81038 		str	r3, [r2, #2064]
+ 409              		.loc 1 103 5 is_stmt 1 view .LVU112
+ 410              		.loc 1 103 19 is_stmt 0 view .LVU113
+ 411 0086 FFF7FEFF 		bl	f_lseek
+ 412              	.LVL24:
+ 413              		.loc 1 103 53 view .LVU114
+ 414 008a B0FA80F0 		clz	r0, r0
+ 415 008e 4009     		lsrs	r0, r0, #5
+ 416              	.L26:
+ 104:AudioFileManager.cpp ****   }
+ 105:AudioFileManager.cpp ****   else return false;
+ 106:AudioFileManager.cpp ****   // if (checkFmt){
+ 107:AudioFileManager.cpp ****   //   header_.sample_rate = header.SampleRate;
+ 108:AudioFileManager.cpp ****   //   header_.channels = header.NbrChannels;
+ 109:AudioFileManager.cpp ****   //   header_.bit_depth = header.BitPerSample;
+ 110:AudioFileManager.cpp ****   // }
+ 111:AudioFileManager.cpp ****   // if (checkData){
+ 112:AudioFileManager.cpp ****   //   header_.file_size = header.SubCHunk2Size;
+ 113:AudioFileManager.cpp ****   // /* find audio len in samples: http://tiny.systems/software/soundProgrammer/WavFormatDocs.pdf *
+ 114:AudioFileManager.cpp ****   //   header_.total_samples = header_.file_size / (header_.bit_depth/8);
+ 115:AudioFileManager.cpp ****   // }
+ 116:AudioFileManager.cpp ****   // /* otherwise: data chunk may be misplaced, so search within file for it */
+ 117:AudioFileManager.cpp ****   // if (!checkFmt || !checkData){
+ 118:AudioFileManager.cpp ****   //   uint32_t chunk_id, chunk_size;
+ 119:AudioFileManager.cpp ****   //   f_lseek(file, 12); /* skip to usual start of fmt chunk (byte 12) to start looking */
+ 120:AudioFileManager.cpp ****   //   while (f_read(file, &chunk_id, 4, &bytes_read) == FR_OK && bytes_read == 4) {
+ 121:AudioFileManager.cpp ****   //     f_read(file, &chunk_size, 4, &bytes_read);
+ 122:AudioFileManager.cpp ****       
+ 123:AudioFileManager.cpp ****   //     if (chunk_id==0x20746D66) { /* this is 'fmt' in little endian */
+ 124:AudioFileManager.cpp ****         
+ 125:AudioFileManager.cpp ****   //       f_lseek(file, f_tell(file)+6); /* skip chunk size and audio format - 6 bytes */
+ 126:AudioFileManager.cpp ****   //       /* now get num of channels - 2 bytes*/
+ 127:AudioFileManager.cpp ****   //       if (f_read(file, &header_.channels, 2, &bytes_read)!=FR_OK || bytes_read!=2){
+ 128:AudioFileManager.cpp ****   //         return false;
+ 129:AudioFileManager.cpp ****   //       }
+ 130:AudioFileManager.cpp ****   //       /* get sample rate - 4 bytes */
+ 131:AudioFileManager.cpp ****   //       if (f_read(file, &header_.sample_rate, 4, &bytes_read)!=FR_OK || bytes_read!=4){
+ 132:AudioFileManager.cpp ****   //         return false;
+ 133:AudioFileManager.cpp ****   //       }
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 14
+
+
+ 134:AudioFileManager.cpp ****   //       f_lseek(file, f_tell(file)+6); /* skip byte rate and block align - 6 bytes */
+ 135:AudioFileManager.cpp ****   //       /* finally get bit depth - 2 bytes */
+ 136:AudioFileManager.cpp ****   //       if (f_read(file, &header_.bit_depth, 2, &bytes_read)!=FR_OK || bytes_read!=2){
+ 137:AudioFileManager.cpp ****   //         return false;
+ 138:AudioFileManager.cpp ****   //       }
+ 139:AudioFileManager.cpp ****   //       checkFmt = true;
+ 140:AudioFileManager.cpp ****   //     }
+ 141:AudioFileManager.cpp ****   //     else if (chunk_id==0x61746164){ /* this is 'data' in little endian */
+ 142:AudioFileManager.cpp ****   //       header_.file_size = chunk_size;
+ 143:AudioFileManager.cpp ****   //       checkData = true;
+ 144:AudioFileManager.cpp ****   //       break;
+ 145:AudioFileManager.cpp ****   //     } 
+ 146:AudioFileManager.cpp ****   //     else {
+ 147:AudioFileManager.cpp ****   //       f_lseek(file, f_tell(file)+chunk_size);
+ 148:AudioFileManager.cpp ****   //     }
+ 149:AudioFileManager.cpp ****   //     if (checkFmt && checkData) break;
+ 150:AudioFileManager.cpp ****   //   }
+ 151:AudioFileManager.cpp ****   // }
+ 152:AudioFileManager.cpp ****   // if (!checkFmt || !checkData) return false;
+ 153:AudioFileManager.cpp ****   // header_.total_samples = header_.file_size / (header_.bit_depth / 8);
+ 154:AudioFileManager.cpp ****   // audio_data_start_ = f_tell(file); 
+ 155:AudioFileManager.cpp ****   // FRESULT seek_res = f_lseek(curr_file_, audio_data_start_);
+ 156:AudioFileManager.cpp ****   // return seek_res == FR_OK;
+ 157:AudioFileManager.cpp **** }
+ 417              		.loc 1 157 1 view .LVU115
+ 418 0090 0CB0     		add	sp, sp, #48
+ 419              		.cfi_remember_state
+ 420              		.cfi_def_cfa_offset 8
+ 421              		@ sp needed
+ 422 0092 10BD     		pop	{r4, pc}
+ 423              	.LVL25:
+ 424              	.L28:
+ 425              		.cfi_restore_state
   85:AudioFileManager.cpp ****   }
-  86:AudioFileManager.cpp **** 
-  87:AudioFileManager.cpp ****   DebugPrint(pod_, "loading audio data now");
-  88:AudioFileManager.cpp ****   return LoadAudioData();
-  89:AudioFileManager.cpp **** }
-  90:AudioFileManager.cpp **** 
-  91:AudioFileManager.cpp **** /// @brief Parses audio format data from a WAV file header
-  92:AudioFileManager.cpp **** /// @param file The WAV file to be parsed
-  93:AudioFileManager.cpp **** /// @return True if all data is successfully parsed
-  94:AudioFileManager.cpp **** /// @return False if file can't be read or data is missing
-  95:AudioFileManager.cpp **** bool AudioFileManager::GetWavHeader(FIL* file){
- 450              		.loc 1 95 47 is_stmt 1 view -0
- 451              		.cfi_startproc
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 17
+ 426              		.loc 1 85 12 view .LVU116
+ 427 0094 0020     		movs	r0, #0
+ 428              	.LVL26:
+  85:AudioFileManager.cpp ****   }
+ 429              		.loc 1 85 12 view .LVU117
+ 430 0096 FBE7     		b	.L26
+ 431              	.L35:
+ 432              		.align	2
+ 433              	.L34:
+ 434 0098 52494646 		.word	1179011410
+ 435 009c 00000000 		.word	.LANCHOR0
+ 436              		.cfi_endproc
+ 437              	.LFE2586:
+ 439              		.section	.text._ZN16AudioFileManager14Load16BitAudioEj,"ax",%progbits
+ 440              		.align	1
+ 441              		.global	_ZN16AudioFileManager14Load16BitAudioEj
+ 442              		.syntax unified
+ 443              		.thumb
+ 444              		.thumb_func
+ 446              	_ZN16AudioFileManager14Load16BitAudioEj:
+ 447              	.LVL27:
+ 448              	.LFB2588:
+ 158:AudioFileManager.cpp **** 
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 15
 
 
- 452              		@ args = 0, pretend = 0, frame = 48
- 453              		@ frame_needed = 0, uses_anonymous_args = 0
-  96:AudioFileManager.cpp ****   WAV_FormatTypeDef header;
- 454              		.loc 1 96 3 view .LVU116
-  97:AudioFileManager.cpp ****   UINT bytes_read;
- 455              		.loc 1 97 3 view .LVU117
-  98:AudioFileManager.cpp ****   FRESULT res = f_read(file, &header, sizeof(WAV_FormatTypeDef),&bytes_read);
- 456              		.loc 1 98 3 view .LVU118
-  95:AudioFileManager.cpp ****   WAV_FormatTypeDef header;
- 457              		.loc 1 95 47 is_stmt 0 view .LVU119
- 458 0000 10B5     		push	{r4, lr}
- 459              		.cfi_def_cfa_offset 8
- 460              		.cfi_offset 4, -8
- 461              		.cfi_offset 14, -4
- 462 0002 8CB0     		sub	sp, sp, #48
- 463              		.cfi_def_cfa_offset 56
-  95:AudioFileManager.cpp ****   WAV_FormatTypeDef header;
- 464              		.loc 1 95 47 view .LVU120
- 465 0004 0446     		mov	r4, r0
- 466              		.loc 1 98 23 view .LVU121
- 467 0006 2C22     		movs	r2, #44
-  95:AudioFileManager.cpp ****   WAV_FormatTypeDef header;
- 468              		.loc 1 95 47 view .LVU122
- 469 0008 0846     		mov	r0, r1
- 470              	.LVL33:
- 471              		.loc 1 98 23 view .LVU123
- 472 000a 6B46     		mov	r3, sp
- 473 000c 01A9     		add	r1, sp, #4
- 474              	.LVL34:
- 475              		.loc 1 98 23 view .LVU124
- 476 000e FFF7FEFF 		bl	f_read
- 477              	.LVL35:
-  99:AudioFileManager.cpp ****   if (res != FR_OK || bytes_read != sizeof(WAV_FormatTypeDef)){
- 478              		.loc 1 99 3 is_stmt 1 view .LVU125
- 479 0012 0028     		cmp	r0, #0
- 480 0014 3DD1     		bne	.L29
- 481              		.loc 1 99 20 is_stmt 0 discriminator 1 view .LVU126
- 482 0016 009B     		ldr	r3, [sp]
- 483 0018 2C2B     		cmp	r3, #44
- 484 001a 38D1     		bne	.L27
- 100:AudioFileManager.cpp ****     return false;
- 101:AudioFileManager.cpp ****   }
- 102:AudioFileManager.cpp ****   /* here we check each subchunk of the wav file is in the correct location and
- 103:AudioFileManager.cpp ****     has the correct identifier - had some problems with weirdly formatted wav files
- 104:AudioFileManager.cpp ****     NB: id values here/below are in little endian (usually big endian) */
- 105:AudioFileManager.cpp ****   bool checkRIFF = (header.ChunkId == 0x46464952);
- 485              		.loc 1 105 3 is_stmt 1 view .LVU127
- 486              	.LVL36:
- 106:AudioFileManager.cpp ****   bool checkWAV = (header.FileFormat == 0x45564157);
- 487              		.loc 1 106 3 view .LVU128
- 107:AudioFileManager.cpp ****   bool checkFmt = (header.SubChunk1ID == 0x20746D66);
- 488              		.loc 1 107 3 view .LVU129
- 108:AudioFileManager.cpp ****   bool checkData = (header.SubChunk2ID == 0x61746164);
- 489              		.loc 1 108 3 view .LVU130
- 109:AudioFileManager.cpp **** 
- 110:AudioFileManager.cpp ****   /* ignore files with invalid riff/fmt header info - not compliant with WAV spec */
- 111:AudioFileManager.cpp ****   if (!checkRIFF || !checkWAV) return false;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 18
+ 159:AudioFileManager.cpp **** /// @brief Clear data buffers, check file length is within bounds, call audio loader
+ 160:AudioFileManager.cpp **** /// @return True if audio is loaded, false if file is too long or incorrect bit depth
+ 161:AudioFileManager.cpp **** bool AudioFileManager::LoadAudioData() {
+ 162:AudioFileManager.cpp ****   memset(left_buf_, 0.0f, CHNL_BUF_SIZE_ABS);
+ 163:AudioFileManager.cpp ****   memset(right_buf_, 0.0f, CHNL_BUF_SIZE_ABS);
+ 164:AudioFileManager.cpp ****   size_t samples_per_channel = GetSamplesPerChannel();
+ 165:AudioFileManager.cpp **** 
+ 166:AudioFileManager.cpp ****   if (samples_per_channel > CHNL_BUF_SIZE_SAMPS) return false;
+ 167:AudioFileManager.cpp **** 
+ 168:AudioFileManager.cpp ****   return Load16BitAudio(samples_per_channel);
+ 169:AudioFileManager.cpp **** }
+ 170:AudioFileManager.cpp **** 
+ 171:AudioFileManager.cpp **** /// @brief Reads chunks of bytes from audio file into temporary buffer, then into SDRAM
+ 172:AudioFileManager.cpp **** /// @param samples_per_channel Length of audio in samples, per channel 
+ 173:AudioFileManager.cpp **** /// @return True if audio is loaded. False if file fails to read
+ 174:AudioFileManager.cpp **** bool AudioFileManager::Load16BitAudio(size_t samples_per_channel){
+ 449              		.loc 1 174 66 is_stmt 1 view -0
+ 450              		.cfi_startproc
+ 451              		@ args = 0, pretend = 0, frame = 8
+ 452              		@ frame_needed = 0, uses_anonymous_args = 0
+ 175:AudioFileManager.cpp ****   // DebugPrint(pod_,"before buf");
+ 176:AudioFileManager.cpp ****   // alignas(32) std::vector<int16_t> temp_buf(BUF_CHUNK_SZ*header_.channels);
+ 177:AudioFileManager.cpp ****   // std::vector<int16_t> temp_buf(BUF_CHUNK_SZ*header_.channels);
+ 178:AudioFileManager.cpp ****   // int16_t temp_buf[16384]; // stack buffer
+ 179:AudioFileManager.cpp ****   int16_t* temp_buf = new int16_t[16384]; // heap buffer? try it 
+ 453              		.loc 1 179 3 view .LVU119
+ 174:AudioFileManager.cpp ****   // DebugPrint(pod_,"before buf");
+ 454              		.loc 1 174 66 is_stmt 0 view .LVU120
+ 455 0000 2DE9F341 		push	{r0, r1, r4, r5, r6, r7, r8, lr}
+ 456              		.cfi_def_cfa_offset 32
+ 457              		.cfi_offset 4, -24
+ 458              		.cfi_offset 5, -20
+ 459              		.cfi_offset 6, -16
+ 460              		.cfi_offset 7, -12
+ 461              		.cfi_offset 8, -8
+ 462              		.cfi_offset 14, -4
+ 174:AudioFileManager.cpp ****   // DebugPrint(pod_,"before buf");
+ 463              		.loc 1 174 66 view .LVU121
+ 464 0004 0746     		mov	r7, r0
+ 465              		.loc 1 179 40 view .LVU122
+ 466 0006 4FF40040 		mov	r0, #32768
+ 467              	.LVL28:
+ 174:AudioFileManager.cpp ****   // DebugPrint(pod_,"before buf");
+ 468              		.loc 1 174 66 view .LVU123
+ 469 000a 0E46     		mov	r6, r1
+ 180:AudioFileManager.cpp ****   size_t samples_read = 0;
+ 470              		.loc 1 180 10 view .LVU124
+ 471 000c 0025     		movs	r5, #0
+ 179:AudioFileManager.cpp ****   size_t samples_read = 0;
+ 472              		.loc 1 179 40 view .LVU125
+ 473 000e FFF7FEFF 		bl	_Znaj
+ 474              	.LVL29:
+ 179:AudioFileManager.cpp ****   size_t samples_read = 0;
+ 475              		.loc 1 179 40 view .LVU126
+ 476 0012 0446     		mov	r4, r0
+ 477              	.LVL30:
+ 478              		.loc 1 180 3 is_stmt 1 view .LVU127
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 16
 
 
- 490              		.loc 1 111 3 view .LVU131
- 491 001c 1E4B     		ldr	r3, .L35
- 492 001e 019A     		ldr	r2, [sp, #4]
- 493 0020 9A42     		cmp	r2, r3
- 494 0022 34D1     		bne	.L27
- 495              		.loc 1 111 18 is_stmt 0 discriminator 2 view .LVU132
- 496 0024 A3F57003 		sub	r3, r3, #15728640
- 497 0028 039A     		ldr	r2, [sp, #12]
- 498 002a A3F2FB73 		subw	r3, r3, #2043
- 499 002e 9A42     		cmp	r2, r3
- 500 0030 2DD1     		bne	.L27
- 112:AudioFileManager.cpp ****   if (checkFmt && checkData){
- 501              		.loc 1 112 3 is_stmt 1 view .LVU133
- 502 0032 03F15B43 		add	r3, r3, #-620756992
- 503 0036 049A     		ldr	r2, [sp, #16]
- 504 0038 03F5F113 		add	r3, r3, #1974272
- 505 003c 03F60F43 		addw	r3, r3, #3087
- 506 0040 9A42     		cmp	r2, r3
- 507 0042 24D1     		bne	.L27
- 508              		.loc 1 112 16 is_stmt 0 discriminator 1 view .LVU134
- 509 0044 03F18243 		add	r3, r3, #1090519040
- 510 0048 0A9A     		ldr	r2, [sp, #40]
- 511 004a A3F60243 		subw	r3, r3, #3074
- 512 004e 9A42     		cmp	r2, r3
- 513 0050 1DD1     		bne	.L27
- 113:AudioFileManager.cpp ****     header_.sample_rate = header.SampleRate;
- 514              		.loc 1 113 5 is_stmt 1 view .LVU135
- 515              		.loc 1 113 25 is_stmt 0 view .LVU136
- 516 0052 079B     		ldr	r3, [sp, #28]
- 114:AudioFileManager.cpp ****     header_.channels = header.NbrChannels;
- 115:AudioFileManager.cpp ****     header_.bit_depth = header.BitPerSample;
- 116:AudioFileManager.cpp ****     header_.file_size = header.SubCHunk2Size;
- 517              		.loc 1 116 32 view .LVU137
- 518 0054 0B9A     		ldr	r2, [sp, #44]
- 113:AudioFileManager.cpp ****     header_.sample_rate = header.SampleRate;
- 519              		.loc 1 113 25 view .LVU138
- 520 0056 C4F85C38 		str	r3, [r4, #2140]
- 114:AudioFileManager.cpp ****     header_.channels = header.NbrChannels;
- 521              		.loc 1 114 5 is_stmt 1 view .LVU139
- 114:AudioFileManager.cpp ****     header_.channels = header.NbrChannels;
- 522              		.loc 1 114 22 is_stmt 0 view .LVU140
- 523 005a BDF81A30 		ldrh	r3, [sp, #26]
- 117:AudioFileManager.cpp ****     header_.total_samples = header_.file_size / (header_.bit_depth/8);
- 118:AudioFileManager.cpp ****     return f_lseek(curr_file_,audio_data_start_) == FR_OK;
- 524              		.loc 1 118 19 view .LVU141
- 525 005e D4F86C18 		ldr	r1, [r4, #2156]
- 114:AudioFileManager.cpp ****     header_.channels = header.NbrChannels;
- 526              		.loc 1 114 22 view .LVU142
- 527 0062 A4F86438 		strh	r3, [r4, #2148]	@ movhi
- 115:AudioFileManager.cpp ****     header_.file_size = header.SubCHunk2Size;
- 528              		.loc 1 115 5 is_stmt 1 view .LVU143
- 115:AudioFileManager.cpp ****     header_.file_size = header.SubCHunk2Size;
- 529              		.loc 1 115 32 is_stmt 0 view .LVU144
- 530 0066 BDF92630 		ldrsh	r3, [sp, #38]
- 531              		.loc 1 118 19 view .LVU145
- 532 006a E068     		ldr	r0, [r4, #12]
- 533              	.LVL37:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 19
-
-
- 115:AudioFileManager.cpp ****     header_.file_size = header.SubCHunk2Size;
- 534              		.loc 1 115 23 view .LVU146
- 535 006c A4F86638 		strh	r3, [r4, #2150]	@ movhi
- 116:AudioFileManager.cpp ****     header_.total_samples = header_.file_size / (header_.bit_depth/8);
- 536              		.loc 1 116 5 is_stmt 1 view .LVU147
- 117:AudioFileManager.cpp ****     header_.total_samples = header_.file_size / (header_.bit_depth/8);
- 537              		.loc 1 117 67 is_stmt 0 view .LVU148
- 538 0070 002B     		cmp	r3, #0
- 116:AudioFileManager.cpp ****     header_.total_samples = header_.file_size / (header_.bit_depth/8);
- 539              		.loc 1 116 23 view .LVU149
- 540 0072 C4F86028 		str	r2, [r4, #2144]
- 117:AudioFileManager.cpp ****     header_.total_samples = header_.file_size / (header_.bit_depth/8);
- 541              		.loc 1 117 5 is_stmt 1 view .LVU150
- 117:AudioFileManager.cpp ****     header_.total_samples = header_.file_size / (header_.bit_depth/8);
- 542              		.loc 1 117 67 is_stmt 0 view .LVU151
- 543 0076 B8BF     		it	lt
- 544 0078 0733     		addlt	r3, r3, #7
- 545 007a DB10     		asrs	r3, r3, #3
- 117:AudioFileManager.cpp ****     header_.total_samples = header_.file_size / (header_.bit_depth/8);
- 546              		.loc 1 117 47 view .LVU152
- 547 007c B2FBF3F3 		udiv	r3, r2, r3
- 117:AudioFileManager.cpp ****     header_.total_samples = header_.file_size / (header_.bit_depth/8);
- 548              		.loc 1 117 27 view .LVU153
- 549 0080 C4F86838 		str	r3, [r4, #2152]
- 550              		.loc 1 118 5 is_stmt 1 view .LVU154
- 551              		.loc 1 118 19 is_stmt 0 view .LVU155
- 552 0084 FFF7FEFF 		bl	f_lseek
- 553              	.LVL38:
- 554              		.loc 1 118 53 view .LVU156
- 555 0088 B0FA80F0 		clz	r0, r0
- 556 008c 4009     		lsrs	r0, r0, #5
- 557              	.L27:
- 119:AudioFileManager.cpp ****   }
- 120:AudioFileManager.cpp ****   else return false;
- 121:AudioFileManager.cpp ****   // if (checkFmt){
- 122:AudioFileManager.cpp ****   //   header_.sample_rate = header.SampleRate;
- 123:AudioFileManager.cpp ****   //   header_.channels = header.NbrChannels;
- 124:AudioFileManager.cpp ****   //   header_.bit_depth = header.BitPerSample;
- 125:AudioFileManager.cpp ****   // }
- 126:AudioFileManager.cpp ****   // if (checkData){
- 127:AudioFileManager.cpp ****   //   header_.file_size = header.SubCHunk2Size;
- 128:AudioFileManager.cpp ****   // /* find audio len in samples: http://tiny.systems/software/soundProgrammer/WavFormatDocs.pdf *
- 129:AudioFileManager.cpp ****   //   header_.total_samples = header_.file_size / (header_.bit_depth/8);
- 130:AudioFileManager.cpp ****   // }
- 131:AudioFileManager.cpp ****   // /* otherwise: data chunk may be misplaced, so search within file for it */
- 132:AudioFileManager.cpp ****   // if (!checkFmt || !checkData){
- 133:AudioFileManager.cpp ****   //   uint32_t chunk_id, chunk_size;
- 134:AudioFileManager.cpp ****   //   f_lseek(file, 12); /* skip to usual start of fmt chunk (byte 12) to start looking */
- 135:AudioFileManager.cpp ****   //   while (f_read(file, &chunk_id, 4, &bytes_read) == FR_OK && bytes_read == 4) {
- 136:AudioFileManager.cpp ****   //     f_read(file, &chunk_size, 4, &bytes_read);
- 137:AudioFileManager.cpp ****       
- 138:AudioFileManager.cpp ****   //     if (chunk_id==0x20746D66) { /* this is 'fmt' in little endian */
- 139:AudioFileManager.cpp ****         
- 140:AudioFileManager.cpp ****   //       f_lseek(file, f_tell(file)+6); /* skip chunk size and audio format - 6 bytes */
- 141:AudioFileManager.cpp ****   //       /* now get num of channels - 2 bytes*/
- 142:AudioFileManager.cpp ****   //       if (f_read(file, &header_.channels, 2, &bytes_read)!=FR_OK || bytes_read!=2){
- 143:AudioFileManager.cpp ****   //         return false;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 20
-
-
- 144:AudioFileManager.cpp ****   //       }
- 145:AudioFileManager.cpp ****   //       /* get sample rate - 4 bytes */
- 146:AudioFileManager.cpp ****   //       if (f_read(file, &header_.sample_rate, 4, &bytes_read)!=FR_OK || bytes_read!=4){
- 147:AudioFileManager.cpp ****   //         return false;
- 148:AudioFileManager.cpp ****   //       }
- 149:AudioFileManager.cpp ****   //       f_lseek(file, f_tell(file)+6); /* skip byte rate and block align - 6 bytes */
- 150:AudioFileManager.cpp ****   //       /* finally get bit depth - 2 bytes */
- 151:AudioFileManager.cpp ****   //       if (f_read(file, &header_.bit_depth, 2, &bytes_read)!=FR_OK || bytes_read!=2){
- 152:AudioFileManager.cpp ****   //         return false;
- 153:AudioFileManager.cpp ****   //       }
- 154:AudioFileManager.cpp ****   //       checkFmt = true;
- 155:AudioFileManager.cpp ****   //     }
- 156:AudioFileManager.cpp ****   //     else if (chunk_id==0x61746164){ /* this is 'data' in little endian */
- 157:AudioFileManager.cpp ****   //       header_.file_size = chunk_size;
- 158:AudioFileManager.cpp ****   //       checkData = true;
- 159:AudioFileManager.cpp ****   //       break;
- 160:AudioFileManager.cpp ****   //     } 
- 161:AudioFileManager.cpp ****   //     else {
- 162:AudioFileManager.cpp ****   //       f_lseek(file, f_tell(file)+chunk_size);
- 163:AudioFileManager.cpp ****   //     }
- 164:AudioFileManager.cpp ****   //     if (checkFmt && checkData) break;
- 165:AudioFileManager.cpp ****   //   }
- 166:AudioFileManager.cpp ****   // }
- 167:AudioFileManager.cpp ****   // if (!checkFmt || !checkData) return false;
- 168:AudioFileManager.cpp ****   // header_.total_samples = header_.file_size / (header_.bit_depth / 8);
- 169:AudioFileManager.cpp ****   // audio_data_start_ = f_tell(file); 
- 170:AudioFileManager.cpp ****   // FRESULT seek_res = f_lseek(curr_file_, audio_data_start_);
- 171:AudioFileManager.cpp ****   // return seek_res == FR_OK;
- 172:AudioFileManager.cpp **** }
- 558              		.loc 1 172 1 view .LVU157
- 559 008e 0CB0     		add	sp, sp, #48
- 560              		.cfi_remember_state
- 561              		.cfi_def_cfa_offset 8
- 562              		@ sp needed
- 563 0090 10BD     		pop	{r4, pc}
- 564              	.LVL39:
- 565              	.L29:
- 566              		.cfi_restore_state
- 100:AudioFileManager.cpp ****   }
- 567              		.loc 1 100 12 view .LVU158
- 568 0092 0020     		movs	r0, #0
- 569              	.LVL40:
- 100:AudioFileManager.cpp ****   }
- 570              		.loc 1 100 12 view .LVU159
- 571 0094 FBE7     		b	.L27
- 572              	.L36:
- 573 0096 00BF     		.align	2
- 574              	.L35:
- 575 0098 52494646 		.word	1179011410
- 576              		.cfi_endproc
- 577              	.LFE2586:
- 579              		.section	.rodata._ZN16AudioFileManager14Load16BitAudioEj.str1.1,"aMS",%progbits,1
- 580              	.LC11:
- 581 0000 6265666F 		.ascii	"before buf\000"
- 581      72652062 
- 581      756600
- 582              	.LC12:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 21
-
-
- 583 000b 66697273 		.ascii	"first bit of loading loop\000"
- 583      74206269 
- 583      74206F66 
- 583      206C6F61 
- 583      64696E67 
- 584              		.section	.text._ZN16AudioFileManager14Load16BitAudioEj,"ax",%progbits
- 585              		.align	1
- 586              		.global	_ZN16AudioFileManager14Load16BitAudioEj
- 587              		.syntax unified
- 588              		.thumb
- 589              		.thumb_func
- 591              	_ZN16AudioFileManager14Load16BitAudioEj:
- 592              	.LVL41:
- 593              	.LFB2588:
- 173:AudioFileManager.cpp **** 
- 174:AudioFileManager.cpp **** /// @brief Clear data buffers, check file length is within bounds, call audio loader
- 175:AudioFileManager.cpp **** /// @return True if audio is loaded, false if file is too long or incorrect bit depth
- 176:AudioFileManager.cpp **** bool AudioFileManager::LoadAudioData() {
- 177:AudioFileManager.cpp ****   memset(left_buf_, 0.0f, CHNL_BUF_SIZE_ABS);
- 178:AudioFileManager.cpp ****   memset(right_buf_, 0.0f, CHNL_BUF_SIZE_ABS);
- 179:AudioFileManager.cpp ****   size_t samples_per_channel = GetSamplesPerChannel();
- 180:AudioFileManager.cpp **** 
- 181:AudioFileManager.cpp ****   if (samples_per_channel > CHNL_BUF_SIZE_SAMPS) return false;
- 182:AudioFileManager.cpp **** 
- 183:AudioFileManager.cpp ****   return Load16BitAudio(samples_per_channel);
- 184:AudioFileManager.cpp **** }
- 185:AudioFileManager.cpp **** 
- 186:AudioFileManager.cpp **** /// @brief Reads chunks of bytes from audio file into temporary buffer, then into SDRAM
- 187:AudioFileManager.cpp **** /// @param samples_per_channel Length of audio in samples, per channel 
- 188:AudioFileManager.cpp **** /// @return True if audio is loaded. False if file fails to read
- 189:AudioFileManager.cpp **** bool AudioFileManager::Load16BitAudio(size_t samples_per_channel){
- 594              		.loc 1 189 66 is_stmt 1 view -0
- 595              		.cfi_startproc
- 596              		@ args = 0, pretend = 0, frame = 8
- 597              		@ frame_needed = 0, uses_anonymous_args = 0
- 190:AudioFileManager.cpp ****   DebugPrint(pod_,"before buf");
- 598              		.loc 1 190 3 view .LVU161
- 599              		.loc 1 190 3 view .LVU162
- 600              	.LBB65:
- 601              	.LBI65:
- 126:../libDaisy/src/daisy_seed.h ****     {
- 602              		.loc 2 126 17 view .LVU163
- 603              	.LBE65:
- 189:AudioFileManager.cpp ****   DebugPrint(pod_,"before buf");
- 604              		.loc 1 189 66 is_stmt 0 view .LVU164
- 605 0000 F7B5     		push	{r0, r1, r2, r4, r5, r6, r7, lr}
- 606              		.cfi_def_cfa_offset 32
- 607              		.cfi_offset 4, -20
- 608              		.cfi_offset 5, -16
- 609              		.cfi_offset 6, -12
- 610              		.cfi_offset 7, -8
- 611              		.cfi_offset 14, -4
- 189:AudioFileManager.cpp ****   DebugPrint(pod_,"before buf");
- 612              		.loc 1 189 66 view .LVU165
- 613 0002 0446     		mov	r4, r0
- 614              	.LBB68:
- 615              	.LBB66:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 22
-
-
- 616              		.loc 2 128 23 view .LVU166
- 617 0004 2B48     		ldr	r0, .L48
- 618              	.LVL42:
- 619              		.loc 2 128 23 view .LVU167
- 620              	.LBE66:
- 621              	.LBE68:
- 189:AudioFileManager.cpp ****   DebugPrint(pod_,"before buf");
- 622              		.loc 1 189 66 view .LVU168
- 623 0006 0F46     		mov	r7, r1
- 624              	.LBB69:
- 625              	.LBB67:
- 626              		.loc 2 128 23 view .LVU169
- 627 0008 FFF7FEFF 		bl	_ZN5daisy6LoggerILNS_17LoggerDestinationE1EE9PrintLineEPKcz
- 628              	.LVL43:
- 629              		.loc 2 128 23 view .LVU170
- 630              	.LBE67:
- 631              	.LBE69:
- 191:AudioFileManager.cpp ****   // alignas(32) std::vector<int16_t> temp_buf(BUF_CHUNK_SZ*header_.channels);
- 192:AudioFileManager.cpp ****   // std::vector<int16_t> temp_buf(BUF_CHUNK_SZ*header_.channels);
- 193:AudioFileManager.cpp ****   // int16_t temp_buf[16384]; // stack buffer
- 194:AudioFileManager.cpp ****   int16_t* temp_buf = new int16_t[16384]; // heap buffer? try it 
- 632              		.loc 1 194 3 is_stmt 1 view .LVU171
- 633              		.loc 1 194 40 is_stmt 0 view .LVU172
- 634 000c 4FF40040 		mov	r0, #32768
- 195:AudioFileManager.cpp ****   // DebugPrint(pod_,"after buf");
- 196:AudioFileManager.cpp ****   size_t samples_read = 0;
- 635              		.loc 1 196 10 view .LVU173
- 636 0010 0026     		movs	r6, #0
- 194:AudioFileManager.cpp ****   // DebugPrint(pod_,"after buf");
- 637              		.loc 1 194 40 view .LVU174
- 638 0012 FFF7FEFF 		bl	_Znaj
- 639              	.LVL44:
- 640 0016 0546     		mov	r5, r0
- 641              	.LVL45:
- 642              		.loc 1 196 3 is_stmt 1 view .LVU175
- 643              	.L46:
- 197:AudioFileManager.cpp ****   UINT bytes_read;
- 644              		.loc 1 197 3 view .LVU176
- 198:AudioFileManager.cpp ****   // DebugPrint(pod_,"starting loading loop");
- 199:AudioFileManager.cpp ****   while (!f_eof(curr_file_) && samples_read<samples_per_channel){
- 645              		.loc 1 199 3 view .LVU177
- 646              		.loc 1 199 29 view .LVU178
- 647              		.loc 1 199 11 is_stmt 0 view .LVU179
- 648 0018 E368     		ldr	r3, [r4, #12]
- 649              		.loc 1 199 29 view .LVU180
- 650 001a 5A69     		ldr	r2, [r3, #20]
- 651 001c DB68     		ldr	r3, [r3, #12]
- 652 001e 9A42     		cmp	r2, r3
- 653 0020 43D0     		beq	.L38
- 654              		.loc 1 199 29 discriminator 1 view .LVU181
- 655 0022 BE42     		cmp	r6, r7
- 656 0024 41D2     		bcs	.L38
- 657              	.LBB70:
- 200:AudioFileManager.cpp ****     DebugPrint(pod_,"first bit of loading loop");
- 658              		.loc 1 200 5 is_stmt 1 view .LVU182
- 659              		.loc 1 200 5 view .LVU183
- 660              	.LVL46:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 23
-
-
- 661              	.LBB71:
- 662              	.LBI71:
- 126:../libDaisy/src/daisy_seed.h ****     {
- 663              		.loc 2 126 17 view .LVU184
- 664              	.LBB72:
- 665              		.loc 2 128 23 is_stmt 0 view .LVU185
- 666 0026 2448     		ldr	r0, .L48+4
- 667 0028 FFF7FEFF 		bl	_ZN5daisy6LoggerILNS_17LoggerDestinationE1EE9PrintLineEPKcz
- 668              	.LVL47:
- 669              		.loc 2 128 23 view .LVU186
- 670              	.LBE72:
- 671              	.LBE71:
- 201:AudioFileManager.cpp ****     size_t samples_to_read = std::min(static_cast<size_t>(16384), (samples_per_channel-samples_read
- 672              		.loc 1 201 5 is_stmt 1 view .LVU187
- 673              		.loc 1 201 87 is_stmt 0 view .LVU188
- 674 002c BB1B     		subs	r3, r7, r6
- 675              	.LVL48:
- 676              	.LBB73:
- 677              	.LBI73:
- 678              		.file 5 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h"
+ 479              	.L45:
+ 181:AudioFileManager.cpp ****   UINT bytes_read;
+ 480              		.loc 1 181 3 view .LVU128
+ 182:AudioFileManager.cpp ****   // DebugPrint(pod_,"starting loading loop");
+ 183:AudioFileManager.cpp ****   while (!f_eof(curr_file_) && samples_read<samples_per_channel){
+ 481              		.loc 1 183 3 view .LVU129
+ 482              		.loc 1 183 29 view .LVU130
+ 483              		.loc 1 183 11 is_stmt 0 view .LVU131
+ 484 0014 F868     		ldr	r0, [r7, #12]
+ 485              		.loc 1 183 29 view .LVU132
+ 486 0016 4269     		ldr	r2, [r0, #20]
+ 487 0018 C368     		ldr	r3, [r0, #12]
+ 488 001a 9A42     		cmp	r2, r3
+ 489 001c 48D0     		beq	.L37
+ 490              		.loc 1 183 29 discriminator 1 view .LVU133
+ 491 001e B542     		cmp	r5, r6
+ 492 0020 46D2     		bcs	.L37
+ 493              	.LBB24:
+ 184:AudioFileManager.cpp ****     // DebugPrint(pod_,"first bit of loading loop");
+ 185:AudioFileManager.cpp ****     size_t samples_to_read = std::min(static_cast<size_t>(16384), (samples_per_channel-samples_read
+ 494              		.loc 1 185 5 is_stmt 1 view .LVU134
+ 495              		.loc 1 185 87 is_stmt 0 view .LVU135
+ 496 0022 731B     		subs	r3, r6, r5
+ 497              	.LVL31:
+ 498              	.LBB25:
+ 499              	.LBI25:
+ 500              		.file 4 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h"
    1:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** // Core algorithmic facilities -*- C++ -*-
    2:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 
    3:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** // Copyright (C) 2001-2020 Free Software Foundation, Inc.
@@ -1371,6 +958,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 1
   28:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****  * Hewlett-Packard Company
   29:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****  *
   30:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****  * Permission to use, copy, modify, distribute and sell this software
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 17
+
+
   31:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****  * and its documentation for any purpose is hereby granted without fee,
   32:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****  * provided that the above copyright notice appear in all copies and
   33:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****  * that both that copyright notice and this permission notice appear
@@ -1378,9 +968,6 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 1
   35:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****  * representations about the suitability of this software for any
   36:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****  * purpose.  It is provided "as is" without express or implied warranty.
   37:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****  *
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 24
-
-
   38:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****  *
   39:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****  * Copyright (c) 1996-1998
   40:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****  * Silicon Graphics Computer Systems, Inc.
@@ -1431,6 +1018,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 1
   85:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    * @param __num The number of elements of type _Tp (not bytes).
   86:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    */
   87:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****   template<typename _Tp, typename _Up>
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 18
+
+
   88:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     _GLIBCXX14_CONSTEXPR
   89:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     inline int
   90:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     __memcmp(const _Tp* __first1, const _Up* __first2, size_t __num)
@@ -1438,9 +1028,6 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 1
   92:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** #if __cplusplus >= 201103L
   93:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****       static_assert(sizeof(_Tp) == sizeof(_Up), "can be compared with memcmp");
   94:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** #endif
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 25
-
-
   95:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** #ifdef __cpp_lib_is_constant_evaluated
   96:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****       if (std::is_constant_evaluated())
   97:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 	{
@@ -1491,6 +1078,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 1
  142:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    *  @param  __a  An iterator.
  143:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    *  @param  __b  Another iterator.
  144:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    *  @return   Nothing.
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 19
+
+
  145:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    *
  146:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    *  This function swaps the values pointed to by two iterators, not the
  147:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    *  iterators themselves.
@@ -1498,9 +1088,6 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 1
  149:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****   template<typename _ForwardIterator1, typename _ForwardIterator2>
  150:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     _GLIBCXX20_CONSTEXPR
  151:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     inline void
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 26
-
-
  152:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     iter_swap(_ForwardIterator1 __a, _ForwardIterator2 __b)
  153:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     {
  154:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****       // concept requirements
@@ -1551,6 +1138,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 1
  199:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     _GLIBCXX20_CONSTEXPR
  200:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     _ForwardIterator2
  201:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     swap_ranges(_ForwardIterator1 __first1, _ForwardIterator1 __last1,
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 20
+
+
  202:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 		_ForwardIterator2 __first2)
  203:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     {
  204:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****       // concept requirements
@@ -1558,9 +1148,6 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 1
  206:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 				  _ForwardIterator1>)
  207:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****       __glibcxx_function_requires(_Mutable_ForwardIteratorConcept<
  208:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 				  _ForwardIterator2>)
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 27
-
-
  209:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****       __glibcxx_requires_valid_range(__first1, __last1);
  210:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 
  211:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****       for (; __first1 != __last1; ++__first1, (void)++__first2)
@@ -1583,18 +1170,17 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 1
  228:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     _GLIBCXX14_CONSTEXPR
  229:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     inline const _Tp&
  230:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     min(const _Tp& __a, const _Tp& __b)
- 679              		.loc 5 230 5 is_stmt 1 view .LVU189
- 680              	.LBE73:
- 202:AudioFileManager.cpp ****     // size_t bytes_to_read = samples_to_read * header_.channels * sizeof(int16_t);
- 203:AudioFileManager.cpp ****     
- 204:AudioFileManager.cpp ****     // DebugPrint(pod_,"about to fread in loop");
- 205:AudioFileManager.cpp ****     if (f_read(curr_file_, temp_buf, samples_to_read*header_.channels * sizeof(int16_t), &bytes_rea
- 681              		.loc 1 205 62 is_stmt 0 view .LVU190
- 682 002e B4F96428 		ldrsh	r2, [r4, #2148]
- 683              		.loc 1 205 15 view .LVU191
- 684 0032 2946     		mov	r1, r5
- 685              	.LBB76:
- 686              	.LBB74:
+ 501              		.loc 4 230 5 is_stmt 1 view .LVU136
+ 502              	.LBE25:
+ 186:AudioFileManager.cpp ****     // size_t bytes_to_read = samples_to_read * header_.channels * sizeof(int16_t);
+ 187:AudioFileManager.cpp ****     
+ 188:AudioFileManager.cpp ****     if (f_read(curr_file_, temp_buf, samples_to_read*header_.channels * sizeof(int16_t), &bytes_rea
+ 503              		.loc 1 188 62 is_stmt 0 view .LVU137
+ 504 0024 DFF89C80 		ldr	r8, .L47+8
+ 505              		.loc 1 188 15 view .LVU138
+ 506 0028 2146     		mov	r1, r4
+ 507              	.LBB28:
+ 508              	.LBB26:
  231:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     {
  232:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****       // concept requirements
  233:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****       __glibcxx_function_requires(_LessThanComparableConcept<_Tp>)
@@ -1602,683 +1188,714 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 1
  235:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****       if (__b < __a)
  236:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 	return __b;
  237:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****       return __a;
- 687              		.loc 5 237 14 view .LVU192
- 688 0034 B3F5804F 		cmp	r3, #16384
- 689              	.LBE74:
- 690              	.LBE76:
- 691              		.loc 1 205 15 view .LVU193
- 692 0038 E068     		ldr	r0, [r4, #12]
- 693              	.LBB77:
- 694              	.LBB75:
- 695              		.loc 5 237 14 view .LVU194
- 696 003a 28BF     		it	cs
- 697 003c 4FF48043 		movcs	r3, #16384
- 698              	.LVL49:
- 699              		.loc 5 237 14 view .LVU195
- 700              	.LBE75:
- 701              	.LBE77:
- 702              		.loc 1 205 5 is_stmt 1 view .LVU196
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 28
+ 509              		.loc 4 237 14 view .LVU139
+ 510 002a B3F5804F 		cmp	r3, #16384
+ 511              	.LBE26:
+ 512              	.LBE28:
+ 513              		.loc 1 188 62 view .LVU140
+ 514 002e B8F90C28 		ldrsh	r2, [r8, #2060]
+ 515              	.LBB29:
+ 516              	.LBB27:
+ 517              		.loc 4 237 14 view .LVU141
+ 518 0032 28BF     		it	cs
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 21
 
 
- 703              		.loc 1 205 15 is_stmt 0 view .LVU197
- 704 0040 5A43     		muls	r2, r3, r2
- 705 0042 01AB     		add	r3, sp, #4
- 706 0044 5200     		lsls	r2, r2, #1
- 707 0046 FFF7FEFF 		bl	f_read
- 708              	.LVL50:
- 709              		.loc 1 205 5 view .LVU198
- 710 004a 0346     		mov	r3, r0
- 711 004c 28B1     		cbz	r0, .L40
- 206:AudioFileManager.cpp ****       delete[] temp_buf;
- 712              		.loc 1 206 7 is_stmt 1 discriminator 1 view .LVU199
- 713              		.loc 1 206 16 is_stmt 0 discriminator 1 view .LVU200
- 714 004e 2846     		mov	r0, r5
- 715 0050 FFF7FEFF 		bl	_ZdaPv
- 716              	.LVL51:
- 207:AudioFileManager.cpp ****       return false;
- 717              		.loc 1 207 7 is_stmt 1 discriminator 1 view .LVU201
- 718              		.loc 1 207 14 is_stmt 0 discriminator 1 view .LVU202
- 719 0054 0020     		movs	r0, #0
- 720              	.L41:
- 721              		.loc 1 207 14 discriminator 1 view .LVU203
- 722              	.LBE70:
- 208:AudioFileManager.cpp ****     }
- 209:AudioFileManager.cpp **** 
- 210:AudioFileManager.cpp ****     // DebugPrint(pod_,"about to copy to bufs in loop");
- 211:AudioFileManager.cpp ****     size_t samples_in_chunk = bytes_read / (header_.channels * sizeof(int16_t));
- 212:AudioFileManager.cpp ****     for (size_t i=0; i<samples_in_chunk; i++){
- 213:AudioFileManager.cpp ****       if (header_.channels == 1){
- 214:AudioFileManager.cpp ****         left_buf_[i+samples_read] = right_buf_[i+samples_read] = temp_buf[i];
- 215:AudioFileManager.cpp ****       }
- 216:AudioFileManager.cpp ****       else {
- 217:AudioFileManager.cpp ****         left_buf_[i+samples_read] = temp_buf[i * 2];
- 218:AudioFileManager.cpp ****         right_buf_[i+samples_read] = temp_buf[i * 2 + 1];
- 219:AudioFileManager.cpp ****       }
- 220:AudioFileManager.cpp ****     }
- 221:AudioFileManager.cpp ****     samples_read += samples_in_chunk;
- 222:AudioFileManager.cpp ****   }
- 223:AudioFileManager.cpp ****   // DebugPrint(pod_,"end of loading loop");
- 224:AudioFileManager.cpp ****   delete[] temp_buf;
- 225:AudioFileManager.cpp ****   return true;
- 226:AudioFileManager.cpp **** }
- 723              		.loc 1 226 1 view .LVU204
- 724 0056 03B0     		add	sp, sp, #12
- 725              		.cfi_remember_state
- 726              		.cfi_def_cfa_offset 20
- 727              		@ sp needed
- 728 0058 F0BD     		pop	{r4, r5, r6, r7, pc}
- 729              	.LVL52:
- 730              	.L40:
- 731              		.cfi_restore_state
- 732              	.LBB79:
- 211:AudioFileManager.cpp ****     for (size_t i=0; i<samples_in_chunk; i++){
- 733              		.loc 1 211 5 is_stmt 1 view .LVU205
- 211:AudioFileManager.cpp ****     for (size_t i=0; i<samples_in_chunk; i++){
- 734              		.loc 1 211 62 is_stmt 0 view .LVU206
- 735 005a B4F96418 		ldrsh	r1, [r4, #2148]
- 736 005e 4A00     		lsls	r2, r1, #1
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 29
+ 519 0034 4FF48043 		movcs	r3, #16384
+ 520              	.LVL32:
+ 521              		.loc 4 237 14 view .LVU142
+ 522              	.LBE27:
+ 523              	.LBE29:
+ 524              		.loc 1 188 5 is_stmt 1 view .LVU143
+ 525              		.loc 1 188 15 is_stmt 0 view .LVU144
+ 526 0038 5A43     		muls	r2, r3, r2
+ 527 003a 01AB     		add	r3, sp, #4
+ 528 003c 5200     		lsls	r2, r2, #1
+ 529 003e FFF7FEFF 		bl	f_read
+ 530              	.LVL33:
+ 531              		.loc 1 188 5 view .LVU145
+ 532 0042 0346     		mov	r3, r0
+ 533 0044 30B1     		cbz	r0, .L39
+ 189:AudioFileManager.cpp ****       delete[] temp_buf;
+ 534              		.loc 1 189 7 is_stmt 1 discriminator 1 view .LVU146
+ 535              		.loc 1 189 16 is_stmt 0 discriminator 1 view .LVU147
+ 536 0046 2046     		mov	r0, r4
+ 537 0048 FFF7FEFF 		bl	_ZdaPv
+ 538              	.LVL34:
+ 190:AudioFileManager.cpp ****       // DebugPrint(pod_, "failed to fread");
+ 191:AudioFileManager.cpp ****       return false;
+ 539              		.loc 1 191 7 is_stmt 1 discriminator 1 view .LVU148
+ 540              		.loc 1 191 14 is_stmt 0 discriminator 1 view .LVU149
+ 541 004c 0020     		movs	r0, #0
+ 542              	.L40:
+ 543              		.loc 1 191 14 discriminator 1 view .LVU150
+ 544              	.LBE24:
+ 192:AudioFileManager.cpp ****     }
+ 193:AudioFileManager.cpp **** 
+ 194:AudioFileManager.cpp ****     size_t samples_in_chunk = bytes_read / (header_.channels * sizeof(int16_t));
+ 195:AudioFileManager.cpp ****     for (size_t i=0; i<samples_in_chunk; i++){
+ 196:AudioFileManager.cpp ****       if (header_.channels == 1){
+ 197:AudioFileManager.cpp ****         left_buf_[i+samples_read] = right_buf_[i+samples_read] = temp_buf[i];
+ 198:AudioFileManager.cpp ****       }
+ 199:AudioFileManager.cpp ****       else {
+ 200:AudioFileManager.cpp ****         left_buf_[i+samples_read] = temp_buf[i * 2];
+ 201:AudioFileManager.cpp ****         right_buf_[i+samples_read] = temp_buf[i * 2 + 1];
+ 202:AudioFileManager.cpp ****       }
+ 203:AudioFileManager.cpp ****     }
+ 204:AudioFileManager.cpp ****     samples_read += samples_in_chunk;
+ 205:AudioFileManager.cpp ****   }
+ 206:AudioFileManager.cpp ****   // DebugPrint(pod_,"end of loading loop - loaded ok");
+ 207:AudioFileManager.cpp ****   delete[] temp_buf;
+ 208:AudioFileManager.cpp ****   return true;
+ 209:AudioFileManager.cpp **** }
+ 545              		.loc 1 209 1 view .LVU151
+ 546 004e 02B0     		add	sp, sp, #8
+ 547              		.cfi_remember_state
+ 548              		.cfi_def_cfa_offset 24
+ 549              		@ sp needed
+ 550 0050 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 551              	.LVL35:
+ 552              	.L39:
+ 553              		.cfi_restore_state
+ 554              	.LBB31:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 22
 
 
- 211:AudioFileManager.cpp ****     for (size_t i=0; i<samples_in_chunk; i++){
- 737              		.loc 1 211 12 view .LVU207
- 738 0060 0199     		ldr	r1, [sp, #4]
- 739 0062 B1FBF2F1 		udiv	r1, r1, r2
- 740              	.LVL53:
- 212:AudioFileManager.cpp ****       if (header_.channels == 1){
- 741              		.loc 1 212 5 is_stmt 1 view .LVU208
- 212:AudioFileManager.cpp ****       if (header_.channels == 1){
- 742              		.loc 1 212 5 is_stmt 0 view .LVU209
- 743 0066 7200     		lsls	r2, r6, #1
- 744              	.LVL54:
- 745              	.L45:
- 746              	.LBB78:
- 212:AudioFileManager.cpp ****       if (header_.channels == 1){
- 747              		.loc 1 212 23 is_stmt 1 discriminator 1 view .LVU210
- 748 0068 8B42     		cmp	r3, r1
- 749 006a 1CD0     		beq	.L42
- 213:AudioFileManager.cpp ****         left_buf_[i+samples_read] = right_buf_[i+samples_read] = temp_buf[i];
- 750              		.loc 1 213 7 view .LVU211
- 751 006c B4F964E8 		ldrsh	lr, [r4, #2148]
- 752 0070 BEF1010F 		cmp	lr, #1
- 214:AudioFileManager.cpp ****       }
- 753              		.loc 1 214 9 view .LVU212
- 214:AudioFileManager.cpp ****       }
- 754              		.loc 1 214 62 is_stmt 0 view .LVU213
- 755 0074 D4E904C0 		ldrd	ip, r0, [r4, #16]
- 217:AudioFileManager.cpp ****         right_buf_[i+samples_read] = temp_buf[i * 2 + 1];
- 756              		.loc 1 217 51 view .LVU214
- 757 0078 17BF     		itett	ne
- 758 007a 35F923E0 		ldrshne	lr, [r5, r3, lsl #2]
- 214:AudioFileManager.cpp ****       }
- 759              		.loc 1 214 76 view .LVU215
- 760 007e 35F913E0 		ldrsheq	lr, [r5, r3, lsl #1]
- 217:AudioFileManager.cpp ****         right_buf_[i+samples_read] = temp_buf[i * 2 + 1];
- 761              		.loc 1 217 35 view .LVU216
- 762 0082 2CF802E0 		strhne	lr, [ip, r2]	@ movhi
- 218:AudioFileManager.cpp ****       }
- 763              		.loc 1 218 56 view .LVU217
- 764 0086 05F1020C 		addne	ip, r5, #2
- 214:AudioFileManager.cpp ****       }
- 765              		.loc 1 214 64 view .LVU218
- 766 008a 0CBF     		ite	eq
- 767 008c 20F802E0 		strheq	lr, [r0, r2]	@ movhi
- 218:AudioFileManager.cpp ****       }
- 768              		.loc 1 218 56 view .LVU219
- 769 0090 3CF923C0 		ldrshne	ip, [ip, r3, lsl #2]
- 212:AudioFileManager.cpp ****       if (header_.channels == 1){
- 770              		.loc 1 212 5 view .LVU220
- 771 0094 03F10103 		add	r3, r3, #1
- 772              	.LVL55:
- 214:AudioFileManager.cpp ****       }
- 773              		.loc 1 214 35 view .LVU221
- 774 0098 0CBF     		ite	eq
- 775 009a 2CF802E0 		strheq	lr, [ip, r2]	@ movhi
- 217:AudioFileManager.cpp ****         right_buf_[i+samples_read] = temp_buf[i * 2 + 1];
- 776              		.loc 1 217 9 is_stmt 1 view .LVU222
- 218:AudioFileManager.cpp ****       }
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 30
+ 194:AudioFileManager.cpp ****     for (size_t i=0; i<samples_in_chunk; i++){
+ 555              		.loc 1 194 5 is_stmt 1 view .LVU152
+ 194:AudioFileManager.cpp ****     for (size_t i=0; i<samples_in_chunk; i++){
+ 556              		.loc 1 194 62 is_stmt 0 view .LVU153
+ 557 0054 B8F90C08 		ldrsh	r0, [r8, #2060]
+ 558 0058 4200     		lsls	r2, r0, #1
+ 194:AudioFileManager.cpp ****     for (size_t i=0; i<samples_in_chunk; i++){
+ 559              		.loc 1 194 12 view .LVU154
+ 560 005a 0198     		ldr	r0, [sp, #4]
+ 561 005c B0FBF2F0 		udiv	r0, r0, r2
+ 562              	.LVL36:
+ 195:AudioFileManager.cpp ****       if (header_.channels == 1){
+ 563              		.loc 1 195 5 is_stmt 1 view .LVU155
+ 564              	.LBB30:
+ 201:AudioFileManager.cpp ****       }
+ 565              		.loc 1 201 34 is_stmt 0 view .LVU156
+ 566 0060 164A     		ldr	r2, .L47
+ 567 0062 1168     		ldr	r1, [r2]
+ 200:AudioFileManager.cpp ****         right_buf_[i+samples_read] = temp_buf[i * 2 + 1];
+ 568              		.loc 1 200 33 view .LVU157
+ 569 0064 164A     		ldr	r2, .L47+4
+ 570 0066 01EB4501 		add	r1, r1, r5, lsl #1
+ 571 006a 1268     		ldr	r2, [r2]
+ 572 006c 02EB4502 		add	r2, r2, r5, lsl #1
+ 573              	.LVL37:
+ 574              	.L44:
+ 195:AudioFileManager.cpp ****       if (header_.channels == 1){
+ 575              		.loc 1 195 23 is_stmt 1 discriminator 1 view .LVU158
+ 576 0070 8342     		cmp	r3, r0
+ 577 0072 1BD0     		beq	.L41
+ 196:AudioFileManager.cpp ****         left_buf_[i+samples_read] = right_buf_[i+samples_read] = temp_buf[i];
+ 578              		.loc 1 196 7 view .LVU159
+ 579 0074 B8F90CC8 		ldrsh	ip, [r8, #2060]
+ 580 0078 0231     		adds	r1, r1, #2
+ 581 007a 0232     		adds	r2, r2, #2
+ 582 007c BCF1010F 		cmp	ip, #1
+ 197:AudioFileManager.cpp ****       }
+ 583              		.loc 1 197 9 view .LVU160
+ 200:AudioFileManager.cpp ****         right_buf_[i+samples_read] = temp_buf[i * 2 + 1];
+ 584              		.loc 1 200 51 is_stmt 0 view .LVU161
+ 585 0080 17BF     		itett	ne
+ 586 0082 34F923C0 		ldrshne	ip, [r4, r3, lsl #2]
+ 197:AudioFileManager.cpp ****       }
+ 587              		.loc 1 197 76 view .LVU162
+ 588 0086 34F913C0 		ldrsheq	ip, [r4, r3, lsl #1]
+ 200:AudioFileManager.cpp ****         right_buf_[i+samples_read] = temp_buf[i * 2 + 1];
+ 589              		.loc 1 200 35 view .LVU163
+ 590 008a 22F802CC 		strhne	ip, [r2, #-2]	@ movhi
+ 201:AudioFileManager.cpp ****       }
+ 591              		.loc 1 201 56 view .LVU164
+ 592 008e 04F1020C 		addne	ip, r4, #2
+ 197:AudioFileManager.cpp ****       }
+ 593              		.loc 1 197 64 view .LVU165
+ 594 0092 0CBF     		ite	eq
+ 595 0094 21F802CC 		strheq	ip, [r1, #-2]	@ movhi
+ 201:AudioFileManager.cpp ****       }
+ 596              		.loc 1 201 56 view .LVU166
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 23
 
 
- 777              		.loc 1 218 9 view .LVU223
- 218:AudioFileManager.cpp ****       }
- 778              		.loc 1 218 36 is_stmt 0 view .LVU224
- 779 009e 20F802C0 		strhne	ip, [r0, r2]	@ movhi
- 212:AudioFileManager.cpp ****       if (header_.channels == 1){
- 780              		.loc 1 212 5 is_stmt 1 view .LVU225
- 781              	.LVL56:
- 212:AudioFileManager.cpp ****       if (header_.channels == 1){
- 782              		.loc 1 212 5 is_stmt 0 view .LVU226
- 783 00a2 0232     		adds	r2, r2, #2
- 784 00a4 E0E7     		b	.L45
- 785              	.L42:
- 212:AudioFileManager.cpp ****       if (header_.channels == 1){
- 786              		.loc 1 212 5 view .LVU227
- 787              	.LBE78:
- 221:AudioFileManager.cpp ****   }
- 788              		.loc 1 221 5 is_stmt 1 view .LVU228
- 221:AudioFileManager.cpp ****   }
- 789              		.loc 1 221 18 is_stmt 0 view .LVU229
- 790 00a6 1E44     		add	r6, r6, r3
- 791              	.LVL57:
- 221:AudioFileManager.cpp ****   }
- 792              		.loc 1 221 18 view .LVU230
- 793              	.LBE79:
- 199:AudioFileManager.cpp ****     DebugPrint(pod_,"first bit of loading loop");
- 794              		.loc 1 199 3 view .LVU231
- 795 00a8 B6E7     		b	.L46
- 796              	.LVL58:
- 797              	.L38:
- 224:AudioFileManager.cpp ****   return true;
- 798              		.loc 1 224 3 is_stmt 1 discriminator 1 view .LVU232
- 224:AudioFileManager.cpp ****   return true;
- 799              		.loc 1 224 12 is_stmt 0 discriminator 1 view .LVU233
- 800 00aa 2846     		mov	r0, r5
- 801 00ac FFF7FEFF 		bl	_ZdaPv
- 802              	.LVL59:
- 225:AudioFileManager.cpp **** }
- 803              		.loc 1 225 3 is_stmt 1 discriminator 1 view .LVU234
- 225:AudioFileManager.cpp **** }
- 804              		.loc 1 225 10 is_stmt 0 discriminator 1 view .LVU235
- 805 00b0 0120     		movs	r0, #1
- 806 00b2 D0E7     		b	.L41
- 807              	.L49:
- 808              		.align	2
- 809              	.L48:
- 810 00b4 00000000 		.word	.LC11
- 811 00b8 0B000000 		.word	.LC12
- 812              		.cfi_endproc
- 813              	.LFE2588:
- 815              		.section	.text._ZN16AudioFileManager13LoadAudioDataEv,"ax",%progbits
- 816              		.align	1
- 817              		.global	_ZN16AudioFileManager13LoadAudioDataEv
- 818              		.syntax unified
- 819              		.thumb
- 820              		.thumb_func
- 822              	_ZN16AudioFileManager13LoadAudioDataEv:
- 823              	.LVL60:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 31
+ 597 0098 3CF923C0 		ldrshne	ip, [ip, r3, lsl #2]
+ 195:AudioFileManager.cpp ****       if (header_.channels == 1){
+ 598              		.loc 1 195 5 view .LVU167
+ 599 009c 03F10103 		add	r3, r3, #1
+ 600              	.LVL38:
+ 197:AudioFileManager.cpp ****       }
+ 601              		.loc 1 197 35 view .LVU168
+ 602 00a0 0CBF     		ite	eq
+ 603 00a2 22F802CC 		strheq	ip, [r2, #-2]	@ movhi
+ 200:AudioFileManager.cpp ****         right_buf_[i+samples_read] = temp_buf[i * 2 + 1];
+ 604              		.loc 1 200 9 is_stmt 1 view .LVU169
+ 201:AudioFileManager.cpp ****       }
+ 605              		.loc 1 201 9 view .LVU170
+ 201:AudioFileManager.cpp ****       }
+ 606              		.loc 1 201 36 is_stmt 0 view .LVU171
+ 607 00a6 21F802CC 		strhne	ip, [r1, #-2]	@ movhi
+ 195:AudioFileManager.cpp ****       if (header_.channels == 1){
+ 608              		.loc 1 195 5 is_stmt 1 view .LVU172
+ 609              	.LVL39:
+ 195:AudioFileManager.cpp ****       if (header_.channels == 1){
+ 610              		.loc 1 195 5 is_stmt 0 view .LVU173
+ 611 00aa E1E7     		b	.L44
+ 612              	.L41:
+ 195:AudioFileManager.cpp ****       if (header_.channels == 1){
+ 613              		.loc 1 195 5 view .LVU174
+ 614              	.LBE30:
+ 204:AudioFileManager.cpp ****   }
+ 615              		.loc 1 204 5 is_stmt 1 view .LVU175
+ 204:AudioFileManager.cpp ****   }
+ 616              		.loc 1 204 18 is_stmt 0 view .LVU176
+ 617 00ac 1D44     		add	r5, r5, r3
+ 618              	.LVL40:
+ 204:AudioFileManager.cpp ****   }
+ 619              		.loc 1 204 18 view .LVU177
+ 620              	.LBE31:
+ 183:AudioFileManager.cpp ****     // DebugPrint(pod_,"first bit of loading loop");
+ 621              		.loc 1 183 3 view .LVU178
+ 622 00ae B1E7     		b	.L45
+ 623              	.LVL41:
+ 624              	.L37:
+ 207:AudioFileManager.cpp ****   return true;
+ 625              		.loc 1 207 3 is_stmt 1 discriminator 1 view .LVU179
+ 207:AudioFileManager.cpp ****   return true;
+ 626              		.loc 1 207 12 is_stmt 0 discriminator 1 view .LVU180
+ 627 00b0 2046     		mov	r0, r4
+ 628 00b2 FFF7FEFF 		bl	_ZdaPv
+ 629              	.LVL42:
+ 208:AudioFileManager.cpp **** }
+ 630              		.loc 1 208 3 is_stmt 1 discriminator 1 view .LVU181
+ 208:AudioFileManager.cpp **** }
+ 631              		.loc 1 208 10 is_stmt 0 discriminator 1 view .LVU182
+ 632 00b6 0120     		movs	r0, #1
+ 633 00b8 C9E7     		b	.L40
+ 634              	.L48:
+ 635 00ba 00BF     		.align	2
+ 636              	.L47:
+ 637 00bc 00000000 		.word	.LANCHOR1
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 24
 
 
- 824              	.LFB2587:
- 176:AudioFileManager.cpp ****   memset(left_buf_, 0.0f, CHNL_BUF_SIZE_ABS);
- 825              		.loc 1 176 40 is_stmt 1 view -0
- 826              		.cfi_startproc
- 827              		@ args = 0, pretend = 0, frame = 0
- 828              		@ frame_needed = 0, uses_anonymous_args = 0
- 177:AudioFileManager.cpp ****   memset(right_buf_, 0.0f, CHNL_BUF_SIZE_ABS);
- 829              		.loc 1 177 3 view .LVU237
- 176:AudioFileManager.cpp ****   memset(left_buf_, 0.0f, CHNL_BUF_SIZE_ABS);
- 830              		.loc 1 176 40 is_stmt 0 view .LVU238
- 831 0000 10B5     		push	{r4, lr}
- 832              		.cfi_def_cfa_offset 8
- 833              		.cfi_offset 4, -8
- 834              		.cfi_offset 14, -4
- 176:AudioFileManager.cpp ****   memset(left_buf_, 0.0f, CHNL_BUF_SIZE_ABS);
- 835              		.loc 1 176 40 view .LVU239
- 836 0002 0446     		mov	r4, r0
- 177:AudioFileManager.cpp ****   memset(right_buf_, 0.0f, CHNL_BUF_SIZE_ABS);
- 837              		.loc 1 177 9 view .LVU240
- 838 0004 4FF08072 		mov	r2, #16777216
- 839 0008 0021     		movs	r1, #0
- 840 000a 0069     		ldr	r0, [r0, #16]
- 841              	.LVL61:
- 177:AudioFileManager.cpp ****   memset(right_buf_, 0.0f, CHNL_BUF_SIZE_ABS);
- 842              		.loc 1 177 9 view .LVU241
- 843 000c FFF7FEFF 		bl	memset
- 844              	.LVL62:
- 178:AudioFileManager.cpp ****   size_t samples_per_channel = GetSamplesPerChannel();
- 845              		.loc 1 178 3 is_stmt 1 view .LVU242
- 178:AudioFileManager.cpp ****   size_t samples_per_channel = GetSamplesPerChannel();
- 846              		.loc 1 178 9 is_stmt 0 view .LVU243
- 847 0010 0021     		movs	r1, #0
- 848 0012 4FF08072 		mov	r2, #16777216
- 849 0016 6069     		ldr	r0, [r4, #20]
- 850 0018 FFF7FEFF 		bl	memset
- 851              	.LVL63:
- 179:AudioFileManager.cpp **** 
- 852              		.loc 1 179 3 is_stmt 1 view .LVU244
- 853              	.LBB80:
- 854              	.LBI80:
- 855              		.file 6 "AudioFileManager.h"
+ 638 00c0 00000000 		.word	.LANCHOR2
+ 639 00c4 00000000 		.word	.LANCHOR0
+ 640              		.cfi_endproc
+ 641              	.LFE2588:
+ 643              		.section	.text._ZN16AudioFileManager13LoadAudioDataEv,"ax",%progbits
+ 644              		.align	1
+ 645              		.global	_ZN16AudioFileManager13LoadAudioDataEv
+ 646              		.syntax unified
+ 647              		.thumb
+ 648              		.thumb_func
+ 650              	_ZN16AudioFileManager13LoadAudioDataEv:
+ 651              	.LVL43:
+ 652              	.LFB2587:
+ 161:AudioFileManager.cpp ****   memset(left_buf_, 0.0f, CHNL_BUF_SIZE_ABS);
+ 653              		.loc 1 161 40 is_stmt 1 view -0
+ 654              		.cfi_startproc
+ 655              		@ args = 0, pretend = 0, frame = 0
+ 656              		@ frame_needed = 0, uses_anonymous_args = 0
+ 162:AudioFileManager.cpp ****   memset(right_buf_, 0.0f, CHNL_BUF_SIZE_ABS);
+ 657              		.loc 1 162 3 view .LVU184
+ 162:AudioFileManager.cpp ****   memset(right_buf_, 0.0f, CHNL_BUF_SIZE_ABS);
+ 658              		.loc 1 162 9 is_stmt 0 view .LVU185
+ 659 0000 104B     		ldr	r3, .L51
+ 660 0002 4FF08072 		mov	r2, #16777216
+ 661 0006 0021     		movs	r1, #0
+ 161:AudioFileManager.cpp ****   memset(left_buf_, 0.0f, CHNL_BUF_SIZE_ABS);
+ 662              		.loc 1 161 40 view .LVU186
+ 663 0008 10B5     		push	{r4, lr}
+ 664              		.cfi_def_cfa_offset 8
+ 665              		.cfi_offset 4, -8
+ 666              		.cfi_offset 14, -4
+ 161:AudioFileManager.cpp ****   memset(left_buf_, 0.0f, CHNL_BUF_SIZE_ABS);
+ 667              		.loc 1 161 40 view .LVU187
+ 668 000a 0446     		mov	r4, r0
+ 162:AudioFileManager.cpp ****   memset(right_buf_, 0.0f, CHNL_BUF_SIZE_ABS);
+ 669              		.loc 1 162 9 view .LVU188
+ 670 000c 1868     		ldr	r0, [r3]
+ 671              	.LVL44:
+ 162:AudioFileManager.cpp ****   memset(right_buf_, 0.0f, CHNL_BUF_SIZE_ABS);
+ 672              		.loc 1 162 9 view .LVU189
+ 673 000e FFF7FEFF 		bl	memset
+ 674              	.LVL45:
+ 163:AudioFileManager.cpp ****   size_t samples_per_channel = GetSamplesPerChannel();
+ 675              		.loc 1 163 3 is_stmt 1 view .LVU190
+ 163:AudioFileManager.cpp ****   size_t samples_per_channel = GetSamplesPerChannel();
+ 676              		.loc 1 163 9 is_stmt 0 view .LVU191
+ 677 0012 0D4B     		ldr	r3, .L51+4
+ 678 0014 4FF08072 		mov	r2, #16777216
+ 679 0018 0021     		movs	r1, #0
+ 680 001a 1868     		ldr	r0, [r3]
+ 681 001c FFF7FEFF 		bl	memset
+ 682              	.LVL46:
+ 164:AudioFileManager.cpp **** 
+ 683              		.loc 1 164 3 is_stmt 1 view .LVU192
+ 684              	.LBB32:
+ 685              	.LBI32:
+ 686              		.file 5 "AudioFileManager.h"
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 25
+
+
    1:AudioFileManager.h **** #pragma once
    2:AudioFileManager.h **** #include <stdio.h>
    3:AudioFileManager.h **** #include <stdint.h>
-   4:AudioFileManager.h **** // #include <vector>
-   5:AudioFileManager.h **** #include "daisy_pod.h"
-   6:AudioFileManager.h **** #include "constants_utils.h"
-   7:AudioFileManager.h **** #include "debug_print.h"
+   4:AudioFileManager.h **** #include "daisy_pod.h"
+   5:AudioFileManager.h **** #include "constants_utils.h"
+   6:AudioFileManager.h **** #include "debug_print.h"
+   7:AudioFileManager.h **** #include "wavheader.h"
    8:AudioFileManager.h **** 
    9:AudioFileManager.h **** using namespace daisy; 
   10:AudioFileManager.h **** 
   11:AudioFileManager.h **** class AudioFileManager {
   12:AudioFileManager.h ****   public:
   13:AudioFileManager.h ****     AudioFileManager(SdmmcHandler &sd, FatFSInterface &fsi, DaisyPod &pod, FIL *file)
-  14:AudioFileManager.h ****       : sd_(sd), fsi_(fsi), pod_(pod), curr_file_(file), 
-  15:AudioFileManager.h ****         left_buf_(nullptr), right_buf_(nullptr) {};
-  16:AudioFileManager.h ****     
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 32
+  14:AudioFileManager.h ****       : sd_(sd), fsi_(fsi), pod_(pod), curr_file_(file){};
+  15:AudioFileManager.h ****     
+  16:AudioFileManager.h ****     bool Init();
+  17:AudioFileManager.h ****     bool ScanWavFiles();
+  18:AudioFileManager.h ****     void SetBuffers(int16_t *left, int16_t *right);
+  19:AudioFileManager.h ****     bool LoadFile(uint16_t file_idx);
+  20:AudioFileManager.h ****     bool CloseFile();
+  21:AudioFileManager.h ****     bool GetWavHeader(FIL *file);
+  22:AudioFileManager.h **** 
+  23:AudioFileManager.h ****     int16_t* GetLeftBuffer() const { return left_buf_; }
+  24:AudioFileManager.h ****     int16_t* GetRightBuffer() const { return right_buf_; }
+  25:AudioFileManager.h ****     size_t GetSamplesPerChannel() const { return header_.total_samples / header_.channels; }
+ 687              		.loc 5 25 12 view .LVU193
+ 688              	.LBB33:
+ 689              		.loc 5 25 43 view .LVU194
+ 690              		.loc 5 25 58 is_stmt 0 view .LVU195
+ 691 0020 0A4B     		ldr	r3, .L51+8
+ 692              		.loc 5 25 82 view .LVU196
+ 693 0022 B3F90C28 		ldrsh	r2, [r3, #2060]
+ 694 0026 D3F81018 		ldr	r1, [r3, #2064]
+ 695 002a B1FBF2F1 		udiv	r1, r1, r2
+ 696              	.LVL47:
+ 697              		.loc 5 25 82 view .LVU197
+ 698              	.LBE33:
+ 699              	.LBE32:
+ 166:AudioFileManager.cpp **** 
+ 700              		.loc 1 166 3 is_stmt 1 view .LVU198
+ 701 002e B1F5000F 		cmp	r1, #8388608
+ 702 0032 04D8     		bhi	.L50
+ 168:AudioFileManager.cpp **** }
+ 703              		.loc 1 168 3 view .LVU199
+ 168:AudioFileManager.cpp **** }
+ 704              		.loc 1 168 24 is_stmt 0 view .LVU200
+ 705 0034 2046     		mov	r0, r4
+ 169:AudioFileManager.cpp **** 
+ 706              		.loc 1 169 1 view .LVU201
+ 707 0036 BDE81040 		pop	{r4, lr}
+ 708              		.cfi_remember_state
+ 709              		.cfi_restore 14
+ 710              		.cfi_restore 4
+ 711              		.cfi_def_cfa_offset 0
+ 712              	.LVL48:
+ 168:AudioFileManager.cpp **** }
+ 713              		.loc 1 168 24 view .LVU202
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 26
 
 
-  17:AudioFileManager.h ****     bool Init();
-  18:AudioFileManager.h ****     bool ScanWavFiles();
-  19:AudioFileManager.h ****     void SetBuffers(int16_t *left, int16_t *right);
-  20:AudioFileManager.h ****     bool LoadFile(uint16_t file_idx);
-  21:AudioFileManager.h ****     
-  22:AudioFileManager.h ****     bool CloseFile();
-  23:AudioFileManager.h ****     bool GetWavHeader(FIL *file);
-  24:AudioFileManager.h **** 
-  25:AudioFileManager.h ****     int16_t* GetLeftBuffer() const { return left_buf_; }
-  26:AudioFileManager.h ****     int16_t* GetRightBuffer() const { return right_buf_; }
-  27:AudioFileManager.h ****     size_t GetSamplesPerChannel() const { return header_.total_samples / header_.channels; }
- 856              		.loc 6 27 12 view .LVU245
- 857              	.LBB81:
- 858              		.loc 6 27 43 view .LVU246
- 859              		.loc 6 27 82 is_stmt 0 view .LVU247
- 860 001c B4F96438 		ldrsh	r3, [r4, #2148]
- 861 0020 D4F86818 		ldr	r1, [r4, #2152]
- 862 0024 B1FBF3F1 		udiv	r1, r1, r3
- 863              	.LVL64:
- 864              		.loc 6 27 82 view .LVU248
- 865              	.LBE81:
- 866              	.LBE80:
- 181:AudioFileManager.cpp **** 
- 867              		.loc 1 181 3 is_stmt 1 view .LVU249
- 868 0028 B1F5000F 		cmp	r1, #8388608
- 869 002c 04D8     		bhi	.L51
- 183:AudioFileManager.cpp **** }
- 870              		.loc 1 183 3 view .LVU250
- 183:AudioFileManager.cpp **** }
- 871              		.loc 1 183 24 is_stmt 0 view .LVU251
- 872 002e 2046     		mov	r0, r4
- 184:AudioFileManager.cpp **** 
- 873              		.loc 1 184 1 view .LVU252
- 874 0030 BDE81040 		pop	{r4, lr}
- 875              		.cfi_remember_state
- 876              		.cfi_restore 14
- 877              		.cfi_restore 4
- 878              		.cfi_def_cfa_offset 0
- 879              	.LVL65:
- 183:AudioFileManager.cpp **** }
- 880              		.loc 1 183 24 view .LVU253
- 881 0034 FFF7FEBF 		b	_ZN16AudioFileManager14Load16BitAudioEj
- 882              	.LVL66:
- 883              	.L51:
- 884              		.cfi_restore_state
- 184:AudioFileManager.cpp **** 
- 885              		.loc 1 184 1 view .LVU254
- 886 0038 0020     		movs	r0, #0
- 887 003a 10BD     		pop	{r4, pc}
- 184:AudioFileManager.cpp **** 
- 888              		.loc 1 184 1 view .LVU255
- 889              		.cfi_endproc
- 890              	.LFE2587:
- 892              		.section	.rodata._ZN16AudioFileManager8LoadFileEt.str1.1,"aMS",%progbits,1
- 893              	.LC13:
- 894 0000 6C6F6164 		.ascii	"loading audio data now\000"
- 894      696E6720 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 33
+ 714 003a FFF7FEBF 		b	_ZN16AudioFileManager14Load16BitAudioEj
+ 715              	.LVL49:
+ 716              	.L50:
+ 717              		.cfi_restore_state
+ 169:AudioFileManager.cpp **** 
+ 718              		.loc 1 169 1 view .LVU203
+ 719 003e 0020     		movs	r0, #0
+ 720 0040 10BD     		pop	{r4, pc}
+ 721              	.LVL50:
+ 722              	.L52:
+ 169:AudioFileManager.cpp **** 
+ 723              		.loc 1 169 1 view .LVU204
+ 724 0042 00BF     		.align	2
+ 725              	.L51:
+ 726 0044 00000000 		.word	.LANCHOR2
+ 727 0048 00000000 		.word	.LANCHOR1
+ 728 004c 00000000 		.word	.LANCHOR0
+ 729              		.cfi_endproc
+ 730              	.LFE2587:
+ 732              		.section	.text._ZN16AudioFileManager8LoadFileEt,"ax",%progbits
+ 733              		.align	1
+ 734              		.global	_ZN16AudioFileManager8LoadFileEt
+ 735              		.syntax unified
+ 736              		.thumb
+ 737              		.thumb_func
+ 739              	_ZN16AudioFileManager8LoadFileEt:
+ 740              	.LVL51:
+ 741              	.LFB2585:
+  62:AudioFileManager.cpp ****   if (sel_idx > file_count_) return false;
+ 742              		.loc 1 62 51 is_stmt 1 view -0
+ 743              		.cfi_startproc
+ 744              		@ args = 0, pretend = 0, frame = 0
+ 745              		@ frame_needed = 0, uses_anonymous_args = 0
+  63:AudioFileManager.cpp ****   if (sel_idx != curr_idx_) f_close(curr_file_);
+ 746              		.loc 1 63 3 view .LVU206
+  62:AudioFileManager.cpp ****   if (sel_idx > file_count_) return false;
+ 747              		.loc 1 62 51 is_stmt 0 view .LVU207
+ 748 0000 70B5     		push	{r4, r5, r6, lr}
+ 749              		.cfi_def_cfa_offset 16
+ 750              		.cfi_offset 4, -16
+ 751              		.cfi_offset 5, -12
+ 752              		.cfi_offset 6, -8
+ 753              		.cfi_offset 14, -4
+  63:AudioFileManager.cpp ****   if (sel_idx != curr_idx_) f_close(curr_file_);
+ 754              		.loc 1 63 15 view .LVU208
+ 755 0002 174E     		ldr	r6, .L62
+  62:AudioFileManager.cpp ****   if (sel_idx > file_count_) return false;
+ 756              		.loc 1 62 51 view .LVU209
+ 757 0004 0446     		mov	r4, r0
+ 758 0006 0D46     		mov	r5, r1
+  63:AudioFileManager.cpp ****   if (sel_idx != curr_idx_) f_close(curr_file_);
+ 759              		.loc 1 63 3 view .LVU210
+ 760 0008 3388     		ldrh	r3, [r6]
+ 761 000a 8B42     		cmp	r3, r1
+ 762 000c 25D3     		bcc	.L55
+  64:AudioFileManager.cpp **** 
+ 763              		.loc 1 64 3 is_stmt 1 view .LVU211
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 27
 
 
- 894      61756469 
- 894      6F206461 
- 894      7461206E 
- 895              	.LC14:
- 896 0017 77617620 		.ascii	"wav header parse failed\000"
- 896      68656164 
- 896      65722070 
- 896      61727365 
- 896      20666169 
- 897              		.section	.text._ZN16AudioFileManager8LoadFileEt,"ax",%progbits
- 898              		.align	1
- 899              		.global	_ZN16AudioFileManager8LoadFileEt
- 900              		.syntax unified
- 901              		.thumb
- 902              		.thumb_func
- 904              	_ZN16AudioFileManager8LoadFileEt:
- 905              	.LVL67:
- 906              	.LFB2585:
-  74:AudioFileManager.cpp ****   if (sel_idx > file_count_) return false;
- 907              		.loc 1 74 51 is_stmt 1 view -0
- 908              		.cfi_startproc
- 909              		@ args = 0, pretend = 0, frame = 0
- 910              		@ frame_needed = 0, uses_anonymous_args = 0
-  75:AudioFileManager.cpp ****   if (sel_idx != curr_idx_) f_close(curr_file_);
- 911              		.loc 1 75 3 view .LVU257
-  74:AudioFileManager.cpp ****   if (sel_idx > file_count_) return false;
- 912              		.loc 1 74 51 is_stmt 0 view .LVU258
- 913 0000 38B5     		push	{r3, r4, r5, lr}
- 914              		.cfi_def_cfa_offset 16
- 915              		.cfi_offset 3, -16
- 916              		.cfi_offset 4, -12
- 917              		.cfi_offset 5, -8
- 918              		.cfi_offset 14, -4
-  75:AudioFileManager.cpp ****   if (sel_idx != curr_idx_) f_close(curr_file_);
- 919              		.loc 1 75 3 view .LVU259
- 920 0002 B0F85A38 		ldrh	r3, [r0, #2138]
-  74:AudioFileManager.cpp ****   if (sel_idx > file_count_) return false;
- 921              		.loc 1 74 51 view .LVU260
- 922 0006 0446     		mov	r4, r0
- 923 0008 0D46     		mov	r5, r1
-  75:AudioFileManager.cpp ****   if (sel_idx != curr_idx_) f_close(curr_file_);
- 924              		.loc 1 75 3 view .LVU261
- 925 000a 8B42     		cmp	r3, r1
- 926 000c 2BD3     		bcc	.L54
-  76:AudioFileManager.cpp **** 
- 927              		.loc 1 76 3 is_stmt 1 view .LVU262
- 928 000e B0F85838 		ldrh	r3, [r0, #2136]
- 929 0012 8B42     		cmp	r3, r1
- 930 0014 02D0     		beq	.L55
-  76:AudioFileManager.cpp **** 
- 931              		.loc 1 76 29 discriminator 1 view .LVU263
-  76:AudioFileManager.cpp **** 
- 932              		.loc 1 76 36 is_stmt 0 discriminator 1 view .LVU264
- 933 0016 C068     		ldr	r0, [r0, #12]
- 934              	.LVL68:
-  76:AudioFileManager.cpp **** 
- 935              		.loc 1 76 36 discriminator 1 view .LVU265
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 34
+ 764 000e B6F81638 		ldrh	r3, [r6, #2070]
+ 765 0012 8B42     		cmp	r3, r1
+ 766 0014 02D0     		beq	.L56
+  64:AudioFileManager.cpp **** 
+ 767              		.loc 1 64 29 discriminator 1 view .LVU212
+  64:AudioFileManager.cpp **** 
+ 768              		.loc 1 64 36 is_stmt 0 discriminator 1 view .LVU213
+ 769 0016 C068     		ldr	r0, [r0, #12]
+ 770              	.LVL52:
+  64:AudioFileManager.cpp **** 
+ 771              		.loc 1 64 36 discriminator 1 view .LVU214
+ 772 0018 FFF7FEFF 		bl	f_close
+ 773              	.LVL53:
+ 774              	.L56:
+  66:AudioFileManager.cpp ****   if (!GetWavHeader(curr_file_)||header_.bit_depth!=16||header_.sample_rate!=48000){
+ 775              		.loc 1 66 3 is_stmt 1 view .LVU215
+  66:AudioFileManager.cpp ****   if (!GetWavHeader(curr_file_)||header_.bit_depth!=16||header_.sample_rate!=48000){
+ 776              		.loc 1 66 13 is_stmt 0 view .LVU216
+ 777 001c 1149     		ldr	r1, .L62+4
+ 778 001e 0122     		movs	r2, #1
+ 779 0020 E068     		ldr	r0, [r4, #12]
+ 780 0022 01EB8511 		add	r1, r1, r5, lsl #6
+ 781 0026 FFF7FEFF 		bl	f_open
+ 782              	.LVL54:
+  66:AudioFileManager.cpp ****   if (!GetWavHeader(curr_file_)||header_.bit_depth!=16||header_.sample_rate!=48000){
+ 783              		.loc 1 66 3 view .LVU217
+ 784 002a B0B9     		cbnz	r0, .L55
+  67:AudioFileManager.cpp ****     // DebugPrint(pod_, "wav header parse failed");
+ 785              		.loc 1 67 3 is_stmt 1 view .LVU218
+  67:AudioFileManager.cpp ****     // DebugPrint(pod_, "wav header parse failed");
+ 786              		.loc 1 67 20 is_stmt 0 view .LVU219
+ 787 002c E168     		ldr	r1, [r4, #12]
+ 788 002e 2046     		mov	r0, r4
+ 789 0030 FFF7FEFF 		bl	_ZN16AudioFileManager12GetWavHeaderEP3FIL
+ 790              	.LVL55:
+  67:AudioFileManager.cpp ****     // DebugPrint(pod_, "wav header parse failed");
+ 791              		.loc 1 67 55 view .LVU220
+ 792 0034 70B1     		cbz	r0, .L58
+  67:AudioFileManager.cpp ****     // DebugPrint(pod_, "wav header parse failed");
+ 793              		.loc 1 67 32 discriminator 2 view .LVU221
+ 794 0036 B6F90E38 		ldrsh	r3, [r6, #2062]
+ 795 003a 102B     		cmp	r3, #16
+ 796 003c 0AD1     		bne	.L58
+  67:AudioFileManager.cpp ****     // DebugPrint(pod_, "wav header parse failed");
+ 797              		.loc 1 67 55 discriminator 4 view .LVU222
+ 798 003e D6F80428 		ldr	r2, [r6, #2052]
+ 799 0042 4BF68033 		movw	r3, #48000
+ 800 0046 9A42     		cmp	r2, r3
+ 801 0048 04D1     		bne	.L58
+  73:AudioFileManager.cpp **** }
+ 802              		.loc 1 73 3 is_stmt 1 view .LVU223
+  73:AudioFileManager.cpp **** }
+ 803              		.loc 1 73 23 is_stmt 0 view .LVU224
+ 804 004a 2046     		mov	r0, r4
+  74:AudioFileManager.cpp **** 
+ 805              		.loc 1 74 1 view .LVU225
+ 806 004c BDE87040 		pop	{r4, r5, r6, lr}
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 28
 
 
- 936 0018 FFF7FEFF 		bl	f_close
- 937              	.LVL69:
- 938              	.L55:
-  79:AudioFileManager.cpp **** 
- 939              		.loc 1 79 3 is_stmt 1 view .LVU266
-  79:AudioFileManager.cpp **** 
- 940              		.loc 1 79 40 is_stmt 0 view .LVU267
- 941 001c 04EB8511 		add	r1, r4, r5, lsl #6
-  79:AudioFileManager.cpp **** 
- 942              		.loc 1 79 13 view .LVU268
- 943 0020 0122     		movs	r2, #1
- 944 0022 E068     		ldr	r0, [r4, #12]
- 945 0024 5831     		adds	r1, r1, #88
- 946 0026 FFF7FEFF 		bl	f_open
- 947              	.LVL70:
-  79:AudioFileManager.cpp **** 
- 948              		.loc 1 79 3 view .LVU269
- 949 002a E0B9     		cbnz	r0, .L54
-  81:AudioFileManager.cpp ****     DebugPrint(pod_, "wav header parse failed");
- 950              		.loc 1 81 3 is_stmt 1 view .LVU270
-  81:AudioFileManager.cpp ****     DebugPrint(pod_, "wav header parse failed");
- 951              		.loc 1 81 20 is_stmt 0 view .LVU271
- 952 002c E168     		ldr	r1, [r4, #12]
- 953 002e 2046     		mov	r0, r4
- 954 0030 FFF7FEFF 		bl	_ZN16AudioFileManager12GetWavHeaderEP3FIL
- 955              	.LVL71:
-  81:AudioFileManager.cpp ****     DebugPrint(pod_, "wav header parse failed");
- 956              		.loc 1 81 55 view .LVU272
- 957 0034 88B1     		cbz	r0, .L57
-  81:AudioFileManager.cpp ****     DebugPrint(pod_, "wav header parse failed");
- 958              		.loc 1 81 32 discriminator 2 view .LVU273
- 959 0036 B4F96638 		ldrsh	r3, [r4, #2150]
- 960 003a 102B     		cmp	r3, #16
- 961 003c 0DD1     		bne	.L57
-  81:AudioFileManager.cpp ****     DebugPrint(pod_, "wav header parse failed");
- 962              		.loc 1 81 55 discriminator 4 view .LVU274
- 963 003e D4F85C28 		ldr	r2, [r4, #2140]
- 964 0042 4BF68033 		movw	r3, #48000
- 965 0046 9A42     		cmp	r2, r3
- 966 0048 07D1     		bne	.L57
-  87:AudioFileManager.cpp ****   return LoadAudioData();
- 967              		.loc 1 87 3 is_stmt 1 view .LVU275
-  87:AudioFileManager.cpp ****   return LoadAudioData();
- 968              		.loc 1 87 3 view .LVU276
- 969              	.LVL72:
- 970              	.LBB82:
- 971              	.LBI82:
- 126:../libDaisy/src/daisy_seed.h ****     {
- 972              		.loc 2 126 17 view .LVU277
- 973              	.LBB83:
- 974              		.loc 2 128 23 is_stmt 0 view .LVU278
- 975 004a 0848     		ldr	r0, .L61
- 976 004c FFF7FEFF 		bl	_ZN5daisy6LoggerILNS_17LoggerDestinationE1EE9PrintLineEPKcz
- 977              	.LVL73:
- 978              		.loc 2 128 23 view .LVU279
- 979              	.LBE83:
- 980              	.LBE82:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 35
+ 807              		.cfi_remember_state
+ 808              		.cfi_restore 14
+ 809              		.cfi_restore 6
+ 810              		.cfi_restore 5
+ 811              		.cfi_restore 4
+ 812              		.cfi_def_cfa_offset 0
+ 813              	.LVL56:
+  73:AudioFileManager.cpp **** }
+ 814              		.loc 1 73 23 view .LVU226
+ 815 0050 FFF7FEBF 		b	_ZN16AudioFileManager13LoadAudioDataEv
+ 816              	.LVL57:
+ 817              	.L58:
+ 818              		.cfi_restore_state
+  69:AudioFileManager.cpp ****     return false;
+ 819              		.loc 1 69 5 is_stmt 1 view .LVU227
+  69:AudioFileManager.cpp ****     return false;
+ 820              		.loc 1 69 12 is_stmt 0 view .LVU228
+ 821 0054 E068     		ldr	r0, [r4, #12]
+ 822 0056 FFF7FEFF 		bl	f_close
+ 823              	.LVL58:
+  70:AudioFileManager.cpp ****   }
+ 824              		.loc 1 70 5 is_stmt 1 view .LVU229
+ 825              	.L55:
+  74:AudioFileManager.cpp **** 
+ 826              		.loc 1 74 1 is_stmt 0 view .LVU230
+ 827 005a 0020     		movs	r0, #0
+ 828 005c 70BD     		pop	{r4, r5, r6, pc}
+ 829              	.LVL59:
+ 830              	.L63:
+  74:AudioFileManager.cpp **** 
+ 831              		.loc 1 74 1 view .LVU231
+ 832 005e 00BF     		.align	2
+ 833              	.L62:
+ 834 0060 00000000 		.word	.LANCHOR0
+ 835 0064 02000000 		.word	.LANCHOR0+2
+ 836              		.cfi_endproc
+ 837              	.LFE2585:
+ 839              		.section	.text._ZN16AudioFileManager9CloseFileEv,"ax",%progbits
+ 840              		.align	1
+ 841              		.global	_ZN16AudioFileManager9CloseFileEv
+ 842              		.syntax unified
+ 843              		.thumb
+ 844              		.thumb_func
+ 846              	_ZN16AudioFileManager9CloseFileEv:
+ 847              	.LVL60:
+ 848              	.LFB2589:
+ 210:AudioFileManager.cpp **** 
+ 211:AudioFileManager.cpp **** /// @brief Closes currently open file
+ 212:AudioFileManager.cpp **** /// @return True if file was successfully closed, else false
+ 213:AudioFileManager.cpp **** bool AudioFileManager::CloseFile(){
+ 849              		.loc 1 213 35 is_stmt 1 view -0
+ 850              		.cfi_startproc
+ 851              		@ args = 0, pretend = 0, frame = 0
+ 852              		@ frame_needed = 0, uses_anonymous_args = 0
+ 214:AudioFileManager.cpp ****   return f_close(curr_file_) == FR_OK;
+ 853              		.loc 1 214 3 view .LVU233
+ 213:AudioFileManager.cpp ****   return f_close(curr_file_) == FR_OK;
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 29
 
 
-  88:AudioFileManager.cpp **** }
- 981              		.loc 1 88 3 is_stmt 1 view .LVU280
-  88:AudioFileManager.cpp **** }
- 982              		.loc 1 88 23 is_stmt 0 view .LVU281
- 983 0050 2046     		mov	r0, r4
-  89:AudioFileManager.cpp **** 
- 984              		.loc 1 89 1 view .LVU282
- 985 0052 BDE83840 		pop	{r3, r4, r5, lr}
- 986              		.cfi_remember_state
- 987              		.cfi_restore 14
- 988              		.cfi_restore 5
- 989              		.cfi_restore 4
- 990              		.cfi_restore 3
- 991              		.cfi_def_cfa_offset 0
- 992              	.LVL74:
-  88:AudioFileManager.cpp **** }
- 993              		.loc 1 88 23 view .LVU283
- 994 0056 FFF7FEBF 		b	_ZN16AudioFileManager13LoadAudioDataEv
- 995              	.LVL75:
- 996              	.L57:
- 997              		.cfi_restore_state
-  82:AudioFileManager.cpp ****     f_close(curr_file_);
- 998              		.loc 1 82 5 is_stmt 1 view .LVU284
-  82:AudioFileManager.cpp ****     f_close(curr_file_);
- 999              		.loc 1 82 5 view .LVU285
- 1000              	.LBB84:
- 1001              	.LBI84:
- 126:../libDaisy/src/daisy_seed.h ****     {
- 1002              		.loc 2 126 17 view .LVU286
- 1003              	.LBB85:
- 1004              		.loc 2 128 23 is_stmt 0 view .LVU287
- 1005 005a 0548     		ldr	r0, .L61+4
- 1006 005c FFF7FEFF 		bl	_ZN5daisy6LoggerILNS_17LoggerDestinationE1EE9PrintLineEPKcz
- 1007              	.LVL76:
- 1008              		.loc 2 128 23 view .LVU288
- 1009              	.LBE85:
- 1010              	.LBE84:
-  83:AudioFileManager.cpp ****     return false;
- 1011              		.loc 1 83 5 is_stmt 1 view .LVU289
-  83:AudioFileManager.cpp ****     return false;
- 1012              		.loc 1 83 12 is_stmt 0 view .LVU290
- 1013 0060 E068     		ldr	r0, [r4, #12]
- 1014 0062 FFF7FEFF 		bl	f_close
- 1015              	.LVL77:
-  84:AudioFileManager.cpp ****   }
- 1016              		.loc 1 84 5 is_stmt 1 view .LVU291
- 1017              	.L54:
-  89:AudioFileManager.cpp **** 
- 1018              		.loc 1 89 1 is_stmt 0 view .LVU292
- 1019 0066 0020     		movs	r0, #0
- 1020 0068 38BD     		pop	{r3, r4, r5, pc}
- 1021              	.LVL78:
- 1022              	.L62:
-  89:AudioFileManager.cpp **** 
- 1023              		.loc 1 89 1 view .LVU293
- 1024 006a 00BF     		.align	2
- 1025              	.L61:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 36
+ 854              		.loc 1 213 35 is_stmt 0 view .LVU234
+ 855 0000 08B5     		push	{r3, lr}
+ 856              		.cfi_def_cfa_offset 8
+ 857              		.cfi_offset 3, -8
+ 858              		.cfi_offset 14, -4
+ 859              		.loc 1 214 17 view .LVU235
+ 860 0002 C068     		ldr	r0, [r0, #12]
+ 861              	.LVL61:
+ 862              		.loc 1 214 17 view .LVU236
+ 863 0004 FFF7FEFF 		bl	f_close
+ 864              	.LVL62:
+ 215:AudioFileManager.cpp **** }
+ 865              		.loc 1 215 1 view .LVU237
+ 866 0008 B0FA80F0 		clz	r0, r0
+ 867 000c 4009     		lsrs	r0, r0, #5
+ 868 000e 08BD     		pop	{r3, pc}
+ 869              		.cfi_endproc
+ 870              	.LFE2589:
+ 872              		.section	.text._ZN16AudioFileManager10SetBuffersEPsS0_,"ax",%progbits
+ 873              		.align	1
+ 874              		.global	_ZN16AudioFileManager10SetBuffersEPsS0_
+ 875              		.syntax unified
+ 876              		.thumb
+ 877              		.thumb_func
+ 879              	_ZN16AudioFileManager10SetBuffersEPsS0_:
+ 880              	.LVL63:
+ 881              	.LFB2590:
+ 216:AudioFileManager.cpp **** 
+ 217:AudioFileManager.cpp **** /// @brief Assign the locations of the audio data buffers
+ 218:AudioFileManager.cpp **** /// @param left Pointer to the left channel buffer
+ 219:AudioFileManager.cpp **** /// @param right Pointer to the right channel buffer
+ 220:AudioFileManager.cpp **** void AudioFileManager::SetBuffers(int16_t *left, int16_t *right){
+ 882              		.loc 1 220 65 is_stmt 1 view -0
+ 883              		.cfi_startproc
+ 884              		@ args = 0, pretend = 0, frame = 0
+ 885              		@ frame_needed = 0, uses_anonymous_args = 0
+ 886              		@ link register save eliminated.
+ 221:AudioFileManager.cpp ****   left_buf_ = left;
+ 887              		.loc 1 221 3 view .LVU239
+ 888              		.loc 1 221 13 is_stmt 0 view .LVU240
+ 889 0000 024B     		ldr	r3, .L66
+ 890 0002 1960     		str	r1, [r3]
+ 222:AudioFileManager.cpp ****   right_buf_ = right;
+ 891              		.loc 1 222 3 is_stmt 1 view .LVU241
+ 892              		.loc 1 222 14 is_stmt 0 view .LVU242
+ 893 0004 024B     		ldr	r3, .L66+4
+ 894 0006 1A60     		str	r2, [r3]
+ 223:AudioFileManager.cpp **** }
+ 895              		.loc 1 223 1 view .LVU243
+ 896 0008 7047     		bx	lr
+ 897              	.L67:
+ 898 000a 00BF     		.align	2
+ 899              	.L66:
+ 900 000c 00000000 		.word	.LANCHOR2
+ 901 0010 00000000 		.word	.LANCHOR1
+ 902              		.cfi_endproc
+ 903              	.LFE2590:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 30
 
 
- 1026 006c 00000000 		.word	.LC13
- 1027 0070 17000000 		.word	.LC14
- 1028              		.cfi_endproc
- 1029              	.LFE2585:
- 1031              		.section	.text._ZN16AudioFileManager9CloseFileEv,"ax",%progbits
- 1032              		.align	1
- 1033              		.global	_ZN16AudioFileManager9CloseFileEv
- 1034              		.syntax unified
- 1035              		.thumb
- 1036              		.thumb_func
- 1038              	_ZN16AudioFileManager9CloseFileEv:
- 1039              	.LVL79:
- 1040              	.LFB2589:
- 227:AudioFileManager.cpp **** 
- 228:AudioFileManager.cpp **** /// @brief Closes currently open file
- 229:AudioFileManager.cpp **** /// @return True if file was successfully closed, else false
- 230:AudioFileManager.cpp **** bool AudioFileManager::CloseFile(){
- 1041              		.loc 1 230 35 is_stmt 1 view -0
- 1042              		.cfi_startproc
- 1043              		@ args = 0, pretend = 0, frame = 0
- 1044              		@ frame_needed = 0, uses_anonymous_args = 0
- 231:AudioFileManager.cpp ****   return f_close(curr_file_) == FR_OK;
- 1045              		.loc 1 231 3 view .LVU295
- 230:AudioFileManager.cpp ****   return f_close(curr_file_) == FR_OK;
- 1046              		.loc 1 230 35 is_stmt 0 view .LVU296
- 1047 0000 08B5     		push	{r3, lr}
- 1048              		.cfi_def_cfa_offset 8
- 1049              		.cfi_offset 3, -8
- 1050              		.cfi_offset 14, -4
- 1051              		.loc 1 231 17 view .LVU297
- 1052 0002 C068     		ldr	r0, [r0, #12]
- 1053              	.LVL80:
- 1054              		.loc 1 231 17 view .LVU298
- 1055 0004 FFF7FEFF 		bl	f_close
- 1056              	.LVL81:
- 232:AudioFileManager.cpp **** }
- 1057              		.loc 1 232 1 view .LVU299
- 1058 0008 B0FA80F0 		clz	r0, r0
- 1059 000c 4009     		lsrs	r0, r0, #5
- 1060 000e 08BD     		pop	{r3, pc}
- 1061              		.cfi_endproc
- 1062              	.LFE2589:
- 1064              		.section	.text._ZN16AudioFileManager10SetBuffersEPsS0_,"ax",%progbits
- 1065              		.align	1
- 1066              		.global	_ZN16AudioFileManager10SetBuffersEPsS0_
- 1067              		.syntax unified
- 1068              		.thumb
- 1069              		.thumb_func
- 1071              	_ZN16AudioFileManager10SetBuffersEPsS0_:
- 1072              	.LVL82:
- 1073              	.LFB2590:
- 233:AudioFileManager.cpp **** 
- 234:AudioFileManager.cpp **** /// @brief Assign the locations of the audio data buffers
- 235:AudioFileManager.cpp **** /// @param left Pointer to the left channel buffer
- 236:AudioFileManager.cpp **** /// @param right Pointer to the right channel buffer
- 237:AudioFileManager.cpp **** void AudioFileManager::SetBuffers(int16_t *left, int16_t *right){
- 1074              		.loc 1 237 65 is_stmt 1 view -0
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 37
+ 905              		.global	_ZN16AudioFileManager10right_buf_E
+ 906              		.global	_ZN16AudioFileManager9left_buf_E
+ 907              		.global	_ZN16AudioFileManager17audio_data_start_E
+ 908              		.global	_ZN16AudioFileManager7header_E
+ 909              		.global	_ZN16AudioFileManager11file_count_E
+ 910              		.global	_ZN16AudioFileManager9curr_idx_E
+ 911              		.global	_ZN16AudioFileManager6names_E
+ 912              		.section	.bss._ZN16AudioFileManager10right_buf_E,"aw",%nobits
+ 913              		.align	2
+ 914              		.set	.LANCHOR1,. + 0
+ 917              	_ZN16AudioFileManager10right_buf_E:
+ 918 0000 00000000 		.space	4
+ 919              		.section	.bss._ZN16AudioFileManager9left_buf_E,"aw",%nobits
+ 920              		.align	2
+ 921              		.set	.LANCHOR2,. + 0
+ 924              	_ZN16AudioFileManager9left_buf_E:
+ 925 0000 00000000 		.space	4
+ 926              		.section	.dtcmram_bss,"aw"
+ 927              		.align	2
+ 928              		.set	.LANCHOR0,. + 0
+ 931              	_ZN16AudioFileManager11file_count_E:
+ 932 0000 0000     		.space	2
+ 935              	_ZN16AudioFileManager6names_E:
+ 936 0002 00000000 		.space	2048
+ 936      00000000 
+ 936      00000000 
+ 936      00000000 
+ 936      00000000 
+ 937 0802 0000     		.space	2
+ 940              	_ZN16AudioFileManager7header_E:
+ 941 0804 00000000 		.space	16
+ 941      00000000 
+ 941      00000000 
+ 941      00000000 
+ 944              	_ZN16AudioFileManager17audio_data_start_E:
+ 945 0814 00       		.space	1
+ 946 0815 00       		.space	1
+ 949              	_ZN16AudioFileManager9curr_idx_E:
+ 950 0816 0000     		.space	2
+ 951              		.text
+ 952              	.Letext0:
+ 953              		.file 6 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/machine/_default_types.h"
+ 954              		.file 7 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/_stdint.h"
+ 955              		.file 8 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdint.h"
+ 956              		.file 9 "/Library/DaisyToolchain/0.2.0/arm/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h"
+ 957              		.file 10 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath"
+ 958              		.file 11 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h"
+ 959              		.file 12 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdlib"
+ 960              		.file 13 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdint"
+ 961              		.file 14 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v
+ 962              		.file 15 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/type_traits"
+ 963              		.file 16 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/debug/debug.h"
+ 964              		.file 17 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/algorithmfwd.h"
+ 965              		.file 18 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_pair.h"
+ 966              		.file 19 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/exception_ptr.h"
+ 967              		.file 20 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/initializer_list"
+ 968              		.file 21 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdarg"
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 31
 
 
- 1075              		.cfi_startproc
- 1076              		@ args = 0, pretend = 0, frame = 0
- 1077              		@ frame_needed = 0, uses_anonymous_args = 0
- 1078              		@ link register save eliminated.
- 238:AudioFileManager.cpp ****   left_buf_ = left;
- 1079              		.loc 1 238 3 view .LVU301
- 239:AudioFileManager.cpp ****   right_buf_ = right;
- 1080              		.loc 1 239 14 is_stmt 0 view .LVU302
- 1081 0000 C0E90412 		strd	r1, r2, [r0, #16]
- 240:AudioFileManager.cpp **** }
- 1082              		.loc 1 240 1 view .LVU303
- 1083 0004 7047     		bx	lr
- 1084              		.cfi_endproc
- 1085              	.LFE2590:
- 1087              		.text
- 1088              	.Letext0:
- 1089              		.file 7 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/machine/_default_types.h"
- 1090              		.file 8 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/_stdint.h"
- 1091              		.file 9 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdint.h"
- 1092              		.file 10 "/Library/DaisyToolchain/0.2.0/arm/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h"
- 1093              		.file 11 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath"
- 1094              		.file 12 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h"
- 1095              		.file 13 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdlib"
- 1096              		.file 14 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdint"
- 1097              		.file 15 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v
- 1098              		.file 16 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/type_traits"
- 1099              		.file 17 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/debug/debug.h"
- 1100              		.file 18 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/algorithmfwd.h"
- 1101              		.file 19 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_pair.h"
- 1102              		.file 20 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/exception_ptr.h"
- 1103              		.file 21 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/initializer_list"
- 1104              		.file 22 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdarg"
- 1105              		.file 23 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdio"
- 1106              		.file 24 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstring"
- 1107              		.file 25 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/predefined_ops.h
- 1108              		.file 26 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/_types.h"
- 1109              		.file 27 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/reent.h"
- 1110              		.file 28 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/lock.h"
- 1111              		.file 29 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/math.h"
- 1112              		.file 30 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdlib.h"
- 1113              		.file 31 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/math.h"
- 1114              		.file 32 "/Library/DaisyToolchain/0.2.0/arm/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h"
- 1115              		.file 33 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdio.h"
- 1116              		.file 34 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/stdlib.h"
- 1117              		.file 35 "../libDaisy/src/daisy_core.h"
- 1118              		.file 36 "../libDaisy/src/per/tim.h"
- 1119              		.file 37 "../libDaisy/src/sys/system.h"
- 1120              		.file 38 "../libDaisy/src/per/qspi.h"
- 1121              		.file 39 "../libDaisy/src/per/dac.h"
- 1122              		.file 40 "../libDaisy/src/per/sai.h"
- 1123              		.file 41 "../libDaisy/src/hid/audio.h"
- 1124              		.file 42 "../libDaisy/src/per/adc.h"
- 1125              		.file 43 "../libDaisy/src/per/uart.h"
- 1126              		.file 44 "../libDaisy/src/hid/MidiEvent.h"
- 1127              		.file 45 "../libDaisy/src/hid/midi_parser.h"
- 1128              		.file 46 "../libDaisy/src/hid/usb.h"
- 1129              		.file 47 "../libDaisy/src/hid/midi.h"
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 38
-
-
- 1130              		.file 48 "../libDaisy/src/util/FIFO.h"
- 1131              		.file 49 "../libDaisy/src/hid/switch.h"
- 1132              		.file 50 "../libDaisy/src/hid/encoder.h"
- 1133              		.file 51 "../libDaisy/src/hid/ctrl.h"
- 1134              		.file 52 "../libDaisy/src/hid/logger_impl.h"
- 1135              		.file 53 "../libDaisy/src/util/wav_format.h"
- 1136              		.file 54 "../libDaisy/src/hid/led.h"
- 1137              		.file 55 "../libDaisy/src/util/color.h"
- 1138              		.file 56 "../libDaisy/src/hid/rgb_led.h"
- 1139              		.file 57 "../libDaisy/src/dev/max11300.h"
- 1140              		.file 58 "../libDaisy/src/hid/logger.h"
- 1141              		.file 59 "../libDaisy/src/daisy_pod.h"
- 1142              		.file 60 "../libDaisy/src/per/gpio.h"
- 1143              		.file 61 "../libDaisy/src/dev/sdram.h"
- 1144              		.file 62 "../libDaisy/Middlewares/Third_Party/FatFs/src/integer.h"
- 1145              		.file 63 "../libDaisy/Middlewares/Third_Party/FatFs/src/ff.h"
- 1146              		.file 64 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/string.h"
- 1147              		.file 65 "constants_utils.h"
- 1148              		.file 66 "../libDaisy/src/dev/sr_595.h"
- 1149              		.file 67 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/new"
- 1150              		.file 68 "<built-in>"
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s 			page 39
+ 969              		.file 22 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdio"
+ 970              		.file 23 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstring"
+ 971              		.file 24 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/predefined_ops.h
+ 972              		.file 25 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/_types.h"
+ 973              		.file 26 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/reent.h"
+ 974              		.file 27 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/lock.h"
+ 975              		.file 28 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/math.h"
+ 976              		.file 29 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdlib.h"
+ 977              		.file 30 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/math.h"
+ 978              		.file 31 "/Library/DaisyToolchain/0.2.0/arm/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h"
+ 979              		.file 32 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdio.h"
+ 980              		.file 33 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/stdlib.h"
+ 981              		.file 34 "../libDaisy/src/daisy_core.h"
+ 982              		.file 35 "../libDaisy/src/per/tim.h"
+ 983              		.file 36 "../libDaisy/src/sys/system.h"
+ 984              		.file 37 "../libDaisy/src/per/qspi.h"
+ 985              		.file 38 "../libDaisy/src/per/dac.h"
+ 986              		.file 39 "../libDaisy/src/per/sai.h"
+ 987              		.file 40 "../libDaisy/src/hid/audio.h"
+ 988              		.file 41 "../libDaisy/src/per/adc.h"
+ 989              		.file 42 "../libDaisy/src/per/uart.h"
+ 990              		.file 43 "../libDaisy/src/hid/MidiEvent.h"
+ 991              		.file 44 "../libDaisy/src/hid/midi_parser.h"
+ 992              		.file 45 "../libDaisy/src/hid/usb.h"
+ 993              		.file 46 "../libDaisy/src/hid/midi.h"
+ 994              		.file 47 "../libDaisy/src/util/FIFO.h"
+ 995              		.file 48 "../libDaisy/src/hid/switch.h"
+ 996              		.file 49 "../libDaisy/src/hid/encoder.h"
+ 997              		.file 50 "../libDaisy/src/hid/ctrl.h"
+ 998              		.file 51 "../libDaisy/src/util/wav_format.h"
+ 999              		.file 52 "../libDaisy/src/hid/led.h"
+ 1000              		.file 53 "../libDaisy/src/util/color.h"
+ 1001              		.file 54 "../libDaisy/src/hid/rgb_led.h"
+ 1002              		.file 55 "../libDaisy/src/dev/max11300.h"
+ 1003              		.file 56 "../libDaisy/src/daisy_seed.h"
+ 1004              		.file 57 "../libDaisy/src/daisy_pod.h"
+ 1005              		.file 58 "../libDaisy/src/per/gpio.h"
+ 1006              		.file 59 "../libDaisy/src/dev/sdram.h"
+ 1007              		.file 60 "../libDaisy/Middlewares/Third_Party/FatFs/src/integer.h"
+ 1008              		.file 61 "../libDaisy/Middlewares/Third_Party/FatFs/src/ff.h"
+ 1009              		.file 62 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/string.h"
+ 1010              		.file 63 "constants_utils.h"
+ 1011              		.file 64 "wavheader.h"
+ 1012              		.file 65 "../libDaisy/src/dev/sr_595.h"
+ 1013              		.file 66 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/new"
+ 1014              		.file 67 "<built-in>"
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 32
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 AudioFileManager.cpp
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s:32     .text._ZN16AudioFileManager4InitEv:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s:38     .text._ZN16AudioFileManager4InitEv:0000000000000000 _ZN16AudioFileManager4InitEv
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s:221    .text._ZN16AudioFileManager4InitEv:0000000000000064 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s:242    .text._ZN16AudioFileManager12ScanWavFilesEv:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s:248    .text._ZN16AudioFileManager12ScanWavFilesEv:0000000000000000 _ZN16AudioFileManager12ScanWavFilesEv
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s:432    .text._ZN16AudioFileManager12ScanWavFilesEv:00000000000000a8 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s:441    .text._ZN16AudioFileManager12GetWavHeaderEP3FIL:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s:447    .text._ZN16AudioFileManager12GetWavHeaderEP3FIL:0000000000000000 _ZN16AudioFileManager12GetWavHeaderEP3FIL
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s:575    .text._ZN16AudioFileManager12GetWavHeaderEP3FIL:0000000000000098 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s:585    .text._ZN16AudioFileManager14Load16BitAudioEj:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s:591    .text._ZN16AudioFileManager14Load16BitAudioEj:0000000000000000 _ZN16AudioFileManager14Load16BitAudioEj
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s:810    .text._ZN16AudioFileManager14Load16BitAudioEj:00000000000000b4 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s:816    .text._ZN16AudioFileManager13LoadAudioDataEv:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s:822    .text._ZN16AudioFileManager13LoadAudioDataEv:0000000000000000 _ZN16AudioFileManager13LoadAudioDataEv
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s:898    .text._ZN16AudioFileManager8LoadFileEt:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s:904    .text._ZN16AudioFileManager8LoadFileEt:0000000000000000 _ZN16AudioFileManager8LoadFileEt
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s:1026   .text._ZN16AudioFileManager8LoadFileEt:000000000000006c $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s:1032   .text._ZN16AudioFileManager9CloseFileEv:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s:1038   .text._ZN16AudioFileManager9CloseFileEv:0000000000000000 _ZN16AudioFileManager9CloseFileEv
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s:1065   .text._ZN16AudioFileManager10SetBuffersEPsS0_:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccbXQTM6.s:1071   .text._ZN16AudioFileManager10SetBuffersEPsS0_:0000000000000000 _ZN16AudioFileManager10SetBuffersEPsS0_
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:22     .text._ZN16AudioFileManager4InitEv:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:28     .text._ZN16AudioFileManager4InitEv:0000000000000000 _ZN16AudioFileManager4InitEv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:126    .text._ZN16AudioFileManager4InitEv:0000000000000040 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:138    .text._ZN16AudioFileManager12ScanWavFilesEv:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:144    .text._ZN16AudioFileManager12ScanWavFilesEv:0000000000000000 _ZN16AudioFileManager12ScanWavFilesEv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:291    .text._ZN16AudioFileManager12ScanWavFilesEv:000000000000009c $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:300    .text._ZN16AudioFileManager12GetWavHeaderEP3FIL:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:306    .text._ZN16AudioFileManager12GetWavHeaderEP3FIL:0000000000000000 _ZN16AudioFileManager12GetWavHeaderEP3FIL
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:434    .text._ZN16AudioFileManager12GetWavHeaderEP3FIL:0000000000000098 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:440    .text._ZN16AudioFileManager14Load16BitAudioEj:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:446    .text._ZN16AudioFileManager14Load16BitAudioEj:0000000000000000 _ZN16AudioFileManager14Load16BitAudioEj
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:637    .text._ZN16AudioFileManager14Load16BitAudioEj:00000000000000bc $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:644    .text._ZN16AudioFileManager13LoadAudioDataEv:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:650    .text._ZN16AudioFileManager13LoadAudioDataEv:0000000000000000 _ZN16AudioFileManager13LoadAudioDataEv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:726    .text._ZN16AudioFileManager13LoadAudioDataEv:0000000000000044 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:733    .text._ZN16AudioFileManager8LoadFileEt:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:739    .text._ZN16AudioFileManager8LoadFileEt:0000000000000000 _ZN16AudioFileManager8LoadFileEt
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:834    .text._ZN16AudioFileManager8LoadFileEt:0000000000000060 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:840    .text._ZN16AudioFileManager9CloseFileEv:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:846    .text._ZN16AudioFileManager9CloseFileEv:0000000000000000 _ZN16AudioFileManager9CloseFileEv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:873    .text._ZN16AudioFileManager10SetBuffersEPsS0_:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:879    .text._ZN16AudioFileManager10SetBuffersEPsS0_:0000000000000000 _ZN16AudioFileManager10SetBuffersEPsS0_
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:900    .text._ZN16AudioFileManager10SetBuffersEPsS0_:000000000000000c $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:917    .bss._ZN16AudioFileManager10right_buf_E:0000000000000000 _ZN16AudioFileManager10right_buf_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:924    .bss._ZN16AudioFileManager9left_buf_E:0000000000000000 _ZN16AudioFileManager9left_buf_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:944    .dtcmram_bss:0000000000000814 _ZN16AudioFileManager17audio_data_start_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:940    .dtcmram_bss:0000000000000804 _ZN16AudioFileManager7header_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:931    .dtcmram_bss:0000000000000000 _ZN16AudioFileManager11file_count_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:949    .dtcmram_bss:0000000000000816 _ZN16AudioFileManager9curr_idx_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:935    .dtcmram_bss:0000000000000002 _ZN16AudioFileManager6names_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:913    .bss._ZN16AudioFileManager10right_buf_E:0000000000000000 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:920    .bss._ZN16AudioFileManager9left_buf_E:0000000000000000 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:927    .dtcmram_bss:0000000000000000 $d
 
 UNDEFINED SYMBOLS
-_ZN5daisy6LoggerILNS_17LoggerDestinationE1EE9PrintLineEPKcz
 _ZN5daisy12SdmmcHandler4InitERKNS0_6ConfigE
 _ZN5daisy14FatFSInterface4InitEh
 f_mount
 f_opendir
 f_readdir
-f_closedir
 strncmp
 strstr
+strncpy
+f_closedir
 f_read
 f_lseek
 _Znaj

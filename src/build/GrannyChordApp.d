@@ -142,7 +142,7 @@ build/GrannyChordApp.o: GrannyChordApp.cpp \
  ../libDaisy/src/util/PersistentStorage.h ../libDaisy/src/per/qspi.h \
  ../libDaisy/src/util/VoctCalibration.h \
  ../libDaisy/src/util/WaveTableLoader.h ../libDaisy/src/sys/fatfs.h \
- ../libDaisy/src/util/WavWriter.h ../DaisySP/Source/daisysp.h \
+ ../libDaisy/src/util/WavWriter.h AppState.h ../DaisySP/Source/daisysp.h \
  ../DaisySP/Source/Control/adenv.h ../DaisySP/Source/Control/adsr.h \
  ../DaisySP/Source/Control/phasor.h \
  ../DaisySP/Source/Drums/analogbassdrum.h \
@@ -185,10 +185,10 @@ build/GrannyChordApp.o: GrannyChordApp.cpp \
  ../DaisySP/Source/Synthesis/zoscillator.h \
  ../DaisySP/Source/Utility/looper.h ../DaisySP/Source/Utility/maytrig.h \
  ../DaisySP/Source/Utility/metro.h ../DaisySP/Source/Utility/samplehold.h \
- ../DaisySP/Source/Utility/smooth_random.h UIManager.h AppState.h \
- constants_utils.h debug_print.h GranularSynth.h Grain.h GrainPhasor.h \
- AudioFileManager.h DaisySP-LGPL-FX/compressor.h \
- DaisySP-LGPL-FX/reverbsc.h DaisySP-LGPL-FX/moogladder.h
+ ../DaisySP/Source/Utility/smooth_random.h constants_utils.h \
+ GranularSynth.h Grain.h GrainPhasor.h debug_print.h AudioFileManager.h \
+ wavheader.h DaisySP-LGPL-FX/compressor.h DaisySP-LGPL-FX/reverbsc.h \
+ DaisySP-LGPL-FX/moogladder.h
 ../libDaisy/Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:
 ../libDaisy/Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h750xx.h:
 ../libDaisy/Drivers/CMSIS/Include/core_cm7.h:
@@ -371,6 +371,7 @@ GrannyChordApp.h:
 ../libDaisy/src/util/WaveTableLoader.h:
 ../libDaisy/src/sys/fatfs.h:
 ../libDaisy/src/util/WavWriter.h:
+AppState.h:
 ../DaisySP/Source/daisysp.h:
 ../DaisySP/Source/Control/adenv.h:
 ../DaisySP/Source/Control/adsr.h:
@@ -426,14 +427,13 @@ GrannyChordApp.h:
 ../DaisySP/Source/Utility/metro.h:
 ../DaisySP/Source/Utility/samplehold.h:
 ../DaisySP/Source/Utility/smooth_random.h:
-UIManager.h:
-AppState.h:
 constants_utils.h:
-debug_print.h:
 GranularSynth.h:
 Grain.h:
 GrainPhasor.h:
+debug_print.h:
 AudioFileManager.h:
+wavheader.h:
 DaisySP-LGPL-FX/compressor.h:
 DaisySP-LGPL-FX/reverbsc.h:
 DaisySP-LGPL-FX/moogladder.h:
