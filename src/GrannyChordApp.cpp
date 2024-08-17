@@ -6,9 +6,10 @@ GrannyChordApp* GrannyChordApp::instance_ = nullptr;
 /// @brief Initialises app state and members and goes through app startup process
 /// @param left Left channel audio data buffer
 /// @param right Right channel audio data buffer
-void GrannyChordApp::Init(int16_t *left, int16_t *right){
+void GrannyChordApp::Init(int16_t *left, int16_t *right, ReverbSc* reverb){
   left_buf_ = left;
   right_buf_ = right;
+  reverb_ = reverb;
   pod_.SetAudioBlockSize(4);
   pod_.SetAudioSampleRate(SaiHandle::Config::SampleRate::SAI_48KHZ);
   if (!InitFileMgr()){
@@ -191,12 +192,15 @@ void GrannyChordApp::ToggleFX(bool which_fx){
 /// @return True on successful initialisation, false if init fails or no WAV files found
 bool GrannyChordApp::InitFileMgr(){
   filemgr_.SetBuffers(left_buf_,right_buf_);
-  if (!filemgr_.Init()){
-      curr_state_ = AppState::Error;
+  if (filemgr_.Init()==false){
+      pod_.seed.PrintLine("init in app failed ret false");
+      // curr_state_ = AppState::Error;
       return false;
   }
+  pod_.seed.PrintLine("scanning wavs now");
   if (!filemgr_.ScanWavFiles()){
-    curr_state_ = AppState::Error;
+    pod_.seed.PrintLine("failed to scan wavs");
+    // curr_state_ = AppState::Error;
     return false;
   }
   return true;
@@ -204,7 +208,8 @@ bool GrannyChordApp::InitFileMgr(){
 
 /// @brief Calls synth initialisation function, passes audio data buffers and audio length
 void GrannyChordApp::InitSynth(){
-  synth_.Init(left_buf_, right_buf_, audio_len_);
+  // synth_.Init(left_buf_, right_buf_, audio_len_);
+  synth_.Init(left_buf_, right_buf_, filemgr_.GetSamplesPerChannel());
 }
 
 /// @brief Resets current file index and audio data buffers
@@ -217,7 +222,7 @@ void GrannyChordApp::ClearAudioBuffers(){
 /// @brief Initialises WAV playback state, resets playhead, sets current file audio length
 void GrannyChordApp::InitPlayback(){
   wav_playhead_ = 0;
-  audio_len_ = filemgr_.GetSamplesPerChannel();
+  // audio_len_ = filemgr_.GetSamplesPerChannel();
   if (!filemgr_.LoadFile(file_idx_)) curr_state_=AppState::Error;
 }
 
@@ -240,7 +245,7 @@ void GrannyChordApp::InitWavWriter(){
 /// @brief initialise reverb, compressor, filter configs for FX section 
 void GrannyChordApp::InitFX(){
   comp_.Init(pod_.AudioSampleRate());
-  reverb_.Init(SAMPLE_RATE_FLOAT);
+  reverb_->Init(SAMPLE_RATE_FLOAT);
   lowpass_moog_.Init(SAMPLE_RATE_FLOAT);
   lowpass_moog_.SetFreq(20000.0f);
   lowpass_moog_.SetRes(0.7f);
@@ -268,7 +273,7 @@ void GrannyChordApp::AudioCallback(AudioHandle::InputBuffer in, AudioHandle::Out
 void GrannyChordApp::ProcessAudio(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, size_t size){
   switch(curr_state_){
     case AppState::PlayWAV: 
-      if (wav_playhead_>= audio_len_ -1){
+      if (wav_playhead_>= filemgr_.GetSamplesPerChannel() -1){
         AudioIdle(out,size);
         break;
       }
@@ -301,7 +306,8 @@ void GrannyChordApp::AudioIdle(AudioHandle::OutputBuffer out, size_t size){
 /// @param size Number of samples to process in this call
 void GrannyChordApp::ProcessWAVPlayback(AudioHandle::OutputBuffer out, size_t size){
   for (size_t i=0; i<size; i++){
-    if (wav_playhead_ < audio_len_){
+    // if (wav_playhead_ < audio_len_){
+    if (wav_playhead_ < filemgr_.GetSamplesPerChannel()){
       out[0][i] = s162f(left_buf_[wav_playhead_]);
       out[1][1] = s162f(right_buf_[wav_playhead_]);
       wav_playhead_++;
@@ -347,7 +353,7 @@ void GrannyChordApp::ProcessSynthesis(AudioHandle::OutputBuffer out, size_t size
     for (size_t i=0; i<size; i++){
       temp_left[i] = out[0][i];
       temp_right[i] = out[1][i];
-      reverb_.Process(temp_left[i],temp_right[i],&out[0][i],&out[1][i]); // NOTE: check this works
+      reverb_->Process(temp_left[i],temp_right[i],&out[0][i],&out[1][i]); // NOTE: check this works
     }
 }
 
@@ -368,7 +374,8 @@ void GrannyChordApp::ProcessChordMode(AudioHandle::OutputBuffer out, size_t size
 /// @param size Number of samples to process in this call
 void GrannyChordApp::RecordOutToSD(AudioHandle::OutputBuffer out, size_t size){
   InitWavWriter();
-  const char name[8] = {recording_count_};
+  char name[32];
+  sprintf(name,"recording_%d",recording_count_);
   sd_out_writer_.OpenFile(name);
   recording_count_++;
   recording_out_ = true;
@@ -431,7 +438,7 @@ void GrannyChordApp::UpdateKnob1Params(float knob1_val, SynthMode mode){
       break;
     case SynthMode::Reverb:
       /* set reverb feedback ie tail length */
-      reverb_.SetFeedback(knob1_val); // NOTE check it doesn't clip
+      reverb_->SetFeedback(knob1_val); // NOTE check it doesn't clip
       break;
     case SynthMode::Filter:
       // knob1_val = fmap(knob1_val, 20.0f, 20000.0f, daisysp::Mapping::EXP);
@@ -469,7 +476,7 @@ void GrannyChordApp::UpdateKnob2Params(float knob2_val, SynthMode mode){
       /* map knob value to frequency range with an exponential curve */
       knob2_val = fmap(knob2_val, 100.0f, 20000.0f, daisysp::Mapping::EXP);
       /* set reverb low pass frequency */
-      reverb_.SetLpFreq(knob2_val);
+      reverb_->SetLpFreq(knob2_val);
       break;
     case SynthMode::Filter:
       /* again, map knob value to frequency range with an exponential curve */

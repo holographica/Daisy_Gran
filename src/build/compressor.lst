@@ -1,0 +1,1509 @@
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.arch armv7e-m
+   3              		.fpu fpv5-d16
+   4              		.eabi_attribute 28, 1
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.file	"compressor.cpp"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text._ZN7daisysp10Compressor4InitEf,"ax",%progbits
+  19              		.align	1
+  20              		.global	_ZN7daisysp10Compressor4InitEf
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  25              	_ZN7daisysp10Compressor4InitEf:
+  26              	.LVL0:
+  27              	.LFB2814:
+  28              		.file 1 "DaisySP-LGPL-FX/compressor.cpp"
+   1:DaisySP-LGPL-FX/compressor.cpp **** // # compressor
+   2:DaisySP-LGPL-FX/compressor.cpp **** //
+   3:DaisySP-LGPL-FX/compressor.cpp **** // Author: shensley, AvAars
+   4:DaisySP-LGPL-FX/compressor.cpp **** //
+   5:DaisySP-LGPL-FX/compressor.cpp **** 
+   6:DaisySP-LGPL-FX/compressor.cpp **** #include <cmath>
+   7:DaisySP-LGPL-FX/compressor.cpp **** #include <stdlib.h>
+   8:DaisySP-LGPL-FX/compressor.cpp **** #include <stdint.h>
+   9:DaisySP-LGPL-FX/compressor.cpp **** #include "compressor.h"
+  10:DaisySP-LGPL-FX/compressor.cpp **** 
+  11:DaisySP-LGPL-FX/compressor.cpp **** using namespace daisysp; 
+  12:DaisySP-LGPL-FX/compressor.cpp **** 
+  13:DaisySP-LGPL-FX/compressor.cpp **** #ifndef max
+  14:DaisySP-LGPL-FX/compressor.cpp **** #define max(a, b) ((a < b) ? b : a)
+  15:DaisySP-LGPL-FX/compressor.cpp **** #endif
+  16:DaisySP-LGPL-FX/compressor.cpp **** 
+  17:DaisySP-LGPL-FX/compressor.cpp **** #ifndef min
+  18:DaisySP-LGPL-FX/compressor.cpp **** #define min(a, b) ((a < b) ? a : b)
+  19:DaisySP-LGPL-FX/compressor.cpp **** #endif
+  20:DaisySP-LGPL-FX/compressor.cpp **** 
+  21:DaisySP-LGPL-FX/compressor.cpp **** void Compressor::Init(float sample_rate)
+  22:DaisySP-LGPL-FX/compressor.cpp **** {
+  29              		.loc 1 22 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  23:DaisySP-LGPL-FX/compressor.cpp ****     sample_rate_      = min(192000, max(1, sample_rate));
+  33              		.loc 1 23 5 view .LVU1
+  22:DaisySP-LGPL-FX/compressor.cpp ****     sample_rate_      = min(192000, max(1, sample_rate));
+  34              		.loc 1 22 1 is_stmt 0 view .LVU2
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s 			page 2
+
+
+  35 0000 10B5     		push	{r4, lr}
+  36              		.cfi_def_cfa_offset 8
+  37              		.cfi_offset 4, -8
+  38              		.cfi_offset 14, -4
+  39 0002 2DED028B 		vpush.64	{d8}
+  40              		.cfi_def_cfa_offset 16
+  41              		.cfi_offset 80, -16
+  42              		.cfi_offset 81, -12
+  43              		.loc 1 23 25 view .LVU3
+  44 0006 B7EE008A 		vmov.f32	s16, #1.0e+0
+  22:DaisySP-LGPL-FX/compressor.cpp ****     sample_rate_      = min(192000, max(1, sample_rate));
+  45              		.loc 1 22 1 view .LVU4
+  46 000a 0446     		mov	r4, r0
+  47              		.loc 1 23 25 view .LVU5
+  48 000c B4EEC80A 		vcmpe.f32	s0, s16
+  49 0010 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+  50 0014 71DD     		ble	.L7
+  51              		.loc 1 23 23 discriminator 4 view .LVU6
+  52 0016 DFED3B7A 		vldr.32	s15, .L8
+  53 001a B4EEE70A 		vcmpe.f32	s0, s15
+  54 001e F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+  55 0022 6CDC     		bgt	.L5
+  56              		.loc 1 23 23 discriminator 8 view .LVU7
+  57 0024 FDEEC07A 		vcvt.s32.f32	s15, s0
+  58 0028 17EE903A 		vmov	r3, s15	@ int
+  59              	.L2:
+  24:DaisySP-LGPL-FX/compressor.cpp ****     sample_rate_inv_  = 1.0f / (float)sample_rate_;
+  60              		.loc 1 24 32 discriminator 12 view .LVU8
+  61 002c 07EE903A 		vmov	s15, r3	@ int
+  62              	.LBB48:
+  63              	.LBB49:
+  64              		.file 2 "DaisySP-LGPL-FX/compressor.h"
+   1:DaisySP-LGPL-FX/compressor.h **** /*
+   2:DaisySP-LGPL-FX/compressor.h **** Copyright (c) 2023 Electrosmith, Corp, GRAME, Centre National de Creation Musicale.
+   3:DaisySP-LGPL-FX/compressor.h **** 
+   4:DaisySP-LGPL-FX/compressor.h **** Use of this source code is governed by the LGPL V2.1
+   5:DaisySP-LGPL-FX/compressor.h **** license that can be found in the LICENSE file or at
+   6:DaisySP-LGPL-FX/compressor.h **** https://opensource.org/license/lgpl-2-1/
+   7:DaisySP-LGPL-FX/compressor.h **** */
+   8:DaisySP-LGPL-FX/compressor.h **** 
+   9:DaisySP-LGPL-FX/compressor.h **** #pragma once
+  10:DaisySP-LGPL-FX/compressor.h **** #ifndef DSY_COMPRESSOR_H
+  11:DaisySP-LGPL-FX/compressor.h **** #define DSY_COMPRESSOR_H
+  12:DaisySP-LGPL-FX/compressor.h **** 
+  13:DaisySP-LGPL-FX/compressor.h **** #include "Utility/dsp.h"
+  14:DaisySP-LGPL-FX/compressor.h **** 
+  15:DaisySP-LGPL-FX/compressor.h **** namespace daisysp
+  16:DaisySP-LGPL-FX/compressor.h **** {
+  17:DaisySP-LGPL-FX/compressor.h **** /** dynamics compressor
+  18:DaisySP-LGPL-FX/compressor.h **** 
+  19:DaisySP-LGPL-FX/compressor.h **** influenced by compressor in soundpipe (from faust).
+  20:DaisySP-LGPL-FX/compressor.h **** 
+  21:DaisySP-LGPL-FX/compressor.h **** Modifications made to do:
+  22:DaisySP-LGPL-FX/compressor.h **** - Less calculations during each process loop (coefficients recalculated on parameter change).
+  23:DaisySP-LGPL-FX/compressor.h **** - C++-ified
+  24:DaisySP-LGPL-FX/compressor.h **** - added sidechain support
+  25:DaisySP-LGPL-FX/compressor.h **** - pulled gain apart for monitoring and multichannel support
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s 			page 3
+
+
+  26:DaisySP-LGPL-FX/compressor.h **** - improved readability
+  27:DaisySP-LGPL-FX/compressor.h **** - improved makeup-gain calculations
+  28:DaisySP-LGPL-FX/compressor.h **** - changing controls now costs a lot less
+  29:DaisySP-LGPL-FX/compressor.h **** - a lot less expensive
+  30:DaisySP-LGPL-FX/compressor.h **** 
+  31:DaisySP-LGPL-FX/compressor.h **** by: shensley, improved upon by AvAars
+  32:DaisySP-LGPL-FX/compressor.h **** \todo Add soft/hard knee settings
+  33:DaisySP-LGPL-FX/compressor.h **** */
+  34:DaisySP-LGPL-FX/compressor.h **** class Compressor
+  35:DaisySP-LGPL-FX/compressor.h **** {
+  36:DaisySP-LGPL-FX/compressor.h ****   public:
+  37:DaisySP-LGPL-FX/compressor.h ****     Compressor() {}
+  38:DaisySP-LGPL-FX/compressor.h ****     ~Compressor() {}
+  39:DaisySP-LGPL-FX/compressor.h ****     /** Initializes compressor
+  40:DaisySP-LGPL-FX/compressor.h ****         \param sample_rate rate at which samples will be produced by the audio engine.
+  41:DaisySP-LGPL-FX/compressor.h ****     */
+  42:DaisySP-LGPL-FX/compressor.h ****     void Init(float sample_rate);
+  43:DaisySP-LGPL-FX/compressor.h **** 
+  44:DaisySP-LGPL-FX/compressor.h ****     /** Compress the audio input signal, saves the calculated gain
+  45:DaisySP-LGPL-FX/compressor.h ****         \param in audio input signal
+  46:DaisySP-LGPL-FX/compressor.h ****     */
+  47:DaisySP-LGPL-FX/compressor.h ****     float Process(float in);
+  48:DaisySP-LGPL-FX/compressor.h **** 
+  49:DaisySP-LGPL-FX/compressor.h ****     /** Compresses the audio input signal, keyed by a secondary input.
+  50:DaisySP-LGPL-FX/compressor.h ****         \param in audio input signal (to be compressed)
+  51:DaisySP-LGPL-FX/compressor.h ****         \param key audio input that will be used to side-chain the compressor
+  52:DaisySP-LGPL-FX/compressor.h ****     */
+  53:DaisySP-LGPL-FX/compressor.h ****     float Process(float in, float key)
+  54:DaisySP-LGPL-FX/compressor.h ****     {
+  55:DaisySP-LGPL-FX/compressor.h ****         Process(key);
+  56:DaisySP-LGPL-FX/compressor.h ****         return Apply(in);
+  57:DaisySP-LGPL-FX/compressor.h ****     }
+  58:DaisySP-LGPL-FX/compressor.h **** 
+  59:DaisySP-LGPL-FX/compressor.h ****     /** Apply compression to the audio signal, based on the previously calculated gain
+  60:DaisySP-LGPL-FX/compressor.h ****         \param in audio input signal
+  61:DaisySP-LGPL-FX/compressor.h ****     */
+  62:DaisySP-LGPL-FX/compressor.h ****     float Apply(float in) { return gain_ * in; }
+  63:DaisySP-LGPL-FX/compressor.h **** 
+  64:DaisySP-LGPL-FX/compressor.h ****     /** Compresses a block of audio
+  65:DaisySP-LGPL-FX/compressor.h ****         \param in audio input signal
+  66:DaisySP-LGPL-FX/compressor.h ****         \param out audio output signal
+  67:DaisySP-LGPL-FX/compressor.h ****         \param size the size of the block
+  68:DaisySP-LGPL-FX/compressor.h ****     */
+  69:DaisySP-LGPL-FX/compressor.h ****     void ProcessBlock(float *in, float *out, size_t size)
+  70:DaisySP-LGPL-FX/compressor.h ****     {
+  71:DaisySP-LGPL-FX/compressor.h ****         ProcessBlock(in, out, in, size);
+  72:DaisySP-LGPL-FX/compressor.h ****     }
+  73:DaisySP-LGPL-FX/compressor.h **** 
+  74:DaisySP-LGPL-FX/compressor.h ****     /** Compresses a block of audio, keyed by a secondary input
+  75:DaisySP-LGPL-FX/compressor.h ****         \param in audio input signal (to be compressed)
+  76:DaisySP-LGPL-FX/compressor.h ****         \param out audio output signal
+  77:DaisySP-LGPL-FX/compressor.h ****         \param key audio input that will be used to side-chain the compressor
+  78:DaisySP-LGPL-FX/compressor.h ****         \param size the size of the block
+  79:DaisySP-LGPL-FX/compressor.h ****     */
+  80:DaisySP-LGPL-FX/compressor.h ****     void ProcessBlock(float *in, float *out, float *key, size_t size);
+  81:DaisySP-LGPL-FX/compressor.h **** 
+  82:DaisySP-LGPL-FX/compressor.h ****     /** Compresses a block of multiple channels of audio, keyed by a secondary input
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s 			page 4
+
+
+  83:DaisySP-LGPL-FX/compressor.h ****         \param in audio input signals (to be compressed)
+  84:DaisySP-LGPL-FX/compressor.h ****         \param out audio output signals
+  85:DaisySP-LGPL-FX/compressor.h ****         \param key audio input that will be used to side-chain the compressor
+  86:DaisySP-LGPL-FX/compressor.h ****         \param channels the number of audio channels
+  87:DaisySP-LGPL-FX/compressor.h ****         \param size the size of the block
+  88:DaisySP-LGPL-FX/compressor.h ****     */
+  89:DaisySP-LGPL-FX/compressor.h ****     void ProcessBlock(float **in,
+  90:DaisySP-LGPL-FX/compressor.h ****                       float **out,
+  91:DaisySP-LGPL-FX/compressor.h ****                       float * key,
+  92:DaisySP-LGPL-FX/compressor.h ****                       size_t  channels,
+  93:DaisySP-LGPL-FX/compressor.h ****                       size_t  size);
+  94:DaisySP-LGPL-FX/compressor.h **** 
+  95:DaisySP-LGPL-FX/compressor.h ****     /** Gets the amount of gain reduction */
+  96:DaisySP-LGPL-FX/compressor.h ****     float GetRatio() { return ratio_; }
+  97:DaisySP-LGPL-FX/compressor.h **** 
+  98:DaisySP-LGPL-FX/compressor.h ****     /** Sets the amount of gain reduction applied to compressed signals
+  99:DaisySP-LGPL-FX/compressor.h ****      \param ratio Expects 1.0 -> 40. (untested with values < 1.0)
+ 100:DaisySP-LGPL-FX/compressor.h ****     */
+ 101:DaisySP-LGPL-FX/compressor.h ****     void SetRatio(float ratio)
+ 102:DaisySP-LGPL-FX/compressor.h ****     {
+ 103:DaisySP-LGPL-FX/compressor.h ****         ratio_ = ratio;
+ 104:DaisySP-LGPL-FX/compressor.h ****         RecalculateRatio();
+ 105:DaisySP-LGPL-FX/compressor.h ****     }
+ 106:DaisySP-LGPL-FX/compressor.h **** 
+ 107:DaisySP-LGPL-FX/compressor.h ****     /** Gets the threshold in dB */
+ 108:DaisySP-LGPL-FX/compressor.h ****     float GetThreshold() { return thresh_; }
+ 109:DaisySP-LGPL-FX/compressor.h **** 
+ 110:DaisySP-LGPL-FX/compressor.h ****     /** Sets the threshold in dB at which compression will be applied
+ 111:DaisySP-LGPL-FX/compressor.h ****      \param threshold Expects 0.0 -> -80.
+ 112:DaisySP-LGPL-FX/compressor.h ****     */
+ 113:DaisySP-LGPL-FX/compressor.h ****     void SetThreshold(float threshold)
+ 114:DaisySP-LGPL-FX/compressor.h ****     {
+ 115:DaisySP-LGPL-FX/compressor.h ****         thresh_ = threshold;
+ 116:DaisySP-LGPL-FX/compressor.h ****         RecalculateMakeup();
+ 117:DaisySP-LGPL-FX/compressor.h ****     }
+ 118:DaisySP-LGPL-FX/compressor.h **** 
+ 119:DaisySP-LGPL-FX/compressor.h ****     /** Gets the envelope time for onset of compression */
+ 120:DaisySP-LGPL-FX/compressor.h ****     float GetAttack() { return atk_; }
+ 121:DaisySP-LGPL-FX/compressor.h **** 
+ 122:DaisySP-LGPL-FX/compressor.h ****     /** Sets the envelope time for onset of compression for signals above the threshold.
+ 123:DaisySP-LGPL-FX/compressor.h ****         \param attack Expects 0.001 -> 10
+ 124:DaisySP-LGPL-FX/compressor.h ****     */
+ 125:DaisySP-LGPL-FX/compressor.h ****     void SetAttack(float attack)
+ 126:DaisySP-LGPL-FX/compressor.h ****     {
+ 127:DaisySP-LGPL-FX/compressor.h ****         atk_ = attack;
+  65              		.loc 2 127 14 discriminator 12 view .LVU9
+  66 0030 DFED358A 		vldr.32	s17, .L8+4
+  67              	.LBE49:
+  68              	.LBE48:
+  23:DaisySP-LGPL-FX/compressor.cpp ****     sample_rate_inv_  = 1.0f / (float)sample_rate_;
+  69              		.loc 1 23 23 discriminator 12 view .LVU10
+  70 0034 2363     		str	r3, [r4, #48]
+  71              		.loc 1 24 5 is_stmt 1 discriminator 12 view .LVU11
+  72              		.loc 1 24 32 is_stmt 0 discriminator 12 view .LVU12
+  73 0036 B8EEE70A 		vcvt.f32.s32	s0, s15
+  74              	.LVL1:
+  75              	.LBB71:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s 			page 5
+
+
+  76              	.LBB66:
+  77              		.loc 2 127 14 discriminator 12 view .LVU13
+  78 003a C4ED028A 		vstr.32	s17, [r4, #8]
+  79              	.LBE66:
+  80              	.LBE71:
+  25:DaisySP-LGPL-FX/compressor.cpp ****     sample_rate_inv2_ = 2.0f / (float)sample_rate_;
+  81              		.loc 1 25 30 discriminator 12 view .LVU14
+  82 003e F0EE007A 		vmov.f32	s15, #2.0e+0
+  24:DaisySP-LGPL-FX/compressor.cpp ****     sample_rate_inv2_ = 2.0f / (float)sample_rate_;
+  83              		.loc 1 24 30 discriminator 12 view .LVU15
+  84 0042 88EE007A 		vdiv.f32	s14, s16, s0
+  85              	.LBB72:
+  86              	.LBB73:
+ 103:DaisySP-LGPL-FX/compressor.h ****         RecalculateRatio();
+  87              		.loc 2 103 16 discriminator 12 view .LVU16
+  88 0046 C4ED007A 		vstr.32	s15, [r4]
+  89              	.LBE73:
+  90              	.LBE72:
+  91              		.loc 1 25 30 discriminator 12 view .LVU17
+  92 004a C7EE806A 		vdiv.f32	s13, s15, s0
+  93              	.LBB80:
+  94              	.LBB78:
+  95              	.LBB74:
+  96              	.LBB75:
+ 128:DaisySP-LGPL-FX/compressor.h ****         RecalculateAttack();
+ 129:DaisySP-LGPL-FX/compressor.h ****     }
+ 130:DaisySP-LGPL-FX/compressor.h **** 
+ 131:DaisySP-LGPL-FX/compressor.h ****     /** Gets the envelope time for release of compression */
+ 132:DaisySP-LGPL-FX/compressor.h ****     float GetRelease() { return rel_; }
+ 133:DaisySP-LGPL-FX/compressor.h **** 
+ 134:DaisySP-LGPL-FX/compressor.h ****     /** Sets the envelope time for release of compression as input signal falls below threshold.
+ 135:DaisySP-LGPL-FX/compressor.h ****         \param release Expects 0.001 -> 10
+ 136:DaisySP-LGPL-FX/compressor.h ****     */
+ 137:DaisySP-LGPL-FX/compressor.h ****     void SetRelease(float release)
+ 138:DaisySP-LGPL-FX/compressor.h ****     {
+ 139:DaisySP-LGPL-FX/compressor.h ****         rel_ = release;
+ 140:DaisySP-LGPL-FX/compressor.h ****         RecalculateRelease();
+ 141:DaisySP-LGPL-FX/compressor.h ****     }
+ 142:DaisySP-LGPL-FX/compressor.h **** 
+ 143:DaisySP-LGPL-FX/compressor.h ****     /** Gets the additional gain to make up for the compression */
+ 144:DaisySP-LGPL-FX/compressor.h ****     float GetMakeup() { return makeup_gain_; }
+ 145:DaisySP-LGPL-FX/compressor.h **** 
+ 146:DaisySP-LGPL-FX/compressor.h ****     /** Manually sets the additional gain to make up for the compression
+ 147:DaisySP-LGPL-FX/compressor.h ****         \param gain Expects 0.0 -> 80
+ 148:DaisySP-LGPL-FX/compressor.h ****     */
+ 149:DaisySP-LGPL-FX/compressor.h ****     void SetMakeup(float gain) { makeup_gain_ = gain; }
+ 150:DaisySP-LGPL-FX/compressor.h **** 
+ 151:DaisySP-LGPL-FX/compressor.h ****     /** Enables or disables the automatic makeup gain. Disabling sets the makeup gain to 0.0
+ 152:DaisySP-LGPL-FX/compressor.h ****         \param enable true to enable, false to disable
+ 153:DaisySP-LGPL-FX/compressor.h ****     */
+ 154:DaisySP-LGPL-FX/compressor.h ****     void AutoMakeup(bool enable)
+ 155:DaisySP-LGPL-FX/compressor.h ****     {
+ 156:DaisySP-LGPL-FX/compressor.h ****         makeup_auto_ = enable;
+ 157:DaisySP-LGPL-FX/compressor.h ****         makeup_gain_ = 0.0f;
+ 158:DaisySP-LGPL-FX/compressor.h ****         RecalculateMakeup();
+ 159:DaisySP-LGPL-FX/compressor.h ****     }
+ 160:DaisySP-LGPL-FX/compressor.h **** 
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s 			page 6
+
+
+ 161:DaisySP-LGPL-FX/compressor.h ****     /** Gets the gain reduction in dB
+ 162:DaisySP-LGPL-FX/compressor.h ****     */
+ 163:DaisySP-LGPL-FX/compressor.h ****     float GetGain() { return fastlog10f(gain_) * 20.0f; }
+ 164:DaisySP-LGPL-FX/compressor.h **** 
+ 165:DaisySP-LGPL-FX/compressor.h ****   private:
+ 166:DaisySP-LGPL-FX/compressor.h ****     float ratio_, thresh_, atk_, rel_;
+ 167:DaisySP-LGPL-FX/compressor.h ****     float makeup_gain_;
+ 168:DaisySP-LGPL-FX/compressor.h ****     float gain_;
+ 169:DaisySP-LGPL-FX/compressor.h **** 
+ 170:DaisySP-LGPL-FX/compressor.h ****     // Recorded slope and gain, used in next sample
+ 171:DaisySP-LGPL-FX/compressor.h ****     float slope_rec_, gain_rec_;
+ 172:DaisySP-LGPL-FX/compressor.h **** 
+ 173:DaisySP-LGPL-FX/compressor.h ****     // Internals from faust
+ 174:DaisySP-LGPL-FX/compressor.h ****     float atk_slo2_, ratio_mul_, atk_slo_, rel_slo_;
+ 175:DaisySP-LGPL-FX/compressor.h **** 
+ 176:DaisySP-LGPL-FX/compressor.h ****     int   sample_rate_;
+ 177:DaisySP-LGPL-FX/compressor.h ****     float sample_rate_inv2_, sample_rate_inv_;
+ 178:DaisySP-LGPL-FX/compressor.h **** 
+ 179:DaisySP-LGPL-FX/compressor.h ****     // Auto makeup gain enable
+ 180:DaisySP-LGPL-FX/compressor.h ****     bool makeup_auto_;
+ 181:DaisySP-LGPL-FX/compressor.h **** 
+ 182:DaisySP-LGPL-FX/compressor.h ****     // Methods for recalculating internals
+ 183:DaisySP-LGPL-FX/compressor.h ****     void RecalculateRatio()
+ 184:DaisySP-LGPL-FX/compressor.h ****     {
+ 185:DaisySP-LGPL-FX/compressor.h ****         ratio_mul_ = ((1.0f - atk_slo2_) * ((1.0f / ratio_) - 1.0f));
+  97              		.loc 2 185 29 discriminator 12 view .LVU18
+  98 004e D4ED087A 		vldr.32	s15, [r4, #32]
+  99 0052 78EE677A 		vsub.f32	s15, s16, s15
+ 100              	.LBE75:
+ 101              	.LBE74:
+ 102              	.LBE78:
+ 103              	.LBE80:
+ 104              	.LBB81:
+ 105              	.LBB67:
+ 106              	.LBB50:
+ 107              	.LBB51:
+ 186:DaisySP-LGPL-FX/compressor.h ****     }
+ 187:DaisySP-LGPL-FX/compressor.h **** 
+ 188:DaisySP-LGPL-FX/compressor.h ****     void RecalculateAttack()
+ 189:DaisySP-LGPL-FX/compressor.h ****     {
+ 190:DaisySP-LGPL-FX/compressor.h ****         atk_slo_  = expf(-(sample_rate_inv_ / atk_));
+ 108              		.loc 2 190 45 discriminator 12 view .LVU19
+ 109 0056 87EE280A 		vdiv.f32	s0, s14, s17
+ 110              	.LBE51:
+ 111              	.LBE50:
+ 112              	.LBE67:
+ 113              	.LBE81:
+  24:DaisySP-LGPL-FX/compressor.cpp ****     sample_rate_inv2_ = 2.0f / (float)sample_rate_;
+ 114              		.loc 1 24 23 discriminator 12 view .LVU20
+ 115 005a 84ED0E7A 		vstr.32	s14, [r4, #56]
+ 116              		.loc 1 25 5 is_stmt 1 discriminator 12 view .LVU21
+ 117              		.loc 1 25 23 is_stmt 0 discriminator 12 view .LVU22
+ 118 005e C4ED0D6A 		vstr.32	s13, [r4, #52]
+  26:DaisySP-LGPL-FX/compressor.cpp **** 
+  27:DaisySP-LGPL-FX/compressor.cpp ****     // Initializing the params in this order to avoid dividing by zero
+  28:DaisySP-LGPL-FX/compressor.cpp **** 
+  29:DaisySP-LGPL-FX/compressor.cpp ****     SetRatio(2.0f);
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s 			page 7
+
+
+ 119              		.loc 1 29 5 is_stmt 1 discriminator 12 view .LVU23
+ 120              	.LVL2:
+ 121              	.LBB82:
+ 122              	.LBI72:
+ 101:DaisySP-LGPL-FX/compressor.h ****     {
+ 123              		.loc 2 101 10 discriminator 12 view .LVU24
+ 124              	.LBB79:
+ 103:DaisySP-LGPL-FX/compressor.h ****         RecalculateRatio();
+ 125              		.loc 2 103 9 discriminator 12 view .LVU25
+ 104:DaisySP-LGPL-FX/compressor.h ****     }
+ 126              		.loc 2 104 9 discriminator 12 view .LVU26
+ 127              	.LBB77:
+ 128              	.LBI74:
+ 183:DaisySP-LGPL-FX/compressor.h ****     {
+ 129              		.loc 2 183 10 discriminator 12 view .LVU27
+ 130              	.LBB76:
+ 185:DaisySP-LGPL-FX/compressor.h ****     }
+ 131              		.loc 2 185 9 discriminator 12 view .LVU28
+ 185:DaisySP-LGPL-FX/compressor.h ****     }
+ 132              		.loc 2 185 42 is_stmt 0 discriminator 12 view .LVU29
+ 133 0062 FEEE006A 		vmov.f32	s13, #-5.0e-1
+ 134 0066 67EEA67A 		vmul.f32	s15, s15, s13
+ 185:DaisySP-LGPL-FX/compressor.h ****     }
+ 135              		.loc 2 185 20 discriminator 12 view .LVU30
+ 136 006a C4ED097A 		vstr.32	s15, [r4, #36]
+ 137              	.LVL3:
+ 185:DaisySP-LGPL-FX/compressor.h ****     }
+ 138              		.loc 2 185 20 discriminator 12 view .LVU31
+ 139              	.LBE76:
+ 140              	.LBE77:
+ 141              	.LBE79:
+ 142              	.LBE82:
+  30:DaisySP-LGPL-FX/compressor.cpp ****     SetAttack(0.1f);
+ 143              		.loc 1 30 5 is_stmt 1 discriminator 12 view .LVU32
+ 144              	.LBB83:
+ 145              	.LBI48:
+ 125:DaisySP-LGPL-FX/compressor.h ****     {
+ 146              		.loc 2 125 10 discriminator 12 view .LVU33
+ 147              	.LBB68:
+ 127:DaisySP-LGPL-FX/compressor.h ****         RecalculateAttack();
+ 148              		.loc 2 127 9 discriminator 12 view .LVU34
+ 128:DaisySP-LGPL-FX/compressor.h ****     }
+ 149              		.loc 2 128 9 discriminator 12 view .LVU35
+ 150              	.LBB63:
+ 151              	.LBI50:
+ 188:DaisySP-LGPL-FX/compressor.h ****     {
+ 152              		.loc 2 188 10 discriminator 12 view .LVU36
+ 153              	.LBB60:
+ 154              		.loc 2 190 9 discriminator 12 view .LVU37
+ 155              		.loc 2 190 25 is_stmt 0 discriminator 12 view .LVU38
+ 156 006e B1EE400A 		vneg.f32	s0, s0
+ 157 0072 FFF7FEFF 		bl	expf
+ 158              	.LVL4:
+ 191:DaisySP-LGPL-FX/compressor.h ****         atk_slo2_ = expf(-(sample_rate_inv2_ / atk_));
+ 159              		.loc 2 191 46 discriminator 12 view .LVU39
+ 160 0076 94ED0D7A 		vldr.32	s14, [r4, #52]
+ 161 007a D4ED027A 		vldr.32	s15, [r4, #8]
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s 			page 8
+
+
+ 190:DaisySP-LGPL-FX/compressor.h ****         atk_slo2_ = expf(-(sample_rate_inv2_ / atk_));
+ 162              		.loc 2 190 19 discriminator 12 view .LVU40
+ 163 007e 84ED0A0A 		vstr.32	s0, [r4, #40]
+ 164              		.loc 2 191 9 is_stmt 1 discriminator 12 view .LVU41
+ 165              		.loc 2 191 46 is_stmt 0 discriminator 12 view .LVU42
+ 166 0082 87EE270A 		vdiv.f32	s0, s14, s15
+ 167              		.loc 2 191 25 discriminator 12 view .LVU43
+ 168 0086 B1EE400A 		vneg.f32	s0, s0
+ 169 008a FFF7FEFF 		bl	expf
+ 170              	.LVL5:
+ 171              	.LBB52:
+ 172              	.LBB53:
+ 185:DaisySP-LGPL-FX/compressor.h ****     }
+ 173              		.loc 2 185 51 discriminator 12 view .LVU44
+ 174 008e 94ED007A 		vldr.32	s14, [r4]
+ 175              	.LBE53:
+ 176              	.LBE52:
+ 177              		.loc 2 191 19 discriminator 12 view .LVU45
+ 178 0092 84ED080A 		vstr.32	s0, [r4, #32]
+ 192:DaisySP-LGPL-FX/compressor.h **** 
+ 193:DaisySP-LGPL-FX/compressor.h ****         RecalculateRatio();
+ 179              		.loc 2 193 9 is_stmt 1 discriminator 12 view .LVU46
+ 180              	.LVL6:
+ 181              	.LBB57:
+ 182              	.LBI52:
+ 183:DaisySP-LGPL-FX/compressor.h ****     {
+ 183              		.loc 2 183 10 discriminator 12 view .LVU47
+ 184              	.LBB54:
+ 185:DaisySP-LGPL-FX/compressor.h ****     }
+ 185              		.loc 2 185 9 discriminator 12 view .LVU48
+ 185:DaisySP-LGPL-FX/compressor.h ****     }
+ 186              		.loc 2 185 51 is_stmt 0 discriminator 12 view .LVU49
+ 187 0096 C8EE077A 		vdiv.f32	s15, s16, s14
+ 188              	.LBE54:
+ 189              	.LBE57:
+ 190              	.LBE60:
+ 191              	.LBE63:
+ 192              	.LBE68:
+ 193              	.LBE83:
+ 194              	.LBB84:
+ 195              	.LBB85:
+ 139:DaisySP-LGPL-FX/compressor.h ****         RecalculateRelease();
+ 196              		.loc 2 139 14 discriminator 12 view .LVU50
+ 197 009a C4ED038A 		vstr.32	s17, [r4, #12]
+ 198              	.LBE85:
+ 199              	.LBE84:
+ 200              	.LBB95:
+ 201              	.LBB69:
+ 202              	.LBB64:
+ 203              	.LBB61:
+ 204              	.LBB58:
+ 205              	.LBB55:
+ 185:DaisySP-LGPL-FX/compressor.h ****     }
+ 206              		.loc 2 185 61 discriminator 12 view .LVU51
+ 207 009e 77EEC87A 		vsub.f32	s15, s15, s16
+ 185:DaisySP-LGPL-FX/compressor.h ****     }
+ 208              		.loc 2 185 29 discriminator 12 view .LVU52
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s 			page 9
+
+
+ 209 00a2 38EE408A 		vsub.f32	s16, s16, s0
+ 185:DaisySP-LGPL-FX/compressor.h ****     }
+ 210              		.loc 2 185 42 discriminator 12 view .LVU53
+ 211 00a6 27EE888A 		vmul.f32	s16, s15, s16
+ 212              	.LBE55:
+ 213              	.LBE58:
+ 214              	.LBE61:
+ 215              	.LBE64:
+ 216              	.LBE69:
+ 217              	.LBE95:
+ 218              	.LBB96:
+ 219              	.LBB92:
+ 220              	.LBB86:
+ 221              	.LBB87:
+ 194:DaisySP-LGPL-FX/compressor.h ****     }
+ 195:DaisySP-LGPL-FX/compressor.h **** 
+ 196:DaisySP-LGPL-FX/compressor.h ****     void RecalculateRelease() { rel_slo_ = expf((-(sample_rate_inv_ / rel_))); }
+ 222              		.loc 2 196 69 discriminator 12 view .LVU54
+ 223 00aa D4ED0E7A 		vldr.32	s15, [r4, #56]
+ 224 00ae 87EEA80A 		vdiv.f32	s0, s15, s17
+ 225              	.LBE87:
+ 226              	.LBE86:
+ 227              	.LBE92:
+ 228              	.LBE96:
+ 229              	.LBB97:
+ 230              	.LBB70:
+ 231              	.LBB65:
+ 232              	.LBB62:
+ 233              	.LBB59:
+ 234              	.LBB56:
+ 185:DaisySP-LGPL-FX/compressor.h ****     }
+ 235              		.loc 2 185 20 discriminator 12 view .LVU55
+ 236 00b2 84ED098A 		vstr.32	s16, [r4, #36]
+ 237              	.LVL7:
+ 185:DaisySP-LGPL-FX/compressor.h ****     }
+ 238              		.loc 2 185 20 discriminator 12 view .LVU56
+ 239              	.LBE56:
+ 240              	.LBE59:
+ 241              	.LBE62:
+ 242              	.LBE65:
+ 243              	.LBE70:
+ 244              	.LBE97:
+  31:DaisySP-LGPL-FX/compressor.cpp ****     SetRelease(0.1f);
+ 245              		.loc 1 31 5 is_stmt 1 discriminator 12 view .LVU57
+ 246              	.LBB98:
+ 247              	.LBI84:
+ 137:DaisySP-LGPL-FX/compressor.h ****     {
+ 248              		.loc 2 137 10 discriminator 12 view .LVU58
+ 249              	.LBB93:
+ 139:DaisySP-LGPL-FX/compressor.h ****         RecalculateRelease();
+ 250              		.loc 2 139 9 discriminator 12 view .LVU59
+ 140:DaisySP-LGPL-FX/compressor.h ****     }
+ 251              		.loc 2 140 9 discriminator 12 view .LVU60
+ 252              	.LBB90:
+ 253              	.LBI86:
+ 254              		.loc 2 196 10 discriminator 12 view .LVU61
+ 255              	.LBB88:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s 			page 10
+
+
+ 256              		.loc 2 196 33 discriminator 12 view .LVU62
+ 257              		.loc 2 196 48 is_stmt 0 discriminator 12 view .LVU63
+ 258 00b6 B1EE400A 		vneg.f32	s0, s0
+ 259 00ba FFF7FEFF 		bl	expf
+ 260              	.LVL8:
+ 261              	.LBE88:
+ 262              	.LBE90:
+ 263              	.LBE93:
+ 264              	.LBE98:
+ 265              	.LBB99:
+ 266              	.LBB100:
+ 115:DaisySP-LGPL-FX/compressor.h ****         RecalculateMakeup();
+ 267              		.loc 2 115 17 discriminator 12 view .LVU64
+ 268 00be FAEE087A 		vmov.f32	s15, #-1.2e+1
+ 269              	.LBE100:
+ 270              	.LBE99:
+ 271              	.LBB103:
+ 272              	.LBB104:
+ 273              	.LBB105:
+ 274              	.LBB106:
+ 275              	.LBB107:
+ 197:DaisySP-LGPL-FX/compressor.h **** 
+ 198:DaisySP-LGPL-FX/compressor.h ****     void RecalculateMakeup()
+ 199:DaisySP-LGPL-FX/compressor.h ****     {
+ 200:DaisySP-LGPL-FX/compressor.h ****         if(makeup_auto_)
+ 201:DaisySP-LGPL-FX/compressor.h ****             makeup_gain_ = fabsf(thresh_ - thresh_ / ratio_) * 0.5f;
+ 276              		.loc 2 201 52 discriminator 12 view .LVU65
+ 277 00c2 D4ED006A 		vldr.32	s13, [r4]
+ 278              	.LBE107:
+ 279              	.LBE106:
+ 280              	.LBE105:
+ 156:DaisySP-LGPL-FX/compressor.h ****         makeup_gain_ = 0.0f;
+ 281              		.loc 2 156 22 discriminator 12 view .LVU66
+ 282 00c6 0123     		movs	r3, #1
+ 283              	.LBE104:
+ 284              	.LBE103:
+  32:DaisySP-LGPL-FX/compressor.cpp ****     SetThreshold(-12.0f);
+  33:DaisySP-LGPL-FX/compressor.cpp ****     AutoMakeup(true);
+  34:DaisySP-LGPL-FX/compressor.cpp **** 
+  35:DaisySP-LGPL-FX/compressor.cpp ****     gain_rec_  = 0.1f;
+ 285              		.loc 1 35 16 discriminator 12 view .LVU67
+ 286 00c8 C4ED078A 		vstr.32	s17, [r4, #28]
+ 287              	.LBB122:
+ 288              	.LBB118:
+ 289              	.LBB114:
+ 290              	.LBB111:
+ 291              	.LBB108:
+ 292              		.loc 2 201 52 discriminator 12 view .LVU68
+ 293 00cc 87EEA67A 		vdiv.f32	s14, s15, s13
+ 294              	.LBE108:
+ 295              	.LBE111:
+ 296              	.LBE114:
+ 297              	.LBE118:
+ 298              	.LBE122:
+ 299              	.LBB123:
+ 300              	.LBB101:
+ 115:DaisySP-LGPL-FX/compressor.h ****         RecalculateMakeup();
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s 			page 11
+
+
+ 301              		.loc 2 115 17 discriminator 12 view .LVU69
+ 302 00d0 C4ED017A 		vstr.32	s15, [r4, #4]
+ 303              	.LBE101:
+ 304              	.LBE123:
+  36:DaisySP-LGPL-FX/compressor.cpp ****     slope_rec_ = 0.1f;
+ 305              		.loc 1 36 16 discriminator 12 view .LVU70
+ 306 00d4 C4ED068A 		vstr.32	s17, [r4, #24]
+ 307              	.LBB124:
+ 308              	.LBB94:
+ 309              	.LBB91:
+ 310              	.LBB89:
+ 196:DaisySP-LGPL-FX/compressor.h **** 
+ 311              		.loc 2 196 42 discriminator 12 view .LVU71
+ 312 00d8 84ED0B0A 		vstr.32	s0, [r4, #44]
+ 313              	.LVL9:
+ 196:DaisySP-LGPL-FX/compressor.h **** 
+ 314              		.loc 2 196 42 discriminator 12 view .LVU72
+ 315              	.LBE89:
+ 316              	.LBE91:
+ 317              	.LBE94:
+ 318              	.LBE124:
+  32:DaisySP-LGPL-FX/compressor.cpp ****     AutoMakeup(true);
+ 319              		.loc 1 32 5 is_stmt 1 discriminator 12 view .LVU73
+ 320              	.LBB125:
+ 321              	.LBI99:
+ 113:DaisySP-LGPL-FX/compressor.h ****     {
+ 322              		.loc 2 113 10 discriminator 12 view .LVU74
+ 323              	.LBB102:
+ 115:DaisySP-LGPL-FX/compressor.h ****         RecalculateMakeup();
+ 324              		.loc 2 115 9 discriminator 12 view .LVU75
+ 116:DaisySP-LGPL-FX/compressor.h ****     }
+ 325              		.loc 2 116 9 discriminator 12 view .LVU76
+ 116:DaisySP-LGPL-FX/compressor.h ****     }
+ 326              		.loc 2 116 9 is_stmt 0 discriminator 12 view .LVU77
+ 327              	.LBE102:
+ 328              	.LBE125:
+ 200:DaisySP-LGPL-FX/compressor.h ****             makeup_gain_ = fabsf(thresh_ - thresh_ / ratio_) * 0.5f;
+ 329              		.loc 2 200 9 is_stmt 1 discriminator 12 view .LVU78
+  33:DaisySP-LGPL-FX/compressor.cpp **** 
+ 330              		.loc 1 33 5 discriminator 12 view .LVU79
+ 331              	.LBB126:
+ 332              	.LBI103:
+ 154:DaisySP-LGPL-FX/compressor.h ****     {
+ 333              		.loc 2 154 10 discriminator 12 view .LVU80
+ 334              	.LBB119:
+ 156:DaisySP-LGPL-FX/compressor.h ****         makeup_gain_ = 0.0f;
+ 335              		.loc 2 156 9 discriminator 12 view .LVU81
+ 156:DaisySP-LGPL-FX/compressor.h ****         makeup_gain_ = 0.0f;
+ 336              		.loc 2 156 22 is_stmt 0 discriminator 12 view .LVU82
+ 337 00dc 84F83C30 		strb	r3, [r4, #60]
+ 157:DaisySP-LGPL-FX/compressor.h ****         RecalculateMakeup();
+ 338              		.loc 2 157 9 is_stmt 1 discriminator 12 view .LVU83
+ 158:DaisySP-LGPL-FX/compressor.h ****     }
+ 339              		.loc 2 158 9 discriminator 12 view .LVU84
+ 340              	.LVL10:
+ 341              	.LBB115:
+ 342              	.LBI105:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s 			page 12
+
+
+ 198:DaisySP-LGPL-FX/compressor.h ****     {
+ 343              		.loc 2 198 10 discriminator 12 view .LVU85
+ 344              	.LBE115:
+ 345              	.LBE119:
+ 346              	.LBE126:
+ 200:DaisySP-LGPL-FX/compressor.h ****             makeup_gain_ = fabsf(thresh_ - thresh_ / ratio_) * 0.5f;
+ 347              		.loc 2 200 9 discriminator 12 view .LVU86
+ 348              	.LBB127:
+ 349              	.LBB120:
+ 350              	.LBB116:
+ 351              	.LBB112:
+ 352              	.LBI106:
+ 198:DaisySP-LGPL-FX/compressor.h ****     {
+ 353              		.loc 2 198 10 discriminator 12 view .LVU87
+ 354              	.LBB109:
+ 355              		.loc 2 201 13 discriminator 12 view .LVU88
+ 356              	.LBE109:
+ 357              	.LBE112:
+ 358              	.LBE116:
+ 359              	.LBE120:
+ 360              	.LBE127:
+  37:DaisySP-LGPL-FX/compressor.cpp **** }
+ 361              		.loc 1 37 1 is_stmt 0 discriminator 12 view .LVU89
+ 362 00e0 BDEC028B 		vldm	sp!, {d8}
+ 363              		.cfi_remember_state
+ 364              		.cfi_restore 80
+ 365              		.cfi_restore 81
+ 366              		.cfi_def_cfa_offset 8
+ 367              	.LBB128:
+ 368              	.LBB121:
+ 369              	.LBB117:
+ 370              	.LBB113:
+ 371              	.LBB110:
+ 372              		.loc 2 201 42 discriminator 12 view .LVU90
+ 373 00e4 77EEC77A 		vsub.f32	s15, s15, s14
+ 374              		.loc 2 201 62 discriminator 12 view .LVU91
+ 375 00e8 B6EE007A 		vmov.f32	s14, #5.0e-1
+ 376              		.loc 2 201 33 discriminator 12 view .LVU92
+ 377 00ec F0EEE77A 		vabs.f32	s15, s15
+ 378              		.loc 2 201 62 discriminator 12 view .LVU93
+ 379 00f0 67EE877A 		vmul.f32	s15, s15, s14
+ 380              		.loc 2 201 26 discriminator 12 view .LVU94
+ 381 00f4 C4ED047A 		vstr.32	s15, [r4, #16]
+ 382              	.LVL11:
+ 383              		.loc 2 201 26 discriminator 12 view .LVU95
+ 384              	.LBE110:
+ 385              	.LBE113:
+ 386              	.LBE117:
+ 387              	.LBE121:
+ 388              	.LBE128:
+  35:DaisySP-LGPL-FX/compressor.cpp ****     slope_rec_ = 0.1f;
+ 389              		.loc 1 35 5 is_stmt 1 discriminator 12 view .LVU96
+  36:DaisySP-LGPL-FX/compressor.cpp **** }
+ 390              		.loc 1 36 5 discriminator 12 view .LVU97
+ 391              		.loc 1 37 1 is_stmt 0 discriminator 12 view .LVU98
+ 392 00f8 10BD     		pop	{r4, pc}
+ 393              	.LVL12:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s 			page 13
+
+
+ 394              	.L7:
+ 395              		.cfi_restore_state
+  23:DaisySP-LGPL-FX/compressor.cpp ****     sample_rate_inv_  = 1.0f / (float)sample_rate_;
+ 396              		.loc 1 23 23 view .LVU99
+ 397 00fa 0123     		movs	r3, #1
+ 398 00fc 96E7     		b	.L2
+ 399              	.L5:
+ 400 00fe 034B     		ldr	r3, .L8+8
+ 401 0100 94E7     		b	.L2
+ 402              	.L9:
+ 403 0102 00BF     		.align	2
+ 404              	.L8:
+ 405 0104 00803B48 		.word	1211858944
+ 406 0108 CDCCCC3D 		.word	1036831949
+ 407 010c 00EE0200 		.word	192000
+ 408              		.cfi_endproc
+ 409              	.LFE2814:
+ 411              		.section	.text._ZN7daisysp10Compressor7ProcessEf,"ax",%progbits
+ 412              		.align	1
+ 413              		.global	_ZN7daisysp10Compressor7ProcessEf
+ 414              		.syntax unified
+ 415              		.thumb
+ 416              		.thumb_func
+ 418              	_ZN7daisysp10Compressor7ProcessEf:
+ 419              	.LVL13:
+ 420              	.LFB2815:
+  38:DaisySP-LGPL-FX/compressor.cpp **** 
+  39:DaisySP-LGPL-FX/compressor.cpp **** float Compressor::Process(float in)
+  40:DaisySP-LGPL-FX/compressor.cpp **** {
+ 421              		.loc 1 40 1 is_stmt 1 view -0
+ 422              		.cfi_startproc
+ 423              		@ args = 0, pretend = 0, frame = 8
+ 424              		@ frame_needed = 0, uses_anonymous_args = 0
+  41:DaisySP-LGPL-FX/compressor.cpp ****     float inAbs   = fabsf(in);
+ 425              		.loc 1 41 5 view .LVU101
+  40:DaisySP-LGPL-FX/compressor.cpp ****     float inAbs   = fabsf(in);
+ 426              		.loc 1 40 1 is_stmt 0 view .LVU102
+ 427 0000 10B5     		push	{r4, lr}
+ 428              		.cfi_def_cfa_offset 8
+ 429              		.cfi_offset 4, -8
+ 430              		.cfi_offset 14, -4
+ 431 0002 2DED048B 		vpush.64	{d8, d9}
+ 432              		.cfi_def_cfa_offset 24
+ 433              		.cfi_offset 80, -24
+ 434              		.cfi_offset 81, -20
+ 435              		.cfi_offset 82, -16
+ 436              		.cfi_offset 83, -12
+ 437 0006 F0EE408A 		vmov.f32	s17, s0
+  42:DaisySP-LGPL-FX/compressor.cpp ****     float cur_slo = ((slope_rec_ > inAbs) ? rel_slo_ : atk_slo_);
+ 438              		.loc 1 42 23 view .LVU103
+ 439 000a D0ED066A 		vldr.32	s13, [r0, #24]
+  41:DaisySP-LGPL-FX/compressor.cpp ****     float inAbs   = fabsf(in);
+ 440              		.loc 1 41 11 view .LVU104
+ 441 000e B0EEC00A 		vabs.f32	s0, s0
+ 442              	.LVL14:
+ 443              		.loc 1 42 5 is_stmt 1 view .LVU105
+  40:DaisySP-LGPL-FX/compressor.cpp ****     float inAbs   = fabsf(in);
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s 			page 14
+
+
+ 444              		.loc 1 40 1 is_stmt 0 view .LVU106
+ 445 0012 82B0     		sub	sp, sp, #8
+ 446              		.cfi_def_cfa_offset 32
+  43:DaisySP-LGPL-FX/compressor.cpp ****     slope_rec_    = ((slope_rec_ * cur_slo) + ((1.0f - cur_slo) * inAbs));
+ 447              		.loc 1 43 54 view .LVU107
+ 448 0014 F7EE007A 		vmov.f32	s15, #1.0e+0
+  40:DaisySP-LGPL-FX/compressor.cpp ****     float inAbs   = fabsf(in);
+ 449              		.loc 1 40 1 view .LVU108
+ 450 0018 0446     		mov	r4, r0
+  44:DaisySP-LGPL-FX/compressor.cpp ****     gain_rec_     = ((atk_slo2_ * gain_rec_)
+ 451              		.loc 1 44 23 view .LVU109
+ 452 001a D0ED089A 		vldr.32	s19, [r0, #32]
+  42:DaisySP-LGPL-FX/compressor.cpp ****     float cur_slo = ((slope_rec_ > inAbs) ? rel_slo_ : atk_slo_);
+ 453              		.loc 1 42 43 view .LVU110
+ 454 001e F4EEC06A 		vcmpe.f32	s13, s0
+ 455              		.loc 1 44 35 view .LVU111
+ 456 0022 90ED079A 		vldr.32	s18, [r0, #28]
+  45:DaisySP-LGPL-FX/compressor.cpp ****                  + (ratio_mul_
+ 457              		.loc 1 45 21 view .LVU112
+ 458 0026 90ED098A 		vldr.32	s16, [r0, #36]
+  42:DaisySP-LGPL-FX/compressor.cpp ****     slope_rec_    = ((slope_rec_ * cur_slo) + ((1.0f - cur_slo) * inAbs));
+ 459              		.loc 1 42 43 view .LVU113
+ 460 002a F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 461 002e CCBF     		ite	gt
+ 462 0030 90ED0B7A 		vldrgt.32	s14, [r0, #44]
+ 463 0034 90ED0A7A 		vldrle.32	s14, [r0, #40]
+ 464              	.LVL15:
+  43:DaisySP-LGPL-FX/compressor.cpp ****     gain_rec_     = ((atk_slo2_ * gain_rec_)
+ 465              		.loc 1 43 5 is_stmt 1 view .LVU114
+  43:DaisySP-LGPL-FX/compressor.cpp ****     gain_rec_     = ((atk_slo2_ * gain_rec_)
+ 466              		.loc 1 43 54 is_stmt 0 view .LVU115
+ 467 0038 77EEC77A 		vsub.f32	s15, s15, s14
+  43:DaisySP-LGPL-FX/compressor.cpp ****     gain_rec_     = ((atk_slo2_ * gain_rec_)
+ 468              		.loc 1 43 65 view .LVU116
+ 469 003c 67EE807A 		vmul.f32	s15, s15, s0
+  43:DaisySP-LGPL-FX/compressor.cpp ****     gain_rec_     = ((atk_slo2_ * gain_rec_)
+ 470              		.loc 1 43 45 view .LVU117
+ 471 0040 E6EE877A 		vfma.f32	s15, s13, s14
+  43:DaisySP-LGPL-FX/compressor.cpp ****     gain_rec_     = ((atk_slo2_ * gain_rec_)
+ 472              		.loc 1 43 19 view .LVU118
+ 473 0044 C0ED067A 		vstr.32	s15, [r0, #24]
+  44:DaisySP-LGPL-FX/compressor.cpp ****                  + (ratio_mul_
+ 474              		.loc 1 44 5 is_stmt 1 view .LVU119
+ 475              	.LVL16:
+ 476              	.LBB137:
+ 477              	.LBI137:
+ 478              		.file 3 "../DaisySP/Source/Utility/dsp.h"
+   1:../DaisySP/Source/Utility/dsp.h **** /*
+   2:../DaisySP/Source/Utility/dsp.h **** Copyright (c) 2020 Electrosmith, Corp, Emilie Gillet
+   3:../DaisySP/Source/Utility/dsp.h **** 
+   4:../DaisySP/Source/Utility/dsp.h **** Use of this source code is governed by an MIT-style
+   5:../DaisySP/Source/Utility/dsp.h **** license that can be found in the LICENSE file or at
+   6:../DaisySP/Source/Utility/dsp.h **** https://opensource.org/licenses/MIT.
+   7:../DaisySP/Source/Utility/dsp.h **** */
+   8:../DaisySP/Source/Utility/dsp.h **** 
+   9:../DaisySP/Source/Utility/dsp.h **** /** Helpful defines, functions, and other utilities for use in/with daisysp modules.
+  10:../DaisySP/Source/Utility/dsp.h **** */
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s 			page 15
+
+
+  11:../DaisySP/Source/Utility/dsp.h **** #pragma once
+  12:../DaisySP/Source/Utility/dsp.h **** #ifndef DSY_CORE_DSP
+  13:../DaisySP/Source/Utility/dsp.h **** #define DSY_CORE_DSP
+  14:../DaisySP/Source/Utility/dsp.h **** #include <cassert>
+  15:../DaisySP/Source/Utility/dsp.h **** #include <cstdint>
+  16:../DaisySP/Source/Utility/dsp.h **** #include <random>
+  17:../DaisySP/Source/Utility/dsp.h **** #include <cmath>
+  18:../DaisySP/Source/Utility/dsp.h **** 
+  19:../DaisySP/Source/Utility/dsp.h **** /** PIs
+  20:../DaisySP/Source/Utility/dsp.h **** */
+  21:../DaisySP/Source/Utility/dsp.h **** #define PI_F 3.1415927410125732421875f
+  22:../DaisySP/Source/Utility/dsp.h **** #define TWOPI_F (2.0f * PI_F)
+  23:../DaisySP/Source/Utility/dsp.h **** #define HALFPI_F (PI_F * 0.5f)
+  24:../DaisySP/Source/Utility/dsp.h **** #define DSY_MIN(in, mn) (in < mn ? in : mn)
+  25:../DaisySP/Source/Utility/dsp.h **** #define DSY_MAX(in, mx) (in > mx ? in : mx)
+  26:../DaisySP/Source/Utility/dsp.h **** #define DSY_CLAMP(in, mn, mx) (DSY_MIN(DSY_MAX(in, mn), mx))
+  27:../DaisySP/Source/Utility/dsp.h **** #define DSY_COUNTOF(_arr) (sizeof(_arr) / sizeof(_arr[0]))
+  28:../DaisySP/Source/Utility/dsp.h **** 
+  29:../DaisySP/Source/Utility/dsp.h **** namespace daisysp
+  30:../DaisySP/Source/Utility/dsp.h **** {
+  31:../DaisySP/Source/Utility/dsp.h **** //Avoids division for random floats. e.g. rand() * kRandFrac
+  32:../DaisySP/Source/Utility/dsp.h **** static constexpr float kRandFrac = 1.f / (float)RAND_MAX;
+  33:../DaisySP/Source/Utility/dsp.h **** 
+  34:../DaisySP/Source/Utility/dsp.h **** //Convert from semitones to other units. e.g. 2 ^ (kOneTwelfth * x)
+  35:../DaisySP/Source/Utility/dsp.h **** static constexpr float kOneTwelfth = 1.f / 12.f;
+  36:../DaisySP/Source/Utility/dsp.h **** 
+  37:../DaisySP/Source/Utility/dsp.h **** /** efficient floating point min/max
+  38:../DaisySP/Source/Utility/dsp.h **** c/o stephen mccaul
+  39:../DaisySP/Source/Utility/dsp.h **** */
+  40:../DaisySP/Source/Utility/dsp.h **** inline float fmax(float a, float b)
+  41:../DaisySP/Source/Utility/dsp.h **** {
+  42:../DaisySP/Source/Utility/dsp.h ****     float r;
+  43:../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+  44:../DaisySP/Source/Utility/dsp.h ****     asm("vmaxnm.f32 %[d], %[n], %[m]" : [d] "=t"(r) : [n] "t"(a), [m] "t"(b) :);
+  45:../DaisySP/Source/Utility/dsp.h **** #else
+  46:../DaisySP/Source/Utility/dsp.h ****     r = (a > b) ? a : b;
+  47:../DaisySP/Source/Utility/dsp.h **** #endif // __arm__
+  48:../DaisySP/Source/Utility/dsp.h ****     return r;
+  49:../DaisySP/Source/Utility/dsp.h **** }
+  50:../DaisySP/Source/Utility/dsp.h **** 
+  51:../DaisySP/Source/Utility/dsp.h **** inline float fmin(float a, float b)
+  52:../DaisySP/Source/Utility/dsp.h **** {
+  53:../DaisySP/Source/Utility/dsp.h ****     float r;
+  54:../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+  55:../DaisySP/Source/Utility/dsp.h ****     asm("vminnm.f32 %[d], %[n], %[m]" : [d] "=t"(r) : [n] "t"(a), [m] "t"(b) :);
+  56:../DaisySP/Source/Utility/dsp.h **** #else
+  57:../DaisySP/Source/Utility/dsp.h ****     r = (a < b) ? a : b;
+  58:../DaisySP/Source/Utility/dsp.h **** #endif // __arm__
+  59:../DaisySP/Source/Utility/dsp.h ****     return r;
+  60:../DaisySP/Source/Utility/dsp.h **** }
+  61:../DaisySP/Source/Utility/dsp.h **** 
+  62:../DaisySP/Source/Utility/dsp.h **** /** quick fp clamp
+  63:../DaisySP/Source/Utility/dsp.h **** */
+  64:../DaisySP/Source/Utility/dsp.h **** inline float fclamp(float in, float min, float max)
+  65:../DaisySP/Source/Utility/dsp.h **** {
+  66:../DaisySP/Source/Utility/dsp.h ****     return fmin(fmax(in, min), max);
+  67:../DaisySP/Source/Utility/dsp.h **** }
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s 			page 16
+
+
+  68:../DaisySP/Source/Utility/dsp.h **** 
+  69:../DaisySP/Source/Utility/dsp.h **** /** From Musicdsp.org "Fast power and root estimates for 32bit floats)
+  70:../DaisySP/Source/Utility/dsp.h **** Original code by Stefan Stenzel
+  71:../DaisySP/Source/Utility/dsp.h **** These are approximations
+  72:../DaisySP/Source/Utility/dsp.h **** */
+  73:../DaisySP/Source/Utility/dsp.h **** inline float fastpower(float f, int n)
+  74:../DaisySP/Source/Utility/dsp.h **** {
+  75:../DaisySP/Source/Utility/dsp.h ****     long *lp, l;
+  76:../DaisySP/Source/Utility/dsp.h ****     lp = (long *)(&f);
+  77:../DaisySP/Source/Utility/dsp.h ****     l  = *lp;
+  78:../DaisySP/Source/Utility/dsp.h ****     l -= 0x3F800000;
+  79:../DaisySP/Source/Utility/dsp.h ****     l <<= (n - 1);
+  80:../DaisySP/Source/Utility/dsp.h ****     l += 0x3F800000;
+  81:../DaisySP/Source/Utility/dsp.h ****     *lp = l;
+  82:../DaisySP/Source/Utility/dsp.h ****     return f;
+  83:../DaisySP/Source/Utility/dsp.h **** }
+  84:../DaisySP/Source/Utility/dsp.h **** 
+  85:../DaisySP/Source/Utility/dsp.h **** inline float fastroot(float f, int n)
+  86:../DaisySP/Source/Utility/dsp.h **** {
+  87:../DaisySP/Source/Utility/dsp.h ****     long *lp, l;
+  88:../DaisySP/Source/Utility/dsp.h ****     lp = (long *)(&f);
+  89:../DaisySP/Source/Utility/dsp.h ****     l  = *lp;
+  90:../DaisySP/Source/Utility/dsp.h ****     l -= 0x3F800000;
+  91:../DaisySP/Source/Utility/dsp.h ****     l >>= (n - 1);
+  92:../DaisySP/Source/Utility/dsp.h ****     l += 0x3F800000;
+  93:../DaisySP/Source/Utility/dsp.h ****     *lp = l;
+  94:../DaisySP/Source/Utility/dsp.h ****     return f;
+  95:../DaisySP/Source/Utility/dsp.h **** }
+  96:../DaisySP/Source/Utility/dsp.h **** 
+  97:../DaisySP/Source/Utility/dsp.h **** /** Significantly more efficient than fmodf(x, 1.0f) for calculating
+  98:../DaisySP/Source/Utility/dsp.h ****  *  the decimal part of a floating point value.
+  99:../DaisySP/Source/Utility/dsp.h ****  */
+ 100:../DaisySP/Source/Utility/dsp.h **** inline float fastmod1f(float x)
+ 101:../DaisySP/Source/Utility/dsp.h **** {
+ 102:../DaisySP/Source/Utility/dsp.h ****     return x - static_cast<int>(x);
+ 103:../DaisySP/Source/Utility/dsp.h **** }
+ 104:../DaisySP/Source/Utility/dsp.h **** 
+ 105:../DaisySP/Source/Utility/dsp.h **** /** From http://openaudio.blogspot.com/2017/02/faster-log10-and-pow.html
+ 106:../DaisySP/Source/Utility/dsp.h **** No approximation, pow10f(x) gives a 90% speed increase over powf(10.f, x)
+ 107:../DaisySP/Source/Utility/dsp.h **** */
+ 108:../DaisySP/Source/Utility/dsp.h **** inline float pow10f(float f)
+ 109:../DaisySP/Source/Utility/dsp.h **** {
+ 110:../DaisySP/Source/Utility/dsp.h ****     return expf(2.302585092994046f * f);
+ 111:../DaisySP/Source/Utility/dsp.h **** }
+ 112:../DaisySP/Source/Utility/dsp.h **** 
+ 113:../DaisySP/Source/Utility/dsp.h **** /* Original code for fastlog2f by Dr. Paul Beckmann from the ARM community forum, adapted from the 
+ 114:../DaisySP/Source/Utility/dsp.h **** About 25% performance increase over std::log10f
+ 115:../DaisySP/Source/Utility/dsp.h **** */
+ 116:../DaisySP/Source/Utility/dsp.h **** inline float fastlog2f(float f)
+ 117:../DaisySP/Source/Utility/dsp.h **** {
+ 118:../DaisySP/Source/Utility/dsp.h ****     float frac;
+ 119:../DaisySP/Source/Utility/dsp.h ****     int   exp;
+ 120:../DaisySP/Source/Utility/dsp.h ****     frac = frexpf(fabsf(f), &exp);
+ 121:../DaisySP/Source/Utility/dsp.h ****     f    = 1.23149591368684f;
+ 122:../DaisySP/Source/Utility/dsp.h ****     f *= frac;
+ 123:../DaisySP/Source/Utility/dsp.h ****     f += -4.11852516267426f;
+ 124:../DaisySP/Source/Utility/dsp.h ****     f *= frac;
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s 			page 17
+
+
+ 125:../DaisySP/Source/Utility/dsp.h ****     f += 6.02197014179219f;
+ 126:../DaisySP/Source/Utility/dsp.h ****     f *= frac;
+ 127:../DaisySP/Source/Utility/dsp.h ****     f += -3.13396450166353f;
+ 128:../DaisySP/Source/Utility/dsp.h ****     f += exp;
+ 129:../DaisySP/Source/Utility/dsp.h ****     return (f);
+ 130:../DaisySP/Source/Utility/dsp.h **** }
+ 131:../DaisySP/Source/Utility/dsp.h **** 
+ 132:../DaisySP/Source/Utility/dsp.h **** inline float fastlog10f(float f)
+ 479              		.loc 3 132 14 view .LVU120
+ 480              	.LBB138:
+ 133:../DaisySP/Source/Utility/dsp.h **** {
+ 134:../DaisySP/Source/Utility/dsp.h ****     return fastlog2f(f) * 0.3010299956639812f;
+ 481              		.loc 3 134 5 view .LVU121
+ 482              	.LBB139:
+ 483              	.LBI139:
+ 116:../DaisySP/Source/Utility/dsp.h **** {
+ 484              		.loc 3 116 14 view .LVU122
+ 485              	.LBB140:
+ 118:../DaisySP/Source/Utility/dsp.h ****     int   exp;
+ 486              		.loc 3 118 5 view .LVU123
+ 119:../DaisySP/Source/Utility/dsp.h ****     frac = frexpf(fabsf(f), &exp);
+ 487              		.loc 3 119 5 view .LVU124
+ 120:../DaisySP/Source/Utility/dsp.h ****     f    = 1.23149591368684f;
+ 488              		.loc 3 120 5 view .LVU125
+ 120:../DaisySP/Source/Utility/dsp.h ****     f    = 1.23149591368684f;
+ 489              		.loc 3 120 18 is_stmt 0 view .LVU126
+ 490 0048 B0EEE70A 		vabs.f32	s0, s15
+ 491              	.LVL17:
+ 120:../DaisySP/Source/Utility/dsp.h ****     f    = 1.23149591368684f;
+ 492              		.loc 3 120 18 view .LVU127
+ 493 004c 01A8     		add	r0, sp, #4
+ 494              	.LVL18:
+ 120:../DaisySP/Source/Utility/dsp.h ****     f    = 1.23149591368684f;
+ 495              		.loc 3 120 18 view .LVU128
+ 496 004e FFF7FEFF 		bl	frexpf
+ 497              	.LVL19:
+ 121:../DaisySP/Source/Utility/dsp.h ****     f *= frac;
+ 498              		.loc 3 121 5 is_stmt 1 view .LVU129
+ 122:../DaisySP/Source/Utility/dsp.h ****     f += -4.11852516267426f;
+ 499              		.loc 3 122 5 view .LVU130
+ 123:../DaisySP/Source/Utility/dsp.h ****     f *= frac;
+ 500              		.loc 3 123 5 view .LVU131
+ 123:../DaisySP/Source/Utility/dsp.h ****     f *= frac;
+ 501              		.loc 3 123 7 is_stmt 0 view .LVU132
+ 502 0052 9FED207A 		vldr.32	s14, .L16
+ 503 0056 DFED207A 		vldr.32	s15, .L16+4
+ 125:../DaisySP/Source/Utility/dsp.h ****     f *= frac;
+ 504              		.loc 3 125 7 view .LVU133
+ 505 005a DFED206A 		vldr.32	s13, .L16+8
+ 123:../DaisySP/Source/Utility/dsp.h ****     f *= frac;
+ 506              		.loc 3 123 7 view .LVU134
+ 507 005e E0EE077A 		vfma.f32	s15, s0, s14
+ 508              	.LVL20:
+ 124:../DaisySP/Source/Utility/dsp.h ****     f += 6.02197014179219f;
+ 509              		.loc 3 124 5 is_stmt 1 view .LVU135
+ 125:../DaisySP/Source/Utility/dsp.h ****     f *= frac;
+ 510              		.loc 3 125 5 view .LVU136
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s 			page 18
+
+
+ 127:../DaisySP/Source/Utility/dsp.h ****     f += exp;
+ 511              		.loc 3 127 7 is_stmt 0 view .LVU137
+ 512 0062 9FED1F7A 		vldr.32	s14, .L16+12
+ 125:../DaisySP/Source/Utility/dsp.h ****     f *= frac;
+ 513              		.loc 3 125 7 view .LVU138
+ 514 0066 E0EE276A 		vfma.f32	s13, s0, s15
+ 515              	.LVL21:
+ 126:../DaisySP/Source/Utility/dsp.h ****     f += -3.13396450166353f;
+ 516              		.loc 3 126 5 is_stmt 1 view .LVU139
+ 127:../DaisySP/Source/Utility/dsp.h ****     f += exp;
+ 517              		.loc 3 127 5 view .LVU140
+ 127:../DaisySP/Source/Utility/dsp.h ****     f += exp;
+ 518              		.loc 3 127 7 is_stmt 0 view .LVU141
+ 519 006a F0EE477A 		vmov.f32	s15, s14
+ 128:../DaisySP/Source/Utility/dsp.h ****     return (f);
+ 520              		.loc 3 128 7 view .LVU142
+ 521 006e 9DED017A 		vldr.32	s14, [sp, #4]	@ int
+ 522 0072 B8EEC77A 		vcvt.f32.s32	s14, s14
+ 127:../DaisySP/Source/Utility/dsp.h ****     f += exp;
+ 523              		.loc 3 127 7 view .LVU143
+ 524 0076 E0EE267A 		vfma.f32	s15, s0, s13
+ 525              	.LVL22:
+ 128:../DaisySP/Source/Utility/dsp.h ****     return (f);
+ 526              		.loc 3 128 5 is_stmt 1 view .LVU144
+ 527              	.LBE140:
+ 528              	.LBE139:
+ 529              	.LBE138:
+ 530              	.LBE137:
+  46:DaisySP-LGPL-FX/compressor.cpp ****                     * fmax(((20.f * fastlog10f(slope_rec_)) - thresh_), 0.f)));
+  47:DaisySP-LGPL-FX/compressor.cpp ****     gain_         = pow10f(0.05f * (gain_rec_ + makeup_gain_));
+ 531              		.loc 1 47 47 is_stmt 0 view .LVU145
+ 532 007a 94ED040A 		vldr.32	s0, [r4, #16]
+ 533              	.LVL23:
+  46:DaisySP-LGPL-FX/compressor.cpp ****                     * fmax(((20.f * fastlog10f(slope_rec_)) - thresh_), 0.f)));
+ 534              		.loc 1 46 27 view .LVU146
+ 535 007e F3EE046A 		vmov.f32	s13, #2.0e+1
+ 536              	.LBB144:
+ 537              	.LBB143:
+ 538              	.LBB142:
+ 539              	.LBB141:
+ 128:../DaisySP/Source/Utility/dsp.h ****     return (f);
+ 540              		.loc 3 128 7 view .LVU147
+ 541 0082 37EE277A 		vadd.f32	s14, s14, s15
+ 542              	.LVL24:
+ 129:../DaisySP/Source/Utility/dsp.h **** }
+ 543              		.loc 3 129 5 is_stmt 1 view .LVU148
+ 129:../DaisySP/Source/Utility/dsp.h **** }
+ 544              		.loc 3 129 5 is_stmt 0 view .LVU149
+ 545              	.LBE141:
+ 546              	.LBE142:
+ 547              		.loc 3 134 27 view .LVU150
+ 548 0086 DFED177A 		vldr.32	s15, .L16+16
+ 549 008a 27EE277A 		vmul.f32	s14, s14, s15
+ 550              	.LBE143:
+ 551              	.LBE144:
+  46:DaisySP-LGPL-FX/compressor.cpp ****                     * fmax(((20.f * fastlog10f(slope_rec_)) - thresh_), 0.f)));
+ 552              		.loc 1 46 27 view .LVU151
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s 			page 19
+
+
+ 553 008e D4ED017A 		vldr.32	s15, [r4, #4]
+ 554 0092 D7EE267A 		vfnms.f32	s15, s14, s13
+ 555              	.LVL25:
+ 556              	.LBB145:
+ 557              	.LBI145:
+  40:../DaisySP/Source/Utility/dsp.h **** {
+ 558              		.loc 3 40 14 is_stmt 1 view .LVU152
+ 559              	.LBB146:
+  42:../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 560              		.loc 3 42 5 view .LVU153
+  44:../DaisySP/Source/Utility/dsp.h **** #else
+ 561              		.loc 3 44 5 view .LVU154
+ 562 0096 9FED147A 		vldr.32	s14, .L16+20
+ 563              		.syntax unified
+ 564              	@ 44 "../DaisySP/Source/Utility/dsp.h" 1
+ 565 009a C7FE877A 		vmaxnm.f32 s15, s15, s14
+ 566              	@ 0 "" 2
+ 567              	.LVL26:
+  48:../DaisySP/Source/Utility/dsp.h **** }
+ 568              		.loc 3 48 5 view .LVU155
+  48:../DaisySP/Source/Utility/dsp.h **** }
+ 569              		.loc 3 48 5 is_stmt 0 view .LVU156
+ 570              		.thumb
+ 571              		.syntax unified
+ 572              	.LBE146:
+ 573              	.LBE145:
+  46:DaisySP-LGPL-FX/compressor.cpp ****     gain_         = pow10f(0.05f * (gain_rec_ + makeup_gain_));
+ 574              		.loc 1 46 21 view .LVU157
+ 575 009e 68EE277A 		vmul.f32	s15, s16, s15
+  45:DaisySP-LGPL-FX/compressor.cpp ****                     * fmax(((20.f * fastlog10f(slope_rec_)) - thresh_), 0.f)));
+ 576              		.loc 1 45 18 view .LVU158
+ 577 00a2 E9EE897A 		vfma.f32	s15, s19, s18
+  44:DaisySP-LGPL-FX/compressor.cpp ****                  + (ratio_mul_
+ 578              		.loc 1 44 19 view .LVU159
+ 579 00a6 C4ED077A 		vstr.32	s15, [r4, #28]
+ 580              		.loc 1 47 5 is_stmt 1 view .LVU160
+ 581              	.LVL27:
+ 582              	.LBB147:
+ 583              	.LBI147:
+ 108:../DaisySP/Source/Utility/dsp.h **** {
+ 584              		.loc 3 108 14 view .LVU161
+ 585              	.LBB148:
+ 110:../DaisySP/Source/Utility/dsp.h **** }
+ 586              		.loc 3 110 5 view .LVU162
+ 587              	.LBE148:
+ 588              	.LBE147:
+ 589              		.loc 1 47 47 is_stmt 0 view .LVU163
+ 590 00aa 77EE807A 		vadd.f32	s15, s15, s0
+ 591              	.LVL28:
+ 592              		.loc 1 47 27 view .LVU164
+ 593 00ae 9FED0F0A 		vldr.32	s0, .L16+24
+ 594              	.LVL29:
+ 595              		.loc 1 47 27 view .LVU165
+ 596 00b2 67EE807A 		vmul.f32	s15, s15, s0
+ 597              	.LVL30:
+ 598              	.LBB150:
+ 599              	.LBB149:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s 			page 20
+
+
+ 110:../DaisySP/Source/Utility/dsp.h **** }
+ 600              		.loc 3 110 16 view .LVU166
+ 601 00b6 9FED0E0A 		vldr.32	s0, .L16+28
+ 602 00ba 27EE800A 		vmul.f32	s0, s15, s0
+ 603 00be FFF7FEFF 		bl	expf
+ 604              	.LVL31:
+ 110:../DaisySP/Source/Utility/dsp.h **** }
+ 605              		.loc 3 110 16 view .LVU167
+ 606              	.LBE149:
+ 607              	.LBE150:
+ 608              		.loc 1 47 19 view .LVU168
+ 609 00c2 84ED050A 		vstr.32	s0, [r4, #20]
+  48:DaisySP-LGPL-FX/compressor.cpp **** 
+  49:DaisySP-LGPL-FX/compressor.cpp ****     return gain_ * in;
+ 610              		.loc 1 49 5 is_stmt 1 view .LVU169
+  50:DaisySP-LGPL-FX/compressor.cpp **** }
+ 611              		.loc 1 50 1 is_stmt 0 view .LVU170
+ 612 00c6 28EE800A 		vmul.f32	s0, s17, s0
+ 613 00ca 02B0     		add	sp, sp, #8
+ 614              		.cfi_def_cfa_offset 24
+ 615              		@ sp needed
+ 616 00cc BDEC048B 		vldm	sp!, {d8-d9}
+ 617              		.cfi_restore 82
+ 618              		.cfi_restore 83
+ 619              		.cfi_restore 80
+ 620              		.cfi_restore 81
+ 621              		.cfi_def_cfa_offset 8
+ 622 00d0 10BD     		pop	{r4, pc}
+ 623              	.LVL32:
+ 624              	.L17:
+ 625              		.loc 1 50 1 view .LVU171
+ 626 00d2 00BF     		.align	2
+ 627              	.L16:
+ 628 00d4 A8A19D3F 		.word	1067295144
+ 629 00d8 F5CA83C0 		.word	-1065104651
+ 630 00dc FBB3C040 		.word	1086370811
+ 631 00e0 E09248C0 		.word	-1068985632
+ 632 00e4 9B209A3E 		.word	1050288283
+ 633 00e8 00000000 		.word	0
+ 634 00ec CDCC4C3D 		.word	1028443341
+ 635 00f0 8E5D1340 		.word	1075010958
+ 636              		.cfi_endproc
+ 637              	.LFE2815:
+ 639              		.section	.text._ZN7daisysp10Compressor12ProcessBlockEPfS1_S1_j,"ax",%progbits
+ 640              		.align	1
+ 641              		.global	_ZN7daisysp10Compressor12ProcessBlockEPfS1_S1_j
+ 642              		.syntax unified
+ 643              		.thumb
+ 644              		.thumb_func
+ 646              	_ZN7daisysp10Compressor12ProcessBlockEPfS1_S1_j:
+ 647              	.LVL33:
+ 648              	.LFB2816:
+  51:DaisySP-LGPL-FX/compressor.cpp **** 
+  52:DaisySP-LGPL-FX/compressor.cpp **** void Compressor::ProcessBlock(float *in, float *out, float *key, size_t size)
+  53:DaisySP-LGPL-FX/compressor.cpp **** {
+ 649              		.loc 1 53 1 is_stmt 1 view -0
+ 650              		.cfi_startproc
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s 			page 21
+
+
+ 651              		@ args = 4, pretend = 0, frame = 0
+ 652              		@ frame_needed = 0, uses_anonymous_args = 0
+  54:DaisySP-LGPL-FX/compressor.cpp ****     for(size_t i = 0; i < size; i++)
+ 653              		.loc 1 54 5 view .LVU173
+  53:DaisySP-LGPL-FX/compressor.cpp ****     for(size_t i = 0; i < size; i++)
+ 654              		.loc 1 53 1 is_stmt 0 view .LVU174
+ 655 0000 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
+ 656              		.cfi_def_cfa_offset 32
+ 657              		.cfi_offset 3, -32
+ 658              		.cfi_offset 4, -28
+ 659              		.cfi_offset 5, -24
+ 660              		.cfi_offset 6, -20
+ 661              		.cfi_offset 7, -16
+ 662              		.cfi_offset 8, -12
+ 663              		.cfi_offset 9, -8
+ 664              		.cfi_offset 14, -4
+  53:DaisySP-LGPL-FX/compressor.cpp ****     for(size_t i = 0; i < size; i++)
+ 665              		.loc 1 53 1 view .LVU175
+ 666 0004 089E     		ldr	r6, [sp, #32]
+ 667 0006 0546     		mov	r5, r0
+ 668 0008 9846     		mov	r8, r3
+ 669 000a 0F46     		mov	r7, r1
+ 670 000c 1446     		mov	r4, r2
+ 671              	.LBB151:
+ 672              		.loc 1 54 16 view .LVU176
+ 673 000e 4FF00009 		mov	r9, #0
+ 674              	.LVL34:
+ 675              	.L20:
+ 676              		.loc 1 54 25 is_stmt 1 discriminator 3 view .LVU177
+ 677 0012 B145     		cmp	r9, r6
+ 678 0014 0FD0     		beq	.L18
+  55:DaisySP-LGPL-FX/compressor.cpp ****     {
+  56:DaisySP-LGPL-FX/compressor.cpp ****         Process(key[i]);
+ 679              		.loc 1 56 9 discriminator 2 view .LVU178
+ 680              		.loc 1 56 16 is_stmt 0 discriminator 2 view .LVU179
+ 681 0016 B8EC010A 		vldmia.32	r8!, {s0}
+ 682 001a 2846     		mov	r0, r5
+ 683 001c FFF7FEFF 		bl	_ZN7daisysp10Compressor7ProcessEf
+ 684              	.LVL35:
+  57:DaisySP-LGPL-FX/compressor.cpp ****         out[i] = Apply(in[i]);
+ 685              		.loc 1 57 9 is_stmt 1 discriminator 2 view .LVU180
+ 686              		.loc 1 57 23 is_stmt 0 discriminator 2 view .LVU181
+ 687 0020 B7EC017A 		vldmia.32	r7!, {s14}
+ 688              	.LVL36:
+ 689              	.LBB152:
+ 690              	.LBI152:
+  62:DaisySP-LGPL-FX/compressor.h **** 
+ 691              		.loc 2 62 11 is_stmt 1 discriminator 2 view .LVU182
+ 692              	.LBB153:
+  62:DaisySP-LGPL-FX/compressor.h **** 
+ 693              		.loc 2 62 29 discriminator 2 view .LVU183
+  62:DaisySP-LGPL-FX/compressor.h **** 
+ 694              		.loc 2 62 44 is_stmt 0 discriminator 2 view .LVU184
+ 695 0024 D5ED057A 		vldr.32	s15, [r5, #20]
+ 696              	.LBE153:
+ 697              	.LBE152:
+  54:DaisySP-LGPL-FX/compressor.cpp ****     {
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s 			page 22
+
+
+ 698              		.loc 1 54 5 discriminator 2 view .LVU185
+ 699 0028 09F10109 		add	r9, r9, #1
+ 700              	.LVL37:
+ 701              	.LBB155:
+ 702              	.LBB154:
+  62:DaisySP-LGPL-FX/compressor.h **** 
+ 703              		.loc 2 62 44 discriminator 2 view .LVU186
+ 704 002c 67EE877A 		vmul.f32	s15, s15, s14
+ 705              	.LBE154:
+ 706              	.LBE155:
+ 707              		.loc 1 57 16 discriminator 2 view .LVU187
+ 708 0030 E4EC017A 		vstmia.32	r4!, {s15}
+  54:DaisySP-LGPL-FX/compressor.cpp ****     {
+ 709              		.loc 1 54 5 is_stmt 1 discriminator 2 view .LVU188
+ 710              	.LVL38:
+  54:DaisySP-LGPL-FX/compressor.cpp ****     {
+ 711              		.loc 1 54 5 is_stmt 0 discriminator 2 view .LVU189
+ 712 0034 EDE7     		b	.L20
+ 713              	.L18:
+  54:DaisySP-LGPL-FX/compressor.cpp ****     {
+ 714              		.loc 1 54 5 discriminator 2 view .LVU190
+ 715              	.LBE151:
+  58:DaisySP-LGPL-FX/compressor.cpp ****     }
+  59:DaisySP-LGPL-FX/compressor.cpp **** }
+ 716              		.loc 1 59 1 view .LVU191
+ 717 0036 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 718              		.loc 1 59 1 view .LVU192
+ 719              		.cfi_endproc
+ 720              	.LFE2816:
+ 722              		.section	.text._ZN7daisysp10Compressor12ProcessBlockEPPfS2_S1_jj,"ax",%progbits
+ 723              		.align	1
+ 724              		.global	_ZN7daisysp10Compressor12ProcessBlockEPPfS2_S1_jj
+ 725              		.syntax unified
+ 726              		.thumb
+ 727              		.thumb_func
+ 729              	_ZN7daisysp10Compressor12ProcessBlockEPPfS2_S1_jj:
+ 730              	.LVL39:
+ 731              	.LFB2817:
+  60:DaisySP-LGPL-FX/compressor.cpp **** 
+  61:DaisySP-LGPL-FX/compressor.cpp **** // Multi-channel block processing
+  62:DaisySP-LGPL-FX/compressor.cpp **** void Compressor::ProcessBlock(float **in,
+  63:DaisySP-LGPL-FX/compressor.cpp ****                               float **out,
+  64:DaisySP-LGPL-FX/compressor.cpp ****                               float * key,
+  65:DaisySP-LGPL-FX/compressor.cpp ****                               size_t  channels,
+  66:DaisySP-LGPL-FX/compressor.cpp ****                               size_t  size)
+  67:DaisySP-LGPL-FX/compressor.cpp **** {
+ 732              		.loc 1 67 1 is_stmt 1 view -0
+ 733              		.cfi_startproc
+ 734              		@ args = 8, pretend = 0, frame = 0
+ 735              		@ frame_needed = 0, uses_anonymous_args = 0
+  68:DaisySP-LGPL-FX/compressor.cpp ****     for(size_t i = 0; i < size; i++)
+ 736              		.loc 1 68 5 view .LVU194
+  67:DaisySP-LGPL-FX/compressor.cpp ****     for(size_t i = 0; i < size; i++)
+ 737              		.loc 1 67 1 is_stmt 0 view .LVU195
+ 738 0000 2DE9F84F 		push	{r3, r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 739              		.cfi_def_cfa_offset 40
+ 740              		.cfi_offset 3, -40
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s 			page 23
+
+
+ 741              		.cfi_offset 4, -36
+ 742              		.cfi_offset 5, -32
+ 743              		.cfi_offset 6, -28
+ 744              		.cfi_offset 7, -24
+ 745              		.cfi_offset 8, -20
+ 746              		.cfi_offset 9, -16
+ 747              		.cfi_offset 10, -12
+ 748              		.cfi_offset 11, -8
+ 749              		.cfi_offset 14, -4
+  67:DaisySP-LGPL-FX/compressor.cpp ****     for(size_t i = 0; i < size; i++)
+ 750              		.loc 1 67 1 view .LVU196
+ 751 0004 0B9F     		ldr	r7, [sp, #44]
+ 752 0006 8146     		mov	r9, r0
+ 753 0008 8A46     		mov	r10, r1
+ 754 000a 9346     		mov	fp, r2
+ 755 000c 9846     		mov	r8, r3
+ 756              	.LBB156:
+ 757              		.loc 1 68 16 view .LVU197
+ 758 000e 0025     		movs	r5, #0
+ 759              	.LVL40:
+ 760              	.L25:
+ 761              		.loc 1 68 25 is_stmt 1 discriminator 1 view .LVU198
+ 762 0010 BD42     		cmp	r5, r7
+ 763 0012 1BD0     		beq	.L21
+ 764              	.LBB157:
+  69:DaisySP-LGPL-FX/compressor.cpp ****     {
+  70:DaisySP-LGPL-FX/compressor.cpp ****         Process(key[i]);
+ 765              		.loc 1 70 9 view .LVU199
+ 766 0014 AE00     		lsls	r6, r5, #2
+ 767              	.LBB158:
+  71:DaisySP-LGPL-FX/compressor.cpp ****         for(size_t c = 0; c < channels; c++)
+ 768              		.loc 1 71 20 is_stmt 0 view .LVU200
+ 769 0016 0024     		movs	r4, #0
+ 770              	.LBE158:
+  70:DaisySP-LGPL-FX/compressor.cpp ****         for(size_t c = 0; c < channels; c++)
+ 771              		.loc 1 70 16 view .LVU201
+ 772 0018 B8EC010A 		vldmia.32	r8!, {s0}
+ 773 001c 4846     		mov	r0, r9
+ 774 001e FFF7FEFF 		bl	_ZN7daisysp10Compressor7ProcessEf
+ 775              	.LVL41:
+ 776              		.loc 1 71 9 is_stmt 1 view .LVU202
+ 777              	.L24:
+ 778              	.LBB167:
+ 779              		.loc 1 71 29 discriminator 3 view .LVU203
+ 780 0022 0A9B     		ldr	r3, [sp, #40]
+ 781 0024 9C42     		cmp	r4, r3
+ 782 0026 0FD0     		beq	.L23
+  72:DaisySP-LGPL-FX/compressor.cpp ****         {
+  73:DaisySP-LGPL-FX/compressor.cpp ****             out[c][i] = Apply(in[c][i]);
+ 783              		.loc 1 73 13 discriminator 2 view .LVU204
+ 784              	.LVL42:
+ 785              	.LBB159:
+ 786              	.LBI159:
+  62:DaisySP-LGPL-FX/compressor.h **** 
+ 787              		.loc 2 62 11 discriminator 2 view .LVU205
+ 788              	.LBB160:
+  62:DaisySP-LGPL-FX/compressor.h **** 
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s 			page 24
+
+
+ 789              		.loc 2 62 29 discriminator 2 view .LVU206
+  62:DaisySP-LGPL-FX/compressor.h **** 
+ 790              		.loc 2 62 29 is_stmt 0 discriminator 2 view .LVU207
+ 791              	.LBE160:
+ 792              	.LBE159:
+ 793              		.loc 1 73 30 discriminator 2 view .LVU208
+ 794 0028 5AF82410 		ldr	r1, [r10, r4, lsl #2]
+ 795              	.LBB164:
+ 796              	.LBB161:
+  62:DaisySP-LGPL-FX/compressor.h **** 
+ 797              		.loc 2 62 44 discriminator 2 view .LVU209
+ 798 002c 99ED057A 		vldr.32	s14, [r9, #20]
+ 799              	.LBE161:
+ 800              	.LBE164:
+ 801              		.loc 1 73 30 discriminator 2 view .LVU210
+ 802 0030 3144     		add	r1, r1, r6
+ 803              		.loc 1 73 23 discriminator 2 view .LVU211
+ 804 0032 5BF82430 		ldr	r3, [fp, r4, lsl #2]
+  71:DaisySP-LGPL-FX/compressor.cpp ****         {
+ 805              		.loc 1 71 9 discriminator 2 view .LVU212
+ 806 0036 0134     		adds	r4, r4, #1
+ 807              	.LVL43:
+ 808              	.LBB165:
+ 809              	.LBB162:
+  62:DaisySP-LGPL-FX/compressor.h **** 
+ 810              		.loc 2 62 44 discriminator 2 view .LVU213
+ 811 0038 D1ED007A 		vldr.32	s15, [r1]
+ 812              	.LBE162:
+ 813              	.LBE165:
+ 814              		.loc 1 73 23 discriminator 2 view .LVU214
+ 815 003c 3344     		add	r3, r3, r6
+ 816              	.LBB166:
+ 817              	.LBB163:
+  62:DaisySP-LGPL-FX/compressor.h **** 
+ 818              		.loc 2 62 44 discriminator 2 view .LVU215
+ 819 003e 67EE877A 		vmul.f32	s15, s15, s14
+ 820              	.LBE163:
+ 821              	.LBE166:
+ 822              		.loc 1 73 23 discriminator 2 view .LVU216
+ 823 0042 C3ED007A 		vstr.32	s15, [r3]
+  71:DaisySP-LGPL-FX/compressor.cpp ****         {
+ 824              		.loc 1 71 9 is_stmt 1 discriminator 2 view .LVU217
+ 825              	.LVL44:
+  71:DaisySP-LGPL-FX/compressor.cpp ****         {
+ 826              		.loc 1 71 9 is_stmt 0 discriminator 2 view .LVU218
+ 827 0046 ECE7     		b	.L24
+ 828              	.L23:
+  71:DaisySP-LGPL-FX/compressor.cpp ****         {
+ 829              		.loc 1 71 9 discriminator 2 view .LVU219
+ 830              	.LBE167:
+ 831              	.LBE157:
+  68:DaisySP-LGPL-FX/compressor.cpp ****     {
+ 832              		.loc 1 68 5 is_stmt 1 discriminator 2 view .LVU220
+ 833 0048 0135     		adds	r5, r5, #1
+ 834              	.LVL45:
+  68:DaisySP-LGPL-FX/compressor.cpp ****     {
+ 835              		.loc 1 68 5 is_stmt 0 discriminator 2 view .LVU221
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s 			page 25
+
+
+ 836 004a E1E7     		b	.L25
+ 837              	.LVL46:
+ 838              	.L21:
+  68:DaisySP-LGPL-FX/compressor.cpp ****     {
+ 839              		.loc 1 68 5 discriminator 2 view .LVU222
+ 840              	.LBE156:
+  74:DaisySP-LGPL-FX/compressor.cpp ****         }
+  75:DaisySP-LGPL-FX/compressor.cpp ****     }
+  76:DaisySP-LGPL-FX/compressor.cpp **** }
+ 841              		.loc 1 76 1 view .LVU223
+ 842 004c BDE8F88F 		pop	{r3, r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 843              		.loc 1 76 1 view .LVU224
+ 844              		.cfi_endproc
+ 845              	.LFE2817:
+ 847              		.text
+ 848              	.Letext0:
+ 849              		.file 4 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/machine/_default_types.h"
+ 850              		.file 5 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/_stdint.h"
+ 851              		.file 6 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdint.h"
+ 852              		.file 7 "/Library/DaisyToolchain/0.2.0/arm/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h"
+ 853              		.file 8 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath"
+ 854              		.file 9 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h"
+ 855              		.file 10 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdlib"
+ 856              		.file 11 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdint"
+ 857              		.file 12 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/type_traits"
+ 858              		.file 13 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/debug/debug.h"
+ 859              		.file 14 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cwchar"
+ 860              		.file 15 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_pair.h"
+ 861              		.file 16 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/exception_ptr.h"
+ 862              		.file 17 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v
+ 863              		.file 18 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/clocale"
+ 864              		.file 19 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdio"
+ 865              		.file 20 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/basic_string.h"
+ 866              		.file 21 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_iterator.h"
+ 867              		.file 22 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/predefined_ops.h
+ 868              		.file 23 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/_types.h"
+ 869              		.file 24 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/reent.h"
+ 870              		.file 25 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/lock.h"
+ 871              		.file 26 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/math.h"
+ 872              		.file 27 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdlib.h"
+ 873              		.file 28 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/math.h"
+ 874              		.file 29 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/stdlib.h"
+ 875              		.file 30 "/Library/DaisyToolchain/0.2.0/arm/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h"
+ 876              		.file 31 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/wchar.h"
+ 877              		.file 32 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/locale.h"
+ 878              		.file 33 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdio.h"
+ 879              		.file 34 "<built-in>"
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s 			page 26
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 compressor.cpp
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s:19     .text._ZN7daisysp10Compressor4InitEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s:25     .text._ZN7daisysp10Compressor4InitEf:0000000000000000 _ZN7daisysp10Compressor4InitEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s:405    .text._ZN7daisysp10Compressor4InitEf:0000000000000104 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s:412    .text._ZN7daisysp10Compressor7ProcessEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s:418    .text._ZN7daisysp10Compressor7ProcessEf:0000000000000000 _ZN7daisysp10Compressor7ProcessEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s:628    .text._ZN7daisysp10Compressor7ProcessEf:00000000000000d4 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s:640    .text._ZN7daisysp10Compressor12ProcessBlockEPfS1_S1_j:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s:646    .text._ZN7daisysp10Compressor12ProcessBlockEPfS1_S1_j:0000000000000000 _ZN7daisysp10Compressor12ProcessBlockEPfS1_S1_j
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s:723    .text._ZN7daisysp10Compressor12ProcessBlockEPPfS2_S1_jj:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccwS38Ha.s:729    .text._ZN7daisysp10Compressor12ProcessBlockEPPfS2_S1_jj:0000000000000000 _ZN7daisysp10Compressor12ProcessBlockEPPfS2_S1_jj
+
+UNDEFINED SYMBOLS
+expf
+frexpf

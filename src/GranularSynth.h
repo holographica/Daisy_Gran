@@ -3,7 +3,6 @@
 #include "Grain.h"
 #include "daisy_pod.h"
 #include "debug_print.h"
-#include <vector>
 
 class GranularSynth{
   public:

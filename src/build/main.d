@@ -135,48 +135,29 @@ build/main.o: main.cpp \
  ../DaisySP/Source/Synthesis/zoscillator.h \
  ../DaisySP/Source/Utility/looper.h ../DaisySP/Source/Utility/maytrig.h \
  ../DaisySP/Source/Utility/metro.h ../DaisySP/Source/Utility/samplehold.h \
- ../DaisySP/Source/Utility/smooth_random.h \
- ../DaisySP/Source/../DaisySP-LGPL/Source/daisysp-lgpl.h \
- ../DaisySP/Source/../DaisySP-LGPL/Source/Control/line.h \
- ../DaisySP/Source/../DaisySP-LGPL/Source/Dynamics/balance.h \
- ../DaisySP/Source/../DaisySP-LGPL/Source/Dynamics/compressor.h \
- ../DaisySP/Source/../DaisySP-LGPL/Source/Effects/bitcrush.h \
- ../DaisySP/Source/../DaisySP-LGPL/Source/Effects/fold.h \
- ../DaisySP/Source/../DaisySP-LGPL/Source/Effects/reverbsc.h \
- ../DaisySP/Source/../DaisySP-LGPL/Source/Filters/allpass.h \
- ../DaisySP/Source/../DaisySP-LGPL/Source/Filters/atone.h \
- ../DaisySP/Source/../DaisySP-LGPL/Source/Filters/biquad.h \
- ../DaisySP/Source/../DaisySP-LGPL/Source/Filters/comb.h \
- ../DaisySP/Source/../DaisySP-LGPL/Source/Filters/mode.h \
- ../DaisySP/Source/../DaisySP-LGPL/Source/Filters/moogladder.h \
- ../DaisySP/Source/../DaisySP-LGPL/Source/Filters/nlfilt.h \
- ../DaisySP/Source/../DaisySP-LGPL/Source/Filters/tone.h \
- ../DaisySP/Source/../DaisySP-LGPL/Source/PhysicalModeling/pluck.h \
- ../DaisySP/Source/../DaisySP-LGPL/Source/Synthesis/blosc.h \
- ../DaisySP/Source/../DaisySP-LGPL/Source/Utility/jitter.h \
- ../DaisySP/Source/../DaisySP-LGPL/Source/Utility/port.h \
- ../libDaisy/src/daisy_pod.h ../libDaisy/src/daisy_seed.h \
- ../libDaisy/src/daisy.h ../libDaisy/src/daisy_core.h \
- ../libDaisy/src/version.h ../libDaisy/src/sys/system.h \
- ../libDaisy/src/per/tim.h ../libDaisy/src/per/qspi.h \
- ../libDaisy/src/per/dac.h ../libDaisy/src/per/gpio.h \
- ../libDaisy/src/dev/leddriver.h ../libDaisy/src/per/i2c.h \
- ../libDaisy/src/dev/mpr121.h ../libDaisy/src/dev/sdram.h \
- ../libDaisy/src/dev/sr_4021.h ../libDaisy/src/sys/system.h \
- ../libDaisy/src/hid/audio.h ../libDaisy/src/per/sai.h \
- ../libDaisy/src/util/unique_id.h ../libDaisy/src/per/adc.h \
- ../libDaisy/src/per/uart.h ../libDaisy/src/hid/midi.h \
- ../libDaisy/src/util/ringbuffer.h ../libDaisy/src/util/FIFO.h \
- ../libDaisy/src/hid/midi_parser.h ../libDaisy/src/hid/MidiEvent.h \
- ../libDaisy/src/hid/usb_midi.h ../libDaisy/src/hid/usb.h \
- ../libDaisy/src/sys/dma.h ../libDaisy/src/hid/encoder.h \
- ../libDaisy/src/hid/switch.h ../libDaisy/src/hid/switch3.h \
- ../libDaisy/src/hid/ctrl.h ../libDaisy/src/hid/gatein.h \
- ../libDaisy/src/hid/parameter.h ../libDaisy/src/hid/logger.h \
- ../libDaisy/src/hid/logger_impl.h ../libDaisy/src/hid/usb_host.h \
- ../libDaisy/src/per/sdmmc.h ../libDaisy/src/per/spi.h \
- ../libDaisy/src/per/spiMultislave.h ../libDaisy/src/per/rng.h \
- ../libDaisy/src/hid/disp/display.h ../libDaisy/src/util/oled_fonts.h \
+ ../DaisySP/Source/Utility/smooth_random.h ../libDaisy/src/daisy_pod.h \
+ ../libDaisy/src/daisy_seed.h ../libDaisy/src/daisy.h \
+ ../libDaisy/src/daisy_core.h ../libDaisy/src/version.h \
+ ../libDaisy/src/sys/system.h ../libDaisy/src/per/tim.h \
+ ../libDaisy/src/per/qspi.h ../libDaisy/src/per/dac.h \
+ ../libDaisy/src/per/gpio.h ../libDaisy/src/dev/leddriver.h \
+ ../libDaisy/src/per/i2c.h ../libDaisy/src/dev/mpr121.h \
+ ../libDaisy/src/dev/sdram.h ../libDaisy/src/dev/sr_4021.h \
+ ../libDaisy/src/sys/system.h ../libDaisy/src/hid/audio.h \
+ ../libDaisy/src/per/sai.h ../libDaisy/src/util/unique_id.h \
+ ../libDaisy/src/per/adc.h ../libDaisy/src/per/uart.h \
+ ../libDaisy/src/hid/midi.h ../libDaisy/src/util/ringbuffer.h \
+ ../libDaisy/src/util/FIFO.h ../libDaisy/src/hid/midi_parser.h \
+ ../libDaisy/src/hid/MidiEvent.h ../libDaisy/src/hid/usb_midi.h \
+ ../libDaisy/src/hid/usb.h ../libDaisy/src/sys/dma.h \
+ ../libDaisy/src/hid/encoder.h ../libDaisy/src/hid/switch.h \
+ ../libDaisy/src/hid/switch3.h ../libDaisy/src/hid/ctrl.h \
+ ../libDaisy/src/hid/gatein.h ../libDaisy/src/hid/parameter.h \
+ ../libDaisy/src/hid/logger.h ../libDaisy/src/hid/logger_impl.h \
+ ../libDaisy/src/hid/usb_host.h ../libDaisy/src/per/sdmmc.h \
+ ../libDaisy/src/per/spi.h ../libDaisy/src/per/spiMultislave.h \
+ ../libDaisy/src/per/rng.h ../libDaisy/src/hid/disp/display.h \
+ ../libDaisy/src/util/oled_fonts.h \
  ../libDaisy/src/hid/disp/graphics_common.h \
  ../libDaisy/src/hid/disp/oled_display.h ../libDaisy/src/hid/wavplayer.h \
  ../libDaisy/src/util/wav_format.h \
@@ -205,7 +186,8 @@ build/main.o: main.cpp \
  ../libDaisy/src/util/WaveTableLoader.h ../libDaisy/src/sys/fatfs.h \
  ../libDaisy/src/util/WavWriter.h AudioFileManager.h constants_utils.h \
  debug_print.h GranularSynth.h Grain.h GrainPhasor.h GrannyChordApp.h \
- UIManager.h AppState.h
+ UIManager.h AppState.h DaisySP-LGPL-FX/compressor.h \
+ DaisySP-LGPL-FX/reverbsc.h DaisySP-LGPL-FX/moogladder.h
 ../libDaisy/Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:
 ../libDaisy/Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h750xx.h:
 ../libDaisy/Drivers/CMSIS/Include/core_cm7.h:
@@ -355,25 +337,6 @@ build/main.o: main.cpp \
 ../DaisySP/Source/Utility/metro.h:
 ../DaisySP/Source/Utility/samplehold.h:
 ../DaisySP/Source/Utility/smooth_random.h:
-../DaisySP/Source/../DaisySP-LGPL/Source/daisysp-lgpl.h:
-../DaisySP/Source/../DaisySP-LGPL/Source/Control/line.h:
-../DaisySP/Source/../DaisySP-LGPL/Source/Dynamics/balance.h:
-../DaisySP/Source/../DaisySP-LGPL/Source/Dynamics/compressor.h:
-../DaisySP/Source/../DaisySP-LGPL/Source/Effects/bitcrush.h:
-../DaisySP/Source/../DaisySP-LGPL/Source/Effects/fold.h:
-../DaisySP/Source/../DaisySP-LGPL/Source/Effects/reverbsc.h:
-../DaisySP/Source/../DaisySP-LGPL/Source/Filters/allpass.h:
-../DaisySP/Source/../DaisySP-LGPL/Source/Filters/atone.h:
-../DaisySP/Source/../DaisySP-LGPL/Source/Filters/biquad.h:
-../DaisySP/Source/../DaisySP-LGPL/Source/Filters/comb.h:
-../DaisySP/Source/../DaisySP-LGPL/Source/Filters/mode.h:
-../DaisySP/Source/../DaisySP-LGPL/Source/Filters/moogladder.h:
-../DaisySP/Source/../DaisySP-LGPL/Source/Filters/nlfilt.h:
-../DaisySP/Source/../DaisySP-LGPL/Source/Filters/tone.h:
-../DaisySP/Source/../DaisySP-LGPL/Source/PhysicalModeling/pluck.h:
-../DaisySP/Source/../DaisySP-LGPL/Source/Synthesis/blosc.h:
-../DaisySP/Source/../DaisySP-LGPL/Source/Utility/jitter.h:
-../DaisySP/Source/../DaisySP-LGPL/Source/Utility/port.h:
 ../libDaisy/src/daisy_pod.h:
 ../libDaisy/src/daisy_seed.h:
 ../libDaisy/src/daisy.h:
@@ -470,3 +433,6 @@ GrainPhasor.h:
 GrannyChordApp.h:
 UIManager.h:
 AppState.h:
+DaisySP-LGPL-FX/compressor.h:
+DaisySP-LGPL-FX/reverbsc.h:
+DaisySP-LGPL-FX/moogladder.h:

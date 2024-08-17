@@ -89,8 +89,8 @@
 #include "Utility/smooth_random.h"
 
 /** LGPL Modules */
-// #ifdef USE_DAISYSP_LGPL
+#ifdef USE_DAISYSP_LGPL
 #include "../DaisySP-LGPL/Source/daisysp-lgpl.h"
-// #endif
+#endif
 
 #endif

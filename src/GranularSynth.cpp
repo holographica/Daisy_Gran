@@ -11,8 +11,12 @@ void GranularSynth::Init(const int16_t *left, const int16_t *right, size_t audio
   right_buf_ = right;
   audio_len_ = audio_len;
   for (Grain& grain: grains_){
-    grain.Init(left,right,audio_len);
+    // grain.Init(left,right);
+    grain.Init();
   }
+  Grain::left_buf_ = left;
+  Grain::right_buf_ = right;
+  Grain::audio_len_ = audio_len;
   phasor_mode_ = GrainPhasor::Mode::OneShot;
   grain_size_ = 4800;
   spawn_pos_ = 0;
@@ -124,8 +128,8 @@ void GranularSynth::ApplyRandomness(){
 void GranularSynth::TriggerGrain(){
   size_t count = 0;
   for(Grain& grain:grains_){
-    if (grain.IsActive()) { count++; }
-    if (!grain.IsActive() && count<active_count_){
+    if (grain.is_active_==true) { count++; }
+    if (!grain.is_active_==false && count<active_count_){
       ApplyRandomness();
       grain.Trigger(spawn_pos_,grain_size_,pitch_ratio_,pan_);
       count++;
@@ -145,7 +149,7 @@ void GranularSynth::ProcessGrains(float *out_left, float *out_right, size_t size
     float sum_right = 0.0f;
     size_t active = 0;
     for (Grain& grain:grains_){
-      if (grain.IsActive()){
+      if (grain.is_active_==true){
         grain.Process(&sum_left,&sum_right);
         active++;
       }

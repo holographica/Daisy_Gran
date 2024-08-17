@@ -6,6 +6,9 @@
 #include "GranularSynth.h"
 #include "AudioFileManager.h"
 #include "debug_print.h"
+#include "DaisySP-LGPL-FX/compressor.h"
+#include "DaisySP-LGPL-FX/reverbsc.h"
+#include "DaisySP-LGPL-FX/moogladder.h"
 
 using namespace daisy;
 using namespace daisysp;
@@ -18,7 +21,7 @@ class GrannyChordApp {
             instance_ = this;
           };
 
-    void Init(int16_t *left, int16_t *right);
+    void Init(int16_t *left, int16_t *right, ReverbSc* reverb);
     void Run();
 
     static void AudioCallback(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, size_t size);
@@ -41,7 +44,7 @@ class GrannyChordApp {
 
     /* audio FX and filters */
     Compressor comp_;
-    ReverbSc reverb_;
+    ReverbSc* reverb_;
     MoogLadder lowpass_moog_;
     OnePole hipass_;
 
@@ -50,7 +53,6 @@ class GrannyChordApp {
     int16_t *right_buf_;
 
     int file_idx_ = 0;
-    char fname[MAX_FNAME_LEN];
     size_t wav_playhead_ = 0;
     uint32_t audio_len_ = 0;
 

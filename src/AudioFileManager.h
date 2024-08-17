@@ -1,7 +1,7 @@
 #pragma once
 #include <stdio.h>
 #include <stdint.h>
-#include <vector>
+// #include <vector>
 #include "daisy_pod.h"
 #include "constants_utils.h"
 #include "debug_print.h"
@@ -53,6 +53,7 @@ class AudioFileManager {
     int16_t* left_buf_;
     int16_t* right_buf_;
     /* list of filenames for logging */
+    int16_t file_indices[MAX_FILES];
     char names_ [MAX_FILES][MAX_FNAME_LEN];
     /* index of currently selected file */
     uint16_t curr_idx_;
@@ -62,5 +63,5 @@ class AudioFileManager {
     /* byte in original wav file at which audio samples start - usually 44 */
     size_t audio_data_start_;
     /* chunk size for reading audio into temporary buffer */
-    const size_t BUF_CHUNK_SZ = 16384;
+    // const size_t BUF_CHUNK_SZ = 16384;
 };
