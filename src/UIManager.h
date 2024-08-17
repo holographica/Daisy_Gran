@@ -44,7 +44,7 @@ class UIManager {
 
   private:
     DaisyPod& pod_;
-    AppState current_state_ = AppState::Startup;
+    AppState current_state_;
     SynthMode current_synth_mode_ = SynthMode::Size_Position;
     TimerHandle timer_;
     SynthMode prev_synth_mode_;

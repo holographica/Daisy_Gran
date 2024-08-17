@@ -47,9 +47,7 @@ class Grain {
     /// @param pitch_ratio Pitch of the grain - 1 plays the grain at its regular pitch
     /// @param pan Position of the grain's audio output in the stereo field
     void Trigger(size_t pos, size_t grain_size, float pitch_ratio=1.0f, float pan=0.5f) {
-      if (pos >= audio_len_){
-        pos = pos - audio_len_;
-      }
+      if (pos >= audio_len_) pos -= audio_len_;
       spawn_pos_ = pos;
       grain_size_ = grain_size;
       is_active_ = true;
@@ -92,10 +90,6 @@ class Grain {
       float gain_right = std::sqrt(pan_);
       *sum_left += (left*env*gain_left);
       *sum_right += (right*env*gain_right);
-
-      // if (phase>= 1.0f){
-      //   DeactivateGrain();
-      // }
     }
 
     void SetSpawnPos(size_t spawn_pos){ spawn_pos_ = spawn_pos; }

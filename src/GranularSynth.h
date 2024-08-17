@@ -12,29 +12,19 @@ class GranularSynth{
         grains_(){}
 
     void Init(const int16_t *left, const int16_t *right, size_t audio_len);
-    void InitParams();
     void UpdateGrainParams();
     void ApplyRandomness();
     void TriggerGrain();
     void ProcessGrains(float *out_left, float *out_right, size_t size);
 
-    /* internal setters */
-    void SetGrainSize(float size_ms);
-    void SetSpawnPosSamples(size_t pos);
-    void SetActiveGrains(size_t count);
-    void SetPitchRatio(float ratio);
     void SetEnvelopeType(Grain::EnvelopeType type);
     void SetPhasorMode(GrainPhasor::Mode mode);
-    /* don't need a user setter for this
-    since pan range is already 0-1 */
     void SetPan(float pan);
     
-    /* user setters that take normalised input */
-    void SetUserGrainSize(float knob_val);
-    void SetUserSpawnPos(float knob_val);
-    void SetUserActiveGrains(float knob_val);
-    void SetUserPitchRatio(float ratio);
-
+    void SetGrainSize(float knob_val);
+    void SetSpawnPos(float knob_val);
+    void SetActiveGrains(float knob_val);
+    void SetPitchRatio(float ratio);
 
     void SetSizeRnd(float rnd){ rnd_size_ = rnd; }
     void SetPositionRnd(float rnd){ rnd_spawn_pos_ = rnd; }
@@ -70,8 +60,4 @@ class GranularSynth{
     float rnd_pan_ = 0.0f;
     float rnd_envelope_ = 0.0f;
     float rnd_phasor_ = 0.0f;
-
-
-
-
 };

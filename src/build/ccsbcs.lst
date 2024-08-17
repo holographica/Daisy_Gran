@@ -1,32 +1,33 @@
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 1
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s 			page 1
 
 
    1              		.cpu cortex-m7
    2              		.arch armv7e-m
    3              		.fpu fpv5-d16
    4              		.eabi_attribute 28, 1
-   5              		.eabi_attribute 23, 1
-   6              		.eabi_attribute 24, 1
-   7              		.eabi_attribute 25, 1
-   8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
-  10              		.eabi_attribute 34, 1
-  11              		.eabi_attribute 18, 4
-  12              		.file	"ccsbcs.c"
-  13              		.text
-  14              	.Ltext0:
-  15              		.cfi_sections	.debug_frame
-  16              		.section	.text.ff_convert,"ax",%progbits
-  17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	ff_convert
-  20              		.syntax unified
-  21              		.thumb
-  22              		.thumb_func
-  24              	ff_convert:
-  25              	.LVL0:
-  26              	.LFB320:
-  27              		.file 1 "../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c"
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.file	"ccsbcs.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.ff_convert,"ax",%progbits
+  19              		.align	1
+  20              		.global	ff_convert
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  25              	ff_convert:
+  26              	.LVL0:
+  27              	.LFB320:
+  28              		.file 1 "../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c"
    1:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** /*------------------------------------------------------------------------*/
    2:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** /* Unicode - Local code bidirectional converter  (C)ChaN, 2015            */
    3:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** /* (SBCS code pages)                                                      */
@@ -57,10 +58,10 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 1
   28:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** #define _TBLDEF 1
   29:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** static
   30:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** const WCHAR Tbl[] = {	/*  CP437(0x80-0xFF) to Unicode conversion table */
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s 			page 2
+
+
   31:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	0x00C7, 0x00FC, 0x00E9, 0x00E2, 0x00E4, 0x00E0, 0x00E5, 0x00E7, 0x00EA, 0x00EB, 0x00E8, 0x00EF, 0x
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 2
-
-
   32:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	0x00C9, 0x00E6, 0x00C6, 0x00F4, 0x00F6, 0x00F2, 0x00FB, 0x00F9, 0x00FF, 0x00D6, 0x00DC, 0x00A2, 0x
   33:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	0x00E1, 0x00ED, 0x00F3, 0x00FA, 0x00F1, 0x00D1, 0x00AA, 0x00BA, 0x00BF, 0x2310, 0x00AC, 0x00BD, 0x
   34:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	0x2591, 0x2592, 0x2593, 0x2502, 0x2524, 0x2561, 0x2562, 0x2556, 0x2555, 0x2563, 0x2551, 0x2557, 0x
@@ -117,10 +118,10 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 1
   85:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** static
   86:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** const WCHAR Tbl[] = {	/*  CP775(0x80-0xFF) to Unicode conversion table */
   87:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	0x0106, 0x00FC, 0x00E9, 0x0101, 0x00E4, 0x0123, 0x00E5, 0x0107, 0x0142, 0x0113, 0x0156, 0x0157, 0x
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s 			page 3
+
+
   88:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	0x00C9, 0x00E6, 0x00C6, 0x014D, 0x00F6, 0x0122, 0x00A2, 0x015A, 0x015B, 0x00D6, 0x00DC, 0x00F8, 0x
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 3
-
-
   89:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	0x0100, 0x012A, 0x00F3, 0x017B, 0x017C, 0x017A, 0x201D, 0x00A6, 0x00A9, 0x00AE, 0x00AC, 0x00BD, 0x
   90:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	0x2591, 0x2592, 0x2593, 0x2502, 0x2524, 0x0104, 0x010C, 0x0118, 0x0116, 0x2563, 0x2551, 0x2557, 0x
   91:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	0x2514, 0x2534, 0x252C, 0x251C, 0x2500, 0x253C, 0x0172, 0x016A, 0x255A, 0x2554, 0x2569, 0x2566, 0x
@@ -177,10 +178,10 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 1
  142:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** const WCHAR Tbl[] = {	/*  CP857(0x80-0xFF) to Unicode conversion table */
  143:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	0x00C7, 0x00FC, 0x00E9, 0x00E2, 0x00E4, 0x00E0, 0x00E5, 0x00E7, 0x00EA, 0x00EB, 0x00E8, 0x00EF, 0x
  144:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	0x00C9, 0x00E6, 0x00C6, 0x00F4, 0x00F6, 0x00F2, 0x00FB, 0x00F9, 0x0130, 0x00D6, 0x00DC, 0x00F8, 0x
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s 			page 4
+
+
  145:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	0x00E1, 0x00ED, 0x00F3, 0x00FA, 0x00F1, 0x00D1, 0x011E, 0x011F, 0x00BF, 0x00AE, 0x00AC, 0x00BD, 0x
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 4
-
-
  146:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	0x2591, 0x2592, 0x2593, 0x2502, 0x2524, 0x00C1, 0x00C2, 0x00C0, 0x00A9, 0x2563, 0x2551, 0x2557, 0x
  147:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	0x2514, 0x2534, 0x252C, 0x251C, 0x2500, 0x253C, 0x00E3, 0x00C3, 0x255A, 0x2554, 0x2569, 0x2566, 0x
  148:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	0x00BA, 0x00AA, 0x00CA, 0x00CB, 0x00C8, 0x0000, 0x00CD, 0x00CE, 0x00CF, 0x2518, 0x250C, 0x2588, 0x
@@ -237,10 +238,10 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 1
  199:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	0x00C7, 0x00FC, 0x00E9, 0x00E2, 0x00C2, 0x00E0, 0x00B6, 0x00E7, 0x00EA, 0x00EB, 0x00E8, 0x00EF, 0x
  200:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	0x00C9, 0x00C8, 0x00CA, 0x00F4, 0x00CB, 0x00CF, 0x00FB, 0x00F9, 0x00A4, 0x00D4, 0x00DC, 0x00A2, 0x
  201:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	0x00A6, 0x00B4, 0x00F3, 0x00FA, 0x00A8, 0x00BB, 0x00B3, 0x00AF, 0x00CE, 0x3210, 0x00AC, 0x00BD, 0x
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s 			page 5
+
+
  202:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	0x2591, 0x2592, 0x2593, 0x2502, 0x2524, 0x2561, 0x2562, 0x2556, 0x2555, 0x2563, 0x2551, 0x2557, 0x
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 5
-
-
  203:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	0x2514, 0x2534, 0x252C, 0x251C, 0x2500, 0x253C, 0x255E, 0x255F, 0x255A, 0x2554, 0x2569, 0x2566, 0x
  204:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	0x2568, 0x2564, 0x2565, 0x2559, 0x2558, 0x2552, 0x2553, 0x256B, 0x256A, 0x2518, 0x250C, 0x2588, 0x
  205:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	0x03B1, 0x00DF, 0x0393, 0x03C0, 0x03A3, 0x03C3, 0x00B5, 0x03C4, 0x03A6, 0x0398, 0x03A9, 0x03B4, 0x
@@ -297,10 +298,10 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 1
  256:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	0x038A, 0x03AA, 0x038C, 0x00B7, 0x00B7, 0x038E, 0x03AB, 0x00A9, 0x038F, 0x00B2, 0x00B3, 0x03AC, 0x
  257:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	0x03CA, 0x0390, 0x03CC, 0x03CD, 0x0391, 0x0392, 0x0393, 0x0394, 0x0395, 0x0396, 0x0397, 0x00BD, 0x
  258:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	0x2591, 0x2592, 0x2593, 0x2502, 0x2524, 0x039A, 0x039B, 0x039C, 0x039D, 0x2563, 0x2551, 0x2557, 0x
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s 			page 6
+
+
  259:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	0x2514, 0x2534, 0x252C, 0x251C, 0x2500, 0x253C, 0x0A30, 0x03A1, 0x255A, 0x2554, 0x2569, 0x2566, 0x
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 6
-
-
  260:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	0x03A4, 0x03A5, 0x03A6, 0x03A7, 0x03A8, 0x03A9, 0x03B1, 0x03B2, 0x03B3, 0x2518, 0x250C, 0x2588, 0x
  261:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	0x03B6, 0x03B7, 0x03B8, 0x03B9, 0x03BA, 0x03BB, 0x03BC, 0x03BD, 0x03BE, 0x03BF, 0x03C0, 0x03C1, 0x
  262:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	0x00AD, 0x00B1, 0x03C5, 0x03C6, 0x03C7, 0x00A7, 0x03C8, 0x0385, 0x00B0, 0x00A8, 0x03C9, 0x03CB, 0x
@@ -321,11 +322,10 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 1
  277:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	UINT	dir		/* 0: Unicode to OEM code, 1: OEM code to Unicode */
  278:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** )
  279:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** {
-  28              		.loc 1 279 1 view -0
-  29              		.cfi_startproc
-  30              		@ args = 0, pretend = 0, frame = 0
-  31              		@ frame_needed = 0, uses_anonymous_args = 0
-  32              		@ link register save eliminated.
+  29              		.loc 1 279 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
  280:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	WCHAR c;
   33              		.loc 1 280 2 view .LVU1
  281:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 
@@ -334,108 +334,124 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 1
   34              		.loc 1 283 2 view .LVU2
   35              		.loc 1 283 5 is_stmt 0 view .LVU3
   36 0000 7F28     		cmp	r0, #127
-  37 0002 12D9     		bls	.L2
+ 279:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	WCHAR c;
+  37              		.loc 1 279 1 view .LVU4
+  38 0002 10B5     		push	{r4, lr}
+  39              		.cfi_def_cfa_offset 8
+  40              		.cfi_offset 4, -8
+  41              		.cfi_offset 14, -4
+  42              		.loc 1 283 5 view .LVU5
+  43 0004 06D9     		bls	.L2
  284:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		c = chr;
  285:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 
  286:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	} else {
  287:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		if (dir) {		/* OEM code to Unicode */
-  38              		.loc 1 287 3 is_stmt 1 view .LVU4
-  39              		.loc 1 287 6 is_stmt 0 view .LVU5
-  40 0004 71B9     		cbnz	r1, .L10
-  41 0006 0C4B     		ldr	r3, .L13
-  42 0008 01E0     		b	.L5
-  43              	.LVL1:
-  44              	.L11:
+  44              		.loc 1 287 3 is_stmt 1 view .LVU6
+  45              		.loc 1 287 6 is_stmt 0 view .LVU7
+  46 0006 31B1     		cbz	r1, .L3
  288:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			c = (chr >= 0x100) ? 0 : Tbl[chr - 0x80];
+  47              		.loc 1 288 4 is_stmt 1 view .LVU8
+  48              		.loc 1 288 6 is_stmt 0 view .LVU9
+  49 0008 FF28     		cmp	r0, #255
+  50 000a 12D8     		bhi	.L6
+  51              		.loc 1 288 6 discriminator 1 view .LVU10
+  52 000c 8038     		subs	r0, r0, #128
+  53              	.LVL1:
+  54              		.loc 1 288 6 discriminator 1 view .LVU11
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s 			page 7
+
+
+  55 000e 0A4B     		ldr	r3, .L8
+  56 0010 33F81000 		ldrh	r0, [r3, r0, lsl #1]
+  57              	.LVL2:
+  58              	.L2:
  289:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 
  290:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		} else {		/* Unicode to OEM code */
  291:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			for (c = 0; c < 0x80; c++) {
-  45              		.loc 1 291 4 discriminator 2 view .LVU6
-  46 000a 8029     		cmp	r1, #128
-  47 000c 0CD0     		beq	.L7
-  48              	.LVL2:
-  49              	.L5:
-  50              		.loc 1 291 26 is_stmt 1 view .LVU7
-  51              		.loc 1 291 16 view .LVU8
  292:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 				if (chr == Tbl[c]) break;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 7
-
-
-  52              		.loc 1 292 19 is_stmt 0 view .LVU9
-  53 000e 33F8022B 		ldrh	r2, [r3], #2
-  54 0012 1FFA81FC 		uxth	ip, r1
-  55              	.LVL3:
-  56              		.loc 1 292 5 is_stmt 1 view .LVU10
- 291:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 				if (chr == Tbl[c]) break;
-  57              		.loc 1 291 4 is_stmt 0 view .LVU11
-  58 0016 0131     		adds	r1, r1, #1
-  59              		.loc 1 292 8 view .LVU12
-  60 0018 8242     		cmp	r2, r0
-  61 001a F6D1     		bne	.L11
  293:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			}
  294:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			c = (c + 0x80) & 0xFF;
-  62              		.loc 1 294 11 view .LVU13
-  63 001c 0CF18000 		add	r0, ip, #128
-  64              	.LVL4:
-  65              		.loc 1 294 11 view .LVU14
-  66 0020 80B2     		uxth	r0, r0
-  67              		.loc 1 294 4 is_stmt 1 view .LVU15
-  68              	.LVL5:
-  69              		.loc 1 294 4 is_stmt 0 view .LVU16
-  70 0022 7047     		bx	lr
-  71              	.LVL6:
-  72              	.L10:
- 288:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 
-  73              		.loc 1 288 4 is_stmt 1 view .LVU17
- 288:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 
-  74              		.loc 1 288 6 is_stmt 0 view .LVU18
-  75 0024 FF28     		cmp	r0, #255
-  76 0026 01D9     		bls	.L12
-  77              	.LVL7:
-  78              	.L7:
- 288:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 
-  79              		.loc 1 288 6 view .LVU19
-  80 0028 0020     		movs	r0, #0
-  81              	.LVL8:
-  82              	.L2:
  295:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		}
  296:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	}
  297:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 
  298:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	return c;
-  83              		.loc 1 298 2 is_stmt 1 view .LVU20
+  59              		.loc 1 298 2 is_stmt 1 view .LVU12
  299:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** }
-  84              		.loc 1 299 1 is_stmt 0 view .LVU21
-  85 002a 7047     		bx	lr
-  86              	.LVL9:
-  87              	.L12:
- 288:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 
-  88              		.loc 1 288 6 discriminator 1 view .LVU22
-  89 002c 024B     		ldr	r3, .L13
-  90 002e 8038     		subs	r0, r0, #128
-  91              	.LVL10:
- 288:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 
-  92              		.loc 1 288 6 discriminator 1 view .LVU23
-  93 0030 33F81000 		ldrh	r0, [r3, r0, lsl #1]
-  94 0034 7047     		bx	lr
-  95              	.L14:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 8
+  60              		.loc 1 299 1 is_stmt 0 view .LVU13
+  61 0014 10BD     		pop	{r4, pc}
+  62              	.LVL3:
+  63              	.L3:
+  64              		.loc 1 299 1 view .LVU14
+  65 0016 084A     		ldr	r2, .L8
+  66              	.LVL4:
+  67              	.L5:
+ 292:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			}
+  68              		.loc 1 292 19 view .LVU15
+  69 0018 32F8024B 		ldrh	r4, [r2], #2
+  70 001c 8BB2     		uxth	r3, r1
+  71              	.LVL5:
+ 292:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			}
+  72              		.loc 1 292 5 is_stmt 1 view .LVU16
+ 292:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			}
+  73              		.loc 1 292 8 is_stmt 0 view .LVU17
+  74 001e 8442     		cmp	r4, r0
+  75 0020 03D0     		beq	.L4
+ 291:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 				if (chr == Tbl[c]) break;
+  76              		.loc 1 291 26 is_stmt 1 discriminator 2 view .LVU18
+  77              	.LVL6:
+ 291:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 				if (chr == Tbl[c]) break;
+  78              		.loc 1 291 16 discriminator 2 view .LVU19
+ 291:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 				if (chr == Tbl[c]) break;
+  79              		.loc 1 291 4 is_stmt 0 discriminator 2 view .LVU20
+  80 0022 0131     		adds	r1, r1, #1
+  81              	.LVL7:
+ 291:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 				if (chr == Tbl[c]) break;
+  82              		.loc 1 291 4 discriminator 2 view .LVU21
+  83 0024 8029     		cmp	r1, #128
+  84 0026 F7D1     		bne	.L5
+  85 0028 0B46     		mov	r3, r1
+  86              	.LVL8:
+  87              	.L4:
+ 294:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		}
+  88              		.loc 1 294 4 is_stmt 1 view .LVU22
+ 294:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		}
+  89              		.loc 1 294 11 is_stmt 0 view .LVU23
+  90 002a 03F18000 		add	r0, r3, #128
+  91              	.LVL9:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s 			page 8
 
 
-  96 0036 00BF     		.align	2
-  97              	.L13:
-  98 0038 00000000 		.word	.LANCHOR0
-  99              		.cfi_endproc
- 100              	.LFE320:
- 102              		.section	.text.ff_wtoupper,"ax",%progbits
- 103              		.align	1
- 104              		.p2align 2,,3
- 105              		.global	ff_wtoupper
- 106              		.syntax unified
- 107              		.thumb
- 108              		.thumb_func
- 110              	ff_wtoupper:
- 111              	.LVL11:
- 112              	.LFB321:
+ 294:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		}
+  92              		.loc 1 294 6 view .LVU24
+  93 002e C0B2     		uxtb	r0, r0
+  94              	.LVL10:
+ 294:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		}
+  95              		.loc 1 294 6 view .LVU25
+  96 0030 F0E7     		b	.L2
+  97              	.LVL11:
+  98              	.L6:
+ 288:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 
+  99              		.loc 1 288 6 view .LVU26
+ 100 0032 0020     		movs	r0, #0
+ 101              	.LVL12:
+ 288:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 
+ 102              		.loc 1 288 6 view .LVU27
+ 103 0034 EEE7     		b	.L2
+ 104              	.L9:
+ 105 0036 00BF     		.align	2
+ 106              	.L8:
+ 107 0038 00000000 		.word	.LANCHOR0
+ 108              		.cfi_endproc
+ 109              	.LFE320:
+ 111              		.section	.text.ff_wtoupper,"ax",%progbits
+ 112              		.align	1
+ 113              		.global	ff_wtoupper
+ 114              		.syntax unified
+ 115              		.thumb
+ 116              		.thumb_func
+ 118              	ff_wtoupper:
+ 119              	.LVL13:
+ 120              	.LFB321:
  300:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 
  301:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 
  302:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 
@@ -443,13 +459,13 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 1
  304:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	WCHAR chr		/* Unicode character to be upper converted (BMP only) */
  305:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** )
  306:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** {
- 113              		.loc 1 306 1 is_stmt 1 view -0
- 114              		.cfi_startproc
- 115              		@ args = 0, pretend = 0, frame = 0
- 116              		@ frame_needed = 0, uses_anonymous_args = 0
+ 121              		.loc 1 306 1 is_stmt 1 view -0
+ 122              		.cfi_startproc
+ 123              		@ args = 0, pretend = 0, frame = 0
+ 124              		@ frame_needed = 0, uses_anonymous_args = 0
  307:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	/* Compressed upper conversion table */
  308:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	static const WCHAR cvt1[] = {	/* U+0000 - U+0FFF */
- 117              		.loc 1 308 2 view .LVU25
+ 125              		.loc 1 308 2 view .LVU29
  309:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		/* Basic Latin */
  310:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		0x0061,0x031A,
  311:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		/* Latin-1 Supplement */
@@ -462,6 +478,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 1
  318:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		0x0222,0x0112,  0x023A,0x0009,0x2C65,0x023B,0x023B,0x023D,0x2C66,0x023F,0x0240,0x0241,0x0241,  0x
  319:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		/* IPA Extensions */
  320:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		0x0253,0x0040,0x0181,0x0186,0x0255,0x0189,0x018A,0x0258,0x018F,0x025A,0x0190,0x025C,0x025D,0x025E
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s 			page 9
+
+
  321:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		/* Greek, Coptic */
  322:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		0x037B,0x0003,0x03FD,0x03FE,0x03FF,  0x03AC,0x0004,0x0386,0x0388,0x0389,0x038A,  0x03B1,0x0311,
  323:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		0x03C2,0x0002,0x03A3,0x03A3,  0x03C4,0x0308,  0x03CC,0x0003,0x038C,0x038E,0x038F,  0x03D8,0x0118,
@@ -474,13 +493,10 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 1
  330:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		0x0000
  331:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	};
  332:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	static const WCHAR cvt2[] = {	/* U+1000 - U+FFFF */
- 118              		.loc 1 332 2 view .LVU26
+ 126              		.loc 1 332 2 view .LVU30
  333:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		/* Phonetic Extensions */
  334:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		0x1D7D,0x0001,0x2C63,
  335:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		/* Latin Extended Additional */
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 9
-
-
  336:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		0x1E00,0x0196,  0x1EA0,0x015A,
  337:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		/* Greek Extended */
  338:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		0x1F00,0x0608,  0x1F10,0x0606,  0x1F20,0x0608,  0x1F30,0x0608,  0x1F40,0x0606,
@@ -506,41 +522,101 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 1
  358:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		0x0000
  359:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	};
  360:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	const WCHAR *p;
- 119              		.loc 1 360 2 view .LVU27
+ 127              		.loc 1 360 2 view .LVU31
  361:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	WCHAR bc, nc, cmd;
- 120              		.loc 1 361 2 view .LVU28
+ 128              		.loc 1 361 2 view .LVU32
  362:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 
  363:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 
  364:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	p = chr < 0x1000 ? cvt1 : cvt2;
- 121              		.loc 1 364 2 view .LVU29
- 122              		.loc 1 364 26 is_stmt 0 view .LVU30
- 123 0000 224B     		ldr	r3, .L35
- 124 0002 234A     		ldr	r2, .L35+4
- 125 0004 B0F5805F 		cmp	r0, #4096
- 126 0008 28BF     		it	cs
- 127 000a 1346     		movcs	r3, r2
+ 129              		.loc 1 364 2 view .LVU33
+ 130              		.loc 1 364 26 is_stmt 0 view .LVU34
+ 131 0000 1E4B     		ldr	r3, .L32
+ 132 0002 1F4A     		ldr	r2, .L32+4
+ 133 0004 B0F5805F 		cmp	r0, #4096
+ 134 0008 28BF     		it	cs
+ 135 000a 1346     		movcs	r3, r2
  306:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	/* Compressed upper conversion table */
- 128              		.loc 1 306 1 view .LVU31
- 129 000c 10B5     		push	{r4, lr}
- 130              		.cfi_def_cfa_offset 8
- 131              		.cfi_offset 4, -8
- 132              		.cfi_offset 14, -4
- 133              	.L30:
- 134 000e 0433     		adds	r3, r3, #4
- 135 0010 01E0     		b	.L29
- 136              	.LVL12:
- 137              	.L18:
+ 136              		.loc 1 306 1 view .LVU35
+ 137 000c 70B5     		push	{r4, r5, r6, lr}
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s 			page 10
+
+
+ 138              		.cfi_def_cfa_offset 16
+ 139              		.cfi_offset 4, -16
+ 140              		.cfi_offset 5, -12
+ 141              		.cfi_offset 6, -8
+ 142              		.cfi_offset 14, -4
+ 143              	.L25:
+ 144 000e 191D     		adds	r1, r3, #4
+ 145              	.L24:
+ 146              	.LVL14:
  365:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	for (;;) {
+ 147              		.loc 1 365 2 is_stmt 1 view .LVU36
  366:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		bc = *p++;								/* Get block base */
+ 148              		.loc 1 366 3 view .LVU37
+ 149              		.loc 1 366 6 is_stmt 0 view .LVU38
+ 150 0010 31F8043C 		ldrh	r3, [r1, #-4]
+ 151              	.LVL15:
  367:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		if (!bc || chr < bc) break;
+ 152              		.loc 1 367 3 is_stmt 1 view .LVU39
+ 153 0014 0A46     		mov	r2, r1
+ 154              		.loc 1 367 6 is_stmt 0 view .LVU40
+ 155 0016 ABB1     		cbz	r3, .L12
+ 156              		.loc 1 367 11 discriminator 1 view .LVU41
+ 157 0018 9842     		cmp	r0, r3
+ 158 001a 13D3     		bcc	.L12
  368:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		nc = *p++; cmd = nc >> 8; nc &= 0xFF;	/* Get processing command and block size */
+ 159              		.loc 1 368 3 is_stmt 1 view .LVU42
+ 160              	.LVL16:
+ 161              		.loc 1 368 6 is_stmt 0 view .LVU43
+ 162 001c 31F8024C 		ldrh	r4, [r1, #-2]
+ 163              	.LVL17:
+ 164              		.loc 1 368 14 is_stmt 1 view .LVU44
+ 165              		.loc 1 368 18 is_stmt 0 view .LVU45
+ 166 0020 250A     		lsrs	r5, r4, #8
+ 167              	.LVL18:
+ 168              		.loc 1 368 29 is_stmt 1 view .LVU46
+ 169              		.loc 1 368 32 is_stmt 0 view .LVU47
+ 170 0022 E6B2     		uxtb	r6, r4
+ 171              	.LVL19:
  369:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		if (chr < bc + nc) {	/* In the block? */
+ 172              		.loc 1 369 3 is_stmt 1 view .LVU48
+ 173              		.loc 1 369 16 is_stmt 0 view .LVU49
+ 174 0024 53FA84F4 		uxtab	r4, r3, r4
+ 175              		.loc 1 369 6 view .LVU50
+ 176 0028 A042     		cmp	r0, r4
+ 177 002a 21DA     		bge	.L13
  370:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			switch (cmd) {
+ 178              		.loc 1 370 4 is_stmt 1 view .LVU51
+ 179 002c 082D     		cmp	r5, #8
+ 180 002e 09D8     		bhi	.L12
+ 181 0030 DFE805F0 		tbb	[pc, r5]
+ 182              	.L15:
+ 183 0034 05       		.byte	(.L23-.L15)/2
+ 184 0035 09       		.byte	(.L22-.L15)/2
+ 185 0036 0F       		.byte	(.L21-.L15)/2
+ 186 0037 11       		.byte	(.L20-.L15)/2
+ 187 0038 13       		.byte	(.L19-.L15)/2
+ 188 0039 15       		.byte	(.L18-.L15)/2
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s 			page 11
+
+
+ 189 003a 17       		.byte	(.L17-.L15)/2
+ 190 003b 19       		.byte	(.L16-.L15)/2
+ 191 003c 1B       		.byte	(.L14-.L15)/2
+ 192 003d 00       		.p2align 1
+ 193              	.L23:
  371:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 0:	chr = p[chr - bc]; break;		/* Table conversion */
+ 194              		.loc 1 371 12 view .LVU52
+ 195              		.loc 1 371 24 is_stmt 0 view .LVU53
+ 196 003e C01A     		subs	r0, r0, r3
+ 197              	.LVL20:
+ 198              		.loc 1 371 16 view .LVU54
+ 199 0040 31F81000 		ldrh	r0, [r1, r0, lsl #1]
+ 200              	.LVL21:
+ 201              		.loc 1 371 31 is_stmt 1 view .LVU55
+ 202              	.L12:
  372:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 1:	chr -= (chr - bc) & 1; break;	/* Case pairs */
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 10
-
-
  373:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 2: chr -= 16; break;				/* Shift -16 */
  374:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 3:	chr -= 32; break;				/* Shift -32 */
  375:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 4:	chr -= 48; break;				/* Shift -48 */
@@ -552,801 +628,683 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 1
  381:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			break;
  382:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		}
  383:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		if (!cmd) p += nc;
- 138              		.loc 1 383 6 view .LVU32
- 139 0012 0433     		adds	r3, r3, #4
- 140              	.LVL13:
- 141              		.loc 1 383 6 view .LVU33
- 142 0014 DAB1     		cbz	r2, .L34
- 143              	.LVL14:
- 144              	.L29:
- 365:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	for (;;) {
- 145              		.loc 1 365 2 is_stmt 1 view .LVU34
- 366:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		if (!bc || chr < bc) break;
- 146              		.loc 1 366 3 view .LVU35
- 368:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		if (chr < bc + nc) {	/* In the block? */
- 147              		.loc 1 368 3 view .LVU36
- 148              		.loc 1 383 3 view .LVU37
- 366:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		if (!bc || chr < bc) break;
- 149              		.loc 1 366 6 is_stmt 0 view .LVU38
- 150 0016 33F8041C 		ldrh	r1, [r3, #-4]
- 151              	.LVL15:
- 367:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		nc = *p++; cmd = nc >> 8; nc &= 0xFF;	/* Get processing command and block size */
- 152              		.loc 1 367 3 is_stmt 1 view .LVU39
- 153 001a 1C46     		mov	r4, r3
- 367:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		nc = *p++; cmd = nc >> 8; nc &= 0xFF;	/* Get processing command and block size */
- 154              		.loc 1 367 6 is_stmt 0 view .LVU40
- 155 001c B1B1     		cbz	r1, .L17
- 156 001e 8842     		cmp	r0, r1
- 157 0020 14D3     		bcc	.L17
- 368:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		if (chr < bc + nc) {	/* In the block? */
- 158              		.loc 1 368 6 view .LVU41
- 159 0022 33F8022C 		ldrh	r2, [r3, #-2]
- 160              	.LVL16:
- 368:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		if (chr < bc + nc) {	/* In the block? */
- 161              		.loc 1 368 14 is_stmt 1 view .LVU42
- 368:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		if (chr < bc + nc) {	/* In the block? */
- 162              		.loc 1 368 32 is_stmt 0 view .LVU43
- 163 0026 5FFA82FC 		uxtb	ip, r2
- 368:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		if (chr < bc + nc) {	/* In the block? */
- 164              		.loc 1 368 18 view .LVU44
- 165 002a 120A     		lsrs	r2, r2, #8
- 166              	.LVL17:
- 368:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 		if (chr < bc + nc) {	/* In the block? */
- 167              		.loc 1 368 29 is_stmt 1 view .LVU45
- 369:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			switch (cmd) {
- 168              		.loc 1 369 3 view .LVU46
- 369:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			switch (cmd) {
- 169              		.loc 1 369 16 is_stmt 0 view .LVU47
- 170 002c 0CEB010E 		add	lr, ip, r1
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 11
-
-
- 369:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			switch (cmd) {
- 171              		.loc 1 369 6 view .LVU48
- 172 0030 7045     		cmp	r0, lr
- 173 0032 EEDA     		bge	.L18
- 370:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 0:	chr = p[chr - bc]; break;		/* Table conversion */
- 174              		.loc 1 370 4 is_stmt 1 view .LVU49
- 175 0034 082A     		cmp	r2, #8
- 176 0036 09D8     		bhi	.L17
- 177 0038 DFE802F0 		tbb	[pc, r2]
- 178              	.L20:
- 179 003c 05       		.byte	(.L28-.L20)/2
- 180 003d 10       		.byte	(.L27-.L20)/2
- 181 003e 16       		.byte	(.L26-.L20)/2
- 182 003f 19       		.byte	(.L25-.L20)/2
- 183 0040 1C       		.byte	(.L24-.L20)/2
- 184 0041 1F       		.byte	(.L23-.L20)/2
- 185 0042 22       		.byte	(.L22-.L20)/2
- 186 0043 25       		.byte	(.L21-.L20)/2
- 187 0044 0C       		.byte	(.L19-.L20)/2
- 188 0045 00       		.p2align 1
- 189              	.L28:
- 371:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 1:	chr -= (chr - bc) & 1; break;	/* Case pairs */
- 190              		.loc 1 371 12 view .LVU50
- 371:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 1:	chr -= (chr - bc) & 1; break;	/* Case pairs */
- 191              		.loc 1 371 24 is_stmt 0 view .LVU51
- 192 0046 411A     		subs	r1, r0, r1
- 193              	.LVL18:
- 371:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 1:	chr -= (chr - bc) & 1; break;	/* Case pairs */
- 194              		.loc 1 371 16 view .LVU52
- 195 0048 33F81100 		ldrh	r0, [r3, r1, lsl #1]
- 196              	.LVL19:
- 371:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 1:	chr -= (chr - bc) & 1; break;	/* Case pairs */
- 197              		.loc 1 371 31 is_stmt 1 view .LVU53
- 198              	.L17:
  384:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	}
  385:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 
  386:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	return chr;
- 199              		.loc 1 386 2 view .LVU54
+ 203              		.loc 1 386 2 view .LVU56
  387:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** }
- 200              		.loc 1 387 1 is_stmt 0 view .LVU55
- 201 004c 10BD     		pop	{r4, pc}
- 202              	.LVL20:
- 203              	.L34:
+ 204              		.loc 1 387 1 is_stmt 0 view .LVU57
+ 205 0044 70BD     		pop	{r4, r5, r6, pc}
+ 206              	.LVL22:
+ 207              	.L22:
+ 372:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 1:	chr -= (chr - bc) & 1; break;	/* Case pairs */
+ 208              		.loc 1 372 12 is_stmt 1 view .LVU58
+ 372:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 1:	chr -= (chr - bc) & 1; break;	/* Case pairs */
+ 209              		.loc 1 372 30 is_stmt 0 view .LVU59
+ 210 0046 C31A     		subs	r3, r0, r3
+ 211              	.LVL23:
+ 372:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 1:	chr -= (chr - bc) & 1; break;	/* Case pairs */
+ 212              		.loc 1 372 30 view .LVU60
+ 213 0048 03F00103 		and	r3, r3, #1
+ 372:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 1:	chr -= (chr - bc) & 1; break;	/* Case pairs */
+ 214              		.loc 1 372 16 view .LVU61
+ 215 004c C01A     		subs	r0, r0, r3
+ 216              	.LVL24:
+ 217              	.L31:
+ 379:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			}
+ 218              		.loc 1 379 16 view .LVU62
+ 219 004e 80B2     		uxth	r0, r0
+ 220              	.LVL25:
+ 379:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			}
+ 221              		.loc 1 379 27 is_stmt 1 view .LVU63
+ 379:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			}
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s 			page 12
+
+
+ 222              		.loc 1 379 4 is_stmt 0 view .LVU64
+ 223 0050 F8E7     		b	.L12
+ 224              	.LVL26:
+ 225              	.L21:
+ 373:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 3:	chr -= 32; break;				/* Shift -32 */
+ 226              		.loc 1 373 12 is_stmt 1 view .LVU65
+ 373:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 3:	chr -= 32; break;				/* Shift -32 */
+ 227              		.loc 1 373 16 is_stmt 0 view .LVU66
+ 228 0052 1038     		subs	r0, r0, #16
+ 229              	.LVL27:
+ 373:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 3:	chr -= 32; break;				/* Shift -32 */
+ 230              		.loc 1 373 16 view .LVU67
+ 231 0054 FBE7     		b	.L31
+ 232              	.LVL28:
+ 233              	.L20:
+ 374:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 4:	chr -= 48; break;				/* Shift -48 */
+ 234              		.loc 1 374 12 is_stmt 1 view .LVU68
+ 374:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 4:	chr -= 48; break;				/* Shift -48 */
+ 235              		.loc 1 374 16 is_stmt 0 view .LVU69
+ 236 0056 2038     		subs	r0, r0, #32
+ 237              	.LVL29:
+ 374:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 4:	chr -= 48; break;				/* Shift -48 */
+ 238              		.loc 1 374 16 view .LVU70
+ 239 0058 F9E7     		b	.L31
+ 240              	.LVL30:
+ 241              	.L19:
+ 375:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 5:	chr -= 26; break;				/* Shift -26 */
+ 242              		.loc 1 375 12 is_stmt 1 view .LVU71
+ 375:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 5:	chr -= 26; break;				/* Shift -26 */
+ 243              		.loc 1 375 16 is_stmt 0 view .LVU72
+ 244 005a 3038     		subs	r0, r0, #48
+ 245              	.LVL31:
+ 375:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 5:	chr -= 26; break;				/* Shift -26 */
+ 246              		.loc 1 375 16 view .LVU73
+ 247 005c F7E7     		b	.L31
+ 248              	.LVL32:
+ 249              	.L18:
+ 376:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 6:	chr += 8; break;				/* Shift +8 */
+ 250              		.loc 1 376 12 is_stmt 1 view .LVU74
+ 376:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 6:	chr += 8; break;				/* Shift +8 */
+ 251              		.loc 1 376 16 is_stmt 0 view .LVU75
+ 252 005e 1A38     		subs	r0, r0, #26
+ 253              	.LVL33:
+ 376:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 6:	chr += 8; break;				/* Shift +8 */
+ 254              		.loc 1 376 16 view .LVU76
+ 255 0060 F5E7     		b	.L31
+ 256              	.LVL34:
+ 257              	.L17:
+ 377:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 7: chr -= 80; break;				/* Shift -80 */
+ 258              		.loc 1 377 12 is_stmt 1 view .LVU77
+ 377:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 7: chr -= 80; break;				/* Shift -80 */
+ 259              		.loc 1 377 16 is_stmt 0 view .LVU78
+ 260 0062 0830     		adds	r0, r0, #8
+ 261              	.LVL35:
+ 377:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 7: chr -= 80; break;				/* Shift -80 */
+ 262              		.loc 1 377 16 view .LVU79
+ 263 0064 F3E7     		b	.L31
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s 			page 13
+
+
+ 264              	.LVL36:
+ 265              	.L16:
+ 378:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 8:	chr -= 0x1C60; break;			/* Shift -0x1C60 */
+ 266              		.loc 1 378 12 is_stmt 1 view .LVU80
+ 378:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 8:	chr -= 0x1C60; break;			/* Shift -0x1C60 */
+ 267              		.loc 1 378 16 is_stmt 0 view .LVU81
+ 268 0066 5038     		subs	r0, r0, #80
+ 269              	.LVL37:
+ 378:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 8:	chr -= 0x1C60; break;			/* Shift -0x1C60 */
+ 270              		.loc 1 378 16 view .LVU82
+ 271 0068 F1E7     		b	.L31
+ 272              	.LVL38:
+ 273              	.L14:
+ 379:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			}
+ 274              		.loc 1 379 12 is_stmt 1 view .LVU83
+ 379:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			}
+ 275              		.loc 1 379 16 is_stmt 0 view .LVU84
+ 276 006a A0F5E350 		sub	r0, r0, #7264
+ 277              	.LVL39:
+ 379:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			}
+ 278              		.loc 1 379 16 view .LVU85
+ 279 006e EEE7     		b	.L31
+ 280              	.LVL40:
+ 281              	.L13:
  383:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	}
- 204              		.loc 1 383 13 is_stmt 1 discriminator 1 view .LVU56
+ 282              		.loc 1 383 3 is_stmt 1 view .LVU86
  383:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	}
- 205              		.loc 1 383 15 is_stmt 0 discriminator 1 view .LVU57
- 206 004e 04EB4C03 		add	r3, r4, ip, lsl #1
- 207              	.LVL21:
+ 283              		.loc 1 383 6 is_stmt 0 view .LVU87
+ 284 0070 0431     		adds	r1, r1, #4
+ 285              	.LVL41:
  383:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	}
- 208              		.loc 1 383 15 discriminator 1 view .LVU58
- 209 0052 DCE7     		b	.L30
- 210              	.L19:
- 379:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			}
- 211              		.loc 1 379 12 is_stmt 1 view .LVU59
- 379:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			}
- 212              		.loc 1 379 16 is_stmt 0 view .LVU60
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 12
+ 286              		.loc 1 383 6 view .LVU88
+ 287 0072 002D     		cmp	r5, #0
+ 288 0074 CCD1     		bne	.L24
+ 383:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	}
+ 289              		.loc 1 383 13 is_stmt 1 discriminator 1 view .LVU89
+ 383:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	}
+ 290              		.loc 1 383 15 is_stmt 0 discriminator 1 view .LVU90
+ 291 0076 02EB4603 		add	r3, r2, r6, lsl #1
+ 292              	.LVL42:
+ 383:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 	}
+ 293              		.loc 1 383 15 discriminator 1 view .LVU91
+ 294 007a C8E7     		b	.L25
+ 295              	.L33:
+ 296              		.align	2
+ 297              	.L32:
+ 298 007c 00000000 		.word	.LANCHOR1
+ 299 0080 00000000 		.word	.LANCHOR2
+ 300              		.cfi_endproc
+ 301              	.LFE321:
+ 303              		.section	.rodata.Tbl,"a"
+ 304              		.align	1
+ 305              		.set	.LANCHOR0,. + 0
+ 308              	Tbl:
+ 309 0000 C700     		.short	199
+ 310 0002 FC00     		.short	252
+ 311 0004 E900     		.short	233
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s 			page 14
 
 
- 213 0054 A0F5E350 		sub	r0, r0, #7264
- 214              	.LVL22:
- 379:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			}
- 215              		.loc 1 379 16 view .LVU61
- 216 0058 80B2     		uxth	r0, r0
- 217              	.LVL23:
- 379:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			}
- 218              		.loc 1 379 27 is_stmt 1 view .LVU62
- 386:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** }
- 219              		.loc 1 386 2 view .LVU63
- 220              		.loc 1 387 1 is_stmt 0 view .LVU64
- 221 005a 10BD     		pop	{r4, pc}
- 222              	.L27:
- 372:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 2: chr -= 16; break;				/* Shift -16 */
- 223              		.loc 1 372 12 is_stmt 1 view .LVU65
- 372:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 2: chr -= 16; break;				/* Shift -16 */
- 224              		.loc 1 372 30 is_stmt 0 view .LVU66
- 225 005c 431A     		subs	r3, r0, r1
- 226              	.LVL24:
- 372:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 2: chr -= 16; break;				/* Shift -16 */
- 227              		.loc 1 372 30 view .LVU67
- 228 005e 03F00103 		and	r3, r3, #1
- 372:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 2: chr -= 16; break;				/* Shift -16 */
- 229              		.loc 1 372 16 view .LVU68
- 230 0062 C01A     		subs	r0, r0, r3
- 231              	.LVL25:
- 372:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 2: chr -= 16; break;				/* Shift -16 */
- 232              		.loc 1 372 16 view .LVU69
- 233 0064 80B2     		uxth	r0, r0
- 234              	.LVL26:
- 372:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 2: chr -= 16; break;				/* Shift -16 */
- 235              		.loc 1 372 35 is_stmt 1 view .LVU70
- 386:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** }
- 236              		.loc 1 386 2 view .LVU71
- 237              		.loc 1 387 1 is_stmt 0 view .LVU72
- 238 0066 10BD     		pop	{r4, pc}
- 239              	.LVL27:
- 240              	.L26:
- 373:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 3:	chr -= 32; break;				/* Shift -32 */
- 241              		.loc 1 373 12 is_stmt 1 view .LVU73
- 373:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 3:	chr -= 32; break;				/* Shift -32 */
- 242              		.loc 1 373 16 is_stmt 0 view .LVU74
- 243 0068 1038     		subs	r0, r0, #16
- 244              	.LVL28:
- 373:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 3:	chr -= 32; break;				/* Shift -32 */
- 245              		.loc 1 373 16 view .LVU75
- 246 006a 80B2     		uxth	r0, r0
- 247              	.LVL29:
- 373:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 3:	chr -= 32; break;				/* Shift -32 */
- 248              		.loc 1 373 23 is_stmt 1 view .LVU76
- 386:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** }
- 249              		.loc 1 386 2 view .LVU77
- 250              		.loc 1 387 1 is_stmt 0 view .LVU78
- 251 006c 10BD     		pop	{r4, pc}
- 252              	.L25:
- 374:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 4:	chr -= 48; break;				/* Shift -48 */
- 253              		.loc 1 374 12 is_stmt 1 view .LVU79
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 13
+ 312 0006 E200     		.short	226
+ 313 0008 E400     		.short	228
+ 314 000a E000     		.short	224
+ 315 000c E500     		.short	229
+ 316 000e E700     		.short	231
+ 317 0010 EA00     		.short	234
+ 318 0012 EB00     		.short	235
+ 319 0014 E800     		.short	232
+ 320 0016 EF00     		.short	239
+ 321 0018 EE00     		.short	238
+ 322 001a EC00     		.short	236
+ 323 001c C400     		.short	196
+ 324 001e C500     		.short	197
+ 325 0020 C900     		.short	201
+ 326 0022 E600     		.short	230
+ 327 0024 C600     		.short	198
+ 328 0026 F400     		.short	244
+ 329 0028 F600     		.short	246
+ 330 002a F200     		.short	242
+ 331 002c FB00     		.short	251
+ 332 002e F900     		.short	249
+ 333 0030 FF00     		.short	255
+ 334 0032 D600     		.short	214
+ 335 0034 DC00     		.short	220
+ 336 0036 F800     		.short	248
+ 337 0038 A300     		.short	163
+ 338 003a D800     		.short	216
+ 339 003c D700     		.short	215
+ 340 003e 9201     		.short	402
+ 341 0040 E100     		.short	225
+ 342 0042 ED00     		.short	237
+ 343 0044 F300     		.short	243
+ 344 0046 FA00     		.short	250
+ 345 0048 F100     		.short	241
+ 346 004a D100     		.short	209
+ 347 004c AA00     		.short	170
+ 348 004e BA00     		.short	186
+ 349 0050 BF00     		.short	191
+ 350 0052 AE00     		.short	174
+ 351 0054 AC00     		.short	172
+ 352 0056 BD00     		.short	189
+ 353 0058 BC00     		.short	188
+ 354 005a A100     		.short	161
+ 355 005c AB00     		.short	171
+ 356 005e BB00     		.short	187
+ 357 0060 9125     		.short	9617
+ 358 0062 9225     		.short	9618
+ 359 0064 9325     		.short	9619
+ 360 0066 0225     		.short	9474
+ 361 0068 2425     		.short	9508
+ 362 006a C100     		.short	193
+ 363 006c C200     		.short	194
+ 364 006e C000     		.short	192
+ 365 0070 A900     		.short	169
+ 366 0072 6325     		.short	9571
+ 367 0074 5125     		.short	9553
+ 368 0076 5725     		.short	9559
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s 			page 15
 
 
- 374:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 4:	chr -= 48; break;				/* Shift -48 */
- 254              		.loc 1 374 16 is_stmt 0 view .LVU80
- 255 006e 2038     		subs	r0, r0, #32
- 256              	.LVL30:
- 374:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 4:	chr -= 48; break;				/* Shift -48 */
- 257              		.loc 1 374 16 view .LVU81
- 258 0070 80B2     		uxth	r0, r0
- 259              	.LVL31:
- 374:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 4:	chr -= 48; break;				/* Shift -48 */
- 260              		.loc 1 374 23 is_stmt 1 view .LVU82
- 386:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** }
- 261              		.loc 1 386 2 view .LVU83
- 262              		.loc 1 387 1 is_stmt 0 view .LVU84
- 263 0072 10BD     		pop	{r4, pc}
- 264              	.L24:
- 375:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 5:	chr -= 26; break;				/* Shift -26 */
- 265              		.loc 1 375 12 is_stmt 1 view .LVU85
- 375:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 5:	chr -= 26; break;				/* Shift -26 */
- 266              		.loc 1 375 16 is_stmt 0 view .LVU86
- 267 0074 3038     		subs	r0, r0, #48
- 268              	.LVL32:
- 375:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 5:	chr -= 26; break;				/* Shift -26 */
- 269              		.loc 1 375 16 view .LVU87
- 270 0076 80B2     		uxth	r0, r0
- 271              	.LVL33:
- 375:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 5:	chr -= 26; break;				/* Shift -26 */
- 272              		.loc 1 375 23 is_stmt 1 view .LVU88
- 386:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** }
- 273              		.loc 1 386 2 view .LVU89
- 274              		.loc 1 387 1 is_stmt 0 view .LVU90
- 275 0078 10BD     		pop	{r4, pc}
- 276              	.L23:
- 376:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 6:	chr += 8; break;				/* Shift +8 */
- 277              		.loc 1 376 12 is_stmt 1 view .LVU91
- 376:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 6:	chr += 8; break;				/* Shift +8 */
- 278              		.loc 1 376 16 is_stmt 0 view .LVU92
- 279 007a 1A38     		subs	r0, r0, #26
- 280              	.LVL34:
- 376:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 6:	chr += 8; break;				/* Shift +8 */
- 281              		.loc 1 376 16 view .LVU93
- 282 007c 80B2     		uxth	r0, r0
- 283              	.LVL35:
- 376:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 6:	chr += 8; break;				/* Shift +8 */
- 284              		.loc 1 376 23 is_stmt 1 view .LVU94
- 386:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** }
- 285              		.loc 1 386 2 view .LVU95
- 286              		.loc 1 387 1 is_stmt 0 view .LVU96
- 287 007e 10BD     		pop	{r4, pc}
- 288              	.L22:
- 377:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 7: chr -= 80; break;				/* Shift -80 */
- 289              		.loc 1 377 12 is_stmt 1 view .LVU97
- 377:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 7: chr -= 80; break;				/* Shift -80 */
- 290              		.loc 1 377 16 is_stmt 0 view .LVU98
- 291 0080 0830     		adds	r0, r0, #8
- 292              	.LVL36:
- 377:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 7: chr -= 80; break;				/* Shift -80 */
- 293              		.loc 1 377 16 view .LVU99
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 14
+ 369 0078 5D25     		.short	9565
+ 370 007a A200     		.short	162
+ 371 007c A500     		.short	165
+ 372 007e 1025     		.short	9488
+ 373 0080 1425     		.short	9492
+ 374 0082 3425     		.short	9524
+ 375 0084 2C25     		.short	9516
+ 376 0086 1C25     		.short	9500
+ 377 0088 0025     		.short	9472
+ 378 008a 3C25     		.short	9532
+ 379 008c E300     		.short	227
+ 380 008e C300     		.short	195
+ 381 0090 5A25     		.short	9562
+ 382 0092 5425     		.short	9556
+ 383 0094 6925     		.short	9577
+ 384 0096 6625     		.short	9574
+ 385 0098 6025     		.short	9568
+ 386 009a 5025     		.short	9552
+ 387 009c 6C25     		.short	9580
+ 388 009e A400     		.short	164
+ 389 00a0 F000     		.short	240
+ 390 00a2 D000     		.short	208
+ 391 00a4 CA00     		.short	202
+ 392 00a6 CB00     		.short	203
+ 393 00a8 C800     		.short	200
+ 394 00aa 3101     		.short	305
+ 395 00ac CD00     		.short	205
+ 396 00ae CE00     		.short	206
+ 397 00b0 CF00     		.short	207
+ 398 00b2 1825     		.short	9496
+ 399 00b4 0C25     		.short	9484
+ 400 00b6 8825     		.short	9608
+ 401 00b8 8425     		.short	9604
+ 402 00ba A600     		.short	166
+ 403 00bc CC00     		.short	204
+ 404 00be 8025     		.short	9600
+ 405 00c0 D300     		.short	211
+ 406 00c2 DF00     		.short	223
+ 407 00c4 D400     		.short	212
+ 408 00c6 D200     		.short	210
+ 409 00c8 F500     		.short	245
+ 410 00ca D500     		.short	213
+ 411 00cc B500     		.short	181
+ 412 00ce FE00     		.short	254
+ 413 00d0 DE00     		.short	222
+ 414 00d2 DA00     		.short	218
+ 415 00d4 DB00     		.short	219
+ 416 00d6 D900     		.short	217
+ 417 00d8 FD00     		.short	253
+ 418 00da DD00     		.short	221
+ 419 00dc AF00     		.short	175
+ 420 00de B400     		.short	180
+ 421 00e0 AD00     		.short	173
+ 422 00e2 B100     		.short	177
+ 423 00e4 1720     		.short	8215
+ 424 00e6 BE00     		.short	190
+ 425 00e8 B600     		.short	182
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s 			page 16
 
 
- 294 0082 80B2     		uxth	r0, r0
- 295              	.LVL37:
- 377:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 7: chr -= 80; break;				/* Shift -80 */
- 296              		.loc 1 377 22 is_stmt 1 view .LVU100
- 386:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** }
- 297              		.loc 1 386 2 view .LVU101
- 298              		.loc 1 387 1 is_stmt 0 view .LVU102
- 299 0084 10BD     		pop	{r4, pc}
- 300              	.L21:
- 378:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 8:	chr -= 0x1C60; break;			/* Shift -0x1C60 */
- 301              		.loc 1 378 12 is_stmt 1 view .LVU103
- 378:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 8:	chr -= 0x1C60; break;			/* Shift -0x1C60 */
- 302              		.loc 1 378 16 is_stmt 0 view .LVU104
- 303 0086 5038     		subs	r0, r0, #80
- 304              	.LVL38:
- 378:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 8:	chr -= 0x1C60; break;			/* Shift -0x1C60 */
- 305              		.loc 1 378 16 view .LVU105
- 306 0088 80B2     		uxth	r0, r0
- 307              	.LVL39:
- 378:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** 			case 8:	chr -= 0x1C60; break;			/* Shift -0x1C60 */
- 308              		.loc 1 378 23 is_stmt 1 view .LVU106
- 386:../libDaisy/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c **** }
- 309              		.loc 1 386 2 view .LVU107
- 310              		.loc 1 387 1 is_stmt 0 view .LVU108
- 311 008a 10BD     		pop	{r4, pc}
- 312              	.L36:
- 313              		.align	2
- 314              	.L35:
- 315 008c 00000000 		.word	.LANCHOR1
- 316 0090 00000000 		.word	.LANCHOR2
- 317              		.cfi_endproc
- 318              	.LFE321:
- 320              		.section	.rodata.Tbl,"a"
- 321              		.align	2
- 322              		.set	.LANCHOR0,. + 0
- 325              	Tbl:
- 326 0000 C700     		.short	199
- 327 0002 FC00     		.short	252
- 328 0004 E900     		.short	233
- 329 0006 E200     		.short	226
- 330 0008 E400     		.short	228
- 331 000a E000     		.short	224
- 332 000c E500     		.short	229
- 333 000e E700     		.short	231
- 334 0010 EA00     		.short	234
- 335 0012 EB00     		.short	235
- 336 0014 E800     		.short	232
- 337 0016 EF00     		.short	239
- 338 0018 EE00     		.short	238
- 339 001a EC00     		.short	236
- 340 001c C400     		.short	196
- 341 001e C500     		.short	197
- 342 0020 C900     		.short	201
- 343 0022 E600     		.short	230
- 344 0024 C600     		.short	198
- 345 0026 F400     		.short	244
- 346 0028 F600     		.short	246
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 15
+ 426 00ea A700     		.short	167
+ 427 00ec F700     		.short	247
+ 428 00ee B800     		.short	184
+ 429 00f0 B000     		.short	176
+ 430 00f2 A800     		.short	168
+ 431 00f4 B700     		.short	183
+ 432 00f6 B900     		.short	185
+ 433 00f8 B300     		.short	179
+ 434 00fa B200     		.short	178
+ 435 00fc A025     		.short	9632
+ 436 00fe A000     		.short	160
+ 437              		.section	.rodata.cvt1.1,"a"
+ 438              		.align	1
+ 439              		.set	.LANCHOR1,. + 0
+ 442              	cvt1.1:
+ 443 0000 6100     		.short	97
+ 444 0002 1A03     		.short	794
+ 445 0004 E000     		.short	224
+ 446 0006 1703     		.short	791
+ 447 0008 F800     		.short	248
+ 448 000a 0703     		.short	775
+ 449 000c FF00     		.short	255
+ 450 000e 0100     		.short	1
+ 451 0010 7801     		.short	376
+ 452 0012 0001     		.short	256
+ 453 0014 3001     		.short	304
+ 454 0016 3201     		.short	306
+ 455 0018 0601     		.short	262
+ 456 001a 3901     		.short	313
+ 457 001c 1001     		.short	272
+ 458 001e 4A01     		.short	330
+ 459 0020 2E01     		.short	302
+ 460 0022 7901     		.short	377
+ 461 0024 0601     		.short	262
+ 462 0026 8001     		.short	384
+ 463 0028 4D00     		.short	77
+ 464 002a 4302     		.short	579
+ 465 002c 8101     		.short	385
+ 466 002e 8201     		.short	386
+ 467 0030 8201     		.short	386
+ 468 0032 8401     		.short	388
+ 469 0034 8401     		.short	388
+ 470 0036 8601     		.short	390
+ 471 0038 8701     		.short	391
+ 472 003a 8701     		.short	391
+ 473 003c 8901     		.short	393
+ 474 003e 8A01     		.short	394
+ 475 0040 8B01     		.short	395
+ 476 0042 8B01     		.short	395
+ 477 0044 8D01     		.short	397
+ 478 0046 8E01     		.short	398
+ 479 0048 8F01     		.short	399
+ 480 004a 9001     		.short	400
+ 481 004c 9101     		.short	401
+ 482 004e 9101     		.short	401
+ 483 0050 9301     		.short	403
+ 484 0052 9401     		.short	404
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s 			page 17
 
 
- 347 002a F200     		.short	242
- 348 002c FB00     		.short	251
- 349 002e F900     		.short	249
- 350 0030 FF00     		.short	255
- 351 0032 D600     		.short	214
- 352 0034 DC00     		.short	220
- 353 0036 F800     		.short	248
- 354 0038 A300     		.short	163
- 355 003a D800     		.short	216
- 356 003c D700     		.short	215
- 357 003e 9201     		.short	402
- 358 0040 E100     		.short	225
- 359 0042 ED00     		.short	237
- 360 0044 F300     		.short	243
- 361 0046 FA00     		.short	250
- 362 0048 F100     		.short	241
- 363 004a D100     		.short	209
- 364 004c AA00     		.short	170
- 365 004e BA00     		.short	186
- 366 0050 BF00     		.short	191
- 367 0052 AE00     		.short	174
- 368 0054 AC00     		.short	172
- 369 0056 BD00     		.short	189
- 370 0058 BC00     		.short	188
- 371 005a A100     		.short	161
- 372 005c AB00     		.short	171
- 373 005e BB00     		.short	187
- 374 0060 9125     		.short	9617
- 375 0062 9225     		.short	9618
- 376 0064 9325     		.short	9619
- 377 0066 0225     		.short	9474
- 378 0068 2425     		.short	9508
- 379 006a C100     		.short	193
- 380 006c C200     		.short	194
- 381 006e C000     		.short	192
- 382 0070 A900     		.short	169
- 383 0072 6325     		.short	9571
- 384 0074 5125     		.short	9553
- 385 0076 5725     		.short	9559
- 386 0078 5D25     		.short	9565
- 387 007a A200     		.short	162
- 388 007c A500     		.short	165
- 389 007e 1025     		.short	9488
- 390 0080 1425     		.short	9492
- 391 0082 3425     		.short	9524
- 392 0084 2C25     		.short	9516
- 393 0086 1C25     		.short	9500
- 394 0088 0025     		.short	9472
- 395 008a 3C25     		.short	9532
- 396 008c E300     		.short	227
- 397 008e C300     		.short	195
- 398 0090 5A25     		.short	9562
- 399 0092 5425     		.short	9556
- 400 0094 6925     		.short	9577
- 401 0096 6625     		.short	9574
- 402 0098 6025     		.short	9568
- 403 009a 5025     		.short	9552
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 16
+ 485 0054 F601     		.short	502
+ 486 0056 9601     		.short	406
+ 487 0058 9701     		.short	407
+ 488 005a 9801     		.short	408
+ 489 005c 9801     		.short	408
+ 490 005e 3D02     		.short	573
+ 491 0060 9B01     		.short	411
+ 492 0062 9C01     		.short	412
+ 493 0064 9D01     		.short	413
+ 494 0066 2002     		.short	544
+ 495 0068 9F01     		.short	415
+ 496 006a A001     		.short	416
+ 497 006c A001     		.short	416
+ 498 006e A201     		.short	418
+ 499 0070 A201     		.short	418
+ 500 0072 A401     		.short	420
+ 501 0074 A401     		.short	420
+ 502 0076 A601     		.short	422
+ 503 0078 A701     		.short	423
+ 504 007a A701     		.short	423
+ 505 007c A901     		.short	425
+ 506 007e AA01     		.short	426
+ 507 0080 AB01     		.short	427
+ 508 0082 AC01     		.short	428
+ 509 0084 AC01     		.short	428
+ 510 0086 AE01     		.short	430
+ 511 0088 AF01     		.short	431
+ 512 008a AF01     		.short	431
+ 513 008c B101     		.short	433
+ 514 008e B201     		.short	434
+ 515 0090 B301     		.short	435
+ 516 0092 B301     		.short	435
+ 517 0094 B501     		.short	437
+ 518 0096 B501     		.short	437
+ 519 0098 B701     		.short	439
+ 520 009a B801     		.short	440
+ 521 009c B801     		.short	440
+ 522 009e BA01     		.short	442
+ 523 00a0 BB01     		.short	443
+ 524 00a2 BC01     		.short	444
+ 525 00a4 BC01     		.short	444
+ 526 00a6 BE01     		.short	446
+ 527 00a8 F701     		.short	503
+ 528 00aa C001     		.short	448
+ 529 00ac C101     		.short	449
+ 530 00ae C201     		.short	450
+ 531 00b0 C301     		.short	451
+ 532 00b2 C401     		.short	452
+ 533 00b4 C501     		.short	453
+ 534 00b6 C401     		.short	452
+ 535 00b8 C701     		.short	455
+ 536 00ba C801     		.short	456
+ 537 00bc C701     		.short	455
+ 538 00be CA01     		.short	458
+ 539 00c0 CB01     		.short	459
+ 540 00c2 CA01     		.short	458
+ 541 00c4 CD01     		.short	461
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s 			page 18
 
 
- 404 009c 6C25     		.short	9580
- 405 009e A400     		.short	164
- 406 00a0 F000     		.short	240
- 407 00a2 D000     		.short	208
- 408 00a4 CA00     		.short	202
- 409 00a6 CB00     		.short	203
- 410 00a8 C800     		.short	200
- 411 00aa 3101     		.short	305
- 412 00ac CD00     		.short	205
- 413 00ae CE00     		.short	206
- 414 00b0 CF00     		.short	207
- 415 00b2 1825     		.short	9496
- 416 00b4 0C25     		.short	9484
- 417 00b6 8825     		.short	9608
- 418 00b8 8425     		.short	9604
- 419 00ba A600     		.short	166
- 420 00bc CC00     		.short	204
- 421 00be 8025     		.short	9600
- 422 00c0 D300     		.short	211
- 423 00c2 DF00     		.short	223
- 424 00c4 D400     		.short	212
- 425 00c6 D200     		.short	210
- 426 00c8 F500     		.short	245
- 427 00ca D500     		.short	213
- 428 00cc B500     		.short	181
- 429 00ce FE00     		.short	254
- 430 00d0 DE00     		.short	222
- 431 00d2 DA00     		.short	218
- 432 00d4 DB00     		.short	219
- 433 00d6 D900     		.short	217
- 434 00d8 FD00     		.short	253
- 435 00da DD00     		.short	221
- 436 00dc AF00     		.short	175
- 437 00de B400     		.short	180
- 438 00e0 AD00     		.short	173
- 439 00e2 B100     		.short	177
- 440 00e4 1720     		.short	8215
- 441 00e6 BE00     		.short	190
- 442 00e8 B600     		.short	182
- 443 00ea A700     		.short	167
- 444 00ec F700     		.short	247
- 445 00ee B800     		.short	184
- 446 00f0 B000     		.short	176
- 447 00f2 A800     		.short	168
- 448 00f4 B700     		.short	183
- 449 00f6 B900     		.short	185
- 450 00f8 B300     		.short	179
- 451 00fa B200     		.short	178
- 452 00fc A025     		.short	9632
- 453 00fe A000     		.short	160
- 454              		.section	.rodata.cvt1.1,"a"
- 455              		.align	2
- 456              		.set	.LANCHOR1,. + 0
- 459              	cvt1.1:
- 460 0000 6100     		.short	97
- 461 0002 1A03     		.short	794
- 462 0004 E000     		.short	224
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 17
+ 542 00c6 1001     		.short	272
+ 543 00c8 DD01     		.short	477
+ 544 00ca 0100     		.short	1
+ 545 00cc 8E01     		.short	398
+ 546 00ce DE01     		.short	478
+ 547 00d0 1201     		.short	274
+ 548 00d2 F301     		.short	499
+ 549 00d4 0300     		.short	3
+ 550 00d6 F101     		.short	497
+ 551 00d8 F401     		.short	500
+ 552 00da F401     		.short	500
+ 553 00dc F801     		.short	504
+ 554 00de 2801     		.short	296
+ 555 00e0 2202     		.short	546
+ 556 00e2 1201     		.short	274
+ 557 00e4 3A02     		.short	570
+ 558 00e6 0900     		.short	9
+ 559 00e8 652C     		.short	11365
+ 560 00ea 3B02     		.short	571
+ 561 00ec 3B02     		.short	571
+ 562 00ee 3D02     		.short	573
+ 563 00f0 662C     		.short	11366
+ 564 00f2 3F02     		.short	575
+ 565 00f4 4002     		.short	576
+ 566 00f6 4102     		.short	577
+ 567 00f8 4102     		.short	577
+ 568 00fa 4602     		.short	582
+ 569 00fc 0A01     		.short	266
+ 570 00fe 5302     		.short	595
+ 571 0100 4000     		.short	64
+ 572 0102 8101     		.short	385
+ 573 0104 8601     		.short	390
+ 574 0106 5502     		.short	597
+ 575 0108 8901     		.short	393
+ 576 010a 8A01     		.short	394
+ 577 010c 5802     		.short	600
+ 578 010e 8F01     		.short	399
+ 579 0110 5A02     		.short	602
+ 580 0112 9001     		.short	400
+ 581 0114 5C02     		.short	604
+ 582 0116 5D02     		.short	605
+ 583 0118 5E02     		.short	606
+ 584 011a 5F02     		.short	607
+ 585 011c 9301     		.short	403
+ 586 011e 6102     		.short	609
+ 587 0120 6202     		.short	610
+ 588 0122 9401     		.short	404
+ 589 0124 6402     		.short	612
+ 590 0126 6502     		.short	613
+ 591 0128 6602     		.short	614
+ 592 012a 6702     		.short	615
+ 593 012c 9701     		.short	407
+ 594 012e 9601     		.short	406
+ 595 0130 6A02     		.short	618
+ 596 0132 622C     		.short	11362
+ 597 0134 6C02     		.short	620
+ 598 0136 6D02     		.short	621
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s 			page 19
 
 
- 463 0006 1703     		.short	791
- 464 0008 F800     		.short	248
- 465 000a 0703     		.short	775
- 466 000c FF00     		.short	255
- 467 000e 0100     		.short	1
- 468 0010 7801     		.short	376
- 469 0012 0001     		.short	256
- 470 0014 3001     		.short	304
- 471 0016 3201     		.short	306
- 472 0018 0601     		.short	262
- 473 001a 3901     		.short	313
- 474 001c 1001     		.short	272
- 475 001e 4A01     		.short	330
- 476 0020 2E01     		.short	302
- 477 0022 7901     		.short	377
- 478 0024 0601     		.short	262
- 479 0026 8001     		.short	384
- 480 0028 4D00     		.short	77
- 481 002a 4302     		.short	579
- 482 002c 8101     		.short	385
- 483 002e 8201     		.short	386
- 484 0030 8201     		.short	386
- 485 0032 8401     		.short	388
- 486 0034 8401     		.short	388
- 487 0036 8601     		.short	390
- 488 0038 8701     		.short	391
- 489 003a 8701     		.short	391
- 490 003c 8901     		.short	393
- 491 003e 8A01     		.short	394
- 492 0040 8B01     		.short	395
- 493 0042 8B01     		.short	395
- 494 0044 8D01     		.short	397
- 495 0046 8E01     		.short	398
- 496 0048 8F01     		.short	399
- 497 004a 9001     		.short	400
- 498 004c 9101     		.short	401
- 499 004e 9101     		.short	401
- 500 0050 9301     		.short	403
- 501 0052 9401     		.short	404
- 502 0054 F601     		.short	502
- 503 0056 9601     		.short	406
- 504 0058 9701     		.short	407
- 505 005a 9801     		.short	408
- 506 005c 9801     		.short	408
- 507 005e 3D02     		.short	573
- 508 0060 9B01     		.short	411
- 509 0062 9C01     		.short	412
- 510 0064 9D01     		.short	413
- 511 0066 2002     		.short	544
- 512 0068 9F01     		.short	415
- 513 006a A001     		.short	416
- 514 006c A001     		.short	416
- 515 006e A201     		.short	418
- 516 0070 A201     		.short	418
- 517 0072 A401     		.short	420
- 518 0074 A401     		.short	420
- 519 0076 A601     		.short	422
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 18
+ 599 0138 6E02     		.short	622
+ 600 013a 9C01     		.short	412
+ 601 013c 7002     		.short	624
+ 602 013e 7102     		.short	625
+ 603 0140 9D01     		.short	413
+ 604 0142 7302     		.short	627
+ 605 0144 7402     		.short	628
+ 606 0146 9F01     		.short	415
+ 607 0148 7602     		.short	630
+ 608 014a 7702     		.short	631
+ 609 014c 7802     		.short	632
+ 610 014e 7902     		.short	633
+ 611 0150 7A02     		.short	634
+ 612 0152 7B02     		.short	635
+ 613 0154 7C02     		.short	636
+ 614 0156 642C     		.short	11364
+ 615 0158 7E02     		.short	638
+ 616 015a 7F02     		.short	639
+ 617 015c A601     		.short	422
+ 618 015e 8102     		.short	641
+ 619 0160 8202     		.short	642
+ 620 0162 A901     		.short	425
+ 621 0164 8402     		.short	644
+ 622 0166 8502     		.short	645
+ 623 0168 8602     		.short	646
+ 624 016a 8702     		.short	647
+ 625 016c AE01     		.short	430
+ 626 016e 4402     		.short	580
+ 627 0170 B101     		.short	433
+ 628 0172 B201     		.short	434
+ 629 0174 4502     		.short	581
+ 630 0176 8D02     		.short	653
+ 631 0178 8E02     		.short	654
+ 632 017a 8F02     		.short	655
+ 633 017c 9002     		.short	656
+ 634 017e 9102     		.short	657
+ 635 0180 B701     		.short	439
+ 636 0182 7B03     		.short	891
+ 637 0184 0300     		.short	3
+ 638 0186 FD03     		.short	1021
+ 639 0188 FE03     		.short	1022
+ 640 018a FF03     		.short	1023
+ 641 018c AC03     		.short	940
+ 642 018e 0400     		.short	4
+ 643 0190 8603     		.short	902
+ 644 0192 8803     		.short	904
+ 645 0194 8903     		.short	905
+ 646 0196 8A03     		.short	906
+ 647 0198 B103     		.short	945
+ 648 019a 1103     		.short	785
+ 649 019c C203     		.short	962
+ 650 019e 0200     		.short	2
+ 651 01a0 A303     		.short	931
+ 652 01a2 A303     		.short	931
+ 653 01a4 C403     		.short	964
+ 654 01a6 0803     		.short	776
+ 655 01a8 CC03     		.short	972
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s 			page 20
 
 
- 520 0078 A701     		.short	423
- 521 007a A701     		.short	423
- 522 007c A901     		.short	425
- 523 007e AA01     		.short	426
- 524 0080 AB01     		.short	427
- 525 0082 AC01     		.short	428
- 526 0084 AC01     		.short	428
- 527 0086 AE01     		.short	430
- 528 0088 AF01     		.short	431
- 529 008a AF01     		.short	431
- 530 008c B101     		.short	433
- 531 008e B201     		.short	434
- 532 0090 B301     		.short	435
- 533 0092 B301     		.short	435
- 534 0094 B501     		.short	437
- 535 0096 B501     		.short	437
- 536 0098 B701     		.short	439
- 537 009a B801     		.short	440
- 538 009c B801     		.short	440
- 539 009e BA01     		.short	442
- 540 00a0 BB01     		.short	443
- 541 00a2 BC01     		.short	444
- 542 00a4 BC01     		.short	444
- 543 00a6 BE01     		.short	446
- 544 00a8 F701     		.short	503
- 545 00aa C001     		.short	448
- 546 00ac C101     		.short	449
- 547 00ae C201     		.short	450
- 548 00b0 C301     		.short	451
- 549 00b2 C401     		.short	452
- 550 00b4 C501     		.short	453
- 551 00b6 C401     		.short	452
- 552 00b8 C701     		.short	455
- 553 00ba C801     		.short	456
- 554 00bc C701     		.short	455
- 555 00be CA01     		.short	458
- 556 00c0 CB01     		.short	459
- 557 00c2 CA01     		.short	458
- 558 00c4 CD01     		.short	461
- 559 00c6 1001     		.short	272
- 560 00c8 DD01     		.short	477
- 561 00ca 0100     		.short	1
- 562 00cc 8E01     		.short	398
- 563 00ce DE01     		.short	478
- 564 00d0 1201     		.short	274
- 565 00d2 F301     		.short	499
- 566 00d4 0300     		.short	3
- 567 00d6 F101     		.short	497
- 568 00d8 F401     		.short	500
- 569 00da F401     		.short	500
- 570 00dc F801     		.short	504
- 571 00de 2801     		.short	296
- 572 00e0 2202     		.short	546
- 573 00e2 1201     		.short	274
- 574 00e4 3A02     		.short	570
- 575 00e6 0900     		.short	9
- 576 00e8 652C     		.short	11365
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 19
+ 656 01aa 0300     		.short	3
+ 657 01ac 8C03     		.short	908
+ 658 01ae 8E03     		.short	910
+ 659 01b0 8F03     		.short	911
+ 660 01b2 D803     		.short	984
+ 661 01b4 1801     		.short	280
+ 662 01b6 F203     		.short	1010
+ 663 01b8 0A00     		.short	10
+ 664 01ba F903     		.short	1017
+ 665 01bc F303     		.short	1011
+ 666 01be F403     		.short	1012
+ 667 01c0 F503     		.short	1013
+ 668 01c2 F603     		.short	1014
+ 669 01c4 F703     		.short	1015
+ 670 01c6 F703     		.short	1015
+ 671 01c8 F903     		.short	1017
+ 672 01ca FA03     		.short	1018
+ 673 01cc FA03     		.short	1018
+ 674 01ce 3004     		.short	1072
+ 675 01d0 2003     		.short	800
+ 676 01d2 5004     		.short	1104
+ 677 01d4 1007     		.short	1808
+ 678 01d6 6004     		.short	1120
+ 679 01d8 2201     		.short	290
+ 680 01da 8A04     		.short	1162
+ 681 01dc 3601     		.short	310
+ 682 01de C104     		.short	1217
+ 683 01e0 0E01     		.short	270
+ 684 01e2 CF04     		.short	1231
+ 685 01e4 0100     		.short	1
+ 686 01e6 C004     		.short	1216
+ 687 01e8 D004     		.short	1232
+ 688 01ea 4401     		.short	324
+ 689 01ec 6105     		.short	1377
+ 690 01ee 2604     		.short	1062
+ 691 01f0 0000     		.short	0
+ 692              		.section	.rodata.cvt2.0,"a"
+ 693              		.align	1
+ 694              		.set	.LANCHOR2,. + 0
+ 697              	cvt2.0:
+ 698 0000 7D1D     		.short	7549
+ 699 0002 0100     		.short	1
+ 700 0004 632C     		.short	11363
+ 701 0006 001E     		.short	7680
+ 702 0008 9601     		.short	406
+ 703 000a A01E     		.short	7840
+ 704 000c 5A01     		.short	346
+ 705 000e 001F     		.short	7936
+ 706 0010 0806     		.short	1544
+ 707 0012 101F     		.short	7952
+ 708 0014 0606     		.short	1542
+ 709 0016 201F     		.short	7968
+ 710 0018 0806     		.short	1544
+ 711 001a 301F     		.short	7984
+ 712 001c 0806     		.short	1544
+ 713 001e 401F     		.short	8000
+ 714 0020 0606     		.short	1542
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s 			page 21
 
 
- 577 00ea 3B02     		.short	571
- 578 00ec 3B02     		.short	571
- 579 00ee 3D02     		.short	573
- 580 00f0 662C     		.short	11366
- 581 00f2 3F02     		.short	575
- 582 00f4 4002     		.short	576
- 583 00f6 4102     		.short	577
- 584 00f8 4102     		.short	577
- 585 00fa 4602     		.short	582
- 586 00fc 0A01     		.short	266
- 587 00fe 5302     		.short	595
- 588 0100 4000     		.short	64
- 589 0102 8101     		.short	385
- 590 0104 8601     		.short	390
- 591 0106 5502     		.short	597
- 592 0108 8901     		.short	393
- 593 010a 8A01     		.short	394
- 594 010c 5802     		.short	600
- 595 010e 8F01     		.short	399
- 596 0110 5A02     		.short	602
- 597 0112 9001     		.short	400
- 598 0114 5C02     		.short	604
- 599 0116 5D02     		.short	605
- 600 0118 5E02     		.short	606
- 601 011a 5F02     		.short	607
- 602 011c 9301     		.short	403
- 603 011e 6102     		.short	609
- 604 0120 6202     		.short	610
- 605 0122 9401     		.short	404
- 606 0124 6402     		.short	612
- 607 0126 6502     		.short	613
- 608 0128 6602     		.short	614
- 609 012a 6702     		.short	615
- 610 012c 9701     		.short	407
- 611 012e 9601     		.short	406
- 612 0130 6A02     		.short	618
- 613 0132 622C     		.short	11362
- 614 0134 6C02     		.short	620
- 615 0136 6D02     		.short	621
- 616 0138 6E02     		.short	622
- 617 013a 9C01     		.short	412
- 618 013c 7002     		.short	624
- 619 013e 7102     		.short	625
- 620 0140 9D01     		.short	413
- 621 0142 7302     		.short	627
- 622 0144 7402     		.short	628
- 623 0146 9F01     		.short	415
- 624 0148 7602     		.short	630
- 625 014a 7702     		.short	631
- 626 014c 7802     		.short	632
- 627 014e 7902     		.short	633
- 628 0150 7A02     		.short	634
- 629 0152 7B02     		.short	635
- 630 0154 7C02     		.short	636
- 631 0156 642C     		.short	11364
- 632 0158 7E02     		.short	638
- 633 015a 7F02     		.short	639
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 20
+ 715 0022 511F     		.short	8017
+ 716 0024 0700     		.short	7
+ 717 0026 591F     		.short	8025
+ 718 0028 521F     		.short	8018
+ 719 002a 5B1F     		.short	8027
+ 720 002c 541F     		.short	8020
+ 721 002e 5D1F     		.short	8029
+ 722 0030 561F     		.short	8022
+ 723 0032 5F1F     		.short	8031
+ 724 0034 601F     		.short	8032
+ 725 0036 0806     		.short	1544
+ 726 0038 701F     		.short	8048
+ 727 003a 0E00     		.short	14
+ 728 003c BA1F     		.short	8122
+ 729 003e BB1F     		.short	8123
+ 730 0040 C81F     		.short	8136
+ 731 0042 C91F     		.short	8137
+ 732 0044 CA1F     		.short	8138
+ 733 0046 CB1F     		.short	8139
+ 734 0048 DA1F     		.short	8154
+ 735 004a DB1F     		.short	8155
+ 736 004c F81F     		.short	8184
+ 737 004e F91F     		.short	8185
+ 738 0050 EA1F     		.short	8170
+ 739 0052 EB1F     		.short	8171
+ 740 0054 FA1F     		.short	8186
+ 741 0056 FB1F     		.short	8187
+ 742 0058 801F     		.short	8064
+ 743 005a 0806     		.short	1544
+ 744 005c 901F     		.short	8080
+ 745 005e 0806     		.short	1544
+ 746 0060 A01F     		.short	8096
+ 747 0062 0806     		.short	1544
+ 748 0064 B01F     		.short	8112
+ 749 0066 0400     		.short	4
+ 750 0068 B81F     		.short	8120
+ 751 006a B91F     		.short	8121
+ 752 006c B21F     		.short	8114
+ 753 006e BC1F     		.short	8124
+ 754 0070 CC1F     		.short	8140
+ 755 0072 0100     		.short	1
+ 756 0074 C31F     		.short	8131
+ 757 0076 D01F     		.short	8144
+ 758 0078 0206     		.short	1538
+ 759 007a E01F     		.short	8160
+ 760 007c 0206     		.short	1538
+ 761 007e E51F     		.short	8165
+ 762 0080 0100     		.short	1
+ 763 0082 EC1F     		.short	8172
+ 764 0084 F21F     		.short	8178
+ 765 0086 0100     		.short	1
+ 766 0088 FC1F     		.short	8188
+ 767 008a 4E21     		.short	8526
+ 768 008c 0100     		.short	1
+ 769 008e 3221     		.short	8498
+ 770 0090 7021     		.short	8560
+ 771 0092 1002     		.short	528
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s 			page 22
 
 
- 634 015c A601     		.short	422
- 635 015e 8102     		.short	641
- 636 0160 8202     		.short	642
- 637 0162 A901     		.short	425
- 638 0164 8402     		.short	644
- 639 0166 8502     		.short	645
- 640 0168 8602     		.short	646
- 641 016a 8702     		.short	647
- 642 016c AE01     		.short	430
- 643 016e 4402     		.short	580
- 644 0170 B101     		.short	433
- 645 0172 B201     		.short	434
- 646 0174 4502     		.short	581
- 647 0176 8D02     		.short	653
- 648 0178 8E02     		.short	654
- 649 017a 8F02     		.short	655
- 650 017c 9002     		.short	656
- 651 017e 9102     		.short	657
- 652 0180 B701     		.short	439
- 653 0182 7B03     		.short	891
- 654 0184 0300     		.short	3
- 655 0186 FD03     		.short	1021
- 656 0188 FE03     		.short	1022
- 657 018a FF03     		.short	1023
- 658 018c AC03     		.short	940
- 659 018e 0400     		.short	4
- 660 0190 8603     		.short	902
- 661 0192 8803     		.short	904
- 662 0194 8903     		.short	905
- 663 0196 8A03     		.short	906
- 664 0198 B103     		.short	945
- 665 019a 1103     		.short	785
- 666 019c C203     		.short	962
- 667 019e 0200     		.short	2
- 668 01a0 A303     		.short	931
- 669 01a2 A303     		.short	931
- 670 01a4 C403     		.short	964
- 671 01a6 0803     		.short	776
- 672 01a8 CC03     		.short	972
- 673 01aa 0300     		.short	3
- 674 01ac 8C03     		.short	908
- 675 01ae 8E03     		.short	910
- 676 01b0 8F03     		.short	911
- 677 01b2 D803     		.short	984
- 678 01b4 1801     		.short	280
- 679 01b6 F203     		.short	1010
- 680 01b8 0A00     		.short	10
- 681 01ba F903     		.short	1017
- 682 01bc F303     		.short	1011
- 683 01be F403     		.short	1012
- 684 01c0 F503     		.short	1013
- 685 01c2 F603     		.short	1014
- 686 01c4 F703     		.short	1015
- 687 01c6 F703     		.short	1015
- 688 01c8 F903     		.short	1017
- 689 01ca FA03     		.short	1018
- 690 01cc FA03     		.short	1018
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 21
-
-
- 691 01ce 3004     		.short	1072
- 692 01d0 2003     		.short	800
- 693 01d2 5004     		.short	1104
- 694 01d4 1007     		.short	1808
- 695 01d6 6004     		.short	1120
- 696 01d8 2201     		.short	290
- 697 01da 8A04     		.short	1162
- 698 01dc 3601     		.short	310
- 699 01de C104     		.short	1217
- 700 01e0 0E01     		.short	270
- 701 01e2 CF04     		.short	1231
- 702 01e4 0100     		.short	1
- 703 01e6 C004     		.short	1216
- 704 01e8 D004     		.short	1232
- 705 01ea 4401     		.short	324
- 706 01ec 6105     		.short	1377
- 707 01ee 2604     		.short	1062
- 708 01f0 0000     		.short	0
- 709              		.section	.rodata.cvt2.0,"a"
- 710              		.align	2
- 711              		.set	.LANCHOR2,. + 0
- 714              	cvt2.0:
- 715 0000 7D1D     		.short	7549
- 716 0002 0100     		.short	1
- 717 0004 632C     		.short	11363
- 718 0006 001E     		.short	7680
- 719 0008 9601     		.short	406
- 720 000a A01E     		.short	7840
- 721 000c 5A01     		.short	346
- 722 000e 001F     		.short	7936
- 723 0010 0806     		.short	1544
- 724 0012 101F     		.short	7952
- 725 0014 0606     		.short	1542
- 726 0016 201F     		.short	7968
- 727 0018 0806     		.short	1544
- 728 001a 301F     		.short	7984
- 729 001c 0806     		.short	1544
- 730 001e 401F     		.short	8000
- 731 0020 0606     		.short	1542
- 732 0022 511F     		.short	8017
- 733 0024 0700     		.short	7
- 734 0026 591F     		.short	8025
- 735 0028 521F     		.short	8018
- 736 002a 5B1F     		.short	8027
- 737 002c 541F     		.short	8020
- 738 002e 5D1F     		.short	8029
- 739 0030 561F     		.short	8022
- 740 0032 5F1F     		.short	8031
- 741 0034 601F     		.short	8032
- 742 0036 0806     		.short	1544
- 743 0038 701F     		.short	8048
- 744 003a 0E00     		.short	14
- 745 003c BA1F     		.short	8122
- 746 003e BB1F     		.short	8123
- 747 0040 C81F     		.short	8136
- 748 0042 C91F     		.short	8137
- 749 0044 CA1F     		.short	8138
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 22
-
-
- 750 0046 CB1F     		.short	8139
- 751 0048 DA1F     		.short	8154
- 752 004a DB1F     		.short	8155
- 753 004c F81F     		.short	8184
- 754 004e F91F     		.short	8185
- 755 0050 EA1F     		.short	8170
- 756 0052 EB1F     		.short	8171
- 757 0054 FA1F     		.short	8186
- 758 0056 FB1F     		.short	8187
- 759 0058 801F     		.short	8064
- 760 005a 0806     		.short	1544
- 761 005c 901F     		.short	8080
- 762 005e 0806     		.short	1544
- 763 0060 A01F     		.short	8096
- 764 0062 0806     		.short	1544
- 765 0064 B01F     		.short	8112
- 766 0066 0400     		.short	4
- 767 0068 B81F     		.short	8120
- 768 006a B91F     		.short	8121
- 769 006c B21F     		.short	8114
- 770 006e BC1F     		.short	8124
- 771 0070 CC1F     		.short	8140
- 772 0072 0100     		.short	1
- 773 0074 C31F     		.short	8131
- 774 0076 D01F     		.short	8144
- 775 0078 0206     		.short	1538
- 776 007a E01F     		.short	8160
- 777 007c 0206     		.short	1538
- 778 007e E51F     		.short	8165
- 779 0080 0100     		.short	1
- 780 0082 EC1F     		.short	8172
- 781 0084 F21F     		.short	8178
- 782 0086 0100     		.short	1
- 783 0088 FC1F     		.short	8188
- 784 008a 4E21     		.short	8526
- 785 008c 0100     		.short	1
- 786 008e 3221     		.short	8498
- 787 0090 7021     		.short	8560
- 788 0092 1002     		.short	528
- 789 0094 8421     		.short	8580
- 790 0096 0100     		.short	1
- 791 0098 8321     		.short	8579
- 792 009a D024     		.short	9424
- 793 009c 1A05     		.short	1306
- 794 009e 302C     		.short	11312
- 795 00a0 2F04     		.short	1071
- 796 00a2 602C     		.short	11360
- 797 00a4 0201     		.short	258
- 798 00a6 672C     		.short	11367
- 799 00a8 0601     		.short	262
- 800 00aa 752C     		.short	11381
- 801 00ac 0201     		.short	258
- 802 00ae 802C     		.short	11392
- 803 00b0 6401     		.short	356
- 804 00b2 002D     		.short	11520
- 805 00b4 2608     		.short	2086
- 806 00b6 41FF     		.short	-191
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 23
-
-
- 807 00b8 1A03     		.short	794
- 808 00ba 0000     		.short	0
- 809              		.text
- 810              	.Letext0:
- 811              		.file 2 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/machine/_default_types.h"
- 812              		.file 3 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/_stdint.h"
- 813              		.file 4 "../libDaisy/Middlewares/Third_Party/FatFs/src/option/../integer.h"
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s 			page 24
+ 772 0094 8421     		.short	8580
+ 773 0096 0100     		.short	1
+ 774 0098 8321     		.short	8579
+ 775 009a D024     		.short	9424
+ 776 009c 1A05     		.short	1306
+ 777 009e 302C     		.short	11312
+ 778 00a0 2F04     		.short	1071
+ 779 00a2 602C     		.short	11360
+ 780 00a4 0201     		.short	258
+ 781 00a6 672C     		.short	11367
+ 782 00a8 0601     		.short	262
+ 783 00aa 752C     		.short	11381
+ 784 00ac 0201     		.short	258
+ 785 00ae 802C     		.short	11392
+ 786 00b0 6401     		.short	356
+ 787 00b2 002D     		.short	11520
+ 788 00b4 2608     		.short	2086
+ 789 00b6 41FF     		.short	-191
+ 790 00b8 1A03     		.short	794
+ 791 00ba 0000     		.short	0
+ 792              		.text
+ 793              	.Letext0:
+ 794              		.file 2 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/machine/_default_types.h"
+ 795              		.file 3 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/_stdint.h"
+ 796              		.file 4 "../libDaisy/Middlewares/Third_Party/FatFs/src/option/../integer.h"
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s 			page 23
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 ccsbcs.c
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s:17     .text.ff_convert:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s:24     .text.ff_convert:0000000000000000 ff_convert
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s:98     .text.ff_convert:0000000000000038 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s:103    .text.ff_wtoupper:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s:110    .text.ff_wtoupper:0000000000000000 ff_wtoupper
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s:179    .text.ff_wtoupper:000000000000003c $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s:315    .text.ff_wtoupper:000000000000008c $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s:321    .rodata.Tbl:0000000000000000 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s:325    .rodata.Tbl:0000000000000000 Tbl
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s:455    .rodata.cvt1.1:0000000000000000 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s:459    .rodata.cvt1.1:0000000000000000 cvt1.1
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s:710    .rodata.cvt2.0:0000000000000000 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s:714    .rodata.cvt2.0:0000000000000000 cvt2.0
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s:188    .text.ff_wtoupper:0000000000000045 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccRldPXD.s:188    .text.ff_wtoupper:0000000000000046 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s:19     .text.ff_convert:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s:25     .text.ff_convert:0000000000000000 ff_convert
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s:107    .text.ff_convert:0000000000000038 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s:112    .text.ff_wtoupper:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s:118    .text.ff_wtoupper:0000000000000000 ff_wtoupper
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s:183    .text.ff_wtoupper:0000000000000034 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s:298    .text.ff_wtoupper:000000000000007c $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s:304    .rodata.Tbl:0000000000000000 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s:308    .rodata.Tbl:0000000000000000 Tbl
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s:438    .rodata.cvt1.1:0000000000000000 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s:442    .rodata.cvt1.1:0000000000000000 cvt1.1
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s:693    .rodata.cvt2.0:0000000000000000 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s:697    .rodata.cvt2.0:0000000000000000 cvt2.0
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s:192    .text.ff_wtoupper:000000000000003d $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccYRmQR4.s:192    .text.ff_wtoupper:000000000000003e $t
 
 NO UNDEFINED SYMBOLS

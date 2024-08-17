@@ -1,6 +1,7 @@
 #pragma once 
 #include "daisy_pod.h"
 #include "daisysp.h"
+// #include "constants_utils.h"
 #include "UIManager.h"
 #include "GranularSynth.h"
 #include "AudioFileManager.h"
@@ -33,15 +34,16 @@ class GrannyChordApp {
     UIManager ui_;
     AppState curr_state_;
     AppState prev_state_;
+    SynthMode curr_synth_mode_;
+    SynthMode prev_synth_mode_;
+    
     bool changing_state_ = false;
 
-    /* audio FX */
+    /* audio FX and filters */
     Compressor comp_;
     ReverbSc reverb_;
-    
-    /* audio filters */
     MoogLadder lowpass_moog_;
-    OnePole hipass_onepole_;
+    OnePole hipass_;
 
     /* audio data channel buffers */
     int16_t *left_buf_;
@@ -59,41 +61,51 @@ class GrannyChordApp {
     bool recording_out_ = false;
     WavWriter<16384> sd_out_writer_;
     int recording_count_;
-    char recording_fname_[16];
+
+
+    void UpdateUI();
+    void UpdateSynthMode();
 
     /* audio input/output/recording methods based on state */
+    void ProcessAudio(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, size_t size);
     void AudioIdle(AudioHandle::OutputBuffer out, size_t size);
     void ProcessWAVPlayback(AudioHandle::OutputBuffer out, size_t size);
     void ProcessRecordIn(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, size_t size);
     void ProcessSynthesis(AudioHandle::OutputBuffer out, size_t size);
     void ProcessChordMode(AudioHandle::OutputBuffer out, size_t size);
     void RecordOutToSD(AudioHandle::OutputBuffer out, size_t size);
-    void StartRecordOut();
-    void StopRecordOut();
+    // void ToggleRecordOut();
+
+    void HandleEncoderPressed();
+    void HandleEncoderLongPress();
+    void HandleButton1();
+    void HandleButton2();
+    void HandleButton1LongPress();
+    void HandleButton2LongPress();
+    void ToggleRandomnessControls();
+    void ToggleFX(bool which_fx);
+
 
     /* methods to init / prepare for state change */
+    void ClearAudioBuffers();
     bool InitFileMgr();
     void InitPlayback();
     void InitSynth();
-    void InitCompressor();
-    void InitFileSelection();
+    void InitFX();
     void InitRecordIn();
     void InitWavWriter();
+    void InitPrevParamVals();
 
-    void RequestStateChange(AppState next_state);
     void HandleStateChange();
-    void HandleFileSelection();
+    void HandleFileSelection(int32_t encoder_inc);
 
     /* methods to update/init synth parameters */
     void UpdateSynthParams();
-    void UpdateGranularParams();
     void UpdateKnob1Params(float knob1_val, SynthMode mode);
     void UpdateKnob2Params(float knob2_val, SynthMode mode);
-    // void UpdateChordParams();
-    // void UpdateFXParams();
-    bool CheckParamDelta(float curr_val, float prev_val);
-    void InitReverb();
-    void InitFilters();
-    void InitPrevParamVals();
+
+    inline constexpr bool CheckParamDelta(float curr_val, float prev_val);
+    inline constexpr float MapKnobDeadzone(float knob_val);
+    inline constexpr float UpdateKnobPassThru(float curr_knob_val, float *stored_knob_val, bool *pass_thru);
 
 };

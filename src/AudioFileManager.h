@@ -21,13 +21,12 @@ class AudioFileManager {
     
     bool CloseFile();
     bool GetWavHeader(FIL *file);
-    bool CheckChunkID(uint32_t chunk_id, uint32_t target_val);
 
     int16_t* GetLeftBuffer() const { return left_buf_; }
     int16_t* GetRightBuffer() const { return right_buf_; }
-    size_t GetSamplesPerChannel() const { return curr_header_.total_samples / curr_header_.channels; }
-    size_t GetTotalSamples() const { return curr_header_.total_samples; }
-    int16_t GetNumChannels() const { return curr_header_.channels; }
+    size_t GetSamplesPerChannel() const { return header_.total_samples / header_.channels; }
+    size_t GetTotalSamples() const { return header_.total_samples; }
+    int16_t GetNumChannels() const { return header_.channels; }
     uint16_t GetFileCount() const { return file_count_; }
     void GetName(uint16_t idx, char* name) const { strcpy(name, names_[idx]); }
 
@@ -35,11 +34,6 @@ class AudioFileManager {
     bool LoadAudioData();
     /* helper functions for loading WAV audio based on bit depth */
     bool Load16BitAudio(size_t samples_per_channel);
-    // bool Load24BitAudio(size_t samples_per_channel); // TODO: shelved for later if time
-
-    /* helper functions for loading audio */
-    size_t GetSamplesInChunk(UINT bytes_read, size_t bytes_per_sample);
-    size_t GetBytesPerSample();
 
     struct WavHeader {
       int sample_rate;
@@ -64,7 +58,7 @@ class AudioFileManager {
     uint16_t curr_idx_;
     uint16_t file_count_;
     /* header data for currently selected file */
-    WavHeader curr_header_;
+    WavHeader header_;;
     /* byte in original wav file at which audio samples start - usually 44 */
     size_t audio_data_start_;
     /* chunk size for reading audio into temporary buffer */

@@ -15,10 +15,6 @@ class GrainPhasor {
     ~GrainPhasor() {};
 
     void Init(size_t grain_size, float pitch_ratio, Mode play_mode){
-      // float size_ms = SamplesToMs(size_samples);
-
-      // float size_samples = (SAMPLE_RATE/1000) * size_ms;
-      // increment_ = pitch_ratio / size_samples;
       increment_ = pitch_ratio/static_cast<float>(grain_size);
       mode_ = play_mode;
       phase_ = 0;
