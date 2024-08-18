@@ -1,6 +1,9 @@
 #include "Grain.h"
 
 size_t Grain::audio_len_;
+int16_t* Grain::left_buf_;
+int16_t* Grain::right_buf_;
+
 const float Grain::start_decay_ = 0.8f;
 const float Grain::decay_rate_ = 5.0f;
 
@@ -8,9 +11,9 @@ const float Grain::decay_rate_ = 5.0f;
 /// @param left Const pointer to the left audio data buffer
 /// @param right Const pointer to the right audio data buffer
 /// @param len Length in samples of the audio file loaded in the buffers
-void Grain::Init(const int16_t *left, const int16_t *right){
-  left_buf_ = left;
-  right_buf_ = right;
+void Grain::Init(int16_t *left, int16_t *right){
+  // left_buf_ = left;
+  // right_buf_ = right;
   SetPhasorMode(GrainPhasor::Mode::OneShot);
   phasor_.Init(0.0f, 1.0f, phasor_mode_);
 }
@@ -33,12 +36,12 @@ void Grain::Trigger(size_t pos, size_t grain_size, float pitch_ratio, float pan)
 /// @brief Processes grain phase, applies envelope and panning and mixes into the output buffers
 /// @param sum_left Pointer to variable storing total left channel audio output of all grains
 /// @param sum_right Pointer to variable storing total right channel audio output of all grains
-void Grain::Process(float *sum_left, float *sum_right) {
-  if (!is_active_) return;
+Sample Grain::Process(Sample sample) {
+  if (!is_active_) return {0.0f, 0.0f};
   float phase = phasor_.Process();
   if (phasor_.GrainFinished()){
     is_active_=false;
-    return;
+    return {0.0f, 0.0f};
   }
   size_t curr_idx = spawn_pos_ + static_cast<size_t>(phase*grain_size_*pitch_ratio_);
   
@@ -61,8 +64,9 @@ void Grain::Process(float *sum_left, float *sum_right) {
   source: cs.cmu.edu/~music/icm-online/readings/panlaws/panlaws.pdf */
   float gain_left = std::sqrt(1.0f-pan_);
   float gain_right = std::sqrt(pan_);
-  *sum_left += (left*env*gain_left);
-  *sum_right += (right*env*gain_right);
+  sample.left += (left*env*gain_left);
+  sample.right += (right*env*gain_right);
+  return sample;
 }
 
 /// @brief Applies selected amplitude envelope to grain based on its phase

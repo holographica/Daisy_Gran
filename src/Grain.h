@@ -2,6 +2,7 @@
 
 #include "daisy_pod.h"
 #include "daisysp.h"
+#include "sample.h"
 #include "GrainPhasor.h"
 
 using namespace daisy;
@@ -28,9 +29,9 @@ class Grain {
     Grain():
       is_active_(false), envelope_type_(EnvelopeType::Decay){}
 
-    void Init(const int16_t *left, const int16_t *right);
+    void Init(int16_t *left, int16_t *right);
     void Trigger(size_t pos, size_t grain_size, float pitch_ratio=1.0f, float pan=0.5f);
-    void Process(float *sum_left, float *sum_right);
+    Sample Process(Sample sample);
   
     void SetSpawnPos(size_t spawn_pos);
     void SetGrainSize(size_t grain_size);
@@ -41,8 +42,8 @@ class Grain {
     void SetPhasorMode(GrainPhasor::Mode mode);
 
     static size_t audio_len_;
-    const int16_t *left_buf_;
-    const int16_t *right_buf_;
+    static int16_t *left_buf_;
+    static int16_t *right_buf_;
     bool is_active_;
 
   private:

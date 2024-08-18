@@ -2,6 +2,9 @@
 
 #include "Grain.h"
 #include "daisy_pod.h"
+#include "debug_print.h"
+
+// #include "sample.h"
 #include <vector>
 
 class GranularSynth{
@@ -10,12 +13,13 @@ class GranularSynth{
       : pod_(pod), left_buf_(nullptr), right_buf_(nullptr), audio_len_(0),
         grains_(){}
 
-    void Init(const int16_t *left, const int16_t *right, size_t audio_len);
+    void Init(int16_t *left, int16_t *right, size_t audio_len);
+    void Reset(size_t len);
     void InitParams();
     void UpdateGrainParams();
     void ApplyRandomness();
     void TriggerGrain();
-    void ProcessGrains(float *out_left, float *out_right, size_t size);
+    Sample ProcessGrains();
 
     void SetEnvelopeType(Grain::EnvelopeType type);
     void SetPhasorMode(GrainPhasor::Mode mode);
@@ -37,11 +41,13 @@ class GranularSynth{
   private:
     DaisyPod& pod_;
     /* pointers to SDRAM audio buffers */
-    const int16_t *left_buf_;
-    const int16_t *right_buf_;
+    int16_t *left_buf_;
+    int16_t *right_buf_;
     /* length of audio in samples */
     size_t audio_len_;
     Grain grains_[MAX_GRAINS];
+    Sample sample_;
+    
 
     /* parameters affecting audio output */
     GrainPhasor::Mode phasor_mode_;

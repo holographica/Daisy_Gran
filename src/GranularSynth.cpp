@@ -6,7 +6,7 @@ using namespace daisy;
 /// @param left Left channel audio data buffer
 /// @param right Right channel audio data buffer
 /// @param audio_len Length of currently loaded audio file in samples
-void GranularSynth::Init(const int16_t *left, const int16_t *right, size_t audio_len){
+void GranularSynth::Init(int16_t *left, int16_t *right, size_t audio_len){
   left_buf_ = left;
   right_buf_ = right;
   audio_len_ = audio_len;
@@ -14,15 +14,26 @@ void GranularSynth::Init(const int16_t *left, const int16_t *right, size_t audio
     grain.Init(left,right);
   }
   Grain::audio_len_ = audio_len;
+  Grain::left_buf_ = left;
+  Grain::right_buf_ = right;
   InitParams();
 }
+
+void GranularSynth::Reset(size_t len){
+  audio_len_ = len;
+  for (Grain& grain: grains_){
+    grain.Init(left_buf_,right_buf_);
+  }
+  InitParams();
+}
+
 
 /// @brief  Set intial grain parameter values
 void GranularSynth::InitParams(){
   phasor_mode_ = GrainPhasor::Mode::OneShot;
   grain_size_ = 4800;
   spawn_pos_ = 0;
-  active_count_ =1;
+  active_count_ = 1;
   pitch_ratio_ = 1.0f;
   pan_ = 0.5f;
 }
@@ -133,7 +144,7 @@ void GranularSynth::TriggerGrain(){
   for(Grain& grain:grains_){
     if (grain.is_active_) { count++; }
     else if (count<active_count_){
-      ApplyRandomness();
+      // ApplyRandomness();
       grain.Trigger(spawn_pos_,grain_size_,pitch_ratio_,pan_);
       count++;
       break;
@@ -145,18 +156,13 @@ void GranularSynth::TriggerGrain(){
 /// @param out_left Pointer to left channel audio output buffer
 /// @param out_right Pointer to right channel audio output buffer
 /// @param size Number of samples to process in this call 
-void GranularSynth::ProcessGrains(float *out_left, float *out_right, size_t size){
-  for (size_t i=0; i<size;i++){
-    TriggerGrain();
-    float sum_left = 0.0f, sum_right = 0.0f;
-    size_t active = 0;
-    for (Grain& grain:grains_){
-      if (grain.is_active_){
-        grain.Process(&sum_left,&sum_right);
-        active++;
-      }
+Sample GranularSynth::ProcessGrains(){
+  sample_.left=0.0f, sample_.right=0.0f;
+  TriggerGrain();
+  for (Grain& grain:grains_){
+    if (grain.is_active_){
+      sample_ += grain.Process(sample_);
     }
-    out_left[i]=sum_left;
-    out_right[i]=sum_right;
   }
+  return sample_;
 }

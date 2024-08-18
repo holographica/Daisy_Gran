@@ -9,12 +9,13 @@
 /* this is required for AudioCallback as it needs a static object */
 GrannyChordApp* GrannyChordApp::instance_ = nullptr;
 
+
 /// @brief Initialises app state and members and goes through app startup process
 /// @param left Left channel audio data buffer
 /// @param right Right channel audio data buffer
 void GrannyChordApp::Init(int16_t *left, int16_t *right, int16_t *temp){
   left_buf_ = left, right_buf_ = right, temp_buf_ = temp;
-  pod_.SetAudioBlockSize(4);
+  pod_.SetAudioBlockSize(2);
   pod_.SetAudioSampleRate(SaiHandle::Config::SampleRate::SAI_48KHZ);
 
   curr_state_ = AppState::SelectFile;
@@ -29,7 +30,7 @@ void GrannyChordApp::Init(int16_t *left, int16_t *right, int16_t *temp){
   InitFX();
   InitPrevParamVals();
   SeedRng();
-
+  synth_.Init(left_buf_, right_buf_, 0);
   pod_.StartAdc();
 }
 
@@ -40,7 +41,7 @@ void GrannyChordApp::Run(){
   pod_.seed.PrintLine("app is running");
   while(true){
     count++;
-    if (count%5000==0){
+    if (count%2000==0){
       const float avgLoad = loadmeter.GetAvgCpuLoad();
       const float maxLoad = loadmeter.GetMaxCpuLoad();
       const float minLoad = loadmeter.GetMinCpuLoad();
@@ -56,6 +57,7 @@ void GrannyChordApp::Run(){
       System::Delay(500);
     }
     UpdateUI();
+    UpdateSynthParams();
     System::Delay(5);
   }
 }
@@ -104,7 +106,9 @@ void GrannyChordApp::HandleStateChange(){
       return;
     case AppState::Synthesis:
       InitSynth();
+      DebugPrint(pod_, "synth init finished");
       curr_state_ = AppState::Synthesis;
+      DebugPrint(pod_, "started audiocb");
       return;
     case AppState::Error: 
       pod_.led1.SetRed(1); 
@@ -122,7 +126,9 @@ void GrannyChordApp::HandleEncoderPressed(){
       next_state_ = AppState::PlayWAV;
       return;
     case AppState::RecordIn: 
-      next_state_ = AppState::PlayWAV;
+      next_state_ = AppState::PlayWAV; // NOTE: NEED TO CHANGE THIS
+                                        // ATM IT LOADS + PLAYS A WAV FILE
+                                        // NEED IT TO PLAY BUFFERS
       return;
     case AppState::PlayWAV:
       next_state_ = AppState::Synthesis;
@@ -189,6 +195,7 @@ void GrannyChordApp::HandleFileSelection(int32_t encoder_inc){
 
 /// @brief iterates through synth parameter control modes
 void GrannyChordApp::UpdateSynthMode(){
+  DebugPrint(pod_, "next synth mode");
   switch(curr_synth_mode_){
     case SynthMode::Size_Position:
       curr_synth_mode_ = SynthMode::Pitch_ActiveGrains;
@@ -254,14 +261,16 @@ bool GrannyChordApp::InitFileMgr(){
 
 /// @brief Calls synth initialisation function, passes audio data buffers and audio length
 void GrannyChordApp::InitSynth(){
-  // synth_.Init(left_buf_, right_buf_, audio_len_);
   synth_.Init(left_buf_, right_buf_, filemgr_.GetSamplesPerChannel());
+  // synth_.Reset(filemgr_.GetSamplesPerChannel());
   DebugPrint(pod_,"synth init ok - samples %u",filemgr_.GetSamplesPerChannel());
+
 }
 
 /// @brief Resets current file index and audio data buffers
 ///        Calls method to handle WAV file selection
 void GrannyChordApp::ClearAudioBuffers(){
+  pod_.seed.PrintLine("clearing audio buffers");
   memset(left_buf_, 0, CHNL_BUF_SIZE_ABS);
   memset(right_buf_, 0, CHNL_BUF_SIZE_ABS);
 }
@@ -328,11 +337,12 @@ void GrannyChordApp::AudioCallback(AudioHandle::InputBuffer in, AudioHandle::Out
 }
 
 void GrannyChordApp::ProcessAudio(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, size_t size){
-  
+
   switch(curr_state_){
-    case AppState::PlayWAV: 
+    case AppState::PlayWAV:
       if (wav_playhead_>= filemgr_.GetSamplesPerChannel() -1){
         instance_->pod_.StopAudio();
+        DebugPrint(pod_, "stopped audio > len");
         return;
       }
       ProcessWAVPlayback(out,size);
@@ -345,7 +355,8 @@ void GrannyChordApp::ProcessAudio(AudioHandle::InputBuffer in, AudioHandle::Outp
       return;
     // case AppState::ChordMode:
     default:
-      pod_.StopAudio();
+      // instance_->pod_.StopAudio();
+
       return;
   }
   
@@ -368,13 +379,10 @@ void GrannyChordApp::ProcessWAVPlayback(AudioHandle::OutputBuffer out, size_t si
   loadmeter.OnBlockStart();
   for (size_t i=0; i<size; i++){
     if (wav_playhead_ < filemgr_.GetSamplesPerChannel()){
-      out[0][i] = s162f(left_buf_[wav_playhead_]) * 0.5f;
-      out[1][1] = s162f(right_buf_[wav_playhead_]) * 0.5f;
+      out[0][i] = s162f(left_buf_[wav_playhead_]);
+      out[1][1] = s162f(right_buf_[wav_playhead_]);
       wav_playhead_++;
     }
-  }
-  if (wav_playhead_%48000==0){
-    pod_.seed.PrintLine("+1s");
   }
   loadmeter.OnBlockEnd();
 }
@@ -405,19 +413,16 @@ void GrannyChordApp::ProcessRecordIn(AudioHandle::InputBuffer in, AudioHandle::O
 /// @param out Output audio buffer
 /// @param size Number of samples to process in this call
 void GrannyChordApp::ProcessSynthesis(AudioHandle::OutputBuffer out, size_t size){
-  // for (size_t i=0; i<size; i++){ // NOTE: is this correct? do i need to loop? don't think so
-    synth_.ProcessGrains(out[0],out[1],size); 
-    comp_.ProcessBlock(out[0],out[0],size);
-    comp_.ProcessBlock(out[1],out[1],size);
-
-    // float temp_left[size];
-    // float temp_right[size];
-    
-    // for (size_t i=0; i<size; i++){
-    //   temp_left[i] = out[0][i];
-    //   temp_right[i] = out[1][i];
-    //   reverb_.Process(temp_left[i],temp_right[i],&out[0][i],&out[1][i]); // NOTE: check this works
-    // }
+  for (size_t i=0; i<size; i++){ 
+    Sample samp = synth_.ProcessGrains();
+    // out[0][i] = comp_.Process(samp.left);
+    out[0][i] = samp.left;
+    // out[1][i] = comp_.Process(samp.right);
+    out[1][i] = samp.right;
+    // reverb_.ProcessMix
+    //   (comp_.Process(samp.left), comp_.Process(samp.right),
+    //   &out[0][i], &out[1][i]);
+  }
 }
 
 /// @brief Process audio from chord mode and mix to output buffer
@@ -595,10 +600,8 @@ void GrannyChordApp::DebugPrintState(AppState state){
     // case AppState::ChordMode:
       DebugPrint(pod_, "State now in: ChordMode");
     case AppState::Error:
+    default:
       DebugPrint(pod_, "State now in: Error");
         return;
-    default:
-      DebugPrint(pod_, "default state??");
-      return;
   }
 };

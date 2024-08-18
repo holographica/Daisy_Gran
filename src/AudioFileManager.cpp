@@ -24,7 +24,6 @@ bool AudioFileManager::ScanWavFiles(){
 
   if (f_opendir(&dir,fsi_.GetSDPath()) != FR_OK){
     DebugPrint(pod_, "failed to open SD card directory");
-    // TODO log error? 
     return false;
   }
   /* loop over files in SD card root directory */

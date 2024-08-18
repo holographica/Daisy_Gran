@@ -5,6 +5,9 @@
 #include "AudioFileManager.h"
 #include "constants_utils.h"
 #include "debug_print.h"
+#include "DaisySP-LGPL-FX/reverb.h"
+#include "DaisySP-LGPL-FX/compressor.h"
+#include "DaisySP-LGPL-FX/moogladder.h"
 #include "AppState.h"
 
 using namespace daisy;

@@ -1,12 +1,13 @@
 # Project Name
 TARGET = Daisy_Gran
 
-# This is necessary if we want to use FatFS in our code
 USE_FATFS = 1
-USE_DAISYSP_LGPL = 1
+# USE_DAISYSP_LGPL = 1
 # Sources
-CPP_SOURCES = main.cpp AudioFileManager.cpp GranularSynth.cpp GrannyChordApp.cpp Grain.cpp
-C_INCLUDES += -I.../DaisySP/DaisySP-LGPL/Source
+CPP_SOURCES = main.cpp AudioFileManager.cpp GranularSynth.cpp GrannyChordApp.cpp Grain.cpp\
+							DaisySP-LGPL-FX/compressor.cpp DaisySP-LGPL-FX/moogladder.cpp DaisySP-LGPL-FX/reverb.cpp
+
+# C_INCLUDES += -I.../DaisySP/DaisySP-LGPL/Source
 
 # Library locations
 LIBDAISY_DIR = ../libDaisy
