@@ -187,7 +187,8 @@ build/GrannyChordApp.o: GrannyChordApp.cpp \
  ../DaisySP/Source/Utility/metro.h ../DaisySP/Source/Utility/samplehold.h \
  ../DaisySP/Source/Utility/smooth_random.h constants_utils.h \
  GranularSynth.h Grain.h GrainPhasor.h debug_print.h AudioFileManager.h \
- wavheader.h DaisySP-LGPL-FX/compressor.h DaisySP-LGPL-FX/reverbsc.h \
+ wavheader.h DaisySP-LGPL-FX/compressor.h zita-rev1/source/reverb.h \
+ zita-rev1/source/pareq.h zita-rev1/source/global.h \
  DaisySP-LGPL-FX/moogladder.h
 ../libDaisy/Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:
 ../libDaisy/Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h750xx.h:
@@ -435,5 +436,7 @@ debug_print.h:
 AudioFileManager.h:
 wavheader.h:
 DaisySP-LGPL-FX/compressor.h:
-DaisySP-LGPL-FX/reverbsc.h:
+zita-rev1/source/reverb.h:
+zita-rev1/source/pareq.h:
+zita-rev1/source/global.h:
 DaisySP-LGPL-FX/moogladder.h:

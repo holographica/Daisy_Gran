@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 1
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -11,23 +11,24 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 1
    8              		.eabi_attribute 24, 1
    9              		.eabi_attribute 25, 1
   10              		.eabi_attribute 26, 1
-  11              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 30, 2
   12              		.eabi_attribute 34, 1
   13              		.eabi_attribute 18, 4
   14              		.file	"pareq.cpp"
   15              		.text
   16              	.Ltext0:
   17              		.cfi_sections	.debug_frame
-  18              		.section	.text._ZN5PareqD2Ev,"ax",%progbits
+  18              		.section	.text._ZN5PareqC2Ev,"ax",%progbits
   19              		.align	1
-  20              		.global	_ZN5PareqD2Ev
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  25              	_ZN5PareqD2Ev:
-  26              	.LVL0:
-  27              	.LFB550:
-  28              		.file 1 "zita-rev1/source/pareq.cpp"
+  20              		.p2align 2,,3
+  21              		.global	_ZN5PareqC2Ev
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	_ZN5PareqC2Ev:
+  27              	.LVL0:
+  28              	.LFB547:
+  29              		.file 1 "zita-rev1/source/pareq.cpp"
    1:zita-rev1/source/pareq.cpp **** // ----------------------------------------------------------------------------
    2:zita-rev1/source/pareq.cpp **** //
    3:zita-rev1/source/pareq.cpp **** //  Copyright (C) 2009-2017 Fons Adriaensen <fons@linuxaudio.org>
@@ -54,268 +55,415 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 1
   24:zita-rev1/source/pareq.cpp **** 
   25:zita-rev1/source/pareq.cpp **** 
   26:zita-rev1/source/pareq.cpp **** Pareq::Pareq (void) :
+  30              		.loc 1 26 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 2
+
+
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+  35              	.LBB12:
   27:zita-rev1/source/pareq.cpp ****     _touch0 (0),
   28:zita-rev1/source/pareq.cpp ****     _touch1 (0),
   29:zita-rev1/source/pareq.cpp ****     _state (BYPASS),
   30:zita-rev1/source/pareq.cpp ****     _g0 (1),
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 2
-
-
   31:zita-rev1/source/pareq.cpp ****     _g1 (1),
   32:zita-rev1/source/pareq.cpp ****     _f0 (1e3f),
   33:zita-rev1/source/pareq.cpp ****     _f1 (1e3f)
+  36              		.loc 1 33 14 is_stmt 0 view .LVU1
+  37 0000 0B49     		ldr	r1, .L3
+  38 0002 0022     		movs	r2, #0
+  39 0004 4FF07E5C 		mov	ip, #1065353216
+  40 0008 8161     		str	r1, [r0, #24]	@ float
+  41 000a C161     		str	r1, [r0, #28]	@ float
   34:zita-rev1/source/pareq.cpp **** {
   35:zita-rev1/source/pareq.cpp ****     setfsamp (0.0f);
+  42              		.loc 1 35 5 is_stmt 1 view .LVU2
+  43              	.LVL1:
+  44              	.LBB13:
+  45              	.LBI13:
   36:zita-rev1/source/pareq.cpp **** }
   37:zita-rev1/source/pareq.cpp **** 
   38:zita-rev1/source/pareq.cpp **** 
   39:zita-rev1/source/pareq.cpp **** Pareq::~Pareq (void)
-  29              		.loc 1 39 1 view -0
-  30              		.cfi_startproc
-  31              		@ args = 0, pretend = 0, frame = 0
-  32              		@ frame_needed = 0, uses_anonymous_args = 0
-  33              		@ link register save eliminated.
   40:zita-rev1/source/pareq.cpp **** {
   41:zita-rev1/source/pareq.cpp **** }
-  34              		.loc 1 41 1 is_stmt 0 view .LVU1
-  35 0000 7047     		bx	lr
-  36              		.cfi_endproc
-  37              	.LFE550:
-  39              		.global	_ZN5PareqD1Ev
-  40              		.thumb_set _ZN5PareqD1Ev,_ZN5PareqD2Ev
-  41              		.section	.text._ZN5Pareq5resetEv,"ax",%progbits
-  42              		.align	1
-  43              		.global	_ZN5Pareq5resetEv
-  44              		.syntax unified
-  45              		.thumb
-  46              		.thumb_func
-  48              	_ZN5Pareq5resetEv:
-  49              	.LVL1:
-  50              	.LFB553:
   42:zita-rev1/source/pareq.cpp **** 
   43:zita-rev1/source/pareq.cpp **** 
   44:zita-rev1/source/pareq.cpp **** void Pareq::setfsamp (float fsamp)
+  46              		.loc 1 44 6 view .LVU3
+  47              	.LBB14:
   45:zita-rev1/source/pareq.cpp **** {
   46:zita-rev1/source/pareq.cpp ****     _fsamp = fsamp;
+  48              		.loc 1 46 5 view .LVU4
+  49              		.loc 1 46 12 is_stmt 0 view .LVU5
+  50 000c 0021     		movs	r1, #0
+  51              	.LBE14:
+  52              	.LBE13:
+  33:zita-rev1/source/pareq.cpp **** {
+  53              		.loc 1 33 14 view .LVU6
+  54 000e 0280     		strh	r2, [r0]	@ movhi
+  55 0010 8260     		str	r2, [r0, #8]
+  56 0012 4280     		strh	r2, [r0, #2]	@ movhi
+  57 0014 C0F810C0 		str	ip, [r0, #16]	@ float
+  58 0018 C0F814C0 		str	ip, [r0, #20]	@ float
+  59              	.LBB20:
+  60              	.LBB19:
+  61              	.LBB15:
+  62              	.LBB16:
   47:zita-rev1/source/pareq.cpp ****     reset ();
   48:zita-rev1/source/pareq.cpp **** }
   49:zita-rev1/source/pareq.cpp **** 
   50:zita-rev1/source/pareq.cpp **** 
   51:zita-rev1/source/pareq.cpp **** void Pareq::reset (void)
   52:zita-rev1/source/pareq.cpp **** {
-  51              		.loc 1 52 1 is_stmt 1 view -0
-  52              		.cfi_startproc
-  53              		@ args = 0, pretend = 0, frame = 0
-  54              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 3
+
+
   53:zita-rev1/source/pareq.cpp ****     memset (_z1, 0, sizeof (float) * MAXCH); 
-  55              		.loc 1 53 5 view .LVU3
-  52:zita-rev1/source/pareq.cpp ****     memset (_z1, 0, sizeof (float) * MAXCH); 
-  56              		.loc 1 52 1 is_stmt 0 view .LVU4
-  57 0000 10B5     		push	{r4, lr}
-  58              		.cfi_def_cfa_offset 8
-  59              		.cfi_offset 4, -8
-  60              		.cfi_offset 14, -4
-  52:zita-rev1/source/pareq.cpp ****     memset (_z1, 0, sizeof (float) * MAXCH); 
-  61              		.loc 1 52 1 view .LVU5
-  62 0002 0446     		mov	r4, r0
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 3
+  63              		.loc 1 53 12 view .LVU7
+  64 001c 8263     		str	r2, [r0, #56]	@ unaligned
+  65 001e C263     		str	r2, [r0, #60]	@ unaligned
+  66              	.LBE16:
+  67              	.LBE15:
+  46:zita-rev1/source/pareq.cpp ****     reset ();
+  68              		.loc 1 46 12 view .LVU8
+  69 0020 C160     		str	r1, [r0, #12]	@ float
+  47:zita-rev1/source/pareq.cpp ****     reset ();
+  70              		.loc 1 47 5 is_stmt 1 view .LVU9
+  71              	.LVL2:
+  72              	.LBB18:
+  73              	.LBI15:
+  51:zita-rev1/source/pareq.cpp **** {
+  74              		.loc 1 51 6 view .LVU10
+  75              	.LBB17:
+  76              		.loc 1 53 5 view .LVU11
+  77              		.loc 1 53 12 is_stmt 0 view .LVU12
+  78 0022 0264     		str	r2, [r0, #64]	@ unaligned
+  79 0024 4264     		str	r2, [r0, #68]	@ unaligned
+  54:zita-rev1/source/pareq.cpp ****     memset (_z2, 0, sizeof (float) * MAXCH); 
+  80              		.loc 1 54 5 is_stmt 1 view .LVU13
+  81              		.loc 1 54 12 is_stmt 0 view .LVU14
+  82 0026 8264     		str	r2, [r0, #72]	@ unaligned
+  83 0028 C264     		str	r2, [r0, #76]	@ unaligned
+  84 002a 0265     		str	r2, [r0, #80]	@ unaligned
+  85 002c 4265     		str	r2, [r0, #84]	@ unaligned
+  86              	.LVL3:
+  87              		.loc 1 54 12 view .LVU15
+  88              	.LBE17:
+  89              	.LBE18:
+  90              	.LBE19:
+  91              	.LBE20:
+  92              	.LBE12:
+  36:zita-rev1/source/pareq.cpp **** 
+  93              		.loc 1 36 1 view .LVU16
+  94 002e 7047     		bx	lr
+  95              	.L4:
+  96              		.align	2
+  97              	.L3:
+  98 0030 00007A44 		.word	1148846080
+  99              		.cfi_endproc
+ 100              	.LFE547:
+ 102              		.global	_ZN5PareqC1Ev
+ 103              		.thumb_set _ZN5PareqC1Ev,_ZN5PareqC2Ev
+ 104              		.section	.text._ZN5PareqD2Ev,"ax",%progbits
+ 105              		.align	1
+ 106              		.p2align 2,,3
+ 107              		.global	_ZN5PareqD2Ev
+ 108              		.syntax unified
+ 109              		.thumb
+ 110              		.thumb_func
+ 112              	_ZN5PareqD2Ev:
+ 113              	.LVL4:
+ 114              	.LFB550:
+  39:zita-rev1/source/pareq.cpp **** {
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 4
 
 
-  63              		.loc 1 53 12 view .LVU6
-  64 0004 1022     		movs	r2, #16
-  65 0006 0021     		movs	r1, #0
-  66 0008 3830     		adds	r0, r0, #56
-  67              	.LVL2:
-  68              		.loc 1 53 12 view .LVU7
-  69 000a FFF7FEFF 		bl	memset
-  70              	.LVL3:
-  54:zita-rev1/source/pareq.cpp ****     memset (_z2, 0, sizeof (float) * MAXCH); 
-  71              		.loc 1 54 5 is_stmt 1 view .LVU8
-  72              		.loc 1 54 12 is_stmt 0 view .LVU9
-  73 000e 04F14800 		add	r0, r4, #72
-  74 0012 1022     		movs	r2, #16
-  75 0014 0021     		movs	r1, #0
-  55:zita-rev1/source/pareq.cpp **** }
-  76              		.loc 1 55 1 view .LVU10
-  77 0016 BDE81040 		pop	{r4, lr}
-  78              		.cfi_restore 14
-  79              		.cfi_restore 4
-  80              		.cfi_def_cfa_offset 0
-  81              	.LVL4:
-  54:zita-rev1/source/pareq.cpp ****     memset (_z2, 0, sizeof (float) * MAXCH); 
-  82              		.loc 1 54 12 view .LVU11
-  83 001a FFF7FEBF 		b	memset
-  84              	.LVL5:
-  54:zita-rev1/source/pareq.cpp ****     memset (_z2, 0, sizeof (float) * MAXCH); 
-  85              		.loc 1 54 12 view .LVU12
-  86              		.cfi_endproc
-  87              	.LFE553:
-  89              		.section	.text._ZN5Pareq8setfsampEf,"ax",%progbits
-  90              		.align	1
-  91              		.global	_ZN5Pareq8setfsampEf
-  92              		.syntax unified
-  93              		.thumb
-  94              		.thumb_func
-  96              	_ZN5Pareq8setfsampEf:
-  97              	.LVL6:
-  98              	.LFB552:
+ 115              		.loc 1 39 1 is_stmt 1 view -0
+ 116              		.cfi_startproc
+ 117              		@ args = 0, pretend = 0, frame = 0
+ 118              		@ frame_needed = 0, uses_anonymous_args = 0
+ 119              		@ link register save eliminated.
+  41:zita-rev1/source/pareq.cpp **** 
+ 120              		.loc 1 41 1 is_stmt 0 view .LVU18
+ 121 0000 7047     		bx	lr
+ 122              		.cfi_endproc
+ 123              	.LFE550:
+ 125              		.global	_ZN5PareqD1Ev
+ 126              		.thumb_set _ZN5PareqD1Ev,_ZN5PareqD2Ev
+ 127 0002 00BF     		.section	.text._ZN5Pareq8setfsampEf,"ax",%progbits
+ 128              		.align	1
+ 129              		.p2align 2,,3
+ 130              		.global	_ZN5Pareq8setfsampEf
+ 131              		.syntax unified
+ 132              		.thumb
+ 133              		.thumb_func
+ 135              	_ZN5Pareq8setfsampEf:
+ 136              	.LVL5:
+ 137              	.LFB552:
   45:zita-rev1/source/pareq.cpp ****     _fsamp = fsamp;
-  99              		.loc 1 45 1 is_stmt 1 view -0
- 100              		.cfi_startproc
- 101              		@ args = 0, pretend = 0, frame = 0
- 102              		@ frame_needed = 0, uses_anonymous_args = 0
- 103              		@ link register save eliminated.
+ 138              		.loc 1 45 1 is_stmt 1 view -0
+ 139              		.cfi_startproc
+ 140              		@ args = 0, pretend = 0, frame = 0
+ 141              		@ frame_needed = 0, uses_anonymous_args = 0
+ 142              		@ link register save eliminated.
   46:zita-rev1/source/pareq.cpp ****     reset ();
- 104              		.loc 1 46 5 view .LVU14
+ 143              		.loc 1 46 5 view .LVU20
+ 144              	.LBB23:
+ 145              	.LBB24:
+  53:zita-rev1/source/pareq.cpp ****     memset (_z2, 0, sizeof (float) * MAXCH); 
+ 146              		.loc 1 53 12 is_stmt 0 view .LVU21
+ 147 0000 0023     		movs	r3, #0
+ 148              	.LBE24:
+ 149              	.LBE23:
   46:zita-rev1/source/pareq.cpp ****     reset ();
- 105              		.loc 1 46 12 is_stmt 0 view .LVU15
- 106 0000 80ED030A 		vstr.32	s0, [r0, #12]
+ 150              		.loc 1 46 12 view .LVU22
+ 151 0002 80ED030A 		vstr.32	s0, [r0, #12]
   47:zita-rev1/source/pareq.cpp **** }
- 107              		.loc 1 47 5 is_stmt 1 view .LVU16
-  47:zita-rev1/source/pareq.cpp **** }
- 108              		.loc 1 47 11 is_stmt 0 view .LVU17
- 109 0004 FFF7FEBF 		b	_ZN5Pareq5resetEv
- 110              	.LVL7:
-  47:zita-rev1/source/pareq.cpp **** }
- 111              		.loc 1 47 11 view .LVU18
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 4
+ 152              		.loc 1 47 5 is_stmt 1 view .LVU23
+ 153              	.LVL6:
+ 154              	.LBB26:
+ 155              	.LBI23:
+  51:zita-rev1/source/pareq.cpp **** {
+ 156              		.loc 1 51 6 view .LVU24
+ 157              	.LBB25:
+  53:zita-rev1/source/pareq.cpp ****     memset (_z2, 0, sizeof (float) * MAXCH); 
+ 158              		.loc 1 53 5 view .LVU25
+  53:zita-rev1/source/pareq.cpp ****     memset (_z2, 0, sizeof (float) * MAXCH); 
+ 159              		.loc 1 53 12 is_stmt 0 view .LVU26
+ 160 0006 8363     		str	r3, [r0, #56]	@ unaligned
+ 161 0008 C363     		str	r3, [r0, #60]	@ unaligned
+ 162 000a 0364     		str	r3, [r0, #64]	@ unaligned
+ 163 000c 4364     		str	r3, [r0, #68]	@ unaligned
+ 164              		.loc 1 54 5 is_stmt 1 view .LVU27
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 5
 
 
- 112              		.cfi_endproc
- 113              	.LFE552:
- 115              		.section	.text._ZN5PareqC2Ev,"ax",%progbits
- 116              		.align	1
- 117              		.global	_ZN5PareqC2Ev
- 118              		.syntax unified
- 119              		.thumb
- 120              		.thumb_func
- 122              	_ZN5PareqC2Ev:
- 123              	.LVL8:
- 124              	.LFB547:
-  26:zita-rev1/source/pareq.cpp ****     _touch0 (0),
- 125              		.loc 1 26 1 is_stmt 1 view -0
- 126              		.cfi_startproc
- 127              		@ args = 0, pretend = 0, frame = 0
- 128              		@ frame_needed = 0, uses_anonymous_args = 0
- 129              	.LBB7:
-  33:zita-rev1/source/pareq.cpp **** {
- 130              		.loc 1 33 14 is_stmt 0 view .LVU20
- 131 0000 0023     		movs	r3, #0
- 132              	.LBE7:
-  26:zita-rev1/source/pareq.cpp ****     _touch0 (0),
- 133              		.loc 1 26 1 view .LVU21
- 134 0002 10B5     		push	{r4, lr}
- 135              		.cfi_def_cfa_offset 8
- 136              		.cfi_offset 4, -8
- 137              		.cfi_offset 14, -4
- 138              	.LBB10:
-  33:zita-rev1/source/pareq.cpp **** {
- 139              		.loc 1 33 14 view .LVU22
- 140 0004 0380     		strh	r3, [r0]	@ movhi
- 141              	.LBE10:
-  26:zita-rev1/source/pareq.cpp ****     _touch0 (0),
- 142              		.loc 1 26 1 view .LVU23
- 143 0006 0446     		mov	r4, r0
- 144              	.LBB11:
-  33:zita-rev1/source/pareq.cpp **** {
- 145              		.loc 1 33 14 view .LVU24
- 146 0008 4380     		strh	r3, [r0, #2]	@ movhi
- 147 000a 8360     		str	r3, [r0, #8]
- 148 000c 4FF07E53 		mov	r3, #1065353216
- 149 0010 0361     		str	r3, [r0, #16]	@ float
- 150 0012 4361     		str	r3, [r0, #20]	@ float
- 151 0014 044B     		ldr	r3, .L5
- 152 0016 8361     		str	r3, [r0, #24]	@ float
- 153 0018 C361     		str	r3, [r0, #28]	@ float
-  35:zita-rev1/source/pareq.cpp **** }
- 154              		.loc 1 35 5 is_stmt 1 view .LVU25
- 155              	.LVL9:
- 156              	.LBB8:
- 157              	.LBI8:
-  44:zita-rev1/source/pareq.cpp **** {
- 158              		.loc 1 44 6 view .LVU26
- 159              	.LBB9:
-  46:zita-rev1/source/pareq.cpp ****     reset ();
- 160              		.loc 1 46 5 view .LVU27
-  46:zita-rev1/source/pareq.cpp ****     reset ();
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 5
+ 165              		.loc 1 54 12 is_stmt 0 view .LVU28
+ 166 000e 8364     		str	r3, [r0, #72]	@ unaligned
+ 167 0010 C364     		str	r3, [r0, #76]	@ unaligned
+ 168 0012 0365     		str	r3, [r0, #80]	@ unaligned
+ 169 0014 4365     		str	r3, [r0, #84]	@ unaligned
+ 170              	.LVL7:
+ 171              		.loc 1 54 12 view .LVU29
+ 172              	.LBE25:
+ 173              	.LBE26:
+  48:zita-rev1/source/pareq.cpp **** 
+ 174              		.loc 1 48 1 view .LVU30
+ 175 0016 7047     		bx	lr
+ 176              		.cfi_endproc
+ 177              	.LFE552:
+ 179              		.section	.text._ZN5Pareq5resetEv,"ax",%progbits
+ 180              		.align	1
+ 181              		.p2align 2,,3
+ 182              		.global	_ZN5Pareq5resetEv
+ 183              		.syntax unified
+ 184              		.thumb
+ 185              		.thumb_func
+ 187              	_ZN5Pareq5resetEv:
+ 188              	.LVL8:
+ 189              	.LFB553:
+  52:zita-rev1/source/pareq.cpp ****     memset (_z1, 0, sizeof (float) * MAXCH); 
+ 190              		.loc 1 52 1 is_stmt 1 view -0
+ 191              		.cfi_startproc
+ 192              		@ args = 0, pretend = 0, frame = 0
+ 193              		@ frame_needed = 0, uses_anonymous_args = 0
+ 194              		@ link register save eliminated.
+  53:zita-rev1/source/pareq.cpp ****     memset (_z2, 0, sizeof (float) * MAXCH); 
+ 195              		.loc 1 53 5 view .LVU32
+  53:zita-rev1/source/pareq.cpp ****     memset (_z2, 0, sizeof (float) * MAXCH); 
+ 196              		.loc 1 53 12 is_stmt 0 view .LVU33
+ 197 0000 0023     		movs	r3, #0
+ 198 0002 8363     		str	r3, [r0, #56]	@ unaligned
+ 199 0004 C363     		str	r3, [r0, #60]	@ unaligned
+ 200 0006 0364     		str	r3, [r0, #64]	@ unaligned
+ 201 0008 4364     		str	r3, [r0, #68]	@ unaligned
+ 202              		.loc 1 54 5 is_stmt 1 view .LVU34
+ 203              		.loc 1 54 12 is_stmt 0 view .LVU35
+ 204 000a 8364     		str	r3, [r0, #72]	@ unaligned
+ 205 000c C364     		str	r3, [r0, #76]	@ unaligned
+ 206 000e 0365     		str	r3, [r0, #80]	@ unaligned
+ 207 0010 4365     		str	r3, [r0, #84]	@ unaligned
+  55:zita-rev1/source/pareq.cpp **** }
+ 208              		.loc 1 55 1 view .LVU36
+ 209 0012 7047     		bx	lr
+ 210              		.cfi_endproc
+ 211              	.LFE553:
+ 213              		.section	.text._ZN5Pareq7prepareEi,"ax",%progbits
+ 214              		.align	1
+ 215              		.p2align 2,,3
+ 216              		.global	_ZN5Pareq7prepareEi
+ 217              		.syntax unified
+ 218              		.thumb
+ 219              		.thumb_func
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 6
 
 
- 161              		.loc 1 46 12 is_stmt 0 view .LVU28
- 162 001a 0023     		movs	r3, #0
- 163 001c C360     		str	r3, [r0, #12]	@ float
-  47:zita-rev1/source/pareq.cpp **** }
- 164              		.loc 1 47 5 is_stmt 1 view .LVU29
-  47:zita-rev1/source/pareq.cpp **** }
- 165              		.loc 1 47 11 is_stmt 0 view .LVU30
- 166 001e FFF7FEFF 		bl	_ZN5Pareq5resetEv
- 167              	.LVL10:
-  47:zita-rev1/source/pareq.cpp **** }
- 168              		.loc 1 47 11 view .LVU31
- 169              	.LBE9:
- 170              	.LBE8:
- 171              	.LBE11:
-  36:zita-rev1/source/pareq.cpp **** 
- 172              		.loc 1 36 1 view .LVU32
- 173 0022 2046     		mov	r0, r4
- 174 0024 10BD     		pop	{r4, pc}
- 175              	.LVL11:
- 176              	.L6:
-  36:zita-rev1/source/pareq.cpp **** 
- 177              		.loc 1 36 1 view .LVU33
- 178 0026 00BF     		.align	2
- 179              	.L5:
- 180 0028 00007A44 		.word	1148846080
- 181              		.cfi_endproc
- 182              	.LFE547:
- 184              		.global	_ZN5PareqC1Ev
- 185              		.thumb_set _ZN5PareqC1Ev,_ZN5PareqC2Ev
- 186              		.section	.text._ZN5Pareq8calcpar1Eiff,"ax",%progbits
- 187              		.align	1
- 188              		.global	_ZN5Pareq8calcpar1Eiff
- 189              		.syntax unified
- 190              		.thumb
- 191              		.thumb_func
- 193              	_ZN5Pareq8calcpar1Eiff:
- 194              	.LVL12:
- 195              	.LFB555:
+ 221              	_ZN5Pareq7prepareEi:
+ 222              	.LVL9:
+ 223              	.LFB554:
   56:zita-rev1/source/pareq.cpp **** 
   57:zita-rev1/source/pareq.cpp **** 
   58:zita-rev1/source/pareq.cpp **** void Pareq::prepare (int nsamp)
   59:zita-rev1/source/pareq.cpp **** {
+ 224              		.loc 1 59 1 is_stmt 1 view -0
+ 225              		.cfi_startproc
+ 226              		@ args = 0, pretend = 0, frame = 8
+ 227              		@ frame_needed = 0, uses_anonymous_args = 0
   60:zita-rev1/source/pareq.cpp ****     bool  upd = false;
+ 228              		.loc 1 60 5 view .LVU38
   61:zita-rev1/source/pareq.cpp ****     float g, f;
+ 229              		.loc 1 61 5 view .LVU39
   62:zita-rev1/source/pareq.cpp **** 
   63:zita-rev1/source/pareq.cpp ****     if (_touch1 != _touch0)
+ 230              		.loc 1 63 5 view .LVU40
+ 231              		.loc 1 63 9 is_stmt 0 view .LVU41
+ 232 0000 4288     		ldrh	r2, [r0, #2]
+ 233              		.loc 1 63 20 view .LVU42
+ 234 0002 0388     		ldrh	r3, [r0]
+ 235              		.loc 1 63 9 view .LVU43
+ 236 0004 12B2     		sxth	r2, r2
+ 237              		.loc 1 63 20 view .LVU44
+ 238 0006 1BB2     		sxth	r3, r3
+ 239              		.loc 1 63 5 view .LVU45
+ 240 0008 9A42     		cmp	r2, r3
+ 241 000a 00F0B780 		beq	.L46
   64:zita-rev1/source/pareq.cpp ****     {
   65:zita-rev1/source/pareq.cpp **** 	g = _g0;
+ 242              		.loc 1 65 4 view .LVU46
+ 243 000e D0ED046A 		vldr.32	s13, [r0, #16]
   66:zita-rev1/source/pareq.cpp **** 	f = _f0;
   67:zita-rev1/source/pareq.cpp ****         if (g != _g1)
+ 244              		.loc 1 67 18 view .LVU47
+ 245 0012 D0ED057A 		vldr.32	s15, [r0, #20]
+  66:zita-rev1/source/pareq.cpp **** 	f = _f0;
+ 246              		.loc 1 66 4 view .LVU48
+ 247 0016 90ED066A 		vldr.32	s12, [r0, #24]
+ 248              		.loc 1 67 9 view .LVU49
+ 249 001a F4EE667A 		vcmp.f32	s15, s13
+  59:zita-rev1/source/pareq.cpp ****     bool  upd = false;
+ 250              		.loc 1 59 1 view .LVU50
+ 251 001e 30B5     		push	{r4, r5, lr}
+ 252              		.cfi_def_cfa_offset 12
+ 253              		.cfi_offset 4, -12
+ 254              		.cfi_offset 5, -8
+ 255              		.cfi_offset 14, -4
+ 256              		.loc 1 67 9 view .LVU51
+ 257 0020 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 258 0024 0446     		mov	r4, r0
+ 259 0026 0D46     		mov	r5, r1
+  65:zita-rev1/source/pareq.cpp **** 	f = _f0;
+ 260              		.loc 1 65 2 is_stmt 1 view .LVU52
+ 261              	.LVL10:
+  66:zita-rev1/source/pareq.cpp **** 	f = _f0;
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 7
+
+
+ 262              		.loc 1 66 2 view .LVU53
+ 263              		.loc 1 67 9 view .LVU54
+  59:zita-rev1/source/pareq.cpp ****     bool  upd = false;
+ 264              		.loc 1 59 1 is_stmt 0 view .LVU55
+ 265 0028 2DED048B 		vpush.64	{d8, d9}
+ 266              		.cfi_def_cfa_offset 28
+ 267              		.cfi_offset 80, -28
+ 268              		.cfi_offset 81, -24
+ 269              		.cfi_offset 82, -20
+ 270              		.cfi_offset 83, -16
+ 271 002c 83B0     		sub	sp, sp, #12
+ 272              		.cfi_def_cfa_offset 40
+ 273              		.loc 1 67 9 view .LVU56
+ 274 002e 00F08980 		beq	.L50
   68:zita-rev1/source/pareq.cpp **** 	{
   69:zita-rev1/source/pareq.cpp **** 	    upd = true;
+ 275              		.loc 1 69 6 is_stmt 1 view .LVU57
+ 276              	.LVL11:
   70:zita-rev1/source/pareq.cpp ****  	    if      (g > 2 * _g1) _g1 *= 2;
+ 277              		.loc 1 70 7 view .LVU58
+ 278              		.loc 1 70 22 is_stmt 0 view .LVU59
+ 279 0032 37EEA78A 		vadd.f32	s16, s15, s15
+ 280              		.loc 1 70 7 view .LVU60
+ 281 0036 B4EEE68A 		vcmpe.f32	s16, s13
+ 282 003a F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 283 003e 40F1A580 		bpl	.L39
+ 284              		.loc 1 70 29 is_stmt 1 discriminator 1 view .LVU61
   71:zita-rev1/source/pareq.cpp **** 	    else if (_g1 > 2 * g) _g1 /= 2;
   72:zita-rev1/source/pareq.cpp **** 	    else                  _g1 = g;
   73:zita-rev1/source/pareq.cpp **** 	}
   74:zita-rev1/source/pareq.cpp ****         if (f != _f1)
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 6
-
-
+ 285              		.loc 1 74 18 is_stmt 0 discriminator 1 view .LVU62
+ 286 0042 90ED077A 		vldr.32	s14, [r0, #28]
+  70:zita-rev1/source/pareq.cpp ****  	    if      (g > 2 * _g1) _g1 *= 2;
+ 287              		.loc 1 70 33 discriminator 1 view .LVU63
+ 288 0046 80ED058A 		vstr.32	s16, [r0, #20]
+ 289              		.loc 1 74 9 is_stmt 1 discriminator 1 view .LVU64
+ 290 004a B4EE476A 		vcmp.f32	s12, s14
+ 291 004e F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 292 0052 19D0     		beq	.L15
+ 293              	.L49:
+ 294 0054 F0EE487A 		vmov.f32	s15, s16
+ 295              	.LVL12:
+ 296              	.L11:
   75:zita-rev1/source/pareq.cpp **** 	{
   76:zita-rev1/source/pareq.cpp **** 	    upd = true;
+ 297              		.loc 1 76 6 view .LVU65
   77:zita-rev1/source/pareq.cpp ****  	    if      (f > 2 * _f1) _f1 *= 2;
+ 298              		.loc 1 77 7 view .LVU66
+ 299              		.loc 1 77 22 is_stmt 0 view .LVU67
+ 300 0058 77EE076A 		vadd.f32	s13, s14, s14
+ 301              	.LVL13:
+ 302              		.loc 1 77 7 view .LVU68
+ 303 005c F4EEC66A 		vcmpe.f32	s13, s12
+ 304 0060 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 305 0064 00F18B80 		bmi	.L51
   78:zita-rev1/source/pareq.cpp **** 	    else if (_f1 > 2 * f) _f1 /= 2;
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 8
+
+
+ 306              		.loc 1 78 11 is_stmt 1 view .LVU69
+ 307              		.loc 1 78 23 is_stmt 0 view .LVU70
+ 308 0068 76EE066A 		vadd.f32	s13, s12, s12
+ 309              		.loc 1 78 11 view .LVU71
+ 310 006c F4EEC76A 		vcmpe.f32	s13, s14
+ 311 0070 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 312 0074 40F1CA80 		bpl	.L42
+ 313              		.loc 1 78 28 is_stmt 1 discriminator 1 view .LVU72
+ 314              		.loc 1 78 32 is_stmt 0 discriminator 1 view .LVU73
+ 315 0078 F6EE006A 		vmov.f32	s13, #5.0e-1
   79:zita-rev1/source/pareq.cpp **** 	    else                  _f1 = f;
   80:zita-rev1/source/pareq.cpp **** 	}
   81:zita-rev1/source/pareq.cpp **** 	if (upd) 
   82:zita-rev1/source/pareq.cpp **** 	{
   83:zita-rev1/source/pareq.cpp **** 	    if ((_state == BYPASS) && (_g1 == 1))
+ 316              		.loc 1 83 33 discriminator 1 view .LVU74
+ 317 007c B0EE678A 		vmov.f32	s16, s15
+  78:zita-rev1/source/pareq.cpp **** 	    else if (_f1 > 2 * f) _f1 /= 2;
+ 318              		.loc 1 78 32 discriminator 1 view .LVU75
+ 319 0080 27EE267A 		vmul.f32	s14, s14, s13
+ 320 0084 84ED077A 		vstr.32	s14, [r4, #28]
+  81:zita-rev1/source/pareq.cpp **** 	{
+ 321              		.loc 1 81 2 is_stmt 1 discriminator 1 view .LVU76
+ 322              	.L15:
+ 323              	.LVL14:
+ 324              		.loc 1 83 6 view .LVU77
+ 325 0088 A368     		ldr	r3, [r4, #8]
+ 326 008a 3BB9     		cbnz	r3, .L22
+ 327              		.loc 1 83 29 is_stmt 0 discriminator 1 view .LVU78
+ 328 008c F7EE008A 		vmov.f32	s17, #1.0e+0
+ 329 0090 B4EE688A 		vcmp.f32	s16, s17
+ 330 0094 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 331 0098 00F09880 		beq	.L52
+ 332              	.L22:
   84:zita-rev1/source/pareq.cpp **** 	    {
   85:zita-rev1/source/pareq.cpp **** 		calcpar1 (0, _g1, _f1);
   86:zita-rev1/source/pareq.cpp **** 	    }
   87:zita-rev1/source/pareq.cpp **** 	    else
   88:zita-rev1/source/pareq.cpp **** 	    {
   89:zita-rev1/source/pareq.cpp **** 		_state = SMOOTH;
+ 333              		.loc 1 89 3 is_stmt 1 view .LVU79
+ 334              	.LBB35:
+ 335              	.LBB36:
   90:zita-rev1/source/pareq.cpp **** 		calcpar1 (nsamp, _g1, _f1);
   91:zita-rev1/source/pareq.cpp **** 	    }
   92:zita-rev1/source/pareq.cpp **** 	}
@@ -330,6 +478,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 1
  101:zita-rev1/source/pareq.cpp ****   	    else    
  102:zita-rev1/source/pareq.cpp **** 	    {
  103:zita-rev1/source/pareq.cpp **** 	        _state = STATIC;
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 9
+
+
  104:zita-rev1/source/pareq.cpp **** 	    }
  105:zita-rev1/source/pareq.cpp **** 	}
  106:zita-rev1/source/pareq.cpp ****     }
@@ -338,439 +489,218 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 1
  109:zita-rev1/source/pareq.cpp **** 
  110:zita-rev1/source/pareq.cpp **** void Pareq::calcpar1 (int nsamp, float g, float f)
  111:zita-rev1/source/pareq.cpp **** {
- 196              		.loc 1 111 1 is_stmt 1 view -0
- 197              		.cfi_startproc
- 198              		@ args = 0, pretend = 0, frame = 0
- 199              		@ frame_needed = 0, uses_anonymous_args = 0
  112:zita-rev1/source/pareq.cpp ****     float b, c1, c2, gg;
- 200              		.loc 1 112 5 view .LVU35
  113:zita-rev1/source/pareq.cpp **** 
  114:zita-rev1/source/pareq.cpp ****     f *= float (M_PI) / _fsamp;
- 201              		.loc 1 114 5 view .LVU36
+ 336              		.loc 1 114 23 is_stmt 0 view .LVU80
+ 337 009c 9FED706A 		vldr.32	s12, .L54
+ 338              	.LVL15:
+ 339              		.loc 1 114 23 view .LVU81
+ 340 00a0 B5EE408A 		vcmp.f32	s16, #0
+ 341 00a4 D4ED036A 		vldr.32	s13, [r4, #12]
+ 342              	.LBE36:
+ 343              	.LBE35:
+  89:zita-rev1/source/pareq.cpp **** 		calcpar1 (nsamp, _g1, _f1);
+ 344              		.loc 1 89 10 view .LVU82
+ 345 00a8 0223     		movs	r3, #2
+ 346              	.LBB41:
+ 347              	.LBB37:
+ 348              		.loc 1 114 23 view .LVU83
+ 349 00aa C6EE267A 		vdiv.f32	s15, s12, s13
+ 350              	.LBE37:
+ 351              	.LBE41:
+  89:zita-rev1/source/pareq.cpp **** 		calcpar1 (nsamp, _g1, _f1);
+ 352              		.loc 1 89 10 view .LVU84
+ 353 00ae A360     		str	r3, [r4, #8]
+  90:zita-rev1/source/pareq.cpp **** 		calcpar1 (nsamp, _g1, _f1);
+ 354              		.loc 1 90 3 is_stmt 1 view .LVU85
+ 355              	.LVL16:
+ 356              	.LBB42:
+ 357              	.LBI35:
+ 110:zita-rev1/source/pareq.cpp **** {
+ 358              		.loc 1 110 6 view .LVU86
+ 359              	.LBB38:
+ 112:zita-rev1/source/pareq.cpp **** 
+ 360              		.loc 1 112 5 view .LVU87
+ 361              		.loc 1 114 5 view .LVU88
  115:zita-rev1/source/pareq.cpp ****     b = 2 * f / sqrtf (g);         
- 202              		.loc 1 115 5 view .LVU37
+ 362              		.loc 1 115 5 view .LVU89
+ 363 00b0 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
  114:zita-rev1/source/pareq.cpp ****     b = 2 * f / sqrtf (g);         
- 203              		.loc 1 114 23 is_stmt 0 view .LVU38
- 204 0000 90ED037A 		vldr.32	s14, [r0, #12]
- 205 0004 DFED2A6A 		vldr.32	s13, .L10
- 206 0008 C6EE877A 		vdiv.f32	s15, s13, s14
- 111:zita-rev1/source/pareq.cpp ****     float b, c1, c2, gg;
- 207              		.loc 1 111 1 view .LVU39
- 208 000c 38B5     		push	{r3, r4, r5, lr}
- 209              		.cfi_def_cfa_offset 16
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 7
+ 364              		.loc 1 114 7 is_stmt 0 view .LVU90
+ 365 00b4 27EE877A 		vmul.f32	s14, s15, s14
+ 366              	.LVL17:
+ 367              		.loc 1 115 11 view .LVU91
+ 368 00b8 37EE077A 		vadd.f32	s14, s14, s14
+ 369              	.LVL18:
+ 370              		.loc 1 115 11 view .LVU92
+ 371 00bc 00F1C780 		bmi	.L43
+ 372              		.loc 1 115 23 view .LVU93
+ 373 00c0 B1EEC80A 		vsqrt.f32	s0, s16
+ 374              	.LVL19:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 10
 
 
- 210              		.cfi_offset 3, -16
- 211              		.cfi_offset 4, -12
- 212              		.cfi_offset 5, -8
- 213              		.cfi_offset 14, -4
- 214 000e 2DED048B 		vpush.64	{d8, d9}
- 215              		.cfi_def_cfa_offset 32
- 216              		.cfi_offset 80, -32
- 217              		.cfi_offset 81, -28
- 218              		.cfi_offset 82, -24
- 219              		.cfi_offset 83, -20
- 111:zita-rev1/source/pareq.cpp ****     float b, c1, c2, gg;
- 220              		.loc 1 111 1 view .LVU40
- 221 0012 0446     		mov	r4, r0
- 222 0014 B0EE408A 		vmov.f32	s16, s0
- 223 0018 0D46     		mov	r5, r1
+ 375              	.L25:
+ 376              		.loc 1 115 7 view .LVU94
+ 377 00c4 C7EE008A 		vdiv.f32	s17, s14, s0
+ 378              	.LVL20:
  116:zita-rev1/source/pareq.cpp ****     gg = 0.5f * (g - 1);
- 224              		.loc 1 116 20 view .LVU41
- 225 001a F7EE009A 		vmov.f32	s19, #1.0e+0
- 114:zita-rev1/source/pareq.cpp ****     b = 2 * f / sqrtf (g);         
- 226              		.loc 1 114 7 view .LVU42
- 227 001e 67EEA00A 		vmul.f32	s1, s15, s1
- 228              	.LVL13:
- 115:zita-rev1/source/pareq.cpp ****     gg = 0.5f * (g - 1);
- 229              		.loc 1 115 11 view .LVU43
- 230 0022 70EEA08A 		vadd.f32	s17, s1, s1
- 115:zita-rev1/source/pareq.cpp ****     gg = 0.5f * (g - 1);
- 231              		.loc 1 115 23 view .LVU44
- 232 0026 FFF7FEFF 		bl	sqrtf
- 233              	.LVL14:
- 234              		.loc 1 116 20 view .LVU45
- 235 002a 38EE698A 		vsub.f32	s16, s16, s19
- 236              	.LVL15:
- 115:zita-rev1/source/pareq.cpp ****     gg = 0.5f * (g - 1);
- 237              		.loc 1 115 7 view .LVU46
- 238 002e 88EE809A 		vdiv.f32	s18, s17, s0
- 239              	.LVL16:
- 240              		.loc 1 116 5 is_stmt 1 view .LVU47
- 241              		.loc 1 116 8 is_stmt 0 view .LVU48
- 242 0032 B6EE000A 		vmov.f32	s0, #5.0e-1
- 243 0036 28EE008A 		vmul.f32	s16, s16, s0
- 244              	.LVL17:
+ 379              		.loc 1 116 5 is_stmt 1 view .LVU95
+ 380              		.loc 1 116 20 is_stmt 0 view .LVU96
+ 381 00c8 B7EE009A 		vmov.f32	s18, #1.0e+0
+ 382              		.loc 1 116 8 view .LVU97
+ 383 00cc F6EE007A 		vmov.f32	s15, #5.0e-1
  117:zita-rev1/source/pareq.cpp ****     c1 = -cosf (2 * f);
- 245              		.loc 1 117 5 is_stmt 1 view .LVU49
- 246              		.loc 1 117 16 is_stmt 0 view .LVU50
- 247 003a B0EE680A 		vmov.f32	s0, s17
- 248 003e FFF7FEFF 		bl	cosf
- 249              	.LVL18:
- 250              		.loc 1 117 8 view .LVU51
- 251 0042 B1EE400A 		vneg.f32	s0, s0
- 252              	.LVL19:
+ 384              		.loc 1 117 16 view .LVU98
+ 385 00d0 B0EE470A 		vmov.f32	s0, s14
+ 116:zita-rev1/source/pareq.cpp ****     gg = 0.5f * (g - 1);
+ 386              		.loc 1 116 20 view .LVU99
+ 387 00d4 38EE498A 		vsub.f32	s16, s16, s18
+ 116:zita-rev1/source/pareq.cpp ****     gg = 0.5f * (g - 1);
+ 388              		.loc 1 116 8 view .LVU100
+ 389 00d8 28EE278A 		vmul.f32	s16, s16, s15
+ 390              	.LVL21:
+ 391              		.loc 1 117 5 is_stmt 1 view .LVU101
+ 392              		.loc 1 117 16 is_stmt 0 view .LVU102
+ 393 00dc FFF7FEFF 		bl	cosf
+ 394              	.LVL22:
+ 395              		.loc 1 117 8 view .LVU103
+ 396 00e0 B1EE400A 		vneg.f32	s0, s0
+ 397              	.LVL23:
  118:zita-rev1/source/pareq.cpp ****     c2 = (1 - b) / (1 + b);
- 253              		.loc 1 118 5 is_stmt 1 view .LVU52
- 254              		.loc 1 118 13 is_stmt 0 view .LVU53
- 255 0046 79EEC97A 		vsub.f32	s15, s19, s18
- 256              		.loc 1 118 23 view .LVU54
- 257 004a 39EE299A 		vadd.f32	s18, s18, s19
- 258              	.LVL20:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 8
-
-
- 259              		.loc 1 118 8 view .LVU55
- 260 004e 87EE897A 		vdiv.f32	s14, s15, s18
- 261              	.LVL21:
+ 398              		.loc 1 118 5 is_stmt 1 view .LVU104
+ 399              		.loc 1 118 13 is_stmt 0 view .LVU105
+ 400 00e4 79EE687A 		vsub.f32	s15, s18, s17
+ 401              		.loc 1 118 23 view .LVU106
+ 402 00e8 78EE898A 		vadd.f32	s17, s17, s18
+ 403              	.LVL24:
+ 404              		.loc 1 118 8 view .LVU107
+ 405 00ec 87EEA87A 		vdiv.f32	s14, s15, s17
+ 406              	.LVL25:
  119:zita-rev1/source/pareq.cpp ****     if (nsamp)
- 262              		.loc 1 119 5 is_stmt 1 view .LVU56
- 263 0052 35B3     		cbz	r5, .L8
+ 407              		.loc 1 119 5 is_stmt 1 view .LVU108
+ 408 00f0 002D     		cmp	r5, #0
+ 409 00f2 61D0     		beq	.L26
  120:zita-rev1/source/pareq.cpp ****     {
  121:zita-rev1/source/pareq.cpp **** 	_dc1 = (c1 - _c1) / nsamp + 1e-30f;
- 264              		.loc 1 121 2 view .LVU57
- 265              		.loc 1 121 13 is_stmt 0 view .LVU58
- 266 0054 D4ED086A 		vldr.32	s13, [r4, #32]
- 267              		.loc 1 121 20 view .LVU59
- 268 0058 07EE905A 		vmov	s15, r5	@ int
- 269              		.loc 1 121 13 view .LVU60
- 270 005c 30EE660A 		vsub.f32	s0, s0, s13
- 271              	.LVL22:
- 272              		.loc 1 121 28 view .LVU61
- 273 0060 DFED146A 		vldr.32	s13, .L10+4
- 274              		.loc 1 121 20 view .LVU62
- 275 0064 F8EEE77A 		vcvt.f32.s32	s15, s15
- 276 0068 80EE276A 		vdiv.f32	s12, s0, s15
- 277              		.loc 1 121 28 view .LVU63
- 278 006c 36EE266A 		vadd.f32	s12, s12, s13
- 279              		.loc 1 121 7 view .LVU64
- 280 0070 84ED096A 		vstr.32	s12, [r4, #36]
+ 410              		.loc 1 121 2 view .LVU109
+ 411              		.loc 1 121 13 is_stmt 0 view .LVU110
+ 412 00f4 D4ED085A 		vldr.32	s11, [r4, #32]
+ 413              		.loc 1 121 20 view .LVU111
+ 414 00f8 07EE905A 		vmov	s15, r5	@ int
  122:zita-rev1/source/pareq.cpp **** 	_dc2 = (c2 - _c2) / nsamp + 1e-30f;
- 281              		.loc 1 122 2 is_stmt 1 view .LVU65
- 282              		.loc 1 122 13 is_stmt 0 view .LVU66
- 283 0074 94ED0A6A 		vldr.32	s12, [r4, #40]
- 284 0078 37EE467A 		vsub.f32	s14, s14, s12
- 285              	.LVL23:
- 286              		.loc 1 122 20 view .LVU67
- 287 007c 87EE276A 		vdiv.f32	s12, s14, s15
- 288              		.loc 1 122 28 view .LVU68
- 289 0080 36EE267A 		vadd.f32	s14, s12, s13
- 290              		.loc 1 122 7 view .LVU69
- 291 0084 84ED0B7A 		vstr.32	s14, [r4, #44]
+ 415              		.loc 1 122 13 view .LVU112
+ 416 00fc 94ED0A6A 		vldr.32	s12, [r4, #40]
  123:zita-rev1/source/pareq.cpp **** 	_dgg = (gg - _gg) / nsamp + 1e-30f;
- 292              		.loc 1 123 2 is_stmt 1 view .LVU70
- 293              		.loc 1 123 13 is_stmt 0 view .LVU71
- 294 0088 94ED0C7A 		vldr.32	s14, [r4, #48]
- 295 008c 38EE478A 		vsub.f32	s16, s16, s14
- 296              	.LVL24:
- 297              		.loc 1 123 20 view .LVU72
- 298 0090 88EE277A 		vdiv.f32	s14, s16, s15
- 299              		.loc 1 123 28 view .LVU73
- 300 0094 77EE267A 		vadd.f32	s15, s14, s13
- 301              		.loc 1 123 7 view .LVU74
- 302 0098 C4ED0D7A 		vstr.32	s15, [r4, #52]
- 303              	.L7:
- 124:zita-rev1/source/pareq.cpp ****     }
- 125:zita-rev1/source/pareq.cpp ****     else
- 126:zita-rev1/source/pareq.cpp ****     {
- 127:zita-rev1/source/pareq.cpp **** 	_c1 = c1;
- 128:zita-rev1/source/pareq.cpp **** 	_c2 = c2;
- 129:zita-rev1/source/pareq.cpp **** 	_gg = gg;
- 130:zita-rev1/source/pareq.cpp ****     }
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 9
+ 417              		.loc 1 123 13 view .LVU113
+ 418 0100 D4ED0C6A 		vldr.32	s13, [r4, #48]
+ 121:zita-rev1/source/pareq.cpp **** 	_dc2 = (c2 - _c2) / nsamp + 1e-30f;
+ 419              		.loc 1 121 20 view .LVU114
+ 420 0104 F8EEE77A 		vcvt.f32.s32	s15, s15
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 11
 
 
- 131:zita-rev1/source/pareq.cpp **** }
- 304              		.loc 1 131 1 view .LVU75
- 305 009c BDEC048B 		vldm	sp!, {d8-d9}
- 306              		.cfi_remember_state
- 307              		.cfi_restore 82
- 308              		.cfi_restore 83
- 309              		.cfi_restore 80
- 310              		.cfi_restore 81
- 311              		.cfi_def_cfa_offset 16
- 312 00a0 38BD     		pop	{r3, r4, r5, pc}
- 313              	.LVL25:
- 314              	.L8:
- 315              		.cfi_restore_state
- 127:zita-rev1/source/pareq.cpp **** 	_c2 = c2;
- 316              		.loc 1 127 2 is_stmt 1 view .LVU76
- 127:zita-rev1/source/pareq.cpp **** 	_c2 = c2;
- 317              		.loc 1 127 6 is_stmt 0 view .LVU77
- 318 00a2 84ED080A 		vstr.32	s0, [r4, #32]
- 128:zita-rev1/source/pareq.cpp **** 	_gg = gg;
- 319              		.loc 1 128 2 is_stmt 1 view .LVU78
- 128:zita-rev1/source/pareq.cpp **** 	_gg = gg;
- 320              		.loc 1 128 6 is_stmt 0 view .LVU79
- 321 00a6 84ED0A7A 		vstr.32	s14, [r4, #40]
- 129:zita-rev1/source/pareq.cpp ****     }
- 322              		.loc 1 129 2 is_stmt 1 view .LVU80
- 129:zita-rev1/source/pareq.cpp ****     }
- 323              		.loc 1 129 6 is_stmt 0 view .LVU81
- 324 00aa 84ED0C8A 		vstr.32	s16, [r4, #48]
- 325              		.loc 1 131 1 view .LVU82
- 326 00ae F5E7     		b	.L7
- 327              	.L11:
- 328              		.align	2
- 329              	.L10:
- 330 00b0 DB0F4940 		.word	1078530011
- 331 00b4 6042A20D 		.word	228737632
- 332              		.cfi_endproc
- 333              	.LFE555:
- 335              		.section	.text._ZN5Pareq7prepareEi,"ax",%progbits
- 336              		.align	1
- 337              		.global	_ZN5Pareq7prepareEi
- 338              		.syntax unified
- 339              		.thumb
- 340              		.thumb_func
- 342              	_ZN5Pareq7prepareEi:
- 343              	.LVL26:
- 344              	.LFB554:
-  59:zita-rev1/source/pareq.cpp ****     bool  upd = false;
- 345              		.loc 1 59 1 is_stmt 1 view -0
- 346              		.cfi_startproc
- 347              		@ args = 0, pretend = 0, frame = 0
- 348              		@ frame_needed = 0, uses_anonymous_args = 0
- 349              		@ link register save eliminated.
-  60:zita-rev1/source/pareq.cpp ****     float g, f;
- 350              		.loc 1 60 5 view .LVU84
-  61:zita-rev1/source/pareq.cpp **** 
- 351              		.loc 1 61 5 view .LVU85
-  63:zita-rev1/source/pareq.cpp ****     {
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 10
+ 122:zita-rev1/source/pareq.cpp **** 	_dc2 = (c2 - _c2) / nsamp + 1e-30f;
+ 421              		.loc 1 122 13 view .LVU115
+ 422 0108 37EE467A 		vsub.f32	s14, s14, s12
+ 423              	.LVL26:
+ 121:zita-rev1/source/pareq.cpp **** 	_dc2 = (c2 - _c2) / nsamp + 1e-30f;
+ 424              		.loc 1 121 13 view .LVU116
+ 425 010c 30EE650A 		vsub.f32	s0, s0, s11
+ 426              	.LVL27:
+ 121:zita-rev1/source/pareq.cpp **** 	_dc2 = (c2 - _c2) / nsamp + 1e-30f;
+ 427              		.loc 1 121 28 view .LVU117
+ 428 0110 DFED545A 		vldr.32	s11, .L54+4
+ 429              		.loc 1 123 13 view .LVU118
+ 430 0114 38EE668A 		vsub.f32	s16, s16, s13
+ 431              	.LVL28:
+ 122:zita-rev1/source/pareq.cpp **** 	_dc2 = (c2 - _c2) / nsamp + 1e-30f;
+ 432              		.loc 1 122 20 view .LVU119
+ 433 0118 C7EE276A 		vdiv.f32	s13, s14, s15
+ 121:zita-rev1/source/pareq.cpp **** 	_dc2 = (c2 - _c2) / nsamp + 1e-30f;
+ 434              		.loc 1 121 20 view .LVU120
+ 435 011c 80EE276A 		vdiv.f32	s12, s0, s15
+ 436              		.loc 1 123 20 view .LVU121
+ 437 0120 88EE277A 		vdiv.f32	s14, s16, s15
+ 122:zita-rev1/source/pareq.cpp **** 	_dc2 = (c2 - _c2) / nsamp + 1e-30f;
+ 438              		.loc 1 122 28 view .LVU122
+ 439 0124 76EEA56A 		vadd.f32	s13, s13, s11
+ 122:zita-rev1/source/pareq.cpp **** 	_dc2 = (c2 - _c2) / nsamp + 1e-30f;
+ 440              		.loc 1 122 7 view .LVU123
+ 441 0128 C4ED0B6A 		vstr.32	s13, [r4, #44]
+ 121:zita-rev1/source/pareq.cpp **** 	_dc2 = (c2 - _c2) / nsamp + 1e-30f;
+ 442              		.loc 1 121 28 view .LVU124
+ 443 012c 36EE256A 		vadd.f32	s12, s12, s11
+ 121:zita-rev1/source/pareq.cpp **** 	_dc2 = (c2 - _c2) / nsamp + 1e-30f;
+ 444              		.loc 1 121 7 view .LVU125
+ 445 0130 84ED096A 		vstr.32	s12, [r4, #36]
+ 122:zita-rev1/source/pareq.cpp **** 	_dc2 = (c2 - _c2) / nsamp + 1e-30f;
+ 446              		.loc 1 122 2 is_stmt 1 view .LVU126
+ 447              		.loc 1 123 2 view .LVU127
+ 448              		.loc 1 123 28 is_stmt 0 view .LVU128
+ 449 0134 77EE257A 		vadd.f32	s15, s14, s11
+ 450              		.loc 1 123 7 view .LVU129
+ 451 0138 C4ED0D7A 		vstr.32	s15, [r4, #52]
+ 452              	.LVL29:
+ 453              	.L8:
+ 454              		.loc 1 123 7 view .LVU130
+ 455              	.LBE38:
+ 456              	.LBE42:
+ 107:zita-rev1/source/pareq.cpp **** 
+ 457              		.loc 1 107 1 view .LVU131
+ 458 013c 03B0     		add	sp, sp, #12
+ 459              		.cfi_remember_state
+ 460              		.cfi_def_cfa_offset 28
+ 461              		@ sp needed
+ 462 013e BDEC048B 		vldm	sp!, {d8-d9}
+ 463              		.cfi_restore 82
+ 464              		.cfi_restore 83
+ 465              		.cfi_restore 80
+ 466              		.cfi_restore 81
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 12
 
 
- 352              		.loc 1 63 5 view .LVU86
-  63:zita-rev1/source/pareq.cpp ****     {
- 353              		.loc 1 63 9 is_stmt 0 view .LVU87
- 354 0000 4288     		ldrh	r2, [r0, #2]
-  63:zita-rev1/source/pareq.cpp ****     {
- 355              		.loc 1 63 20 view .LVU88
- 356 0002 0388     		ldrh	r3, [r0]
-  63:zita-rev1/source/pareq.cpp ****     {
- 357              		.loc 1 63 9 view .LVU89
- 358 0004 12B2     		sxth	r2, r2
-  63:zita-rev1/source/pareq.cpp ****     {
- 359              		.loc 1 63 20 view .LVU90
- 360 0006 1BB2     		sxth	r3, r3
-  63:zita-rev1/source/pareq.cpp ****     {
- 361              		.loc 1 63 5 view .LVU91
- 362 0008 9A42     		cmp	r2, r3
- 363 000a 73D0     		beq	.L12
-  65:zita-rev1/source/pareq.cpp **** 	f = _f0;
- 364              		.loc 1 65 2 is_stmt 1 view .LVU92
-  65:zita-rev1/source/pareq.cpp **** 	f = _f0;
- 365              		.loc 1 65 4 is_stmt 0 view .LVU93
- 366 000c 90ED047A 		vldr.32	s14, [r0, #16]
- 367              	.LVL27:
-  66:zita-rev1/source/pareq.cpp ****         if (g != _g1)
- 368              		.loc 1 66 2 is_stmt 1 view .LVU94
-  67:zita-rev1/source/pareq.cpp **** 	{
- 369              		.loc 1 67 18 is_stmt 0 view .LVU95
- 370 0010 D0ED057A 		vldr.32	s15, [r0, #20]
-  66:zita-rev1/source/pareq.cpp ****         if (g != _g1)
- 371              		.loc 1 66 4 view .LVU96
- 372 0014 D0ED066A 		vldr.32	s13, [r0, #24]
- 373              	.LVL28:
-  67:zita-rev1/source/pareq.cpp **** 	{
- 374              		.loc 1 67 9 is_stmt 1 view .LVU97
- 375 0018 F4EE477A 		vcmp.f32	s15, s14
- 376 001c F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 377 0020 3BD0     		beq	.L29
-  69:zita-rev1/source/pareq.cpp ****  	    if      (g > 2 * _g1) _g1 *= 2;
- 378              		.loc 1 69 6 view .LVU98
- 379              	.LVL29:
-  70:zita-rev1/source/pareq.cpp **** 	    else if (_g1 > 2 * g) _g1 /= 2;
- 380              		.loc 1 70 7 view .LVU99
-  70:zita-rev1/source/pareq.cpp **** 	    else if (_g1 > 2 * g) _g1 /= 2;
- 381              		.loc 1 70 22 is_stmt 0 view .LVU100
- 382 0022 37EEA76A 		vadd.f32	s12, s15, s15
-  70:zita-rev1/source/pareq.cpp **** 	    else if (_g1 > 2 * g) _g1 /= 2;
- 383              		.loc 1 70 7 view .LVU101
- 384 0026 B4EEC76A 		vcmpe.f32	s12, s14
- 385 002a F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 386 002e 23D5     		bpl	.L35
-  70:zita-rev1/source/pareq.cpp **** 	    else if (_g1 > 2 * g) _g1 /= 2;
- 387              		.loc 1 70 29 is_stmt 1 discriminator 1 view .LVU102
-  70:zita-rev1/source/pareq.cpp **** 	    else if (_g1 > 2 * g) _g1 /= 2;
- 388              		.loc 1 70 33 is_stmt 0 discriminator 1 view .LVU103
- 389 0030 80ED056A 		vstr.32	s12, [r0, #20]
- 390              	.LVL30:
- 391              	.L40:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 11
-
-
-  69:zita-rev1/source/pareq.cpp ****  	    if      (g > 2 * _g1) _g1 *= 2;
- 392              		.loc 1 69 10 discriminator 1 view .LVU104
- 393 0034 0123     		movs	r3, #1
- 394              	.LVL31:
- 395              	.L14:
+ 467              		.cfi_def_cfa_offset 12
+ 468 0142 30BD     		pop	{r4, r5, pc}
+ 469              	.LVL30:
+ 470              	.L50:
+ 471              		.cfi_restore_state
   74:zita-rev1/source/pareq.cpp **** 	{
- 396              		.loc 1 74 9 is_stmt 1 view .LVU105
+ 472              		.loc 1 74 9 is_stmt 1 view .LVU132
   74:zita-rev1/source/pareq.cpp **** 	{
- 397              		.loc 1 74 18 is_stmt 0 view .LVU106
- 398 0036 90ED077A 		vldr.32	s14, [r0, #28]
-  96:zita-rev1/source/pareq.cpp ****             {
- 399              		.loc 1 96 23 view .LVU107
- 400 003a D0ED057A 		vldr.32	s15, [r0, #20]
+ 473              		.loc 1 74 18 is_stmt 0 view .LVU133
+ 474 0144 90ED077A 		vldr.32	s14, [r0, #28]
   74:zita-rev1/source/pareq.cpp **** 	{
- 401              		.loc 1 74 9 view .LVU108
- 402 003e B4EE667A 		vcmp.f32	s14, s13
- 403 0042 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 404 0046 3AD0     		beq	.L19
-  76:zita-rev1/source/pareq.cpp ****  	    if      (f > 2 * _f1) _f1 *= 2;
- 405              		.loc 1 76 6 is_stmt 1 view .LVU109
- 406              	.LVL32:
-  77:zita-rev1/source/pareq.cpp **** 	    else if (_f1 > 2 * f) _f1 /= 2;
- 407              		.loc 1 77 7 view .LVU110
-  77:zita-rev1/source/pareq.cpp **** 	    else if (_f1 > 2 * f) _f1 /= 2;
- 408              		.loc 1 77 22 is_stmt 0 view .LVU111
- 409 0048 37EE076A 		vadd.f32	s12, s14, s14
-  77:zita-rev1/source/pareq.cpp **** 	    else if (_f1 > 2 * f) _f1 /= 2;
- 410              		.loc 1 77 7 view .LVU112
- 411 004c B4EEE66A 		vcmpe.f32	s12, s13
- 412 0050 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 413 0054 23D5     		bpl	.L37
-  77:zita-rev1/source/pareq.cpp **** 	    else if (_f1 > 2 * f) _f1 /= 2;
- 414              		.loc 1 77 29 is_stmt 1 discriminator 1 view .LVU113
-  77:zita-rev1/source/pareq.cpp **** 	    else if (_f1 > 2 * f) _f1 /= 2;
- 415              		.loc 1 77 33 is_stmt 0 discriminator 1 view .LVU114
- 416 0056 80ED076A 		vstr.32	s12, [r0, #28]
+ 475              		.loc 1 74 9 view .LVU134
+ 476 0148 B4EE476A 		vcmp.f32	s12, s14
+ 477 014c F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 478 0150 82D1     		bne	.L11
   81:zita-rev1/source/pareq.cpp **** 	{
- 417              		.loc 1 81 2 is_stmt 1 discriminator 1 view .LVU115
- 418              	.LVL33:
- 419              	.L22:
-  83:zita-rev1/source/pareq.cpp **** 	    {
- 420              		.loc 1 83 6 view .LVU116
- 421 005a 8368     		ldr	r3, [r0, #8]
-  85:zita-rev1/source/pareq.cpp **** 	    }
- 422              		.loc 1 85 12 is_stmt 0 view .LVU117
- 423 005c D0ED070A 		vldr.32	s1, [r0, #28]
-  83:zita-rev1/source/pareq.cpp **** 	    {
- 424              		.loc 1 83 6 view .LVU118
- 425 0060 002B     		cmp	r3, #0
- 426 0062 40D1     		bne	.L26
-  83:zita-rev1/source/pareq.cpp **** 	    {
- 427              		.loc 1 83 29 discriminator 1 view .LVU119
- 428 0064 B7EE000A 		vmov.f32	s0, #1.0e+0
- 429 0068 F4EE407A 		vcmp.f32	s15, s0
- 430 006c F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 431 0070 39D1     		bne	.L26
-  85:zita-rev1/source/pareq.cpp **** 	    }
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 12
-
-
- 432              		.loc 1 85 3 is_stmt 1 view .LVU120
-  85:zita-rev1/source/pareq.cpp **** 	    }
- 433              		.loc 1 85 12 is_stmt 0 view .LVU121
- 434 0072 1946     		mov	r1, r3
- 435              	.LVL34:
- 436              	.L41:
-  90:zita-rev1/source/pareq.cpp **** 	    }
- 437              		.loc 1 90 12 view .LVU122
- 438 0074 FFF7FEBF 		b	_ZN5Pareq8calcpar1Eiff
- 439              	.LVL35:
- 440              	.L35:
-  71:zita-rev1/source/pareq.cpp **** 	    else                  _g1 = g;
- 441              		.loc 1 71 11 is_stmt 1 view .LVU123
-  71:zita-rev1/source/pareq.cpp **** 	    else                  _g1 = g;
- 442              		.loc 1 71 23 is_stmt 0 view .LVU124
- 443 0078 37EE076A 		vadd.f32	s12, s14, s14
-  71:zita-rev1/source/pareq.cpp **** 	    else                  _g1 = g;
- 444              		.loc 1 71 11 view .LVU125
- 445 007c F4EEC67A 		vcmpe.f32	s15, s12
- 446 0080 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 447 0084 06DD     		ble	.L36
-  71:zita-rev1/source/pareq.cpp **** 	    else                  _g1 = g;
- 448              		.loc 1 71 28 is_stmt 1 discriminator 1 view .LVU126
-  71:zita-rev1/source/pareq.cpp **** 	    else                  _g1 = g;
- 449              		.loc 1 71 32 is_stmt 0 discriminator 1 view .LVU127
- 450 0086 B6EE007A 		vmov.f32	s14, #5.0e-1
- 451              	.LVL36:
-  71:zita-rev1/source/pareq.cpp **** 	    else                  _g1 = g;
- 452              		.loc 1 71 32 discriminator 1 view .LVU128
- 453 008a 67EE877A 		vmul.f32	s15, s15, s14
- 454 008e C0ED057A 		vstr.32	s15, [r0, #20]
- 455 0092 CFE7     		b	.L40
- 456              	.LVL37:
- 457              	.L36:
-  72:zita-rev1/source/pareq.cpp **** 	}
- 458              		.loc 1 72 28 is_stmt 1 view .LVU129
-  72:zita-rev1/source/pareq.cpp **** 	}
- 459              		.loc 1 72 32 is_stmt 0 view .LVU130
- 460 0094 80ED057A 		vstr.32	s14, [r0, #20]
- 461 0098 CCE7     		b	.L40
- 462              	.LVL38:
- 463              	.L29:
-  60:zita-rev1/source/pareq.cpp ****     float g, f;
- 464              		.loc 1 60 11 view .LVU131
- 465 009a 0023     		movs	r3, #0
- 466 009c CBE7     		b	.L14
- 467              	.LVL39:
- 468              	.L37:
-  78:zita-rev1/source/pareq.cpp **** 	    else                  _f1 = f;
- 469              		.loc 1 78 11 is_stmt 1 view .LVU132
-  78:zita-rev1/source/pareq.cpp **** 	    else                  _f1 = f;
- 470              		.loc 1 78 23 is_stmt 0 view .LVU133
- 471 009e 36EEA66A 		vadd.f32	s12, s13, s13
-  78:zita-rev1/source/pareq.cpp **** 	    else                  _f1 = f;
- 472              		.loc 1 78 11 view .LVU134
- 473 00a2 B4EEC67A 		vcmpe.f32	s14, s12
- 474 00a6 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 13
-
-
-  78:zita-rev1/source/pareq.cpp **** 	    else                  _f1 = f;
- 475              		.loc 1 78 28 is_stmt 1 view .LVU135
-  78:zita-rev1/source/pareq.cpp **** 	    else                  _f1 = f;
- 476              		.loc 1 78 32 is_stmt 0 view .LVU136
- 477 00aa C9BF     		itett	gt
- 478 00ac F6EE006A 		vmovgt.f32	s13, #5.0e-1
- 479              	.LVL40:
-  79:zita-rev1/source/pareq.cpp **** 	}
- 480              		.loc 1 79 32 view .LVU137
- 481 00b0 C0ED076A 		vstrle.32	s13, [r0, #28]
-  78:zita-rev1/source/pareq.cpp **** 	    else                  _f1 = f;
- 482              		.loc 1 78 32 view .LVU138
- 483 00b4 27EE267A 		vmulgt.f32	s14, s14, s13
- 484 00b8 80ED077A 		vstrgt.32	s14, [r0, #28]
-  81:zita-rev1/source/pareq.cpp **** 	{
- 485              		.loc 1 81 2 is_stmt 1 view .LVU139
-  79:zita-rev1/source/pareq.cpp **** 	}
- 486              		.loc 1 79 28 view .LVU140
-  81:zita-rev1/source/pareq.cpp **** 	{
- 487              		.loc 1 81 2 view .LVU141
- 488 00bc CDE7     		b	.L22
- 489              	.LVL41:
- 490              	.L19:
-  81:zita-rev1/source/pareq.cpp **** 	{
- 491              		.loc 1 81 2 view .LVU142
- 492 00be 002B     		cmp	r3, #0
- 493 00c0 CBD1     		bne	.L22
- 494              	.LVL42:
+ 479              		.loc 1 81 2 is_stmt 1 view .LVU135
   95:zita-rev1/source/pareq.cpp ****             if (fabs (_g1 - 1) < 0.001f)
- 495              		.loc 1 95 6 view .LVU143
+ 480              		.loc 1 95 6 view .LVU136
   96:zita-rev1/source/pareq.cpp ****             {
- 496              		.loc 1 96 22 is_stmt 0 view .LVU144
- 497 00c2 B7EE000A 		vmov.f32	s0, #1.0e+0
+ 481              		.loc 1 96 22 is_stmt 0 view .LVU137
+ 482 0152 F7EE006A 		vmov.f32	s13, #1.0e+0
+ 483              	.LVL31:
   96:zita-rev1/source/pareq.cpp ****             {
- 498              		.loc 1 96 13 view .LVU145
- 499 00c6 9FED0C7A 		vldr.32	s14, .L42
+ 484              		.loc 1 96 13 view .LVU138
+ 485 0156 9FED447A 		vldr.32	s14, .L54+8
   95:zita-rev1/source/pareq.cpp ****             if (fabs (_g1 - 1) < 0.001f)
- 500              		.loc 1 95 16 view .LVU146
- 501 00ca 0288     		ldrh	r2, [r0]
+ 486              		.loc 1 95 16 view .LVU139
+ 487 015a 0388     		ldrh	r3, [r0]
   96:zita-rev1/source/pareq.cpp ****             {
- 502              		.loc 1 96 22 view .LVU147
- 503 00cc 77EEC07A 		vsub.f32	s15, s15, s0
+ 488              		.loc 1 96 22 view .LVU140
+ 489 015c 77EEE67A 		vsub.f32	s15, s15, s13
   95:zita-rev1/source/pareq.cpp ****             if (fabs (_g1 - 1) < 0.001f)
- 504              		.loc 1 95 14 view .LVU148
- 505 00d0 4280     		strh	r2, [r0, #2]	@ movhi
+ 490              		.loc 1 95 14 view .LVU141
+ 491 0160 4380     		strh	r3, [r0, #2]	@ movhi
   96:zita-rev1/source/pareq.cpp ****             {
- 506              		.loc 1 96 13 is_stmt 1 view .LVU149
- 507              	.LBB12:
- 508              	.LBI12:
- 509              		.file 2 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath"
+ 492              		.loc 1 96 13 is_stmt 1 view .LVU142
+ 493              	.LBB43:
+ 494              	.LBI43:
+ 495              		.file 2 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath"
    1:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // -*- C++ -*- C forwarding header.
    2:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
    3:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // Copyright (C) 1997-2020 Free Software Foundation, Inc.
@@ -778,9 +708,6 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 1
    5:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // This file is part of the GNU ISO C++ Library.  This library is free
    6:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // software; you can redistribute it and/or modify it under the
    7:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // terms of the GNU General Public License as published by the
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 14
-
-
    8:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // Free Software Foundation; either version 3, or (at your option)
    9:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // any later version.
   10:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
@@ -791,6 +718,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 1
   15:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
   16:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // Under Section 7 of GPL version 3, you are granted additional
   17:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // permissions described in the GCC Runtime Library Exception, version
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 13
+
+
   18:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // 3.1, as published by the Free Software Foundation.
   19:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
   20:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // You should have received a copy of the GNU General Public License and
@@ -838,9 +768,6 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 1
   62:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef fabs
   63:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef floor
   64:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef fmod
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 15
-
-
   65:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef frexp
   66:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef ldexp
   67:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef log
@@ -851,6 +778,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 1
   72:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef sinh
   73:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef sqrt
   74:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef tan
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 14
+
+
   75:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef tanh
   76:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
   77:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** extern "C++"
@@ -898,9 +828,6 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 1
  119:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_asin(__x); }
  120:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  121:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::atan;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 16
-
-
  122:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  123:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
  124:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
@@ -911,6 +838,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 1
  129:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   atan(long double __x)
  130:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_atanl(__x); }
  131:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 15
+
+
  132:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  133:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
  134:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline _GLIBCXX_CONSTEXPR
@@ -958,9 +888,6 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 1
  176:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
  177:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     ceil(_Tp __x)
  178:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_ceil(__x); }
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 17
-
-
  179:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  180:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::cos;
  181:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
@@ -971,6 +898,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 1
  186:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  187:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
  188:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   cos(long double __x)
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 16
+
+
  189:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_cosl(__x); }
  190:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
  191:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
@@ -1018,144 +948,685 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 1
  233:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
  234:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     exp(_Tp __x)
  235:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_exp(__x); }
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 18
-
-
  236:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  237:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::fabs;
  238:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  239:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
  240:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
  241:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   fabs(float __x)
- 510              		.loc 2 241 3 view .LVU150
- 511              	.LBB13:
+ 496              		.loc 2 241 3 view .LVU143
+ 497              	.LBB44:
  242:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_fabsf(__x); }
- 512              		.loc 2 242 5 view .LVU151
- 513              		.loc 2 242 31 is_stmt 0 view .LVU152
- 514 00d2 F0EEE77A 		vabs.f32	s15, s15
- 515              	.LBE13:
- 516              	.LBE12:
+ 498              		.loc 2 242 5 view .LVU144
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 17
+
+
+ 499              		.loc 2 242 31 is_stmt 0 view .LVU145
+ 500 0162 F0EEE77A 		vabs.f32	s15, s15
+ 501              	.LBE44:
+ 502              	.LBE43:
   96:zita-rev1/source/pareq.cpp ****             {
- 517              		.loc 1 96 13 view .LVU153
- 518 00d6 F4EEC77A 		vcmpe.f32	s15, s14
- 519 00da F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 520 00de 07D5     		bpl	.L39
-  98:zita-rev1/source/pareq.cpp **** 	        reset ();
- 521              		.loc 1 98 10 is_stmt 1 view .LVU154
-  98:zita-rev1/source/pareq.cpp **** 	        reset ();
- 522              		.loc 1 98 17 is_stmt 0 view .LVU155
- 523 00e0 8360     		str	r3, [r0, #8]
-  99:zita-rev1/source/pareq.cpp **** 	    }
- 524              		.loc 1 99 10 is_stmt 1 view .LVU156
-  99:zita-rev1/source/pareq.cpp **** 	    }
- 525              		.loc 1 99 16 is_stmt 0 view .LVU157
- 526 00e2 FFF7FEBF 		b	_ZN5Pareq5resetEv
- 527              	.LVL43:
- 528              	.L26:
-  89:zita-rev1/source/pareq.cpp **** 		calcpar1 (nsamp, _g1, _f1);
- 529              		.loc 1 89 3 is_stmt 1 view .LVU158
-  89:zita-rev1/source/pareq.cpp **** 		calcpar1 (nsamp, _g1, _f1);
- 530              		.loc 1 89 10 is_stmt 0 view .LVU159
- 531 00e6 0223     		movs	r3, #2
-  90:zita-rev1/source/pareq.cpp **** 	    }
- 532              		.loc 1 90 12 view .LVU160
- 533 00e8 B0EE670A 		vmov.f32	s0, s15
-  89:zita-rev1/source/pareq.cpp **** 		calcpar1 (nsamp, _g1, _f1);
- 534              		.loc 1 89 10 view .LVU161
- 535 00ec 8360     		str	r3, [r0, #8]
-  90:zita-rev1/source/pareq.cpp **** 	    }
- 536              		.loc 1 90 3 is_stmt 1 view .LVU162
- 537 00ee C1E7     		b	.L41
- 538              	.LVL44:
- 539              	.L39:
+ 503              		.loc 1 96 13 view .LVU146
+ 504 0166 F4EEC77A 		vcmpe.f32	s15, s14
+ 505 016a F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 506 016e 60D4     		bmi	.L53
  103:zita-rev1/source/pareq.cpp **** 	    }
- 540              		.loc 1 103 10 view .LVU163
+ 507              		.loc 1 103 10 is_stmt 1 view .LVU147
  103:zita-rev1/source/pareq.cpp **** 	    }
- 541              		.loc 1 103 17 is_stmt 0 view .LVU164
- 542 00f0 0123     		movs	r3, #1
- 543 00f2 8360     		str	r3, [r0, #8]
- 544              	.LVL45:
- 545              	.L12:
+ 508              		.loc 1 103 17 is_stmt 0 view .LVU148
+ 509 0170 0123     		movs	r3, #1
+ 510 0172 8360     		str	r3, [r0, #8]
  107:zita-rev1/source/pareq.cpp **** 
- 546              		.loc 1 107 1 view .LVU165
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 19
+ 511              		.loc 1 107 1 view .LVU149
+ 512 0174 03B0     		add	sp, sp, #12
+ 513              		.cfi_def_cfa_offset 28
+ 514              		@ sp needed
+ 515 0176 BDEC048B 		vldm	sp!, {d8-d9}
+ 516              		.cfi_restore 82
+ 517              		.cfi_restore 83
+ 518              		.cfi_restore 80
+ 519              		.cfi_restore 81
+ 520              		.cfi_def_cfa_offset 12
+ 521 017a 30BD     		pop	{r4, r5, pc}
+ 522              	.LVL32:
+ 523              	.L46:
+ 524              		.cfi_def_cfa_offset 0
+ 525              		.cfi_restore 4
+ 526              		.cfi_restore 5
+ 527              		.cfi_restore 14
+ 107:zita-rev1/source/pareq.cpp **** 
+ 528              		.loc 1 107 1 view .LVU150
+ 529 017c 7047     		bx	lr
+ 530              	.LVL33:
+ 531              	.L51:
+ 532              		.cfi_def_cfa_offset 40
+ 533              		.cfi_offset 4, -12
+ 534              		.cfi_offset 5, -8
+ 535              		.cfi_offset 14, -4
+ 536              		.cfi_offset 80, -28
+ 537              		.cfi_offset 81, -24
+ 538              		.cfi_offset 82, -20
+ 539              		.cfi_offset 83, -16
+  77:zita-rev1/source/pareq.cpp **** 	    else if (_f1 > 2 * f) _f1 /= 2;
+ 540              		.loc 1 77 29 is_stmt 1 discriminator 1 view .LVU151
+  83:zita-rev1/source/pareq.cpp **** 	    {
+ 541              		.loc 1 83 33 is_stmt 0 discriminator 1 view .LVU152
+ 542 017e B0EE678A 		vmov.f32	s16, s15
+  77:zita-rev1/source/pareq.cpp **** 	    else if (_f1 > 2 * f) _f1 /= 2;
+ 543              		.loc 1 77 33 discriminator 1 view .LVU153
+ 544 0182 C4ED076A 		vstr.32	s13, [r4, #28]
+  81:zita-rev1/source/pareq.cpp **** 	{
+ 545              		.loc 1 81 2 is_stmt 1 discriminator 1 view .LVU154
+  83:zita-rev1/source/pareq.cpp **** 	    {
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 18
 
 
- 547 00f4 7047     		bx	lr
- 548              	.L43:
- 549 00f6 00BF     		.align	2
- 550              	.L42:
- 551 00f8 6F12833A 		.word	981668463
- 552              		.cfi_endproc
- 553              	.LFE554:
- 555              		.section	.text._ZN5Pareq8process1EiiPPf,"ax",%progbits
- 556              		.align	1
- 557              		.global	_ZN5Pareq8process1EiiPPf
- 558              		.syntax unified
- 559              		.thumb
- 560              		.thumb_func
- 562              	_ZN5Pareq8process1EiiPPf:
- 563              	.LVL46:
- 564              	.LFB556:
+ 546              		.loc 1 83 33 is_stmt 0 discriminator 1 view .LVU155
+ 547 0186 B0EE667A 		vmov.f32	s14, s13
+ 548 018a 7DE7     		b	.L15
+ 549              	.LVL34:
+ 550              	.L39:
+  71:zita-rev1/source/pareq.cpp **** 	    else                  _g1 = g;
+ 551              		.loc 1 71 11 is_stmt 1 view .LVU156
+  71:zita-rev1/source/pareq.cpp **** 	    else                  _g1 = g;
+ 552              		.loc 1 71 23 is_stmt 0 view .LVU157
+ 553 018c 36EEA67A 		vadd.f32	s14, s13, s13
+  71:zita-rev1/source/pareq.cpp **** 	    else                  _g1 = g;
+ 554              		.loc 1 71 11 view .LVU158
+ 555 0190 F4EEC77A 		vcmpe.f32	s15, s14
+ 556 0194 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 557 0198 3FDD     		ble	.L40
+  71:zita-rev1/source/pareq.cpp **** 	    else                  _g1 = g;
+ 558              		.loc 1 71 28 is_stmt 1 discriminator 1 view .LVU159
+  74:zita-rev1/source/pareq.cpp **** 	{
+ 559              		.loc 1 74 18 is_stmt 0 discriminator 1 view .LVU160
+ 560 019a 90ED077A 		vldr.32	s14, [r0, #28]
+  71:zita-rev1/source/pareq.cpp **** 	    else                  _g1 = g;
+ 561              		.loc 1 71 32 discriminator 1 view .LVU161
+ 562 019e B6EE008A 		vmov.f32	s16, #5.0e-1
+  74:zita-rev1/source/pareq.cpp **** 	{
+ 563              		.loc 1 74 9 discriminator 1 view .LVU162
+ 564 01a2 B4EE476A 		vcmp.f32	s12, s14
+  71:zita-rev1/source/pareq.cpp **** 	    else                  _g1 = g;
+ 565              		.loc 1 71 32 discriminator 1 view .LVU163
+ 566 01a6 27EE888A 		vmul.f32	s16, s15, s16
+  74:zita-rev1/source/pareq.cpp **** 	{
+ 567              		.loc 1 74 9 discriminator 1 view .LVU164
+ 568 01aa F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+  71:zita-rev1/source/pareq.cpp **** 	    else                  _g1 = g;
+ 569              		.loc 1 71 32 discriminator 1 view .LVU165
+ 570 01ae 80ED058A 		vstr.32	s16, [r0, #20]
+  74:zita-rev1/source/pareq.cpp **** 	{
+ 571              		.loc 1 74 9 is_stmt 1 discriminator 1 view .LVU166
+ 572 01b2 3FF469AF 		beq	.L15
+ 573 01b6 4DE7     		b	.L49
+ 574              	.LVL35:
+ 575              	.L26:
+ 576              	.LBB45:
+ 577              	.LBB39:
+ 124:zita-rev1/source/pareq.cpp ****     }
+ 125:zita-rev1/source/pareq.cpp ****     else
+ 126:zita-rev1/source/pareq.cpp ****     {
+ 127:zita-rev1/source/pareq.cpp **** 	_c1 = c1;
+ 578              		.loc 1 127 2 view .LVU167
+ 579              		.loc 1 127 6 is_stmt 0 view .LVU168
+ 580 01b8 84ED080A 		vstr.32	s0, [r4, #32]
+ 128:zita-rev1/source/pareq.cpp **** 	_c2 = c2;
+ 581              		.loc 1 128 2 is_stmt 1 view .LVU169
+ 582              		.loc 1 128 6 is_stmt 0 view .LVU170
+ 583 01bc 84ED0A7A 		vstr.32	s14, [r4, #40]
+ 129:zita-rev1/source/pareq.cpp **** 	_gg = gg;
+ 584              		.loc 1 129 2 is_stmt 1 view .LVU171
+ 585              		.loc 1 129 6 is_stmt 0 view .LVU172
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 19
+
+
+ 586 01c0 84ED0C8A 		vstr.32	s16, [r4, #48]
+ 587              	.LBE39:
+ 588              	.LBE45:
+ 107:zita-rev1/source/pareq.cpp **** 
+ 589              		.loc 1 107 1 view .LVU173
+ 590 01c4 03B0     		add	sp, sp, #12
+ 591              		.cfi_remember_state
+ 592              		.cfi_def_cfa_offset 28
+ 593              		@ sp needed
+ 594 01c6 BDEC048B 		vldm	sp!, {d8-d9}
+ 595              		.cfi_restore 82
+ 596              		.cfi_restore 83
+ 597              		.cfi_restore 80
+ 598              		.cfi_restore 81
+ 599              		.cfi_def_cfa_offset 12
+ 600              	.LVL36:
+ 107:zita-rev1/source/pareq.cpp **** 
+ 601              		.loc 1 107 1 view .LVU174
+ 602 01ca 30BD     		pop	{r4, r5, pc}
+ 603              	.LVL37:
+ 604              	.L52:
+ 605              		.cfi_restore_state
+  85:zita-rev1/source/pareq.cpp **** 	    }
+ 606              		.loc 1 85 3 is_stmt 1 view .LVU175
+ 607              	.LBB46:
+ 608              	.LBI46:
+ 110:zita-rev1/source/pareq.cpp **** {
+ 609              		.loc 1 110 6 view .LVU176
+ 610              	.LBB47:
+ 112:zita-rev1/source/pareq.cpp **** 
+ 611              		.loc 1 112 5 view .LVU177
+ 114:zita-rev1/source/pareq.cpp ****     b = 2 * f / sqrtf (g);         
+ 612              		.loc 1 114 5 view .LVU178
+ 115:zita-rev1/source/pareq.cpp ****     gg = 0.5f * (g - 1);
+ 613              		.loc 1 115 5 view .LVU179
+ 114:zita-rev1/source/pareq.cpp ****     b = 2 * f / sqrtf (g);         
+ 614              		.loc 1 114 23 is_stmt 0 view .LVU180
+ 615 01cc D4ED037A 		vldr.32	s15, [r4, #12]
+ 616 01d0 DFED236A 		vldr.32	s13, .L54
+ 617 01d4 86EEA78A 		vdiv.f32	s16, s13, s15
+ 114:zita-rev1/source/pareq.cpp ****     b = 2 * f / sqrtf (g);         
+ 618              		.loc 1 114 7 view .LVU181
+ 619 01d8 28EE078A 		vmul.f32	s16, s16, s14
+ 620              	.LVL38:
+ 115:zita-rev1/source/pareq.cpp ****     gg = 0.5f * (g - 1);
+ 621              		.loc 1 115 11 view .LVU182
+ 622 01dc 38EE088A 		vadd.f32	s16, s16, s16
+ 623              	.LVL39:
+ 116:zita-rev1/source/pareq.cpp ****     c1 = -cosf (2 * f);
+ 624              		.loc 1 116 5 is_stmt 1 view .LVU183
+ 117:zita-rev1/source/pareq.cpp ****     c2 = (1 - b) / (1 + b);
+ 625              		.loc 1 117 5 view .LVU184
+ 117:zita-rev1/source/pareq.cpp ****     c2 = (1 - b) / (1 + b);
+ 626              		.loc 1 117 16 is_stmt 0 view .LVU185
+ 627 01e0 B0EE480A 		vmov.f32	s0, s16
+ 628 01e4 FFF7FEFF 		bl	cosf
+ 629              	.LVL40:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 20
+
+
+ 118:zita-rev1/source/pareq.cpp ****     if (nsamp)
+ 630              		.loc 1 118 5 is_stmt 1 view .LVU186
+ 119:zita-rev1/source/pareq.cpp ****     {
+ 631              		.loc 1 119 5 view .LVU187
+ 127:zita-rev1/source/pareq.cpp **** 	_c2 = c2;
+ 632              		.loc 1 127 2 view .LVU188
+ 118:zita-rev1/source/pareq.cpp ****     if (nsamp)
+ 633              		.loc 1 118 13 is_stmt 0 view .LVU189
+ 634 01e8 38EEC87A 		vsub.f32	s14, s17, s16
+ 118:zita-rev1/source/pareq.cpp ****     if (nsamp)
+ 635              		.loc 1 118 23 view .LVU190
+ 636 01ec 38EE288A 		vadd.f32	s16, s16, s17
+ 637              	.LVL41:
+ 638              		.loc 1 129 6 view .LVU191
+ 639 01f0 0023     		movs	r3, #0
+ 117:zita-rev1/source/pareq.cpp ****     c2 = (1 - b) / (1 + b);
+ 640              		.loc 1 117 8 view .LVU192
+ 641 01f2 B1EE400A 		vneg.f32	s0, s0
+ 642              	.LVL42:
+ 643              		.loc 1 129 6 view .LVU193
+ 644 01f6 2363     		str	r3, [r4, #48]	@ float
+ 118:zita-rev1/source/pareq.cpp ****     if (nsamp)
+ 645              		.loc 1 118 8 view .LVU194
+ 646 01f8 C7EE087A 		vdiv.f32	s15, s14, s16
+ 127:zita-rev1/source/pareq.cpp **** 	_c2 = c2;
+ 647              		.loc 1 127 6 view .LVU195
+ 648 01fc 84ED080A 		vstr.32	s0, [r4, #32]
+ 128:zita-rev1/source/pareq.cpp **** 	_gg = gg;
+ 649              		.loc 1 128 2 is_stmt 1 view .LVU196
+ 128:zita-rev1/source/pareq.cpp **** 	_gg = gg;
+ 650              		.loc 1 128 6 is_stmt 0 view .LVU197
+ 651 0200 C4ED0A7A 		vstr.32	s15, [r4, #40]
+ 652              		.loc 1 129 2 is_stmt 1 view .LVU198
+ 653              	.LBE47:
+ 654              	.LBE46:
+ 107:zita-rev1/source/pareq.cpp **** 
+ 655              		.loc 1 107 1 is_stmt 0 view .LVU199
+ 656 0204 03B0     		add	sp, sp, #12
+ 657              		.cfi_remember_state
+ 658              		.cfi_def_cfa_offset 28
+ 659              		@ sp needed
+ 660 0206 BDEC048B 		vldm	sp!, {d8-d9}
+ 661              		.cfi_restore 82
+ 662              		.cfi_restore 83
+ 663              		.cfi_restore 80
+ 664              		.cfi_restore 81
+ 665              		.cfi_def_cfa_offset 12
+ 666 020a 30BD     		pop	{r4, r5, pc}
+ 667              	.LVL43:
+ 668              	.L42:
+ 669              		.cfi_restore_state
+  79:zita-rev1/source/pareq.cpp **** 	}
+ 670              		.loc 1 79 28 is_stmt 1 view .LVU200
+  83:zita-rev1/source/pareq.cpp **** 	    {
+ 671              		.loc 1 83 33 is_stmt 0 view .LVU201
+ 672 020c B0EE678A 		vmov.f32	s16, s15
+  79:zita-rev1/source/pareq.cpp **** 	}
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 21
+
+
+ 673              		.loc 1 79 32 view .LVU202
+ 674 0210 84ED076A 		vstr.32	s12, [r4, #28]
+  81:zita-rev1/source/pareq.cpp **** 	{
+ 675              		.loc 1 81 2 is_stmt 1 view .LVU203
+  83:zita-rev1/source/pareq.cpp **** 	    {
+ 676              		.loc 1 83 33 is_stmt 0 view .LVU204
+ 677 0214 B0EE467A 		vmov.f32	s14, s12
+ 678 0218 36E7     		b	.L15
+ 679              	.LVL44:
+ 680              	.L40:
+  72:zita-rev1/source/pareq.cpp **** 	}
+ 681              		.loc 1 72 28 is_stmt 1 view .LVU205
+  74:zita-rev1/source/pareq.cpp **** 	{
+ 682              		.loc 1 74 18 is_stmt 0 view .LVU206
+ 683 021a 90ED077A 		vldr.32	s14, [r0, #28]
+  72:zita-rev1/source/pareq.cpp **** 	}
+ 684              		.loc 1 72 32 view .LVU207
+ 685 021e C0ED056A 		vstr.32	s13, [r0, #20]
+  74:zita-rev1/source/pareq.cpp **** 	{
+ 686              		.loc 1 74 9 is_stmt 1 view .LVU208
+ 687 0222 B4EE476A 		vcmp.f32	s12, s14
+ 688 0226 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 689 022a 0DD0     		beq	.L29
+  74:zita-rev1/source/pareq.cpp **** 	{
+ 690              		.loc 1 74 9 is_stmt 0 view .LVU209
+ 691 022c F0EE667A 		vmov.f32	s15, s13
+ 692 0230 12E7     		b	.L11
+ 693              	.LVL45:
+ 694              	.L53:
+  98:zita-rev1/source/pareq.cpp **** 	        reset ();
+ 695              		.loc 1 98 10 is_stmt 1 view .LVU210
+  98:zita-rev1/source/pareq.cpp **** 	        reset ();
+ 696              		.loc 1 98 17 is_stmt 0 view .LVU211
+ 697 0232 0023     		movs	r3, #0
+ 698 0234 8360     		str	r3, [r0, #8]
+  99:zita-rev1/source/pareq.cpp **** 	    }
+ 699              		.loc 1 99 10 is_stmt 1 view .LVU212
+ 700              	.LVL46:
+ 701              	.LBB48:
+ 702              	.LBI48:
+  51:zita-rev1/source/pareq.cpp **** {
+ 703              		.loc 1 51 6 view .LVU213
+ 704              	.LBB49:
+  53:zita-rev1/source/pareq.cpp ****     memset (_z2, 0, sizeof (float) * MAXCH); 
+ 705              		.loc 1 53 5 view .LVU214
+  53:zita-rev1/source/pareq.cpp ****     memset (_z2, 0, sizeof (float) * MAXCH); 
+ 706              		.loc 1 53 12 is_stmt 0 view .LVU215
+ 707 0236 8363     		str	r3, [r0, #56]	@ unaligned
+ 708 0238 C363     		str	r3, [r0, #60]	@ unaligned
+ 709 023a 0364     		str	r3, [r0, #64]	@ unaligned
+ 710 023c 4364     		str	r3, [r0, #68]	@ unaligned
+  54:zita-rev1/source/pareq.cpp **** }
+ 711              		.loc 1 54 5 is_stmt 1 view .LVU216
+  54:zita-rev1/source/pareq.cpp **** }
+ 712              		.loc 1 54 12 is_stmt 0 view .LVU217
+ 713 023e 8364     		str	r3, [r0, #72]	@ unaligned
+ 714 0240 C364     		str	r3, [r0, #76]	@ unaligned
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 22
+
+
+ 715 0242 0365     		str	r3, [r0, #80]	@ unaligned
+ 716 0244 4365     		str	r3, [r0, #84]	@ unaligned
+  55:zita-rev1/source/pareq.cpp **** 
+ 717              		.loc 1 55 1 view .LVU218
+ 718 0246 79E7     		b	.L8
+ 719              	.LVL47:
+ 720              	.L29:
+  55:zita-rev1/source/pareq.cpp **** 
+ 721              		.loc 1 55 1 view .LVU219
+ 722              	.LBE49:
+ 723              	.LBE48:
+  74:zita-rev1/source/pareq.cpp **** 	{
+ 724              		.loc 1 74 9 view .LVU220
+ 725 0248 B0EE668A 		vmov.f32	s16, s13
+ 726 024c 1CE7     		b	.L15
+ 727              	.LVL48:
+ 728              	.L43:
+ 729              	.LBB50:
+ 730              	.LBB40:
+ 115:zita-rev1/source/pareq.cpp ****     gg = 0.5f * (g - 1);
+ 731              		.loc 1 115 23 view .LVU221
+ 732 024e B0EE480A 		vmov.f32	s0, s16
+ 733 0252 8DED017A 		vstr.32	s14, [sp, #4]	@ int
+ 734 0256 FFF7FEFF 		bl	sqrtf
+ 735              	.LVL49:
+ 115:zita-rev1/source/pareq.cpp ****     gg = 0.5f * (g - 1);
+ 736              		.loc 1 115 23 view .LVU222
+ 737 025a 9DED017A 		vldr.32	s14, [sp, #4]	@ int
+ 738 025e 31E7     		b	.L25
+ 739              	.L55:
+ 740              		.align	2
+ 741              	.L54:
+ 742 0260 DB0F4940 		.word	1078530011
+ 743 0264 6042A20D 		.word	228737632
+ 744 0268 6F12833A 		.word	981668463
+ 745              	.LBE40:
+ 746              	.LBE50:
+ 747              		.cfi_endproc
+ 748              	.LFE554:
+ 750              		.section	.text._ZN5Pareq8calcpar1Eiff,"ax",%progbits
+ 751              		.align	1
+ 752              		.p2align 2,,3
+ 753              		.global	_ZN5Pareq8calcpar1Eiff
+ 754              		.syntax unified
+ 755              		.thumb
+ 756              		.thumb_func
+ 758              	_ZN5Pareq8calcpar1Eiff:
+ 759              	.LVL50:
+ 760              	.LFB555:
+ 111:zita-rev1/source/pareq.cpp ****     float b, c1, c2, gg;
+ 761              		.loc 1 111 1 is_stmt 1 view -0
+ 762              		.cfi_startproc
+ 763              		@ args = 0, pretend = 0, frame = 8
+ 764              		@ frame_needed = 0, uses_anonymous_args = 0
+ 112:zita-rev1/source/pareq.cpp **** 
+ 765              		.loc 1 112 5 view .LVU224
+ 114:zita-rev1/source/pareq.cpp ****     b = 2 * f / sqrtf (g);         
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 23
+
+
+ 766              		.loc 1 114 5 view .LVU225
+ 114:zita-rev1/source/pareq.cpp ****     b = 2 * f / sqrtf (g);         
+ 767              		.loc 1 114 23 is_stmt 0 view .LVU226
+ 768 0000 DFED346A 		vldr.32	s13, .L65
+ 769 0004 B5EE400A 		vcmp.f32	s0, #0
+ 770 0008 90ED037A 		vldr.32	s14, [r0, #12]
+ 771 000c C6EE877A 		vdiv.f32	s15, s13, s14
+ 772 0010 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 111:zita-rev1/source/pareq.cpp ****     float b, c1, c2, gg;
+ 773              		.loc 1 111 1 view .LVU227
+ 774 0014 30B5     		push	{r4, r5, lr}
+ 775              		.cfi_def_cfa_offset 12
+ 776              		.cfi_offset 4, -12
+ 777              		.cfi_offset 5, -8
+ 778              		.cfi_offset 14, -4
+ 779 0016 0446     		mov	r4, r0
+ 780              	.LVL51:
+ 115:zita-rev1/source/pareq.cpp ****     gg = 0.5f * (g - 1);
+ 781              		.loc 1 115 5 is_stmt 1 view .LVU228
+ 111:zita-rev1/source/pareq.cpp ****     float b, c1, c2, gg;
+ 782              		.loc 1 111 1 is_stmt 0 view .LVU229
+ 783 0018 0D46     		mov	r5, r1
+ 784 001a 2DED048B 		vpush.64	{d8, d9}
+ 785              		.cfi_def_cfa_offset 28
+ 786              		.cfi_offset 80, -28
+ 787              		.cfi_offset 81, -24
+ 788              		.cfi_offset 82, -20
+ 789              		.cfi_offset 83, -16
+ 790 001e B0EE408A 		vmov.f32	s16, s0
+ 791 0022 83B0     		sub	sp, sp, #12
+ 792              		.cfi_def_cfa_offset 40
+ 114:zita-rev1/source/pareq.cpp ****     b = 2 * f / sqrtf (g);         
+ 793              		.loc 1 114 7 view .LVU230
+ 794 0024 67EEA00A 		vmul.f32	s1, s15, s1
+ 795              	.LVL52:
+ 115:zita-rev1/source/pareq.cpp ****     gg = 0.5f * (g - 1);
+ 796              		.loc 1 115 11 view .LVU231
+ 797 0028 70EEA00A 		vadd.f32	s1, s1, s1
+ 798 002c 4AD4     		bmi	.L63
+ 115:zita-rev1/source/pareq.cpp ****     gg = 0.5f * (g - 1);
+ 799              		.loc 1 115 23 view .LVU232
+ 800 002e B1EEC80A 		vsqrt.f32	s0, s16
+ 801              	.LVL53:
+ 802              	.L59:
+ 115:zita-rev1/source/pareq.cpp ****     gg = 0.5f * (g - 1);
+ 803              		.loc 1 115 7 view .LVU233
+ 804 0032 C0EE808A 		vdiv.f32	s17, s1, s0
+ 805              	.LVL54:
+ 116:zita-rev1/source/pareq.cpp ****     c1 = -cosf (2 * f);
+ 806              		.loc 1 116 5 is_stmt 1 view .LVU234
+ 116:zita-rev1/source/pareq.cpp ****     c1 = -cosf (2 * f);
+ 807              		.loc 1 116 20 is_stmt 0 view .LVU235
+ 808 0036 B7EE009A 		vmov.f32	s18, #1.0e+0
+ 116:zita-rev1/source/pareq.cpp ****     c1 = -cosf (2 * f);
+ 809              		.loc 1 116 8 view .LVU236
+ 810 003a F6EE007A 		vmov.f32	s15, #5.0e-1
+ 117:zita-rev1/source/pareq.cpp ****     c2 = (1 - b) / (1 + b);
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 24
+
+
+ 811              		.loc 1 117 16 view .LVU237
+ 812 003e B0EE600A 		vmov.f32	s0, s1
+ 116:zita-rev1/source/pareq.cpp ****     c1 = -cosf (2 * f);
+ 813              		.loc 1 116 20 view .LVU238
+ 814 0042 38EE498A 		vsub.f32	s16, s16, s18
+ 815              	.LVL55:
+ 116:zita-rev1/source/pareq.cpp ****     c1 = -cosf (2 * f);
+ 816              		.loc 1 116 8 view .LVU239
+ 817 0046 28EE278A 		vmul.f32	s16, s16, s15
+ 818              	.LVL56:
+ 117:zita-rev1/source/pareq.cpp ****     c2 = (1 - b) / (1 + b);
+ 819              		.loc 1 117 5 is_stmt 1 view .LVU240
+ 117:zita-rev1/source/pareq.cpp ****     c2 = (1 - b) / (1 + b);
+ 820              		.loc 1 117 16 is_stmt 0 view .LVU241
+ 821 004a FFF7FEFF 		bl	cosf
+ 822              	.LVL57:
+ 117:zita-rev1/source/pareq.cpp ****     c2 = (1 - b) / (1 + b);
+ 823              		.loc 1 117 8 view .LVU242
+ 824 004e B1EE400A 		vneg.f32	s0, s0
+ 825              	.LVL58:
+ 118:zita-rev1/source/pareq.cpp ****     if (nsamp)
+ 826              		.loc 1 118 5 is_stmt 1 view .LVU243
+ 118:zita-rev1/source/pareq.cpp ****     if (nsamp)
+ 827              		.loc 1 118 13 is_stmt 0 view .LVU244
+ 828 0052 79EE687A 		vsub.f32	s15, s18, s17
+ 118:zita-rev1/source/pareq.cpp ****     if (nsamp)
+ 829              		.loc 1 118 23 view .LVU245
+ 830 0056 78EE898A 		vadd.f32	s17, s17, s18
+ 831              	.LVL59:
+ 118:zita-rev1/source/pareq.cpp ****     if (nsamp)
+ 832              		.loc 1 118 8 view .LVU246
+ 833 005a 87EEA87A 		vdiv.f32	s14, s15, s17
+ 834              	.LVL60:
+ 119:zita-rev1/source/pareq.cpp ****     {
+ 835              		.loc 1 119 5 is_stmt 1 view .LVU247
+ 836 005e 3DB3     		cbz	r5, .L60
+ 121:zita-rev1/source/pareq.cpp **** 	_dc2 = (c2 - _c2) / nsamp + 1e-30f;
+ 837              		.loc 1 121 2 view .LVU248
+ 121:zita-rev1/source/pareq.cpp **** 	_dc2 = (c2 - _c2) / nsamp + 1e-30f;
+ 838              		.loc 1 121 13 is_stmt 0 view .LVU249
+ 839 0060 D4ED085A 		vldr.32	s11, [r4, #32]
+ 121:zita-rev1/source/pareq.cpp **** 	_dc2 = (c2 - _c2) / nsamp + 1e-30f;
+ 840              		.loc 1 121 20 view .LVU250
+ 841 0064 07EE905A 		vmov	s15, r5	@ int
+ 122:zita-rev1/source/pareq.cpp **** 	_dgg = (gg - _gg) / nsamp + 1e-30f;
+ 842              		.loc 1 122 13 view .LVU251
+ 843 0068 94ED0A6A 		vldr.32	s12, [r4, #40]
+ 123:zita-rev1/source/pareq.cpp ****     }
+ 844              		.loc 1 123 13 view .LVU252
+ 845 006c D4ED0C6A 		vldr.32	s13, [r4, #48]
+ 121:zita-rev1/source/pareq.cpp **** 	_dc2 = (c2 - _c2) / nsamp + 1e-30f;
+ 846              		.loc 1 121 20 view .LVU253
+ 847 0070 F8EEE77A 		vcvt.f32.s32	s15, s15
+ 121:zita-rev1/source/pareq.cpp **** 	_dc2 = (c2 - _c2) / nsamp + 1e-30f;
+ 848              		.loc 1 121 13 view .LVU254
+ 849 0074 30EE650A 		vsub.f32	s0, s0, s11
+ 850              	.LVL61:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 25
+
+
+ 121:zita-rev1/source/pareq.cpp **** 	_dc2 = (c2 - _c2) / nsamp + 1e-30f;
+ 851              		.loc 1 121 28 view .LVU255
+ 852 0078 DFED175A 		vldr.32	s11, .L65+4
+ 122:zita-rev1/source/pareq.cpp **** 	_dgg = (gg - _gg) / nsamp + 1e-30f;
+ 853              		.loc 1 122 13 view .LVU256
+ 854 007c 37EE467A 		vsub.f32	s14, s14, s12
+ 855              	.LVL62:
+ 123:zita-rev1/source/pareq.cpp ****     }
+ 856              		.loc 1 123 13 view .LVU257
+ 857 0080 38EE668A 		vsub.f32	s16, s16, s13
+ 858              	.LVL63:
+ 121:zita-rev1/source/pareq.cpp **** 	_dc2 = (c2 - _c2) / nsamp + 1e-30f;
+ 859              		.loc 1 121 20 view .LVU258
+ 860 0084 80EE276A 		vdiv.f32	s12, s0, s15
+ 122:zita-rev1/source/pareq.cpp **** 	_dgg = (gg - _gg) / nsamp + 1e-30f;
+ 861              		.loc 1 122 20 view .LVU259
+ 862 0088 C7EE276A 		vdiv.f32	s13, s14, s15
+ 123:zita-rev1/source/pareq.cpp ****     }
+ 863              		.loc 1 123 20 view .LVU260
+ 864 008c 88EE277A 		vdiv.f32	s14, s16, s15
+ 121:zita-rev1/source/pareq.cpp **** 	_dc2 = (c2 - _c2) / nsamp + 1e-30f;
+ 865              		.loc 1 121 28 view .LVU261
+ 866 0090 36EE256A 		vadd.f32	s12, s12, s11
+ 121:zita-rev1/source/pareq.cpp **** 	_dc2 = (c2 - _c2) / nsamp + 1e-30f;
+ 867              		.loc 1 121 7 view .LVU262
+ 868 0094 84ED096A 		vstr.32	s12, [r4, #36]
+ 122:zita-rev1/source/pareq.cpp **** 	_dgg = (gg - _gg) / nsamp + 1e-30f;
+ 869              		.loc 1 122 2 is_stmt 1 view .LVU263
+ 122:zita-rev1/source/pareq.cpp **** 	_dgg = (gg - _gg) / nsamp + 1e-30f;
+ 870              		.loc 1 122 28 is_stmt 0 view .LVU264
+ 871 0098 76EEA56A 		vadd.f32	s13, s13, s11
+ 122:zita-rev1/source/pareq.cpp **** 	_dgg = (gg - _gg) / nsamp + 1e-30f;
+ 872              		.loc 1 122 7 view .LVU265
+ 873 009c C4ED0B6A 		vstr.32	s13, [r4, #44]
+ 123:zita-rev1/source/pareq.cpp ****     }
+ 874              		.loc 1 123 2 is_stmt 1 view .LVU266
+ 123:zita-rev1/source/pareq.cpp ****     }
+ 875              		.loc 1 123 28 is_stmt 0 view .LVU267
+ 876 00a0 77EE257A 		vadd.f32	s15, s14, s11
+ 123:zita-rev1/source/pareq.cpp ****     }
+ 877              		.loc 1 123 7 view .LVU268
+ 878 00a4 C4ED0D7A 		vstr.32	s15, [r4, #52]
+ 130:zita-rev1/source/pareq.cpp ****     }
+ 131:zita-rev1/source/pareq.cpp **** }
+ 879              		.loc 1 131 1 view .LVU269
+ 880 00a8 03B0     		add	sp, sp, #12
+ 881              		.cfi_remember_state
+ 882              		.cfi_def_cfa_offset 28
+ 883              		@ sp needed
+ 884 00aa BDEC048B 		vldm	sp!, {d8-d9}
+ 885              		.cfi_restore 82
+ 886              		.cfi_restore 83
+ 887              		.cfi_restore 80
+ 888              		.cfi_restore 81
+ 889              		.cfi_def_cfa_offset 12
+ 890              	.LVL64:
+ 891              		.loc 1 131 1 view .LVU270
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 26
+
+
+ 892 00ae 30BD     		pop	{r4, r5, pc}
+ 893              	.LVL65:
+ 894              	.L60:
+ 895              		.cfi_restore_state
+ 127:zita-rev1/source/pareq.cpp **** 	_c2 = c2;
+ 896              		.loc 1 127 2 is_stmt 1 view .LVU271
+ 127:zita-rev1/source/pareq.cpp **** 	_c2 = c2;
+ 897              		.loc 1 127 6 is_stmt 0 view .LVU272
+ 898 00b0 84ED080A 		vstr.32	s0, [r4, #32]
+ 128:zita-rev1/source/pareq.cpp **** 	_gg = gg;
+ 899              		.loc 1 128 2 is_stmt 1 view .LVU273
+ 128:zita-rev1/source/pareq.cpp **** 	_gg = gg;
+ 900              		.loc 1 128 6 is_stmt 0 view .LVU274
+ 901 00b4 84ED0A7A 		vstr.32	s14, [r4, #40]
+ 129:zita-rev1/source/pareq.cpp ****     }
+ 902              		.loc 1 129 2 is_stmt 1 view .LVU275
+ 129:zita-rev1/source/pareq.cpp ****     }
+ 903              		.loc 1 129 6 is_stmt 0 view .LVU276
+ 904 00b8 84ED0C8A 		vstr.32	s16, [r4, #48]
+ 905              		.loc 1 131 1 view .LVU277
+ 906 00bc 03B0     		add	sp, sp, #12
+ 907              		.cfi_remember_state
+ 908              		.cfi_def_cfa_offset 28
+ 909              		@ sp needed
+ 910 00be BDEC048B 		vldm	sp!, {d8-d9}
+ 911              		.cfi_restore 82
+ 912              		.cfi_restore 83
+ 913              		.cfi_restore 80
+ 914              		.cfi_restore 81
+ 915              		.cfi_def_cfa_offset 12
+ 916              	.LVL66:
+ 917              		.loc 1 131 1 view .LVU278
+ 918 00c2 30BD     		pop	{r4, r5, pc}
+ 919              	.LVL67:
+ 920              	.L63:
+ 921              		.cfi_restore_state
+ 922              		.loc 1 131 1 view .LVU279
+ 923 00c4 CDED010A 		vstr.32	s1, [sp, #4]	@ int
+ 115:zita-rev1/source/pareq.cpp ****     gg = 0.5f * (g - 1);
+ 924              		.loc 1 115 23 view .LVU280
+ 925 00c8 FFF7FEFF 		bl	sqrtf
+ 926              	.LVL68:
+ 115:zita-rev1/source/pareq.cpp ****     gg = 0.5f * (g - 1);
+ 927              		.loc 1 115 23 view .LVU281
+ 928 00cc DDED010A 		vldr.32	s1, [sp, #4]	@ int
+ 929 00d0 AFE7     		b	.L59
+ 930              	.L66:
+ 931 00d2 00BF     		.align	2
+ 932              	.L65:
+ 933 00d4 DB0F4940 		.word	1078530011
+ 934 00d8 6042A20D 		.word	228737632
+ 935              		.cfi_endproc
+ 936              	.LFE555:
+ 938              		.section	.text._ZN5Pareq8process1EiiPPf,"ax",%progbits
+ 939              		.align	1
+ 940              		.p2align 2,,3
+ 941              		.global	_ZN5Pareq8process1EiiPPf
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 27
+
+
+ 942              		.syntax unified
+ 943              		.thumb
+ 944              		.thumb_func
+ 946              	_ZN5Pareq8process1EiiPPf:
+ 947              	.LVL69:
+ 948              	.LFB556:
  132:zita-rev1/source/pareq.cpp **** 
  133:zita-rev1/source/pareq.cpp **** 
  134:zita-rev1/source/pareq.cpp **** void Pareq::process1 (int nsamp, int nchan, float *data[])
  135:zita-rev1/source/pareq.cpp **** {
- 565              		.loc 1 135 1 is_stmt 1 view -0
- 566              		.cfi_startproc
- 567              		@ args = 0, pretend = 0, frame = 0
- 568              		@ frame_needed = 0, uses_anonymous_args = 0
+ 949              		.loc 1 135 1 is_stmt 1 view -0
+ 950              		.cfi_startproc
+ 951              		@ args = 0, pretend = 0, frame = 0
+ 952              		@ frame_needed = 0, uses_anonymous_args = 0
  136:zita-rev1/source/pareq.cpp ****     int   i, j;
- 569              		.loc 1 136 5 view .LVU167
+ 953              		.loc 1 136 5 view .LVU283
  137:zita-rev1/source/pareq.cpp ****     float c1, c2, gg;
- 570              		.loc 1 137 5 view .LVU168
+ 954              		.loc 1 137 5 view .LVU284
  138:zita-rev1/source/pareq.cpp ****     float x, y, z1, z2;
- 571              		.loc 1 138 5 view .LVU169
+ 955              		.loc 1 138 5 view .LVU285
  139:zita-rev1/source/pareq.cpp ****     float *p;
- 572              		.loc 1 139 5 view .LVU170
+ 956              		.loc 1 139 5 view .LVU286
  140:zita-rev1/source/pareq.cpp **** 
  141:zita-rev1/source/pareq.cpp ****     c1 = _c1;
- 573              		.loc 1 141 5 view .LVU171
+ 957              		.loc 1 141 5 view .LVU287
  135:zita-rev1/source/pareq.cpp ****     int   i, j;
- 574              		.loc 1 135 1 is_stmt 0 view .LVU172
- 575 0000 F0B5     		push	{r4, r5, r6, r7, lr}
- 576              		.cfi_def_cfa_offset 20
- 577              		.cfi_offset 4, -20
- 578              		.cfi_offset 5, -16
- 579              		.cfi_offset 6, -12
- 580              		.cfi_offset 7, -8
- 581              		.cfi_offset 14, -4
+ 958              		.loc 1 135 1 is_stmt 0 view .LVU288
+ 959 0000 9C46     		mov	ip, r3
  142:zita-rev1/source/pareq.cpp ****     c2 = _c2;
  143:zita-rev1/source/pareq.cpp ****     gg = _gg;
  144:zita-rev1/source/pareq.cpp ****     if (_state == SMOOTH)
- 582              		.loc 1 144 5 view .LVU173
- 583 0002 8468     		ldr	r4, [r0, #8]
+ 960              		.loc 1 144 5 view .LVU289
+ 961 0002 8368     		ldr	r3, [r0, #8]
+ 962              	.LVL70:
  141:zita-rev1/source/pareq.cpp ****     c2 = _c2;
- 584              		.loc 1 141 8 view .LVU174
- 585 0004 D0ED087A 		vldr.32	s15, [r0, #32]
- 586              	.LVL47:
+ 963              		.loc 1 141 8 view .LVU290
+ 964 0004 90ED086A 		vldr.32	s12, [r0, #32]
+ 965              	.LVL71:
  142:zita-rev1/source/pareq.cpp ****     c2 = _c2;
- 587              		.loc 1 142 5 is_stmt 1 view .LVU175
- 588              		.loc 1 144 5 is_stmt 0 view .LVU176
- 589 0008 022C     		cmp	r4, #2
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 20
+ 966              		.loc 1 142 5 is_stmt 1 view .LVU291
+ 967              		.loc 1 144 5 is_stmt 0 view .LVU292
+ 968 0008 022B     		cmp	r3, #2
+ 142:zita-rev1/source/pareq.cpp ****     c2 = _c2;
+ 969              		.loc 1 142 8 view .LVU293
+ 970 000a D0ED0A5A 		vldr.32	s11, [r0, #40]
+ 971              	.LVL72:
+ 143:zita-rev1/source/pareq.cpp ****     if (_state == SMOOTH)
+ 972              		.loc 1 143 5 is_stmt 1 view .LVU294
+ 143:zita-rev1/source/pareq.cpp ****     if (_state == SMOOTH)
+ 973              		.loc 1 143 8 is_stmt 0 view .LVU295
+ 974 000e D0ED0C4A 		vldr.32	s9, [r0, #48]
+ 975              	.LVL73:
+ 976              		.loc 1 144 5 is_stmt 1 view .LVU296
+ 135:zita-rev1/source/pareq.cpp ****     int   i, j;
+ 977              		.loc 1 135 1 is_stmt 0 view .LVU297
+ 978 0012 30B5     		push	{r4, r5, lr}
+ 979              		.cfi_def_cfa_offset 12
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 28
 
 
- 142:zita-rev1/source/pareq.cpp ****     c2 = _c2;
- 590              		.loc 1 142 8 view .LVU177
- 591 000a 90ED0A7A 		vldr.32	s14, [r0, #40]
- 592              	.LVL48:
- 143:zita-rev1/source/pareq.cpp ****     if (_state == SMOOTH)
- 593              		.loc 1 143 5 is_stmt 1 view .LVU178
- 143:zita-rev1/source/pareq.cpp ****     if (_state == SMOOTH)
- 594              		.loc 1 143 8 is_stmt 0 view .LVU179
- 595 000e D0ED0C5A 		vldr.32	s11, [r0, #48]
- 596              	.LVL49:
- 597              		.loc 1 144 5 is_stmt 1 view .LVU180
- 598 0012 00F13804 		add	r4, r0, #56
- 599 0016 26D0     		beq	.L45
- 600 0018 2046     		mov	r0, r4
- 601              	.LVL50:
+ 980              		.cfi_offset 4, -12
+ 981              		.cfi_offset 5, -8
+ 982              		.cfi_offset 14, -4
+ 983              		.loc 1 144 5 view .LVU298
+ 984 0014 35D0     		beq	.L82
+ 985              	.LVL74:
  145:zita-rev1/source/pareq.cpp ****     {
  146:zita-rev1/source/pareq.cpp **** 	for (i = 0; i < nchan; i++)
  147:zita-rev1/source/pareq.cpp **** 	{
@@ -1187,373 +1658,393 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 1
  173:zita-rev1/source/pareq.cpp ****     else
  174:zita-rev1/source/pareq.cpp ****     {
  175:zita-rev1/source/pareq.cpp **** 	for (i = 0; i < nchan; i++)
- 602              		.loc 1 175 9 is_stmt 0 view .LVU181
- 603 001a 0024     		movs	r4, #0
- 604              	.LVL51:
- 605              	.L46:
- 606              		.loc 1 175 16 is_stmt 1 discriminator 1 view .LVU182
- 607 001c 9442     		cmp	r4, r2
- 608 001e 66DA     		bge	.L44
+ 986              		.loc 1 175 16 is_stmt 1 view .LVU299
+ 987 0016 002A     		cmp	r2, #0
+ 988 0018 32DD     		ble	.L67
+ 989 001a 00F13804 		add	r4, r0, #56
+ 990 001e 0CEB820E 		add	lr, ip, r2, lsl #2
+ 991 0022 4830     		adds	r0, r0, #72
+ 992              	.LVL75:
+ 993              	.L78:
  176:zita-rev1/source/pareq.cpp **** 	{
  177:zita-rev1/source/pareq.cpp **** 	    p = data [i];
- 609              		.loc 1 177 6 view .LVU183
- 610              		.loc 1 177 8 is_stmt 0 view .LVU184
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 21
-
-
- 611 0020 53F82460 		ldr	r6, [r3, r4, lsl #2]
- 612              	.LVL52:
+ 994              		.loc 1 177 6 view .LVU300
  178:zita-rev1/source/pareq.cpp ****             z1 = _z1 [i];
- 613              		.loc 1 178 13 is_stmt 1 view .LVU185
  179:zita-rev1/source/pareq.cpp ****             z2 = _z2 [i];
  180:zita-rev1/source/pareq.cpp ****             for (j = 0; j < nsamp; j++)
- 614              		.loc 1 180 20 is_stmt 0 view .LVU186
- 615 0024 0025     		movs	r5, #0
+ 995              		.loc 1 180 27 is_stmt 0 view .LVU301
+ 996 0024 0029     		cmp	r1, #0
+ 177:zita-rev1/source/pareq.cpp ****             z1 = _z1 [i];
+ 997              		.loc 1 177 8 view .LVU302
+ 998 0026 5CF8043B 		ldr	r3, [ip], #4
+ 999              	.LVL76:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 29
+
+
  178:zita-rev1/source/pareq.cpp ****             z1 = _z1 [i];
- 616              		.loc 1 178 16 view .LVU187
- 617 0026 90ED006A 		vldr.32	s12, [r0]
- 618              	.LVL53:
- 179:zita-rev1/source/pareq.cpp ****             z2 = _z2 [i];
- 619              		.loc 1 179 13 is_stmt 1 view .LVU188
- 179:zita-rev1/source/pareq.cpp ****             z2 = _z2 [i];
- 620              		.loc 1 179 16 is_stmt 0 view .LVU189
- 621 002a D0ED046A 		vldr.32	s13, [r0, #16]
- 622              	.LVL54:
- 623              		.loc 1 180 13 is_stmt 1 view .LVU190
- 624              	.L53:
- 625              		.loc 1 180 27 discriminator 3 view .LVU191
- 626 002e 8D42     		cmp	r5, r1
- 627 0030 5EDA     		bge	.L52
+ 1000              		.loc 1 178 13 is_stmt 1 view .LVU303
+ 178:zita-rev1/source/pareq.cpp ****             z1 = _z1 [i];
+ 1001              		.loc 1 178 16 is_stmt 0 view .LVU304
+ 1002 002a B4EC015A 		vldmia.32	r4!, {s10}
+ 1003              	.LVL77:
+ 179:zita-rev1/source/pareq.cpp ****             for (j = 0; j < nsamp; j++)
+ 1004              		.loc 1 179 13 is_stmt 1 view .LVU305
+ 179:zita-rev1/source/pareq.cpp ****             for (j = 0; j < nsamp; j++)
+ 1005              		.loc 1 179 16 is_stmt 0 view .LVU306
+ 1006 002e F0EC016A 		vldmia.32	r0!, {s13}
+ 1007              	.LVL78:
+ 1008              		.loc 1 180 13 is_stmt 1 view .LVU307
+ 1009              		.loc 1 180 27 view .LVU308
+ 1010 0032 1FDD     		ble	.L75
+ 1011 0034 F1EE652A 		vneg.f32	s5, s11
+ 1012              		.loc 1 180 20 is_stmt 0 view .LVU309
+ 1013 0038 0022     		movs	r2, #0
+ 1014 003a B1EE463A 		vneg.f32	s6, s12
+ 1015              	.LVL79:
+ 1016              	.L76:
  181:zita-rev1/source/pareq.cpp ****             {
  182:zita-rev1/source/pareq.cpp **** 	        x = *p;
- 628              		.loc 1 182 10 discriminator 2 view .LVU192
- 629              		.loc 1 182 12 is_stmt 0 discriminator 2 view .LVU193
- 630 0032 D6ED004A 		vldr.32	s9, [r6]
- 631              	.LVL55:
+ 1017              		.loc 1 182 10 is_stmt 1 discriminator 2 view .LVU310
+ 1018              		.loc 1 182 12 is_stmt 0 discriminator 2 view .LVU311
+ 1019 003e D3ED007A 		vldr.32	s15, [r3]
+ 1020              	.LVL80:
  183:zita-rev1/source/pareq.cpp **** 	        y = x - c2 * z2;
- 632              		.loc 1 183 10 is_stmt 1 discriminator 2 view .LVU194
+ 1021              		.loc 1 183 10 is_stmt 1 discriminator 2 view .LVU312
  180:zita-rev1/source/pareq.cpp ****             {
- 633              		.loc 1 180 13 is_stmt 0 discriminator 2 view .LVU195
- 634 0036 0135     		adds	r5, r5, #1
- 635              	.LVL56:
- 636              		.loc 1 183 12 discriminator 2 view .LVU196
- 637 0038 B0EE645A 		vmov.f32	s10, s9
- 638 003c A6EEC75A 		vfms.f32	s10, s13, s14
- 639              	.LVL57:
+ 1022              		.loc 1 180 13 is_stmt 0 discriminator 2 view .LVU313
+ 1023 0042 0132     		adds	r2, r2, #1
+ 1024              	.LVL81:
  184:zita-rev1/source/pareq.cpp **** 		*p++ = x - gg * (z2 + c2 * y - x);
- 640              		.loc 1 184 3 is_stmt 1 discriminator 2 view .LVU197
- 641              		.loc 1 184 23 is_stmt 0 discriminator 2 view .LVU198
- 642 0040 E7EE056A 		vfma.f32	s13, s14, s10
- 643              	.LVL58:
  185:zita-rev1/source/pareq.cpp **** 	        y -= c1 * z1;
- 644              		.loc 1 185 12 discriminator 2 view .LVU199
- 645 0044 A6EE675A 		vfms.f32	s10, s12, s15
- 646              	.LVL59:
- 184:zita-rev1/source/pareq.cpp **** 		*p++ = x - gg * (z2 + c2 * y - x);
- 647              		.loc 1 184 32 discriminator 2 view .LVU200
- 648 0048 76EEE46A 		vsub.f32	s13, s13, s9
- 184:zita-rev1/source/pareq.cpp **** 		*p++ = x - gg * (z2 + c2 * y - x);
- 649              		.loc 1 184 12 discriminator 2 view .LVU201
- 650 004c E6EEE54A 		vfms.f32	s9, s13, s11
- 651              	.LVL60:
  186:zita-rev1/source/pareq.cpp **** 	        z2 = z1 + c1 * y;
- 652              		.loc 1 186 13 discriminator 2 view .LVU202
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 22
-
-
- 653 0050 F0EE466A 		vmov.f32	s13, s12
  187:zita-rev1/source/pareq.cpp **** 	        z1 = y + 1e-20f;
- 654              		.loc 1 187 13 discriminator 2 view .LVU203
- 655 0054 9FED296A 		vldr.32	s12, .L56
- 656              	.LVL61:
- 657              		.loc 1 187 13 discriminator 2 view .LVU204
- 658 0058 35EE066A 		vadd.f32	s12, s10, s12
- 186:zita-rev1/source/pareq.cpp **** 	        z2 = z1 + c1 * y;
- 659              		.loc 1 186 13 discriminator 2 view .LVU205
- 660 005c E7EE856A 		vfma.f32	s13, s15, s10
- 661              	.LVL62:
- 184:zita-rev1/source/pareq.cpp **** 	        y -= c1 * z1;
- 662              		.loc 1 184 8 discriminator 2 view .LVU206
- 663 0060 E6EC014A 		vstmia.32	r6!, {s9}
- 664              	.LVL63:
+ 1025              		.loc 1 187 13 discriminator 2 view .LVU314
+ 1026 0044 DFED353A 		vldr.32	s7, .L83
+ 183:zita-rev1/source/pareq.cpp **** 		*p++ = x - gg * (z2 + c2 * y - x);
+ 1027              		.loc 1 183 12 discriminator 2 view .LVU315
+ 1028 0048 B0EE677A 		vmov.f32	s14, s15
+ 180:zita-rev1/source/pareq.cpp ****             {
+ 1029              		.loc 1 180 27 discriminator 2 view .LVU316
+ 1030 004c 9142     		cmp	r1, r2
+ 183:zita-rev1/source/pareq.cpp **** 		*p++ = x - gg * (z2 + c2 * y - x);
+ 1031              		.loc 1 183 12 discriminator 2 view .LVU317
+ 1032 004e A2EEA67A 		vfma.f32	s14, s5, s13
+ 1033              	.LVL82:
+ 184:zita-rev1/source/pareq.cpp **** 		*p++ = x - gg * (z2 + c2 * y - x);
+ 1034              		.loc 1 184 3 is_stmt 1 discriminator 2 view .LVU318
+ 184:zita-rev1/source/pareq.cpp **** 		*p++ = x - gg * (z2 + c2 * y - x);
+ 1035              		.loc 1 184 23 is_stmt 0 discriminator 2 view .LVU319
+ 1036 0052 E5EE876A 		vfma.f32	s13, s11, s14
+ 1037              	.LVL83:
  185:zita-rev1/source/pareq.cpp **** 	        z2 = z1 + c1 * y;
- 665              		.loc 1 185 10 is_stmt 1 discriminator 2 view .LVU207
+ 1038              		.loc 1 185 12 discriminator 2 view .LVU320
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 30
+
+
+ 1039 0056 A3EE057A 		vfma.f32	s14, s6, s10
+ 1040              	.LVL84:
+ 184:zita-rev1/source/pareq.cpp **** 		*p++ = x - gg * (z2 + c2 * y - x);
+ 1041              		.loc 1 184 32 discriminator 2 view .LVU321
+ 1042 005a 36EEE74A 		vsub.f32	s8, s13, s15
  186:zita-rev1/source/pareq.cpp **** 	        z1 = y + 1e-20f;
- 666              		.loc 1 186 10 discriminator 2 view .LVU208
- 667              		.loc 1 187 10 discriminator 2 view .LVU209
+ 1043              		.loc 1 186 13 discriminator 2 view .LVU322
+ 1044 005e F0EE456A 		vmov.f32	s13, s10
+ 1045              		.loc 1 187 13 discriminator 2 view .LVU323
+ 1046 0062 37EE235A 		vadd.f32	s10, s14, s7
+ 1047              	.LVL85:
+ 184:zita-rev1/source/pareq.cpp **** 	        y -= c1 * z1;
+ 1048              		.loc 1 184 12 discriminator 2 view .LVU324
+ 1049 0066 E4EE647A 		vfms.f32	s15, s8, s9
+ 1050              	.LVL86:
+ 186:zita-rev1/source/pareq.cpp **** 	        z1 = y + 1e-20f;
+ 1051              		.loc 1 186 13 discriminator 2 view .LVU325
+ 1052 006a E6EE076A 		vfma.f32	s13, s12, s14
+ 1053              	.LVL87:
+ 184:zita-rev1/source/pareq.cpp **** 	        y -= c1 * z1;
+ 1054              		.loc 1 184 8 discriminator 2 view .LVU326
+ 1055 006e E3EC017A 		vstmia.32	r3!, {s15}
+ 1056              	.LVL88:
+ 185:zita-rev1/source/pareq.cpp **** 	        z2 = z1 + c1 * y;
+ 1057              		.loc 1 185 10 is_stmt 1 discriminator 2 view .LVU327
+ 186:zita-rev1/source/pareq.cpp **** 	        z1 = y + 1e-20f;
+ 1058              		.loc 1 186 10 discriminator 2 view .LVU328
+ 1059              		.loc 1 187 10 discriminator 2 view .LVU329
  180:zita-rev1/source/pareq.cpp ****             {
- 668              		.loc 1 180 13 discriminator 2 view .LVU210
+ 1060              		.loc 1 180 13 discriminator 2 view .LVU330
  180:zita-rev1/source/pareq.cpp ****             {
- 669              		.loc 1 180 13 is_stmt 0 discriminator 2 view .LVU211
- 670 0064 E3E7     		b	.L53
- 671              	.LVL64:
- 672              	.L45:
- 146:zita-rev1/source/pareq.cpp **** 	{
- 673              		.loc 1 146 9 view .LVU212
- 674 0066 0025     		movs	r5, #0
- 675              	.L50:
- 676              	.LVL65:
- 146:zita-rev1/source/pareq.cpp **** 	{
- 677              		.loc 1 146 16 is_stmt 1 discriminator 1 view .LVU213
- 678 0068 9542     		cmp	r5, r2
- 679 006a 3ADA     		bge	.L47
- 148:zita-rev1/source/pareq.cpp ****             z1 = _z1 [i];
- 680              		.loc 1 148 6 view .LVU214
- 148:zita-rev1/source/pareq.cpp ****             z1 = _z1 [i];
- 681              		.loc 1 148 8 is_stmt 0 view .LVU215
- 682 006c 53F82570 		ldr	r7, [r3, r5, lsl #2]
- 683              	.LVL66:
- 149:zita-rev1/source/pareq.cpp ****             z2 = _z2 [i];
- 684              		.loc 1 149 13 is_stmt 1 view .LVU216
- 154:zita-rev1/source/pareq.cpp ****             {
- 685              		.loc 1 154 20 is_stmt 0 view .LVU217
- 686 0070 0026     		movs	r6, #0
- 149:zita-rev1/source/pareq.cpp ****             z2 = _z2 [i];
- 687              		.loc 1 149 16 view .LVU218
- 688 0072 94ED006A 		vldr.32	s12, [r4]
- 689              	.LVL67:
- 150:zita-rev1/source/pareq.cpp ****             c1 = _c1;
- 690              		.loc 1 150 13 is_stmt 1 view .LVU219
- 150:zita-rev1/source/pareq.cpp ****             c1 = _c1;
- 691              		.loc 1 150 16 is_stmt 0 view .LVU220
- 692 0076 D4ED046A 		vldr.32	s13, [r4, #16]
- 693              	.LVL68:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 23
-
-
- 151:zita-rev1/source/pareq.cpp ****             c2 = _c2;
- 694              		.loc 1 151 13 is_stmt 1 view .LVU221
- 151:zita-rev1/source/pareq.cpp ****             c2 = _c2;
- 695              		.loc 1 151 16 is_stmt 0 view .LVU222
- 696 007a D0ED087A 		vldr.32	s15, [r0, #32]
- 697              	.LVL69:
- 152:zita-rev1/source/pareq.cpp ****             gg = _gg;
- 698              		.loc 1 152 13 is_stmt 1 view .LVU223
- 152:zita-rev1/source/pareq.cpp ****             gg = _gg;
- 699              		.loc 1 152 16 is_stmt 0 view .LVU224
- 700 007e 90ED0A7A 		vldr.32	s14, [r0, #40]
- 701              	.LVL70:
- 153:zita-rev1/source/pareq.cpp ****             for (j = 0; j < nsamp; j++)
- 702              		.loc 1 153 13 is_stmt 1 view .LVU225
- 153:zita-rev1/source/pareq.cpp ****             for (j = 0; j < nsamp; j++)
- 703              		.loc 1 153 16 is_stmt 0 view .LVU226
- 704 0082 D0ED0C5A 		vldr.32	s11, [r0, #48]
- 705              	.LVL71:
- 154:zita-rev1/source/pareq.cpp ****             {
- 706              		.loc 1 154 13 is_stmt 1 view .LVU227
- 707              	.L49:
- 154:zita-rev1/source/pareq.cpp ****             {
- 708              		.loc 1 154 27 discriminator 3 view .LVU228
- 709 0086 8E42     		cmp	r6, r1
- 710 0088 25DA     		bge	.L48
- 156:zita-rev1/source/pareq.cpp ****                 c2 += _dc2;
- 711              		.loc 1 156 17 discriminator 2 view .LVU229
- 156:zita-rev1/source/pareq.cpp ****                 c2 += _dc2;
- 712              		.loc 1 156 20 is_stmt 0 discriminator 2 view .LVU230
- 713 008a 90ED095A 		vldr.32	s10, [r0, #36]
- 154:zita-rev1/source/pareq.cpp ****             {
- 714              		.loc 1 154 13 discriminator 2 view .LVU231
- 715 008e 0136     		adds	r6, r6, #1
- 716              	.LVL72:
- 159:zita-rev1/source/pareq.cpp **** 	        y = x - c2 * z2;
- 717              		.loc 1 159 12 discriminator 2 view .LVU232
- 718 0090 D7ED004A 		vldr.32	s9, [r7]
- 156:zita-rev1/source/pareq.cpp ****                 c2 += _dc2;
- 719              		.loc 1 156 20 discriminator 2 view .LVU233
- 720 0094 77EE857A 		vadd.f32	s15, s15, s10
- 721              	.LVL73:
- 157:zita-rev1/source/pareq.cpp ****                 gg += _dgg;
- 722              		.loc 1 157 17 is_stmt 1 discriminator 2 view .LVU234
- 157:zita-rev1/source/pareq.cpp ****                 gg += _dgg;
- 723              		.loc 1 157 20 is_stmt 0 discriminator 2 view .LVU235
- 724 0098 90ED0B5A 		vldr.32	s10, [r0, #44]
- 725 009c 37EE057A 		vadd.f32	s14, s14, s10
- 726              	.LVL74:
- 158:zita-rev1/source/pareq.cpp **** 	        x = *p;
- 727              		.loc 1 158 17 is_stmt 1 discriminator 2 view .LVU236
- 158:zita-rev1/source/pareq.cpp **** 	        x = *p;
- 728              		.loc 1 158 20 is_stmt 0 discriminator 2 view .LVU237
- 729 00a0 90ED0D5A 		vldr.32	s10, [r0, #52]
- 730 00a4 75EE855A 		vadd.f32	s11, s11, s10
- 731              	.LVL75:
- 159:zita-rev1/source/pareq.cpp **** 	        y = x - c2 * z2;
- 732              		.loc 1 159 10 is_stmt 1 discriminator 2 view .LVU238
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 24
-
-
- 160:zita-rev1/source/pareq.cpp **** 		*p++ = x - gg * (z2 + c2 * y - x);
- 733              		.loc 1 160 10 discriminator 2 view .LVU239
- 160:zita-rev1/source/pareq.cpp **** 		*p++ = x - gg * (z2 + c2 * y - x);
- 734              		.loc 1 160 12 is_stmt 0 discriminator 2 view .LVU240
- 735 00a8 B0EE645A 		vmov.f32	s10, s9
- 736 00ac A6EEC75A 		vfms.f32	s10, s13, s14
- 737              	.LVL76:
- 161:zita-rev1/source/pareq.cpp **** 	        y -= c1 * z1;
- 738              		.loc 1 161 3 is_stmt 1 discriminator 2 view .LVU241
- 161:zita-rev1/source/pareq.cpp **** 	        y -= c1 * z1;
- 739              		.loc 1 161 23 is_stmt 0 discriminator 2 view .LVU242
- 740 00b0 E7EE056A 		vfma.f32	s13, s14, s10
- 741              	.LVL77:
- 162:zita-rev1/source/pareq.cpp **** 	        z2 = z1 + c1 * y;
- 742              		.loc 1 162 12 discriminator 2 view .LVU243
- 743 00b4 A6EE675A 		vfms.f32	s10, s12, s15
- 744              	.LVL78:
- 161:zita-rev1/source/pareq.cpp **** 	        y -= c1 * z1;
- 745              		.loc 1 161 32 discriminator 2 view .LVU244
- 746 00b8 76EEE46A 		vsub.f32	s13, s13, s9
- 161:zita-rev1/source/pareq.cpp **** 	        y -= c1 * z1;
- 747              		.loc 1 161 12 discriminator 2 view .LVU245
- 748 00bc E6EEE54A 		vfms.f32	s9, s13, s11
- 749              	.LVL79:
- 163:zita-rev1/source/pareq.cpp **** 	        z1 = y + 1e-20f;
- 750              		.loc 1 163 13 discriminator 2 view .LVU246
- 751 00c0 F0EE466A 		vmov.f32	s13, s12
- 164:zita-rev1/source/pareq.cpp **** 	    }
- 752              		.loc 1 164 13 discriminator 2 view .LVU247
- 753 00c4 9FED0D6A 		vldr.32	s12, .L56
- 754              	.LVL80:
- 164:zita-rev1/source/pareq.cpp **** 	    }
- 755              		.loc 1 164 13 discriminator 2 view .LVU248
- 756 00c8 35EE066A 		vadd.f32	s12, s10, s12
- 163:zita-rev1/source/pareq.cpp **** 	        z1 = y + 1e-20f;
- 757              		.loc 1 163 13 discriminator 2 view .LVU249
- 758 00cc E7EE856A 		vfma.f32	s13, s15, s10
- 759              	.LVL81:
- 161:zita-rev1/source/pareq.cpp **** 	        y -= c1 * z1;
- 760              		.loc 1 161 8 discriminator 2 view .LVU250
- 761 00d0 E7EC014A 		vstmia.32	r7!, {s9}
- 762              	.LVL82:
- 162:zita-rev1/source/pareq.cpp **** 	        z2 = z1 + c1 * y;
- 763              		.loc 1 162 10 is_stmt 1 discriminator 2 view .LVU251
- 163:zita-rev1/source/pareq.cpp **** 	        z1 = y + 1e-20f;
- 764              		.loc 1 163 10 discriminator 2 view .LVU252
- 164:zita-rev1/source/pareq.cpp **** 	    }
- 765              		.loc 1 164 10 discriminator 2 view .LVU253
- 154:zita-rev1/source/pareq.cpp ****             {
- 766              		.loc 1 154 13 discriminator 2 view .LVU254
- 154:zita-rev1/source/pareq.cpp ****             {
- 767              		.loc 1 154 13 is_stmt 0 discriminator 2 view .LVU255
- 768 00d4 D7E7     		b	.L49
- 769              	.LVL83:
- 770              	.L48:
- 166:zita-rev1/source/pareq.cpp ****             _z2 [i] = z2;
- 771              		.loc 1 166 13 is_stmt 1 discriminator 2 view .LVU256
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 25
-
-
- 166:zita-rev1/source/pareq.cpp ****             _z2 [i] = z2;
- 772              		.loc 1 166 21 is_stmt 0 discriminator 2 view .LVU257
- 773 00d6 A4EC016A 		vstmia.32	r4!, {s12}
- 167:zita-rev1/source/pareq.cpp **** 	}
- 774              		.loc 1 167 13 is_stmt 1 discriminator 2 view .LVU258
- 146:zita-rev1/source/pareq.cpp **** 	{
- 775              		.loc 1 146 2 is_stmt 0 discriminator 2 view .LVU259
- 776 00da 0135     		adds	r5, r5, #1
- 777              	.LVL84:
- 167:zita-rev1/source/pareq.cpp **** 	}
- 778              		.loc 1 167 21 discriminator 2 view .LVU260
- 779 00dc C4ED036A 		vstr.32	s13, [r4, #12]
- 146:zita-rev1/source/pareq.cpp **** 	{
- 780              		.loc 1 146 2 is_stmt 1 discriminator 2 view .LVU261
- 781              	.LVL85:
- 146:zita-rev1/source/pareq.cpp **** 	{
- 782              		.loc 1 146 2 is_stmt 0 discriminator 2 view .LVU262
- 783 00e0 C2E7     		b	.L50
- 784              	.LVL86:
- 785              	.L47:
- 169:zita-rev1/source/pareq.cpp ****         _c2 = c2;
- 786              		.loc 1 169 9 is_stmt 1 view .LVU263
- 169:zita-rev1/source/pareq.cpp ****         _c2 = c2;
- 787              		.loc 1 169 13 is_stmt 0 view .LVU264
- 788 00e2 C0ED087A 		vstr.32	s15, [r0, #32]
- 170:zita-rev1/source/pareq.cpp ****         _gg = gg;
- 789              		.loc 1 170 9 is_stmt 1 view .LVU265
- 170:zita-rev1/source/pareq.cpp ****         _gg = gg;
- 790              		.loc 1 170 13 is_stmt 0 view .LVU266
- 791 00e6 80ED0A7A 		vstr.32	s14, [r0, #40]
- 171:zita-rev1/source/pareq.cpp ****     }
- 792              		.loc 1 171 9 is_stmt 1 view .LVU267
- 171:zita-rev1/source/pareq.cpp ****     }
- 793              		.loc 1 171 13 is_stmt 0 view .LVU268
- 794 00ea C0ED0C5A 		vstr.32	s11, [r0, #48]
- 795              	.LVL87:
- 796              	.L44:
+ 1061              		.loc 1 180 27 discriminator 2 view .LVU331
+ 1062 0072 E4D1     		bne	.L76
+ 1063              	.LVL89:
+ 1064              	.L75:
  188:zita-rev1/source/pareq.cpp **** 	    }
  189:zita-rev1/source/pareq.cpp ****             _z1 [i] = z1;
+ 1065              		.loc 1 189 13 discriminator 2 view .LVU332
+ 175:zita-rev1/source/pareq.cpp **** 	{
+ 1066              		.loc 1 175 16 is_stmt 0 discriminator 2 view .LVU333
+ 1067 0074 E645     		cmp	lr, ip
+ 1068              		.loc 1 189 21 discriminator 2 view .LVU334
+ 1069 0076 04ED015A 		vstr.32	s10, [r4, #-4]
  190:zita-rev1/source/pareq.cpp ****             _z2 [i] = z2;
+ 1070              		.loc 1 190 13 is_stmt 1 discriminator 2 view .LVU335
+ 1071              		.loc 1 190 21 is_stmt 0 discriminator 2 view .LVU336
+ 1072 007a 40ED016A 		vstr.32	s13, [r0, #-4]
+ 175:zita-rev1/source/pareq.cpp **** 	{
+ 1073              		.loc 1 175 2 is_stmt 1 discriminator 2 view .LVU337
+ 175:zita-rev1/source/pareq.cpp **** 	{
+ 1074              		.loc 1 175 16 discriminator 2 view .LVU338
+ 1075 007e D1D1     		bne	.L78
+ 1076              	.LVL90:
+ 1077              	.L67:
  191:zita-rev1/source/pareq.cpp **** 	}
  192:zita-rev1/source/pareq.cpp ****     }
  193:zita-rev1/source/pareq.cpp **** }
- 797              		.loc 1 193 1 view .LVU269
- 798 00ee F0BD     		pop	{r4, r5, r6, r7, pc}
- 799              	.LVL88:
- 800              	.L52:
- 189:zita-rev1/source/pareq.cpp ****             _z2 [i] = z2;
- 801              		.loc 1 189 13 is_stmt 1 discriminator 2 view .LVU270
- 189:zita-rev1/source/pareq.cpp ****             _z2 [i] = z2;
- 802              		.loc 1 189 21 is_stmt 0 discriminator 2 view .LVU271
- 803 00f0 A0EC016A 		vstmia.32	r0!, {s12}
- 190:zita-rev1/source/pareq.cpp **** 	}
- 804              		.loc 1 190 13 is_stmt 1 discriminator 2 view .LVU272
- 175:zita-rev1/source/pareq.cpp **** 	{
- 805              		.loc 1 175 2 is_stmt 0 discriminator 2 view .LVU273
- 806 00f4 0134     		adds	r4, r4, #1
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 26
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 31
 
 
- 807              	.LVL89:
- 190:zita-rev1/source/pareq.cpp **** 	}
- 808              		.loc 1 190 21 discriminator 2 view .LVU274
- 809 00f6 C0ED036A 		vstr.32	s13, [r0, #12]
- 175:zita-rev1/source/pareq.cpp **** 	{
- 810              		.loc 1 175 2 is_stmt 1 discriminator 2 view .LVU275
- 811              	.LVL90:
- 175:zita-rev1/source/pareq.cpp **** 	{
- 812              		.loc 1 175 2 is_stmt 0 discriminator 2 view .LVU276
- 813 00fa 8FE7     		b	.L46
- 814              	.L57:
- 815              		.align	2
- 816              	.L56:
- 817 00fc 08E53C1E 		.word	507307272
- 818              		.cfi_endproc
- 819              	.LFE556:
- 821              		.text
- 822              	.Letext0:
- 823              		.file 3 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/machine/_default_types.h"
- 824              		.file 4 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/_stdint.h"
- 825              		.file 5 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h"
- 826              		.file 6 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7
- 827              		.file 7 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/math.h"
- 828              		.file 8 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/math.h"
- 829              		.file 9 "zita-rev1/source/pareq.h"
- 830              		.file 10 "<built-in>"
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s 			page 27
+ 1078              		.loc 1 193 1 is_stmt 0 view .LVU339
+ 1079 0080 30BD     		pop	{r4, r5, pc}
+ 1080              	.LVL91:
+ 1081              	.L82:
+ 146:zita-rev1/source/pareq.cpp **** 	{
+ 1082              		.loc 1 146 16 is_stmt 1 view .LVU340
+ 1083 0082 002A     		cmp	r2, #0
+ 1084 0084 42DD     		ble	.L69
+ 1085 0086 00F13805 		add	r5, r0, #56
+ 1086 008a 0CEB820E 		add	lr, ip, r2, lsl #2
+ 1087 008e 00F14804 		add	r4, r0, #72
+ 1088              	.LVL92:
+ 1089              	.L72:
+ 148:zita-rev1/source/pareq.cpp ****             z1 = _z1 [i];
+ 1090              		.loc 1 148 6 view .LVU341
+ 154:zita-rev1/source/pareq.cpp ****             {
+ 1091              		.loc 1 154 27 is_stmt 0 view .LVU342
+ 1092 0092 0029     		cmp	r1, #0
+ 148:zita-rev1/source/pareq.cpp ****             z1 = _z1 [i];
+ 1093              		.loc 1 148 8 view .LVU343
+ 1094 0094 5CF8043B 		ldr	r3, [ip], #4
+ 1095              	.LVL93:
+ 149:zita-rev1/source/pareq.cpp ****             z2 = _z2 [i];
+ 1096              		.loc 1 149 13 is_stmt 1 view .LVU344
+ 149:zita-rev1/source/pareq.cpp ****             z2 = _z2 [i];
+ 1097              		.loc 1 149 16 is_stmt 0 view .LVU345
+ 1098 0098 B5EC015A 		vldmia.32	r5!, {s10}
+ 1099              	.LVL94:
+ 150:zita-rev1/source/pareq.cpp ****             c1 = _c1;
+ 1100              		.loc 1 150 13 is_stmt 1 view .LVU346
+ 150:zita-rev1/source/pareq.cpp ****             c1 = _c1;
+ 1101              		.loc 1 150 16 is_stmt 0 view .LVU347
+ 1102 009c F4EC016A 		vldmia.32	r4!, {s13}
+ 1103              	.LVL95:
+ 151:zita-rev1/source/pareq.cpp ****             c2 = _c2;
+ 1104              		.loc 1 151 13 is_stmt 1 view .LVU348
+ 152:zita-rev1/source/pareq.cpp ****             gg = _gg;
+ 1105              		.loc 1 152 13 view .LVU349
+ 153:zita-rev1/source/pareq.cpp ****             for (j = 0; j < nsamp; j++)
+ 1106              		.loc 1 153 13 view .LVU350
+ 154:zita-rev1/source/pareq.cpp ****             {
+ 1107              		.loc 1 154 13 view .LVU351
+ 154:zita-rev1/source/pareq.cpp ****             {
+ 1108              		.loc 1 154 27 view .LVU352
+ 1109 00a0 27DD     		ble	.L70
+ 154:zita-rev1/source/pareq.cpp ****             {
+ 1110              		.loc 1 154 20 is_stmt 0 view .LVU353
+ 1111 00a2 0022     		movs	r2, #0
+ 1112              	.LVL96:
+ 1113              	.L71:
+ 156:zita-rev1/source/pareq.cpp ****                 c2 += _dc2;
+ 1114              		.loc 1 156 17 is_stmt 1 discriminator 2 view .LVU354
+ 159:zita-rev1/source/pareq.cpp **** 	        y = x - c2 * z2;
+ 1115              		.loc 1 159 12 is_stmt 0 discriminator 2 view .LVU355
+ 1116 00a4 D3ED007A 		vldr.32	s15, [r3]
+ 154:zita-rev1/source/pareq.cpp ****             {
+ 1117              		.loc 1 154 13 discriminator 2 view .LVU356
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 32
+
+
+ 1118 00a8 0132     		adds	r2, r2, #1
+ 1119              	.LVL97:
+ 157:zita-rev1/source/pareq.cpp ****                 gg += _dgg;
+ 1120              		.loc 1 157 20 discriminator 2 view .LVU357
+ 1121 00aa D0ED0B3A 		vldr.32	s7, [r0, #44]
+ 158:zita-rev1/source/pareq.cpp **** 	        x = *p;
+ 1122              		.loc 1 158 20 discriminator 2 view .LVU358
+ 1123 00ae 90ED0D7A 		vldr.32	s14, [r0, #52]
+ 154:zita-rev1/source/pareq.cpp ****             {
+ 1124              		.loc 1 154 27 discriminator 2 view .LVU359
+ 1125 00b2 9142     		cmp	r1, r2
+ 157:zita-rev1/source/pareq.cpp ****                 gg += _dgg;
+ 1126              		.loc 1 157 20 discriminator 2 view .LVU360
+ 1127 00b4 75EEA35A 		vadd.f32	s11, s11, s7
+ 1128              	.LVL98:
+ 156:zita-rev1/source/pareq.cpp ****                 c2 += _dc2;
+ 1129              		.loc 1 156 20 discriminator 2 view .LVU361
+ 1130 00b8 90ED094A 		vldr.32	s8, [r0, #36]
+ 158:zita-rev1/source/pareq.cpp **** 	        x = *p;
+ 1131              		.loc 1 158 20 discriminator 2 view .LVU362
+ 1132 00bc 74EE874A 		vadd.f32	s9, s9, s14
+ 1133              	.LVL99:
+ 164:zita-rev1/source/pareq.cpp **** 	    }
+ 1134              		.loc 1 164 13 discriminator 2 view .LVU363
+ 1135 00c0 DFED163A 		vldr.32	s7, .L83
+ 160:zita-rev1/source/pareq.cpp **** 		*p++ = x - gg * (z2 + c2 * y - x);
+ 1136              		.loc 1 160 12 discriminator 2 view .LVU364
+ 1137 00c4 B0EE677A 		vmov.f32	s14, s15
+ 156:zita-rev1/source/pareq.cpp ****                 c2 += _dc2;
+ 1138              		.loc 1 156 20 discriminator 2 view .LVU365
+ 1139 00c8 36EE046A 		vadd.f32	s12, s12, s8
+ 1140              	.LVL100:
+ 157:zita-rev1/source/pareq.cpp ****                 gg += _dgg;
+ 1141              		.loc 1 157 17 is_stmt 1 discriminator 2 view .LVU366
+ 158:zita-rev1/source/pareq.cpp **** 	        x = *p;
+ 1142              		.loc 1 158 17 discriminator 2 view .LVU367
+ 159:zita-rev1/source/pareq.cpp **** 	        y = x - c2 * z2;
+ 1143              		.loc 1 159 10 discriminator 2 view .LVU368
+ 160:zita-rev1/source/pareq.cpp **** 		*p++ = x - gg * (z2 + c2 * y - x);
+ 1144              		.loc 1 160 10 discriminator 2 view .LVU369
+ 160:zita-rev1/source/pareq.cpp **** 		*p++ = x - gg * (z2 + c2 * y - x);
+ 1145              		.loc 1 160 12 is_stmt 0 discriminator 2 view .LVU370
+ 1146 00cc A5EEE67A 		vfms.f32	s14, s11, s13
+ 1147              	.LVL101:
+ 161:zita-rev1/source/pareq.cpp **** 	        y -= c1 * z1;
+ 1148              		.loc 1 161 3 is_stmt 1 discriminator 2 view .LVU371
+ 161:zita-rev1/source/pareq.cpp **** 	        y -= c1 * z1;
+ 1149              		.loc 1 161 23 is_stmt 0 discriminator 2 view .LVU372
+ 1150 00d0 E5EE876A 		vfma.f32	s13, s11, s14
+ 1151              	.LVL102:
+ 162:zita-rev1/source/pareq.cpp **** 	        z2 = z1 + c1 * y;
+ 1152              		.loc 1 162 12 discriminator 2 view .LVU373
+ 1153 00d4 A6EE457A 		vfms.f32	s14, s12, s10
+ 1154              	.LVL103:
+ 161:zita-rev1/source/pareq.cpp **** 	        y -= c1 * z1;
+ 1155              		.loc 1 161 32 discriminator 2 view .LVU374
+ 1156 00d8 36EEE74A 		vsub.f32	s8, s13, s15
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 33
+
+
+ 163:zita-rev1/source/pareq.cpp **** 	        z1 = y + 1e-20f;
+ 1157              		.loc 1 163 13 discriminator 2 view .LVU375
+ 1158 00dc F0EE456A 		vmov.f32	s13, s10
+ 164:zita-rev1/source/pareq.cpp **** 	    }
+ 1159              		.loc 1 164 13 discriminator 2 view .LVU376
+ 1160 00e0 37EE235A 		vadd.f32	s10, s14, s7
+ 1161              	.LVL104:
+ 161:zita-rev1/source/pareq.cpp **** 	        y -= c1 * z1;
+ 1162              		.loc 1 161 12 discriminator 2 view .LVU377
+ 1163 00e4 E4EE647A 		vfms.f32	s15, s8, s9
+ 1164              	.LVL105:
+ 163:zita-rev1/source/pareq.cpp **** 	        z1 = y + 1e-20f;
+ 1165              		.loc 1 163 13 discriminator 2 view .LVU378
+ 1166 00e8 E6EE076A 		vfma.f32	s13, s12, s14
+ 1167              	.LVL106:
+ 161:zita-rev1/source/pareq.cpp **** 	        y -= c1 * z1;
+ 1168              		.loc 1 161 8 discriminator 2 view .LVU379
+ 1169 00ec E3EC017A 		vstmia.32	r3!, {s15}
+ 1170              	.LVL107:
+ 162:zita-rev1/source/pareq.cpp **** 	        z2 = z1 + c1 * y;
+ 1171              		.loc 1 162 10 is_stmt 1 discriminator 2 view .LVU380
+ 163:zita-rev1/source/pareq.cpp **** 	        z1 = y + 1e-20f;
+ 1172              		.loc 1 163 10 discriminator 2 view .LVU381
+ 164:zita-rev1/source/pareq.cpp **** 	    }
+ 1173              		.loc 1 164 10 discriminator 2 view .LVU382
+ 154:zita-rev1/source/pareq.cpp ****             {
+ 1174              		.loc 1 154 13 discriminator 2 view .LVU383
+ 154:zita-rev1/source/pareq.cpp ****             {
+ 1175              		.loc 1 154 27 discriminator 2 view .LVU384
+ 1176 00f0 D8D1     		bne	.L71
+ 1177              	.LVL108:
+ 1178              	.L70:
+ 166:zita-rev1/source/pareq.cpp ****             _z2 [i] = z2;
+ 1179              		.loc 1 166 13 discriminator 2 view .LVU385
+ 146:zita-rev1/source/pareq.cpp **** 	{
+ 1180              		.loc 1 146 16 is_stmt 0 discriminator 2 view .LVU386
+ 1181 00f2 E645     		cmp	lr, ip
+ 166:zita-rev1/source/pareq.cpp ****             _z2 [i] = z2;
+ 1182              		.loc 1 166 21 discriminator 2 view .LVU387
+ 1183 00f4 05ED015A 		vstr.32	s10, [r5, #-4]
+ 167:zita-rev1/source/pareq.cpp **** 	}
+ 1184              		.loc 1 167 13 is_stmt 1 discriminator 2 view .LVU388
+ 167:zita-rev1/source/pareq.cpp **** 	}
+ 1185              		.loc 1 167 21 is_stmt 0 discriminator 2 view .LVU389
+ 1186 00f8 44ED016A 		vstr.32	s13, [r4, #-4]
+ 146:zita-rev1/source/pareq.cpp **** 	{
+ 1187              		.loc 1 146 2 is_stmt 1 discriminator 2 view .LVU390
+ 146:zita-rev1/source/pareq.cpp **** 	{
+ 1188              		.loc 1 146 16 discriminator 2 view .LVU391
+ 1189 00fc 06D0     		beq	.L69
+ 151:zita-rev1/source/pareq.cpp ****             c2 = _c2;
+ 1190              		.loc 1 151 16 is_stmt 0 view .LVU392
+ 1191 00fe 90ED086A 		vldr.32	s12, [r0, #32]
+ 152:zita-rev1/source/pareq.cpp ****             gg = _gg;
+ 1192              		.loc 1 152 16 view .LVU393
+ 1193 0102 D0ED0A5A 		vldr.32	s11, [r0, #40]
+ 153:zita-rev1/source/pareq.cpp ****             for (j = 0; j < nsamp; j++)
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 34
+
+
+ 1194              		.loc 1 153 16 view .LVU394
+ 1195 0106 D0ED0C4A 		vldr.32	s9, [r0, #48]
+ 1196 010a C2E7     		b	.L72
+ 1197              	.LVL109:
+ 1198              	.L69:
+ 169:zita-rev1/source/pareq.cpp ****         _c2 = c2;
+ 1199              		.loc 1 169 9 is_stmt 1 view .LVU395
+ 169:zita-rev1/source/pareq.cpp ****         _c2 = c2;
+ 1200              		.loc 1 169 13 is_stmt 0 view .LVU396
+ 1201 010c 80ED086A 		vstr.32	s12, [r0, #32]
+ 170:zita-rev1/source/pareq.cpp ****         _gg = gg;
+ 1202              		.loc 1 170 9 is_stmt 1 view .LVU397
+ 170:zita-rev1/source/pareq.cpp ****         _gg = gg;
+ 1203              		.loc 1 170 13 is_stmt 0 view .LVU398
+ 1204 0110 C0ED0A5A 		vstr.32	s11, [r0, #40]
+ 171:zita-rev1/source/pareq.cpp ****     }
+ 1205              		.loc 1 171 9 is_stmt 1 view .LVU399
+ 171:zita-rev1/source/pareq.cpp ****     }
+ 1206              		.loc 1 171 13 is_stmt 0 view .LVU400
+ 1207 0114 C0ED0C4A 		vstr.32	s9, [r0, #48]
+ 1208              		.loc 1 193 1 view .LVU401
+ 1209 0118 30BD     		pop	{r4, r5, pc}
+ 1210              	.L84:
+ 1211 011a 00BF     		.align	2
+ 1212              	.L83:
+ 1213 011c 08E53C1E 		.word	507307272
+ 1214              		.cfi_endproc
+ 1215              	.LFE556:
+ 1217              		.text
+ 1218              	.Letext0:
+ 1219              		.file 3 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/machine/_default_types.h"
+ 1220              		.file 4 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/_stdint.h"
+ 1221              		.file 5 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h"
+ 1222              		.file 6 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7
+ 1223              		.file 7 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/math.h"
+ 1224              		.file 8 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/math.h"
+ 1225              		.file 9 "zita-rev1/source/pareq.h"
+ 1226              		.file 10 "<built-in>"
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s 			page 35
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 pareq.cpp
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s:19     .text._ZN5PareqD2Ev:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s:25     .text._ZN5PareqD2Ev:0000000000000000 _ZN5PareqD2Ev
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s:25     .text._ZN5PareqD2Ev:0000000000000000 _ZN5PareqD1Ev
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s:42     .text._ZN5Pareq5resetEv:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s:48     .text._ZN5Pareq5resetEv:0000000000000000 _ZN5Pareq5resetEv
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s:90     .text._ZN5Pareq8setfsampEf:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s:96     .text._ZN5Pareq8setfsampEf:0000000000000000 _ZN5Pareq8setfsampEf
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s:116    .text._ZN5PareqC2Ev:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s:122    .text._ZN5PareqC2Ev:0000000000000000 _ZN5PareqC2Ev
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s:180    .text._ZN5PareqC2Ev:0000000000000028 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s:122    .text._ZN5PareqC2Ev:0000000000000000 _ZN5PareqC1Ev
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s:187    .text._ZN5Pareq8calcpar1Eiff:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s:193    .text._ZN5Pareq8calcpar1Eiff:0000000000000000 _ZN5Pareq8calcpar1Eiff
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s:330    .text._ZN5Pareq8calcpar1Eiff:00000000000000b0 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s:336    .text._ZN5Pareq7prepareEi:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s:342    .text._ZN5Pareq7prepareEi:0000000000000000 _ZN5Pareq7prepareEi
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s:551    .text._ZN5Pareq7prepareEi:00000000000000f8 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s:556    .text._ZN5Pareq8process1EiiPPf:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s:562    .text._ZN5Pareq8process1EiiPPf:0000000000000000 _ZN5Pareq8process1EiiPPf
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccejspVB.s:817    .text._ZN5Pareq8process1EiiPPf:00000000000000fc $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s:19     .text._ZN5PareqC2Ev:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s:26     .text._ZN5PareqC2Ev:0000000000000000 _ZN5PareqC2Ev
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s:98     .text._ZN5PareqC2Ev:0000000000000030 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s:26     .text._ZN5PareqC2Ev:0000000000000000 _ZN5PareqC1Ev
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s:105    .text._ZN5PareqD2Ev:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s:112    .text._ZN5PareqD2Ev:0000000000000000 _ZN5PareqD2Ev
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s:112    .text._ZN5PareqD2Ev:0000000000000000 _ZN5PareqD1Ev
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s:128    .text._ZN5Pareq8setfsampEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s:135    .text._ZN5Pareq8setfsampEf:0000000000000000 _ZN5Pareq8setfsampEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s:180    .text._ZN5Pareq5resetEv:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s:187    .text._ZN5Pareq5resetEv:0000000000000000 _ZN5Pareq5resetEv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s:214    .text._ZN5Pareq7prepareEi:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s:221    .text._ZN5Pareq7prepareEi:0000000000000000 _ZN5Pareq7prepareEi
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s:742    .text._ZN5Pareq7prepareEi:0000000000000260 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s:751    .text._ZN5Pareq8calcpar1Eiff:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s:758    .text._ZN5Pareq8calcpar1Eiff:0000000000000000 _ZN5Pareq8calcpar1Eiff
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s:933    .text._ZN5Pareq8calcpar1Eiff:00000000000000d4 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s:939    .text._ZN5Pareq8process1EiiPPf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s:946    .text._ZN5Pareq8process1EiiPPf:0000000000000000 _ZN5Pareq8process1EiiPPf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccCgwKPa.s:1213   .text._ZN5Pareq8process1EiiPPf:000000000000011c $d
 
 UNDEFINED SYMBOLS
-memset
-sqrtf
 cosf
+sqrtf

@@ -13,14 +13,11 @@ int16_t* AudioFileManager::right_buf_ = nullptr;
 
 /// @brief Initialises sd card and file system interfaces
 /// @return True if initialisation succeeds, else false
-bool AudioFileManager::Init(){
-  SdmmcHandler::Config sd_cfg;
-  sd_cfg.Defaults();
-  if (sd_.Init(sd_cfg) != SdmmcHandler::Result::OK) {
-    return false;
-  }
-  fsi_.Init(FatFSInterface::Config::MEDIA_SD);
-  return (f_mount(&fsi_.GetSDFileSystem(),"/",1) == FR_OK);
+void AudioFileManager::Init(SdmmcHandler& sd, FatFSInterface& fsi, DaisyPod& pod, FIL* file){
+  pod_ = &pod;
+  sd_ = &sd;
+  fsi_ = &fsi;
+  curr_file_ = file;
 }
 
 /// @brief Scans for list of WAVs on SD card and stores filenames
@@ -30,7 +27,7 @@ bool AudioFileManager::ScanWavFiles(){
   FILINFO fno;
   file_count_=0;
 
-  if (f_opendir(&dir,fsi_.GetSDPath()) != FR_OK){
+  if (f_opendir(&dir,fsi_->GetSDPath()) != FR_OK){
     // DebugPrint(pod_, "failed to open SD card directory");
     // TODO log error? 
     return false;

@@ -29,18 +29,18 @@ class Grain {
       is_active_(false), envelope_type_(EnvelopeType::Decay){}
 
     void Init();
-    void Trigger(size_t pos, size_t grain_size, float pitch_ratio=1.0f, float pan=0.5f);
+    void Trigger(std::size_t pos, std::size_t grain_size, float pitch_ratio=1.0f, float pan=0.5f);
     void Process(float *sum_left, float *sum_right);
   
-    void SetSpawnPos(size_t spawn_pos);
-    void SetGrainSize(size_t grain_size);
+    void SetSpawnPos(std::size_t spawn_pos);
+    void SetGrainSize(std::size_t grain_size);
     void SetPitchRatio(float pitch_ratio);
     void SetEnvelopeType(EnvelopeType type);
 
     void SetPhasorPitchRatio(float pitch_ratio);
     void SetPhasorMode(GrainPhasor::Mode mode);
 
-    static size_t audio_len_;
+    static std::size_t audio_len_;
     static const int16_t *left_buf_;
     static const int16_t *right_buf_;
     bool is_active_;
@@ -52,8 +52,8 @@ class Grain {
 
     /* Grain audio parameters */
     float pan_;
-    size_t spawn_pos_;
-    size_t grain_size_;
+    std::size_t spawn_pos_;
+    std::size_t grain_size_;
     float pitch_ratio_;
     EnvelopeType envelope_type_;
 

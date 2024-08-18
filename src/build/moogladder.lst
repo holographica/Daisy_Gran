@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 1
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -11,7 +11,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 1
    8              		.eabi_attribute 24, 1
    9              		.eabi_attribute 25, 1
   10              		.eabi_attribute 26, 1
-  11              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 30, 2
   12              		.eabi_attribute 34, 1
   13              		.eabi_attribute 18, 4
   14              		.file	"moogladder.cpp"
@@ -20,14 +20,15 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 1
   17              		.cfi_sections	.debug_frame
   18              		.section	.text._ZN7daisysp10MoogLadder7my_tanhEf,"ax",%progbits
   19              		.align	1
-  20              		.global	_ZN7daisysp10MoogLadder7my_tanhEf
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  25              	_ZN7daisysp10MoogLadder7my_tanhEf:
-  26              	.LVL0:
-  27              	.LFB2797:
-  28              		.file 1 "DaisySP-LGPL-FX/moogladder.cpp"
+  20              		.p2align 2,,3
+  21              		.global	_ZN7daisysp10MoogLadder7my_tanhEf
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	_ZN7daisysp10MoogLadder7my_tanhEf:
+  27              	.LVL0:
+  28              	.LFB2797:
+  29              		.file 1 "DaisySP-LGPL-FX/moogladder.cpp"
    1:DaisySP-LGPL-FX/moogladder.cpp **** #include "moogladder.h"
    2:DaisySP-LGPL-FX/moogladder.cpp **** #include "Utility/dsp.h"
    3:DaisySP-LGPL-FX/moogladder.cpp **** 
@@ -35,96 +36,64 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 1
    5:DaisySP-LGPL-FX/moogladder.cpp **** 
    6:DaisySP-LGPL-FX/moogladder.cpp **** float MoogLadder::my_tanh(float x)
    7:DaisySP-LGPL-FX/moogladder.cpp **** {
-  29              		.loc 1 7 1 view -0
-  30              		.cfi_startproc
-  31              		@ args = 0, pretend = 0, frame = 0
-  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  30              		.loc 1 7 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
    8:DaisySP-LGPL-FX/moogladder.cpp ****     int sign = 1;
-  33              		.loc 1 8 5 view .LVU1
+  34              		.loc 1 8 5 view .LVU1
    9:DaisySP-LGPL-FX/moogladder.cpp ****     if(x < 0)
-  34              		.loc 1 9 5 view .LVU2
-  35 0000 B5EEC00A 		vcmpe.f32	s0, #0
+  35              		.loc 1 9 5 view .LVU2
+  36 0000 B5EEC00A 		vcmpe.f32	s0, #0
    7:DaisySP-LGPL-FX/moogladder.cpp ****     int sign = 1;
-  36              		.loc 1 7 1 is_stmt 0 view .LVU3
-  37 0004 08B5     		push	{r3, lr}
-  38              		.cfi_def_cfa_offset 8
-  39              		.cfi_offset 3, -8
-  40              		.cfi_offset 14, -4
-  41              		.loc 1 9 5 view .LVU4
-  42 0006 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+  37              		.loc 1 7 1 is_stmt 0 view .LVU3
+  38 0004 08B5     		push	{r3, lr}
+  39              		.cfi_def_cfa_offset 8
+  40              		.cfi_offset 3, -8
+  41              		.cfi_offset 14, -4
+  42              		.loc 1 9 5 view .LVU4
+  43 0006 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+   7:DaisySP-LGPL-FX/moogladder.cpp ****     int sign = 1;
+  44              		.loc 1 7 1 view .LVU5
+  45 000a 2DED028B 		vpush.64	{d8}
+  46              		.cfi_def_cfa_offset 16
+  47              		.cfi_offset 80, -16
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 2
+
+
+  48              		.cfi_offset 81, -12
+  49              		.loc 1 9 5 view .LVU6
+  50 000e 23D4     		bmi	.L11
+  51 0010 B7EE008A 		vmov.f32	s16, #1.0e+0
+  52 0014 F0EE407A 		vmov.f32	s15, s0
+  53              	.LVL1:
+  54              	.L2:
   10:DaisySP-LGPL-FX/moogladder.cpp ****     {
   11:DaisySP-LGPL-FX/moogladder.cpp ****         sign = -1;
-  43              		.loc 1 11 9 is_stmt 1 view .LVU5
-  44              	.LVL1:
   12:DaisySP-LGPL-FX/moogladder.cpp ****         x    = -x;
-  45              		.loc 1 12 9 view .LVU6
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 2
-
-
-   7:DaisySP-LGPL-FX/moogladder.cpp ****     int sign = 1;
-  46              		.loc 1 7 1 is_stmt 0 view .LVU7
-  47 000a 2DED028B 		vpush.64	{d8}
-  48              		.cfi_def_cfa_offset 16
-  49              		.cfi_offset 80, -16
-  50              		.cfi_offset 81, -12
-  11:DaisySP-LGPL-FX/moogladder.cpp ****         x    = -x;
-  51              		.loc 1 11 14 view .LVU8
-  52 000e 4ABF     		itet	mi
-  53 0010 4FF0FF33 		movmi	r3, #-1
-   8:DaisySP-LGPL-FX/moogladder.cpp ****     if(x < 0)
-  54              		.loc 1 8 9 view .LVU9
-  55 0014 0123     		movpl	r3, #1
-  56              		.loc 1 12 14 view .LVU10
-  57 0016 B1EE400A 		vnegmi.f32	s0, s0
-  58              	.LVL2:
   13:DaisySP-LGPL-FX/moogladder.cpp ****     }
   14:DaisySP-LGPL-FX/moogladder.cpp ****     if(x >= 4.0)
-  59              		.loc 1 14 5 is_stmt 1 view .LVU11
+  55              		.loc 1 14 5 is_stmt 1 view .LVU7
+  56 0018 B1EE007A 		vmov.f32	s14, #4.0e+0
+  57 001c F4EEC77A 		vcmpe.f32	s15, s14
+  58 0020 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+  59 0024 0CDA     		bge	.L1
   15:DaisySP-LGPL-FX/moogladder.cpp ****     {
   16:DaisySP-LGPL-FX/moogladder.cpp ****         return sign;
-  60              		.loc 1 16 16 is_stmt 0 view .LVU12
-  61 001a 07EE903A 		vmov	s15, r3	@ int
-  62 001e B8EEE78A 		vcvt.f32.s32	s16, s15
-  14:DaisySP-LGPL-FX/moogladder.cpp ****     {
-  63              		.loc 1 14 5 view .LVU13
-  64 0022 F1EE007A 		vmov.f32	s15, #4.0e+0
-  65 0026 B4EEE70A 		vcmpe.f32	s0, s15
-  66 002a F1EE10FA 		vmrs	APSR_nzcv, FPSCR
-  67 002e 08DA     		bge	.L1
   17:DaisySP-LGPL-FX/moogladder.cpp ****     }
   18:DaisySP-LGPL-FX/moogladder.cpp ****     if(x < 0.5)
-  68              		.loc 1 18 5 is_stmt 1 view .LVU14
-  69 0030 F6EE007A 		vmov.f32	s15, #5.0e-1
-  70 0034 B4EEE70A 		vcmpe.f32	s0, s15
-  71 0038 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
-  72 003c 06D5     		bpl	.L11
-  73              	.LVL3:
-  74              	.L12:
+  60              		.loc 1 18 5 view .LVU8
+  61 0026 B6EE007A 		vmov.f32	s14, #5.0e-1
+  62 002a F4EEC77A 		vcmpe.f32	s15, s14
+  63 002e F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+  64 0032 0AD4     		bmi	.L6
   19:DaisySP-LGPL-FX/moogladder.cpp ****         return x * sign;
   20:DaisySP-LGPL-FX/moogladder.cpp ****     return sign * tanh(x);
-  75              		.loc 1 20 25 is_stmt 0 view .LVU15
-  76 003e 28EE008A 		vmul.f32	s16, s16, s0
-  77              	.L1:
-  21:DaisySP-LGPL-FX/moogladder.cpp **** }
-  78              		.loc 1 21 1 view .LVU16
-  79 0042 B0EE480A 		vmov.f32	s0, s16
-  80 0046 BDEC028B 		vldm	sp!, {d8}
-  81              		.cfi_remember_state
-  82              		.cfi_restore 80
-  83              		.cfi_restore 81
-  84              		.cfi_def_cfa_offset 8
-  85 004a 08BD     		pop	{r3, pc}
-  86              	.LVL4:
-  87              	.L11:
-  88              		.cfi_restore_state
-  20:DaisySP-LGPL-FX/moogladder.cpp **** }
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 3
-
-
-  89              		.loc 1 20 5 is_stmt 1 view .LVU17
-  90              	.LBB4:
-  91              	.LBI4:
-  92              		.file 2 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath"
+  65              		.loc 1 20 5 view .LVU9
+  66              	.LVL2:
+  67              	.LBB6:
+  68              	.LBI6:
+  69              		.file 2 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath"
    1:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // -*- C++ -*- C forwarding header.
    2:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
    3:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // Copyright (C) 1997-2020 Free Software Foundation, Inc.
@@ -149,6 +118,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 1
   22:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
   23:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // <http://www.gnu.org/licenses/>.
   24:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 3
+
+
   25:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** /** @file include/cmath
   26:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****  *  This is a Standard C++ Library file.  You should @c \#include this file
   27:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****  *  in your programs, rather than any of the @a *.h implementation files.
@@ -178,9 +150,6 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 1
   51:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
   52:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // Get rid of those macros defined in <math.h> in lieu of real functions.
   53:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef div
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 4
-
-
   54:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef acos
   55:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef asin
   56:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef atan
@@ -209,6 +178,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 1
   79:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** namespace std _GLIBCXX_VISIBILITY(default)
   80:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** {
   81:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** _GLIBCXX_BEGIN_NAMESPACE_VERSION
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 4
+
+
   82:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
   83:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::acos;
   84:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
@@ -238,9 +210,6 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 1
  108:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  109:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
  110:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   asin(long double __x)
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 5
-
-
  111:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_asinl(__x); }
  112:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
  113:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
@@ -269,6 +238,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 1
  136:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
  137:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     atan(_Tp __x)
  138:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_atan(__x); }
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 5
+
+
  139:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  140:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::atan2;
  141:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
@@ -298,9 +270,6 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 1
  165:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   ceil(float __x)
  166:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_ceilf(__x); }
  167:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 6
-
-
  168:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
  169:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   ceil(long double __x)
  170:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_ceill(__x); }
@@ -329,6 +298,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 1
  193:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline _GLIBCXX_CONSTEXPR
  194:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value,
  195:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 6
+
+
  196:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     cos(_Tp __x)
  197:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_cos(__x); }
  198:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
@@ -358,9 +330,6 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 1
  222:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   exp(float __x)
  223:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_expf(__x); }
  224:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 7
-
-
  225:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
  226:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   exp(long double __x)
  227:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_expl(__x); }
@@ -389,6 +358,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 1
  250:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline _GLIBCXX_CONSTEXPR
  251:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value,
  252:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 7
+
+
  253:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     fabs(_Tp __x)
  254:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_fabs(__x); }
  255:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
@@ -418,9 +390,6 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 1
  279:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   fmod(float __x, float __y)
  280:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_fmodf(__x, __y); }
  281:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 8
-
-
  282:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
  283:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   fmod(long double __x, long double __y)
  284:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_fmodl(__x, __y); }
@@ -449,6 +418,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 1
  307:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  308:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
  309:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline _GLIBCXX_CONSTEXPR
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 8
+
+
  310:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
  311:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
  312:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     frexp(_Tp __x, int* __exp)
@@ -478,9 +450,6 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 1
  336:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
  337:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
  338:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   log(float __x)
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 9
-
-
  339:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_logf(__x); }
  340:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  341:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
@@ -509,6 +478,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 1
  364:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  365:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
  366:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline _GLIBCXX_CONSTEXPR
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 9
+
+
  367:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value,
  368:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
  369:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     log10(_Tp __x)
@@ -538,9 +510,6 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 1
  393:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_powl(__x, __y); }
  394:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  395:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #if __cplusplus < 201103L
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 10
-
-
  396:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   // _GLIBCXX_RESOLVE_LIB_DEFECTS
  397:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   // DR 550. What should the return type of pow(float,int) be?
  398:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline double
@@ -569,6 +538,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 1
  421:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::sin;
  422:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  423:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 10
+
+
  424:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
  425:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   sin(float __x)
  426:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_sinf(__x); }
@@ -598,9 +570,6 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 1
  450:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
  451:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  452:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 11
-
-
  453:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline _GLIBCXX_CONSTEXPR
  454:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
  455:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
@@ -629,6 +598,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 1
  478:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::tan;
  479:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  480:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 11
+
+
  481:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
  482:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   tan(float __x)
  483:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_tanf(__x); }
@@ -650,420 +622,483 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 1
  499:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
  500:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
  501:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   tanh(float __x)
-  93              		.loc 2 501 3 view .LVU18
-  94              	.LBB5:
+  70              		.loc 2 501 3 view .LVU10
+  71              	.LBB7:
  502:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_tanhf(__x); }
-  95              		.loc 2 502 5 view .LVU19
-  96              		.loc 2 502 27 is_stmt 0 view .LVU20
-  97 004c FFF7FEFF 		bl	tanhf
-  98              	.LVL5:
-  99              		.loc 2 502 27 view .LVU21
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 12
+  72              		.loc 2 502 5 view .LVU11
+  73              		.loc 2 502 27 is_stmt 0 view .LVU12
+  74 0034 B0EE670A 		vmov.f32	s0, s15
+  75 0038 FFF7FEFF 		bl	tanhf
+  76              	.LVL3:
+  77              		.loc 2 502 27 view .LVU13
+  78              	.LBE7:
+  79              	.LBE6:
+  80              		.loc 1 20 25 view .LVU14
+  81 003c 28EE008A 		vmul.f32	s16, s16, s0
+  82              	.L1:
+  21:DaisySP-LGPL-FX/moogladder.cpp **** }
+  83              		.loc 1 21 1 view .LVU15
+  84 0040 B0EE480A 		vmov.f32	s0, s16
+  85 0044 BDEC028B 		vldm	sp!, {d8}
+  86              		.cfi_remember_state
+  87              		.cfi_restore 80
+  88              		.cfi_restore 81
+  89              		.cfi_def_cfa_offset 8
+  90 0048 08BD     		pop	{r3, pc}
+  91              	.LVL4:
+  92              	.L6:
+  93              		.cfi_restore_state
+  19:DaisySP-LGPL-FX/moogladder.cpp ****     return sign * tanh(x);
+  94              		.loc 1 19 20 view .LVU16
+  95 004a B0EE408A 		vmov.f32	s16, s0
+  96              		.loc 1 21 1 view .LVU17
+  97 004e B0EE480A 		vmov.f32	s0, s16
+  98 0052 BDEC028B 		vldm	sp!, {d8}
+  99              		.cfi_remember_state
+ 100              		.cfi_restore 80
+ 101              		.cfi_restore 81
+ 102              		.cfi_def_cfa_offset 8
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 12
 
 
- 100 0050 F5E7     		b	.L12
- 101              	.LBE5:
- 102              	.LBE4:
- 103              		.cfi_endproc
- 104              	.LFE2797:
- 106              		.section	.text._ZN7daisysp10MoogLadder4InitEf,"ax",%progbits
- 107              		.align	1
- 108              		.global	_ZN7daisysp10MoogLadder4InitEf
- 109              		.syntax unified
- 110              		.thumb
- 111              		.thumb_func
- 113              	_ZN7daisysp10MoogLadder4InitEf:
- 114              	.LVL6:
- 115              	.LFB2798:
+ 103 0056 08BD     		pop	{r3, pc}
+ 104              	.LVL5:
+ 105              	.L11:
+ 106              		.cfi_restore_state
+  11:DaisySP-LGPL-FX/moogladder.cpp ****         x    = -x;
+ 107              		.loc 1 11 9 is_stmt 1 view .LVU18
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 108              		.loc 1 12 9 view .LVU19
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 109              		.loc 1 12 14 is_stmt 0 view .LVU20
+ 110 0058 F1EE407A 		vneg.f32	s15, s0
+ 111              	.LVL6:
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 112              		.loc 1 12 14 view .LVU21
+ 113 005c BFEE008A 		vmov.f32	s16, #-1.0e+0
+ 114 0060 DAE7     		b	.L2
+ 115              		.cfi_endproc
+ 116              	.LFE2797:
+ 118 0062 00BF     		.section	.text._ZN7daisysp10MoogLadder4InitEf,"ax",%progbits
+ 119              		.align	1
+ 120              		.p2align 2,,3
+ 121              		.global	_ZN7daisysp10MoogLadder4InitEf
+ 122              		.syntax unified
+ 123              		.thumb
+ 124              		.thumb_func
+ 126              	_ZN7daisysp10MoogLadder4InitEf:
+ 127              	.LVL7:
+ 128              	.LFB2798:
   22:DaisySP-LGPL-FX/moogladder.cpp **** 
   23:DaisySP-LGPL-FX/moogladder.cpp **** void MoogLadder::Init(float sample_rate)
   24:DaisySP-LGPL-FX/moogladder.cpp **** {
- 116              		.loc 1 24 1 is_stmt 1 view -0
- 117              		.cfi_startproc
- 118              		@ args = 0, pretend = 0, frame = 0
- 119              		@ frame_needed = 0, uses_anonymous_args = 0
- 120              		@ link register save eliminated.
+ 129              		.loc 1 24 1 is_stmt 1 view -0
+ 130              		.cfi_startproc
+ 131              		@ args = 0, pretend = 0, frame = 0
+ 132              		@ frame_needed = 0, uses_anonymous_args = 0
+ 133              		@ link register save eliminated.
   25:DaisySP-LGPL-FX/moogladder.cpp ****     sample_rate_ = sample_rate;
- 121              		.loc 1 25 5 view .LVU23
+ 134              		.loc 1 25 5 view .LVU23
   26:DaisySP-LGPL-FX/moogladder.cpp ****     istor_       = 0.0f;
- 122              		.loc 1 26 18 is_stmt 0 view .LVU24
- 123 0000 0023     		movs	r3, #0
   27:DaisySP-LGPL-FX/moogladder.cpp ****     res_         = 0.4f;
- 124              		.loc 1 27 18 view .LVU25
- 125 0002 0A4A     		ldr	r2, .L14
-  25:DaisySP-LGPL-FX/moogladder.cpp ****     sample_rate_ = sample_rate;
- 126              		.loc 1 25 18 view .LVU26
- 127 0004 80ED0E0A 		vstr.32	s0, [r0, #56]
+ 135              		.loc 1 27 18 is_stmt 0 view .LVU24
+ 136 0000 0A49     		ldr	r1, .L13
   26:DaisySP-LGPL-FX/moogladder.cpp ****     istor_       = 0.0f;
- 128              		.loc 1 26 5 is_stmt 1 view .LVU27
-  26:DaisySP-LGPL-FX/moogladder.cpp ****     istor_       = 0.0f;
- 129              		.loc 1 26 18 is_stmt 0 view .LVU28
- 130 0008 0360     		str	r3, [r0]	@ float
- 131              		.loc 1 27 5 is_stmt 1 view .LVU29
- 132              		.loc 1 27 18 is_stmt 0 view .LVU30
- 133 000a 4260     		str	r2, [r0, #4]	@ float
+ 137              		.loc 1 26 18 view .LVU25
+ 138 0002 0023     		movs	r3, #0
   28:DaisySP-LGPL-FX/moogladder.cpp ****     freq_        = 1000.0f;
- 134              		.loc 1 28 5 is_stmt 1 view .LVU31
- 135              	.LBB6:
   29:DaisySP-LGPL-FX/moogladder.cpp **** 
   30:DaisySP-LGPL-FX/moogladder.cpp ****     for(int i = 0; i < 6; i++)
   31:DaisySP-LGPL-FX/moogladder.cpp ****     {
   32:DaisySP-LGPL-FX/moogladder.cpp ****         delay_[i]       = 0.0;
- 136              		.loc 1 32 25 is_stmt 0 view .LVU32
- 137 000c C360     		str	r3, [r0, #12]	@ float
- 138              	.LBE6:
-  28:DaisySP-LGPL-FX/moogladder.cpp ****     freq_        = 1000.0f;
- 139              		.loc 1 28 18 view .LVU33
- 140 000e 084A     		ldr	r2, .L14+4
- 141              	.LBB7:
   33:DaisySP-LGPL-FX/moogladder.cpp ****         tanhstg_[i % 3] = 0.0;
- 142              		.loc 1 33 25 view .LVU34
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 13
-
-
- 143 0010 4362     		str	r3, [r0, #36]	@ float
-  32:DaisySP-LGPL-FX/moogladder.cpp ****         tanhstg_[i % 3] = 0.0;
- 144              		.loc 1 32 25 view .LVU35
- 145 0012 0361     		str	r3, [r0, #16]	@ float
- 146              		.loc 1 33 25 view .LVU36
- 147 0014 8362     		str	r3, [r0, #40]	@ float
-  32:DaisySP-LGPL-FX/moogladder.cpp ****         tanhstg_[i % 3] = 0.0;
- 148              		.loc 1 32 25 view .LVU37
- 149 0016 4361     		str	r3, [r0, #20]	@ float
- 150              		.loc 1 33 25 view .LVU38
- 151 0018 C362     		str	r3, [r0, #44]	@ float
-  32:DaisySP-LGPL-FX/moogladder.cpp ****         tanhstg_[i % 3] = 0.0;
- 152              		.loc 1 32 25 view .LVU39
- 153 001a 8361     		str	r3, [r0, #24]	@ float
- 154 001c C361     		str	r3, [r0, #28]	@ float
- 155 001e 0362     		str	r3, [r0, #32]	@ float
- 156              	.LBE7:
   34:DaisySP-LGPL-FX/moogladder.cpp ****     }
   35:DaisySP-LGPL-FX/moogladder.cpp **** 
   36:DaisySP-LGPL-FX/moogladder.cpp ****     old_freq_ = 0.0f;
- 157              		.loc 1 36 15 view .LVU40
- 158 0020 0363     		str	r3, [r0, #48]	@ float
   37:DaisySP-LGPL-FX/moogladder.cpp ****     old_res_  = -1.0f;
- 159              		.loc 1 37 15 view .LVU41
- 160 0022 044B     		ldr	r3, .L14+8
+ 139              		.loc 1 37 15 view .LVU26
+ 140 0004 0A4A     		ldr	r2, .L13+4
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 13
+
+
+  27:DaisySP-LGPL-FX/moogladder.cpp ****     freq_        = 1000.0f;
+ 141              		.loc 1 27 18 view .LVU27
+ 142 0006 4160     		str	r1, [r0, #4]	@ float
+  28:DaisySP-LGPL-FX/moogladder.cpp ****     freq_        = 1000.0f;
+ 143              		.loc 1 28 18 view .LVU28
+ 144 0008 0A49     		ldr	r1, .L13+8
+  25:DaisySP-LGPL-FX/moogladder.cpp ****     istor_       = 0.0f;
+ 145              		.loc 1 25 18 view .LVU29
+ 146 000a 80ED0E0A 		vstr.32	s0, [r0, #56]
+  26:DaisySP-LGPL-FX/moogladder.cpp ****     res_         = 0.4f;
+ 147              		.loc 1 26 5 is_stmt 1 view .LVU30
+  26:DaisySP-LGPL-FX/moogladder.cpp ****     res_         = 0.4f;
+ 148              		.loc 1 26 18 is_stmt 0 view .LVU31
+ 149 000e 0360     		str	r3, [r0]	@ float
+  27:DaisySP-LGPL-FX/moogladder.cpp ****     freq_        = 1000.0f;
+ 150              		.loc 1 27 5 is_stmt 1 view .LVU32
   28:DaisySP-LGPL-FX/moogladder.cpp **** 
- 161              		.loc 1 28 18 view .LVU42
- 162 0024 8260     		str	r2, [r0, #8]	@ float
-  30:DaisySP-LGPL-FX/moogladder.cpp ****     {
- 163              		.loc 1 30 5 is_stmt 1 view .LVU43
- 164              	.LVL7:
- 165              	.LBB8:
-  30:DaisySP-LGPL-FX/moogladder.cpp ****     {
- 166              		.loc 1 30 22 view .LVU44
+ 151              		.loc 1 28 5 view .LVU33
+ 152              	.LBB8:
   32:DaisySP-LGPL-FX/moogladder.cpp ****         tanhstg_[i % 3] = 0.0;
- 167              		.loc 1 32 9 view .LVU45
+ 153              		.loc 1 32 25 is_stmt 0 view .LVU34
+ 154 0010 C360     		str	r3, [r0, #12]	@ float
   33:DaisySP-LGPL-FX/moogladder.cpp ****     }
- 168              		.loc 1 33 9 view .LVU46
+ 155              		.loc 1 33 25 view .LVU35
+ 156 0012 4362     		str	r3, [r0, #36]	@ float
+ 157              	.LBE8:
+  28:DaisySP-LGPL-FX/moogladder.cpp **** 
+ 158              		.loc 1 28 18 view .LVU36
+ 159 0014 8160     		str	r1, [r0, #8]	@ float
   30:DaisySP-LGPL-FX/moogladder.cpp ****     {
- 169              		.loc 1 30 5 view .LVU47
+ 160              		.loc 1 30 5 is_stmt 1 view .LVU37
+ 161              	.LVL8:
+ 162              	.LBB9:
   30:DaisySP-LGPL-FX/moogladder.cpp ****     {
- 170              		.loc 1 30 22 view .LVU48
+ 163              		.loc 1 30 22 view .LVU38
   32:DaisySP-LGPL-FX/moogladder.cpp ****         tanhstg_[i % 3] = 0.0;
- 171              		.loc 1 32 9 view .LVU49
+ 164              		.loc 1 32 9 view .LVU39
   33:DaisySP-LGPL-FX/moogladder.cpp ****     }
- 172              		.loc 1 33 9 view .LVU50
+ 165              		.loc 1 33 9 view .LVU40
   30:DaisySP-LGPL-FX/moogladder.cpp ****     {
- 173              		.loc 1 30 5 view .LVU51
+ 166              		.loc 1 30 5 view .LVU41
   30:DaisySP-LGPL-FX/moogladder.cpp ****     {
- 174              		.loc 1 30 22 view .LVU52
+ 167              		.loc 1 30 22 view .LVU42
   32:DaisySP-LGPL-FX/moogladder.cpp ****         tanhstg_[i % 3] = 0.0;
- 175              		.loc 1 32 9 view .LVU53
+ 168              		.loc 1 32 9 view .LVU43
+  32:DaisySP-LGPL-FX/moogladder.cpp ****         tanhstg_[i % 3] = 0.0;
+ 169              		.loc 1 32 25 is_stmt 0 view .LVU44
+ 170 0016 0361     		str	r3, [r0, #16]	@ float
   33:DaisySP-LGPL-FX/moogladder.cpp ****     }
- 176              		.loc 1 33 9 view .LVU54
+ 171              		.loc 1 33 9 is_stmt 1 view .LVU45
+  33:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 172              		.loc 1 33 25 is_stmt 0 view .LVU46
+ 173 0018 8362     		str	r3, [r0, #40]	@ float
   30:DaisySP-LGPL-FX/moogladder.cpp ****     {
- 177              		.loc 1 30 5 view .LVU55
+ 174              		.loc 1 30 5 is_stmt 1 view .LVU47
+ 175              	.LVL9:
   30:DaisySP-LGPL-FX/moogladder.cpp ****     {
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 14
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 14
 
 
- 178              		.loc 1 30 22 view .LVU56
+ 176              		.loc 1 30 22 view .LVU48
   32:DaisySP-LGPL-FX/moogladder.cpp ****         tanhstg_[i % 3] = 0.0;
- 179              		.loc 1 32 9 view .LVU57
-  33:DaisySP-LGPL-FX/moogladder.cpp ****     }
- 180              		.loc 1 33 9 view .LVU58
-  30:DaisySP-LGPL-FX/moogladder.cpp ****     {
- 181              		.loc 1 30 5 view .LVU59
-  30:DaisySP-LGPL-FX/moogladder.cpp ****     {
- 182              		.loc 1 30 22 view .LVU60
+ 177              		.loc 1 32 9 view .LVU49
   32:DaisySP-LGPL-FX/moogladder.cpp ****         tanhstg_[i % 3] = 0.0;
- 183              		.loc 1 32 9 view .LVU61
+ 178              		.loc 1 32 25 is_stmt 0 view .LVU50
+ 179 001a 4361     		str	r3, [r0, #20]	@ float
   33:DaisySP-LGPL-FX/moogladder.cpp ****     }
- 184              		.loc 1 33 9 view .LVU62
+ 180              		.loc 1 33 9 is_stmt 1 view .LVU51
+  33:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 181              		.loc 1 33 25 is_stmt 0 view .LVU52
+ 182 001c C362     		str	r3, [r0, #44]	@ float
   30:DaisySP-LGPL-FX/moogladder.cpp ****     {
- 185              		.loc 1 30 5 view .LVU63
+ 183              		.loc 1 30 5 is_stmt 1 view .LVU53
+ 184              	.LVL10:
   30:DaisySP-LGPL-FX/moogladder.cpp ****     {
- 186              		.loc 1 30 22 view .LVU64
+ 185              		.loc 1 30 22 view .LVU54
   32:DaisySP-LGPL-FX/moogladder.cpp ****         tanhstg_[i % 3] = 0.0;
- 187              		.loc 1 32 9 view .LVU65
+ 186              		.loc 1 32 9 view .LVU55
+  32:DaisySP-LGPL-FX/moogladder.cpp ****         tanhstg_[i % 3] = 0.0;
+ 187              		.loc 1 32 25 is_stmt 0 view .LVU56
+ 188 001e 8361     		str	r3, [r0, #24]	@ float
   33:DaisySP-LGPL-FX/moogladder.cpp ****     }
- 188              		.loc 1 33 9 view .LVU66
+ 189              		.loc 1 33 9 is_stmt 1 view .LVU57
   30:DaisySP-LGPL-FX/moogladder.cpp ****     {
- 189              		.loc 1 30 5 view .LVU67
+ 190              		.loc 1 30 5 view .LVU58
+ 191              	.LVL11:
   30:DaisySP-LGPL-FX/moogladder.cpp ****     {
- 190              		.loc 1 30 22 view .LVU68
- 191              	.LBE8:
+ 192              		.loc 1 30 22 view .LVU59
+  32:DaisySP-LGPL-FX/moogladder.cpp ****         tanhstg_[i % 3] = 0.0;
+ 193              		.loc 1 32 9 view .LVU60
+  32:DaisySP-LGPL-FX/moogladder.cpp ****         tanhstg_[i % 3] = 0.0;
+ 194              		.loc 1 32 25 is_stmt 0 view .LVU61
+ 195 0020 C361     		str	r3, [r0, #28]	@ float
+  33:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 196              		.loc 1 33 9 is_stmt 1 view .LVU62
+  30:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 197              		.loc 1 30 5 view .LVU63
+ 198              	.LVL12:
+  30:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 199              		.loc 1 30 22 view .LVU64
+  32:DaisySP-LGPL-FX/moogladder.cpp ****         tanhstg_[i % 3] = 0.0;
+ 200              		.loc 1 32 9 view .LVU65
+  32:DaisySP-LGPL-FX/moogladder.cpp ****         tanhstg_[i % 3] = 0.0;
+ 201              		.loc 1 32 25 is_stmt 0 view .LVU66
+ 202 0022 0362     		str	r3, [r0, #32]	@ float
+  33:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 203              		.loc 1 33 9 is_stmt 1 view .LVU67
+  30:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 204              		.loc 1 30 5 view .LVU68
+ 205              	.LVL13:
+  30:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 206              		.loc 1 30 22 view .LVU69
+ 207              	.LBE9:
   36:DaisySP-LGPL-FX/moogladder.cpp ****     old_res_  = -1.0f;
- 192              		.loc 1 36 5 view .LVU69
- 193              		.loc 1 37 5 view .LVU70
- 194              		.loc 1 37 15 is_stmt 0 view .LVU71
- 195 0026 4363     		str	r3, [r0, #52]	@ float
+ 208              		.loc 1 36 5 view .LVU70
+  36:DaisySP-LGPL-FX/moogladder.cpp ****     old_res_  = -1.0f;
+ 209              		.loc 1 36 15 is_stmt 0 view .LVU71
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 15
+
+
+ 210 0024 0363     		str	r3, [r0, #48]	@ float
+ 211              		.loc 1 37 5 is_stmt 1 view .LVU72
+ 212              		.loc 1 37 15 is_stmt 0 view .LVU73
+ 213 0026 4263     		str	r2, [r0, #52]	@ float
   38:DaisySP-LGPL-FX/moogladder.cpp **** }
- 196              		.loc 1 38 1 view .LVU72
- 197 0028 7047     		bx	lr
- 198              	.L15:
- 199 002a 00BF     		.align	2
- 200              	.L14:
- 201 002c CDCCCC3E 		.word	1053609165
- 202 0030 00007A44 		.word	1148846080
- 203 0034 000080BF 		.word	-1082130432
- 204              		.cfi_endproc
- 205              	.LFE2798:
- 207              		.section	.text._ZN7daisysp10MoogLadder7ProcessEf,"ax",%progbits
- 208              		.align	1
- 209              		.global	_ZN7daisysp10MoogLadder7ProcessEf
- 210              		.syntax unified
- 211              		.thumb
- 212              		.thumb_func
- 214              	_ZN7daisysp10MoogLadder7ProcessEf:
- 215              	.LVL8:
- 216              	.LFB2799:
+ 214              		.loc 1 38 1 view .LVU74
+ 215 0028 7047     		bx	lr
+ 216              	.L14:
+ 217 002a 00BF     		.align	2
+ 218              	.L13:
+ 219 002c CDCCCC3E 		.word	1053609165
+ 220 0030 000080BF 		.word	-1082130432
+ 221 0034 00007A44 		.word	1148846080
+ 222              		.cfi_endproc
+ 223              	.LFE2798:
+ 225              		.section	.text._ZN7daisysp10MoogLadder7ProcessEf,"ax",%progbits
+ 226              		.align	1
+ 227              		.p2align 2,,3
+ 228              		.global	_ZN7daisysp10MoogLadder7ProcessEf
+ 229              		.syntax unified
+ 230              		.thumb
+ 231              		.thumb_func
+ 233              	_ZN7daisysp10MoogLadder7ProcessEf:
+ 234              	.LVL14:
+ 235              	.LFB2799:
   39:DaisySP-LGPL-FX/moogladder.cpp **** 
   40:DaisySP-LGPL-FX/moogladder.cpp **** float MoogLadder::Process(float in)
   41:DaisySP-LGPL-FX/moogladder.cpp **** {
- 217              		.loc 1 41 1 is_stmt 1 view -0
- 218              		.cfi_startproc
- 219              		@ args = 0, pretend = 0, frame = 16
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 15
-
-
- 220              		@ frame_needed = 0, uses_anonymous_args = 0
+ 236              		.loc 1 41 1 is_stmt 1 view -0
+ 237              		.cfi_startproc
+ 238              		@ args = 0, pretend = 0, frame = 0
+ 239              		@ frame_needed = 0, uses_anonymous_args = 0
   42:DaisySP-LGPL-FX/moogladder.cpp ****     float  freq = freq_;
- 221              		.loc 1 42 5 view .LVU74
+ 240              		.loc 1 42 5 view .LVU76
   41:DaisySP-LGPL-FX/moogladder.cpp ****     float  freq = freq_;
- 222              		.loc 1 41 1 is_stmt 0 view .LVU75
- 223 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
- 224              		.cfi_def_cfa_offset 24
- 225              		.cfi_offset 4, -24
- 226              		.cfi_offset 5, -20
- 227              		.cfi_offset 6, -16
- 228              		.cfi_offset 7, -12
- 229              		.cfi_offset 8, -8
- 230              		.cfi_offset 14, -4
- 231 0004 2DED068B 		vpush.64	{d8, d9, d10}
- 232              		.cfi_def_cfa_offset 48
- 233              		.cfi_offset 80, -48
- 234              		.cfi_offset 81, -44
- 235              		.cfi_offset 82, -40
- 236              		.cfi_offset 83, -36
- 237              		.cfi_offset 84, -32
- 238              		.cfi_offset 85, -28
+ 241              		.loc 1 41 1 is_stmt 0 view .LVU77
+ 242 0000 10B5     		push	{r4, lr}
+ 243              		.cfi_def_cfa_offset 8
+ 244              		.cfi_offset 4, -8
+ 245              		.cfi_offset 14, -4
+ 246 0002 2DED0C8B 		vpush.64	{d8, d9, d10, d11, d12, d13}
+ 247              		.cfi_def_cfa_offset 56
+ 248              		.cfi_offset 80, -56
+ 249              		.cfi_offset 81, -52
+ 250              		.cfi_offset 82, -48
+ 251              		.cfi_offset 83, -44
+ 252              		.cfi_offset 84, -40
+ 253              		.cfi_offset 85, -36
+ 254              		.cfi_offset 86, -32
+ 255              		.cfi_offset 87, -28
+ 256              		.cfi_offset 88, -24
+ 257              		.cfi_offset 89, -20
+ 258              		.cfi_offset 90, -16
+ 259              		.cfi_offset 91, -12
   43:DaisySP-LGPL-FX/moogladder.cpp ****     float  res  = res_;
- 239              		.loc 1 43 12 view .LVU76
- 240 0008 D0ED018A 		vldr.32	s17, [r0, #4]
+ 260              		.loc 1 43 12 view .LVU78
+ 261 0006 90ED018A 		vldr.32	s16, [r0, #4]
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 16
+
+
   41:DaisySP-LGPL-FX/moogladder.cpp ****     float  freq = freq_;
- 241              		.loc 1 41 1 view .LVU77
- 242 000c B0EE409A 		vmov.f32	s18, s0
+ 262              		.loc 1 41 1 view .LVU79
+ 263 000a F0EE409A 		vmov.f32	s19, s0
   42:DaisySP-LGPL-FX/moogladder.cpp ****     float  freq = freq_;
- 243              		.loc 1 42 12 view .LVU78
- 244 0010 90ED027A 		vldr.32	s14, [r0, #8]
- 245              	.LVL9:
- 246              		.loc 1 43 5 is_stmt 1 view .LVU79
+ 264              		.loc 1 42 12 view .LVU80
+ 265 000e D0ED026A 		vldr.32	s13, [r0, #8]
+ 266              	.LVL15:
+ 267              		.loc 1 43 5 is_stmt 1 view .LVU81
   44:DaisySP-LGPL-FX/moogladder.cpp ****     float  res4;
- 247              		.loc 1 44 5 view .LVU80
+ 268              		.loc 1 44 5 view .LVU82
   45:DaisySP-LGPL-FX/moogladder.cpp ****     float* delay   = delay_;
- 248              		.loc 1 45 5 view .LVU81
+ 269              		.loc 1 45 5 view .LVU83
   46:DaisySP-LGPL-FX/moogladder.cpp ****     float* tanhstg = tanhstg_;
- 249              		.loc 1 46 5 view .LVU82
+ 270              		.loc 1 46 5 view .LVU84
   47:DaisySP-LGPL-FX/moogladder.cpp ****     float  stg[4];
- 250              		.loc 1 47 5 view .LVU83
+ 271              		.loc 1 47 5 view .LVU85
   48:DaisySP-LGPL-FX/moogladder.cpp ****     float  acr, tune;
- 251              		.loc 1 48 5 view .LVU84
+ 272              		.loc 1 48 5 view .LVU86
   49:DaisySP-LGPL-FX/moogladder.cpp **** 
   50:DaisySP-LGPL-FX/moogladder.cpp ****     float THERMAL = 0.000025;
- 252              		.loc 1 50 5 view .LVU85
+ 273              		.loc 1 50 5 view .LVU87
   51:DaisySP-LGPL-FX/moogladder.cpp **** 
   52:DaisySP-LGPL-FX/moogladder.cpp ****     if(res < 0)
- 253              		.loc 1 52 5 view .LVU86
+ 274              		.loc 1 52 5 view .LVU88
   41:DaisySP-LGPL-FX/moogladder.cpp ****     float  freq = freq_;
- 254              		.loc 1 41 1 is_stmt 0 view .LVU87
- 255 0014 84B0     		sub	sp, sp, #16
- 256              		.cfi_def_cfa_offset 64
- 257              		.loc 1 52 5 view .LVU88
- 258 0016 F5EEC08A 		vcmpe.f32	s17, #0
- 259              	.LBB9:
+ 275              		.loc 1 41 1 is_stmt 0 view .LVU89
+ 276 0012 0446     		mov	r4, r0
+ 277              		.loc 1 52 5 view .LVU90
+ 278 0014 B5EEC08A 		vcmpe.f32	s16, #0
+ 279              	.LBB27:
   53:DaisySP-LGPL-FX/moogladder.cpp ****     {
   54:DaisySP-LGPL-FX/moogladder.cpp ****         res = 0;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 16
-
-
   55:DaisySP-LGPL-FX/moogladder.cpp ****     }
   56:DaisySP-LGPL-FX/moogladder.cpp **** 
   57:DaisySP-LGPL-FX/moogladder.cpp ****     if(old_freq_ != freq || old_res_ != res)
- 260              		.loc 1 57 5 view .LVU89
- 261 001a D0ED0C7A 		vldr.32	s15, [r0, #48]
- 262              	.LBE9:
-  41:DaisySP-LGPL-FX/moogladder.cpp ****     float  freq = freq_;
- 263              		.loc 1 41 1 view .LVU90
- 264 001e 0446     		mov	r4, r0
- 265 0020 DFED5C9A 		vldr.32	s19, .L29
+ 280              		.loc 1 57 5 view .LVU91
+ 281 0018 D0ED0C7A 		vldr.32	s15, [r0, #48]
+ 282              	.LBE27:
   52:DaisySP-LGPL-FX/moogladder.cpp ****     {
- 266              		.loc 1 52 5 view .LVU91
- 267 0024 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 268              	.LBB11:
- 269              		.loc 1 57 5 view .LVU92
- 270 0028 F4EE477A 		vcmp.f32	s15, s14
- 271              	.LBE11:
+ 283              		.loc 1 52 5 view .LVU92
+ 284 001c F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 285              	.LBB29:
+ 286              		.loc 1 57 5 view .LVU93
+ 287 0020 F4EE667A 		vcmp.f32	s15, s13
+ 288              	.LBE29:
   54:DaisySP-LGPL-FX/moogladder.cpp ****     }
- 272              		.loc 1 54 13 view .LVU93
- 273 002c 48BF     		it	mi
- 274 002e DFED5A8A 		vldrmi.32	s17, .L29+4
- 275              	.LVL10:
- 276              		.loc 1 57 5 is_stmt 1 view .LVU94
- 277              	.LBB12:
- 278 0032 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 279 0036 07D1     		bne	.L19
- 280              		.loc 1 57 29 is_stmt 0 discriminator 1 view .LVU95
- 281 0038 D0ED0D7A 		vldr.32	s15, [r0, #52]
- 282              		.loc 1 57 26 discriminator 1 view .LVU96
- 283 003c F4EE687A 		vcmp.f32	s15, s17
- 284 0040 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 285 0044 00F09380 		beq	.L20
- 286              	.L19:
- 287              	.LBB10:
+ 289              		.loc 1 54 13 view .LVU94
+ 290 0024 48BF     		it	mi
+ 291 0026 9FEDE48A 		vldrmi.32	s16, .L103
+ 292              	.LVL16:
+ 293              		.loc 1 57 5 is_stmt 1 view .LVU95
+ 294              	.LBB30:
+ 295 002a F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 296 002e 07D1     		bne	.L18
+ 297              		.loc 1 57 29 is_stmt 0 discriminator 1 view .LVU96
+ 298 0030 D0ED0D7A 		vldr.32	s15, [r0, #52]
+ 299              		.loc 1 57 26 discriminator 1 view .LVU97
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 17
+
+
+ 300 0034 F4EE487A 		vcmp.f32	s15, s16
+ 301 0038 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 302 003c 00F00382 		beq	.L19
+ 303              	.L18:
+ 304              	.LBB28:
   58:DaisySP-LGPL-FX/moogladder.cpp ****     {
   59:DaisySP-LGPL-FX/moogladder.cpp ****         float f, fc, fc2, fc3, fcr;
- 288              		.loc 1 59 9 is_stmt 1 view .LVU97
+ 305              		.loc 1 59 9 is_stmt 1 view .LVU98
   60:DaisySP-LGPL-FX/moogladder.cpp ****         old_freq_ = freq;
- 289              		.loc 1 60 9 view .LVU98
+ 306              		.loc 1 60 9 view .LVU99
   61:DaisySP-LGPL-FX/moogladder.cpp ****         fc        = (freq / sample_rate_);
- 290              		.loc 1 61 19 is_stmt 0 view .LVU99
- 291 0048 D4ED0E6A 		vldr.32	s13, [r4, #56]
+ 307              		.loc 1 61 19 is_stmt 0 view .LVU100
+ 308 0040 94ED0E6A 		vldr.32	s12, [r4, #56]
   62:DaisySP-LGPL-FX/moogladder.cpp ****         f         = 0.5f * fc;
- 292              		.loc 1 62 19 view .LVU100
- 293 004c B6EE000A 		vmov.f32	s0, #5.0e-1
- 294              	.LVL11:
+ 309              		.loc 1 62 19 view .LVU101
+ 310 0044 B6EE000A 		vmov.f32	s0, #5.0e-1
+ 311              	.LVL17:
   60:DaisySP-LGPL-FX/moogladder.cpp ****         old_freq_ = freq;
- 295              		.loc 1 60 19 view .LVU101
- 296 0050 84ED0C7A 		vstr.32	s14, [r4, #48]
+ 312              		.loc 1 60 19 view .LVU102
+ 313 0048 C4ED0C6A 		vstr.32	s13, [r4, #48]
   61:DaisySP-LGPL-FX/moogladder.cpp ****         fc        = (freq / sample_rate_);
- 297              		.loc 1 61 9 is_stmt 1 view .LVU102
+ 314              		.loc 1 61 9 is_stmt 1 view .LVU103
   61:DaisySP-LGPL-FX/moogladder.cpp ****         fc        = (freq / sample_rate_);
- 298              		.loc 1 61 19 is_stmt 0 view .LVU103
- 299 0054 C7EE267A 		vdiv.f32	s15, s14, s13
- 300              	.LVL12:
- 301              		.loc 1 62 9 is_stmt 1 view .LVU104
+ 315              		.loc 1 61 19 is_stmt 0 view .LVU104
+ 316 004c 86EE867A 		vdiv.f32	s14, s13, s12
+ 317              	.LVL18:
+ 318              		.loc 1 62 9 is_stmt 1 view .LVU105
   63:DaisySP-LGPL-FX/moogladder.cpp ****         fc2       = fc * fc;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 17
-
-
- 302              		.loc 1 63 9 view .LVU105
+ 319              		.loc 1 63 9 view .LVU106
   64:DaisySP-LGPL-FX/moogladder.cpp ****         fc3       = fc2 * fc2;
   65:DaisySP-LGPL-FX/moogladder.cpp **** 
   66:DaisySP-LGPL-FX/moogladder.cpp ****         fcr  = 1.8730f * fc3 + 0.4955f * fc2 - 0.6490f * fc + 0.9988f;
- 303              		.loc 1 66 40 is_stmt 0 view .LVU106
- 304 0058 9FED507A 		vldr.32	s14, .L29+8
- 305              	.LVL13:
- 306              		.loc 1 66 30 view .LVU107
- 307 005c 9FED506A 		vldr.32	s12, .L29+12
+ 320              		.loc 1 66 40 is_stmt 0 view .LVU107
+ 321 0050 DFEDDA7A 		vldr.32	s15, .L103+4
+ 322              		.loc 1 66 30 view .LVU108
+ 323 0054 9FEDDA5A 		vldr.32	s10, .L103+8
+ 324              		.loc 1 66 46 view .LVU109
+ 325 0058 DFEDDA5A 		vldr.32	s11, .L103+12
   67:DaisySP-LGPL-FX/moogladder.cpp ****         acr  = -3.9364f * fc2 + 1.8409f * fc + 0.9968f;
- 308              		.loc 1 67 41 view .LVU108
- 309 0060 9FED508A 		vldr.32	s16, .L29+16
-  63:DaisySP-LGPL-FX/moogladder.cpp ****         fc2       = fc * fc;
- 310              		.loc 1 63 19 view .LVU109
- 311 0064 67EEA76A 		vmul.f32	s13, s15, s15
- 312              	.LVL14:
-  64:DaisySP-LGPL-FX/moogladder.cpp ****         fc3       = fc2 * fc2;
- 313              		.loc 1 64 9 is_stmt 1 view .LVU110
-  66:DaisySP-LGPL-FX/moogladder.cpp ****         acr  = -3.9364f * fc2 + 1.8409f * fc + 0.9968f;
- 314              		.loc 1 66 9 view .LVU111
- 315              		.loc 1 67 41 is_stmt 0 view .LVU112
- 316 0068 27EE888A 		vmul.f32	s16, s15, s16
-  64:DaisySP-LGPL-FX/moogladder.cpp ****         fc3       = fc2 * fc2;
- 317              		.loc 1 64 19 view .LVU113
- 318 006c 66EEA65A 		vmul.f32	s11, s13, s13
- 319              	.LVL15:
-  66:DaisySP-LGPL-FX/moogladder.cpp ****         acr  = -3.9364f * fc2 + 1.8409f * fc + 0.9968f;
- 320              		.loc 1 66 40 view .LVU114
- 321 0070 26EE877A 		vmul.f32	s14, s13, s14
-  66:DaisySP-LGPL-FX/moogladder.cpp ****         acr  = -3.9364f * fc2 + 1.8409f * fc + 0.9968f;
- 322              		.loc 1 66 30 view .LVU115
- 323 0074 A5EE867A 		vfma.f32	s14, s11, s12
-  66:DaisySP-LGPL-FX/moogladder.cpp ****         acr  = -3.9364f * fc2 + 1.8409f * fc + 0.9968f;
- 324              		.loc 1 66 46 view .LVU116
- 325 0078 9FED4B6A 		vldr.32	s12, .L29+20
- 326 007c A7EEC67A 		vfms.f32	s14, s15, s12
- 327              	.LVL16:
- 328              		.loc 1 67 9 is_stmt 1 view .LVU117
- 329              		.loc 1 67 31 is_stmt 0 view .LVU118
- 330 0080 9FED4A6A 		vldr.32	s12, .L29+24
-  62:DaisySP-LGPL-FX/moogladder.cpp ****         fc2       = fc * fc;
- 331              		.loc 1 62 19 view .LVU119
- 332 0084 67EE807A 		vmul.f32	s15, s15, s0
- 333              	.LVL17:
   68:DaisySP-LGPL-FX/moogladder.cpp ****         tune = (1.0f - expf(-((2 * PI_F) * f * fcr))) / THERMAL;
- 334              		.loc 1 68 42 view .LVU120
- 335 0088 9FED490A 		vldr.32	s0, .L29+28
-  67:DaisySP-LGPL-FX/moogladder.cpp ****         tune = (1.0f - expf(-((2 * PI_F) * f * fcr))) / THERMAL;
- 336              		.loc 1 67 31 view .LVU121
- 337 008c A6EE868A 		vfma.f32	s16, s13, s12
-  67:DaisySP-LGPL-FX/moogladder.cpp ****         tune = (1.0f - expf(-((2 * PI_F) * f * fcr))) / THERMAL;
- 338              		.loc 1 67 14 view .LVU122
- 339 0090 DFED486A 		vldr.32	s13, .L29+32
- 340              	.LVL18:
- 341              		.loc 1 68 42 view .LVU123
- 342 0094 67EE807A 		vmul.f32	s15, s15, s0
- 343              	.LVL19:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 18
-
-
+ 326              		.loc 1 68 42 view .LVU110
+ 327 005c 9FEDDA4A 		vldr.32	s8, .L103+16
   66:DaisySP-LGPL-FX/moogladder.cpp ****         acr  = -3.9364f * fc2 + 1.8409f * fc + 0.9968f;
- 344              		.loc 1 66 14 view .LVU124
- 345 0098 9FED470A 		vldr.32	s0, .L29+36
- 346 009c 37EE000A 		vadd.f32	s0, s14, s0
- 347              	.LVL20:
+ 328              		.loc 1 66 14 view .LVU111
+ 329 0060 9FEDDA6A 		vldr.32	s12, .L103+20
+  67:DaisySP-LGPL-FX/moogladder.cpp ****         acr  = -3.9364f * fc2 + 1.8409f * fc + 0.9968f;
+ 330              		.loc 1 67 41 view .LVU112
+ 331 0064 9FEDDA9A 		vldr.32	s18, .L103+24
+  67:DaisySP-LGPL-FX/moogladder.cpp ****         acr  = -3.9364f * fc2 + 1.8409f * fc + 0.9968f;
+ 332              		.loc 1 67 31 view .LVU113
+ 333 0068 DFEDDA3A 		vldr.32	s7, .L103+28
+  67:DaisySP-LGPL-FX/moogladder.cpp ****         acr  = -3.9364f * fc2 + 1.8409f * fc + 0.9968f;
+ 334              		.loc 1 67 14 view .LVU114
+ 335 006c 9FEDDABA 		vldr.32	s22, .L103+32
+  63:DaisySP-LGPL-FX/moogladder.cpp ****         fc3       = fc2 * fc2;
+ 336              		.loc 1 63 19 view .LVU115
+ 337 0070 67EE076A 		vmul.f32	s13, s14, s14
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 18
+
+
+ 338              	.LVL19:
+  64:DaisySP-LGPL-FX/moogladder.cpp **** 
+ 339              		.loc 1 64 9 is_stmt 1 view .LVU116
+  66:DaisySP-LGPL-FX/moogladder.cpp ****         acr  = -3.9364f * fc2 + 1.8409f * fc + 0.9968f;
+ 340              		.loc 1 66 9 view .LVU117
+  62:DaisySP-LGPL-FX/moogladder.cpp ****         fc2       = fc * fc;
+ 341              		.loc 1 62 19 is_stmt 0 view .LVU118
+ 342 0074 27EE000A 		vmul.f32	s0, s14, s0
+ 343              	.LVL20:
   67:DaisySP-LGPL-FX/moogladder.cpp ****         tune = (1.0f - expf(-((2 * PI_F) * f * fcr))) / THERMAL;
- 348              		.loc 1 67 14 view .LVU125
- 349 00a0 38EE268A 		vadd.f32	s16, s16, s13
- 350              	.LVL21:
- 351              		.loc 1 68 9 is_stmt 1 view .LVU126
- 352              		.loc 1 68 28 is_stmt 0 view .LVU127
- 353 00a4 20EE670A 		vnmul.f32	s0, s0, s15
- 354              	.LVL22:
- 355              		.loc 1 68 28 view .LVU128
- 356 00a8 FFF7FEFF 		bl	expf
- 357              	.LVL23:
- 358              		.loc 1 68 22 view .LVU129
- 359 00ac F7EE007A 		vmov.f32	s15, #1.0e+0
+ 344              		.loc 1 67 41 view .LVU119
+ 345 0078 27EE099A 		vmul.f32	s18, s14, s18
+  64:DaisySP-LGPL-FX/moogladder.cpp **** 
+ 346              		.loc 1 64 19 view .LVU120
+ 347 007c 66EEA64A 		vmul.f32	s9, s13, s13
+ 348              	.LVL21:
+  66:DaisySP-LGPL-FX/moogladder.cpp ****         acr  = -3.9364f * fc2 + 1.8409f * fc + 0.9968f;
+ 349              		.loc 1 66 40 view .LVU121
+ 350 0080 66EEA77A 		vmul.f32	s15, s13, s15
+ 351              		.loc 1 68 42 view .LVU122
+ 352 0084 20EE040A 		vmul.f32	s0, s0, s8
+ 353              	.LVL22:
+  67:DaisySP-LGPL-FX/moogladder.cpp ****         tune = (1.0f - expf(-((2 * PI_F) * f * fcr))) / THERMAL;
+ 354              		.loc 1 67 31 view .LVU123
+ 355 0088 A6EEA39A 		vfma.f32	s18, s13, s7
+  66:DaisySP-LGPL-FX/moogladder.cpp ****         acr  = -3.9364f * fc2 + 1.8409f * fc + 0.9968f;
+ 356              		.loc 1 66 30 view .LVU124
+ 357 008c E4EE857A 		vfma.f32	s15, s9, s10
+  67:DaisySP-LGPL-FX/moogladder.cpp ****         tune = (1.0f - expf(-((2 * PI_F) * f * fcr))) / THERMAL;
+ 358              		.loc 1 67 14 view .LVU125
+ 359 0090 39EE0BBA 		vadd.f32	s22, s18, s22
+  66:DaisySP-LGPL-FX/moogladder.cpp ****         acr  = -3.9364f * fc2 + 1.8409f * fc + 0.9968f;
+ 360              		.loc 1 66 46 view .LVU126
+ 361 0094 E7EE657A 		vfms.f32	s15, s14, s11
+ 362              	.LVL23:
+  67:DaisySP-LGPL-FX/moogladder.cpp ****         tune = (1.0f - expf(-((2 * PI_F) * f * fcr))) / THERMAL;
+ 363              		.loc 1 67 9 is_stmt 1 view .LVU127
+ 364              		.loc 1 68 9 view .LVU128
+  66:DaisySP-LGPL-FX/moogladder.cpp ****         acr  = -3.9364f * fc2 + 1.8409f * fc + 0.9968f;
+ 365              		.loc 1 66 14 is_stmt 0 view .LVU129
+ 366 0098 77EE867A 		vadd.f32	s15, s15, s12
+ 367              	.LVL24:
+ 368              		.loc 1 68 28 view .LVU130
+ 369 009c 27EEC00A 		vnmul.f32	s0, s15, s0
+ 370 00a0 FFF7FEFF 		bl	expf
+ 371              	.LVL25:
+ 372              		.loc 1 68 22 view .LVU131
+ 373 00a4 F7EE007A 		vmov.f32	s15, #1.0e+0
+ 374              		.loc 1 68 14 view .LVU132
+ 375 00a8 9FEDCC7A 		vldr.32	s14, .L103+36
   69:DaisySP-LGPL-FX/moogladder.cpp **** 
   70:DaisySP-LGPL-FX/moogladder.cpp ****         old_res_  = res;
- 360              		.loc 1 70 19 view .LVU130
- 361 00b0 C4ED0D8A 		vstr.32	s17, [r4, #52]
+ 376              		.loc 1 70 19 view .LVU133
+ 377 00ac 84ED0D8A 		vstr.32	s16, [r4, #52]
+  68:DaisySP-LGPL-FX/moogladder.cpp **** 
+ 378              		.loc 1 68 22 view .LVU134
+ 379 00b0 37EEC00A 		vsub.f32	s0, s15, s0
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 19
+
+
   71:DaisySP-LGPL-FX/moogladder.cpp ****         old_acr_  = acr;
- 362              		.loc 1 71 19 view .LVU131
- 363 00b4 84ED0F8A 		vstr.32	s16, [r4, #60]
+ 380              		.loc 1 71 19 view .LVU135
+ 381 00b4 84ED0FBA 		vstr.32	s22, [r4, #60]
   68:DaisySP-LGPL-FX/moogladder.cpp **** 
- 364              		.loc 1 68 22 view .LVU132
- 365 00b8 37EEC00A 		vsub.f32	s0, s15, s0
-  68:DaisySP-LGPL-FX/moogladder.cpp **** 
- 366              		.loc 1 68 14 view .LVU133
- 367 00bc 80EE29AA 		vdiv.f32	s20, s0, s19
- 368              	.LVL24:
+ 382              		.loc 1 68 14 view .LVU136
+ 383 00b8 C0EE078A 		vdiv.f32	s17, s0, s14
+ 384              	.LVL26:
   70:DaisySP-LGPL-FX/moogladder.cpp ****         old_acr_  = acr;
- 369              		.loc 1 70 9 is_stmt 1 view .LVU134
- 370              		.loc 1 71 9 view .LVU135
+ 385              		.loc 1 70 9 is_stmt 1 view .LVU137
+ 386              		.loc 1 71 9 view .LVU138
   72:DaisySP-LGPL-FX/moogladder.cpp ****         old_tune_ = tune;
- 371              		.loc 1 72 9 view .LVU136
- 372              		.loc 1 72 19 is_stmt 0 view .LVU137
- 373 00c0 84ED10AA 		vstr.32	s20, [r4, #64]
- 374              	.L21:
- 375              		.loc 1 72 19 view .LVU138
- 376              	.LBE10:
- 377              	.LBE12:
+ 387              		.loc 1 72 9 view .LVU139
+ 388              		.loc 1 72 19 is_stmt 0 view .LVU140
+ 389 00bc C4ED108A 		vstr.32	s17, [r4, #64]
+ 390              	.L20:
+ 391              		.loc 1 72 19 view .LVU141
+ 392              	.LBE28:
+ 393              	.LBE30:
   73:DaisySP-LGPL-FX/moogladder.cpp ****     }
   74:DaisySP-LGPL-FX/moogladder.cpp ****     else
   75:DaisySP-LGPL-FX/moogladder.cpp ****     {
@@ -1073,318 +1108,1322 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 1
   79:DaisySP-LGPL-FX/moogladder.cpp ****     }
   80:DaisySP-LGPL-FX/moogladder.cpp **** 
   81:DaisySP-LGPL-FX/moogladder.cpp ****     res4 = 4.0f * res * acr;
- 378              		.loc 1 81 5 is_stmt 1 view .LVU139
- 379              		.loc 1 81 17 is_stmt 0 view .LVU140
- 380 00c4 F1EE007A 		vmov.f32	s15, #4.0e+0
- 381              		.loc 1 81 10 view .LVU141
- 382 00c8 4FF00208 		mov	r8, #2
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 19
-
-
- 383              		.loc 1 81 17 view .LVU142
- 384 00cc 68EEA78A 		vmul.f32	s17, s17, s15
- 385              	.LVL25:
- 386              		.loc 1 81 10 view .LVU143
- 387 00d0 28EE888A 		vmul.f32	s16, s17, s16
- 388              	.LVL26:
+ 394              		.loc 1 81 5 is_stmt 1 view .LVU142
+ 395              		.loc 1 81 17 is_stmt 0 view .LVU143
+ 396 00c0 B1EE009A 		vmov.f32	s18, #4.0e+0
+ 397              	.LBB31:
+ 398              	.LBB32:
   82:DaisySP-LGPL-FX/moogladder.cpp **** 
   83:DaisySP-LGPL-FX/moogladder.cpp ****     for(int j = 0; j < 2; j++)
- 389              		.loc 1 83 5 is_stmt 1 view .LVU144
- 390              	.LBB13:
- 391              		.loc 1 83 22 view .LVU145
- 392              	.L25:
- 393              	.LBB14:
   84:DaisySP-LGPL-FX/moogladder.cpp ****     {
   85:DaisySP-LGPL-FX/moogladder.cpp ****         in -= res4 * delay[5];
- 394              		.loc 1 85 9 view .LVU146
- 395              		.loc 1 85 12 is_stmt 0 view .LVU147
- 396 00d4 D4ED087A 		vldr.32	s15, [r4, #32]
+ 399              		.loc 1 85 12 view .LVU144
+ 400 00c4 94ED087A 		vldr.32	s14, [r4, #32]
   86:DaisySP-LGPL-FX/moogladder.cpp ****         delay[0] = stg[0]
   87:DaisySP-LGPL-FX/moogladder.cpp ****             = delay[0] + tune * (my_tanh(in * THERMAL) - tanhstg[0]);
- 397              		.loc 1 87 41 view .LVU148
- 398 00d8 2046     		mov	r0, r4
- 399 00da 6F46     		mov	r7, sp
- 400 00dc 04F11005 		add	r5, r4, #16
+ 401              		.loc 1 87 41 view .LVU145
+ 402 00c8 DFEDC47A 		vldr.32	s15, .L103+36
+ 403 00cc D4ED03AA 		vldr.32	s21, [r4, #12]
+ 404              	.LBE32:
+ 405              	.LBE31:
+  81:DaisySP-LGPL-FX/moogladder.cpp **** 
+ 406              		.loc 1 81 17 view .LVU146
+ 407 00d0 28EE099A 		vmul.f32	s18, s16, s18
+ 408              	.LVL27:
+  83:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 409              		.loc 1 83 5 is_stmt 1 view .LVU147
+ 410              	.LBB118:
+  83:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 411              		.loc 1 83 22 view .LVU148
+ 412 00d4 94ED09DA 		vldr.32	s26, [r4, #36]
+ 413 00d8 D4ED04DA 		vldr.32	s27, [r4, #16]
+ 414 00dc D4ED0ABA 		vldr.32	s23, [r4, #40]
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 20
+
+
+ 415              	.LBB115:
   85:DaisySP-LGPL-FX/moogladder.cpp ****         delay[0] = stg[0]
- 401              		.loc 1 85 12 view .LVU149
- 402 00e0 A7EEC89A 		vfms.f32	s18, s15, s16
- 403              	.LVL27:
-  86:DaisySP-LGPL-FX/moogladder.cpp ****         delay[0] = stg[0]
- 404              		.loc 1 86 9 is_stmt 1 view .LVU150
- 405              	.LBB15:
-  88:DaisySP-LGPL-FX/moogladder.cpp ****         for(int k = 1; k < 4; k++)
- 406              		.loc 1 88 17 is_stmt 0 view .LVU151
- 407 00e4 0126     		movs	r6, #1
- 408              	.LBE15:
-  87:DaisySP-LGPL-FX/moogladder.cpp ****         for(int k = 1; k < 4; k++)
- 409              		.loc 1 87 41 view .LVU152
- 410 00e6 29EE290A 		vmul.f32	s0, s18, s19
- 411 00ea FFF7FEFF 		bl	_ZN7daisysp10MoogLadder7my_tanhEf
- 412              	.LVL28:
-  87:DaisySP-LGPL-FX/moogladder.cpp ****         for(int k = 1; k < 4; k++)
- 413              		.loc 1 87 56 view .LVU153
- 414 00ee D4ED097A 		vldr.32	s15, [r4, #36]
- 415 00f2 30EE670A 		vsub.f32	s0, s0, s15
-  87:DaisySP-LGPL-FX/moogladder.cpp ****         for(int k = 1; k < 4; k++)
- 416              		.loc 1 87 24 view .LVU154
- 417 00f6 D4ED037A 		vldr.32	s15, [r4, #12]
- 418 00fa E0EE0A7A 		vfma.f32	s15, s0, s20
-  87:DaisySP-LGPL-FX/moogladder.cpp ****         for(int k = 1; k < 4; k++)
- 419              		.loc 1 87 13 view .LVU155
- 420 00fe CDED007A 		vstr.32	s15, [sp]
+ 416              		.loc 1 85 12 is_stmt 0 view .LVU149
+ 417 00e0 2BEE499A 		vnmul.f32	s18, s22, s18
+ 418              	.LVL28:
+  85:DaisySP-LGPL-FX/moogladder.cpp ****         delay[0] = stg[0]
+ 419              		.loc 1 85 12 view .LVU150
+ 420 00e4 94ED05AA 		vldr.32	s20, [r4, #20]
+ 421 00e8 D4ED0BCA 		vldr.32	s25, [r4, #44]
+ 422 00ec 94ED068A 		vldr.32	s16, [r4, #24]
+ 423              	.LVL29:
+  85:DaisySP-LGPL-FX/moogladder.cpp ****         delay[0] = stg[0]
+ 424              		.loc 1 85 12 view .LVU151
+ 425 00f0 E9EE079A 		vfma.f32	s19, s18, s14
+ 426              	.LVL30:
+  85:DaisySP-LGPL-FX/moogladder.cpp ****         delay[0] = stg[0]
+ 427              		.loc 1 85 12 view .LVU152
+ 428 00f4 94ED07CA 		vldr.32	s24, [r4, #28]
+ 429              	.LVL31:
+  85:DaisySP-LGPL-FX/moogladder.cpp ****         delay[0] = stg[0]
+ 430              		.loc 1 85 9 is_stmt 1 view .LVU153
   86:DaisySP-LGPL-FX/moogladder.cpp ****             = delay[0] + tune * (my_tanh(in * THERMAL) - tanhstg[0]);
- 421              		.loc 1 86 18 view .LVU156
- 422 0102 C4ED037A 		vstr.32	s15, [r4, #12]
- 423              		.loc 1 88 9 is_stmt 1 view .LVU157
- 424              	.LVL29:
- 425              	.LBB16:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 20
+ 431              		.loc 1 86 9 view .LVU154
+ 432              		.loc 1 87 41 is_stmt 0 view .LVU155
+ 433 00f8 69EEA77A 		vmul.f32	s15, s19, s15
+ 434              	.LVL32:
+ 435              	.LBB33:
+ 436              	.LBI33:
+   6:DaisySP-LGPL-FX/moogladder.cpp **** {
+ 437              		.loc 1 6 7 is_stmt 1 view .LVU156
+ 438              	.LBB34:
+   8:DaisySP-LGPL-FX/moogladder.cpp ****     if(x < 0)
+ 439              		.loc 1 8 5 view .LVU157
+   9:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 440              		.loc 1 9 5 view .LVU158
+ 441 00fc F5EEC07A 		vcmpe.f32	s15, #0
+ 442 0100 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 443 0104 00F1DC81 		bmi	.L94
+   9:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 444              		.loc 1 9 5 is_stmt 0 view .LVU159
+ 445 0108 F7EE009A 		vmov.f32	s19, #1.0e+0
+ 446              	.LBE34:
+ 447              	.LBE33:
+ 448              		.loc 1 87 41 view .LVU160
+ 449 010c B0EE670A 		vmov.f32	s0, s15
+ 450              	.LVL33:
+ 451              	.L21:
+ 452              	.LBB44:
+ 453              	.LBB39:
+  14:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 454              		.loc 1 14 5 is_stmt 1 view .LVU161
+ 455 0110 B1EE007A 		vmov.f32	s14, #4.0e+0
+ 456 0114 B4EEC70A 		vcmpe.f32	s0, s14
+ 457 0118 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 458 011c 0BDA     		bge	.L23
+  18:DaisySP-LGPL-FX/moogladder.cpp ****         return x * sign;
+ 459              		.loc 1 18 5 view .LVU162
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 21
 
 
- 426              		.loc 1 88 26 view .LVU158
- 427              	.L24:
+ 460 011e B6EE007A 		vmov.f32	s14, #5.0e-1
+ 461 0122 B4EEC70A 		vcmpe.f32	s0, s14
+ 462 0126 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 463 012a 00F19981 		bmi	.L54
+  20:DaisySP-LGPL-FX/moogladder.cpp **** }
+ 464              		.loc 1 20 5 view .LVU163
+ 465              	.LVL34:
+ 466              	.LBB35:
+ 467              	.LBI35:
+ 501:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_tanhf(__x); }
+ 468              		.loc 2 501 3 view .LVU164
+ 469              	.LBB36:
+ 470              		.loc 2 502 5 view .LVU165
+ 471              		.loc 2 502 27 is_stmt 0 view .LVU166
+ 472 012e FFF7FEFF 		bl	tanhf
+ 473              	.LVL35:
+ 474              		.loc 2 502 27 view .LVU167
+ 475              	.LBE36:
+ 476              	.LBE35:
+  20:DaisySP-LGPL-FX/moogladder.cpp **** }
+ 477              		.loc 1 20 25 view .LVU168
+ 478 0132 69EE809A 		vmul.f32	s19, s19, s0
+ 479              	.L23:
+ 480              	.LVL36:
+  20:DaisySP-LGPL-FX/moogladder.cpp **** }
+ 481              		.loc 1 20 25 view .LVU169
+ 482              	.LBE39:
+ 483              	.LBE44:
+ 484              		.loc 1 87 56 view .LVU170
+ 485 0136 79EECD9A 		vsub.f32	s19, s19, s26
+ 486              	.LBB45:
+  88:DaisySP-LGPL-FX/moogladder.cpp ****         for(int k = 1; k < 4; k++)
   89:DaisySP-LGPL-FX/moogladder.cpp ****         {
   90:DaisySP-LGPL-FX/moogladder.cpp ****             in     = stg[k - 1];
- 428              		.loc 1 90 13 view .LVU159
- 429              		.loc 1 90 20 is_stmt 0 view .LVU160
- 430 0106 B7EC019A 		vldmia.32	r7!, {s18}
- 431              	.LVL30:
   91:DaisySP-LGPL-FX/moogladder.cpp ****             stg[k] = delay[k]
- 432              		.loc 1 91 13 is_stmt 1 view .LVU161
   92:DaisySP-LGPL-FX/moogladder.cpp ****                      + tune
   93:DaisySP-LGPL-FX/moogladder.cpp ****                            * ((tanhstg[k - 1] = my_tanh(in * THERMAL))
- 433              		.loc 1 93 56 is_stmt 0 view .LVU162
- 434 010a 2046     		mov	r0, r4
-  91:DaisySP-LGPL-FX/moogladder.cpp ****             stg[k] = delay[k]
- 435              		.loc 1 91 29 view .LVU163
- 436 010c F5EC01AA 		vldmia.32	r5!, {s21}
- 437              		.loc 1 93 56 view .LVU164
- 438 0110 29EE290A 		vmul.f32	s0, s18, s19
- 439 0114 FFF7FEFF 		bl	_ZN7daisysp10MoogLadder7my_tanhEf
- 440              	.LVL31:
-  94:DaisySP-LGPL-FX/moogladder.cpp ****                               - (k != 3 ? tanhstg[k]
- 441              		.loc 1 94 41 view .LVU165
- 442 0118 032E     		cmp	r6, #3
-  93:DaisySP-LGPL-FX/moogladder.cpp ****                               - (k != 3 ? tanhstg[k]
- 443              		.loc 1 93 56 view .LVU166
- 444 011a F0EE408A 		vmov.f32	s17, s0
-  93:DaisySP-LGPL-FX/moogladder.cpp ****                               - (k != 3 ? tanhstg[k]
- 445              		.loc 1 93 47 view .LVU167
- 446 011e 85ED040A 		vstr.32	s0, [r5, #16]
- 447              		.loc 1 94 41 view .LVU168
- 448 0122 2ED0     		beq	.L22
- 449              	.LVL32:
- 450              		.loc 1 94 41 discriminator 1 view .LVU169
- 451 0124 95ED050A 		vldr.32	s0, [r5, #20]
- 452              	.L23:
- 453              		.loc 1 94 31 discriminator 2 view .LVU170
- 454 0128 78EEC08A 		vsub.f32	s17, s17, s0
-  88:DaisySP-LGPL-FX/moogladder.cpp ****         {
- 455              		.loc 1 88 9 discriminator 2 view .LVU171
- 456 012c 0136     		adds	r6, r6, #1
- 457              	.LVL33:
-  92:DaisySP-LGPL-FX/moogladder.cpp ****                            * ((tanhstg[k - 1] = my_tanh(in * THERMAL))
- 458              		.loc 1 92 22 discriminator 2 view .LVU172
- 459 012e F0EE6A7A 		vmov.f32	s15, s21
-  88:DaisySP-LGPL-FX/moogladder.cpp ****         {
- 460              		.loc 1 88 26 discriminator 2 view .LVU173
- 461 0132 042E     		cmp	r6, #4
-  92:DaisySP-LGPL-FX/moogladder.cpp ****                            * ((tanhstg[k - 1] = my_tanh(in * THERMAL))
- 462              		.loc 1 92 22 discriminator 2 view .LVU174
- 463 0134 E8EE8A7A 		vfma.f32	s15, s17, s20
+ 487              		.loc 1 93 56 view .LVU171
+ 488 013a DFEDA87A 		vldr.32	s15, .L103+36
+ 489              	.LBE45:
+  87:DaisySP-LGPL-FX/moogladder.cpp ****         for(int k = 1; k < 4; k++)
+ 490              		.loc 1 87 24 view .LVU172
+ 491 013e E8EEA9AA 		vfma.f32	s21, s17, s19
+  88:DaisySP-LGPL-FX/moogladder.cpp ****         for(int k = 1; k < 4; k++)
+ 492              		.loc 1 88 9 is_stmt 1 view .LVU173
+ 493              	.LVL37:
+ 494              	.LBB102:
+  88:DaisySP-LGPL-FX/moogladder.cpp ****         for(int k = 1; k < 4; k++)
+ 495              		.loc 1 88 26 view .LVU174
+  90:DaisySP-LGPL-FX/moogladder.cpp ****             stg[k] = delay[k]
+ 496              		.loc 1 90 13 view .LVU175
   91:DaisySP-LGPL-FX/moogladder.cpp ****                      + tune
- 464              		.loc 1 91 20 discriminator 2 view .LVU175
- 465 0138 C7ED007A 		vstr.32	s15, [r7]
+ 497              		.loc 1 91 13 view .LVU176
+ 498              		.loc 1 93 56 is_stmt 0 view .LVU177
+ 499 0142 6AEEA77A 		vmul.f32	s15, s21, s15
+ 500              	.LVL38:
+ 501              	.LBB46:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 22
+
+
+ 502              	.LBI46:
+   6:DaisySP-LGPL-FX/moogladder.cpp **** {
+ 503              		.loc 1 6 7 is_stmt 1 view .LVU178
+ 504              	.LBB47:
+   8:DaisySP-LGPL-FX/moogladder.cpp ****     if(x < 0)
+ 505              		.loc 1 8 5 view .LVU179
+   9:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 506              		.loc 1 9 5 view .LVU180
+ 507 0146 F5EEC07A 		vcmpe.f32	s15, #0
+ 508 014a F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 509 014e 00F1A381 		bmi	.L95
+ 510 0152 B7EE00DA 		vmov.f32	s26, #1.0e+0
+ 511              	.LBE47:
+ 512              	.LBE46:
+ 513              		.loc 1 93 56 is_stmt 0 view .LVU181
+ 514 0156 B0EE670A 		vmov.f32	s0, s15
+ 515              	.LVL39:
+ 516              	.L24:
+ 517              	.LBB74:
+ 518              	.LBB60:
+  14:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 519              		.loc 1 14 5 is_stmt 1 view .LVU182
+ 520 015a B1EE007A 		vmov.f32	s14, #4.0e+0
+ 521 015e B4EEC70A 		vcmpe.f32	s0, s14
+ 522 0162 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 523 0166 0BDA     		bge	.L26
+  18:DaisySP-LGPL-FX/moogladder.cpp ****         return x * sign;
+ 524              		.loc 1 18 5 view .LVU183
+ 525 0168 B6EE007A 		vmov.f32	s14, #5.0e-1
+ 526 016c B4EEC70A 		vcmpe.f32	s0, s14
+ 527 0170 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 528 0174 00F17A81 		bmi	.L56
+  20:DaisySP-LGPL-FX/moogladder.cpp **** }
+ 529              		.loc 1 20 5 view .LVU184
+ 530              	.LVL40:
+ 531              	.LBB48:
+ 532              	.LBI48:
+ 501:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_tanhf(__x); }
+ 533              		.loc 2 501 3 view .LVU185
+ 534              	.LBB49:
+ 535              		.loc 2 502 5 view .LVU186
+ 536              		.loc 2 502 27 is_stmt 0 view .LVU187
+ 537 0178 FFF7FEFF 		bl	tanhf
+ 538              	.LVL41:
+ 539              		.loc 2 502 27 view .LVU188
+ 540              	.LBE49:
+ 541              	.LBE48:
+  20:DaisySP-LGPL-FX/moogladder.cpp **** }
+ 542              		.loc 1 20 25 view .LVU189
+ 543 017c 2DEE00DA 		vmul.f32	s26, s26, s0
+ 544              	.L26:
+ 545              	.LVL42:
+  20:DaisySP-LGPL-FX/moogladder.cpp **** }
+ 546              		.loc 1 20 25 view .LVU190
+ 547              	.LBE60:
+ 548              	.LBE74:
+  94:DaisySP-LGPL-FX/moogladder.cpp ****                               - (k != 3 ? tanhstg[k]
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 23
+
+
+ 549              		.loc 1 94 31 view .LVU191
+ 550 0180 7DEE6BBA 		vsub.f32	s23, s26, s23
+  93:DaisySP-LGPL-FX/moogladder.cpp ****                               - (k != 3 ? tanhstg[k]
+ 551              		.loc 1 93 56 view .LVU192
+ 552 0184 DFED957A 		vldr.32	s15, .L103+36
+  92:DaisySP-LGPL-FX/moogladder.cpp ****                            * ((tanhstg[k - 1] = my_tanh(in * THERMAL))
+ 553              		.loc 1 92 22 view .LVU193
+ 554 0188 B0EE6DBA 		vmov.f32	s22, s27
+ 555              	.LVL43:
+  92:DaisySP-LGPL-FX/moogladder.cpp ****                            * ((tanhstg[k - 1] = my_tanh(in * THERMAL))
+ 556              		.loc 1 92 22 view .LVU194
+ 557 018c A8EEABBA 		vfma.f32	s22, s17, s23
   95:DaisySP-LGPL-FX/moogladder.cpp ****                                         : my_tanh(delay[k] * THERMAL)));
   96:DaisySP-LGPL-FX/moogladder.cpp ****             delay[k] = stg[k];
- 466              		.loc 1 96 13 is_stmt 1 discriminator 2 view .LVU176
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 21
+ 558              		.loc 1 96 13 is_stmt 1 view .LVU195
+  88:DaisySP-LGPL-FX/moogladder.cpp ****         {
+ 559              		.loc 1 88 9 view .LVU196
+ 560              	.LVL44:
+  88:DaisySP-LGPL-FX/moogladder.cpp ****         {
+ 561              		.loc 1 88 26 view .LVU197
+  90:DaisySP-LGPL-FX/moogladder.cpp ****             stg[k] = delay[k]
+ 562              		.loc 1 90 13 view .LVU198
+  91:DaisySP-LGPL-FX/moogladder.cpp ****                      + tune
+ 563              		.loc 1 91 13 view .LVU199
+  93:DaisySP-LGPL-FX/moogladder.cpp ****                               - (k != 3 ? tanhstg[k]
+ 564              		.loc 1 93 56 is_stmt 0 view .LVU200
+ 565 0190 6BEE277A 		vmul.f32	s15, s22, s15
+ 566              	.LVL45:
+ 567              	.LBB75:
+   6:DaisySP-LGPL-FX/moogladder.cpp **** {
+ 568              		.loc 1 6 7 is_stmt 1 view .LVU201
+ 569              	.LBB61:
+   8:DaisySP-LGPL-FX/moogladder.cpp ****     if(x < 0)
+ 570              		.loc 1 8 5 view .LVU202
+   9:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 571              		.loc 1 9 5 view .LVU203
+ 572 0194 F5EEC07A 		vcmpe.f32	s15, #0
+ 573 0198 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 574 019c 00F19581 		bmi	.L96
+ 575 01a0 F7EE00BA 		vmov.f32	s23, #1.0e+0
+ 576              	.LBE61:
+ 577              	.LBE75:
+  93:DaisySP-LGPL-FX/moogladder.cpp ****                               - (k != 3 ? tanhstg[k]
+ 578              		.loc 1 93 56 is_stmt 0 view .LVU204
+ 579 01a4 B0EE670A 		vmov.f32	s0, s15
+ 580              	.LVL46:
+ 581              	.L27:
+ 582              	.LBB76:
+ 583              	.LBB62:
+  14:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 584              		.loc 1 14 5 is_stmt 1 view .LVU205
+ 585 01a8 B1EE007A 		vmov.f32	s14, #4.0e+0
+ 586 01ac B4EEC70A 		vcmpe.f32	s0, s14
+ 587 01b0 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 588 01b4 0BDA     		bge	.L29
+  18:DaisySP-LGPL-FX/moogladder.cpp ****         return x * sign;
+ 589              		.loc 1 18 5 view .LVU206
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 24
 
 
- 467              		.loc 1 96 22 is_stmt 0 discriminator 2 view .LVU177
- 468 013c 45ED017A 		vstr.32	s15, [r5, #-4]
+ 590 01b6 B6EE007A 		vmov.f32	s14, #5.0e-1
+ 591 01ba B4EEC70A 		vcmpe.f32	s0, s14
+ 592 01be F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 593 01c2 00F15081 		bmi	.L58
+  20:DaisySP-LGPL-FX/moogladder.cpp **** }
+ 594              		.loc 1 20 5 view .LVU207
+ 595              	.LVL47:
+ 596              	.LBB55:
+ 501:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_tanhf(__x); }
+ 597              		.loc 2 501 3 view .LVU208
+ 598              	.LBB50:
+ 599              		.loc 2 502 5 view .LVU209
+ 600              		.loc 2 502 27 is_stmt 0 view .LVU210
+ 601 01c6 FFF7FEFF 		bl	tanhf
+ 602              	.LVL48:
+ 603              		.loc 2 502 27 view .LVU211
+ 604              	.LBE50:
+ 605              	.LBE55:
+  20:DaisySP-LGPL-FX/moogladder.cpp **** }
+ 606              		.loc 1 20 25 view .LVU212
+ 607 01ca 6BEE80BA 		vmul.f32	s23, s23, s0
+ 608              	.L29:
+ 609              	.LVL49:
+  20:DaisySP-LGPL-FX/moogladder.cpp **** }
+ 610              		.loc 1 20 25 view .LVU213
+ 611              	.LBE62:
+ 612              	.LBE76:
+  94:DaisySP-LGPL-FX/moogladder.cpp ****                                         : my_tanh(delay[k] * THERMAL)));
+ 613              		.loc 1 94 31 view .LVU214
+ 614 01ce 7BEEECCA 		vsub.f32	s25, s23, s25
+  93:DaisySP-LGPL-FX/moogladder.cpp ****                               - (k != 3 ? tanhstg[k]
+ 615              		.loc 1 93 56 view .LVU215
+ 616 01d2 DFED827A 		vldr.32	s15, .L103+36
+  92:DaisySP-LGPL-FX/moogladder.cpp ****                            * ((tanhstg[k - 1] = my_tanh(in * THERMAL))
+ 617              		.loc 1 92 22 view .LVU216
+ 618 01d6 F0EE4A9A 		vmov.f32	s19, s20
+ 619 01da E8EEAC9A 		vfma.f32	s19, s17, s25
+ 620              		.loc 1 96 13 is_stmt 1 view .LVU217
   88:DaisySP-LGPL-FX/moogladder.cpp ****         {
- 469              		.loc 1 88 9 is_stmt 1 discriminator 2 view .LVU178
- 470              	.LVL34:
+ 621              		.loc 1 88 9 view .LVU218
+ 622              	.LVL50:
   88:DaisySP-LGPL-FX/moogladder.cpp ****         {
- 471              		.loc 1 88 26 discriminator 2 view .LVU179
- 472 0140 E1D1     		bne	.L24
- 473              	.LVL35:
-  88:DaisySP-LGPL-FX/moogladder.cpp ****         {
- 474              		.loc 1 88 26 is_stmt 0 discriminator 2 view .LVU180
- 475              	.LBE16:
+ 623              		.loc 1 88 26 view .LVU219
+  90:DaisySP-LGPL-FX/moogladder.cpp ****             stg[k] = delay[k]
+ 624              		.loc 1 90 13 view .LVU220
+  91:DaisySP-LGPL-FX/moogladder.cpp ****                      + tune
+ 625              		.loc 1 91 13 view .LVU221
+  93:DaisySP-LGPL-FX/moogladder.cpp ****                               - (k != 3 ? tanhstg[k]
+ 626              		.loc 1 93 56 is_stmt 0 view .LVU222
+ 627 01de 69EEA77A 		vmul.f32	s15, s19, s15
+ 628              	.LVL51:
+ 629              	.LBB77:
+   6:DaisySP-LGPL-FX/moogladder.cpp **** {
+ 630              		.loc 1 6 7 is_stmt 1 view .LVU223
+ 631              	.LBB63:
+   8:DaisySP-LGPL-FX/moogladder.cpp ****     if(x < 0)
+ 632              		.loc 1 8 5 view .LVU224
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 25
+
+
+   9:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 633              		.loc 1 9 5 view .LVU225
+ 634 01e2 F5EEC07A 		vcmpe.f32	s15, #0
+ 635 01e6 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 636 01ea 00F14B81 		bmi	.L97
+ 637 01ee B7EE00AA 		vmov.f32	s20, #1.0e+0
+ 638              	.LBE63:
+ 639              	.LBE77:
+  93:DaisySP-LGPL-FX/moogladder.cpp ****                               - (k != 3 ? tanhstg[k]
+ 640              		.loc 1 93 56 is_stmt 0 view .LVU226
+ 641 01f2 B0EE670A 		vmov.f32	s0, s15
+ 642              	.LVL52:
+ 643              	.L30:
+ 644              	.LBB78:
+ 645              	.LBB64:
+  14:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 646              		.loc 1 14 5 is_stmt 1 view .LVU227
+ 647 01f6 B1EE007A 		vmov.f32	s14, #4.0e+0
+ 648 01fa B4EEC70A 		vcmpe.f32	s0, s14
+ 649 01fe F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 650 0202 0BDA     		bge	.L32
+  18:DaisySP-LGPL-FX/moogladder.cpp ****         return x * sign;
+ 651              		.loc 1 18 5 view .LVU228
+ 652 0204 B6EE007A 		vmov.f32	s14, #5.0e-1
+ 653 0208 B4EEC70A 		vcmpe.f32	s0, s14
+ 654 020c F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 655 0210 00F12381 		bmi	.L60
+  20:DaisySP-LGPL-FX/moogladder.cpp **** }
+ 656              		.loc 1 20 5 view .LVU229
+ 657              	.LVL53:
+ 658              	.LBB56:
+ 501:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_tanhf(__x); }
+ 659              		.loc 2 501 3 view .LVU230
+ 660              	.LBB51:
+ 661              		.loc 2 502 5 view .LVU231
+ 662              		.loc 2 502 27 is_stmt 0 view .LVU232
+ 663 0214 FFF7FEFF 		bl	tanhf
+ 664              	.LVL54:
+ 665              		.loc 2 502 27 view .LVU233
+ 666              	.LBE51:
+ 667              	.LBE56:
+  20:DaisySP-LGPL-FX/moogladder.cpp **** }
+ 668              		.loc 1 20 25 view .LVU234
+ 669 0218 2AEE00AA 		vmul.f32	s20, s20, s0
+ 670              	.L32:
+ 671              	.LVL55:
+  20:DaisySP-LGPL-FX/moogladder.cpp **** }
+ 672              		.loc 1 20 25 view .LVU235
+ 673              	.LBE64:
+ 674              	.LBE78:
+  95:DaisySP-LGPL-FX/moogladder.cpp ****             delay[k] = stg[k];
+ 675              		.loc 1 95 50 view .LVU236
+ 676 021c DFED6F7A 		vldr.32	s15, .L103+36
+ 677 0220 68EE277A 		vmul.f32	s15, s16, s15
+ 678              	.LVL56:
+ 679              	.LBB79:
+ 680              	.LBI79:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 26
+
+
+   6:DaisySP-LGPL-FX/moogladder.cpp **** {
+ 681              		.loc 1 6 7 is_stmt 1 view .LVU237
+ 682              	.LBB80:
+   8:DaisySP-LGPL-FX/moogladder.cpp ****     if(x < 0)
+ 683              		.loc 1 8 5 view .LVU238
+   9:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 684              		.loc 1 9 5 view .LVU239
+ 685 0224 F5EEC07A 		vcmpe.f32	s15, #0
+ 686 0228 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 687 022c 00F15781 		bmi	.L98
+ 688 0230 F7EE00CA 		vmov.f32	s25, #1.0e+0
+ 689              	.LBE80:
+ 690              	.LBE79:
+  95:DaisySP-LGPL-FX/moogladder.cpp ****             delay[k] = stg[k];
+ 691              		.loc 1 95 50 is_stmt 0 view .LVU240
+ 692 0234 B0EE670A 		vmov.f32	s0, s15
+ 693              	.LVL57:
+ 694              	.L33:
+ 695              	.LBB89:
+ 696              	.LBB85:
+  14:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 697              		.loc 1 14 5 is_stmt 1 view .LVU241
+ 698 0238 B1EE007A 		vmov.f32	s14, #4.0e+0
+ 699 023c B4EEC70A 		vcmpe.f32	s0, s14
+ 700 0240 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 701 0244 0BDA     		bge	.L35
+  18:DaisySP-LGPL-FX/moogladder.cpp ****         return x * sign;
+ 702              		.loc 1 18 5 view .LVU242
+ 703 0246 B6EE007A 		vmov.f32	s14, #5.0e-1
+ 704 024a B4EEC70A 		vcmpe.f32	s0, s14
+ 705 024e F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 706 0252 00F14981 		bmi	.L62
+  20:DaisySP-LGPL-FX/moogladder.cpp **** }
+ 707              		.loc 1 20 5 view .LVU243
+ 708              	.LVL58:
+ 709              	.LBB81:
+ 710              	.LBI81:
+ 501:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_tanhf(__x); }
+ 711              		.loc 2 501 3 view .LVU244
+ 712              	.LBB82:
+ 713              		.loc 2 502 5 view .LVU245
+ 714              		.loc 2 502 27 is_stmt 0 view .LVU246
+ 715 0256 FFF7FEFF 		bl	tanhf
+ 716              	.LVL59:
+ 717              		.loc 2 502 27 view .LVU247
+ 718              	.LBE82:
+ 719              	.LBE81:
+  20:DaisySP-LGPL-FX/moogladder.cpp **** }
+ 720              		.loc 1 20 25 view .LVU248
+ 721 025a 6CEE80CA 		vmul.f32	s25, s25, s0
+ 722              	.L35:
+ 723              	.LVL60:
+  20:DaisySP-LGPL-FX/moogladder.cpp **** }
+ 724              		.loc 1 20 25 view .LVU249
+ 725              	.LBE85:
+ 726              	.LBE89:
+  94:DaisySP-LGPL-FX/moogladder.cpp ****                                         : my_tanh(delay[k] * THERMAL)));
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 27
+
+
+ 727              		.loc 1 94 31 view .LVU250
+ 728 025e 3AEE6C7A 		vsub.f32	s14, s20, s25
+ 729              	.LBE102:
+  87:DaisySP-LGPL-FX/moogladder.cpp ****         for(int k = 1; k < 4; k++)
+ 730              		.loc 1 87 41 view .LVU251
+ 731 0262 DFED5E6A 		vldr.32	s13, .L103+36
   97:DaisySP-LGPL-FX/moogladder.cpp ****         }
   98:DaisySP-LGPL-FX/moogladder.cpp ****         delay[5] = (stg[3] + delay[4]) * 0.5f;
- 476              		.loc 1 98 9 is_stmt 1 discriminator 2 view .LVU181
- 477              		.loc 1 98 26 is_stmt 0 discriminator 2 view .LVU182
- 478 0142 DDED037A 		vldr.32	s15, [sp, #12]
- 479              		.loc 1 98 40 discriminator 2 view .LVU183
- 480 0146 B6EE007A 		vmov.f32	s14, #5.0e-1
- 481              		.loc 1 98 28 discriminator 2 view .LVU184
- 482 014a 94ED070A 		vldr.32	s0, [r4, #28]
- 483              	.LBE14:
-  83:DaisySP-LGPL-FX/moogladder.cpp ****     {
- 484              		.loc 1 83 22 discriminator 2 view .LVU185
- 485 014e B8F1010F 		cmp	r8, #1
- 486              	.LBB18:
+ 732              		.loc 1 98 40 view .LVU252
+ 733 0266 F6EE007A 		vmov.f32	s15, #5.0e-1
+ 734              	.LBB103:
+  92:DaisySP-LGPL-FX/moogladder.cpp ****                            * ((tanhstg[k - 1] = my_tanh(in * THERMAL))
+ 735              		.loc 1 92 22 view .LVU253
+ 736 026a A8EE878A 		vfma.f32	s16, s17, s14
+  96:DaisySP-LGPL-FX/moogladder.cpp ****         }
+ 737              		.loc 1 96 13 is_stmt 1 view .LVU254
+  88:DaisySP-LGPL-FX/moogladder.cpp ****         {
+ 738              		.loc 1 88 9 view .LVU255
+ 739              	.LVL61:
+  88:DaisySP-LGPL-FX/moogladder.cpp ****         {
+ 740              		.loc 1 88 26 view .LVU256
+ 741              	.LBE103:
+ 742              		.loc 1 98 9 view .LVU257
   99:DaisySP-LGPL-FX/moogladder.cpp ****         delay[4] = stg[3];
- 487              		.loc 1 99 18 discriminator 2 view .LVU186
- 488 0152 C4ED077A 		vstr.32	s15, [r4, #28]
-  98:DaisySP-LGPL-FX/moogladder.cpp ****         delay[4] = stg[3];
- 489              		.loc 1 98 28 discriminator 2 view .LVU187
- 490 0156 37EE800A 		vadd.f32	s0, s15, s0
-  98:DaisySP-LGPL-FX/moogladder.cpp ****         delay[4] = stg[3];
- 491              		.loc 1 98 40 discriminator 2 view .LVU188
- 492 015a 20EE070A 		vmul.f32	s0, s0, s14
-  98:DaisySP-LGPL-FX/moogladder.cpp ****         delay[4] = stg[3];
- 493              		.loc 1 98 18 discriminator 2 view .LVU189
- 494 015e 84ED080A 		vstr.32	s0, [r4, #32]
- 495              		.loc 1 99 9 is_stmt 1 discriminator 2 view .LVU190
- 496              	.LBE18:
+ 743              		.loc 1 99 9 view .LVU258
+ 744              	.LBE115:
   83:DaisySP-LGPL-FX/moogladder.cpp ****     {
- 497              		.loc 1 83 5 discriminator 2 view .LVU191
- 498              	.LVL36:
+ 745              		.loc 1 83 5 view .LVU259
   83:DaisySP-LGPL-FX/moogladder.cpp ****     {
- 499              		.loc 1 83 22 discriminator 2 view .LVU192
- 500 0162 0BD1     		bne	.L26
- 501              	.LBE13:
+ 746              		.loc 1 83 22 view .LVU260
+ 747              	.LBB116:
+  85:DaisySP-LGPL-FX/moogladder.cpp ****         delay[0] = stg[0]
+ 748              		.loc 1 85 9 view .LVU261
+  98:DaisySP-LGPL-FX/moogladder.cpp ****         delay[4] = stg[3];
+ 749              		.loc 1 98 28 is_stmt 0 view .LVU262
+ 750 026e 38EE0CCA 		vadd.f32	s24, s16, s24
+  98:DaisySP-LGPL-FX/moogladder.cpp ****         delay[4] = stg[3];
+ 751              		.loc 1 98 40 view .LVU263
+ 752 0272 2CEE27CA 		vmul.f32	s24, s24, s15
+  85:DaisySP-LGPL-FX/moogladder.cpp ****         delay[0] = stg[0]
+ 753              		.loc 1 85 12 view .LVU264
+ 754 0276 F0EE697A 		vmov.f32	s15, s19
+ 755 027a E9EE0C7A 		vfma.f32	s15, s18, s24
+ 756              	.LVL62:
+  86:DaisySP-LGPL-FX/moogladder.cpp ****             = delay[0] + tune * (my_tanh(in * THERMAL) - tanhstg[0]);
+ 757              		.loc 1 86 9 is_stmt 1 view .LVU265
+  87:DaisySP-LGPL-FX/moogladder.cpp ****         for(int k = 1; k < 4; k++)
+ 758              		.loc 1 87 41 is_stmt 0 view .LVU266
+ 759 027e 67EEA67A 		vmul.f32	s15, s15, s13
+ 760              	.LVL63:
+ 761              	.LBB104:
+   6:DaisySP-LGPL-FX/moogladder.cpp **** {
+ 762              		.loc 1 6 7 is_stmt 1 view .LVU267
+ 763              	.LBB40:
+   8:DaisySP-LGPL-FX/moogladder.cpp ****     if(x < 0)
+ 764              		.loc 1 8 5 view .LVU268
+   9:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 28
+
+
+ 765              		.loc 1 9 5 view .LVU269
+ 766 0282 F5EEC07A 		vcmpe.f32	s15, #0
+ 767 0286 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 768 028a 00F10081 		bmi	.L99
+ 769 028e B7EE009A 		vmov.f32	s18, #1.0e+0
+ 770              	.LVL64:
+   9:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 771              		.loc 1 9 5 is_stmt 0 view .LVU270
+ 772              	.LBE40:
+ 773              	.LBE104:
+  87:DaisySP-LGPL-FX/moogladder.cpp ****         for(int k = 1; k < 4; k++)
+ 774              		.loc 1 87 41 view .LVU271
+ 775 0292 B0EE670A 		vmov.f32	s0, s15
+ 776              	.LVL65:
+ 777              	.L36:
+ 778              	.LBB105:
+ 779              	.LBB41:
+  14:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 780              		.loc 1 14 5 is_stmt 1 view .LVU272
+ 781 0296 B1EE007A 		vmov.f32	s14, #4.0e+0
+ 782 029a B4EEC70A 		vcmpe.f32	s0, s14
+ 783 029e F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 784 02a2 0BDA     		bge	.L38
+  18:DaisySP-LGPL-FX/moogladder.cpp ****         return x * sign;
+ 785              		.loc 1 18 5 view .LVU273
+ 786 02a4 B6EE007A 		vmov.f32	s14, #5.0e-1
+ 787 02a8 B4EEC70A 		vcmpe.f32	s0, s14
+ 788 02ac F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 789 02b0 00F1D080 		bmi	.L64
+  20:DaisySP-LGPL-FX/moogladder.cpp **** }
+ 790              		.loc 1 20 5 view .LVU274
+ 791              	.LVL66:
+ 792              	.LBB38:
+ 501:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_tanhf(__x); }
+ 793              		.loc 2 501 3 view .LVU275
+ 794              	.LBB37:
+ 795              		.loc 2 502 5 view .LVU276
+ 796              		.loc 2 502 27 is_stmt 0 view .LVU277
+ 797 02b4 FFF7FEFF 		bl	tanhf
+ 798              	.LVL67:
+ 799              		.loc 2 502 27 view .LVU278
+ 800              	.LBE37:
+ 801              	.LBE38:
+  20:DaisySP-LGPL-FX/moogladder.cpp **** }
+ 802              		.loc 1 20 25 view .LVU279
+ 803 02b8 29EE009A 		vmul.f32	s18, s18, s0
+ 804              	.L38:
+ 805              	.LVL68:
+  20:DaisySP-LGPL-FX/moogladder.cpp **** }
+ 806              		.loc 1 20 25 view .LVU280
+ 807              	.LBE41:
+ 808              	.LBE105:
+  87:DaisySP-LGPL-FX/moogladder.cpp ****         for(int k = 1; k < 4; k++)
+ 809              		.loc 1 87 56 view .LVU281
+ 810 02bc 39EE4D9A 		vsub.f32	s18, s18, s26
+ 811              	.LBB106:
+  93:DaisySP-LGPL-FX/moogladder.cpp ****                               - (k != 3 ? tanhstg[k]
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 29
+
+
+ 812              		.loc 1 93 56 view .LVU282
+ 813 02c0 DFED467A 		vldr.32	s15, .L103+36
+ 814              	.LBE106:
+  87:DaisySP-LGPL-FX/moogladder.cpp ****         for(int k = 1; k < 4; k++)
+ 815              		.loc 1 87 24 view .LVU283
+ 816 02c4 E9EE28AA 		vfma.f32	s21, s18, s17
+  88:DaisySP-LGPL-FX/moogladder.cpp ****         {
+ 817              		.loc 1 88 9 is_stmt 1 view .LVU284
+ 818              	.LVL69:
+ 819              	.LBB107:
+  88:DaisySP-LGPL-FX/moogladder.cpp ****         {
+ 820              		.loc 1 88 26 view .LVU285
+  90:DaisySP-LGPL-FX/moogladder.cpp ****             stg[k] = delay[k]
+ 821              		.loc 1 90 13 view .LVU286
+  91:DaisySP-LGPL-FX/moogladder.cpp ****                      + tune
+ 822              		.loc 1 91 13 view .LVU287
+  93:DaisySP-LGPL-FX/moogladder.cpp ****                               - (k != 3 ? tanhstg[k]
+ 823              		.loc 1 93 56 is_stmt 0 view .LVU288
+ 824 02c8 6AEEA77A 		vmul.f32	s15, s21, s15
+ 825              	.LVL70:
+ 826              	.LBB90:
+   6:DaisySP-LGPL-FX/moogladder.cpp **** {
+ 827              		.loc 1 6 7 is_stmt 1 view .LVU289
+ 828              	.LBB65:
+   8:DaisySP-LGPL-FX/moogladder.cpp ****     if(x < 0)
+ 829              		.loc 1 8 5 view .LVU290
+   9:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 830              		.loc 1 9 5 view .LVU291
+ 831 02cc F5EEC07A 		vcmpe.f32	s15, #0
+ 832 02d0 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 833 02d4 00F1EF80 		bmi	.L100
+ 834 02d8 B7EE009A 		vmov.f32	s18, #1.0e+0
+ 835              	.LBE65:
+ 836              	.LBE90:
+  93:DaisySP-LGPL-FX/moogladder.cpp ****                               - (k != 3 ? tanhstg[k]
+ 837              		.loc 1 93 56 is_stmt 0 view .LVU292
+ 838 02dc B0EE670A 		vmov.f32	s0, s15
+ 839              	.LVL71:
+ 840              	.L39:
+ 841              	.LBB91:
+ 842              	.LBB66:
+  14:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 843              		.loc 1 14 5 is_stmt 1 view .LVU293
+ 844 02e0 B1EE007A 		vmov.f32	s14, #4.0e+0
+ 845 02e4 B4EEC70A 		vcmpe.f32	s0, s14
+ 846 02e8 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 847 02ec 0BDA     		bge	.L41
+  18:DaisySP-LGPL-FX/moogladder.cpp ****         return x * sign;
+ 848              		.loc 1 18 5 view .LVU294
+ 849 02ee B6EE007A 		vmov.f32	s14, #5.0e-1
+ 850 02f2 B4EEC70A 		vcmpe.f32	s0, s14
+ 851 02f6 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 852 02fa 00F1C080 		bmi	.L66
+  20:DaisySP-LGPL-FX/moogladder.cpp **** }
+ 853              		.loc 1 20 5 view .LVU295
+ 854              	.LVL72:
+ 855              	.LBB57:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 30
+
+
+ 501:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_tanhf(__x); }
+ 856              		.loc 2 501 3 view .LVU296
+ 857              	.LBB52:
+ 858              		.loc 2 502 5 view .LVU297
+ 859              		.loc 2 502 27 is_stmt 0 view .LVU298
+ 860 02fe FFF7FEFF 		bl	tanhf
+ 861              	.LVL73:
+ 862              		.loc 2 502 27 view .LVU299
+ 863              	.LBE52:
+ 864              	.LBE57:
+  20:DaisySP-LGPL-FX/moogladder.cpp **** }
+ 865              		.loc 1 20 25 view .LVU300
+ 866 0302 29EE009A 		vmul.f32	s18, s18, s0
+ 867              	.L41:
+ 868              	.LVL74:
+  20:DaisySP-LGPL-FX/moogladder.cpp **** }
+ 869              		.loc 1 20 25 view .LVU301
+ 870              	.LBE66:
+ 871              	.LBE91:
+  94:DaisySP-LGPL-FX/moogladder.cpp ****                                         : my_tanh(delay[k] * THERMAL)));
+ 872              		.loc 1 94 31 view .LVU302
+ 873 0306 79EE6BBA 		vsub.f32	s23, s18, s23
+  93:DaisySP-LGPL-FX/moogladder.cpp ****                               - (k != 3 ? tanhstg[k]
+ 874              		.loc 1 93 56 view .LVU303
+ 875 030a DFED347A 		vldr.32	s15, .L103+36
+  92:DaisySP-LGPL-FX/moogladder.cpp ****                            * ((tanhstg[k - 1] = my_tanh(in * THERMAL))
+ 876              		.loc 1 92 22 view .LVU304
+ 877 030e A8EEABBA 		vfma.f32	s22, s17, s23
+  96:DaisySP-LGPL-FX/moogladder.cpp ****         }
+ 878              		.loc 1 96 13 is_stmt 1 view .LVU305
+  88:DaisySP-LGPL-FX/moogladder.cpp ****         {
+ 879              		.loc 1 88 9 view .LVU306
+ 880              	.LVL75:
+  88:DaisySP-LGPL-FX/moogladder.cpp ****         {
+ 881              		.loc 1 88 26 view .LVU307
+  90:DaisySP-LGPL-FX/moogladder.cpp ****             stg[k] = delay[k]
+ 882              		.loc 1 90 13 view .LVU308
+  91:DaisySP-LGPL-FX/moogladder.cpp ****                      + tune
+ 883              		.loc 1 91 13 view .LVU309
+  93:DaisySP-LGPL-FX/moogladder.cpp ****                               - (k != 3 ? tanhstg[k]
+ 884              		.loc 1 93 56 is_stmt 0 view .LVU310
+ 885 0312 6BEE277A 		vmul.f32	s15, s22, s15
+ 886              	.LVL76:
+ 887              	.LBB92:
+   6:DaisySP-LGPL-FX/moogladder.cpp **** {
+ 888              		.loc 1 6 7 is_stmt 1 view .LVU311
+ 889              	.LBB67:
+   8:DaisySP-LGPL-FX/moogladder.cpp ****     if(x < 0)
+ 890              		.loc 1 8 5 view .LVU312
+   9:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 891              		.loc 1 9 5 view .LVU313
+ 892 0316 F5EEC07A 		vcmpe.f32	s15, #0
+ 893 031a F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 894 031e 00F1C580 		bmi	.L101
+ 895 0322 F7EE00BA 		vmov.f32	s23, #1.0e+0
+ 896              	.LBE67:
+ 897              	.LBE92:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 31
+
+
+  93:DaisySP-LGPL-FX/moogladder.cpp ****                               - (k != 3 ? tanhstg[k]
+ 898              		.loc 1 93 56 is_stmt 0 view .LVU314
+ 899 0326 B0EE670A 		vmov.f32	s0, s15
+ 900              	.LVL77:
+ 901              	.L42:
+ 902              	.LBB93:
+ 903              	.LBB68:
+  14:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 904              		.loc 1 14 5 is_stmt 1 view .LVU315
+ 905 032a B1EE007A 		vmov.f32	s14, #4.0e+0
+ 906 032e B4EEC70A 		vcmpe.f32	s0, s14
+ 907 0332 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 908 0336 0BDA     		bge	.L44
+  18:DaisySP-LGPL-FX/moogladder.cpp ****         return x * sign;
+ 909              		.loc 1 18 5 view .LVU316
+ 910 0338 B6EE007A 		vmov.f32	s14, #5.0e-1
+ 911 033c B4EEC70A 		vcmpe.f32	s0, s14
+ 912 0340 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 913 0344 00F19880 		bmi	.L68
+  20:DaisySP-LGPL-FX/moogladder.cpp **** }
+ 914              		.loc 1 20 5 view .LVU317
+ 915              	.LVL78:
+ 916              	.LBB58:
+ 501:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_tanhf(__x); }
+ 917              		.loc 2 501 3 view .LVU318
+ 918              	.LBB53:
+ 919              		.loc 2 502 5 view .LVU319
+ 920              		.loc 2 502 27 is_stmt 0 view .LVU320
+ 921 0348 FFF7FEFF 		bl	tanhf
+ 922              	.LVL79:
+ 923              		.loc 2 502 27 view .LVU321
+ 924              	.LBE53:
+ 925              	.LBE58:
+  20:DaisySP-LGPL-FX/moogladder.cpp **** }
+ 926              		.loc 1 20 25 view .LVU322
+ 927 034c 6BEE80BA 		vmul.f32	s23, s23, s0
+ 928              	.L44:
+ 929              	.LVL80:
+  20:DaisySP-LGPL-FX/moogladder.cpp **** }
+ 930              		.loc 1 20 25 view .LVU323
+ 931              	.LBE68:
+ 932              	.LBE93:
+  94:DaisySP-LGPL-FX/moogladder.cpp ****                                         : my_tanh(delay[k] * THERMAL)));
+ 933              		.loc 1 94 31 view .LVU324
+ 934 0350 3BEECAAA 		vsub.f32	s20, s23, s20
+  93:DaisySP-LGPL-FX/moogladder.cpp ****                               - (k != 3 ? tanhstg[k]
+ 935              		.loc 1 93 56 view .LVU325
+ 936 0354 DFED217A 		vldr.32	s15, .L103+36
+  92:DaisySP-LGPL-FX/moogladder.cpp ****                            * ((tanhstg[k - 1] = my_tanh(in * THERMAL))
+ 937              		.loc 1 92 22 view .LVU326
+ 938 0358 E8EE8A9A 		vfma.f32	s19, s17, s20
+  96:DaisySP-LGPL-FX/moogladder.cpp ****         }
+ 939              		.loc 1 96 13 is_stmt 1 view .LVU327
+  88:DaisySP-LGPL-FX/moogladder.cpp ****         {
+ 940              		.loc 1 88 9 view .LVU328
+ 941              	.LVL81:
+  88:DaisySP-LGPL-FX/moogladder.cpp ****         {
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 32
+
+
+ 942              		.loc 1 88 26 view .LVU329
+  90:DaisySP-LGPL-FX/moogladder.cpp ****             stg[k] = delay[k]
+ 943              		.loc 1 90 13 view .LVU330
+  91:DaisySP-LGPL-FX/moogladder.cpp ****                      + tune
+ 944              		.loc 1 91 13 view .LVU331
+  93:DaisySP-LGPL-FX/moogladder.cpp ****                               - (k != 3 ? tanhstg[k]
+ 945              		.loc 1 93 56 is_stmt 0 view .LVU332
+ 946 035c 69EEA77A 		vmul.f32	s15, s19, s15
+ 947              	.LVL82:
+ 948              	.LBB94:
+   6:DaisySP-LGPL-FX/moogladder.cpp **** {
+ 949              		.loc 1 6 7 is_stmt 1 view .LVU333
+ 950              	.LBB69:
+   8:DaisySP-LGPL-FX/moogladder.cpp ****     if(x < 0)
+ 951              		.loc 1 8 5 view .LVU334
+   9:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 952              		.loc 1 9 5 view .LVU335
+ 953 0360 F5EEC07A 		vcmpe.f32	s15, #0
+ 954 0364 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 955 0368 00F19B80 		bmi	.L102
+ 956 036c B7EE00AA 		vmov.f32	s20, #1.0e+0
+ 957              	.LBE69:
+ 958              	.LBE94:
+  93:DaisySP-LGPL-FX/moogladder.cpp ****                               - (k != 3 ? tanhstg[k]
+ 959              		.loc 1 93 56 is_stmt 0 view .LVU336
+ 960 0370 B0EE670A 		vmov.f32	s0, s15
+ 961              	.LVL83:
+ 962              	.L45:
+ 963              	.LBB95:
+ 964              	.LBB70:
+  14:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 965              		.loc 1 14 5 is_stmt 1 view .LVU337
+ 966 0374 B1EE007A 		vmov.f32	s14, #4.0e+0
+ 967 0378 B4EEC70A 		vcmpe.f32	s0, s14
+ 968 037c F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 969 0380 0ADA     		bge	.L47
+  18:DaisySP-LGPL-FX/moogladder.cpp ****         return x * sign;
+ 970              		.loc 1 18 5 view .LVU338
+ 971 0382 B6EE007A 		vmov.f32	s14, #5.0e-1
+ 972 0386 B4EEC70A 		vcmpe.f32	s0, s14
+ 973 038a F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 974 038e 70D4     		bmi	.L70
+  20:DaisySP-LGPL-FX/moogladder.cpp **** }
+ 975              		.loc 1 20 5 view .LVU339
+ 976              	.LVL84:
+ 977              	.LBB59:
+ 501:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_tanhf(__x); }
+ 978              		.loc 2 501 3 view .LVU340
+ 979              	.LBB54:
+ 980              		.loc 2 502 5 view .LVU341
+ 981              		.loc 2 502 27 is_stmt 0 view .LVU342
+ 982 0390 FFF7FEFF 		bl	tanhf
+ 983              	.LVL85:
+ 984              		.loc 2 502 27 view .LVU343
+ 985              	.LBE54:
+ 986              	.LBE59:
+  20:DaisySP-LGPL-FX/moogladder.cpp **** }
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 33
+
+
+ 987              		.loc 1 20 25 view .LVU344
+ 988 0394 2AEE00AA 		vmul.f32	s20, s20, s0
+ 989              	.L47:
+ 990              	.LVL86:
+  20:DaisySP-LGPL-FX/moogladder.cpp **** }
+ 991              		.loc 1 20 25 view .LVU345
+ 992              	.LBE70:
+ 993              	.LBE95:
+  95:DaisySP-LGPL-FX/moogladder.cpp ****             delay[k] = stg[k];
+ 994              		.loc 1 95 50 view .LVU346
+ 995 0398 DFED107A 		vldr.32	s15, .L103+36
+ 996 039c 68EE277A 		vmul.f32	s15, s16, s15
+ 997              	.LVL87:
+ 998              	.LBB96:
+   6:DaisySP-LGPL-FX/moogladder.cpp **** {
+ 999              		.loc 1 6 7 is_stmt 1 view .LVU347
+ 1000              	.LBB86:
+   8:DaisySP-LGPL-FX/moogladder.cpp ****     if(x < 0)
+ 1001              		.loc 1 8 5 view .LVU348
+   9:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 1002              		.loc 1 9 5 view .LVU349
+ 1003 03a0 F5EEC07A 		vcmpe.f32	s15, #0
+ 1004 03a4 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 1005 03a8 00F19480 		bmi	.L48
+ 1006 03ac B7EE00CA 		vmov.f32	s24, #1.0e+0
+ 1007              	.LBE86:
+ 1008              	.LBE96:
+  95:DaisySP-LGPL-FX/moogladder.cpp ****             delay[k] = stg[k];
+ 1009              		.loc 1 95 50 is_stmt 0 view .LVU350
+ 1010 03b0 B0EE670A 		vmov.f32	s0, s15
+ 1011 03b4 14E0     		b	.L104
+ 1012              	.L105:
+ 1013 03b6 00BF     		.align	2
+ 1014              	.L103:
+ 1015 03b8 00000000 		.word	0
+ 1016 03bc 2DB2FD3E 		.word	1056813613
+ 1017 03c0 77BEEF3F 		.word	1072676471
+ 1018 03c4 DD24263F 		.word	1059464413
+ 1019 03c8 DB0FC940 		.word	1086918619
+ 1020 03cc 5BB17F3F 		.word	1065333083
+ 1021 03d0 9CA2EB3F 		.word	1072407196
+ 1022 03d4 FAED7BC0 		.word	-1065619974
+ 1023 03d8 492E7F3F 		.word	1065299529
+ 1024 03dc 17B7D137 		.word	936490775
+ 1025              	.L104:
+ 1026              	.LVL88:
+ 1027              	.L52:
+ 1028              	.LBB97:
+ 1029              	.LBB87:
+  14:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 1030              		.loc 1 14 5 is_stmt 1 view .LVU351
+ 1031 03e0 B1EE007A 		vmov.f32	s14, #4.0e+0
+ 1032 03e4 B4EEC70A 		vcmpe.f32	s0, s14
+ 1033 03e8 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 1034 03ec 0ADA     		bge	.L51
+  18:DaisySP-LGPL-FX/moogladder.cpp ****         return x * sign;
+ 1035              		.loc 1 18 5 view .LVU352
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 34
+
+
+ 1036 03ee B6EE007A 		vmov.f32	s14, #5.0e-1
+ 1037 03f2 B4EEC70A 		vcmpe.f32	s0, s14
+ 1038 03f6 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 1039 03fa 78D4     		bmi	.L71
+  20:DaisySP-LGPL-FX/moogladder.cpp **** }
+ 1040              		.loc 1 20 5 view .LVU353
+ 1041              	.LVL89:
+ 1042              	.LBB84:
+ 501:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_tanhf(__x); }
+ 1043              		.loc 2 501 3 view .LVU354
+ 1044              	.LBB83:
+ 1045              		.loc 2 502 5 view .LVU355
+ 1046              		.loc 2 502 27 is_stmt 0 view .LVU356
+ 1047 03fc FFF7FEFF 		bl	tanhf
+ 1048              	.LVL90:
+ 1049              		.loc 2 502 27 view .LVU357
+ 1050              	.LBE83:
+ 1051              	.LBE84:
+  20:DaisySP-LGPL-FX/moogladder.cpp **** }
+ 1052              		.loc 1 20 25 view .LVU358
+ 1053 0400 2CEE00CA 		vmul.f32	s24, s24, s0
+ 1054              	.L51:
+ 1055              	.LVL91:
+  20:DaisySP-LGPL-FX/moogladder.cpp **** }
+ 1056              		.loc 1 20 25 view .LVU359
+ 1057              	.LBE87:
+ 1058              	.LBE97:
+  94:DaisySP-LGPL-FX/moogladder.cpp ****                                         : my_tanh(delay[k] * THERMAL)));
+ 1059              		.loc 1 94 31 view .LVU360
+ 1060 0404 3AEE4C7A 		vsub.f32	s14, s20, s24
+ 1061 0408 C4ED03AA 		vstr.32	s21, [r4, #12]
+  92:DaisySP-LGPL-FX/moogladder.cpp ****                            * ((tanhstg[k - 1] = my_tanh(in * THERMAL))
+ 1062              		.loc 1 92 22 view .LVU361
+ 1063 040c F0EE487A 		vmov.f32	s15, s16
+ 1064 0410 84ED099A 		vstr.32	s18, [r4, #36]
+ 1065              	.LBE107:
+  98:DaisySP-LGPL-FX/moogladder.cpp ****         delay[4] = stg[3];
+ 1066              		.loc 1 98 40 view .LVU362
+ 1067 0414 B6EE000A 		vmov.f32	s0, #5.0e-1
+ 1068 0418 84ED04BA 		vstr.32	s22, [r4, #16]
+ 1069 041c C4ED0ABA 		vstr.32	s23, [r4, #40]
+ 1070              	.LBB108:
+  92:DaisySP-LGPL-FX/moogladder.cpp ****                            * ((tanhstg[k - 1] = my_tanh(in * THERMAL))
+ 1071              		.loc 1 92 22 view .LVU363
+ 1072 0420 E8EE877A 		vfma.f32	s15, s17, s14
+  96:DaisySP-LGPL-FX/moogladder.cpp ****         }
+ 1073              		.loc 1 96 13 is_stmt 1 view .LVU364
+  88:DaisySP-LGPL-FX/moogladder.cpp ****         {
+ 1074              		.loc 1 88 9 view .LVU365
+ 1075              	.LVL92:
+  88:DaisySP-LGPL-FX/moogladder.cpp ****         {
+ 1076              		.loc 1 88 26 view .LVU366
+ 1077              	.LBE108:
+  98:DaisySP-LGPL-FX/moogladder.cpp ****         delay[4] = stg[3];
+ 1078              		.loc 1 98 9 view .LVU367
+ 1079 0424 C4ED059A 		vstr.32	s19, [r4, #20]
+ 1080 0428 84ED0BAA 		vstr.32	s20, [r4, #44]
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 35
+
+
+  98:DaisySP-LGPL-FX/moogladder.cpp ****         delay[4] = stg[3];
+ 1081              		.loc 1 98 28 is_stmt 0 view .LVU368
+ 1082 042c 38EE278A 		vadd.f32	s16, s16, s15
+ 1083 0430 C4ED067A 		vstr.32	s15, [r4, #24]
+ 1084 0434 C4ED077A 		vstr.32	s15, [r4, #28]
+  98:DaisySP-LGPL-FX/moogladder.cpp ****         delay[4] = stg[3];
+ 1085              		.loc 1 98 40 view .LVU369
+ 1086 0438 28EE000A 		vmul.f32	s0, s16, s0
+ 1087              		.loc 1 99 9 is_stmt 1 view .LVU370
+ 1088              	.LBE116:
+  83:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 1089              		.loc 1 83 5 view .LVU371
+  83:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 1090              		.loc 1 83 22 view .LVU372
+ 1091              	.LBE118:
  100:DaisySP-LGPL-FX/moogladder.cpp ****     }
  101:DaisySP-LGPL-FX/moogladder.cpp ****     return delay[5];
- 502              		.loc 1 101 5 view .LVU193
+ 1092              		.loc 1 101 5 view .LVU373
  102:DaisySP-LGPL-FX/moogladder.cpp **** }
- 503              		.loc 1 102 1 is_stmt 0 view .LVU194
- 504 0164 04B0     		add	sp, sp, #16
- 505              		.cfi_remember_state
- 506              		.cfi_def_cfa_offset 48
- 507              		@ sp needed
- 508 0166 BDEC068B 		vldm	sp!, {d8-d10}
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 22
+ 1093              		.loc 1 102 1 is_stmt 0 view .LVU374
+ 1094 043c BDEC0C8B 		vldm	sp!, {d8-d13}
+ 1095              		.cfi_remember_state
+ 1096              		.cfi_restore 90
+ 1097              		.cfi_restore 91
+ 1098              		.cfi_restore 88
+ 1099              		.cfi_restore 89
+ 1100              		.cfi_restore 86
+ 1101              		.cfi_restore 87
+ 1102              		.cfi_restore 84
+ 1103              		.cfi_restore 85
+ 1104              		.cfi_restore 82
+ 1105              		.cfi_restore 83
+ 1106              		.cfi_restore 80
+ 1107              		.cfi_restore 81
+ 1108              		.cfi_def_cfa_offset 8
+ 1109 0440 84ED080A 		vstr.32	s0, [r4, #32]
+ 1110 0444 10BD     		pop	{r4, pc}
+ 1111              	.LVL93:
+ 1112              	.L19:
+ 1113              		.cfi_restore_state
+ 1114              	.LBB119:
+  76:DaisySP-LGPL-FX/moogladder.cpp ****         acr  = old_acr_;
+ 1115              		.loc 1 76 9 is_stmt 1 view .LVU375
+  77:DaisySP-LGPL-FX/moogladder.cpp ****         tune = old_tune_;
+ 1116              		.loc 1 77 9 view .LVU376
+  76:DaisySP-LGPL-FX/moogladder.cpp ****         acr  = old_acr_;
+ 1117              		.loc 1 76 14 is_stmt 0 view .LVU377
+ 1118 0446 B0EE678A 		vmov.f32	s16, s15
+  77:DaisySP-LGPL-FX/moogladder.cpp ****         tune = old_tune_;
+ 1119              		.loc 1 77 14 view .LVU378
+ 1120 044a 90ED0FBA 		vldr.32	s22, [r0, #60]
+ 1121              	.LVL94:
+  78:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1122              		.loc 1 78 9 is_stmt 1 view .LVU379
+  78:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1123              		.loc 1 78 14 is_stmt 0 view .LVU380
+ 1124 044e D0ED108A 		vldr.32	s17, [r0, #64]
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 36
 
 
- 509              		.cfi_restore 84
- 510              		.cfi_restore 85
- 511              		.cfi_restore 82
- 512              		.cfi_restore 83
- 513              		.cfi_restore 80
- 514              		.cfi_restore 81
- 515              		.cfi_def_cfa_offset 24
- 516              	.LVL37:
- 517              		.loc 1 102 1 view .LVU195
- 518 016a BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
- 519              	.LVL38:
- 520              	.L20:
- 521              		.cfi_restore_state
- 522              	.LBB20:
-  76:DaisySP-LGPL-FX/moogladder.cpp ****         acr  = old_acr_;
- 523              		.loc 1 76 9 is_stmt 1 view .LVU196
-  77:DaisySP-LGPL-FX/moogladder.cpp ****         tune = old_tune_;
- 524              		.loc 1 77 9 view .LVU197
-  76:DaisySP-LGPL-FX/moogladder.cpp ****         acr  = old_acr_;
- 525              		.loc 1 76 14 is_stmt 0 view .LVU198
- 526 016e F0EE678A 		vmov.f32	s17, s15
-  77:DaisySP-LGPL-FX/moogladder.cpp ****         tune = old_tune_;
- 527              		.loc 1 77 14 view .LVU199
- 528 0172 90ED0F8A 		vldr.32	s16, [r0, #60]
- 529              	.LVL39:
+ 1125              	.LVL95:
   78:DaisySP-LGPL-FX/moogladder.cpp ****     }
- 530              		.loc 1 78 9 is_stmt 1 view .LVU200
+ 1126              		.loc 1 78 14 view .LVU381
+ 1127 0452 35E6     		b	.L20
+ 1128              	.LVL96:
+ 1129              	.L64:
   78:DaisySP-LGPL-FX/moogladder.cpp ****     }
- 531              		.loc 1 78 14 is_stmt 0 view .LVU201
- 532 0176 90ED10AA 		vldr.32	s20, [r0, #64]
- 533              	.LVL40:
-  78:DaisySP-LGPL-FX/moogladder.cpp ****     }
- 534              		.loc 1 78 14 view .LVU202
- 535 017a A3E7     		b	.L21
- 536              	.LVL41:
- 537              	.L26:
-  78:DaisySP-LGPL-FX/moogladder.cpp ****     }
- 538              		.loc 1 78 14 view .LVU203
- 539              	.LBE20:
- 540              	.LBB21:
- 541 017c 4FF00108 		mov	r8, #1
- 542              	.LVL42:
-  78:DaisySP-LGPL-FX/moogladder.cpp ****     }
- 543              		.loc 1 78 14 view .LVU204
- 544 0180 A8E7     		b	.L25
- 545              	.LVL43:
- 546              	.L22:
- 547              	.LBB19:
- 548              	.LBB17:
+ 1130              		.loc 1 78 14 view .LVU382
+ 1131              	.LBE119:
+ 1132              	.LBB120:
+ 1133              	.LBB117:
+  87:DaisySP-LGPL-FX/moogladder.cpp ****         for(int k = 1; k < 4; k++)
+ 1134              		.loc 1 87 41 view .LVU383
+ 1135 0454 B0EE679A 		vmov.f32	s18, s15
+ 1136 0458 30E7     		b	.L38
+ 1137              	.LVL97:
+ 1138              	.L60:
+ 1139              	.LBB109:
+  93:DaisySP-LGPL-FX/moogladder.cpp ****                               - (k != 3 ? tanhstg[k]
+ 1140              		.loc 1 93 56 view .LVU384
+ 1141 045a B0EE67AA 		vmov.f32	s20, s15
+ 1142 045e DDE6     		b	.L32
+ 1143              	.LVL98:
+ 1144              	.L54:
+  93:DaisySP-LGPL-FX/moogladder.cpp ****                               - (k != 3 ? tanhstg[k]
+ 1145              		.loc 1 93 56 view .LVU385
+ 1146              	.LBE109:
+  87:DaisySP-LGPL-FX/moogladder.cpp ****         for(int k = 1; k < 4; k++)
+ 1147              		.loc 1 87 41 view .LVU386
+ 1148 0460 F0EE679A 		vmov.f32	s19, s15
+ 1149 0464 67E6     		b	.L23
+ 1150              	.LVL99:
+ 1151              	.L58:
+ 1152              	.LBB110:
+  93:DaisySP-LGPL-FX/moogladder.cpp ****                               - (k != 3 ? tanhstg[k]
+ 1153              		.loc 1 93 56 view .LVU387
+ 1154 0466 F0EE67BA 		vmov.f32	s23, s15
+ 1155 046a B0E6     		b	.L29
+ 1156              	.LVL100:
+ 1157              	.L56:
+  93:DaisySP-LGPL-FX/moogladder.cpp ****                               - (k != 3 ? tanhstg[k]
+ 1158              		.loc 1 93 56 view .LVU388
+ 1159 046c B0EE67DA 		vmov.f32	s26, s15
+ 1160 0470 86E6     		b	.L26
+ 1161              	.LVL101:
+ 1162              	.L70:
+  93:DaisySP-LGPL-FX/moogladder.cpp ****                               - (k != 3 ? tanhstg[k]
+ 1163              		.loc 1 93 56 view .LVU389
+ 1164 0472 B0EE67AA 		vmov.f32	s20, s15
+ 1165 0476 8FE7     		b	.L47
+ 1166              	.LVL102:
+ 1167              	.L68:
+  93:DaisySP-LGPL-FX/moogladder.cpp ****                               - (k != 3 ? tanhstg[k]
+ 1168              		.loc 1 93 56 view .LVU390
+ 1169 0478 F0EE67BA 		vmov.f32	s23, s15
+ 1170 047c 68E7     		b	.L44
+ 1171              	.LVL103:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 37
+
+
+ 1172              	.L66:
+  93:DaisySP-LGPL-FX/moogladder.cpp ****                               - (k != 3 ? tanhstg[k]
+ 1173              		.loc 1 93 56 view .LVU391
+ 1174 047e B0EE679A 		vmov.f32	s18, s15
+ 1175 0482 40E7     		b	.L41
+ 1176              	.LVL104:
+ 1177              	.L97:
+ 1178              	.LBB98:
+ 1179              	.LBB71:
+  11:DaisySP-LGPL-FX/moogladder.cpp ****         x    = -x;
+ 1180              		.loc 1 11 9 is_stmt 1 view .LVU392
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1181              		.loc 1 12 9 view .LVU393
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1182              		.loc 1 12 14 is_stmt 0 view .LVU394
+ 1183 0484 B1EE670A 		vneg.f32	s0, s15
+ 1184              	.LVL105:
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1185              		.loc 1 12 14 view .LVU395
+ 1186 0488 BFEE00AA 		vmov.f32	s20, #-1.0e+0
+ 1187 048c B3E6     		b	.L30
+ 1188              	.LVL106:
+ 1189              	.L99:
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1190              		.loc 1 12 14 view .LVU396
+ 1191              	.LBE71:
+ 1192              	.LBE98:
+ 1193              	.LBE110:
+ 1194              	.LBB111:
+ 1195              	.LBB42:
+  11:DaisySP-LGPL-FX/moogladder.cpp ****         x    = -x;
+ 1196              		.loc 1 11 9 is_stmt 1 view .LVU397
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1197              		.loc 1 12 9 view .LVU398
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1198              		.loc 1 12 14 is_stmt 0 view .LVU399
+ 1199 048e B1EE670A 		vneg.f32	s0, s15
+ 1200              	.LVL107:
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1201              		.loc 1 12 14 view .LVU400
+ 1202 0492 BFEE009A 		vmov.f32	s18, #-1.0e+0
+ 1203              	.LVL108:
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1204              		.loc 1 12 14 view .LVU401
+ 1205 0496 FEE6     		b	.L36
+ 1206              	.LVL109:
+ 1207              	.L95:
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1208              		.loc 1 12 14 view .LVU402
+ 1209              	.LBE42:
+ 1210              	.LBE111:
+ 1211              	.LBB112:
+ 1212              	.LBB99:
+ 1213              	.LBB72:
+  11:DaisySP-LGPL-FX/moogladder.cpp ****         x    = -x;
+ 1214              		.loc 1 11 9 is_stmt 1 view .LVU403
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 38
+
+
+ 1215              		.loc 1 12 9 view .LVU404
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1216              		.loc 1 12 14 is_stmt 0 view .LVU405
+ 1217 0498 B1EE670A 		vneg.f32	s0, s15
+ 1218              	.LVL110:
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1219              		.loc 1 12 14 view .LVU406
+ 1220 049c BFEE00DA 		vmov.f32	s26, #-1.0e+0
+ 1221 04a0 5BE6     		b	.L24
+ 1222              	.LVL111:
+ 1223              	.L102:
+  11:DaisySP-LGPL-FX/moogladder.cpp ****         x    = -x;
+ 1224              		.loc 1 11 9 is_stmt 1 view .LVU407
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1225              		.loc 1 12 9 view .LVU408
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1226              		.loc 1 12 14 is_stmt 0 view .LVU409
+ 1227 04a2 B1EE670A 		vneg.f32	s0, s15
+ 1228              	.LVL112:
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1229              		.loc 1 12 14 view .LVU410
+ 1230 04a6 BFEE00AA 		vmov.f32	s20, #-1.0e+0
+ 1231 04aa 63E7     		b	.L45
+ 1232              	.LVL113:
+ 1233              	.L101:
+  11:DaisySP-LGPL-FX/moogladder.cpp ****         x    = -x;
+ 1234              		.loc 1 11 9 is_stmt 1 view .LVU411
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1235              		.loc 1 12 9 view .LVU412
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1236              		.loc 1 12 14 is_stmt 0 view .LVU413
+ 1237 04ac B1EE670A 		vneg.f32	s0, s15
+ 1238              	.LVL114:
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1239              		.loc 1 12 14 view .LVU414
+ 1240 04b0 FFEE00BA 		vmov.f32	s23, #-1.0e+0
+ 1241 04b4 39E7     		b	.L42
+ 1242              	.LVL115:
+ 1243              	.L100:
+  11:DaisySP-LGPL-FX/moogladder.cpp ****         x    = -x;
+ 1244              		.loc 1 11 9 is_stmt 1 view .LVU415
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1245              		.loc 1 12 9 view .LVU416
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1246              		.loc 1 12 14 is_stmt 0 view .LVU417
+ 1247 04b6 B1EE670A 		vneg.f32	s0, s15
+ 1248              	.LVL116:
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1249              		.loc 1 12 14 view .LVU418
+ 1250 04ba BFEE009A 		vmov.f32	s18, #-1.0e+0
+ 1251 04be 0FE7     		b	.L39
+ 1252              	.LVL117:
+ 1253              	.L94:
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1254              		.loc 1 12 14 view .LVU419
+ 1255              	.LBE72:
+ 1256              	.LBE99:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 39
+
+
+ 1257              	.LBE112:
+ 1258              	.LBB113:
+ 1259              	.LBB43:
+  11:DaisySP-LGPL-FX/moogladder.cpp ****         x    = -x;
+ 1260              		.loc 1 11 9 is_stmt 1 view .LVU420
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1261              		.loc 1 12 9 view .LVU421
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1262              		.loc 1 12 14 is_stmt 0 view .LVU422
+ 1263 04c0 B1EE670A 		vneg.f32	s0, s15
+ 1264              	.LVL118:
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1265              		.loc 1 12 14 view .LVU423
+ 1266 04c4 FFEE009A 		vmov.f32	s19, #-1.0e+0
+ 1267 04c8 22E6     		b	.L21
+ 1268              	.LVL119:
+ 1269              	.L96:
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1270              		.loc 1 12 14 view .LVU424
+ 1271              	.LBE43:
+ 1272              	.LBE113:
+ 1273              	.LBB114:
+ 1274              	.LBB100:
+ 1275              	.LBB73:
+  11:DaisySP-LGPL-FX/moogladder.cpp ****         x    = -x;
+ 1276              		.loc 1 11 9 is_stmt 1 view .LVU425
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1277              		.loc 1 12 9 view .LVU426
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1278              		.loc 1 12 14 is_stmt 0 view .LVU427
+ 1279 04ca B1EE670A 		vneg.f32	s0, s15
+ 1280              	.LVL120:
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1281              		.loc 1 12 14 view .LVU428
+ 1282 04ce FFEE00BA 		vmov.f32	s23, #-1.0e+0
+ 1283 04d2 69E6     		b	.L27
+ 1284              	.LVL121:
+ 1285              	.L48:
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1286              		.loc 1 12 14 view .LVU429
+ 1287              	.LBE73:
+ 1288              	.LBE100:
+ 1289              	.LBB101:
+ 1290              	.LBB88:
+  11:DaisySP-LGPL-FX/moogladder.cpp ****         x    = -x;
+ 1291              		.loc 1 11 9 is_stmt 1 view .LVU430
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1292              		.loc 1 12 9 view .LVU431
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1293              		.loc 1 12 14 is_stmt 0 view .LVU432
+ 1294 04d4 B1EE670A 		vneg.f32	s0, s15
+ 1295              	.LVL122:
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1296              		.loc 1 12 14 view .LVU433
+ 1297 04d8 BFEE00CA 		vmov.f32	s24, #-1.0e+0
+ 1298 04dc 80E7     		b	.L52
+ 1299              	.LVL123:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 40
+
+
+ 1300              	.L98:
+  11:DaisySP-LGPL-FX/moogladder.cpp ****         x    = -x;
+ 1301              		.loc 1 11 9 is_stmt 1 view .LVU434
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1302              		.loc 1 12 9 view .LVU435
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1303              		.loc 1 12 14 is_stmt 0 view .LVU436
+ 1304 04de B1EE670A 		vneg.f32	s0, s15
+ 1305              	.LVL124:
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1306              		.loc 1 12 14 view .LVU437
+ 1307 04e2 FFEE00CA 		vmov.f32	s25, #-1.0e+0
+ 1308 04e6 A7E6     		b	.L33
+ 1309              	.LVL125:
+ 1310              	.L62:
+  12:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 1311              		.loc 1 12 14 view .LVU438
+ 1312              	.LBE88:
+ 1313              	.LBE101:
   95:DaisySP-LGPL-FX/moogladder.cpp ****             delay[k] = stg[k];
- 549              		.loc 1 95 50 view .LVU205
- 550 0182 15ED010A 		vldr.32	s0, [r5, #-4]
- 551 0186 2046     		mov	r0, r4
- 552 0188 20EE290A 		vmul.f32	s0, s0, s19
- 553 018c FFF7FEFF 		bl	_ZN7daisysp10MoogLadder7my_tanhEf
- 554              	.LVL44:
- 555 0190 CAE7     		b	.L23
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 23
+ 1314              		.loc 1 95 50 view .LVU439
+ 1315 04e8 F0EE67CA 		vmov.f32	s25, s15
+ 1316 04ec B7E6     		b	.L35
+ 1317              	.L71:
+  95:DaisySP-LGPL-FX/moogladder.cpp ****             delay[k] = stg[k];
+ 1318              		.loc 1 95 50 view .LVU440
+ 1319 04ee B0EE67CA 		vmov.f32	s24, s15
+ 1320 04f2 87E7     		b	.L51
+ 1321              	.LBE114:
+ 1322              	.LBE117:
+ 1323              	.LBE120:
+ 1324              		.cfi_endproc
+ 1325              	.LFE2799:
+ 1327              		.text
+ 1328              	.Letext0:
+ 1329              		.file 3 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/machine/_default_types.h"
+ 1330              		.file 4 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/_stdint.h"
+ 1331              		.file 5 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdint.h"
+ 1332              		.file 6 "/Library/DaisyToolchain/0.2.0/arm/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h"
+ 1333              		.file 7 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h"
+ 1334              		.file 8 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdint"
+ 1335              		.file 9 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdlib"
+ 1336              		.file 10 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/type_traits"
+ 1337              		.file 11 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/debug/debug.h"
+ 1338              		.file 12 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cwchar"
+ 1339              		.file 13 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_pair.h"
+ 1340              		.file 14 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/exception_ptr.h"
+ 1341              		.file 15 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v
+ 1342              		.file 16 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/clocale"
+ 1343              		.file 17 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdio"
+ 1344              		.file 18 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/basic_string.h"
+ 1345              		.file 19 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_iterator.h"
+ 1346              		.file 20 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/predefined_ops.h
+ 1347              		.file 21 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/_types.h"
+ 1348              		.file 22 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/reent.h"
+ 1349              		.file 23 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/lock.h"
+ 1350              		.file 24 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/math.h"
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 41
 
 
- 556              	.L30:
- 557 0192 00BF     		.align	2
- 558              	.L29:
- 559 0194 17B7D137 		.word	936490775
- 560 0198 00000000 		.word	0
- 561 019c 2DB2FD3E 		.word	1056813613
- 562 01a0 77BEEF3F 		.word	1072676471
- 563 01a4 9CA2EB3F 		.word	1072407196
- 564 01a8 DD24263F 		.word	1059464413
- 565 01ac FAED7BC0 		.word	-1065619974
- 566 01b0 DB0FC940 		.word	1086918619
- 567 01b4 492E7F3F 		.word	1065299529
- 568 01b8 5BB17F3F 		.word	1065333083
- 569              	.LBE17:
- 570              	.LBE19:
- 571              	.LBE21:
- 572              		.cfi_endproc
- 573              	.LFE2799:
- 575              		.text
- 576              	.Letext0:
- 577              		.file 3 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/machine/_default_types.h"
- 578              		.file 4 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/_stdint.h"
- 579              		.file 5 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdint.h"
- 580              		.file 6 "/Library/DaisyToolchain/0.2.0/arm/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h"
- 581              		.file 7 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h"
- 582              		.file 8 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdint"
- 583              		.file 9 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdlib"
- 584              		.file 10 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/type_traits"
- 585              		.file 11 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/debug/debug.h"
- 586              		.file 12 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cwchar"
- 587              		.file 13 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_pair.h"
- 588              		.file 14 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/exception_ptr.h"
- 589              		.file 15 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v
- 590              		.file 16 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/clocale"
- 591              		.file 17 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdio"
- 592              		.file 18 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/basic_string.h"
- 593              		.file 19 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_iterator.h"
- 594              		.file 20 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/predefined_ops.h
- 595              		.file 21 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/_types.h"
- 596              		.file 22 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/reent.h"
- 597              		.file 23 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/lock.h"
- 598              		.file 24 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/math.h"
- 599              		.file 25 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdlib.h"
- 600              		.file 26 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/math.h"
- 601              		.file 27 "DaisySP-LGPL-FX/moogladder.h"
- 602              		.file 28 "../DaisySP/Source/Utility/dsp.h"
- 603              		.file 29 "/Library/DaisyToolchain/0.2.0/arm/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h"
- 604              		.file 30 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/wchar.h"
- 605              		.file 31 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/locale.h"
- 606              		.file 32 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdio.h"
- 607              		.file 33 "<built-in>"
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s 			page 24
+ 1351              		.file 25 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdlib.h"
+ 1352              		.file 26 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/math.h"
+ 1353              		.file 27 "DaisySP-LGPL-FX/moogladder.h"
+ 1354              		.file 28 "../DaisySP/Source/Utility/dsp.h"
+ 1355              		.file 29 "/Library/DaisyToolchain/0.2.0/arm/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h"
+ 1356              		.file 30 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/wchar.h"
+ 1357              		.file 31 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/locale.h"
+ 1358              		.file 32 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdio.h"
+ 1359              		.file 33 "<built-in>"
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s 			page 42
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 moogladder.cpp
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s:19     .text._ZN7daisysp10MoogLadder7my_tanhEf:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s:25     .text._ZN7daisysp10MoogLadder7my_tanhEf:0000000000000000 _ZN7daisysp10MoogLadder7my_tanhEf
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s:107    .text._ZN7daisysp10MoogLadder4InitEf:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s:113    .text._ZN7daisysp10MoogLadder4InitEf:0000000000000000 _ZN7daisysp10MoogLadder4InitEf
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s:201    .text._ZN7daisysp10MoogLadder4InitEf:000000000000002c $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s:208    .text._ZN7daisysp10MoogLadder7ProcessEf:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s:214    .text._ZN7daisysp10MoogLadder7ProcessEf:0000000000000000 _ZN7daisysp10MoogLadder7ProcessEf
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccqAqfqW.s:559    .text._ZN7daisysp10MoogLadder7ProcessEf:0000000000000194 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s:19     .text._ZN7daisysp10MoogLadder7my_tanhEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s:26     .text._ZN7daisysp10MoogLadder7my_tanhEf:0000000000000000 _ZN7daisysp10MoogLadder7my_tanhEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s:119    .text._ZN7daisysp10MoogLadder4InitEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s:126    .text._ZN7daisysp10MoogLadder4InitEf:0000000000000000 _ZN7daisysp10MoogLadder4InitEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s:219    .text._ZN7daisysp10MoogLadder4InitEf:000000000000002c $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s:226    .text._ZN7daisysp10MoogLadder7ProcessEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s:233    .text._ZN7daisysp10MoogLadder7ProcessEf:0000000000000000 _ZN7daisysp10MoogLadder7ProcessEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s:1015   .text._ZN7daisysp10MoogLadder7ProcessEf:00000000000003b8 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc0B4D7l.s:1031   .text._ZN7daisysp10MoogLadder7ProcessEf:00000000000003e0 $t
 
 UNDEFINED SYMBOLS
 tanhf

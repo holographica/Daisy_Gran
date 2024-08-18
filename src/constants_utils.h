@@ -1,10 +1,11 @@
 #pragma once
-#include "stddef.h"
+#include "stdlib.h"
 #include <time.h>
 
 /* macro to set frequently used variables to be stored in DTCMRAM */
 #define DTCMRAM_BSS __attribute__((section(".dtcmram_bss")))
-#define SRAM_BSS __attribute__((section(".bss")))
+#define ITCMRAM_TEXT __attribute__((section(".itcmram_text")))
+#define DATA_ __attribute__((section(".data")))
 
 constexpr int MIN_GRAINS = 1;
 constexpr int MAX_GRAINS = 20;
@@ -16,25 +17,25 @@ constexpr float MAX_PITCH = 3.0f;
 
 static constexpr int NUM_ENV_TYPES = 4; 
 static constexpr int NUM_PHASOR_MODES = 4;
-static constexpr int NUM_SYNTH_MODES = 7;
+static constexpr int NUM_SYNTH_MODES = 9;
 static constexpr float PARAM_CHANGE_THRESHOLD = 0.01f;
 
 /* integer clamp as can't use std::clamp */
-inline constexpr size_t intclamp(size_t val, size_t min, size_t max){
+inline constexpr std::size_t intclamp(size_t val, size_t min, size_t max){
   if (val < min) val = min;
   else if (val > max) val = max;
   return val;
 }
 
 /* converts milliseconds to number of samples */
-inline constexpr size_t MsToSamples(float ms){
+inline constexpr std::size_t MsToSamples(float ms){
   /* hardcoded sample rate here to help performance 
       since SAMPLE_RATE_FLOAT is stored in QSPI */
-  return static_cast<size_t>(48000.0f * (ms*0.001f));
+  return static_cast<std::size_t>(48000.0f * (ms*0.001f));
 }
 
 /* converts number of samples to milliseconds */
-inline constexpr float SamplesToMs(size_t samples){
+inline constexpr float SamplesToMs(std::size_t samples){
   /* hardcoded sample rate here to help performance 
       since SAMPLE_RATE_FLOAT is stored in QSPI */
   return (static_cast<float>(samples) * 1000.0f) / 48000.0f; 
@@ -64,9 +65,9 @@ constexpr int BIT_DEPTH = 16;
 constexpr uint16_t MAX_FILES = 32;          
 constexpr uint16_t MAX_FNAME_LEN = 64;
 /* 16mb - max size of one stereo channel to be loaded into buffers */
-constexpr size_t CHNL_BUF_SIZE_ABS = 16*1024*1024;
+constexpr std::size_t CHNL_BUF_SIZE_ABS = 16*1024*1024;
 /* each sample needs an int16 (2 bytes) so we do (absolute size)/2 */
-constexpr size_t CHNL_BUF_SIZE_SAMPS = 8*1024*1024;
+constexpr std::size_t CHNL_BUF_SIZE_SAMPS = 8*1024*1024;
 
 
 

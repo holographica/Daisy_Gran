@@ -4,8 +4,8 @@ using namespace daisy;
 
 /* define all static variables before initialisation */
 
-DTCMRAM_BSS const int16_t* GranularSynth::left_buf_ = nullptr;
-DTCMRAM_BSS const int16_t* GranularSynth::right_buf_ = nullptr;
+const int16_t* GranularSynth::left_buf_ = nullptr;
+const int16_t* GranularSynth::right_buf_ = nullptr;
 /* length of audio in samples */
 DTCMRAM_BSS size_t GranularSynth::audio_len_;
 DTCMRAM_BSS Grain GranularSynth::grains_[MAX_GRAINS];
@@ -33,7 +33,8 @@ DTCMRAM_BSS float GranularSynth::rnd_phasor_;
 /// @param left Left channel audio data buffer
 /// @param right Right channel audio data buffer
 /// @param audio_len Length of currently loaded audio file in samples
-void GranularSynth::Init(const int16_t *left, const int16_t *right, size_t audio_len){
+void GranularSynth::Init(DaisyPod& pod, const int16_t *left, const int16_t *right, size_t audio_len){
+  pod_ = &pod;
   left_buf_ = left;
   right_buf_ = right;
   audio_len_ = audio_len;
@@ -100,7 +101,7 @@ void GranularSynth::SetPan(float pan){
 }
 
 /// @brief Update grain audio parameters
-void GranularSynth::UpdateGrainParams(){
+ITCMRAM_TEXT void GranularSynth::UpdateGrainParams(){
   for (Grain& grain:grains_){
     grain.SetGrainSize(grain_size_);
     grain.SetSpawnPos(spawn_pos_);
@@ -111,7 +112,8 @@ void GranularSynth::UpdateGrainParams(){
 /// @brief We take a random number, map it into a certain range
 ///        determined by the user randomness setting for that parameter,
 ///        then clamp it so it stays in the correct range for the parameter 
-void GranularSynth::ApplyRandomness(){
+
+ITCMRAM_TEXT void GranularSynth::ApplyRandomness(){
   /* here we map a randomly generated num between 1 +/- user randomness setting 
       then convert it to ms so we can use fclamp to clamp it within the correct range */
   if (rnd_size_>0){
@@ -180,7 +182,7 @@ void GranularSynth::TriggerGrain(){
 /// @param out_left Pointer to left channel audio output buffer
 /// @param out_right Pointer to right channel audio output buffer
 /// @param size Number of samples to process in this call 
-void GranularSynth::ProcessGrains(float *out_left, float *out_right, size_t size){
+ITCMRAM_TEXT void GranularSynth::ProcessGrains(float *out_left, float *out_right, size_t size){
   for (size_t i=0; i<size;i++){
     TriggerGrain();
     float sum_left = 0.0f, sum_right = 0.0f;

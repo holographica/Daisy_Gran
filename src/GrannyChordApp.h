@@ -7,29 +7,34 @@
 #include "AudioFileManager.h"
 #include "debug_print.h"
 #include "DaisySP-LGPL-FX/compressor.h"
-#include "DaisySP-LGPL-FX/reverbsc.h"
+#include "zita-rev1/source/reverb.h"
 #include "DaisySP-LGPL-FX/moogladder.h"
+
 
 using namespace daisy;
 using namespace daisysp;
 
 class GrannyChordApp {
   public:
-  GrannyChordApp(DaisyPod& pod, GranularSynth& synth, AudioFileManager& filemgr)
-    : pod_(pod), synth_(synth), filemgr_(filemgr){
-      instance_ = this;
-    };
+  GrannyChordApp(): pod_(nullptr) { instance_ = this; }
 
-    void Init(int16_t *left, int16_t *right);
+  // GrannyChordApp():{};
+  // GrannyChordApp():{ instance_ = this; };
+
+    void Init(DaisyPod& pod, GranularSynth& synth, AudioFileManager& filemgr, int16_t *left, int16_t *right);
     void Run();
 
     static void AudioCallback(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, size_t size);
     static GrannyChordApp* instance_;
 
+    void PassCPUMeter(CpuLoadMeter& meter);
+    void PrintCPULoad();
+    CpuLoadMeter* cpumeter_;
+
   private:
-    DaisyPod &pod_;
-    GranularSynth synth_;
-    AudioFileManager &filemgr_;
+    DaisyPod *pod_;
+    GranularSynth *synth_;
+    AudioFileManager *filemgr_;
     FIL *file_;
 
     /* UI and state objects */
@@ -38,7 +43,8 @@ class GrannyChordApp {
     static DTCMRAM_BSS SynthMode prev_synth_mode_;
     
     /* audio FX and filters */
-    // static DSY_SDRAM_BSS ReverbSc reverb_;
+    // static DSY_SDRAM_BSS Reverb reverb_;
+    static DTCMRAM_BSS Reverb reverb_;
 
     static DTCMRAM_BSS Compressor comp_;
     static DTCMRAM_BSS MoogLadder lowpass_moog_;
@@ -58,11 +64,12 @@ class GrannyChordApp {
 
     bool changing_state_ = false;
     bool recording_out_ = false;
-    WavWriter<16384> sd_out_writer_;
+    static DTCMRAM_BSS WavWriter<16384> sd_out_writer_;
     static DTCMRAM_BSS int recording_count_;
 
     void UpdateUI();
     void UpdateSynthMode();
+
 
     /* audio input/output/recording methods based on state */
     void ProcessAudio(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, size_t size);
@@ -70,6 +77,7 @@ class GrannyChordApp {
     void ProcessWAVPlayback(AudioHandle::OutputBuffer out, size_t size);
     void ProcessRecordIn(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, size_t size);
     void ProcessSynthesis(AudioHandle::OutputBuffer out, size_t size);
+    void ProcessFX(AudioHandle::OutputBuffer, size_t size);
     void ProcessChordMode(AudioHandle::OutputBuffer out, size_t size);
     void RecordOutToSD(AudioHandle::OutputBuffer out, size_t size);
     // void ToggleRecordOut();

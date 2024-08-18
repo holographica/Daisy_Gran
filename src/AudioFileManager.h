@@ -10,10 +10,11 @@ using namespace daisy;
 
 class AudioFileManager {
   public:
-    AudioFileManager(SdmmcHandler &sd, FatFSInterface &fsi, DaisyPod &pod, FIL *file)
-      : sd_(sd), fsi_(fsi), pod_(pod), curr_file_(file){};
+    // AudioFileManager(SdmmcHandler &sd, FatFSInterface &fsi, DaisyPod &pod, FIL *file)
+    //   : sd_(sd), fsi_(fsi), pod_(pod), curr_file_(file){};
+    AudioFileManager(): pod_(nullptr) {};
     
-    bool Init();
+    void Init(SdmmcHandler& sd, FatFSInterface& fsi, DaisyPod& pod, FIL* file);
     bool ScanWavFiles();
     void SetBuffers(int16_t *left, int16_t *right);
     bool LoadFile(uint16_t file_idx);
@@ -22,8 +23,8 @@ class AudioFileManager {
 
     int16_t* GetLeftBuffer() const { return left_buf_; }
     int16_t* GetRightBuffer() const { return right_buf_; }
-    size_t GetSamplesPerChannel() const { return header_.total_samples / header_.channels; }
-    size_t GetTotalSamples() const { return header_.total_samples; }
+    std::size_t GetSamplesPerChannel() const { return header_.total_samples / header_.channels; }
+    std::size_t GetTotalSamples() const { return header_.total_samples; }
     int16_t GetNumChannels() const { return header_.channels; }
     uint16_t GetFileCount() const { return file_count_; }
     void GetName(uint16_t idx, char* name) const { strcpy(name, names_[idx]); }
@@ -31,12 +32,12 @@ class AudioFileManager {
   private:
     /* methods for loading WAV audio data */
     bool LoadAudioData();
-    bool Load16BitAudio(size_t samples_per_channel);
+    bool Load16BitAudio(std::size_t samples_per_channel);
 
     /* references to hardware interfaces */
-    SdmmcHandler& sd_;
-    FatFSInterface& fsi_;
-    DaisyPod& pod_;
+    SdmmcHandler* sd_;
+    FatFSInterface* fsi_;
+    DaisyPod* pod_;
     FIL* curr_file_; 
     /* pointers to master left/right channel buffers */
     static int16_t* left_buf_;
