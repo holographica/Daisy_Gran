@@ -2,14 +2,6 @@
 
 using namespace daisy;
 
-/* declare / initialise static members */
-DTCMRAM_BSS char AudioFileManager::names_[MAX_FILES][MAX_FNAME_LEN];
-DTCMRAM_BSS uint16_t AudioFileManager::curr_idx_ = 0;
-DTCMRAM_BSS uint16_t AudioFileManager::file_count_ = 0;
-DTCMRAM_BSS WavHeader AudioFileManager::header_;
-DTCMRAM_BSS uint8_t AudioFileManager::audio_data_start_ = 0;
-int16_t* AudioFileManager::left_buf_ = nullptr;
-int16_t* AudioFileManager::right_buf_ = nullptr;
 
 /// @brief Initialises sd card and file system interfaces
 /// @return True if initialisation succeeds, else false
@@ -31,7 +23,7 @@ bool AudioFileManager::ScanWavFiles(){
   file_count_=0;
 
   if (f_opendir(&dir,fsi_.GetSDPath()) != FR_OK){
-    // DebugPrint(pod_, "failed to open SD card directory");
+    DebugPrint(pod_, "failed to open SD card directory");
     // TODO log error? 
     return false;
   }
@@ -47,7 +39,7 @@ bool AudioFileManager::ScanWavFiles(){
     }
   }
   f_closedir(&dir);
-  // DebugPrint(pod_, "file count is %d",file_count_);
+  DebugPrint(pod_, "file count is %d",file_count_);
   return file_count_ >0;
 }
 
@@ -65,11 +57,11 @@ bool AudioFileManager::LoadFile(uint16_t sel_idx) {
 
   if (f_open(curr_file_, names_[sel_idx], (FA_OPEN_EXISTING | FA_READ))!=FR_OK) return false;
   if (!GetWavHeader(curr_file_)||header_.bit_depth!=16||header_.sample_rate!=48000){
-    // DebugPrint(pod_, "wav header parse failed");
+    DebugPrint(pod_, "wav header parse failed");
     f_close(curr_file_);
     return false;
   }
-  // DebugPrint(pod_, "loading audio data now");
+  DebugPrint(pod_, "loading audio data now");
   return LoadAudioData();
 }
 
@@ -164,7 +156,7 @@ bool AudioFileManager::LoadAudioData() {
   size_t samples_per_channel = GetSamplesPerChannel();
 
   if (samples_per_channel > CHNL_BUF_SIZE_SAMPS) return false;
-
+  DebugPrint(pod_, "calling load16bit func");
   return Load16BitAudio(samples_per_channel);
 }
 
@@ -172,39 +164,32 @@ bool AudioFileManager::LoadAudioData() {
 /// @param samples_per_channel Length of audio in samples, per channel 
 /// @return True if audio is loaded. False if file fails to read
 bool AudioFileManager::Load16BitAudio(size_t samples_per_channel){
-  // DebugPrint(pod_,"before buf");
-  // alignas(32) std::vector<int16_t> temp_buf(BUF_CHUNK_SZ*header_.channels);
-  // std::vector<int16_t> temp_buf(BUF_CHUNK_SZ*header_.channels);
-  // int16_t temp_buf[16384]; // stack buffer
-  int16_t* temp_buf = new int16_t[16384]; // heap buffer? try it 
+  size_t chunk_size = 16384;
+  alignas(16) std::vector<int16_t> temp_buff(chunk_size*header_.channels);
   size_t samples_read = 0;
   UINT bytes_read;
-  // DebugPrint(pod_,"starting loading loop");
-  while (!f_eof(curr_file_) && samples_read<samples_per_channel){
-    // DebugPrint(pod_,"first bit of loading loop");
-    size_t samples_to_read = std::min(static_cast<size_t>(16384), (samples_per_channel-samples_read));
-    // size_t bytes_to_read = samples_to_read * header_.channels * sizeof(int16_t);
-    
-    if (f_read(curr_file_, temp_buf, samples_to_read*header_.channels * sizeof(int16_t), &bytes_read)!=FR_OK) {
-      delete[] temp_buf;
-      // DebugPrint(pod_, "failed to fread");
+  
+  while (!f_eof(curr_file_) && samples_read < samples_per_channel){
+    size_t samples_to_read = std::min(chunk_size, samples_per_channel - samples_read);
+    UINT bytes_to_read = samples_to_read * header_.channels * sizeof(int16_t);
+    if (f_read(curr_file_, temp_buff.data(), bytes_to_read, &bytes_read) !=FR_OK){
+      DebugPrint(pod_, "failed to read file from SD card");
       return false;
     }
 
     size_t samples_in_chunk = bytes_read / (header_.channels * sizeof(int16_t));
     for (size_t i=0; i<samples_in_chunk; i++){
       if (header_.channels == 1){
-        left_buf_[i+samples_read] = right_buf_[i+samples_read] = temp_buf[i];
+        left_buf_[i+samples_read] = right_buf_[i+samples_read] = temp_buff[i];
       }
       else {
-        left_buf_[i+samples_read] = temp_buf[i * 2];
-        right_buf_[i+samples_read] = temp_buf[i * 2 + 1];
+        left_buf_[i+samples_read] = temp_buff[i * 2];
+        right_buf_[i+samples_read] = temp_buff[i * 2 + 1];
       }
     }
     samples_read += samples_in_chunk;
   }
-  // DebugPrint(pod_,"end of loading loop - loaded ok");
-  delete[] temp_buf;
+  DebugPrint(pod_,"end of loading loop - loaded ok");
   return true;
 }
 

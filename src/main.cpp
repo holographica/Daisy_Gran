@@ -12,7 +12,7 @@
 #include "GrannyChordApp.h"
 #include "constants_utils.h"
 #include "debug_print.h"
-#include "zita-rev1/source/reverb.h"
+#include "DaisySP-LGPL-FX/reverbsc.h"
 
 using namespace daisy;
 using namespace daisysp;
@@ -23,27 +23,22 @@ using namespace std;
 /* SDRAM buffers for storing WAV files or recorded input audio */
 DSY_SDRAM_BSS alignas(16) int16_t left_buf[CHNL_BUF_SIZE_SAMPS];
 DSY_SDRAM_BSS alignas(16) int16_t right_buf[CHNL_BUF_SIZE_SAMPS];
+/* reverb stored on SDRAM as its delay line buffers are too large for flash/SRAM */
+DSY_SDRAM_BSS ReverbSc reverb;
 
 /* hardware interfaces */
-DSY_SDRAM_BSS SdmmcHandler sd;
-// __attribute__((section(".axi_sram")))SdmmcHandler sd;
-// SdmmcHandler sd;
-DSY_SDRAM_BSS FatFSInterface fsi;
-// __attribute__((section(".axi_sram")))FatFSInterface fsi;
+SdmmcHandler sd;
+FatFSInterface fsi;
 DaisyPod pod;
-DSY_SDRAM_BSS FIL file;
-Reverb reverb;
+FIL file;
 
+// CpuLoadMeter loadmeter;
 
 /* software classes to run app */
-//NOTE: can't put this on SDRAM
-// CAN put it on axi_sdram
-// __attribute__((section(".axi_sdram")))AudioFileManager filemgr(sd, fsi, pod, &file);
 AudioFileManager filemgr(sd, fsi, pod, &file);
-// DSY_SDRAM_BSS AudioFileManager filemgr(sd, fsi, pod, &file);
-// __attribute__((section(".axi_sram")))static GranularSynth synth(pod);
 static GranularSynth synth(pod);
-GrannyChordApp app(pod, synth, filemgr);
+GrannyChordApp app(pod, synth, filemgr, reverb);
+// GrannyChordApp app(pod, synth, filemgr);
 
 /* we set rng state here so we can use RNG fns across classes */
 uint32_t rng_state;
@@ -51,28 +46,21 @@ uint32_t rng_state;
 
 int main (void){
   pod.Init();
-  reverb.init(48000.0f, false);
-  #ifdef DEBUG_MODE
-  pod.seed.StartLog(true);
-  DebugPrint(pod,"started log");
-  #endif
   pod.led1.SetBlue(1);
+  pod.UpdateLeds();
+  // pod.seed.StartLog(true);
+  // #ifdef DEBUG_MODE
+  // pod.seed.StartLog(true);
+  // DebugPrint(pod,"started log");
+  // #endif
+  pod.ClearLeds();
+  pod.led1.SetGreen(1);
   pod.UpdateLeds();
 
 
   app.Init(left_buf, right_buf);
-  // DebugPrint(pod, "app init done.");
-  filemgr.LoadFile(6);
-  // DebugPrint(pod, "finished loading file.");
-
-  // pod.StartAdc();
-  // pod.StartAudio(AudioCallback);
-
+  // app.GetLoadmeter(&loadmeter);
   app.Run();
-  // while(true){
-
-  // }
-
 }
 
 // let grains through gate when button pressed 

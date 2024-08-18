@@ -3,9 +3,7 @@
 #include <time.h>
 
 /* macro to set frequently used variables to be stored in DTCMRAM */
-#define DTCMRAM_BSS __attribute__((section(".dtcmram_bss")))
-#define SRAM_BSS __attribute__((section(".bss")))
-
+#define DTCMRAM_BSS __attribute__((section(".bss")))
 constexpr int MIN_GRAINS = 1;
 constexpr int MAX_GRAINS = 20;
 

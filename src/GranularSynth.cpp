@@ -4,31 +4,6 @@ using namespace daisy;
 
 /* define all static variables before initialisation */
 
-DTCMRAM_BSS const int16_t* GranularSynth::left_buf_ = nullptr;
-DTCMRAM_BSS const int16_t* GranularSynth::right_buf_ = nullptr;
-/* length of audio in samples */
-DTCMRAM_BSS size_t GranularSynth::audio_len_;
-DTCMRAM_BSS Grain GranularSynth::grains_[MAX_GRAINS];
-
-/* parameters affecting audio output */
-DTCMRAM_BSS GrainPhasor::Mode GranularSynth::phasor_mode_;
-DTCMRAM_BSS Grain::EnvelopeType GranularSynth::env_type_;
-DTCMRAM_BSS size_t GranularSynth::grain_size_;
-DTCMRAM_BSS size_t GranularSynth::spawn_pos_;
-DTCMRAM_BSS size_t GranularSynth::active_count_;
-DTCMRAM_BSS float GranularSynth::pitch_ratio_;
-DTCMRAM_BSS float GranularSynth::pan_;
-
-/* amount of randomness to apply to synth/grain parameters*/
-DTCMRAM_BSS float GranularSynth::rnd_size_;
-DTCMRAM_BSS float GranularSynth::rnd_spawn_pos_;;
-DTCMRAM_BSS float GranularSynth::rnd_count_;
-DTCMRAM_BSS float GranularSynth::rnd_pitch_;
-DTCMRAM_BSS float GranularSynth::rnd_pan_;
-DTCMRAM_BSS float GranularSynth::rnd_envelope_;
-DTCMRAM_BSS float GranularSynth::rnd_phasor_;
-
-
 /// @brief Initialise granular synth object and assign audio buffers
 /// @param left Left channel audio data buffer
 /// @param right Right channel audio data buffer

@@ -54,6 +54,7 @@ int ReverbSc::Init(float sr)
     prv_lpfreq_    = 0.0;
     init_done_     = 1;
     int i, n_bytes = 0;
+    wet_mix_ = 0.3;
     n_bytes = 0;
     for(i = 0; i < 8; i++)
     {
@@ -281,3 +282,11 @@ int ReverbSc::Process(const float &in1,
     *out2 = a_out_r * kOutputGain;
     return REVSC_OK;
 }
+
+void ReverbSc::ProcessMix(const float &in1, const float &in2, float *out1, float *out2){
+  float wet_out1, wet_out2;
+  Process(in1, in2, &wet_out1, &wet_out2);
+  *out1 = wet_mix_*wet_out1 + ((1.0f-wet_mix_)*in1);
+  *out2 = wet_mix_*wet_out2 + ((1.0f-wet_mix_)*in2);
+}
+

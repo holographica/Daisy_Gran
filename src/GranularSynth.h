@@ -10,7 +10,7 @@ class GranularSynth{
     GranularSynth(DaisyPod& pod) 
       : pod_(pod){}
 
-    static void Init(const int16_t *left, const int16_t *right, size_t audio_len);
+    void Init(const int16_t *left, const int16_t *right, size_t audio_len);
     void UpdateGrainParams();
     void ApplyRandomness();
     void TriggerGrain();
@@ -36,27 +36,27 @@ class GranularSynth{
   private:
     DaisyPod& pod_;
     /* pointers to SDRAM audio buffers */
-    static DTCMRAM_BSS const int16_t *left_buf_;
-    static DTCMRAM_BSS const int16_t *right_buf_;
+    const int16_t *left_buf_;
+    const int16_t *right_buf_;
     /* length of audio in samples */
-    static DTCMRAM_BSS size_t audio_len_;
-    static DTCMRAM_BSS Grain grains_[MAX_GRAINS];
+    size_t audio_len_;
+    Grain grains_[MAX_GRAINS];
 
     /* parameters affecting audio output */
-    static DTCMRAM_BSS GrainPhasor::Mode phasor_mode_;
-    static DTCMRAM_BSS Grain::EnvelopeType env_type_;
-    static DTCMRAM_BSS size_t grain_size_;
-    static DTCMRAM_BSS size_t spawn_pos_;
-    static DTCMRAM_BSS size_t active_count_;
-    static DTCMRAM_BSS float pitch_ratio_;
-    static DTCMRAM_BSS float pan_;
+    GrainPhasor::Mode phasor_mode_;
+    Grain::EnvelopeType env_type_;
+    size_t grain_size_;
+    size_t spawn_pos_;
+    size_t active_count_;
+    float pitch_ratio_;
+    float pan_;
 
     /* amount of randomness to apply to synth/grain parameters*/
-    static DTCMRAM_BSS float rnd_size_;
-    static DTCMRAM_BSS float rnd_spawn_pos_; 
-    static DTCMRAM_BSS float rnd_count_;
-    static DTCMRAM_BSS float rnd_pitch_;
-    static DTCMRAM_BSS float rnd_pan_;
-    static DTCMRAM_BSS float rnd_envelope_;
-    static DTCMRAM_BSS float rnd_phasor_;
+    float rnd_size_;
+    float rnd_spawn_pos_; 
+    float rnd_count_;
+    float rnd_pitch_;
+    float rnd_pan_;
+    float rnd_envelope_;
+    float rnd_phasor_;
 };

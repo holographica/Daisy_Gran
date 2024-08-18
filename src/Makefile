@@ -5,15 +5,16 @@ TARGET = Daisy_Gran
 USE_FATFS = 1
 # USE_DAISYSP_LGPL = 1
 # Sources
-CPP_SOURCES = main.cpp AudioFileManager.cpp GranularSynth.cpp GrannyChordApp.cpp\
+CPP_SOURCES = main.cpp AudioFileManager.cpp GranularSynth.cpp\
+							GrannyChordApp.cpp\
 							Grain.cpp DaisySP-LGPL-FX/compressor.cpp\
-							DaisySP-LGPL-FX/moogladder.cpp DaisySP-LGPL-FX/reverbsc.cpp\
-							zita-rev1/source/reverb.cpp zita-rev1/source/pareq.cpp
+							DaisySP-LGPL-FX/moogladder.cpp\
+							DaisySP-LGPL-FX/reverbsc.cpp\
 
 # Library locations
 LIBDAISY_DIR = ../libDaisy
 DAISYSP_DIR = ../DaisySP
-# APP_TYPE = BOOT_SRAM_EDITED
+APP_TYPE = BOOT_SRAM_EDITED
 
 
 # Core location, and generic Makefile
@@ -23,5 +24,4 @@ include $(SYSTEM_FILES_DIR)/Makefile
 LDFLAGS += -u _printf_float -Wl,-Map=output.map
 OPT += -Os
 CFLAGS += -DDEBUG_MODE=1 -ffunction-sections -fdata-sections
-# -flto 
 

@@ -45,6 +45,10 @@ class ReverbSc
     */
     int Process(const float &in1, const float &in2, float *out1, float *out2);
 
+    /* adds a simple wet/dry mix and processes reverb with this mix level */
+    void ProcessMix(const float &in1, const float &in2, float *out1, float *out2);
+
+    void SetMix(float mix) { wet_mix_ = mix; }
     /** controls the reverb time. reverb tail becomes infinite when set to 1.0
         \param fb - sets reverb time. range: 0.0 to 1.0
     */
@@ -65,6 +69,7 @@ class ReverbSc
     int        init_done_;
     ReverbScDl delay_lines_[8];
     float      aux_[DSY_REVERBSC_MAX_SIZE];
+    float wet_mix_;
 };
 
 

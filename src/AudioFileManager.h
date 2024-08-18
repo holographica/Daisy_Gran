@@ -1,5 +1,6 @@
 #pragma once
 #include <stdio.h>
+#include <vector>
 #include <stdint.h>
 #include "daisy_pod.h"
 #include "constants_utils.h"
@@ -39,16 +40,16 @@ class AudioFileManager {
     DaisyPod& pod_;
     FIL* curr_file_; 
     /* pointers to master left/right channel buffers */
-    static int16_t* left_buf_;
-    static int16_t* right_buf_;
+    int16_t* left_buf_;
+    int16_t* right_buf_;
     /* list of filenames for logging */
-    static DTCMRAM_BSS char names_ [MAX_FILES][MAX_FNAME_LEN];
+    char names_ [MAX_FILES][MAX_FNAME_LEN];
     /* index of currently selected file */
-    static DTCMRAM_BSS uint16_t curr_idx_;
-    static DTCMRAM_BSS uint16_t file_count_;
+    uint16_t curr_idx_;
+    uint16_t file_count_;
     /* header data for currently selected file */
-    static DTCMRAM_BSS WavHeader header_;
+    WavHeader header_;
     /* byte in original wav file at which audio samples start - usually 44 */
-    static DTCMRAM_BSS uint8_t audio_data_start_;
+    uint8_t audio_data_start_;
     /* chunk size for reading audio into temporary buffer */
 };
