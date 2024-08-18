@@ -53,13 +53,13 @@ class GranularSynth{
     float pan_;
 
     /* amount of randomness to apply to synth/grain parameters*/
-    float rnd_size_ = 0.0f;
-    float rnd_spawn_pos_ = 0.0f;
-    float rnd_count_ = 0.0f;
-    float rnd_pitch_ = 0.0f;
-    float rnd_pan_ = 0.0f;
-    float rnd_envelope_ = 0.0f;
-    float rnd_phasor_ = 0.0f;
+    float rnd_size_;
+    float rnd_spawn_pos_;
+    float rnd_count_;
+    float rnd_pitch_;
+    float rnd_pan_;
+    float rnd_envelope_;
+    float rnd_phasor_;
 
 
 

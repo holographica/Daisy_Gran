@@ -11,6 +11,7 @@ https://opensource.org/license/lgpl-2-1/
 #define DSYSP_REVERBSC_H
 
 #define DSY_REVERBSC_MAX_SIZE 98936
+// #define DSY_REVERBSC_MAX_SIZE 49468
 
 namespace daisysp
 {

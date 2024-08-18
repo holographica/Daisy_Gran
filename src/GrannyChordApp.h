@@ -35,6 +35,7 @@ class GrannyChordApp {
 
     /* UI and state objects */
     AppState curr_state_;
+    AppState next_state_;
     SynthMode curr_synth_mode_;
     SynthMode prev_synth_mode_;
 
@@ -60,7 +61,7 @@ class GrannyChordApp {
     float prev_param_vals_k2[NUM_SYNTH_MODES];
 
     bool recording_out_ = false;
-
+    size_t count = 0;
     void UpdateUI();
     void UpdateSynthMode();
 

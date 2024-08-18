@@ -25,7 +25,7 @@ void GrannyChordApp::Init(int16_t *left, int16_t *right, int16_t *temp){
     pod_.UpdateLeds();
     return;
   }
-  // loadmeter.Init(pod_.AudioSampleRate(), pod_.AudioBlockSize());
+  loadmeter.Init(pod_.AudioSampleRate(), pod_.AudioBlockSize());
   InitFX();
   InitPrevParamVals();
   SeedRng();
@@ -36,19 +36,36 @@ void GrannyChordApp::Init(int16_t *left, int16_t *right, int16_t *temp){
 /// @brief Loops whilst app is running, updating state and UI, handling 
 ///        state transitions, updating parameters and managing audio recordings
 void GrannyChordApp::Run(){
+  // size_t count = 0;
+  pod_.seed.PrintLine("app is running");
   while(true){
+    count++;
+    if (count%5000==0){
+      const float avgLoad = loadmeter.GetAvgCpuLoad();
+      const float maxLoad = loadmeter.GetMaxCpuLoad();
+      const float minLoad = loadmeter.GetMinCpuLoad();
+      // print it to the serial connection (as percentages)
+      pod_.seed.PrintLine("Processing Load %:");
+      // pod_.seed.PrintLine("Max: %.8f",(maxLoad * 100.0f));
+      // pod_.seed.PrintLine("Avg: %.8f",(avgLoad * 100.0f));
+      // pod_.seed.PrintLine("Min: %.8f",(minLoad * 100.0f)); 
+      pod_.seed.PrintLine("Max: " FLT_FMT3, FLT_VAR3(maxLoad * 100.0f));
+      pod_.seed.PrintLine("Avg: " FLT_FMT3, FLT_VAR3(avgLoad * 100.0f));
+      pod_.seed.PrintLine("Min: " FLT_FMT3, FLT_VAR3(minLoad * 100.0f));
+      count=0;
+      System::Delay(500);
+    }
     UpdateUI();
-    System::Delay(10);
+    System::Delay(5);
   }
 }
 
 void GrannyChordApp::UpdateUI(){
-  AppState prev_state = curr_state_;
   pod_.ProcessDigitalControls();
-  if (pod_.encoder.Pressed()) HandleEncoderPressed();
-  if (pod_.encoder.TimeHeldMs() > 1000.0f) HandleEncoderLongPress();
-  if (pod_.button1.Pressed()) HandleButton1();
-  if (pod_.button2.Pressed()) HandleButton2();
+  if ((pod_.encoder.TimeHeldMs() > 1000.0f)) HandleEncoderLongPress();
+  else if (pod_.encoder.FallingEdge()) HandleEncoderPressed();
+  if (pod_.button1.FallingEdge()) HandleButton1();
+  if (pod_.button2.FallingEdge()) HandleButton2();
   if (curr_state_==AppState::Synthesis){
     if (pod_.button1.TimeHeldMs() >1000.0f) HandleButton1LongPress();
     if (pod_.button2.TimeHeldMs() >1000.0f) HandleButton2LongPress();
@@ -56,38 +73,43 @@ void GrannyChordApp::UpdateUI(){
 
   int32_t encoder_inc = pod_.encoder.Increment();
   if (encoder_inc!=0){
-    if (curr_state_== AppState::SelectFile){
+    if (next_state_== AppState::SelectFile){
       HandleFileSelection(encoder_inc);
     }
     else if (curr_state_==AppState::PlayWAV){
-      curr_state_ = AppState::SelectFile;
+      next_state_ = AppState::SelectFile;
     }
   }
-  if (prev_state != curr_state_){
-    DebugPrintState(prev_state);
-    DebugPrint(pod_, "switching states");
+  if (curr_state_ != next_state_){
     DebugPrintState(curr_state_);
+    DebugPrint(pod_, "switching states");
+    DebugPrintState(next_state_);
     HandleStateChange();
   }
 }
 
 void GrannyChordApp::HandleStateChange(){
-  switch(curr_state_){
+  switch(next_state_){
     case AppState::SelectFile:
       pod_.StopAudio();
+      curr_state_ = AppState::SelectFile;
       return; 
     case AppState::RecordIn:
-      ClearAudioBuffers();    
+      ClearAudioBuffers();
+      curr_state_ = AppState::RecordIn;  
       return;
     case AppState::PlayWAV:
       InitPlayback(); 
+      curr_state_ = AppState::PlayWAV;
       return;
     case AppState::Synthesis:
       InitSynth();
+      curr_state_ = AppState::Synthesis;
       return;
     case AppState::Error: 
       pod_.led1.SetRed(1); 
       pod_.led2.SetRed(1); 
+      curr_state_ = AppState::Error;
       return;
     default: 
       return;
@@ -97,13 +119,13 @@ void GrannyChordApp::HandleStateChange(){
 void GrannyChordApp::HandleEncoderPressed(){
   switch(curr_state_){
     case AppState::SelectFile:
-      curr_state_ = AppState::PlayWAV;
+      next_state_ = AppState::PlayWAV;
       return;
     case AppState::RecordIn: 
-      curr_state_ = AppState::PlayWAV;
+      next_state_ = AppState::PlayWAV;
       return;
     case AppState::PlayWAV:
-      curr_state_ = AppState::Synthesis;
+      next_state_ = AppState::Synthesis;
       return;
     default:
       return;
@@ -111,18 +133,21 @@ void GrannyChordApp::HandleEncoderPressed(){
 }
 
 void GrannyChordApp::HandleEncoderLongPress(){
+  do { pod_.encoder.Debounce();  }
+  while(!pod_.encoder.FallingEdge());
+  DebugPrint(pod_,"in long press method");
   switch(curr_state_){
     case AppState::Synthesis:
-      curr_state_ = AppState::SelectFile;
+      next_state_ = AppState::SelectFile;
       return;
     case AppState::RecordIn:  
-      curr_state_ = AppState::SelectFile;
+      next_state_ = AppState::SelectFile;
       return;
     case AppState::SelectFile:
-      curr_state_ = AppState::RecordIn; 
+      next_state_ = AppState::RecordIn;
       return;
     case AppState::PlayWAV: 
-      curr_state_ = AppState::RecordIn;  
+      next_state_ = AppState::RecordIn;  
       return;
     default:
       return;
@@ -231,6 +256,7 @@ bool GrannyChordApp::InitFileMgr(){
 void GrannyChordApp::InitSynth(){
   // synth_.Init(left_buf_, right_buf_, audio_len_);
   synth_.Init(left_buf_, right_buf_, filemgr_.GetSamplesPerChannel());
+  DebugPrint(pod_,"synth init ok - samples %u",filemgr_.GetSamplesPerChannel());
 }
 
 /// @brief Resets current file index and audio data buffers
@@ -302,7 +328,7 @@ void GrannyChordApp::AudioCallback(AudioHandle::InputBuffer in, AudioHandle::Out
 }
 
 void GrannyChordApp::ProcessAudio(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, size_t size){
-  // loadmeter.OnBlockStart();
+  
   switch(curr_state_){
     case AppState::PlayWAV: 
       if (wav_playhead_>= filemgr_.GetSamplesPerChannel() -1){
@@ -322,7 +348,7 @@ void GrannyChordApp::ProcessAudio(AudioHandle::InputBuffer in, AudioHandle::Outp
       pod_.StopAudio();
       return;
   }
-  // loadmeter.OnBlockEnd();
+  
 }
 
 
@@ -339,6 +365,7 @@ void GrannyChordApp::ProcessAudio(AudioHandle::InputBuffer in, AudioHandle::Outp
 /// @param out Output audio buffer
 /// @param size Number of samples to process in this call
 void GrannyChordApp::ProcessWAVPlayback(AudioHandle::OutputBuffer out, size_t size){
+  loadmeter.OnBlockStart();
   for (size_t i=0; i<size; i++){
     if (wav_playhead_ < filemgr_.GetSamplesPerChannel()){
       out[0][i] = s162f(left_buf_[wav_playhead_]) * 0.5f;
@@ -349,6 +376,7 @@ void GrannyChordApp::ProcessWAVPlayback(AudioHandle::OutputBuffer out, size_t si
   if (wav_playhead_%48000==0){
     pod_.seed.PrintLine("+1s");
   }
+  loadmeter.OnBlockEnd();
 }
 
 /// @brief Process input audio when app is in RecordIn state
