@@ -12,6 +12,7 @@
 #include "GrannyChordApp.h"
 #include "constants_utils.h"
 #include "debug_print.h"
+#include "zita-rev1/source/reverb.h"
 
 using namespace daisy;
 using namespace daisysp;
@@ -31,6 +32,7 @@ DSY_SDRAM_BSS FatFSInterface fsi;
 // __attribute__((section(".axi_sram")))FatFSInterface fsi;
 DaisyPod pod;
 DSY_SDRAM_BSS FIL file;
+Reverb reverb;
 
 
 /* software classes to run app */
@@ -49,6 +51,7 @@ uint32_t rng_state;
 
 int main (void){
   pod.Init();
+  reverb.init(48000.0f, false);
   #ifdef DEBUG_MODE
   pod.seed.StartLog(true);
   DebugPrint(pod,"started log");

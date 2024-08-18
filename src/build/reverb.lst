@@ -1,0 +1,3771 @@
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.arch armv7e-m
+   3              		.fpu fpv5-d16
+   4              		.eabi_attribute 28, 1
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.file	"reverb.cpp"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text._ZN5Diff17processEf,"axG",%progbits,_ZN5Diff17processEf,comdat
+  19              		.align	1
+  20              		.weak	_ZN5Diff17processEf
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  25              	_ZN5Diff17processEf:
+  26              	.LVL0:
+  27              	.LFB547:
+  28              		.file 1 "zita-rev1/source/reverb.h"
+   1:zita-rev1/source/reverb.h **** // ----------------------------------------------------------------------------
+   2:zita-rev1/source/reverb.h **** //
+   3:zita-rev1/source/reverb.h **** //  Copyright (C) 2003-2017 Fons Adriaensen <fons@linuxaudio.org>
+   4:zita-rev1/source/reverb.h **** //    
+   5:zita-rev1/source/reverb.h **** //  This program is free software; you can redistribute it and/or modify
+   6:zita-rev1/source/reverb.h **** //  it under the terms of the GNU General Public License as published by
+   7:zita-rev1/source/reverb.h **** //  the Free Software Foundation; either version 3 of the License, or
+   8:zita-rev1/source/reverb.h **** //  (at your option) any later version.
+   9:zita-rev1/source/reverb.h **** //
+  10:zita-rev1/source/reverb.h **** //  This program is distributed in the hope that it will be useful,
+  11:zita-rev1/source/reverb.h **** //  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  12:zita-rev1/source/reverb.h **** //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  13:zita-rev1/source/reverb.h **** //  GNU General Public License for more details.
+  14:zita-rev1/source/reverb.h **** //
+  15:zita-rev1/source/reverb.h **** //  You should have received a copy of the GNU General Public License
+  16:zita-rev1/source/reverb.h **** //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  17:zita-rev1/source/reverb.h **** //
+  18:zita-rev1/source/reverb.h **** // ----------------------------------------------------------------------------
+  19:zita-rev1/source/reverb.h **** 
+  20:zita-rev1/source/reverb.h **** 
+  21:zita-rev1/source/reverb.h **** #ifndef __REVERB_H
+  22:zita-rev1/source/reverb.h **** #define __REVERB_H
+  23:zita-rev1/source/reverb.h **** 
+  24:zita-rev1/source/reverb.h **** #include "pareq.h"
+  25:zita-rev1/source/reverb.h **** 
+  26:zita-rev1/source/reverb.h **** 
+  27:zita-rev1/source/reverb.h **** // -----------------------------------------------------------------------
+  28:zita-rev1/source/reverb.h **** 
+  29:zita-rev1/source/reverb.h **** 
+  30:zita-rev1/source/reverb.h **** class Diff1
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 2
+
+
+  31:zita-rev1/source/reverb.h **** {
+  32:zita-rev1/source/reverb.h **** private:
+  33:zita-rev1/source/reverb.h **** 
+  34:zita-rev1/source/reverb.h ****     friend class Reverb;
+  35:zita-rev1/source/reverb.h ****     
+  36:zita-rev1/source/reverb.h ****     Diff1 (void);
+  37:zita-rev1/source/reverb.h ****     ~Diff1 (void);
+  38:zita-rev1/source/reverb.h **** 
+  39:zita-rev1/source/reverb.h ****     void  init (int size, float c);
+  40:zita-rev1/source/reverb.h ****     void  fini (void);
+  41:zita-rev1/source/reverb.h **** 
+  42:zita-rev1/source/reverb.h ****     float process (float x)
+  29              		.loc 1 42 11 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  43:zita-rev1/source/reverb.h ****     {
+  44:zita-rev1/source/reverb.h **** 	float z = _line [_i];
+  34              		.loc 1 44 2 view .LVU1
+  35              		.loc 1 44 19 is_stmt 0 view .LVU2
+  36 0000 0368     		ldr	r3, [r0]
+  37              		.loc 1 44 21 view .LVU3
+  38 0002 C268     		ldr	r2, [r0, #12]
+  45:zita-rev1/source/reverb.h **** 	x -= _c * z;
+  39              		.loc 1 45 4 view .LVU4
+  40 0004 90ED017A 		vldr.32	s14, [r0, #4]
+  44:zita-rev1/source/reverb.h **** 	x -= _c * z;
+  41              		.loc 1 44 21 view .LVU5
+  42 0008 02EB8302 		add	r2, r2, r3, lsl #2
+  46:zita-rev1/source/reverb.h ****         _line [_i] = x;
+  47:zita-rev1/source/reverb.h ****         if (++_i == _size) _i = 0;
+  43              		.loc 1 47 13 view .LVU6
+  44 000c 0133     		adds	r3, r3, #1
+  44:zita-rev1/source/reverb.h **** 	x -= _c * z;
+  45              		.loc 1 44 8 view .LVU7
+  46 000e D2ED007A 		vldr.32	s15, [r2]
+  47              	.LVL1:
+  45:zita-rev1/source/reverb.h ****         _line [_i] = x;
+  48              		.loc 1 45 2 is_stmt 1 view .LVU8
+  45:zita-rev1/source/reverb.h ****         _line [_i] = x;
+  49              		.loc 1 45 4 is_stmt 0 view .LVU9
+  50 0012 A7EE670A 		vfms.f32	s0, s14, s15
+  51              	.LVL2:
+  46:zita-rev1/source/reverb.h ****         _line [_i] = x;
+  52              		.loc 1 46 9 is_stmt 1 view .LVU10
+  46:zita-rev1/source/reverb.h ****         _line [_i] = x;
+  53              		.loc 1 46 20 is_stmt 0 view .LVU11
+  54 0016 82ED000A 		vstr.32	s0, [r2]
+  55              		.loc 1 47 9 is_stmt 1 view .LVU12
+  48:zita-rev1/source/reverb.h **** 	return z + _c * x;
+  56              		.loc 1 48 18 is_stmt 0 view .LVU13
+  57 001a 90ED017A 		vldr.32	s14, [r0, #4]
+  47:zita-rev1/source/reverb.h **** 	return z + _c * x;
+  58              		.loc 1 47 9 view .LVU14
+  59 001e 8268     		ldr	r2, [r0, #8]
+  49:zita-rev1/source/reverb.h ****     } 
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 3
+
+
+  60              		.loc 1 49 5 view .LVU15
+  61 0020 E7EE007A 		vfma.f32	s15, s14, s0
+  62              	.LVL3:
+  47:zita-rev1/source/reverb.h **** 	return z + _c * x;
+  63              		.loc 1 47 18 view .LVU16
+  64 0024 0360     		str	r3, [r0]
+  47:zita-rev1/source/reverb.h **** 	return z + _c * x;
+  65              		.loc 1 47 9 view .LVU17
+  66 0026 9342     		cmp	r3, r2
+  47:zita-rev1/source/reverb.h **** 	return z + _c * x;
+  67              		.loc 1 47 28 is_stmt 1 view .LVU18
+  47:zita-rev1/source/reverb.h **** 	return z + _c * x;
+  68              		.loc 1 47 31 is_stmt 0 view .LVU19
+  69 0028 04BF     		itt	eq
+  70 002a 0023     		moveq	r3, #0
+  71 002c 0360     		streq	r3, [r0]
+  48:zita-rev1/source/reverb.h **** 	return z + _c * x;
+  72              		.loc 1 48 2 is_stmt 1 view .LVU20
+  73              		.loc 1 49 5 is_stmt 0 view .LVU21
+  74 002e B0EE670A 		vmov.f32	s0, s15
+  75              	.LVL4:
+  76              		.loc 1 49 5 view .LVU22
+  77 0032 7047     		bx	lr
+  78              		.cfi_endproc
+  79              	.LFE547:
+  81              		.section	.text._ZN5Filt17processEf,"axG",%progbits,_ZN5Filt17processEf,comdat
+  82              		.align	1
+  83              		.weak	_ZN5Filt17processEf
+  84              		.syntax unified
+  85              		.thumb
+  86              		.thumb_func
+  88              	_ZN5Filt17processEf:
+  89              	.LVL5:
+  90              	.LFB554:
+  50:zita-rev1/source/reverb.h **** 
+  51:zita-rev1/source/reverb.h ****     int     _i;
+  52:zita-rev1/source/reverb.h ****     float   _c;
+  53:zita-rev1/source/reverb.h ****     int     _size;
+  54:zita-rev1/source/reverb.h ****     float  *_line;
+  55:zita-rev1/source/reverb.h **** };
+  56:zita-rev1/source/reverb.h **** 
+  57:zita-rev1/source/reverb.h **** 
+  58:zita-rev1/source/reverb.h **** // -----------------------------------------------------------------------
+  59:zita-rev1/source/reverb.h **** 
+  60:zita-rev1/source/reverb.h **** 
+  61:zita-rev1/source/reverb.h **** class Filt1
+  62:zita-rev1/source/reverb.h **** {
+  63:zita-rev1/source/reverb.h **** private:
+  64:zita-rev1/source/reverb.h **** 
+  65:zita-rev1/source/reverb.h ****     friend class Reverb;
+  66:zita-rev1/source/reverb.h ****     
+  67:zita-rev1/source/reverb.h ****     Filt1 (void) : _slo (0), _shi (0) {}
+  68:zita-rev1/source/reverb.h ****     ~Filt1 (void) {}
+  69:zita-rev1/source/reverb.h **** 
+  70:zita-rev1/source/reverb.h ****     void  set_params (float del, float tmf, float tlo, float wlo, float thi, float chi);
+  71:zita-rev1/source/reverb.h **** 
+  72:zita-rev1/source/reverb.h ****     float process (float x)
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 4
+
+
+  91              		.loc 1 72 11 is_stmt 1 view -0
+  92              		.cfi_startproc
+  93              		@ args = 0, pretend = 0, frame = 0
+  94              		@ frame_needed = 0, uses_anonymous_args = 0
+  95              		@ link register save eliminated.
+  73:zita-rev1/source/reverb.h ****     {
+  74:zita-rev1/source/reverb.h ****         _slo += _wlo * (x - _slo) + 1e-10f;
+  96              		.loc 1 74 9 view .LVU24
+  97              		.loc 1 74 14 is_stmt 0 view .LVU25
+  98 0000 90ED047A 		vldr.32	s14, [r0, #16]
+  99              		.loc 1 74 35 view .LVU26
+ 100 0004 90ED026A 		vldr.32	s12, [r0, #8]
+ 101              		.loc 1 74 27 view .LVU27
+ 102 0008 70EE476A 		vsub.f32	s13, s0, s14
+ 103              		.loc 1 74 35 view .LVU28
+ 104 000c DFED0D7A 		vldr.32	s15, .L4
+ 105 0010 E6EE267A 		vfma.f32	s15, s12, s13
+  75:zita-rev1/source/reverb.h ****         x += _glo * _slo;
+  76:zita-rev1/source/reverb.h ****         _shi += _whi * (x - _shi);
+ 106              		.loc 1 76 14 view .LVU29
+ 107 0014 D0ED036A 		vldr.32	s13, [r0, #12]
+  74:zita-rev1/source/reverb.h ****         x += _glo * _slo;
+ 108              		.loc 1 74 14 view .LVU30
+ 109 0018 77EE277A 		vadd.f32	s15, s14, s15
+  75:zita-rev1/source/reverb.h ****         x += _glo * _slo;
+ 110              		.loc 1 75 11 view .LVU31
+ 111 001c 90ED017A 		vldr.32	s14, [r0, #4]
+ 112 0020 A7EE870A 		vfma.f32	s0, s15, s14
+ 113              	.LVL6:
+ 114              		.loc 1 76 14 view .LVU32
+ 115 0024 90ED057A 		vldr.32	s14, [r0, #20]
+  74:zita-rev1/source/reverb.h ****         x += _glo * _slo;
+ 116              		.loc 1 74 14 view .LVU33
+ 117 0028 C0ED047A 		vstr.32	s15, [r0, #16]
+  75:zita-rev1/source/reverb.h ****         x += _glo * _slo;
+ 118              		.loc 1 75 9 is_stmt 1 view .LVU34
+ 119              	.LVL7:
+ 120              		.loc 1 76 9 view .LVU35
+ 121              		.loc 1 76 27 is_stmt 0 view .LVU36
+ 122 002c 70EE477A 		vsub.f32	s15, s0, s14
+  77:zita-rev1/source/reverb.h **** 	return _gmf * _shi;
+ 123              		.loc 1 77 16 view .LVU37
+ 124 0030 90ED000A 		vldr.32	s0, [r0]
+ 125              	.LVL8:
+  76:zita-rev1/source/reverb.h **** 	return _gmf * _shi;
+ 126              		.loc 1 76 14 view .LVU38
+ 127 0034 A6EEA77A 		vfma.f32	s14, s13, s15
+  78:zita-rev1/source/reverb.h ****     }
+ 128              		.loc 1 78 5 view .LVU39
+ 129 0038 27EE000A 		vmul.f32	s0, s14, s0
+  76:zita-rev1/source/reverb.h **** 	return _gmf * _shi;
+ 130              		.loc 1 76 14 view .LVU40
+ 131 003c 80ED057A 		vstr.32	s14, [r0, #20]
+  77:zita-rev1/source/reverb.h **** 	return _gmf * _shi;
+ 132              		.loc 1 77 2 is_stmt 1 view .LVU41
+ 133              		.loc 1 78 5 is_stmt 0 view .LVU42
+ 134 0040 7047     		bx	lr
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 5
+
+
+ 135              	.L5:
+ 136 0042 00BF     		.align	2
+ 137              	.L4:
+ 138 0044 FFE6DB2E 		.word	786163455
+ 139              		.cfi_endproc
+ 140              	.LFE554:
+ 142              		.section	.text._ZN5Delay4readEv,"axG",%progbits,_ZN5Delay4readEv,comdat
+ 143              		.align	1
+ 144              		.weak	_ZN5Delay4readEv
+ 145              		.syntax unified
+ 146              		.thumb
+ 147              		.thumb_func
+ 149              	_ZN5Delay4readEv:
+ 150              	.LVL9:
+ 151              	.LFB555:
+  79:zita-rev1/source/reverb.h ****     float   _gmf;
+  80:zita-rev1/source/reverb.h ****     float   _glo;
+  81:zita-rev1/source/reverb.h ****     float   _wlo;
+  82:zita-rev1/source/reverb.h ****     float   _whi;
+  83:zita-rev1/source/reverb.h ****     float   _slo;
+  84:zita-rev1/source/reverb.h ****     float   _shi;    
+  85:zita-rev1/source/reverb.h **** };
+  86:zita-rev1/source/reverb.h **** 
+  87:zita-rev1/source/reverb.h **** 
+  88:zita-rev1/source/reverb.h **** // -----------------------------------------------------------------------
+  89:zita-rev1/source/reverb.h **** 
+  90:zita-rev1/source/reverb.h **** 
+  91:zita-rev1/source/reverb.h **** class Delay
+  92:zita-rev1/source/reverb.h **** {
+  93:zita-rev1/source/reverb.h **** private:
+  94:zita-rev1/source/reverb.h **** 
+  95:zita-rev1/source/reverb.h ****     friend class Reverb;
+  96:zita-rev1/source/reverb.h ****     
+  97:zita-rev1/source/reverb.h ****     Delay (void);
+  98:zita-rev1/source/reverb.h ****     ~Delay (void);
+  99:zita-rev1/source/reverb.h **** 
+ 100:zita-rev1/source/reverb.h ****     void  init (int size);
+ 101:zita-rev1/source/reverb.h ****     void  fini (void);
+ 102:zita-rev1/source/reverb.h **** 
+ 103:zita-rev1/source/reverb.h ****     float read (void)
+ 152              		.loc 1 103 11 is_stmt 1 view -0
+ 153              		.cfi_startproc
+ 154              		@ args = 0, pretend = 0, frame = 0
+ 155              		@ frame_needed = 0, uses_anonymous_args = 0
+ 156              		@ link register save eliminated.
+ 104:zita-rev1/source/reverb.h ****     {
+ 105:zita-rev1/source/reverb.h **** 	return _line [_i];
+ 157              		.loc 1 105 2 view .LVU44
+ 158              		.loc 1 105 18 is_stmt 0 view .LVU45
+ 159 0000 0268     		ldr	r2, [r0]
+ 160 0002 8368     		ldr	r3, [r0, #8]
+ 161 0004 03EB8203 		add	r3, r3, r2, lsl #2
+ 106:zita-rev1/source/reverb.h ****     }
+ 162              		.loc 1 106 5 view .LVU46
+ 163 0008 93ED000A 		vldr.32	s0, [r3]
+ 164 000c 7047     		bx	lr
+ 165              		.cfi_endproc
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 6
+
+
+ 166              	.LFE555:
+ 168              		.section	.text._ZN5Delay5writeEf,"axG",%progbits,_ZN5Delay5writeEf,comdat
+ 169              		.align	1
+ 170              		.weak	_ZN5Delay5writeEf
+ 171              		.syntax unified
+ 172              		.thumb
+ 173              		.thumb_func
+ 175              	_ZN5Delay5writeEf:
+ 176              	.LVL10:
+ 177              	.LFB556:
+ 107:zita-rev1/source/reverb.h **** 
+ 108:zita-rev1/source/reverb.h ****     void write (float x)
+ 178              		.loc 1 108 10 is_stmt 1 view -0
+ 179              		.cfi_startproc
+ 180              		@ args = 0, pretend = 0, frame = 0
+ 181              		@ frame_needed = 0, uses_anonymous_args = 0
+ 182              		@ link register save eliminated.
+ 109:zita-rev1/source/reverb.h ****     {
+ 110:zita-rev1/source/reverb.h **** 	_line [_i++] = x;
+ 183              		.loc 1 110 2 view .LVU48
+ 184              		.loc 1 110 9 is_stmt 0 view .LVU49
+ 185 0000 0168     		ldr	r1, [r0]
+ 186              		.loc 1 110 2 view .LVU50
+ 187 0002 8368     		ldr	r3, [r0, #8]
+ 188              		.loc 1 110 11 view .LVU51
+ 189 0004 4A1C     		adds	r2, r1, #1
+ 190              		.loc 1 110 15 view .LVU52
+ 191 0006 03EB8103 		add	r3, r3, r1, lsl #2
+ 192              		.loc 1 110 11 view .LVU53
+ 193 000a 0260     		str	r2, [r0]
+ 194              		.loc 1 110 15 view .LVU54
+ 195 000c 83ED000A 		vstr.32	s0, [r3]
+ 111:zita-rev1/source/reverb.h **** 	if (_i == _size) _i = 0;
+ 196              		.loc 1 111 2 is_stmt 1 view .LVU55
+ 197 0010 4368     		ldr	r3, [r0, #4]
+ 198 0012 9A42     		cmp	r2, r3
+ 199              		.loc 1 111 19 view .LVU56
+ 200              		.loc 1 111 22 is_stmt 0 view .LVU57
+ 201 0014 04BF     		itt	eq
+ 202 0016 0023     		moveq	r3, #0
+ 203 0018 0360     		streq	r3, [r0]
+ 112:zita-rev1/source/reverb.h ****     }
+ 204              		.loc 1 112 5 view .LVU58
+ 205 001a 7047     		bx	lr
+ 206              		.cfi_endproc
+ 207              	.LFE556:
+ 209              		.section	.text._ZN6Vdelay4readEv,"axG",%progbits,_ZN6Vdelay4readEv,comdat
+ 210              		.align	1
+ 211              		.weak	_ZN6Vdelay4readEv
+ 212              		.syntax unified
+ 213              		.thumb
+ 214              		.thumb_func
+ 216              	_ZN6Vdelay4readEv:
+ 217              	.LVL11:
+ 218              	.LFB557:
+ 113:zita-rev1/source/reverb.h **** 
+ 114:zita-rev1/source/reverb.h ****     int     _i;
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 7
+
+
+ 115:zita-rev1/source/reverb.h ****     int     _size;
+ 116:zita-rev1/source/reverb.h ****     float  *_line;
+ 117:zita-rev1/source/reverb.h **** };
+ 118:zita-rev1/source/reverb.h **** 
+ 119:zita-rev1/source/reverb.h **** 
+ 120:zita-rev1/source/reverb.h **** // -----------------------------------------------------------------------
+ 121:zita-rev1/source/reverb.h **** 
+ 122:zita-rev1/source/reverb.h **** 
+ 123:zita-rev1/source/reverb.h **** class Vdelay
+ 124:zita-rev1/source/reverb.h **** {
+ 125:zita-rev1/source/reverb.h **** private:
+ 126:zita-rev1/source/reverb.h **** 
+ 127:zita-rev1/source/reverb.h ****     friend class Reverb;
+ 128:zita-rev1/source/reverb.h ****     
+ 129:zita-rev1/source/reverb.h ****     Vdelay (void);
+ 130:zita-rev1/source/reverb.h ****     ~Vdelay (void);
+ 131:zita-rev1/source/reverb.h **** 
+ 132:zita-rev1/source/reverb.h ****     void  init (int size);
+ 133:zita-rev1/source/reverb.h ****     void  fini (void);
+ 134:zita-rev1/source/reverb.h ****     void  set_delay (int del);
+ 135:zita-rev1/source/reverb.h **** 
+ 136:zita-rev1/source/reverb.h ****     float read (void)
+ 219              		.loc 1 136 11 is_stmt 1 view -0
+ 220              		.cfi_startproc
+ 221              		@ args = 0, pretend = 0, frame = 0
+ 222              		@ frame_needed = 0, uses_anonymous_args = 0
+ 223              		@ link register save eliminated.
+ 137:zita-rev1/source/reverb.h ****     {
+ 138:zita-rev1/source/reverb.h **** 	float x = _line [_ir++];
+ 224              		.loc 1 138 2 view .LVU60
+ 225              		.loc 1 138 19 is_stmt 0 view .LVU61
+ 226 0000 0168     		ldr	r1, [r0]
+ 227              		.loc 1 138 12 view .LVU62
+ 228 0002 C368     		ldr	r3, [r0, #12]
+ 229              		.loc 1 138 22 view .LVU63
+ 230 0004 4A1C     		adds	r2, r1, #1
+ 231              		.loc 1 138 24 view .LVU64
+ 232 0006 03EB8103 		add	r3, r3, r1, lsl #2
+ 233              		.loc 1 138 22 view .LVU65
+ 234 000a 0260     		str	r2, [r0]
+ 235              		.loc 1 138 24 view .LVU66
+ 236 000c 93ED000A 		vldr.32	s0, [r3]
+ 237              	.LVL12:
+ 139:zita-rev1/source/reverb.h **** 	if (_ir == _size) _ir = 0;
+ 238              		.loc 1 139 2 is_stmt 1 view .LVU67
+ 239 0010 8368     		ldr	r3, [r0, #8]
+ 240 0012 9A42     		cmp	r2, r3
+ 241              		.loc 1 139 20 view .LVU68
+ 242              		.loc 1 139 24 is_stmt 0 view .LVU69
+ 243 0014 04BF     		itt	eq
+ 244 0016 0023     		moveq	r3, #0
+ 245 0018 0360     		streq	r3, [r0]
+ 140:zita-rev1/source/reverb.h **** 	return x;
+ 246              		.loc 1 140 2 is_stmt 1 view .LVU70
+ 141:zita-rev1/source/reverb.h ****     }
+ 247              		.loc 1 141 5 is_stmt 0 view .LVU71
+ 248 001a 7047     		bx	lr
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 8
+
+
+ 249              		.cfi_endproc
+ 250              	.LFE557:
+ 252              		.section	.text._ZN6Vdelay5writeEf,"axG",%progbits,_ZN6Vdelay5writeEf,comdat
+ 253              		.align	1
+ 254              		.weak	_ZN6Vdelay5writeEf
+ 255              		.syntax unified
+ 256              		.thumb
+ 257              		.thumb_func
+ 259              	_ZN6Vdelay5writeEf:
+ 260              	.LVL13:
+ 261              	.LFB558:
+ 142:zita-rev1/source/reverb.h **** 
+ 143:zita-rev1/source/reverb.h ****     void write (float x)
+ 262              		.loc 1 143 10 is_stmt 1 view -0
+ 263              		.cfi_startproc
+ 264              		@ args = 0, pretend = 0, frame = 0
+ 265              		@ frame_needed = 0, uses_anonymous_args = 0
+ 266              		@ link register save eliminated.
+ 144:zita-rev1/source/reverb.h ****     {
+ 145:zita-rev1/source/reverb.h **** 	_line [_iw++] = x;
+ 267              		.loc 1 145 2 view .LVU73
+ 268              		.loc 1 145 9 is_stmt 0 view .LVU74
+ 269 0000 4168     		ldr	r1, [r0, #4]
+ 270              		.loc 1 145 2 view .LVU75
+ 271 0002 C368     		ldr	r3, [r0, #12]
+ 272              		.loc 1 145 12 view .LVU76
+ 273 0004 4A1C     		adds	r2, r1, #1
+ 274              		.loc 1 145 16 view .LVU77
+ 275 0006 03EB8103 		add	r3, r3, r1, lsl #2
+ 276              		.loc 1 145 12 view .LVU78
+ 277 000a 4260     		str	r2, [r0, #4]
+ 278              		.loc 1 145 16 view .LVU79
+ 279 000c 83ED000A 		vstr.32	s0, [r3]
+ 146:zita-rev1/source/reverb.h **** 	if (_iw == _size) _iw = 0;
+ 280              		.loc 1 146 2 is_stmt 1 view .LVU80
+ 281 0010 8368     		ldr	r3, [r0, #8]
+ 282 0012 9A42     		cmp	r2, r3
+ 283              		.loc 1 146 20 view .LVU81
+ 284              		.loc 1 146 24 is_stmt 0 view .LVU82
+ 285 0014 04BF     		itt	eq
+ 286 0016 0023     		moveq	r3, #0
+ 287 0018 4360     		streq	r3, [r0, #4]
+ 147:zita-rev1/source/reverb.h ****     }
+ 288              		.loc 1 147 5 view .LVU83
+ 289 001a 7047     		bx	lr
+ 290              		.cfi_endproc
+ 291              	.LFE558:
+ 293              		.section	.text._ZN5Diff1C2Ev,"ax",%progbits
+ 294              		.align	1
+ 295              		.global	_ZN5Diff1C2Ev
+ 296              		.syntax unified
+ 297              		.thumb
+ 298              		.thumb_func
+ 300              	_ZN5Diff1C2Ev:
+ 301              	.LVL14:
+ 302              	.LFB569:
+ 303              		.file 2 "zita-rev1/source/reverb.cpp"
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 9
+
+
+   1:zita-rev1/source/reverb.cpp **** // ----------------------------------------------------------------------------
+   2:zita-rev1/source/reverb.cpp **** //
+   3:zita-rev1/source/reverb.cpp **** //  Copyright (C) 2003-2017 Fons Adriaensen <fons@linuxaudio.org>
+   4:zita-rev1/source/reverb.cpp **** //    
+   5:zita-rev1/source/reverb.cpp **** //  This program is free software; you can redistribute it and/or modify
+   6:zita-rev1/source/reverb.cpp **** //  it under the terms of the GNU General Public License as published by
+   7:zita-rev1/source/reverb.cpp **** //  the Free Software Foundation; either version 3 of the License, or
+   8:zita-rev1/source/reverb.cpp **** //  (at your option) any later version.
+   9:zita-rev1/source/reverb.cpp **** //
+  10:zita-rev1/source/reverb.cpp **** //  This program is distributed in the hope that it will be useful,
+  11:zita-rev1/source/reverb.cpp **** //  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  12:zita-rev1/source/reverb.cpp **** //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  13:zita-rev1/source/reverb.cpp **** //  GNU General Public License for more details.
+  14:zita-rev1/source/reverb.cpp **** //
+  15:zita-rev1/source/reverb.cpp **** //  You should have received a copy of the GNU General Public License
+  16:zita-rev1/source/reverb.cpp **** //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  17:zita-rev1/source/reverb.cpp **** //
+  18:zita-rev1/source/reverb.cpp **** // ----------------------------------------------------------------------------
+  19:zita-rev1/source/reverb.cpp **** 
+  20:zita-rev1/source/reverb.cpp **** 
+  21:zita-rev1/source/reverb.cpp **** #include <stdio.h>
+  22:zita-rev1/source/reverb.cpp **** #include <string.h>
+  23:zita-rev1/source/reverb.cpp **** #include <math.h>
+  24:zita-rev1/source/reverb.cpp **** #include "reverb.h"
+  25:zita-rev1/source/reverb.cpp **** 
+  26:zita-rev1/source/reverb.cpp **** 
+  27:zita-rev1/source/reverb.cpp **** // -----------------------------------------------------------------------
+  28:zita-rev1/source/reverb.cpp **** 
+  29:zita-rev1/source/reverb.cpp **** 
+  30:zita-rev1/source/reverb.cpp **** Diff1::Diff1 (void) :
+ 304              		.loc 2 30 1 is_stmt 1 view -0
+ 305              		.cfi_startproc
+ 306              		@ args = 0, pretend = 0, frame = 0
+ 307              		@ frame_needed = 0, uses_anonymous_args = 0
+ 308              		@ link register save eliminated.
+ 309              	.LBB34:
+  31:zita-rev1/source/reverb.cpp ****     _size (0),
+  32:zita-rev1/source/reverb.cpp ****     _line (0)
+ 310              		.loc 2 32 13 is_stmt 0 view .LVU85
+ 311 0000 0022     		movs	r2, #0
+ 312 0002 C0E90222 		strd	r2, r2, [r0, #8]
+ 313              	.LBE34:
+  33:zita-rev1/source/reverb.cpp **** {
+  34:zita-rev1/source/reverb.cpp **** }    
+ 314              		.loc 2 34 1 view .LVU86
+ 315 0006 7047     		bx	lr
+ 316              		.cfi_endproc
+ 317              	.LFE569:
+ 319              		.global	_ZN5Diff1C1Ev
+ 320              		.thumb_set _ZN5Diff1C1Ev,_ZN5Diff1C2Ev
+ 321              		.section	.text._ZN5Diff14initEif,"ax",%progbits
+ 322              		.align	1
+ 323              		.global	_ZN5Diff14initEif
+ 324              		.syntax unified
+ 325              		.thumb
+ 326              		.thumb_func
+ 328              	_ZN5Diff14initEif:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 10
+
+
+ 329              	.LVL15:
+ 330              	.LFB574:
+  35:zita-rev1/source/reverb.cpp **** 
+  36:zita-rev1/source/reverb.cpp **** 
+  37:zita-rev1/source/reverb.cpp **** Diff1::~Diff1 (void)
+  38:zita-rev1/source/reverb.cpp **** {
+  39:zita-rev1/source/reverb.cpp ****     fini ();
+  40:zita-rev1/source/reverb.cpp **** }
+  41:zita-rev1/source/reverb.cpp **** 
+  42:zita-rev1/source/reverb.cpp **** 
+  43:zita-rev1/source/reverb.cpp **** void Diff1::init (int size, float c)
+  44:zita-rev1/source/reverb.cpp **** {
+ 331              		.loc 2 44 1 is_stmt 1 view -0
+ 332              		.cfi_startproc
+ 333              		@ args = 0, pretend = 0, frame = 0
+ 334              		@ frame_needed = 0, uses_anonymous_args = 0
+  45:zita-rev1/source/reverb.cpp ****     _size = size;
+ 335              		.loc 2 45 5 view .LVU88
+  44:zita-rev1/source/reverb.cpp ****     _size = size;
+ 336              		.loc 2 44 1 is_stmt 0 view .LVU89
+ 337 0000 38B5     		push	{r3, r4, r5, lr}
+ 338              		.cfi_def_cfa_offset 16
+ 339              		.cfi_offset 3, -16
+ 340              		.cfi_offset 4, -12
+ 341              		.cfi_offset 5, -8
+ 342              		.cfi_offset 14, -4
+  46:zita-rev1/source/reverb.cpp ****     _line = new float [size];
+ 343              		.loc 2 46 28 view .LVU90
+ 344 0002 8D00     		lsls	r5, r1, #2
+ 345 0004 6FF06043 		mvn	r3, #-536870912
+  44:zita-rev1/source/reverb.cpp ****     _size = size;
+ 346              		.loc 2 44 1 view .LVU91
+ 347 0008 0446     		mov	r4, r0
+ 348 000a 2DED028B 		vpush.64	{d8}
+ 349              		.cfi_def_cfa_offset 24
+ 350              		.cfi_offset 80, -24
+ 351              		.cfi_offset 81, -20
+  44:zita-rev1/source/reverb.cpp ****     _size = size;
+ 352              		.loc 2 44 1 view .LVU92
+ 353 000e B0EE408A 		vmov.f32	s16, s0
+  45:zita-rev1/source/reverb.cpp ****     _size = size;
+ 354              		.loc 2 45 11 view .LVU93
+ 355 0012 8160     		str	r1, [r0, #8]
+ 356              		.loc 2 46 5 is_stmt 1 view .LVU94
+ 357              		.loc 2 46 28 is_stmt 0 view .LVU95
+ 358 0014 9942     		cmp	r1, r3
+ 359 0016 34BF     		ite	cc
+ 360 0018 2846     		movcc	r0, r5
+ 361 001a 4FF0FF30 		movcs	r0, #-1
+ 362              	.LVL16:
+ 363              		.loc 2 46 28 view .LVU96
+ 364 001e FFF7FEFF 		bl	_Znaj
+ 365              	.LVL17:
+  47:zita-rev1/source/reverb.cpp ****     memset (_line, 0, size * sizeof (float));
+ 366              		.loc 2 47 12 view .LVU97
+ 367 0022 2A46     		mov	r2, r5
+ 368 0024 0021     		movs	r1, #0
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 11
+
+
+  46:zita-rev1/source/reverb.cpp ****     _line = new float [size];
+ 369              		.loc 2 46 11 view .LVU98
+ 370 0026 E060     		str	r0, [r4, #12]
+ 371              		.loc 2 47 5 is_stmt 1 view .LVU99
+ 372              		.loc 2 47 12 is_stmt 0 view .LVU100
+ 373 0028 FFF7FEFF 		bl	memset
+ 374              	.LVL18:
+  48:zita-rev1/source/reverb.cpp ****     _i = 0;
+ 375              		.loc 2 48 5 is_stmt 1 view .LVU101
+ 376              		.loc 2 48 8 is_stmt 0 view .LVU102
+ 377 002c 0023     		movs	r3, #0
+  49:zita-rev1/source/reverb.cpp ****     _c = c;
+ 378              		.loc 2 49 8 view .LVU103
+ 379 002e 84ED018A 		vstr.32	s16, [r4, #4]
+  48:zita-rev1/source/reverb.cpp ****     _i = 0;
+ 380              		.loc 2 48 8 view .LVU104
+ 381 0032 2360     		str	r3, [r4]
+ 382              		.loc 2 49 5 is_stmt 1 view .LVU105
+  50:zita-rev1/source/reverb.cpp **** }
+ 383              		.loc 2 50 1 is_stmt 0 view .LVU106
+ 384 0034 BDEC028B 		vldm	sp!, {d8}
+ 385              		.cfi_restore 80
+ 386              		.cfi_restore 81
+ 387              		.cfi_def_cfa_offset 16
+ 388              	.LVL19:
+ 389              		.loc 2 50 1 view .LVU107
+ 390 0038 38BD     		pop	{r3, r4, r5, pc}
+ 391              		.loc 2 50 1 view .LVU108
+ 392              		.cfi_endproc
+ 393              	.LFE574:
+ 395              		.section	.text._ZN5Diff14finiEv,"ax",%progbits
+ 396              		.align	1
+ 397              		.global	_ZN5Diff14finiEv
+ 398              		.syntax unified
+ 399              		.thumb
+ 400              		.thumb_func
+ 402              	_ZN5Diff14finiEv:
+ 403              	.LVL20:
+ 404              	.LFB575:
+  51:zita-rev1/source/reverb.cpp **** 
+  52:zita-rev1/source/reverb.cpp **** 
+  53:zita-rev1/source/reverb.cpp **** void Diff1::fini (void)
+  54:zita-rev1/source/reverb.cpp **** {
+ 405              		.loc 2 54 1 is_stmt 1 view -0
+ 406              		.cfi_startproc
+ 407              		@ args = 0, pretend = 0, frame = 0
+ 408              		@ frame_needed = 0, uses_anonymous_args = 0
+  55:zita-rev1/source/reverb.cpp ****     delete[] _line;
+ 409              		.loc 2 55 5 view .LVU110
+  54:zita-rev1/source/reverb.cpp ****     delete[] _line;
+ 410              		.loc 2 54 1 is_stmt 0 view .LVU111
+ 411 0000 10B5     		push	{r4, lr}
+ 412              		.cfi_def_cfa_offset 8
+ 413              		.cfi_offset 4, -8
+ 414              		.cfi_offset 14, -4
+  54:zita-rev1/source/reverb.cpp ****     delete[] _line;
+ 415              		.loc 2 54 1 view .LVU112
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 12
+
+
+ 416 0002 0446     		mov	r4, r0
+ 417              		.loc 2 55 14 view .LVU113
+ 418 0004 C068     		ldr	r0, [r0, #12]
+ 419              	.LVL21:
+ 420              		.loc 2 55 5 view .LVU114
+ 421 0006 08B1     		cbz	r0, .L18
+ 422              		.loc 2 55 14 discriminator 1 view .LVU115
+ 423 0008 FFF7FEFF 		bl	_ZdaPv
+ 424              	.LVL22:
+ 425              	.L18:
+  56:zita-rev1/source/reverb.cpp ****     _size = 0;
+ 426              		.loc 2 56 5 is_stmt 1 view .LVU116
+ 427              		.loc 2 56 11 is_stmt 0 view .LVU117
+ 428 000c 0023     		movs	r3, #0
+  57:zita-rev1/source/reverb.cpp ****     _line = 0;
+ 429              		.loc 2 57 11 view .LVU118
+ 430 000e C4E90233 		strd	r3, r3, [r4, #8]
+  58:zita-rev1/source/reverb.cpp **** }
+ 431              		.loc 2 58 1 view .LVU119
+ 432 0012 10BD     		pop	{r4, pc}
+ 433              		.loc 2 58 1 view .LVU120
+ 434              		.cfi_endproc
+ 435              	.LFE575:
+ 437              		.section	.text._ZN5Diff1D2Ev,"ax",%progbits
+ 438              		.align	1
+ 439              		.global	_ZN5Diff1D2Ev
+ 440              		.syntax unified
+ 441              		.thumb
+ 442              		.thumb_func
+ 444              	_ZN5Diff1D2Ev:
+ 445              	.LVL23:
+ 446              	.LFB572:
+  37:zita-rev1/source/reverb.cpp **** {
+ 447              		.loc 2 37 1 is_stmt 1 view -0
+ 448              		.cfi_startproc
+ 449              		@ args = 0, pretend = 0, frame = 0
+ 450              		@ frame_needed = 0, uses_anonymous_args = 0
+ 451              	.LBB35:
+  39:zita-rev1/source/reverb.cpp **** }
+ 452              		.loc 2 39 5 view .LVU122
+ 453              	.LBE35:
+  37:zita-rev1/source/reverb.cpp **** {
+ 454              		.loc 2 37 1 is_stmt 0 view .LVU123
+ 455 0000 10B5     		push	{r4, lr}
+ 456              		.cfi_def_cfa_offset 8
+ 457              		.cfi_offset 4, -8
+ 458              		.cfi_offset 14, -4
+  37:zita-rev1/source/reverb.cpp **** {
+ 459              		.loc 2 37 1 view .LVU124
+ 460 0002 0446     		mov	r4, r0
+ 461              	.LBB36:
+  39:zita-rev1/source/reverb.cpp **** }
+ 462              		.loc 2 39 10 view .LVU125
+ 463 0004 FFF7FEFF 		bl	_ZN5Diff14finiEv
+ 464              	.LVL24:
+  39:zita-rev1/source/reverb.cpp **** }
+ 465              		.loc 2 39 10 view .LVU126
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 13
+
+
+ 466              	.LBE36:
+  40:zita-rev1/source/reverb.cpp **** 
+ 467              		.loc 2 40 1 view .LVU127
+ 468 0008 2046     		mov	r0, r4
+ 469 000a 10BD     		pop	{r4, pc}
+  40:zita-rev1/source/reverb.cpp **** 
+ 470              		.loc 2 40 1 view .LVU128
+ 471              		.cfi_endproc
+ 472              	.LFE572:
+ 474              		.global	_ZN5Diff1D1Ev
+ 475              		.thumb_set _ZN5Diff1D1Ev,_ZN5Diff1D2Ev
+ 476              		.section	.text._ZN5DelayC2Ev,"ax",%progbits
+ 477              		.align	1
+ 478              		.global	_ZN5DelayC2Ev
+ 479              		.syntax unified
+ 480              		.thumb
+ 481              		.thumb_func
+ 483              	_ZN5DelayC2Ev:
+ 484              	.LVL25:
+ 485              	.LFB577:
+  59:zita-rev1/source/reverb.cpp **** 
+  60:zita-rev1/source/reverb.cpp **** 
+  61:zita-rev1/source/reverb.cpp **** // -----------------------------------------------------------------------
+  62:zita-rev1/source/reverb.cpp **** 
+  63:zita-rev1/source/reverb.cpp **** 
+  64:zita-rev1/source/reverb.cpp **** Delay::Delay (void) :
+ 486              		.loc 2 64 1 is_stmt 1 view -0
+ 487              		.cfi_startproc
+ 488              		@ args = 0, pretend = 0, frame = 0
+ 489              		@ frame_needed = 0, uses_anonymous_args = 0
+ 490              		@ link register save eliminated.
+ 491              	.LBB37:
+  65:zita-rev1/source/reverb.cpp ****     _size (0),
+  66:zita-rev1/source/reverb.cpp ****     _line (0)
+ 492              		.loc 2 66 13 is_stmt 0 view .LVU130
+ 493 0000 0022     		movs	r2, #0
+ 494 0002 C0E90122 		strd	r2, r2, [r0, #4]
+ 495              	.LBE37:
+  67:zita-rev1/source/reverb.cpp **** {
+  68:zita-rev1/source/reverb.cpp **** }
+ 496              		.loc 2 68 1 view .LVU131
+ 497 0006 7047     		bx	lr
+ 498              		.cfi_endproc
+ 499              	.LFE577:
+ 501              		.global	_ZN5DelayC1Ev
+ 502              		.thumb_set _ZN5DelayC1Ev,_ZN5DelayC2Ev
+ 503              		.section	.text._ZN5Delay4initEi,"ax",%progbits
+ 504              		.align	1
+ 505              		.global	_ZN5Delay4initEi
+ 506              		.syntax unified
+ 507              		.thumb
+ 508              		.thumb_func
+ 510              	_ZN5Delay4initEi:
+ 511              	.LVL26:
+ 512              	.LFB582:
+  69:zita-rev1/source/reverb.cpp **** 
+  70:zita-rev1/source/reverb.cpp **** 
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 14
+
+
+  71:zita-rev1/source/reverb.cpp **** Delay::~Delay (void)
+  72:zita-rev1/source/reverb.cpp **** {
+  73:zita-rev1/source/reverb.cpp ****     fini ();
+  74:zita-rev1/source/reverb.cpp **** }
+  75:zita-rev1/source/reverb.cpp **** 
+  76:zita-rev1/source/reverb.cpp **** 
+  77:zita-rev1/source/reverb.cpp **** void Delay::init (int size)
+  78:zita-rev1/source/reverb.cpp **** {
+ 513              		.loc 2 78 1 is_stmt 1 view -0
+ 514              		.cfi_startproc
+ 515              		@ args = 0, pretend = 0, frame = 0
+ 516              		@ frame_needed = 0, uses_anonymous_args = 0
+  79:zita-rev1/source/reverb.cpp ****     _size = size;
+ 517              		.loc 2 79 5 view .LVU133
+  78:zita-rev1/source/reverb.cpp ****     _size = size;
+ 518              		.loc 2 78 1 is_stmt 0 view .LVU134
+ 519 0000 38B5     		push	{r3, r4, r5, lr}
+ 520              		.cfi_def_cfa_offset 16
+ 521              		.cfi_offset 3, -16
+ 522              		.cfi_offset 4, -12
+ 523              		.cfi_offset 5, -8
+ 524              		.cfi_offset 14, -4
+  80:zita-rev1/source/reverb.cpp ****     _line = new float [size];
+ 525              		.loc 2 80 28 view .LVU135
+ 526 0002 8D00     		lsls	r5, r1, #2
+ 527 0004 6FF06043 		mvn	r3, #-536870912
+  78:zita-rev1/source/reverb.cpp ****     _size = size;
+ 528              		.loc 2 78 1 view .LVU136
+ 529 0008 0446     		mov	r4, r0
+  79:zita-rev1/source/reverb.cpp ****     _size = size;
+ 530              		.loc 2 79 11 view .LVU137
+ 531 000a 4160     		str	r1, [r0, #4]
+ 532              		.loc 2 80 5 is_stmt 1 view .LVU138
+ 533              		.loc 2 80 28 is_stmt 0 view .LVU139
+ 534 000c 9942     		cmp	r1, r3
+ 535 000e 34BF     		ite	cc
+ 536 0010 2846     		movcc	r0, r5
+ 537 0012 4FF0FF30 		movcs	r0, #-1
+ 538              	.LVL27:
+ 539              		.loc 2 80 28 view .LVU140
+ 540 0016 FFF7FEFF 		bl	_Znaj
+ 541              	.LVL28:
+  81:zita-rev1/source/reverb.cpp ****     memset (_line, 0, size * sizeof (float));
+ 542              		.loc 2 81 12 view .LVU141
+ 543 001a 2A46     		mov	r2, r5
+ 544 001c 0021     		movs	r1, #0
+  80:zita-rev1/source/reverb.cpp ****     _line = new float [size];
+ 545              		.loc 2 80 11 view .LVU142
+ 546 001e A060     		str	r0, [r4, #8]
+ 547              		.loc 2 81 5 is_stmt 1 view .LVU143
+ 548              		.loc 2 81 12 is_stmt 0 view .LVU144
+ 549 0020 FFF7FEFF 		bl	memset
+ 550              	.LVL29:
+  82:zita-rev1/source/reverb.cpp ****     _i = 0;
+ 551              		.loc 2 82 5 is_stmt 1 view .LVU145
+ 552              		.loc 2 82 8 is_stmt 0 view .LVU146
+ 553 0024 0023     		movs	r3, #0
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 15
+
+
+ 554 0026 2360     		str	r3, [r4]
+  83:zita-rev1/source/reverb.cpp **** }
+ 555              		.loc 2 83 1 view .LVU147
+ 556 0028 38BD     		pop	{r3, r4, r5, pc}
+ 557              		.loc 2 83 1 view .LVU148
+ 558              		.cfi_endproc
+ 559              	.LFE582:
+ 561              		.section	.text._ZN5Delay4finiEv,"ax",%progbits
+ 562              		.align	1
+ 563              		.global	_ZN5Delay4finiEv
+ 564              		.syntax unified
+ 565              		.thumb
+ 566              		.thumb_func
+ 568              	_ZN5Delay4finiEv:
+ 569              	.LVL30:
+ 570              	.LFB583:
+  84:zita-rev1/source/reverb.cpp **** 
+  85:zita-rev1/source/reverb.cpp **** 
+  86:zita-rev1/source/reverb.cpp **** void Delay::fini (void)
+  87:zita-rev1/source/reverb.cpp **** {
+ 571              		.loc 2 87 1 is_stmt 1 view -0
+ 572              		.cfi_startproc
+ 573              		@ args = 0, pretend = 0, frame = 0
+ 574              		@ frame_needed = 0, uses_anonymous_args = 0
+  88:zita-rev1/source/reverb.cpp ****     delete[] _line;
+ 575              		.loc 2 88 5 view .LVU150
+  87:zita-rev1/source/reverb.cpp ****     delete[] _line;
+ 576              		.loc 2 87 1 is_stmt 0 view .LVU151
+ 577 0000 10B5     		push	{r4, lr}
+ 578              		.cfi_def_cfa_offset 8
+ 579              		.cfi_offset 4, -8
+ 580              		.cfi_offset 14, -4
+  87:zita-rev1/source/reverb.cpp ****     delete[] _line;
+ 581              		.loc 2 87 1 view .LVU152
+ 582 0002 0446     		mov	r4, r0
+ 583              		.loc 2 88 14 view .LVU153
+ 584 0004 8068     		ldr	r0, [r0, #8]
+ 585              	.LVL31:
+ 586              		.loc 2 88 5 view .LVU154
+ 587 0006 08B1     		cbz	r0, .L28
+ 588              		.loc 2 88 14 discriminator 1 view .LVU155
+ 589 0008 FFF7FEFF 		bl	_ZdaPv
+ 590              	.LVL32:
+ 591              	.L28:
+  89:zita-rev1/source/reverb.cpp ****     _size = 0;
+ 592              		.loc 2 89 5 is_stmt 1 view .LVU156
+ 593              		.loc 2 89 11 is_stmt 0 view .LVU157
+ 594 000c 0023     		movs	r3, #0
+  90:zita-rev1/source/reverb.cpp ****     _line = 0;
+ 595              		.loc 2 90 11 view .LVU158
+ 596 000e C4E90133 		strd	r3, r3, [r4, #4]
+  91:zita-rev1/source/reverb.cpp **** }
+ 597              		.loc 2 91 1 view .LVU159
+ 598 0012 10BD     		pop	{r4, pc}
+ 599              		.loc 2 91 1 view .LVU160
+ 600              		.cfi_endproc
+ 601              	.LFE583:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 16
+
+
+ 603              		.section	.text._ZN5DelayD2Ev,"ax",%progbits
+ 604              		.align	1
+ 605              		.global	_ZN5DelayD2Ev
+ 606              		.syntax unified
+ 607              		.thumb
+ 608              		.thumb_func
+ 610              	_ZN5DelayD2Ev:
+ 611              	.LVL33:
+ 612              	.LFB580:
+  71:zita-rev1/source/reverb.cpp **** {
+ 613              		.loc 2 71 1 is_stmt 1 view -0
+ 614              		.cfi_startproc
+ 615              		@ args = 0, pretend = 0, frame = 0
+ 616              		@ frame_needed = 0, uses_anonymous_args = 0
+ 617              	.LBB38:
+  73:zita-rev1/source/reverb.cpp **** }
+ 618              		.loc 2 73 5 view .LVU162
+ 619              	.LBE38:
+  71:zita-rev1/source/reverb.cpp **** {
+ 620              		.loc 2 71 1 is_stmt 0 view .LVU163
+ 621 0000 10B5     		push	{r4, lr}
+ 622              		.cfi_def_cfa_offset 8
+ 623              		.cfi_offset 4, -8
+ 624              		.cfi_offset 14, -4
+  71:zita-rev1/source/reverb.cpp **** {
+ 625              		.loc 2 71 1 view .LVU164
+ 626 0002 0446     		mov	r4, r0
+ 627              	.LBB39:
+  73:zita-rev1/source/reverb.cpp **** }
+ 628              		.loc 2 73 10 view .LVU165
+ 629 0004 FFF7FEFF 		bl	_ZN5Delay4finiEv
+ 630              	.LVL34:
+  73:zita-rev1/source/reverb.cpp **** }
+ 631              		.loc 2 73 10 view .LVU166
+ 632              	.LBE39:
+  74:zita-rev1/source/reverb.cpp **** 
+ 633              		.loc 2 74 1 view .LVU167
+ 634 0008 2046     		mov	r0, r4
+ 635 000a 10BD     		pop	{r4, pc}
+  74:zita-rev1/source/reverb.cpp **** 
+ 636              		.loc 2 74 1 view .LVU168
+ 637              		.cfi_endproc
+ 638              	.LFE580:
+ 640              		.global	_ZN5DelayD1Ev
+ 641              		.thumb_set _ZN5DelayD1Ev,_ZN5DelayD2Ev
+ 642              		.section	.text._ZN6VdelayC2Ev,"ax",%progbits
+ 643              		.align	1
+ 644              		.global	_ZN6VdelayC2Ev
+ 645              		.syntax unified
+ 646              		.thumb
+ 647              		.thumb_func
+ 649              	_ZN6VdelayC2Ev:
+ 650              	.LVL35:
+ 651              	.LFB585:
+  92:zita-rev1/source/reverb.cpp **** 
+  93:zita-rev1/source/reverb.cpp **** 
+  94:zita-rev1/source/reverb.cpp **** // -----------------------------------------------------------------------
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 17
+
+
+  95:zita-rev1/source/reverb.cpp **** 
+  96:zita-rev1/source/reverb.cpp **** 
+  97:zita-rev1/source/reverb.cpp **** Vdelay::Vdelay (void) :
+ 652              		.loc 2 97 1 is_stmt 1 view -0
+ 653              		.cfi_startproc
+ 654              		@ args = 0, pretend = 0, frame = 0
+ 655              		@ frame_needed = 0, uses_anonymous_args = 0
+ 656              		@ link register save eliminated.
+ 657              	.LBB40:
+  98:zita-rev1/source/reverb.cpp ****     _size (0),
+  99:zita-rev1/source/reverb.cpp ****     _line (0)
+ 658              		.loc 2 99 13 is_stmt 0 view .LVU170
+ 659 0000 0022     		movs	r2, #0
+ 660 0002 C0E90222 		strd	r2, r2, [r0, #8]
+ 661              	.LBE40:
+ 100:zita-rev1/source/reverb.cpp **** {
+ 101:zita-rev1/source/reverb.cpp **** }
+ 662              		.loc 2 101 1 view .LVU171
+ 663 0006 7047     		bx	lr
+ 664              		.cfi_endproc
+ 665              	.LFE585:
+ 667              		.global	_ZN6VdelayC1Ev
+ 668              		.thumb_set _ZN6VdelayC1Ev,_ZN6VdelayC2Ev
+ 669              		.section	.text._ZN6Vdelay4initEi,"ax",%progbits
+ 670              		.align	1
+ 671              		.global	_ZN6Vdelay4initEi
+ 672              		.syntax unified
+ 673              		.thumb
+ 674              		.thumb_func
+ 676              	_ZN6Vdelay4initEi:
+ 677              	.LVL36:
+ 678              	.LFB590:
+ 102:zita-rev1/source/reverb.cpp **** 
+ 103:zita-rev1/source/reverb.cpp **** 
+ 104:zita-rev1/source/reverb.cpp **** Vdelay::~Vdelay (void)
+ 105:zita-rev1/source/reverb.cpp **** {
+ 106:zita-rev1/source/reverb.cpp ****     fini ();
+ 107:zita-rev1/source/reverb.cpp **** }
+ 108:zita-rev1/source/reverb.cpp **** 
+ 109:zita-rev1/source/reverb.cpp **** 
+ 110:zita-rev1/source/reverb.cpp **** void Vdelay::init (int size)
+ 111:zita-rev1/source/reverb.cpp **** {
+ 679              		.loc 2 111 1 is_stmt 1 view -0
+ 680              		.cfi_startproc
+ 681              		@ args = 0, pretend = 0, frame = 0
+ 682              		@ frame_needed = 0, uses_anonymous_args = 0
+ 112:zita-rev1/source/reverb.cpp ****     _size = size;
+ 683              		.loc 2 112 5 view .LVU173
+ 111:zita-rev1/source/reverb.cpp ****     _size = size;
+ 684              		.loc 2 111 1 is_stmt 0 view .LVU174
+ 685 0000 38B5     		push	{r3, r4, r5, lr}
+ 686              		.cfi_def_cfa_offset 16
+ 687              		.cfi_offset 3, -16
+ 688              		.cfi_offset 4, -12
+ 689              		.cfi_offset 5, -8
+ 690              		.cfi_offset 14, -4
+ 113:zita-rev1/source/reverb.cpp ****     _line = new float [size];
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 18
+
+
+ 691              		.loc 2 113 28 view .LVU175
+ 692 0002 8D00     		lsls	r5, r1, #2
+ 693 0004 6FF06043 		mvn	r3, #-536870912
+ 111:zita-rev1/source/reverb.cpp ****     _size = size;
+ 694              		.loc 2 111 1 view .LVU176
+ 695 0008 0446     		mov	r4, r0
+ 112:zita-rev1/source/reverb.cpp ****     _size = size;
+ 696              		.loc 2 112 11 view .LVU177
+ 697 000a 8160     		str	r1, [r0, #8]
+ 698              		.loc 2 113 5 is_stmt 1 view .LVU178
+ 699              		.loc 2 113 28 is_stmt 0 view .LVU179
+ 700 000c 9942     		cmp	r1, r3
+ 701 000e 34BF     		ite	cc
+ 702 0010 2846     		movcc	r0, r5
+ 703 0012 4FF0FF30 		movcs	r0, #-1
+ 704              	.LVL37:
+ 705              		.loc 2 113 28 view .LVU180
+ 706 0016 FFF7FEFF 		bl	_Znaj
+ 707              	.LVL38:
+ 114:zita-rev1/source/reverb.cpp ****     memset (_line, 0, size * sizeof (float));
+ 708              		.loc 2 114 12 view .LVU181
+ 709 001a 2A46     		mov	r2, r5
+ 710 001c 0021     		movs	r1, #0
+ 113:zita-rev1/source/reverb.cpp ****     _line = new float [size];
+ 711              		.loc 2 113 11 view .LVU182
+ 712 001e E060     		str	r0, [r4, #12]
+ 713              		.loc 2 114 5 is_stmt 1 view .LVU183
+ 714              		.loc 2 114 12 is_stmt 0 view .LVU184
+ 715 0020 FFF7FEFF 		bl	memset
+ 716              	.LVL39:
+ 115:zita-rev1/source/reverb.cpp ****     _ir = 0;
+ 717              		.loc 2 115 5 is_stmt 1 view .LVU185
+ 718              		.loc 2 115 9 is_stmt 0 view .LVU186
+ 719 0024 0023     		movs	r3, #0
+ 116:zita-rev1/source/reverb.cpp ****     _iw = 0;
+ 720              		.loc 2 116 9 view .LVU187
+ 721 0026 C4E90033 		strd	r3, r3, [r4]
+ 117:zita-rev1/source/reverb.cpp **** }
+ 722              		.loc 2 117 1 view .LVU188
+ 723 002a 38BD     		pop	{r3, r4, r5, pc}
+ 724              		.loc 2 117 1 view .LVU189
+ 725              		.cfi_endproc
+ 726              	.LFE590:
+ 728              		.section	.text._ZN6Vdelay4finiEv,"ax",%progbits
+ 729              		.align	1
+ 730              		.global	_ZN6Vdelay4finiEv
+ 731              		.syntax unified
+ 732              		.thumb
+ 733              		.thumb_func
+ 735              	_ZN6Vdelay4finiEv:
+ 736              	.LVL40:
+ 737              	.LFB591:
+ 118:zita-rev1/source/reverb.cpp **** 
+ 119:zita-rev1/source/reverb.cpp **** 
+ 120:zita-rev1/source/reverb.cpp **** void Vdelay::fini (void)
+ 121:zita-rev1/source/reverb.cpp **** {
+ 738              		.loc 2 121 1 is_stmt 1 view -0
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 19
+
+
+ 739              		.cfi_startproc
+ 740              		@ args = 0, pretend = 0, frame = 0
+ 741              		@ frame_needed = 0, uses_anonymous_args = 0
+ 122:zita-rev1/source/reverb.cpp ****     delete[] _line;
+ 742              		.loc 2 122 5 view .LVU191
+ 121:zita-rev1/source/reverb.cpp ****     delete[] _line;
+ 743              		.loc 2 121 1 is_stmt 0 view .LVU192
+ 744 0000 10B5     		push	{r4, lr}
+ 745              		.cfi_def_cfa_offset 8
+ 746              		.cfi_offset 4, -8
+ 747              		.cfi_offset 14, -4
+ 121:zita-rev1/source/reverb.cpp ****     delete[] _line;
+ 748              		.loc 2 121 1 view .LVU193
+ 749 0002 0446     		mov	r4, r0
+ 750              		.loc 2 122 14 view .LVU194
+ 751 0004 C068     		ldr	r0, [r0, #12]
+ 752              	.LVL41:
+ 753              		.loc 2 122 5 view .LVU195
+ 754 0006 08B1     		cbz	r0, .L38
+ 755              		.loc 2 122 14 discriminator 1 view .LVU196
+ 756 0008 FFF7FEFF 		bl	_ZdaPv
+ 757              	.LVL42:
+ 758              	.L38:
+ 123:zita-rev1/source/reverb.cpp ****     _size = 0;
+ 759              		.loc 2 123 5 is_stmt 1 view .LVU197
+ 760              		.loc 2 123 11 is_stmt 0 view .LVU198
+ 761 000c 0023     		movs	r3, #0
+ 124:zita-rev1/source/reverb.cpp ****     _line = 0;
+ 762              		.loc 2 124 11 view .LVU199
+ 763 000e C4E90233 		strd	r3, r3, [r4, #8]
+ 125:zita-rev1/source/reverb.cpp **** }
+ 764              		.loc 2 125 1 view .LVU200
+ 765 0012 10BD     		pop	{r4, pc}
+ 766              		.loc 2 125 1 view .LVU201
+ 767              		.cfi_endproc
+ 768              	.LFE591:
+ 770              		.section	.text._ZN6VdelayD2Ev,"ax",%progbits
+ 771              		.align	1
+ 772              		.global	_ZN6VdelayD2Ev
+ 773              		.syntax unified
+ 774              		.thumb
+ 775              		.thumb_func
+ 777              	_ZN6VdelayD2Ev:
+ 778              	.LVL43:
+ 779              	.LFB588:
+ 104:zita-rev1/source/reverb.cpp **** {
+ 780              		.loc 2 104 1 is_stmt 1 view -0
+ 781              		.cfi_startproc
+ 782              		@ args = 0, pretend = 0, frame = 0
+ 783              		@ frame_needed = 0, uses_anonymous_args = 0
+ 784              	.LBB41:
+ 106:zita-rev1/source/reverb.cpp **** }
+ 785              		.loc 2 106 5 view .LVU203
+ 786              	.LBE41:
+ 104:zita-rev1/source/reverb.cpp **** {
+ 787              		.loc 2 104 1 is_stmt 0 view .LVU204
+ 788 0000 10B5     		push	{r4, lr}
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 20
+
+
+ 789              		.cfi_def_cfa_offset 8
+ 790              		.cfi_offset 4, -8
+ 791              		.cfi_offset 14, -4
+ 104:zita-rev1/source/reverb.cpp **** {
+ 792              		.loc 2 104 1 view .LVU205
+ 793 0002 0446     		mov	r4, r0
+ 794              	.LBB42:
+ 106:zita-rev1/source/reverb.cpp **** }
+ 795              		.loc 2 106 10 view .LVU206
+ 796 0004 FFF7FEFF 		bl	_ZN6Vdelay4finiEv
+ 797              	.LVL44:
+ 106:zita-rev1/source/reverb.cpp **** }
+ 798              		.loc 2 106 10 view .LVU207
+ 799              	.LBE42:
+ 107:zita-rev1/source/reverb.cpp **** 
+ 800              		.loc 2 107 1 view .LVU208
+ 801 0008 2046     		mov	r0, r4
+ 802 000a 10BD     		pop	{r4, pc}
+ 107:zita-rev1/source/reverb.cpp **** 
+ 803              		.loc 2 107 1 view .LVU209
+ 804              		.cfi_endproc
+ 805              	.LFE588:
+ 807              		.global	_ZN6VdelayD1Ev
+ 808              		.thumb_set _ZN6VdelayD1Ev,_ZN6VdelayD2Ev
+ 809              		.section	.text._ZN6Vdelay9set_delayEi,"ax",%progbits
+ 810              		.align	1
+ 811              		.global	_ZN6Vdelay9set_delayEi
+ 812              		.syntax unified
+ 813              		.thumb
+ 814              		.thumb_func
+ 816              	_ZN6Vdelay9set_delayEi:
+ 817              	.LVL45:
+ 818              	.LFB592:
+ 126:zita-rev1/source/reverb.cpp **** 
+ 127:zita-rev1/source/reverb.cpp **** 
+ 128:zita-rev1/source/reverb.cpp **** void Vdelay::set_delay (int del)
+ 129:zita-rev1/source/reverb.cpp **** {
+ 819              		.loc 2 129 1 is_stmt 1 view -0
+ 820              		.cfi_startproc
+ 821              		@ args = 0, pretend = 0, frame = 0
+ 822              		@ frame_needed = 0, uses_anonymous_args = 0
+ 823              		@ link register save eliminated.
+ 130:zita-rev1/source/reverb.cpp ****     _ir = _iw - del;
+ 824              		.loc 2 130 5 view .LVU211
+ 825              		.loc 2 130 15 is_stmt 0 view .LVU212
+ 826 0000 4368     		ldr	r3, [r0, #4]
+ 827 0002 591A     		subs	r1, r3, r1
+ 828              	.LVL46:
+ 131:zita-rev1/source/reverb.cpp ****     if (_ir < 0) _ir += _size;
+ 829              		.loc 2 131 5 view .LVU213
+ 830 0004 0029     		cmp	r1, #0
+ 130:zita-rev1/source/reverb.cpp ****     _ir = _iw - del;
+ 831              		.loc 2 130 9 view .LVU214
+ 832 0006 0160     		str	r1, [r0]
+ 833              		.loc 2 131 5 is_stmt 1 view .LVU215
+ 834              		.loc 2 131 18 view .LVU216
+ 835              		.loc 2 131 22 is_stmt 0 view .LVU217
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 21
+
+
+ 836 0008 BEBF     		ittt	lt
+ 837 000a 8368     		ldrlt	r3, [r0, #8]
+ 838 000c C918     		addlt	r1, r1, r3
+ 839 000e 0160     		strlt	r1, [r0]
+ 132:zita-rev1/source/reverb.cpp **** }
+ 840              		.loc 2 132 1 view .LVU218
+ 841 0010 7047     		bx	lr
+ 842              		.cfi_endproc
+ 843              	.LFE592:
+ 845              		.section	.text._ZN5Filt110set_paramsEffffff,"ax",%progbits
+ 846              		.align	1
+ 847              		.global	_ZN5Filt110set_paramsEffffff
+ 848              		.syntax unified
+ 849              		.thumb
+ 850              		.thumb_func
+ 852              	_ZN5Filt110set_paramsEffffff:
+ 853              	.LVL47:
+ 854              	.LFB593:
+ 133:zita-rev1/source/reverb.cpp **** 
+ 134:zita-rev1/source/reverb.cpp **** 
+ 135:zita-rev1/source/reverb.cpp **** // -----------------------------------------------------------------------
+ 136:zita-rev1/source/reverb.cpp **** 
+ 137:zita-rev1/source/reverb.cpp **** 
+ 138:zita-rev1/source/reverb.cpp **** void Filt1::set_params (float del, float tmf, float tlo, float wlo, float thi, float chi)
+ 139:zita-rev1/source/reverb.cpp **** {
+ 855              		.loc 2 139 1 is_stmt 1 view -0
+ 856              		.cfi_startproc
+ 857              		@ args = 0, pretend = 0, frame = 0
+ 858              		@ frame_needed = 0, uses_anonymous_args = 0
+ 140:zita-rev1/source/reverb.cpp ****     float g, t;
+ 859              		.loc 2 140 5 view .LVU220
+ 141:zita-rev1/source/reverb.cpp **** 
+ 142:zita-rev1/source/reverb.cpp ****     _gmf = powf (0.001f, del / tmf);
+ 860              		.loc 2 142 5 view .LVU221
+ 139:zita-rev1/source/reverb.cpp ****     float g, t;
+ 861              		.loc 2 139 1 is_stmt 0 view .LVU222
+ 862 0000 10B5     		push	{r4, lr}
+ 863              		.cfi_def_cfa_offset 8
+ 864              		.cfi_offset 4, -8
+ 865              		.cfi_offset 14, -4
+ 866 0002 2DED068B 		vpush.64	{d8, d9, d10}
+ 867              		.cfi_def_cfa_offset 32
+ 868              		.cfi_offset 80, -32
+ 869              		.cfi_offset 81, -28
+ 870              		.cfi_offset 82, -24
+ 871              		.cfi_offset 83, -20
+ 872              		.cfi_offset 84, -16
+ 873              		.cfi_offset 85, -12
+ 139:zita-rev1/source/reverb.cpp ****     float g, t;
+ 874              		.loc 2 139 1 view .LVU223
+ 875 0006 F0EE418A 		vmov.f32	s17, s2
+ 876              		.loc 2 142 17 view .LVU224
+ 877 000a DFED279A 		vldr.32	s19, .L46
+ 139:zita-rev1/source/reverb.cpp ****     float g, t;
+ 878              		.loc 2 139 1 view .LVU225
+ 879 000e B0EE408A 		vmov.f32	s16, s0
+ 880 0012 0446     		mov	r4, r0
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 22
+
+
+ 881              		.loc 2 142 17 view .LVU226
+ 882 0014 C0EE200A 		vdiv.f32	s1, s0, s1
+ 883              	.LVL48:
+ 884              		.loc 2 142 17 view .LVU227
+ 885 0018 B0EE690A 		vmov.f32	s0, s19
+ 886              	.LVL49:
+ 139:zita-rev1/source/reverb.cpp ****     float g, t;
+ 887              		.loc 2 139 1 view .LVU228
+ 888 001c F0EE61AA 		vmov.f32	s21, s3
+ 889 0020 B0EE42AA 		vmov.f32	s20, s4
+ 890 0024 B0EE629A 		vmov.f32	s18, s5
+ 891              		.loc 2 142 17 view .LVU229
+ 892 0028 FFF7FEFF 		bl	powf
+ 893              	.LVL50:
+ 143:zita-rev1/source/reverb.cpp ****     _glo = powf (0.001f, del / tlo) / _gmf - 1.0f;
+ 894              		.loc 2 143 17 view .LVU230
+ 895 002c C8EE280A 		vdiv.f32	s1, s16, s17
+ 142:zita-rev1/source/reverb.cpp ****     _glo = powf (0.001f, del / tlo) / _gmf - 1.0f;
+ 896              		.loc 2 142 10 view .LVU231
+ 897 0030 84ED000A 		vstr.32	s0, [r4]
+ 898              		.loc 2 143 5 is_stmt 1 view .LVU232
+ 899              		.loc 2 143 17 is_stmt 0 view .LVU233
+ 900 0034 B0EE690A 		vmov.f32	s0, s19
+ 901 0038 FFF7FEFF 		bl	powf
+ 902              	.LVL51:
+ 903              		.loc 2 143 37 view .LVU234
+ 904 003c 94ED007A 		vldr.32	s14, [r4]
+ 905              		.loc 2 143 44 view .LVU235
+ 906 0040 F7EE008A 		vmov.f32	s17, #1.0e+0
+ 907              	.LVL52:
+ 144:zita-rev1/source/reverb.cpp ****     _wlo = wlo;    
+ 908              		.loc 2 144 10 view .LVU236
+ 909 0044 C4ED02AA 		vstr.32	s21, [r4, #8]
+ 143:zita-rev1/source/reverb.cpp ****     _glo = powf (0.001f, del / tlo) / _gmf - 1.0f;
+ 910              		.loc 2 143 37 view .LVU237
+ 911 0048 C0EE077A 		vdiv.f32	s15, s0, s14
+ 145:zita-rev1/source/reverb.cpp ****     g = powf (0.001f, del / thi) / _gmf;
+ 912              		.loc 2 145 14 view .LVU238
+ 913 004c C8EE0A0A 		vdiv.f32	s1, s16, s20
+ 914 0050 B0EE690A 		vmov.f32	s0, s19
+ 143:zita-rev1/source/reverb.cpp ****     _wlo = wlo;    
+ 915              		.loc 2 143 44 view .LVU239
+ 916 0054 77EEE87A 		vsub.f32	s15, s15, s17
+ 143:zita-rev1/source/reverb.cpp ****     _wlo = wlo;    
+ 917              		.loc 2 143 10 view .LVU240
+ 918 0058 C4ED017A 		vstr.32	s15, [r4, #4]
+ 144:zita-rev1/source/reverb.cpp ****     _wlo = wlo;    
+ 919              		.loc 2 144 5 is_stmt 1 view .LVU241
+ 920              		.loc 2 145 5 view .LVU242
+ 921              		.loc 2 145 14 is_stmt 0 view .LVU243
+ 922 005c FFF7FEFF 		bl	powf
+ 923              	.LVL53:
+ 924              		.loc 2 145 7 view .LVU244
+ 925 0060 D4ED007A 		vldr.32	s15, [r4]
+ 146:zita-rev1/source/reverb.cpp ****     t = (1 - g * g) / (2 * g * g * chi);
+ 926              		.loc 2 146 12 view .LVU245
+ 927 0064 F0EE686A 		vmov.f32	s13, s17
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 23
+
+
+ 145:zita-rev1/source/reverb.cpp ****     g = powf (0.001f, del / thi) / _gmf;
+ 928              		.loc 2 145 7 view .LVU246
+ 929 0068 80EE277A 		vdiv.f32	s14, s0, s15
+ 930              	.LVL54:
+ 931              		.loc 2 146 5 is_stmt 1 view .LVU247
+ 147:zita-rev1/source/reverb.cpp ****     _whi = (sqrtf (1 + 4 * t) - 1) / (2 * t); 
+ 932              		.loc 2 147 19 is_stmt 0 view .LVU248
+ 933 006c B0EE680A 		vmov.f32	s0, s17
+ 146:zita-rev1/source/reverb.cpp ****     t = (1 - g * g) / (2 * g * g * chi);
+ 934              		.loc 2 146 26 view .LVU249
+ 935 0070 77EE077A 		vadd.f32	s15, s14, s14
+ 146:zita-rev1/source/reverb.cpp ****     t = (1 - g * g) / (2 * g * g * chi);
+ 936              		.loc 2 146 12 view .LVU250
+ 937 0074 E7EE476A 		vfms.f32	s13, s14, s14
+ 146:zita-rev1/source/reverb.cpp ****     t = (1 - g * g) / (2 * g * g * chi);
+ 938              		.loc 2 146 30 view .LVU251
+ 939 0078 67EE877A 		vmul.f32	s15, s15, s14
+ 146:zita-rev1/source/reverb.cpp ****     t = (1 - g * g) / (2 * g * g * chi);
+ 940              		.loc 2 146 34 view .LVU252
+ 941 007c 67EE892A 		vmul.f32	s5, s15, s18
+ 942              		.loc 2 147 19 view .LVU253
+ 943 0080 F1EE007A 		vmov.f32	s15, #4.0e+0
+ 146:zita-rev1/source/reverb.cpp ****     t = (1 - g * g) / (2 * g * g * chi);
+ 944              		.loc 2 146 7 view .LVU254
+ 945 0084 86EEA28A 		vdiv.f32	s16, s13, s5
+ 946              	.LVL55:
+ 947              		.loc 2 147 5 is_stmt 1 view .LVU255
+ 948              		.loc 2 147 19 is_stmt 0 view .LVU256
+ 949 0088 A8EE270A 		vfma.f32	s0, s16, s15
+ 950 008c FFF7FEFF 		bl	sqrtf
+ 951              	.LVL56:
+ 952              		.loc 2 147 41 view .LVU257
+ 953 0090 38EE088A 		vadd.f32	s16, s16, s16
+ 954              	.LVL57:
+ 955              		.loc 2 147 31 view .LVU258
+ 956 0094 30EE680A 		vsub.f32	s0, s0, s17
+ 957              		.loc 2 147 36 view .LVU259
+ 958 0098 C0EE087A 		vdiv.f32	s15, s0, s16
+ 148:zita-rev1/source/reverb.cpp **** } 
+ 959              		.loc 2 148 1 view .LVU260
+ 960 009c BDEC068B 		vldm	sp!, {d8-d10}
+ 961              		.cfi_restore 84
+ 962              		.cfi_restore 85
+ 963              		.cfi_restore 82
+ 964              		.cfi_restore 83
+ 965              		.cfi_restore 80
+ 966              		.cfi_restore 81
+ 967              		.cfi_def_cfa_offset 8
+ 968              	.LVL58:
+ 147:zita-rev1/source/reverb.cpp ****     _whi = (sqrtf (1 + 4 * t) - 1) / (2 * t); 
+ 969              		.loc 2 147 10 view .LVU261
+ 970 00a0 C4ED037A 		vstr.32	s15, [r4, #12]
+ 971              		.loc 2 148 1 view .LVU262
+ 972 00a4 10BD     		pop	{r4, pc}
+ 973              	.LVL59:
+ 974              	.L47:
+ 975              		.loc 2 148 1 view .LVU263
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 24
+
+
+ 976 00a6 00BF     		.align	2
+ 977              	.L46:
+ 978 00a8 6F12833A 		.word	981668463
+ 979              		.cfi_endproc
+ 980              	.LFE593:
+ 982              		.section	.text._ZN6ReverbC2Ev,"ax",%progbits
+ 983              		.align	1
+ 984              		.global	_ZN6ReverbC2Ev
+ 985              		.syntax unified
+ 986              		.thumb
+ 987              		.thumb_func
+ 989              	_ZN6ReverbC2Ev:
+ 990              	.LVL60:
+ 991              	.LFB595:
+ 149:zita-rev1/source/reverb.cpp **** 
+ 150:zita-rev1/source/reverb.cpp ****  
+ 151:zita-rev1/source/reverb.cpp **** // -----------------------------------------------------------------------
+ 152:zita-rev1/source/reverb.cpp **** 
+ 153:zita-rev1/source/reverb.cpp **** 
+ 154:zita-rev1/source/reverb.cpp **** float Reverb::_tdiff1 [8] = 
+ 155:zita-rev1/source/reverb.cpp **** {
+ 156:zita-rev1/source/reverb.cpp ****     20346e-6f,
+ 157:zita-rev1/source/reverb.cpp ****     24421e-6f,
+ 158:zita-rev1/source/reverb.cpp ****     31604e-6f,
+ 159:zita-rev1/source/reverb.cpp ****     27333e-6f,
+ 160:zita-rev1/source/reverb.cpp ****     22904e-6f,
+ 161:zita-rev1/source/reverb.cpp ****     29291e-6f,
+ 162:zita-rev1/source/reverb.cpp ****     13458e-6f,
+ 163:zita-rev1/source/reverb.cpp ****     19123e-6f
+ 164:zita-rev1/source/reverb.cpp **** };
+ 165:zita-rev1/source/reverb.cpp **** 
+ 166:zita-rev1/source/reverb.cpp **** 
+ 167:zita-rev1/source/reverb.cpp **** float Reverb::_tdelay [8] = 
+ 168:zita-rev1/source/reverb.cpp **** {
+ 169:zita-rev1/source/reverb.cpp ****    153129e-6f,
+ 170:zita-rev1/source/reverb.cpp ****    210389e-6f,
+ 171:zita-rev1/source/reverb.cpp ****    127837e-6f,
+ 172:zita-rev1/source/reverb.cpp ****    256891e-6f,
+ 173:zita-rev1/source/reverb.cpp ****    174713e-6f,
+ 174:zita-rev1/source/reverb.cpp ****    192303e-6f,
+ 175:zita-rev1/source/reverb.cpp ****    125000e-6f,
+ 176:zita-rev1/source/reverb.cpp ****    219991e-6f
+ 177:zita-rev1/source/reverb.cpp **** };
+ 178:zita-rev1/source/reverb.cpp **** 
+ 179:zita-rev1/source/reverb.cpp **** 
+ 180:zita-rev1/source/reverb.cpp **** Reverb::Reverb (void)
+ 992              		.loc 2 180 1 is_stmt 1 view -0
+ 993              		.cfi_startproc
+ 994              		@ args = 0, pretend = 0, frame = 0
+ 995              		@ frame_needed = 0, uses_anonymous_args = 0
+ 996              	.LBB43:
+ 997              	.LBB44:
+ 998              	.LBI44:
+  97:zita-rev1/source/reverb.cpp ****     _size (0),
+ 999              		.loc 2 97 1 view .LVU265
+ 1000              	.LBB45:
+  99:zita-rev1/source/reverb.cpp **** {
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 25
+
+
+ 1001              		.loc 2 99 13 is_stmt 0 view .LVU266
+ 1002 0000 0023     		movs	r3, #0
+ 1003 0002 00F1A801 		add	r1, r0, #168
+ 1004              	.LBE45:
+ 1005              	.LBE44:
+ 1006              	.LBE43:
+ 1007              		.loc 2 180 1 view .LVU267
+ 1008 0006 10B5     		push	{r4, lr}
+ 1009              		.cfi_def_cfa_offset 8
+ 1010              		.cfi_offset 4, -8
+ 1011              		.cfi_offset 14, -4
+ 1012              	.LBB58:
+ 1013              	.LBB47:
+ 1014              	.LBB46:
+  99:zita-rev1/source/reverb.cpp **** {
+ 1015              		.loc 2 99 13 view .LVU268
+ 1016 0008 C0E90433 		strd	r3, r3, [r0, #16]
+ 1017              	.LVL61:
+  99:zita-rev1/source/reverb.cpp **** {
+ 1018              		.loc 2 99 13 view .LVU269
+ 1019              	.LBE46:
+ 1020              	.LBE47:
+ 1021              	.LBB48:
+ 1022              	.LBI48:
+  97:zita-rev1/source/reverb.cpp ****     _size (0),
+ 1023              		.loc 2 97 1 is_stmt 1 view .LVU270
+ 1024              	.LBB49:
+  99:zita-rev1/source/reverb.cpp **** {
+ 1025              		.loc 2 99 13 is_stmt 0 view .LVU271
+ 1026 000c C0E90833 		strd	r3, r3, [r0, #32]
+ 1027              	.LVL62:
+  99:zita-rev1/source/reverb.cpp **** {
+ 1028              		.loc 2 99 13 view .LVU272
+ 1029              	.LBE49:
+ 1030              	.LBE48:
+ 1031              		.loc 2 180 21 is_stmt 1 view .LVU273
+ 1032              	.LBE58:
+ 1033              		.loc 2 180 1 is_stmt 0 view .LVU274
+ 1034 0010 0446     		mov	r4, r0
+ 1035 0012 00F12803 		add	r3, r0, #40
+ 1036              	.L49:
+ 1037              	.LVL63:
+ 1038              	.LBB59:
+ 1039              	.LBB50:
+ 1040              	.LBI50:
+  30:zita-rev1/source/reverb.cpp ****     _size (0),
+ 1041              		.loc 2 30 1 is_stmt 1 view .LVU275
+ 1042              	.LBB51:
+  32:zita-rev1/source/reverb.cpp **** {
+ 1043              		.loc 2 32 13 is_stmt 0 view .LVU276
+ 1044 0016 0022     		movs	r2, #0
+ 1045 0018 C3E90222 		strd	r2, r2, [r3, #8]
+ 1046              	.LVL64:
+  32:zita-rev1/source/reverb.cpp **** {
+ 1047              		.loc 2 32 13 view .LVU277
+ 1048              	.LBE51:
+ 1049              	.LBE50:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 26
+
+
+ 1050              		.loc 2 180 21 is_stmt 1 view .LVU278
+ 1051              		.loc 2 180 21 view .LVU279
+ 1052 001c 1033     		adds	r3, r3, #16
+ 1053 001e 8B42     		cmp	r3, r1
+ 1054 0020 F9D1     		bne	.L49
+ 1055              		.loc 2 180 21 discriminator 2 view .LVU280
+ 1056 0022 04F5B472 		add	r2, r4, #360
+ 1057              	.L50:
+ 1058              	.LVL65:
+ 1059              	.LBB52:
+ 1060              	.LBI52:
+  67:zita-rev1/source/reverb.h ****     ~Filt1 (void) {}
+ 1061              		.loc 1 67 5 view .LVU281
+ 1062              	.LBB53:
+  67:zita-rev1/source/reverb.h ****     ~Filt1 (void) {}
+ 1063              		.loc 1 67 37 is_stmt 0 view .LVU282
+ 1064 0026 0021     		movs	r1, #0
+ 1065              	.LBE53:
+ 1066              	.LBE52:
+ 1067              		.loc 2 180 21 view .LVU283
+ 1068 0028 1833     		adds	r3, r3, #24
+ 1069              	.LVL66:
+ 1070              	.LBB55:
+ 1071              	.LBB54:
+  67:zita-rev1/source/reverb.h ****     ~Filt1 (void) {}
+ 1072              		.loc 1 67 37 view .LVU284
+ 1073 002a 43F8081C 		str	r1, [r3, #-8]	@ float
+ 1074 002e 43F8041C 		str	r1, [r3, #-4]	@ float
+ 1075              	.LVL67:
+  67:zita-rev1/source/reverb.h ****     ~Filt1 (void) {}
+ 1076              		.loc 1 67 37 view .LVU285
+ 1077              	.LBE54:
+ 1078              	.LBE55:
+ 1079              		.loc 2 180 21 is_stmt 1 view .LVU286
+ 1080              		.loc 2 180 21 view .LVU287
+ 1081 0032 9A42     		cmp	r2, r3
+ 1082 0034 F7D1     		bne	.L50
+ 1083              		.loc 2 180 21 discriminator 6 view .LVU288
+ 1084 0036 1346     		mov	r3, r2
+ 1085 0038 04F5E471 		add	r1, r4, #456
+ 1086              	.L51:
+ 1087              	.LVL68:
+ 1088              	.LBB56:
+ 1089              	.LBI56:
+  64:zita-rev1/source/reverb.cpp ****     _size (0),
+ 1090              		.loc 2 64 1 view .LVU289
+ 1091              	.LBB57:
+  66:zita-rev1/source/reverb.cpp **** {
+ 1092              		.loc 2 66 13 is_stmt 0 view .LVU290
+ 1093 003c 0022     		movs	r2, #0
+ 1094 003e C3E90122 		strd	r2, r2, [r3, #4]
+ 1095              	.LVL69:
+  66:zita-rev1/source/reverb.cpp **** {
+ 1096              		.loc 2 66 13 view .LVU291
+ 1097              	.LBE57:
+ 1098              	.LBE56:
+ 1099              		.loc 2 180 21 is_stmt 1 view .LVU292
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 27
+
+
+ 1100              		.loc 2 180 21 view .LVU293
+ 1101 0042 0C33     		adds	r3, r3, #12
+ 1102 0044 8B42     		cmp	r3, r1
+ 1103 0046 F9D1     		bne	.L51
+ 1104              		.loc 2 180 21 is_stmt 0 discriminator 10 view .LVU294
+ 1105 0048 04F50370 		add	r0, r4, #524
+ 1106              	.LVL70:
+ 1107              		.loc 2 180 21 discriminator 10 view .LVU295
+ 1108 004c FFF7FEFF 		bl	_ZN5PareqC1Ev
+ 1109              	.LVL71:
+ 1110 0050 04F51970 		add	r0, r4, #612
+ 1111 0054 FFF7FEFF 		bl	_ZN5PareqC1Ev
+ 1112              	.LVL72:
+ 1113              	.LBE59:
+ 181:zita-rev1/source/reverb.cpp **** {
+ 182:zita-rev1/source/reverb.cpp **** }
+ 1114              		.loc 2 182 1 discriminator 10 view .LVU296
+ 1115 0058 2046     		mov	r0, r4
+ 1116 005a 10BD     		pop	{r4, pc}
+ 1117              		.loc 2 182 1 discriminator 10 view .LVU297
+ 1118              		.cfi_endproc
+ 1119              	.LFE595:
+ 1121              		.global	_ZN6ReverbC1Ev
+ 1122              		.thumb_set _ZN6ReverbC1Ev,_ZN6ReverbC2Ev
+ 1123              		.section	.text._ZN6Reverb4initEfb,"ax",%progbits
+ 1124              		.align	1
+ 1125              		.global	_ZN6Reverb4initEfb
+ 1126              		.syntax unified
+ 1127              		.thumb
+ 1128              		.thumb_func
+ 1130              	_ZN6Reverb4initEfb:
+ 1131              	.LVL73:
+ 1132              	.LFB600:
+ 183:zita-rev1/source/reverb.cpp **** 
+ 184:zita-rev1/source/reverb.cpp **** 
+ 185:zita-rev1/source/reverb.cpp **** Reverb::~Reverb (void)
+ 186:zita-rev1/source/reverb.cpp **** {
+ 187:zita-rev1/source/reverb.cpp ****     fini ();
+ 188:zita-rev1/source/reverb.cpp **** }
+ 189:zita-rev1/source/reverb.cpp **** 
+ 190:zita-rev1/source/reverb.cpp **** /*
+ 191:zita-rev1/source/reverb.cpp ****  R_DELAY, &r_delay   0.04);
+ 192:zita-rev1/source/reverb.cpp ****  R_XOVER, &r_xover  200.0);
+ 193:zita-rev1/source/reverb.cpp ****  R_RTLOW, &r_rtlow    3.0);
+ 194:zita-rev1/source/reverb.cpp ****  R_RTMID, &r_rtmid    2.0);
+ 195:zita-rev1/source/reverb.cpp ****  R_FDAMP, &r_fdamp  6.0e3);
+ 196:zita-rev1/source/reverb.cpp **** 
+ 197:zita-rev1/source/reverb.cpp ****  R_OPMIX, &r_opmix    0.5);
+ 198:zita-rev1/source/reverb.cpp ****  R_RGXYZ, &r_rgxyz    0.0);
+ 199:zita-rev1/source/reverb.cpp **** 
+ 200:zita-rev1/source/reverb.cpp **** 
+ 201:zita-rev1/source/reverb.cpp ****  R_EQ1FR, &r_parfr  160.0);
+ 202:zita-rev1/source/reverb.cpp ****  R_EQ1GN, &r_pargn    0.0);
+ 203:zita-rev1/source/reverb.cpp **** 
+ 204:zita-rev1/source/reverb.cpp ****  R_EQ2FR, &r_parfr  2.5e3);
+ 205:zita-rev1/source/reverb.cpp ****  R_EQ2GN, &r_pargn    0.0);
+ 206:zita-rev1/source/reverb.cpp ****  */
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 28
+
+
+ 207:zita-rev1/source/reverb.cpp **** 
+ 208:zita-rev1/source/reverb.cpp **** 
+ 209:zita-rev1/source/reverb.cpp **** void Reverb::init (float fsamp, bool ambis)
+ 210:zita-rev1/source/reverb.cpp **** {
+ 1133              		.loc 2 210 1 is_stmt 1 view -0
+ 1134              		.cfi_startproc
+ 1135              		@ args = 0, pretend = 0, frame = 0
+ 1136              		@ frame_needed = 0, uses_anonymous_args = 0
+ 211:zita-rev1/source/reverb.cpp ****     int i, k1, k2;
+ 1137              		.loc 2 211 5 view .LVU299
+ 212:zita-rev1/source/reverb.cpp **** 
+ 213:zita-rev1/source/reverb.cpp ****     _fsamp = fsamp;
+ 1138              		.loc 2 213 5 view .LVU300
+ 210:zita-rev1/source/reverb.cpp ****     int i, k1, k2;
+ 1139              		.loc 2 210 1 is_stmt 0 view .LVU301
+ 1140 0000 2DE9F84F 		push	{r3, r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 1141              		.cfi_def_cfa_offset 40
+ 1142              		.cfi_offset 3, -40
+ 1143              		.cfi_offset 4, -36
+ 1144              		.cfi_offset 5, -32
+ 1145              		.cfi_offset 6, -28
+ 1146              		.cfi_offset 7, -24
+ 1147              		.cfi_offset 8, -20
+ 1148              		.cfi_offset 9, -16
+ 1149              		.cfi_offset 10, -12
+ 1150              		.cfi_offset 11, -8
+ 1151              		.cfi_offset 14, -4
+ 214:zita-rev1/source/reverb.cpp ****     _ambis = ambis;
+ 215:zita-rev1/source/reverb.cpp ****     _cntA1 = 1;
+ 1152              		.loc 2 215 12 view .LVU302
+ 1153 0004 0123     		movs	r3, #1
+ 216:zita-rev1/source/reverb.cpp ****     _cntA2 = 0;
+ 1154              		.loc 2 216 12 view .LVU303
+ 1155 0006 0025     		movs	r5, #0
+ 210:zita-rev1/source/reverb.cpp ****     int i, k1, k2;
+ 1156              		.loc 2 210 1 view .LVU304
+ 1157 0008 0446     		mov	r4, r0
+ 217:zita-rev1/source/reverb.cpp ****     _cntB1 = 1;
+ 218:zita-rev1/source/reverb.cpp ****     _cntB2 = 0;
+ 219:zita-rev1/source/reverb.cpp ****     _cntC1 = 1;
+ 220:zita-rev1/source/reverb.cpp ****     _cntC2 = 0;
+ 221:zita-rev1/source/reverb.cpp **** 
+ 222:zita-rev1/source/reverb.cpp ****     _ipdel = 0.04f;
+ 223:zita-rev1/source/reverb.cpp ****     _xover = 200.0f;
+ 224:zita-rev1/source/reverb.cpp ****     _rtlow = 3.0f;
+ 225:zita-rev1/source/reverb.cpp ****     _rtmid = 2.0f;
+ 226:zita-rev1/source/reverb.cpp ****     _fdamp = 3e3f;
+ 227:zita-rev1/source/reverb.cpp ****     _opmix = 0.5f;
+ 228:zita-rev1/source/reverb.cpp ****     _rgxyz = 0.0f;
+ 229:zita-rev1/source/reverb.cpp **** 
+ 230:zita-rev1/source/reverb.cpp ****     _g0 = _d0 = 0;
+ 231:zita-rev1/source/reverb.cpp ****     _g1 = _d1 = 0;
+ 232:zita-rev1/source/reverb.cpp **** 
+ 233:zita-rev1/source/reverb.cpp ****     _vdelay0.init ((int)(0.1f * _fsamp));
+ 1158              		.loc 2 233 19 view .LVU305
+ 1159 000a 0830     		adds	r0, r0, #8
+ 1160              	.LVL74:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 29
+
+
+ 1161              		.loc 2 233 19 view .LVU306
+ 1162 000c DFF840B1 		ldr	fp, .L60+28
+ 1163 0010 DFF840A1 		ldr	r10, .L60+32
+ 1164 0014 04F12809 		add	r9, r4, #40
+ 1165 0018 04F5B478 		add	r8, r4, #360
+ 210:zita-rev1/source/reverb.cpp ****     int i, k1, k2;
+ 1166              		.loc 2 210 1 view .LVU307
+ 1167 001c 2DED048B 		vpush.64	{d8, d9}
+ 1168              		.cfi_def_cfa_offset 56
+ 1169              		.cfi_offset 80, -56
+ 1170              		.cfi_offset 81, -52
+ 1171              		.cfi_offset 82, -48
+ 1172              		.cfi_offset 83, -44
+ 215:zita-rev1/source/reverb.cpp ****     _cntA2 = 0;
+ 1173              		.loc 2 215 12 view .LVU308
+ 1174 0020 C0F8C031 		str	r3, [r0, #448]
+ 227:zita-rev1/source/reverb.cpp ****     _rgxyz = 0.0f;
+ 1175              		.loc 2 227 12 view .LVU309
+ 1176 0024 F6EE008A 		vmov.f32	s17, #5.0e-1
+ 217:zita-rev1/source/reverb.cpp ****     _cntB2 = 0;
+ 1177              		.loc 2 217 12 view .LVU310
+ 1178 0028 C0F8C431 		str	r3, [r0, #452]
+ 210:zita-rev1/source/reverb.cpp ****     int i, k1, k2;
+ 1179              		.loc 2 210 1 view .LVU311
+ 1180 002c B0EE408A 		vmov.f32	s16, s0
+ 219:zita-rev1/source/reverb.cpp ****     _cntC2 = 0;
+ 1181              		.loc 2 219 12 view .LVU312
+ 1182 0030 C0F8C831 		str	r3, [r0, #456]
+ 222:zita-rev1/source/reverb.cpp ****     _xover = 200.0f;
+ 1183              		.loc 2 222 12 view .LVU313
+ 1184 0034 3F4B     		ldr	r3, .L60
+ 1185              		.loc 2 233 31 view .LVU314
+ 1186 0036 9FED409A 		vldr.32	s18, .L60+4
+ 222:zita-rev1/source/reverb.cpp ****     _xover = 200.0f;
+ 1187              		.loc 2 222 12 view .LVU315
+ 1188 003a C0F8D831 		str	r3, [r0, #472]	@ float
+ 223:zita-rev1/source/reverb.cpp ****     _rtlow = 3.0f;
+ 1189              		.loc 2 223 12 view .LVU316
+ 1190 003e 3F4B     		ldr	r3, .L60+8
+ 1191              		.loc 2 233 31 view .LVU317
+ 1192 0040 60EE097A 		vmul.f32	s15, s0, s18
+ 213:zita-rev1/source/reverb.cpp ****     _ambis = ambis;
+ 1193              		.loc 2 213 12 view .LVU318
+ 1194 0044 00ED020A 		vstr.32	s0, [r0, #-8]
+ 214:zita-rev1/source/reverb.cpp ****     _cntA1 = 1;
+ 1195              		.loc 2 214 5 is_stmt 1 view .LVU319
+ 223:zita-rev1/source/reverb.cpp ****     _rtlow = 3.0f;
+ 1196              		.loc 2 223 12 is_stmt 0 view .LVU320
+ 1197 0048 C0F8DC31 		str	r3, [r0, #476]	@ float
+ 224:zita-rev1/source/reverb.cpp ****     _rtmid = 2.0f;
+ 1198              		.loc 2 224 12 view .LVU321
+ 1199 004c 3C4B     		ldr	r3, .L60+12
+ 1200              		.loc 2 233 19 view .LVU322
+ 1201 004e FDEEE77A 		vcvt.s32.f32	s15, s15
+ 214:zita-rev1/source/reverb.cpp ****     _cntA1 = 1;
+ 1202              		.loc 2 214 12 view .LVU323
+ 1203 0052 00F8041C 		strb	r1, [r0, #-4]
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 30
+
+
+ 215:zita-rev1/source/reverb.cpp ****     _cntA2 = 0;
+ 1204              		.loc 2 215 5 is_stmt 1 view .LVU324
+ 216:zita-rev1/source/reverb.cpp ****     _cntB1 = 1;
+ 1205              		.loc 2 216 5 view .LVU325
+ 224:zita-rev1/source/reverb.cpp ****     _rtmid = 2.0f;
+ 1206              		.loc 2 224 12 is_stmt 0 view .LVU326
+ 1207 0056 C0F8E031 		str	r3, [r0, #480]	@ float
+ 225:zita-rev1/source/reverb.cpp ****     _fdamp = 3e3f;
+ 1208              		.loc 2 225 12 view .LVU327
+ 1209 005a 4FF08043 		mov	r3, #1073741824
+ 1210              		.loc 2 233 19 view .LVU328
+ 1211 005e 17EE901A 		vmov	r1, s15	@ int
+ 1212              	.LVL75:
+ 216:zita-rev1/source/reverb.cpp ****     _cntB1 = 1;
+ 1213              		.loc 2 216 12 view .LVU329
+ 1214 0062 C0F8CC51 		str	r5, [r0, #460]
+ 217:zita-rev1/source/reverb.cpp ****     _cntB2 = 0;
+ 1215              		.loc 2 217 5 is_stmt 1 view .LVU330
+ 218:zita-rev1/source/reverb.cpp ****     _cntC1 = 1;
+ 1216              		.loc 2 218 5 view .LVU331
+ 225:zita-rev1/source/reverb.cpp ****     _fdamp = 3e3f;
+ 1217              		.loc 2 225 12 is_stmt 0 view .LVU332
+ 1218 0066 C0F8E431 		str	r3, [r0, #484]	@ float
+ 226:zita-rev1/source/reverb.cpp ****     _opmix = 0.5f;
+ 1219              		.loc 2 226 12 view .LVU333
+ 1220 006a 364B     		ldr	r3, .L60+16
+ 218:zita-rev1/source/reverb.cpp ****     _cntC1 = 1;
+ 1221              		.loc 2 218 12 view .LVU334
+ 1222 006c C0F8D051 		str	r5, [r0, #464]
+ 219:zita-rev1/source/reverb.cpp ****     _cntC2 = 0;
+ 1223              		.loc 2 219 5 is_stmt 1 view .LVU335
+ 220:zita-rev1/source/reverb.cpp **** 
+ 1224              		.loc 2 220 5 view .LVU336
+ 226:zita-rev1/source/reverb.cpp ****     _opmix = 0.5f;
+ 1225              		.loc 2 226 12 is_stmt 0 view .LVU337
+ 1226 0070 C0F8E831 		str	r3, [r0, #488]	@ float
+ 228:zita-rev1/source/reverb.cpp **** 
+ 1227              		.loc 2 228 12 view .LVU338
+ 1228 0074 0023     		movs	r3, #0
+ 220:zita-rev1/source/reverb.cpp **** 
+ 1229              		.loc 2 220 12 view .LVU339
+ 1230 0076 C0F8D451 		str	r5, [r0, #468]
+ 222:zita-rev1/source/reverb.cpp ****     _xover = 200.0f;
+ 1231              		.loc 2 222 5 is_stmt 1 view .LVU340
+ 223:zita-rev1/source/reverb.cpp ****     _rtlow = 3.0f;
+ 1232              		.loc 2 223 5 view .LVU341
+ 224:zita-rev1/source/reverb.cpp ****     _rtmid = 2.0f;
+ 1233              		.loc 2 224 5 view .LVU342
+ 225:zita-rev1/source/reverb.cpp ****     _fdamp = 3e3f;
+ 1234              		.loc 2 225 5 view .LVU343
+ 226:zita-rev1/source/reverb.cpp ****     _opmix = 0.5f;
+ 1235              		.loc 2 226 5 view .LVU344
+ 227:zita-rev1/source/reverb.cpp ****     _rgxyz = 0.0f;
+ 1236              		.loc 2 227 5 view .LVU345
+ 228:zita-rev1/source/reverb.cpp **** 
+ 1237              		.loc 2 228 12 is_stmt 0 view .LVU346
+ 1238 007a C0F8F031 		str	r3, [r0, #496]	@ float
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 31
+
+
+ 230:zita-rev1/source/reverb.cpp ****     _g1 = _d1 = 0;
+ 1239              		.loc 2 230 15 view .LVU347
+ 1240 007e C0F8F831 		str	r3, [r0, #504]	@ float
+ 230:zita-rev1/source/reverb.cpp ****     _g1 = _d1 = 0;
+ 1241              		.loc 2 230 9 view .LVU348
+ 1242 0082 C0F8F431 		str	r3, [r0, #500]	@ float
+ 231:zita-rev1/source/reverb.cpp **** 
+ 1243              		.loc 2 231 15 view .LVU349
+ 1244 0086 C0F80032 		str	r3, [r0, #512]	@ float
+ 231:zita-rev1/source/reverb.cpp **** 
+ 1245              		.loc 2 231 9 view .LVU350
+ 1246 008a C0F8FC31 		str	r3, [r0, #508]	@ float
+ 227:zita-rev1/source/reverb.cpp ****     _rgxyz = 0.0f;
+ 1247              		.loc 2 227 12 view .LVU351
+ 1248 008e C0ED7B8A 		vstr.32	s17, [r0, #492]
+ 228:zita-rev1/source/reverb.cpp **** 
+ 1249              		.loc 2 228 5 is_stmt 1 view .LVU352
+ 230:zita-rev1/source/reverb.cpp ****     _g1 = _d1 = 0;
+ 1250              		.loc 2 230 5 view .LVU353
+ 231:zita-rev1/source/reverb.cpp **** 
+ 1251              		.loc 2 231 5 view .LVU354
+ 1252              		.loc 2 233 5 view .LVU355
+ 1253              		.loc 2 233 19 is_stmt 0 view .LVU356
+ 1254 0092 FFF7FEFF 		bl	_ZN6Vdelay4initEi
+ 1255              	.LVL76:
+ 234:zita-rev1/source/reverb.cpp ****     _vdelay1.init ((int)(0.1f * _fsamp));
+ 1256              		.loc 2 234 5 is_stmt 1 view .LVU357
+ 1257              		.loc 2 234 31 is_stmt 0 view .LVU358
+ 1258 0096 D4ED007A 		vldr.32	s15, [r4]
+ 1259 009a 2046     		mov	r0, r4
+ 1260 009c 67EE897A 		vmul.f32	s15, s15, s18
+ 1261 00a0 1830     		adds	r0, r0, #24
+ 1262              		.loc 2 234 19 view .LVU359
+ 1263 00a2 FDEEE77A 		vcvt.s32.f32	s15, s15
+ 1264 00a6 17EE901A 		vmov	r1, s15	@ int
+ 1265 00aa FFF7FEFF 		bl	_ZN6Vdelay4initEi
+ 1266              	.LVL77:
+ 235:zita-rev1/source/reverb.cpp ****     for (i = 0; i < 8; i++)
+ 1267              		.loc 2 235 5 is_stmt 1 view .LVU360
+ 1268              		.loc 2 235 19 view .LVU361
+ 1269              	.L57:
+ 236:zita-rev1/source/reverb.cpp ****     {
+ 237:zita-rev1/source/reverb.cpp **** 	k1 = (int)(floorf (_tdiff1 [i] * _fsamp + 0.5f));
+ 1270              		.loc 2 237 2 view .LVU362
+ 1271              		.loc 2 237 20 is_stmt 0 view .LVU363
+ 1272 00ae F0EE687A 		vmov.f32	s15, s17
+ 1273              		.loc 2 237 35 view .LVU364
+ 1274 00b2 94ED007A 		vldr.32	s14, [r4]
+ 1275              		.loc 2 237 31 view .LVU365
+ 1276 00b6 FBEC016A 		vldmia.32	fp!, {s13}
+ 238:zita-rev1/source/reverb.cpp **** 	k2 = (int)(floorf (_tdelay [i] * _fsamp + 0.5f));
+ 239:zita-rev1/source/reverb.cpp ****         _diff1 [i].init (k1, (i & 1) ? -0.6f : 0.6f);
+ 1277              		.loc 2 239 25 view .LVU366
+ 1278 00ba 15F0010F 		tst	r5, #1
+ 1279 00be 9FED220A 		vldr.32	s0, .L60+20
+ 1280 00c2 4846     		mov	r0, r9
+ 237:zita-rev1/source/reverb.cpp **** 	k2 = (int)(floorf (_tdelay [i] * _fsamp + 0.5f));
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 32
+
+
+ 1281              		.loc 2 237 20 view .LVU367
+ 1282 00c4 E6EE877A 		vfma.f32	s15, s13, s14
+ 238:zita-rev1/source/reverb.cpp **** 	k2 = (int)(floorf (_tdelay [i] * _fsamp + 0.5f));
+ 1283              		.loc 2 238 31 view .LVU368
+ 1284 00c8 FAEC016A 		vldmia.32	r10!, {s13}
+ 235:zita-rev1/source/reverb.cpp ****     {
+ 1285              		.loc 2 235 5 view .LVU369
+ 1286 00cc 05F10105 		add	r5, r5, #1
+ 1287              	.LVL78:
+ 235:zita-rev1/source/reverb.cpp ****     {
+ 1288              		.loc 2 235 19 view .LVU370
+ 1289 00d0 09F11009 		add	r9, r9, #16
+ 237:zita-rev1/source/reverb.cpp **** 	k2 = (int)(floorf (_tdelay [i] * _fsamp + 0.5f));
+ 1290              		.loc 2 237 20 view .LVU371
+ 1291 00d4 FBFE677A 		vrintm.f32	s15, s15
+ 237:zita-rev1/source/reverb.cpp **** 	k2 = (int)(floorf (_tdelay [i] * _fsamp + 0.5f));
+ 1292              		.loc 2 237 5 view .LVU372
+ 1293 00d8 FDEEE77A 		vcvt.s32.f32	s15, s15
+ 1294 00dc 17EE906A 		vmov	r6, s15	@ int
+ 1295              	.LVL79:
+ 238:zita-rev1/source/reverb.cpp **** 	k2 = (int)(floorf (_tdelay [i] * _fsamp + 0.5f));
+ 1296              		.loc 2 238 2 is_stmt 1 view .LVU373
+ 238:zita-rev1/source/reverb.cpp **** 	k2 = (int)(floorf (_tdelay [i] * _fsamp + 0.5f));
+ 1297              		.loc 2 238 20 is_stmt 0 view .LVU374
+ 1298 00e0 F0EE687A 		vmov.f32	s15, s17
+ 1299              		.loc 2 239 25 view .LVU375
+ 1300 00e4 3146     		mov	r1, r6
+ 238:zita-rev1/source/reverb.cpp **** 	k2 = (int)(floorf (_tdelay [i] * _fsamp + 0.5f));
+ 1301              		.loc 2 238 20 view .LVU376
+ 1302 00e6 E7EE267A 		vfma.f32	s15, s14, s13
+ 1303 00ea FBFE677A 		vrintm.f32	s15, s15
+ 238:zita-rev1/source/reverb.cpp **** 	k2 = (int)(floorf (_tdelay [i] * _fsamp + 0.5f));
+ 1304              		.loc 2 238 5 view .LVU377
+ 1305 00ee FDEEE77A 		vcvt.s32.f32	s15, s15
+ 1306 00f2 17EE907A 		vmov	r7, s15	@ int
+ 1307              	.LVL80:
+ 1308              		.loc 2 239 9 is_stmt 1 view .LVU378
+ 1309              		.loc 2 239 25 is_stmt 0 view .LVU379
+ 1310 00f6 DFED157A 		vldr.32	s15, .L60+24
+ 1311 00fa 07FE800A 		vseleq.f32	s0, s15, s0
+ 1312 00fe FFF7FEFF 		bl	_ZN5Diff14initEif
+ 1313              	.LVL81:
+ 240:zita-rev1/source/reverb.cpp ****         _delay [i].init (k2 - k1);
+ 1314              		.loc 2 240 9 is_stmt 1 view .LVU380
+ 1315              		.loc 2 240 25 is_stmt 0 view .LVU381
+ 1316 0102 4046     		mov	r0, r8
+ 1317 0104 B91B     		subs	r1, r7, r6
+ 235:zita-rev1/source/reverb.cpp ****     {
+ 1318              		.loc 2 235 19 view .LVU382
+ 1319 0106 08F10C08 		add	r8, r8, #12
+ 1320              		.loc 2 240 25 view .LVU383
+ 1321 010a FFF7FEFF 		bl	_ZN5Delay4initEi
+ 1322              	.LVL82:
+ 235:zita-rev1/source/reverb.cpp ****     {
+ 1323              		.loc 2 235 5 is_stmt 1 view .LVU384
+ 235:zita-rev1/source/reverb.cpp ****     {
+ 1324              		.loc 2 235 19 view .LVU385
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 33
+
+
+ 1325 010e 082D     		cmp	r5, #8
+ 1326 0110 CDD1     		bne	.L57
+ 241:zita-rev1/source/reverb.cpp ****     }
+ 242:zita-rev1/source/reverb.cpp **** 
+ 243:zita-rev1/source/reverb.cpp ****     _pareq1.setfsamp (fsamp);
+ 1327              		.loc 2 243 5 view .LVU386
+ 1328              		.loc 2 243 22 is_stmt 0 view .LVU387
+ 1329 0112 B0EE480A 		vmov.f32	s0, s16
+ 1330 0116 04F50370 		add	r0, r4, #524
+ 1331 011a FFF7FEFF 		bl	_ZN5Pareq8setfsampEf
+ 1332              	.LVL83:
+ 244:zita-rev1/source/reverb.cpp ****     _pareq2.setfsamp (fsamp);
+ 1333              		.loc 2 244 5 is_stmt 1 view .LVU388
+ 1334              		.loc 2 244 22 is_stmt 0 view .LVU389
+ 1335 011e B0EE480A 		vmov.f32	s0, s16
+ 1336 0122 04F51970 		add	r0, r4, #612
+ 245:zita-rev1/source/reverb.cpp **** }
+ 1337              		.loc 2 245 1 view .LVU390
+ 1338 0126 BDEC048B 		vldm	sp!, {d8-d9}
+ 1339              		.cfi_restore 82
+ 1340              		.cfi_restore 83
+ 1341              		.cfi_restore 80
+ 1342              		.cfi_restore 81
+ 1343              		.cfi_def_cfa_offset 40
+ 1344              	.LVL84:
+ 1345              		.loc 2 245 1 view .LVU391
+ 1346 012a BDE8F84F 		pop	{r3, r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 1347              		.cfi_restore 14
+ 1348              		.cfi_restore 11
+ 1349              		.cfi_restore 10
+ 1350              		.cfi_restore 9
+ 1351              		.cfi_restore 8
+ 1352              		.cfi_restore 7
+ 1353              		.cfi_restore 6
+ 1354              		.cfi_restore 5
+ 1355              		.cfi_restore 4
+ 1356              		.cfi_restore 3
+ 1357              		.cfi_def_cfa_offset 0
+ 1358              	.LVL85:
+ 244:zita-rev1/source/reverb.cpp ****     _pareq2.setfsamp (fsamp);
+ 1359              		.loc 2 244 22 view .LVU392
+ 1360 012e FFF7FEBF 		b	_ZN5Pareq8setfsampEf
+ 1361              	.LVL86:
+ 1362              	.L61:
+ 244:zita-rev1/source/reverb.cpp ****     _pareq2.setfsamp (fsamp);
+ 1363              		.loc 2 244 22 view .LVU393
+ 1364 0132 00BF     		.align	2
+ 1365              	.L60:
+ 1366 0134 0AD7233D 		.word	1025758986
+ 1367 0138 CDCCCC3D 		.word	1036831949
+ 1368 013c 00004843 		.word	1128792064
+ 1369 0140 00004040 		.word	1077936128
+ 1370 0144 00803B45 		.word	1161527296
+ 1371 0148 9A9919BF 		.word	-1088841318
+ 1372 014c 9A99193F 		.word	1058642330
+ 1373 0150 00000000 		.word	.LANCHOR0
+ 1374 0154 00000000 		.word	.LANCHOR1
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 34
+
+
+ 1375              		.cfi_endproc
+ 1376              	.LFE600:
+ 1378              		.section	.text._ZN6Reverb4finiEv,"ax",%progbits
+ 1379              		.align	1
+ 1380              		.global	_ZN6Reverb4finiEv
+ 1381              		.syntax unified
+ 1382              		.thumb
+ 1383              		.thumb_func
+ 1385              	_ZN6Reverb4finiEv:
+ 1386              	.LVL87:
+ 1387              	.LFB601:
+ 246:zita-rev1/source/reverb.cpp **** 
+ 247:zita-rev1/source/reverb.cpp **** 
+ 248:zita-rev1/source/reverb.cpp **** void Reverb::fini (void)
+ 249:zita-rev1/source/reverb.cpp **** {
+ 1388              		.loc 2 249 1 is_stmt 1 view -0
+ 1389              		.cfi_startproc
+ 1390              		@ args = 0, pretend = 0, frame = 0
+ 1391              		@ frame_needed = 0, uses_anonymous_args = 0
+ 250:zita-rev1/source/reverb.cpp ****     for (int i = 0; i < 8; i++) _delay [i].fini ();
+ 1392              		.loc 2 250 5 view .LVU395
+ 1393              	.LBB60:
+ 1394              		.loc 2 250 23 view .LVU396
+ 1395              	.LBE60:
+ 249:zita-rev1/source/reverb.cpp ****     for (int i = 0; i < 8; i++) _delay [i].fini ();
+ 1396              		.loc 2 249 1 is_stmt 0 view .LVU397
+ 1397 0000 38B5     		push	{r3, r4, r5, lr}
+ 1398              		.cfi_def_cfa_offset 16
+ 1399              		.cfi_offset 3, -16
+ 1400              		.cfi_offset 4, -12
+ 1401              		.cfi_offset 5, -8
+ 1402              		.cfi_offset 14, -4
+ 1403 0002 00F5B475 		add	r5, r0, #360
+ 1404 0006 00F5E474 		add	r4, r0, #456
+ 1405              	.LVL88:
+ 1406              	.L63:
+ 1407              	.LBB61:
+ 1408              		.loc 2 250 33 is_stmt 1 discriminator 2 view .LVU398
+ 1409              		.loc 2 250 49 is_stmt 0 discriminator 2 view .LVU399
+ 1410 000a 2846     		mov	r0, r5
+ 1411              		.loc 2 250 23 discriminator 2 view .LVU400
+ 1412 000c 0C35     		adds	r5, r5, #12
+ 1413              		.loc 2 250 49 discriminator 2 view .LVU401
+ 1414 000e FFF7FEFF 		bl	_ZN5Delay4finiEv
+ 1415              	.LVL89:
+ 1416              		.loc 2 250 5 is_stmt 1 discriminator 2 view .LVU402
+ 1417              		.loc 2 250 23 discriminator 2 view .LVU403
+ 1418 0012 A542     		cmp	r5, r4
+ 1419 0014 F9D1     		bne	.L63
+ 1420              	.LBE61:
+ 251:zita-rev1/source/reverb.cpp **** }
+ 1421              		.loc 2 251 1 is_stmt 0 view .LVU404
+ 1422 0016 38BD     		pop	{r3, r4, r5, pc}
+ 1423              		.loc 2 251 1 view .LVU405
+ 1424              		.cfi_endproc
+ 1425              	.LFE601:
+ 1427              		.section	.text._ZN6ReverbD2Ev,"ax",%progbits
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 35
+
+
+ 1428              		.align	1
+ 1429              		.global	_ZN6ReverbD2Ev
+ 1430              		.syntax unified
+ 1431              		.thumb
+ 1432              		.thumb_func
+ 1434              	_ZN6ReverbD2Ev:
+ 1435              	.LVL90:
+ 1436              	.LFB598:
+ 185:zita-rev1/source/reverb.cpp **** {
+ 1437              		.loc 2 185 1 is_stmt 1 view -0
+ 1438              		.cfi_startproc
+ 1439              		@ args = 0, pretend = 0, frame = 0
+ 1440              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1441              	.LBB62:
+ 187:zita-rev1/source/reverb.cpp **** }
+ 1442              		.loc 2 187 5 view .LVU407
+ 1443              	.LBE62:
+ 185:zita-rev1/source/reverb.cpp **** {
+ 1444              		.loc 2 185 1 is_stmt 0 view .LVU408
+ 1445 0000 70B5     		push	{r4, r5, r6, lr}
+ 1446              		.cfi_def_cfa_offset 16
+ 1447              		.cfi_offset 4, -16
+ 1448              		.cfi_offset 5, -12
+ 1449              		.cfi_offset 6, -8
+ 1450              		.cfi_offset 14, -4
+ 185:zita-rev1/source/reverb.cpp **** {
+ 1451              		.loc 2 185 1 view .LVU409
+ 1452 0002 0446     		mov	r4, r0
+ 1453              	.LBB73:
+ 187:zita-rev1/source/reverb.cpp **** }
+ 1454              		.loc 2 187 10 view .LVU410
+ 1455 0004 FFF7FEFF 		bl	_ZN6Reverb4finiEv
+ 1456              	.LVL91:
+ 185:zita-rev1/source/reverb.cpp **** {
+ 1457              		.loc 2 185 22 view .LVU411
+ 1458 0008 04F5E475 		add	r5, r4, #456
+ 1459 000c 04F51970 		add	r0, r4, #612
+ 1460 0010 04F5B476 		add	r6, r4, #360
+ 1461 0014 FFF7FEFF 		bl	_ZN5PareqD1Ev
+ 1462              	.LVL92:
+ 1463 0018 04F50370 		add	r0, r4, #524
+ 1464 001c FFF7FEFF 		bl	_ZN5PareqD1Ev
+ 1465              	.LVL93:
+ 1466              	.L67:
+ 185:zita-rev1/source/reverb.cpp **** {
+ 1467              		.loc 2 185 22 discriminator 6 view .LVU412
+ 1468 0020 B542     		cmp	r5, r6
+ 1469 0022 04D0     		beq	.L66
+ 185:zita-rev1/source/reverb.cpp **** {
+ 1470              		.loc 2 185 22 discriminator 5 view .LVU413
+ 1471 0024 0C3D     		subs	r5, r5, #12
+ 1472              	.LVL94:
+ 1473              	.LBB63:
+ 1474              	.LBI63:
+  71:zita-rev1/source/reverb.cpp **** {
+ 1475              		.loc 2 71 1 is_stmt 1 discriminator 5 view .LVU414
+ 1476              	.LBB64:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 36
+
+
+ 1477              	.LBB65:
+  73:zita-rev1/source/reverb.cpp **** }
+ 1478              		.loc 2 73 5 discriminator 5 view .LVU415
+  73:zita-rev1/source/reverb.cpp **** }
+ 1479              		.loc 2 73 10 is_stmt 0 discriminator 5 view .LVU416
+ 1480 0026 2846     		mov	r0, r5
+ 1481 0028 FFF7FEFF 		bl	_ZN5Delay4finiEv
+ 1482              	.LVL95:
+ 1483              	.LBE65:
+  74:zita-rev1/source/reverb.cpp **** 
+ 1484              		.loc 2 74 1 discriminator 5 view .LVU417
+ 1485 002c F8E7     		b	.L67
+ 1486              	.LVL96:
+ 1487              	.L66:
+  74:zita-rev1/source/reverb.cpp **** 
+ 1488              		.loc 2 74 1 discriminator 5 view .LVU418
+ 1489              	.LBE64:
+ 1490              	.LBE63:
+ 185:zita-rev1/source/reverb.cpp **** {
+ 1491              		.loc 2 185 22 discriminator 7 view .LVU419
+ 1492 002e 04F1A805 		add	r5, r4, #168
+ 1493 0032 04F12806 		add	r6, r4, #40
+ 1494              	.L69:
+ 185:zita-rev1/source/reverb.cpp **** {
+ 1495              		.loc 2 185 22 discriminator 20 view .LVU420
+ 1496 0036 B542     		cmp	r5, r6
+ 1497 0038 04D0     		beq	.L68
+ 185:zita-rev1/source/reverb.cpp **** {
+ 1498              		.loc 2 185 22 discriminator 19 view .LVU421
+ 1499 003a 103D     		subs	r5, r5, #16
+ 1500              	.LVL97:
+ 1501              	.LBB66:
+ 1502              	.LBI66:
+  37:zita-rev1/source/reverb.cpp **** {
+ 1503              		.loc 2 37 1 is_stmt 1 discriminator 19 view .LVU422
+ 1504              	.LBB67:
+ 1505              	.LBB68:
+  39:zita-rev1/source/reverb.cpp **** }
+ 1506              		.loc 2 39 5 discriminator 19 view .LVU423
+  39:zita-rev1/source/reverb.cpp **** }
+ 1507              		.loc 2 39 10 is_stmt 0 discriminator 19 view .LVU424
+ 1508 003c 2846     		mov	r0, r5
+ 1509 003e FFF7FEFF 		bl	_ZN5Diff14finiEv
+ 1510              	.LVL98:
+ 1511              	.LBE68:
+  40:zita-rev1/source/reverb.cpp **** 
+ 1512              		.loc 2 40 1 discriminator 19 view .LVU425
+ 1513 0042 F8E7     		b	.L69
+ 1514              	.LVL99:
+ 1515              	.L68:
+  40:zita-rev1/source/reverb.cpp **** 
+ 1516              		.loc 2 40 1 discriminator 19 view .LVU426
+ 1517              	.LBE67:
+ 1518              	.LBE66:
+ 1519              	.LBB69:
+ 1520              	.LBI69:
+ 104:zita-rev1/source/reverb.cpp **** {
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 37
+
+
+ 1521              		.loc 2 104 1 is_stmt 1 discriminator 21 view .LVU427
+ 1522              	.LBB70:
+ 106:zita-rev1/source/reverb.cpp **** }
+ 1523              		.loc 2 106 5 discriminator 21 view .LVU428
+ 106:zita-rev1/source/reverb.cpp **** }
+ 1524              		.loc 2 106 10 is_stmt 0 discriminator 21 view .LVU429
+ 1525 0044 04F11800 		add	r0, r4, #24
+ 1526              	.LVL100:
+ 106:zita-rev1/source/reverb.cpp **** }
+ 1527              		.loc 2 106 10 discriminator 21 view .LVU430
+ 1528 0048 FFF7FEFF 		bl	_ZN6Vdelay4finiEv
+ 1529              	.LVL101:
+ 106:zita-rev1/source/reverb.cpp **** }
+ 1530              		.loc 2 106 10 discriminator 21 view .LVU431
+ 1531              	.LBE70:
+ 1532              	.LBE69:
+ 1533              	.LBB71:
+ 1534              	.LBI71:
+ 104:zita-rev1/source/reverb.cpp **** {
+ 1535              		.loc 2 104 1 is_stmt 1 discriminator 21 view .LVU432
+ 1536              	.LBB72:
+ 106:zita-rev1/source/reverb.cpp **** }
+ 1537              		.loc 2 106 5 discriminator 21 view .LVU433
+ 106:zita-rev1/source/reverb.cpp **** }
+ 1538              		.loc 2 106 10 is_stmt 0 discriminator 21 view .LVU434
+ 1539 004c 04F10800 		add	r0, r4, #8
+ 1540              	.LVL102:
+ 106:zita-rev1/source/reverb.cpp **** }
+ 1541              		.loc 2 106 10 discriminator 21 view .LVU435
+ 1542 0050 FFF7FEFF 		bl	_ZN6Vdelay4finiEv
+ 1543              	.LVL103:
+ 106:zita-rev1/source/reverb.cpp **** }
+ 1544              		.loc 2 106 10 discriminator 21 view .LVU436
+ 1545              	.LBE72:
+ 1546              	.LBE71:
+ 1547              	.LBE73:
+ 188:zita-rev1/source/reverb.cpp **** 
+ 1548              		.loc 2 188 1 discriminator 21 view .LVU437
+ 1549 0054 2046     		mov	r0, r4
+ 1550 0056 70BD     		pop	{r4, r5, r6, pc}
+ 188:zita-rev1/source/reverb.cpp **** 
+ 1551              		.loc 2 188 1 discriminator 21 view .LVU438
+ 1552              		.cfi_endproc
+ 1553              	.LFE598:
+ 1555              		.global	_ZN6ReverbD1Ev
+ 1556              		.thumb_set _ZN6ReverbD1Ev,_ZN6ReverbD2Ev
+ 1557              		.section	.text._ZN6Reverb7prepareEi,"ax",%progbits
+ 1558              		.align	1
+ 1559              		.global	_ZN6Reverb7prepareEi
+ 1560              		.syntax unified
+ 1561              		.thumb
+ 1562              		.thumb_func
+ 1564              	_ZN6Reverb7prepareEi:
+ 1565              	.LVL104:
+ 1566              	.LFB602:
+ 252:zita-rev1/source/reverb.cpp **** 
+ 253:zita-rev1/source/reverb.cpp **** 
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 38
+
+
+ 254:zita-rev1/source/reverb.cpp **** void Reverb::prepare (int nfram)
+ 255:zita-rev1/source/reverb.cpp **** {
+ 1567              		.loc 2 255 1 is_stmt 1 view -0
+ 1568              		.cfi_startproc
+ 1569              		@ args = 0, pretend = 0, frame = 8
+ 1570              		@ frame_needed = 0, uses_anonymous_args = 0
+ 256:zita-rev1/source/reverb.cpp ****     int    a, b, c, i, k;
+ 1571              		.loc 2 256 5 view .LVU440
+ 257:zita-rev1/source/reverb.cpp ****     float  t0, t1, wlo, chi;
+ 1572              		.loc 2 257 5 view .LVU441
+ 258:zita-rev1/source/reverb.cpp **** 
+ 259:zita-rev1/source/reverb.cpp ****     a = _cntA1;
+ 1573              		.loc 2 259 5 view .LVU442
+ 260:zita-rev1/source/reverb.cpp ****     b = _cntB1;
+ 261:zita-rev1/source/reverb.cpp ****     c = _cntC1;
+ 262:zita-rev1/source/reverb.cpp ****     _d0 = _d1 = 0;
+ 1574              		.loc 2 262 15 is_stmt 0 view .LVU443
+ 1575 0000 0023     		movs	r3, #0
+ 259:zita-rev1/source/reverb.cpp ****     b = _cntB1;
+ 1576              		.loc 2 259 7 view .LVU444
+ 1577 0002 D0F8C821 		ldr	r2, [r0, #456]
+ 1578              	.LVL105:
+ 260:zita-rev1/source/reverb.cpp ****     b = _cntB1;
+ 1579              		.loc 2 260 5 is_stmt 1 view .LVU445
+ 255:zita-rev1/source/reverb.cpp ****     int    a, b, c, i, k;
+ 1580              		.loc 2 255 1 is_stmt 0 view .LVU446
+ 1581 0006 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+ 1582              		.cfi_def_cfa_offset 32
+ 1583              		.cfi_offset 4, -32
+ 1584              		.cfi_offset 5, -28
+ 1585              		.cfi_offset 6, -24
+ 1586              		.cfi_offset 7, -20
+ 1587              		.cfi_offset 8, -16
+ 1588              		.cfi_offset 9, -12
+ 1589              		.cfi_offset 10, -8
+ 1590              		.cfi_offset 14, -4
+ 1591 000a 2DED048B 		vpush.64	{d8, d9}
+ 1592              		.cfi_def_cfa_offset 48
+ 1593              		.cfi_offset 80, -48
+ 1594              		.cfi_offset 81, -44
+ 1595              		.cfi_offset 82, -40
+ 1596              		.cfi_offset 83, -36
+ 1597              		.loc 2 262 15 view .LVU447
+ 1598 000e C0F80832 		str	r3, [r0, #520]	@ float
+ 255:zita-rev1/source/reverb.cpp ****     int    a, b, c, i, k;
+ 1599              		.loc 2 255 1 view .LVU448
+ 1600 0012 82B0     		sub	sp, sp, #8
+ 1601              		.cfi_def_cfa_offset 56
+ 1602              		.loc 2 262 9 view .LVU449
+ 1603 0014 C0F80032 		str	r3, [r0, #512]	@ float
+ 255:zita-rev1/source/reverb.cpp ****     int    a, b, c, i, k;
+ 1604              		.loc 2 255 1 view .LVU450
+ 1605 0018 0446     		mov	r4, r0
+ 263:zita-rev1/source/reverb.cpp **** 
+ 264:zita-rev1/source/reverb.cpp ****     if (a != _cntA2)
+ 1606              		.loc 2 264 5 view .LVU451
+ 1607 001a D0F8D431 		ldr	r3, [r0, #468]
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 39
+
+
+ 255:zita-rev1/source/reverb.cpp ****     int    a, b, c, i, k;
+ 1608              		.loc 2 255 1 view .LVU452
+ 1609 001e 0D46     		mov	r5, r1
+ 260:zita-rev1/source/reverb.cpp ****     c = _cntC1;
+ 1610              		.loc 2 260 7 view .LVU453
+ 1611 0020 D0F8CC81 		ldr	r8, [r0, #460]
+ 1612              	.LVL106:
+ 261:zita-rev1/source/reverb.cpp ****     _d0 = _d1 = 0;
+ 1613              		.loc 2 261 5 is_stmt 1 view .LVU454
+ 1614              		.loc 2 264 5 is_stmt 0 view .LVU455
+ 1615 0024 9342     		cmp	r3, r2
+ 261:zita-rev1/source/reverb.cpp ****     _d0 = _d1 = 0;
+ 1616              		.loc 2 261 7 view .LVU456
+ 1617 0026 D0F8D071 		ldr	r7, [r0, #464]
+ 1618              	.LVL107:
+ 262:zita-rev1/source/reverb.cpp **** 
+ 1619              		.loc 2 262 5 is_stmt 1 view .LVU457
+ 1620              		.loc 2 264 5 view .LVU458
+ 1621 002a 1DD0     		beq	.L71
+ 265:zita-rev1/source/reverb.cpp ****     {
+ 266:zita-rev1/source/reverb.cpp ****         k = (int)(floorf ((_ipdel - 0.020f) * _fsamp + 0.5f));
+ 1622              		.loc 2 266 9 view .LVU459
+ 1623              		.loc 2 266 35 is_stmt 0 view .LVU460
+ 1624 002c 90ED787A 		vldr.32	s14, [r0, #480]
+ 1625              		.loc 2 266 26 view .LVU461
+ 1626 0030 0830     		adds	r0, r0, #8
+ 1627              	.LVL108:
+ 1628              		.loc 2 266 35 view .LVU462
+ 1629 0032 DFED597A 		vldr.32	s15, .L80
+ 1630              		.loc 2 266 26 view .LVU463
+ 1631 0036 D4ED006A 		vldr.32	s13, [r4]
+ 1632              		.loc 2 266 35 view .LVU464
+ 1633 003a 37EE677A 		vsub.f32	s14, s14, s15
+ 1634              		.loc 2 266 26 view .LVU465
+ 1635 003e F6EE007A 		vmov.f32	s15, #5.0e-1
+ 1636 0042 E7EE267A 		vfma.f32	s15, s14, s13
+ 1637 0046 FBFE677A 		vrintm.f32	s15, s15
+ 1638              		.loc 2 266 11 view .LVU466
+ 1639 004a FDEEE77A 		vcvt.s32.f32	s15, s15
+ 1640 004e 17EE901A 		vmov	r1, s15	@ int
+ 1641              	.LVL109:
+ 267:zita-rev1/source/reverb.cpp ****         _vdelay0.set_delay (k);
+ 1642              		.loc 2 267 9 is_stmt 1 view .LVU467
+ 1643              		.loc 2 267 28 is_stmt 0 view .LVU468
+ 1644 0052 CDED017A 		vstr.32	s15, [sp, #4]	@ int
+ 1645 0056 FFF7FEFF 		bl	_ZN6Vdelay9set_delayEi
+ 1646              	.LVL110:
+ 268:zita-rev1/source/reverb.cpp ****         _vdelay1.set_delay (k);
+ 1647              		.loc 2 268 9 is_stmt 1 view .LVU469
+ 1648              		.loc 2 268 28 is_stmt 0 view .LVU470
+ 1649 005a 0199     		ldr	r1, [sp, #4]
+ 1650 005c 04F11800 		add	r0, r4, #24
+ 1651 0060 FFF7FEFF 		bl	_ZN6Vdelay9set_delayEi
+ 1652              	.LVL111:
+ 269:zita-rev1/source/reverb.cpp ****         _cntA2 = a;
+ 1653              		.loc 2 269 9 is_stmt 1 view .LVU471
+ 1654              		.loc 2 269 16 is_stmt 0 view .LVU472
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 40
+
+
+ 1655 0064 C4F8D421 		str	r2, [r4, #468]
+ 1656              	.LVL112:
+ 1657              	.L71:
+ 270:zita-rev1/source/reverb.cpp ****     }
+ 271:zita-rev1/source/reverb.cpp **** 
+ 272:zita-rev1/source/reverb.cpp ****     if (b != _cntB2)
+ 1658              		.loc 2 272 5 is_stmt 1 view .LVU473
+ 1659 0068 D4F8D831 		ldr	r3, [r4, #472]
+ 1660 006c 4345     		cmp	r3, r8
+ 1661 006e 3AD0     		beq	.L72
+ 273:zita-rev1/source/reverb.cpp ****     {
+ 274:zita-rev1/source/reverb.cpp ****          wlo = 6.2832f * _xover / _fsamp;
+ 1662              		.loc 2 274 10 view .LVU474
+ 1663              		.loc 2 274 24 is_stmt 0 view .LVU475
+ 1664 0070 94ED797A 		vldr.32	s14, [r4, #484]
+ 1665 0074 DFED496A 		vldr.32	s13, .L80+4
+ 1666              		.loc 2 274 35 view .LVU476
+ 1667 0078 94ED000A 		vldr.32	s0, [r4]
+ 1668              		.loc 2 274 24 view .LVU477
+ 1669 007c 27EE267A 		vmul.f32	s14, s14, s13
+ 275:zita-rev1/source/reverb.cpp **** 	 if (_fdamp > 0.49f * _fsamp) chi = 2;
+ 1670              		.loc 2 275 7 view .LVU478
+ 1671 0080 D4ED7C7A 		vldr.32	s15, [r4, #496]
+ 274:zita-rev1/source/reverb.cpp **** 	 if (_fdamp > 0.49f * _fsamp) chi = 2;
+ 1672              		.loc 2 274 14 view .LVU479
+ 1673 0084 C7EE008A 		vdiv.f32	s17, s14, s0
+ 1674              	.LVL113:
+ 1675              		.loc 2 275 3 is_stmt 1 view .LVU480
+ 1676              		.loc 2 275 22 is_stmt 0 view .LVU481
+ 1677 0088 9FED457A 		vldr.32	s14, .L80+8
+ 1678 008c 20EE077A 		vmul.f32	s14, s0, s14
+ 1679              		.loc 2 275 3 view .LVU482
+ 1680 0090 F4EEC77A 		vcmpe.f32	s15, s14
+ 1681 0094 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 1682 0098 64DC     		bgt	.L78
+ 276:zita-rev1/source/reverb.cpp **** 	 else chi = 1 - cosf (6.2832f * _fdamp / _fsamp);
+ 1683              		.loc 2 276 8 is_stmt 1 view .LVU483
+ 1684              		.loc 2 276 32 is_stmt 0 view .LVU484
+ 1685 009a 67EEA67A 		vmul.f32	s15, s15, s13
+ 1686              		.loc 2 276 23 view .LVU485
+ 1687 009e 87EE800A 		vdiv.f32	s0, s15, s0
+ 1688 00a2 FFF7FEFF 		bl	cosf
+ 1689              	.LVL114:
+ 1690              		.loc 2 276 12 view .LVU486
+ 1691 00a6 F7EE002A 		vmov.f32	s5, #1.0e+0
+ 1692 00aa 32EEC08A 		vsub.f32	s16, s5, s0
+ 1693              	.LVL115:
+ 1694              	.L73:
+ 277:zita-rev1/source/reverb.cpp ****          for (i = 0; i < 8; i++)
+ 1695              		.loc 2 277 10 is_stmt 1 view .LVU487
+ 1696              		.loc 2 277 24 view .LVU488
+ 1697 00ae DFF8FC90 		ldr	r9, .L80+20
+ 1698 00b2 04F1A806 		add	r6, r4, #168
+ 1699 00b6 04F5B47A 		add	r10, r4, #360
+ 1700              	.LVL116:
+ 1701              	.L74:
+ 278:zita-rev1/source/reverb.cpp **** 	 {
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 41
+
+
+ 279:zita-rev1/source/reverb.cpp ****              _filt1 [i].set_params (_tdelay [i], _rtmid, _rtlow, wlo, 0.5f * _rtmid, chi);
+ 1702              		.loc 2 279 14 discriminator 2 view .LVU489
+ 1703              		.loc 2 279 36 is_stmt 0 discriminator 2 view .LVU490
+ 1704 00ba B6EE002A 		vmov.f32	s4, #5.0e-1
+ 1705 00be D4ED7B0A 		vldr.32	s1, [r4, #492]
+ 1706 00c2 3046     		mov	r0, r6
+ 277:zita-rev1/source/reverb.cpp ****          for (i = 0; i < 8; i++)
+ 1707              		.loc 2 277 24 discriminator 2 view .LVU491
+ 1708 00c4 1836     		adds	r6, r6, #24
+ 1709              		.loc 2 279 36 discriminator 2 view .LVU492
+ 1710 00c6 F0EE482A 		vmov.f32	s5, s16
+ 1711 00ca 94ED7A1A 		vldr.32	s2, [r4, #488]
+ 1712 00ce 20EE822A 		vmul.f32	s4, s1, s4
+ 1713 00d2 B9EC010A 		vldmia.32	r9!, {s0}
+ 1714 00d6 F0EE681A 		vmov.f32	s3, s17
+ 1715 00da FFF7FEFF 		bl	_ZN5Filt110set_paramsEffffff
+ 1716              	.LVL117:
+ 277:zita-rev1/source/reverb.cpp ****          for (i = 0; i < 8; i++)
+ 1717              		.loc 2 277 10 is_stmt 1 discriminator 2 view .LVU493
+ 277:zita-rev1/source/reverb.cpp ****          for (i = 0; i < 8; i++)
+ 1718              		.loc 2 277 24 discriminator 2 view .LVU494
+ 1719 00de B245     		cmp	r10, r6
+ 1720 00e0 EBD1     		bne	.L74
+ 280:zita-rev1/source/reverb.cpp **** 	 }
+ 281:zita-rev1/source/reverb.cpp ****          _cntB2 = b;
+ 1721              		.loc 2 281 10 view .LVU495
+ 1722              		.loc 2 281 17 is_stmt 0 view .LVU496
+ 1723 00e2 C4F8D881 		str	r8, [r4, #472]
+ 1724              	.LVL118:
+ 1725              	.L72:
+ 282:zita-rev1/source/reverb.cpp ****     }
+ 283:zita-rev1/source/reverb.cpp **** 
+ 284:zita-rev1/source/reverb.cpp ****     if (c != _cntC2)
+ 1726              		.loc 2 284 5 is_stmt 1 view .LVU497
+ 1727 00e6 D4F8DC31 		ldr	r3, [r4, #476]
+ 1728 00ea BB42     		cmp	r3, r7
+ 1729 00ec 2BD0     		beq	.L75
+ 285:zita-rev1/source/reverb.cpp ****     {
+ 286:zita-rev1/source/reverb.cpp **** 	if (_ambis)
+ 1730              		.loc 2 286 2 view .LVU498
+ 1731 00ee 2379     		ldrb	r3, [r4, #4]	@ zero_extendqisi2
+ 1732 00f0 F7EE008A 		vmov.f32	s17, #1.0e+0
+ 287:zita-rev1/source/reverb.cpp **** 	{
+ 288:zita-rev1/source/reverb.cpp **** 	    t0 = 1.0f / sqrtf (_rtmid);
+ 1733              		.loc 2 288 24 is_stmt 0 view .LVU499
+ 1734 00f4 94ED7B0A 		vldr.32	s0, [r4, #492]
+ 286:zita-rev1/source/reverb.cpp **** 	{
+ 1735              		.loc 2 286 2 view .LVU500
+ 1736 00f8 BBB3     		cbz	r3, .L76
+ 1737              		.loc 2 288 6 is_stmt 1 view .LVU501
+ 1738              		.loc 2 288 24 is_stmt 0 view .LVU502
+ 1739 00fa FFF7FEFF 		bl	sqrtf
+ 1740              	.LVL119:
+ 1741              		.loc 2 288 9 view .LVU503
+ 1742 00fe 88EE808A 		vdiv.f32	s16, s17, s0
+ 1743              	.LVL120:
+ 289:zita-rev1/source/reverb.cpp **** 	    t1 = t0 * powf (10.0f, 0.05f * _rgxyz);
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 42
+
+
+ 1744              		.loc 2 289 6 is_stmt 1 view .LVU504
+ 1745              		.loc 2 289 21 is_stmt 0 view .LVU505
+ 1746 0102 DFED287A 		vldr.32	s15, .L80+12
+ 1747 0106 D4ED7E0A 		vldr.32	s1, [r4, #504]
+ 1748 010a B2EE040A 		vmov.f32	s0, #1.0e+1
+ 1749 010e 60EEA70A 		vmul.f32	s1, s1, s15
+ 1750 0112 FFF7FEFF 		bl	powf
+ 1751              	.LVL121:
+ 1752              		.loc 2 289 9 view .LVU506
+ 1753 0116 60EE087A 		vmul.f32	s15, s0, s16
+ 1754              	.LVL122:
+ 1755              	.L77:
+ 290:zita-rev1/source/reverb.cpp **** 	}
+ 291:zita-rev1/source/reverb.cpp **** 	else
+ 292:zita-rev1/source/reverb.cpp **** 	{
+ 293:zita-rev1/source/reverb.cpp **** 	    t0 = (1 - _opmix) * (1 + _opmix);
+ 294:zita-rev1/source/reverb.cpp **** 	    t1 = 0.7f * _opmix * (2 - _opmix) / sqrtf (_rtmid);
+ 295:zita-rev1/source/reverb.cpp **** 	}
+ 296:zita-rev1/source/reverb.cpp ****         _d0 = (t0 - _g0) / nfram;
+ 1756              		.loc 2 296 9 is_stmt 1 view .LVU507
+ 1757              		.loc 2 296 19 is_stmt 0 view .LVU508
+ 1758 011a 94ED7F7A 		vldr.32	s14, [r4, #508]
+ 297:zita-rev1/source/reverb.cpp ****         _d1 = (t1 - _g1) / nfram;
+ 1759              		.loc 2 297 19 view .LVU509
+ 1760 011e 94ED810A 		vldr.32	s0, [r4, #516]
+ 296:zita-rev1/source/reverb.cpp ****         _d1 = (t1 - _g1) / nfram;
+ 1761              		.loc 2 296 19 view .LVU510
+ 1762 0122 38EE478A 		vsub.f32	s16, s16, s14
+ 1763              	.LVL123:
+ 296:zita-rev1/source/reverb.cpp ****         _d1 = (t1 - _g1) / nfram;
+ 1764              		.loc 2 296 26 view .LVU511
+ 1765 0126 07EE105A 		vmov	s14, r5	@ int
+ 1766              		.loc 2 297 19 view .LVU512
+ 1767 012a 77EEC07A 		vsub.f32	s15, s15, s0
+ 1768              	.LVL124:
+ 298:zita-rev1/source/reverb.cpp ****         _cntC2 = c;
+ 1769              		.loc 2 298 16 view .LVU513
+ 1770 012e C4F8DC71 		str	r7, [r4, #476]
+ 296:zita-rev1/source/reverb.cpp ****         _d1 = (t1 - _g1) / nfram;
+ 1771              		.loc 2 296 26 view .LVU514
+ 1772 0132 B8EEC77A 		vcvt.f32.s32	s14, s14
+ 1773 0136 C8EE076A 		vdiv.f32	s13, s16, s14
+ 296:zita-rev1/source/reverb.cpp ****         _d1 = (t1 - _g1) / nfram;
+ 1774              		.loc 2 296 13 view .LVU515
+ 1775 013a C4ED806A 		vstr.32	s13, [r4, #512]
+ 297:zita-rev1/source/reverb.cpp ****         _d1 = (t1 - _g1) / nfram;
+ 1776              		.loc 2 297 9 is_stmt 1 view .LVU516
+ 297:zita-rev1/source/reverb.cpp ****         _d1 = (t1 - _g1) / nfram;
+ 1777              		.loc 2 297 26 is_stmt 0 view .LVU517
+ 1778 013e C7EE876A 		vdiv.f32	s13, s15, s14
+ 297:zita-rev1/source/reverb.cpp ****         _d1 = (t1 - _g1) / nfram;
+ 1779              		.loc 2 297 13 view .LVU518
+ 1780 0142 C4ED826A 		vstr.32	s13, [r4, #520]
+ 1781              		.loc 2 298 9 is_stmt 1 view .LVU519
+ 1782              	.L75:
+ 299:zita-rev1/source/reverb.cpp ****     }
+ 300:zita-rev1/source/reverb.cpp **** 
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 43
+
+
+ 301:zita-rev1/source/reverb.cpp ****     _pareq1.prepare (nfram);
+ 1783              		.loc 2 301 5 view .LVU520
+ 1784              		.loc 2 301 21 is_stmt 0 view .LVU521
+ 1785 0146 2946     		mov	r1, r5
+ 1786 0148 04F50370 		add	r0, r4, #524
+ 1787 014c FFF7FEFF 		bl	_ZN5Pareq7prepareEi
+ 1788              	.LVL125:
+ 302:zita-rev1/source/reverb.cpp ****     _pareq2.prepare (nfram);
+ 1789              		.loc 2 302 5 is_stmt 1 view .LVU522
+ 1790              		.loc 2 302 21 is_stmt 0 view .LVU523
+ 1791 0150 2946     		mov	r1, r5
+ 1792 0152 04F51970 		add	r0, r4, #612
+ 303:zita-rev1/source/reverb.cpp **** }
+ 1793              		.loc 2 303 1 view .LVU524
+ 1794 0156 02B0     		add	sp, sp, #8
+ 1795              		.cfi_remember_state
+ 1796              		.cfi_def_cfa_offset 48
+ 1797              		@ sp needed
+ 1798 0158 BDEC048B 		vldm	sp!, {d8-d9}
+ 1799              		.cfi_restore 82
+ 1800              		.cfi_restore 83
+ 1801              		.cfi_restore 80
+ 1802              		.cfi_restore 81
+ 1803              		.cfi_def_cfa_offset 32
+ 1804 015c BDE8F047 		pop	{r4, r5, r6, r7, r8, r9, r10, lr}
+ 1805              		.cfi_restore 14
+ 1806              		.cfi_restore 10
+ 1807              		.cfi_restore 9
+ 1808              		.cfi_restore 8
+ 1809              		.cfi_restore 7
+ 1810              		.cfi_restore 6
+ 1811              		.cfi_restore 5
+ 1812              		.cfi_restore 4
+ 1813              		.cfi_def_cfa_offset 0
+ 1814              	.LVL126:
+ 302:zita-rev1/source/reverb.cpp ****     _pareq2.prepare (nfram);
+ 1815              		.loc 2 302 21 view .LVU525
+ 1816 0160 FFF7FEBF 		b	_ZN5Pareq7prepareEi
+ 1817              	.LVL127:
+ 1818              	.L78:
+ 1819              		.cfi_restore_state
+ 275:zita-rev1/source/reverb.cpp **** 	 else chi = 1 - cosf (6.2832f * _fdamp / _fsamp);
+ 1820              		.loc 2 275 36 view .LVU526
+ 1821 0164 B0EE008A 		vmov.f32	s16, #2.0e+0
+ 1822 0168 A1E7     		b	.L73
+ 1823              	.LVL128:
+ 1824              	.L76:
+ 293:zita-rev1/source/reverb.cpp **** 	    t1 = 0.7f * _opmix * (2 - _opmix) / sqrtf (_rtmid);
+ 1825              		.loc 2 293 6 is_stmt 1 view .LVU527
+ 293:zita-rev1/source/reverb.cpp **** 	    t1 = 0.7f * _opmix * (2 - _opmix) / sqrtf (_rtmid);
+ 1826              		.loc 2 293 16 is_stmt 0 view .LVU528
+ 1827 016a 94ED7D9A 		vldr.32	s18, [r4, #500]
+ 294:zita-rev1/source/reverb.cpp **** 	}
+ 1828              		.loc 2 294 48 view .LVU529
+ 1829 016e FFF7FEFF 		bl	sqrtf
+ 1830              	.LVL129:
+ 294:zita-rev1/source/reverb.cpp **** 	}
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 44
+
+
+ 1831              		.loc 2 294 30 view .LVU530
+ 1832 0172 F0EE007A 		vmov.f32	s15, #2.0e+0
+ 294:zita-rev1/source/reverb.cpp **** 	}
+ 1833              		.loc 2 294 16 view .LVU531
+ 1834 0176 9FED0C7A 		vldr.32	s14, .L80+16
+ 293:zita-rev1/source/reverb.cpp **** 	    t1 = 0.7f * _opmix * (2 - _opmix) / sqrtf (_rtmid);
+ 1835              		.loc 2 293 14 view .LVU532
+ 1836 017a 38EEC98A 		vsub.f32	s16, s17, s18
+ 294:zita-rev1/source/reverb.cpp **** 	}
+ 1837              		.loc 2 294 16 view .LVU533
+ 1838 017e 29EE077A 		vmul.f32	s14, s18, s14
+ 293:zita-rev1/source/reverb.cpp **** 	    t1 = 0.7f * _opmix * (2 - _opmix) / sqrtf (_rtmid);
+ 1839              		.loc 2 293 29 view .LVU534
+ 1840 0182 79EE288A 		vadd.f32	s17, s18, s17
+ 294:zita-rev1/source/reverb.cpp **** 	}
+ 1841              		.loc 2 294 30 view .LVU535
+ 1842 0186 37EEC99A 		vsub.f32	s18, s15, s18
+ 293:zita-rev1/source/reverb.cpp **** 	    t1 = 0.7f * _opmix * (2 - _opmix) / sqrtf (_rtmid);
+ 1843              		.loc 2 293 9 view .LVU536
+ 1844 018a 28EE288A 		vmul.f32	s16, s16, s17
+ 1845              	.LVL130:
+ 294:zita-rev1/source/reverb.cpp **** 	}
+ 1846              		.loc 2 294 6 is_stmt 1 view .LVU537
+ 294:zita-rev1/source/reverb.cpp **** 	}
+ 1847              		.loc 2 294 25 is_stmt 0 view .LVU538
+ 1848 018e 27EE097A 		vmul.f32	s14, s14, s18
+ 294:zita-rev1/source/reverb.cpp **** 	}
+ 1849              		.loc 2 294 9 view .LVU539
+ 1850 0192 C7EE007A 		vdiv.f32	s15, s14, s0
+ 1851              	.LVL131:
+ 294:zita-rev1/source/reverb.cpp **** 	}
+ 1852              		.loc 2 294 9 view .LVU540
+ 1853 0196 C0E7     		b	.L77
+ 1854              	.L81:
+ 1855              		.align	2
+ 1856              	.L80:
+ 1857 0198 0AD7A33C 		.word	1017370378
+ 1858 019c F90FC940 		.word	1086918649
+ 1859 01a0 48E1FA3E 		.word	1056629064
+ 1860 01a4 CDCC4C3D 		.word	1028443341
+ 1861 01a8 3333333F 		.word	1060320051
+ 1862 01ac 00000000 		.word	.LANCHOR1
+ 1863              		.cfi_endproc
+ 1864              	.LFE602:
+ 1866              		.section	.text._ZN6Reverb7processEiPPfS1_,"ax",%progbits
+ 1867              		.align	1
+ 1868              		.global	_ZN6Reverb7processEiPPfS1_
+ 1869              		.syntax unified
+ 1870              		.thumb
+ 1871              		.thumb_func
+ 1873              	_ZN6Reverb7processEiPPfS1_:
+ 1874              	.LVL132:
+ 1875              	.LFB603:
+ 304:zita-rev1/source/reverb.cpp **** 
+ 305:zita-rev1/source/reverb.cpp **** 
+ 306:zita-rev1/source/reverb.cpp **** void Reverb::process (int nfram, float *inp [], float *out [])
+ 307:zita-rev1/source/reverb.cpp **** {	
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 45
+
+
+ 1876              		.loc 2 307 1 is_stmt 1 view -0
+ 1877              		.cfi_startproc
+ 1878              		@ args = 0, pretend = 0, frame = 40
+ 1879              		@ frame_needed = 0, uses_anonymous_args = 0
+ 308:zita-rev1/source/reverb.cpp ****     int   i, n;
+ 1880              		.loc 2 308 5 view .LVU542
+ 309:zita-rev1/source/reverb.cpp ****     float *p0, *p1;
+ 1881              		.loc 2 309 5 view .LVU543
+ 310:zita-rev1/source/reverb.cpp ****     float *q0, *q1, *q2, *q3;
+ 1882              		.loc 2 310 5 view .LVU544
+ 311:zita-rev1/source/reverb.cpp ****     float t, g, x0, x1, x2, x3, x4, x5, x6, x7;
+ 1883              		.loc 2 311 5 view .LVU545
+ 312:zita-rev1/source/reverb.cpp **** 
+ 313:zita-rev1/source/reverb.cpp ****     g = sqrtf (0.125f);
+ 1884              		.loc 2 313 5 view .LVU546
+ 314:zita-rev1/source/reverb.cpp **** 
+ 315:zita-rev1/source/reverb.cpp ****     p0 = inp [0];
+ 1885              		.loc 2 315 5 view .LVU547
+ 316:zita-rev1/source/reverb.cpp ****     p1 = inp [1];
+ 1886              		.loc 2 316 5 view .LVU548
+ 317:zita-rev1/source/reverb.cpp ****     q0 = out [0];
+ 1887              		.loc 2 317 5 view .LVU549
+ 318:zita-rev1/source/reverb.cpp ****     q1 = out [1];
+ 1888              		.loc 2 318 5 view .LVU550
+ 319:zita-rev1/source/reverb.cpp ****     q2 = out [2];
+ 1889              		.loc 2 319 5 view .LVU551
+ 320:zita-rev1/source/reverb.cpp ****     q3 = out [3];
+ 1890              		.loc 2 320 5 view .LVU552
+ 321:zita-rev1/source/reverb.cpp **** 
+ 322:zita-rev1/source/reverb.cpp ****     for (i = 0; i < nfram; i++)
+ 1891              		.loc 2 322 5 view .LVU553
+ 307:zita-rev1/source/reverb.cpp ****     int   i, n;
+ 1892              		.loc 2 307 1 is_stmt 0 view .LVU554
+ 1893 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 1894              		.cfi_def_cfa_offset 36
+ 1895              		.cfi_offset 4, -36
+ 1896              		.cfi_offset 5, -32
+ 1897              		.cfi_offset 6, -28
+ 1898              		.cfi_offset 7, -24
+ 1899              		.cfi_offset 8, -20
+ 1900              		.cfi_offset 9, -16
+ 1901              		.cfi_offset 10, -12
+ 1902              		.cfi_offset 11, -8
+ 1903              		.cfi_offset 14, -4
+ 1904 0004 D3E900A9 		ldrd	r10, r9, [r3]
+ 1905 0008 2DED0E8B 		vpush.64	{d8, d9, d10, d11, d12, d13, d14}
+ 1906              		.cfi_def_cfa_offset 92
+ 1907              		.cfi_offset 80, -92
+ 1908              		.cfi_offset 81, -88
+ 1909              		.cfi_offset 82, -84
+ 1910              		.cfi_offset 83, -80
+ 1911              		.cfi_offset 84, -76
+ 1912              		.cfi_offset 85, -72
+ 1913              		.cfi_offset 86, -68
+ 1914              		.cfi_offset 87, -64
+ 1915              		.cfi_offset 88, -60
+ 1916              		.cfi_offset 89, -56
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 46
+
+
+ 1917              		.cfi_offset 90, -52
+ 1918              		.cfi_offset 91, -48
+ 1919              		.cfi_offset 92, -44
+ 1920              		.cfi_offset 93, -40
+ 1921 000c 1D46     		mov	r5, r3
+ 1922 000e 8BB0     		sub	sp, sp, #44
+ 1923              		.cfi_def_cfa_offset 136
+ 1924 0010 9B68     		ldr	r3, [r3, #8]
+ 1925              	.LVL133:
+ 307:zita-rev1/source/reverb.cpp ****     int   i, n;
+ 1926              		.loc 2 307 1 view .LVU555
+ 1927 0012 0E46     		mov	r6, r1
+ 1928 0014 0446     		mov	r4, r0
+ 1929              		.loc 2 322 12 view .LVU556
+ 1930 0016 0021     		movs	r1, #0
+ 1931              	.LVL134:
+ 1932              		.loc 2 322 12 view .LVU557
+ 1933 0018 0393     		str	r3, [sp, #12]
+ 1934 001a EB68     		ldr	r3, [r5, #12]
+ 1935 001c 0191     		str	r1, [sp, #4]
+ 1936 001e 0493     		str	r3, [sp, #16]
+ 1937 0020 1368     		ldr	r3, [r2]
+ 1938 0022 0093     		str	r3, [sp]
+ 1939 0024 5368     		ldr	r3, [r2, #4]
+ 320:zita-rev1/source/reverb.cpp ****     q3 = out [3];
+ 1940              		.loc 2 320 8 view .LVU558
+ 1941 0026 5246     		mov	r2, r10
+ 1942              	.LVL135:
+ 320:zita-rev1/source/reverb.cpp ****     q3 = out [3];
+ 1943              		.loc 2 320 8 view .LVU559
+ 1944 0028 0293     		str	r3, [sp, #8]
+ 1945 002a 0693     		str	r3, [sp, #24]
+ 1946 002c 009B     		ldr	r3, [sp]
+ 1947 002e 0593     		str	r3, [sp, #20]
+ 1948 0030 4B46     		mov	r3, r9
+ 1949              	.LVL136:
+ 1950              	.L86:
+ 320:zita-rev1/source/reverb.cpp ****     q3 = out [3];
+ 1951              		.loc 2 320 8 view .LVU560
+ 1952 0032 CDE90823 		strd	r2, r3, [sp, #32]
+ 1953              	.LVL137:
+ 1954              		.loc 2 322 19 is_stmt 1 discriminator 1 view .LVU561
+ 1955 0036 019B     		ldr	r3, [sp, #4]
+ 1956 0038 B342     		cmp	r3, r6
+ 1957 003a 80F26381 		bge	.L83
+ 323:zita-rev1/source/reverb.cpp ****     {
+ 324:zita-rev1/source/reverb.cpp **** 	_vdelay0.write (p0 [i]);
+ 1958              		.loc 2 324 2 view .LVU562
+ 1959              		.loc 2 324 17 is_stmt 0 view .LVU563
+ 1960 003e 059B     		ldr	r3, [sp, #20]
+ 1961 0040 04F10808 		add	r8, r4, #8
+ 325:zita-rev1/source/reverb.cpp **** 	_vdelay1.write (p1 [i]);
+ 1962              		.loc 2 325 17 view .LVU564
+ 1963 0044 04F11807 		add	r7, r4, #24
+ 326:zita-rev1/source/reverb.cpp **** 
+ 327:zita-rev1/source/reverb.cpp ****  	t = 0.3f * _vdelay0.read ();
+ 328:zita-rev1/source/reverb.cpp **** 	x0 = _diff1 [0].process (_delay [0].read () + t);
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 47
+
+
+ 1964              		.loc 2 328 26 view .LVU565
+ 1965 0048 DFEDCFAA 		vldr.32	s21, .L100
+ 324:zita-rev1/source/reverb.cpp **** 	_vdelay1.write (p1 [i]);
+ 1966              		.loc 2 324 17 view .LVU566
+ 1967 004c B3EC010A 		vldmia.32	r3!, {s0}
+ 1968 0050 4046     		mov	r0, r8
+ 329:zita-rev1/source/reverb.cpp **** 	x1 = _diff1 [1].process (_delay [1].read () + t);
+ 330:zita-rev1/source/reverb.cpp **** 	x2 = _diff1 [2].process (_delay [2].read () - t);
+ 331:zita-rev1/source/reverb.cpp **** 	x3 = _diff1 [3].process (_delay [3].read () - t);
+ 1969              		.loc 2 331 43 view .LVU567
+ 1970 0052 04F5C67B 		add	fp, r4, #396
+ 324:zita-rev1/source/reverb.cpp **** 	_vdelay1.write (p1 [i]);
+ 1971              		.loc 2 324 17 view .LVU568
+ 1972 0056 0593     		str	r3, [sp, #20]
+ 1973 0058 FFF7FEFF 		bl	_ZN6Vdelay5writeEf
+ 1974              	.LVL138:
+ 325:zita-rev1/source/reverb.cpp **** 
+ 1975              		.loc 2 325 2 is_stmt 1 view .LVU569
+ 325:zita-rev1/source/reverb.cpp **** 
+ 1976              		.loc 2 325 17 is_stmt 0 view .LVU570
+ 1977 005c 069B     		ldr	r3, [sp, #24]
+ 1978 005e 3846     		mov	r0, r7
+ 1979 0060 B3EC010A 		vldmia.32	r3!, {s0}
+ 1980 0064 0693     		str	r3, [sp, #24]
+ 1981 0066 FFF7FEFF 		bl	_ZN6Vdelay5writeEf
+ 1982              	.LVL139:
+ 327:zita-rev1/source/reverb.cpp **** 	x0 = _diff1 [0].process (_delay [0].read () + t);
+ 1983              		.loc 2 327 3 is_stmt 1 view .LVU571
+ 327:zita-rev1/source/reverb.cpp **** 	x0 = _diff1 [0].process (_delay [0].read () + t);
+ 1984              		.loc 2 327 28 is_stmt 0 view .LVU572
+ 1985 006a 4046     		mov	r0, r8
+ 332:zita-rev1/source/reverb.cpp ****  	t = 0.3f * _vdelay1.read ();
+ 333:zita-rev1/source/reverb.cpp **** 	x4 = _diff1 [4].process (_delay [4].read () + t);
+ 334:zita-rev1/source/reverb.cpp **** 	x5 = _diff1 [5].process (_delay [5].read () + t);
+ 335:zita-rev1/source/reverb.cpp **** 	x6 = _diff1 [6].process (_delay [6].read () - t);
+ 1986              		.loc 2 335 43 view .LVU573
+ 1987 006c 04F5D878 		add	r8, r4, #432
+ 327:zita-rev1/source/reverb.cpp **** 	x0 = _diff1 [0].process (_delay [0].read () + t);
+ 1988              		.loc 2 327 28 view .LVU574
+ 1989 0070 FFF7FEFF 		bl	_ZN6Vdelay4readEv
+ 1990              	.LVL140:
+ 328:zita-rev1/source/reverb.cpp **** 	x1 = _diff1 [1].process (_delay [1].read () + t);
+ 1991              		.loc 2 328 43 view .LVU575
+ 1992 0074 04F5B471 		add	r1, r4, #360
+ 327:zita-rev1/source/reverb.cpp **** 	x0 = _diff1 [0].process (_delay [0].read () + t);
+ 1993              		.loc 2 327 28 view .LVU576
+ 1994 0078 B0EE408A 		vmov.f32	s16, s0
+ 1995              	.LVL141:
+ 328:zita-rev1/source/reverb.cpp **** 	x1 = _diff1 [1].process (_delay [1].read () + t);
+ 1996              		.loc 2 328 2 is_stmt 1 view .LVU577
+ 328:zita-rev1/source/reverb.cpp **** 	x1 = _diff1 [1].process (_delay [1].read () + t);
+ 1997              		.loc 2 328 43 is_stmt 0 view .LVU578
+ 1998 007c 0846     		mov	r0, r1
+ 1999 007e 0791     		str	r1, [sp, #28]
+ 2000 0080 FFF7FEFF 		bl	_ZN5Delay4readEv
+ 2001              	.LVL142:
+ 328:zita-rev1/source/reverb.cpp **** 	x1 = _diff1 [1].process (_delay [1].read () + t);
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 48
+
+
+ 2002              		.loc 2 328 26 view .LVU579
+ 2003 0084 04F12800 		add	r0, r4, #40
+ 2004 0088 A8EE2A0A 		vfma.f32	s0, s16, s21
+ 2005 008c FFF7FEFF 		bl	_ZN5Diff17processEf
+ 2006              	.LVL143:
+ 329:zita-rev1/source/reverb.cpp **** 	x2 = _diff1 [2].process (_delay [2].read () - t);
+ 2007              		.loc 2 329 43 view .LVU580
+ 2008 0090 04F5BA73 		add	r3, r4, #372
+ 328:zita-rev1/source/reverb.cpp **** 	x1 = _diff1 [1].process (_delay [1].read () + t);
+ 2009              		.loc 2 328 26 view .LVU581
+ 2010 0094 B0EE409A 		vmov.f32	s18, s0
+ 2011              	.LVL144:
+ 329:zita-rev1/source/reverb.cpp **** 	x2 = _diff1 [2].process (_delay [2].read () - t);
+ 2012              		.loc 2 329 2 is_stmt 1 view .LVU582
+ 329:zita-rev1/source/reverb.cpp **** 	x2 = _diff1 [2].process (_delay [2].read () - t);
+ 2013              		.loc 2 329 43 is_stmt 0 view .LVU583
+ 2014 0098 1846     		mov	r0, r3
+ 2015 009a 0DEE103A 		vmov	s26, r3	@ int
+ 2016 009e FFF7FEFF 		bl	_ZN5Delay4readEv
+ 2017              	.LVL145:
+ 329:zita-rev1/source/reverb.cpp **** 	x2 = _diff1 [2].process (_delay [2].read () - t);
+ 2018              		.loc 2 329 26 view .LVU584
+ 2019 00a2 04F13800 		add	r0, r4, #56
+ 2020 00a6 A8EE2A0A 		vfma.f32	s0, s16, s21
+ 2021 00aa FFF7FEFF 		bl	_ZN5Diff17processEf
+ 2022              	.LVL146:
+ 330:zita-rev1/source/reverb.cpp **** 	x3 = _diff1 [3].process (_delay [3].read () - t);
+ 2023              		.loc 2 330 43 view .LVU585
+ 2024 00ae 04F5C073 		add	r3, r4, #384
+ 330:zita-rev1/source/reverb.cpp **** 	x3 = _diff1 [3].process (_delay [3].read () - t);
+ 2025              		.loc 2 330 26 view .LVU586
+ 2026 00b2 F1EE488A 		vneg.f32	s17, s16
+ 330:zita-rev1/source/reverb.cpp **** 	x3 = _diff1 [3].process (_delay [3].read () - t);
+ 2027              		.loc 2 330 43 view .LVU587
+ 2028 00b6 1846     		mov	r0, r3
+ 2029 00b8 0DEE903A 		vmov	s27, r3	@ int
+ 329:zita-rev1/source/reverb.cpp **** 	x2 = _diff1 [2].process (_delay [2].read () - t);
+ 2030              		.loc 2 329 26 view .LVU588
+ 2031 00bc B0EE40CA 		vmov.f32	s24, s0
+ 2032              	.LVL147:
+ 330:zita-rev1/source/reverb.cpp **** 	x3 = _diff1 [3].process (_delay [3].read () - t);
+ 2033              		.loc 2 330 2 is_stmt 1 view .LVU589
+ 330:zita-rev1/source/reverb.cpp **** 	x3 = _diff1 [3].process (_delay [3].read () - t);
+ 2034              		.loc 2 330 43 is_stmt 0 view .LVU590
+ 2035 00c0 FFF7FEFF 		bl	_ZN5Delay4readEv
+ 2036              	.LVL148:
+ 330:zita-rev1/source/reverb.cpp **** 	x3 = _diff1 [3].process (_delay [3].read () - t);
+ 2037              		.loc 2 330 26 view .LVU591
+ 2038 00c4 04F14800 		add	r0, r4, #72
+ 2039 00c8 A8EE6A0A 		vfms.f32	s0, s16, s21
+ 2040 00cc FFF7FEFF 		bl	_ZN5Diff17processEf
+ 2041              	.LVL149:
+ 331:zita-rev1/source/reverb.cpp ****  	t = 0.3f * _vdelay1.read ();
+ 2042              		.loc 2 331 43 view .LVU592
+ 2043 00d0 5846     		mov	r0, fp
+ 330:zita-rev1/source/reverb.cpp **** 	x3 = _diff1 [3].process (_delay [3].read () - t);
+ 2044              		.loc 2 330 26 view .LVU593
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 49
+
+
+ 2045 00d2 B0EE40AA 		vmov.f32	s20, s0
+ 2046              	.LVL150:
+ 331:zita-rev1/source/reverb.cpp ****  	t = 0.3f * _vdelay1.read ();
+ 2047              		.loc 2 331 2 is_stmt 1 view .LVU594
+ 331:zita-rev1/source/reverb.cpp ****  	t = 0.3f * _vdelay1.read ();
+ 2048              		.loc 2 331 43 is_stmt 0 view .LVU595
+ 2049 00d6 FFF7FEFF 		bl	_ZN5Delay4readEv
+ 2050              	.LVL151:
+ 331:zita-rev1/source/reverb.cpp ****  	t = 0.3f * _vdelay1.read ();
+ 2051              		.loc 2 331 26 view .LVU596
+ 2052 00da 04F15800 		add	r0, r4, #88
+ 2053 00de A8EEAA0A 		vfma.f32	s0, s17, s21
+ 2054 00e2 FFF7FEFF 		bl	_ZN5Diff17processEf
+ 2055              	.LVL152:
+ 332:zita-rev1/source/reverb.cpp **** 	x4 = _diff1 [4].process (_delay [4].read () + t);
+ 2056              		.loc 2 332 28 view .LVU597
+ 2057 00e6 3846     		mov	r0, r7
+ 331:zita-rev1/source/reverb.cpp ****  	t = 0.3f * _vdelay1.read ();
+ 2058              		.loc 2 331 26 view .LVU598
+ 2059 00e8 F0EE40BA 		vmov.f32	s23, s0
+ 2060              	.LVL153:
+ 332:zita-rev1/source/reverb.cpp **** 	x4 = _diff1 [4].process (_delay [4].read () + t);
+ 2061              		.loc 2 332 3 is_stmt 1 view .LVU599
+ 332:zita-rev1/source/reverb.cpp **** 	x4 = _diff1 [4].process (_delay [4].read () + t);
+ 2062              		.loc 2 332 28 is_stmt 0 view .LVU600
+ 2063 00ec FFF7FEFF 		bl	_ZN6Vdelay4readEv
+ 2064              	.LVL154:
+ 333:zita-rev1/source/reverb.cpp **** 	x5 = _diff1 [5].process (_delay [5].read () + t);
+ 2065              		.loc 2 333 43 view .LVU601
+ 2066 00f0 04F5CC73 		add	r3, r4, #408
+ 332:zita-rev1/source/reverb.cpp **** 	x4 = _diff1 [4].process (_delay [4].read () + t);
+ 2067              		.loc 2 332 28 view .LVU602
+ 2068 00f4 B0EE408A 		vmov.f32	s16, s0
+ 2069              	.LVL155:
+ 333:zita-rev1/source/reverb.cpp **** 	x5 = _diff1 [5].process (_delay [5].read () + t);
+ 2070              		.loc 2 333 2 is_stmt 1 view .LVU603
+ 336:zita-rev1/source/reverb.cpp **** 	x7 = _diff1 [7].process (_delay [7].read () - t);
+ 2071              		.loc 2 336 43 is_stmt 0 view .LVU604
+ 2072 00f8 04F5DE77 		add	r7, r4, #444
+ 333:zita-rev1/source/reverb.cpp **** 	x5 = _diff1 [5].process (_delay [5].read () + t);
+ 2073              		.loc 2 333 43 view .LVU605
+ 2074 00fc 1846     		mov	r0, r3
+ 2075 00fe 0EEE103A 		vmov	s28, r3	@ int
+ 2076 0102 FFF7FEFF 		bl	_ZN5Delay4readEv
+ 2077              	.LVL156:
+ 333:zita-rev1/source/reverb.cpp **** 	x5 = _diff1 [5].process (_delay [5].read () + t);
+ 2078              		.loc 2 333 26 view .LVU606
+ 2079 0106 04F16800 		add	r0, r4, #104
+ 2080 010a A8EE2A0A 		vfma.f32	s0, s16, s21
+ 2081 010e FFF7FEFF 		bl	_ZN5Diff17processEf
+ 2082              	.LVL157:
+ 334:zita-rev1/source/reverb.cpp **** 	x6 = _diff1 [6].process (_delay [6].read () - t);
+ 2083              		.loc 2 334 43 view .LVU607
+ 2084 0112 04F5D273 		add	r3, r4, #420
+ 333:zita-rev1/source/reverb.cpp **** 	x5 = _diff1 [5].process (_delay [5].read () + t);
+ 2085              		.loc 2 333 26 view .LVU608
+ 2086 0116 F0EE408A 		vmov.f32	s17, s0
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 50
+
+
+ 2087              	.LVL158:
+ 334:zita-rev1/source/reverb.cpp **** 	x6 = _diff1 [6].process (_delay [6].read () - t);
+ 2088              		.loc 2 334 2 is_stmt 1 view .LVU609
+ 334:zita-rev1/source/reverb.cpp **** 	x6 = _diff1 [6].process (_delay [6].read () - t);
+ 2089              		.loc 2 334 43 is_stmt 0 view .LVU610
+ 2090 011a 1846     		mov	r0, r3
+ 2091 011c 0EEE903A 		vmov	s29, r3	@ int
+ 2092 0120 FFF7FEFF 		bl	_ZN5Delay4readEv
+ 2093              	.LVL159:
+ 334:zita-rev1/source/reverb.cpp **** 	x6 = _diff1 [6].process (_delay [6].read () - t);
+ 2094              		.loc 2 334 26 view .LVU611
+ 2095 0124 04F17800 		add	r0, r4, #120
+ 2096 0128 A8EE2A0A 		vfma.f32	s0, s16, s21
+ 2097 012c FFF7FEFF 		bl	_ZN5Diff17processEf
+ 2098              	.LVL160:
+ 335:zita-rev1/source/reverb.cpp **** 	x7 = _diff1 [7].process (_delay [7].read () - t);
+ 2099              		.loc 2 335 43 view .LVU612
+ 2100 0130 4046     		mov	r0, r8
+ 334:zita-rev1/source/reverb.cpp **** 	x6 = _diff1 [6].process (_delay [6].read () - t);
+ 2101              		.loc 2 334 26 view .LVU613
+ 2102 0132 B0EE40BA 		vmov.f32	s22, s0
+ 2103              	.LVL161:
+ 335:zita-rev1/source/reverb.cpp **** 	x7 = _diff1 [7].process (_delay [7].read () - t);
+ 2104              		.loc 2 335 2 is_stmt 1 view .LVU614
+ 335:zita-rev1/source/reverb.cpp **** 	x7 = _diff1 [7].process (_delay [7].read () - t);
+ 2105              		.loc 2 335 43 is_stmt 0 view .LVU615
+ 2106 0136 FFF7FEFF 		bl	_ZN5Delay4readEv
+ 2107              	.LVL162:
+ 335:zita-rev1/source/reverb.cpp **** 	x7 = _diff1 [7].process (_delay [7].read () - t);
+ 2108              		.loc 2 335 26 view .LVU616
+ 2109 013a F1EE48CA 		vneg.f32	s25, s16
+ 2110 013e 04F18800 		add	r0, r4, #136
+ 2111 0142 A8EE6A0A 		vfms.f32	s0, s16, s21
+ 2112 0146 FFF7FEFF 		bl	_ZN5Diff17processEf
+ 2113              	.LVL163:
+ 2114 014a F0EE409A 		vmov.f32	s19, s0
+ 2115              	.LVL164:
+ 2116              		.loc 2 336 2 is_stmt 1 view .LVU617
+ 2117              		.loc 2 336 43 is_stmt 0 view .LVU618
+ 2118 014e 3846     		mov	r0, r7
+ 2119 0150 FFF7FEFF 		bl	_ZN5Delay4readEv
+ 2120              	.LVL165:
+ 2121              		.loc 2 336 26 view .LVU619
+ 2122 0154 04F19800 		add	r0, r4, #152
+ 2123 0158 ACEEAA0A 		vfma.f32	s0, s25, s21
+ 2124 015c FFF7FEFF 		bl	_ZN5Diff17processEf
+ 2125              	.LVL166:
+ 337:zita-rev1/source/reverb.cpp **** 
+ 338:zita-rev1/source/reverb.cpp ****         t = x0 - x1; x0 += x1;  x1 = t;
+ 2126              		.loc 2 338 9 is_stmt 1 view .LVU620
+ 339:zita-rev1/source/reverb.cpp ****         t = x2 - x3; x2 += x3;  x3 = t;
+ 2127              		.loc 2 339 11 is_stmt 0 view .LVU621
+ 2128 0160 3AEE6B6A 		vsub.f32	s12, s20, s23
+ 340:zita-rev1/source/reverb.cpp ****         t = x4 - x5; x4 += x5;  x5 = t;
+ 2129              		.loc 2 340 11 view .LVU622
+ 2130 0164 38EECB7A 		vsub.f32	s14, s17, s22
+ 341:zita-rev1/source/reverb.cpp ****         t = x6 - x7; x6 += x7;  x7 = t;
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 51
+
+
+ 342:zita-rev1/source/reverb.cpp ****         t = x0 - x2; x0 += x2;  x2 = t;
+ 343:zita-rev1/source/reverb.cpp ****         t = x1 - x3; x1 += x3;  x3 = t;
+ 344:zita-rev1/source/reverb.cpp ****         t = x4 - x6; x4 += x6;  x6 = t;
+ 345:zita-rev1/source/reverb.cpp ****         t = x5 - x7; x5 += x7;  x7 = t;
+ 346:zita-rev1/source/reverb.cpp ****         t = x0 - x4; x0 += x4;  x4 = t;
+ 347:zita-rev1/source/reverb.cpp ****         t = x1 - x5; x1 += x5;  x5 = t;
+ 348:zita-rev1/source/reverb.cpp ****         t = x2 - x6; x2 += x6;  x6 = t;
+ 349:zita-rev1/source/reverb.cpp ****         t = x3 - x7; x3 += x7;  x7 = t;
+ 350:zita-rev1/source/reverb.cpp **** 
+ 351:zita-rev1/source/reverb.cpp **** 	if (_ambis)
+ 2131              		.loc 2 351 2 view .LVU623
+ 2132 0168 2079     		ldrb	r0, [r4, #4]	@ zero_extendqisi2
+ 339:zita-rev1/source/reverb.cpp ****         t = x4 - x5; x4 += x5;  x5 = t;
+ 2133              		.loc 2 339 25 view .LVU624
+ 2134 016a 3AEE2BAA 		vadd.f32	s20, s20, s23
+ 2135              	.LVL167:
+ 2136              		.loc 2 351 2 view .LVU625
+ 2137 016e 099B     		ldr	r3, [sp, #36]
+ 338:zita-rev1/source/reverb.cpp ****         t = x2 - x3; x2 += x3;  x3 = t;
+ 2138              		.loc 2 338 11 view .LVU626
+ 2139 0170 39EE4C8A 		vsub.f32	s16, s18, s24
+ 2140              	.LVL168:
+ 338:zita-rev1/source/reverb.cpp ****         t = x2 - x3; x2 += x3;  x3 = t;
+ 2141              		.loc 2 338 22 is_stmt 1 view .LVU627
+ 340:zita-rev1/source/reverb.cpp ****         t = x6 - x7; x6 += x7;  x7 = t;
+ 2142              		.loc 2 340 25 is_stmt 0 view .LVU628
+ 2143 0174 78EE8B8A 		vadd.f32	s17, s17, s22
+ 2144              	.LVL169:
+ 341:zita-rev1/source/reverb.cpp ****         t = x0 - x2; x0 += x2;  x2 = t;
+ 2145              		.loc 2 341 11 view .LVU629
+ 2146 0178 79EEC05A 		vsub.f32	s11, s19, s0
+ 338:zita-rev1/source/reverb.cpp ****         t = x2 - x3; x2 += x3;  x3 = t;
+ 2147              		.loc 2 338 25 view .LVU630
+ 2148 017c 39EE0C9A 		vadd.f32	s18, s18, s24
+ 2149              	.LVL170:
+ 338:zita-rev1/source/reverb.cpp ****         t = x2 - x3; x2 += x3;  x3 = t;
+ 2150              		.loc 2 338 33 is_stmt 1 view .LVU631
+ 339:zita-rev1/source/reverb.cpp ****         t = x4 - x5; x4 += x5;  x5 = t;
+ 2151              		.loc 2 339 9 view .LVU632
+ 339:zita-rev1/source/reverb.cpp ****         t = x4 - x5; x4 += x5;  x5 = t;
+ 2152              		.loc 2 339 22 view .LVU633
+ 339:zita-rev1/source/reverb.cpp ****         t = x4 - x5; x4 += x5;  x5 = t;
+ 2153              		.loc 2 339 33 view .LVU634
+ 340:zita-rev1/source/reverb.cpp ****         t = x6 - x7; x6 += x7;  x7 = t;
+ 2154              		.loc 2 340 9 view .LVU635
+ 340:zita-rev1/source/reverb.cpp ****         t = x6 - x7; x6 += x7;  x7 = t;
+ 2155              		.loc 2 340 22 view .LVU636
+ 340:zita-rev1/source/reverb.cpp ****         t = x6 - x7; x6 += x7;  x7 = t;
+ 2156              		.loc 2 340 33 view .LVU637
+ 341:zita-rev1/source/reverb.cpp ****         t = x0 - x2; x0 += x2;  x2 = t;
+ 2157              		.loc 2 341 9 view .LVU638
+ 341:zita-rev1/source/reverb.cpp ****         t = x0 - x2; x0 += x2;  x2 = t;
+ 2158              		.loc 2 341 22 view .LVU639
+ 341:zita-rev1/source/reverb.cpp ****         t = x0 - x2; x0 += x2;  x2 = t;
+ 2159              		.loc 2 341 25 is_stmt 0 view .LVU640
+ 2160 0180 39EE800A 		vadd.f32	s0, s19, s0
+ 2161              	.LVL171:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 52
+
+
+ 341:zita-rev1/source/reverb.cpp ****         t = x0 - x2; x0 += x2;  x2 = t;
+ 2162              		.loc 2 341 33 is_stmt 1 view .LVU641
+ 342:zita-rev1/source/reverb.cpp ****         t = x1 - x3; x1 += x3;  x3 = t;
+ 2163              		.loc 2 342 9 view .LVU642
+ 343:zita-rev1/source/reverb.cpp ****         t = x4 - x6; x4 += x6;  x6 = t;
+ 2164              		.loc 2 343 11 is_stmt 0 view .LVU643
+ 2165 0184 78EE466A 		vsub.f32	s13, s16, s12
+ 342:zita-rev1/source/reverb.cpp ****         t = x1 - x3; x1 += x3;  x3 = t;
+ 2166              		.loc 2 342 11 view .LVU644
+ 2167 0188 79EE4A7A 		vsub.f32	s15, s18, s20
+ 2168              	.LVL172:
+ 342:zita-rev1/source/reverb.cpp ****         t = x1 - x3; x1 += x3;  x3 = t;
+ 2169              		.loc 2 342 22 is_stmt 1 view .LVU645
+ 343:zita-rev1/source/reverb.cpp ****         t = x4 - x6; x4 += x6;  x6 = t;
+ 2170              		.loc 2 343 25 is_stmt 0 view .LVU646
+ 2171 018c 38EE068A 		vadd.f32	s16, s16, s12
+ 2172              	.LVL173:
+ 342:zita-rev1/source/reverb.cpp ****         t = x1 - x3; x1 += x3;  x3 = t;
+ 2173              		.loc 2 342 25 view .LVU647
+ 2174 0190 39EE0A9A 		vadd.f32	s18, s18, s20
+ 2175              	.LVL174:
+ 342:zita-rev1/source/reverb.cpp ****         t = x1 - x3; x1 += x3;  x3 = t;
+ 2176              		.loc 2 342 33 is_stmt 1 view .LVU648
+ 343:zita-rev1/source/reverb.cpp ****         t = x4 - x6; x4 += x6;  x6 = t;
+ 2177              		.loc 2 343 9 view .LVU649
+ 343:zita-rev1/source/reverb.cpp ****         t = x4 - x6; x4 += x6;  x6 = t;
+ 2178              		.loc 2 343 22 view .LVU650
+ 343:zita-rev1/source/reverb.cpp ****         t = x4 - x6; x4 += x6;  x6 = t;
+ 2179              		.loc 2 343 33 view .LVU651
+ 344:zita-rev1/source/reverb.cpp ****         t = x5 - x7; x5 += x7;  x7 = t;
+ 2180              		.loc 2 344 9 view .LVU652
+ 344:zita-rev1/source/reverb.cpp ****         t = x5 - x7; x5 += x7;  x7 = t;
+ 2181              		.loc 2 344 11 is_stmt 0 view .LVU653
+ 2182 0194 38EEC06A 		vsub.f32	s12, s17, s0
+ 2183              	.LVL175:
+ 344:zita-rev1/source/reverb.cpp ****         t = x5 - x7; x5 += x7;  x7 = t;
+ 2184              		.loc 2 344 22 is_stmt 1 view .LVU654
+ 345:zita-rev1/source/reverb.cpp ****         t = x0 - x4; x0 += x4;  x4 = t;
+ 2185              		.loc 2 345 11 is_stmt 0 view .LVU655
+ 2186 0198 77EE659A 		vsub.f32	s19, s14, s11
+ 344:zita-rev1/source/reverb.cpp ****         t = x5 - x7; x5 += x7;  x7 = t;
+ 2187              		.loc 2 344 25 view .LVU656
+ 2188 019c 38EE800A 		vadd.f32	s0, s17, s0
+ 2189              	.LVL176:
+ 344:zita-rev1/source/reverb.cpp ****         t = x5 - x7; x5 += x7;  x7 = t;
+ 2190              		.loc 2 344 33 is_stmt 1 view .LVU657
+ 345:zita-rev1/source/reverb.cpp ****         t = x0 - x4; x0 += x4;  x4 = t;
+ 2191              		.loc 2 345 9 view .LVU658
+ 345:zita-rev1/source/reverb.cpp ****         t = x0 - x4; x0 += x4;  x4 = t;
+ 2192              		.loc 2 345 22 view .LVU659
+ 345:zita-rev1/source/reverb.cpp ****         t = x0 - x4; x0 += x4;  x4 = t;
+ 2193              		.loc 2 345 25 is_stmt 0 view .LVU660
+ 2194 01a0 37EE257A 		vadd.f32	s14, s14, s11
+ 2195              	.LVL177:
+ 345:zita-rev1/source/reverb.cpp ****         t = x0 - x4; x0 += x4;  x4 = t;
+ 2196              		.loc 2 345 33 is_stmt 1 view .LVU661
+ 346:zita-rev1/source/reverb.cpp ****         t = x1 - x5; x1 += x5;  x5 = t;
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 53
+
+
+ 2197              		.loc 2 346 9 view .LVU662
+ 349:zita-rev1/source/reverb.cpp **** 
+ 2198              		.loc 2 349 11 is_stmt 0 view .LVU663
+ 2199 01a4 76EEE9BA 		vsub.f32	s23, s13, s19
+ 346:zita-rev1/source/reverb.cpp ****         t = x1 - x5; x1 += x5;  x5 = t;
+ 2200              		.loc 2 346 11 view .LVU664
+ 2201 01a8 39EE40AA 		vsub.f32	s20, s18, s0
+ 2202              	.LVL178:
+ 346:zita-rev1/source/reverb.cpp ****         t = x1 - x5; x1 += x5;  x5 = t;
+ 2203              		.loc 2 346 22 is_stmt 1 view .LVU665
+ 347:zita-rev1/source/reverb.cpp ****         t = x2 - x6; x2 += x6;  x6 = t;
+ 2204              		.loc 2 347 11 is_stmt 0 view .LVU666
+ 2205 01ac 78EE47AA 		vsub.f32	s21, s16, s14
+ 346:zita-rev1/source/reverb.cpp ****         t = x1 - x5; x1 += x5;  x5 = t;
+ 2206              		.loc 2 346 25 view .LVU667
+ 2207 01b0 39EE000A 		vadd.f32	s0, s18, s0
+ 2208              	.LVL179:
+ 346:zita-rev1/source/reverb.cpp ****         t = x1 - x5; x1 += x5;  x5 = t;
+ 2209              		.loc 2 346 33 is_stmt 1 view .LVU668
+ 347:zita-rev1/source/reverb.cpp ****         t = x2 - x6; x2 += x6;  x6 = t;
+ 2210              		.loc 2 347 9 view .LVU669
+ 347:zita-rev1/source/reverb.cpp ****         t = x2 - x6; x2 += x6;  x6 = t;
+ 2211              		.loc 2 347 22 view .LVU670
+ 348:zita-rev1/source/reverb.cpp ****         t = x3 - x7; x3 += x7;  x7 = t;
+ 2212              		.loc 2 348 11 is_stmt 0 view .LVU671
+ 2213 01b4 37EEC6BA 		vsub.f32	s22, s15, s12
+ 348:zita-rev1/source/reverb.cpp ****         t = x3 - x7; x3 += x7;  x7 = t;
+ 2214              		.loc 2 348 25 view .LVU672
+ 2215 01b8 37EE869A 		vadd.f32	s18, s15, s12
+ 2216 01bc D4ED817A 		vldr.32	s15, [r4, #516]
+ 2217              	.LVL180:
+ 349:zita-rev1/source/reverb.cpp **** 
+ 2218              		.loc 2 349 25 view .LVU673
+ 2219 01c0 76EEA99A 		vadd.f32	s19, s13, s19
+ 2220              	.LVL181:
+ 349:zita-rev1/source/reverb.cpp **** 
+ 2221              		.loc 2 349 25 view .LVU674
+ 2222 01c4 D4ED826A 		vldr.32	s13, [r4, #520]
+ 2223              	.LVL182:
+ 347:zita-rev1/source/reverb.cpp ****         t = x2 - x6; x2 += x6;  x6 = t;
+ 2224              		.loc 2 347 25 view .LVU675
+ 2225 01c8 38EE078A 		vadd.f32	s16, s16, s14
+ 2226              	.LVL183:
+ 347:zita-rev1/source/reverb.cpp ****         t = x2 - x6; x2 += x6;  x6 = t;
+ 2227              		.loc 2 347 33 is_stmt 1 view .LVU676
+ 348:zita-rev1/source/reverb.cpp ****         t = x3 - x7; x3 += x7;  x7 = t;
+ 2228              		.loc 2 348 9 view .LVU677
+ 348:zita-rev1/source/reverb.cpp ****         t = x3 - x7; x3 += x7;  x7 = t;
+ 2229              		.loc 2 348 22 view .LVU678
+ 348:zita-rev1/source/reverb.cpp ****         t = x3 - x7; x3 += x7;  x7 = t;
+ 2230              		.loc 2 348 33 view .LVU679
+ 349:zita-rev1/source/reverb.cpp **** 
+ 2231              		.loc 2 349 9 view .LVU680
+ 349:zita-rev1/source/reverb.cpp **** 
+ 2232              		.loc 2 349 22 view .LVU681
+ 349:zita-rev1/source/reverb.cpp **** 
+ 2233              		.loc 2 349 33 view .LVU682
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 54
+
+
+ 2234              		.loc 2 351 2 view .LVU683
+ 2235 01cc DDE90712 		ldrd	r1, r2, [sp, #28]
+ 2236 01d0 0028     		cmp	r0, #0
+ 2237 01d2 00F08480 		beq	.L84
+ 352:zita-rev1/source/reverb.cpp **** 	{
+ 353:zita-rev1/source/reverb.cpp ****             _g0 += _d0;
+ 2238              		.loc 2 353 13 view .LVU684
+ 2239              		.loc 2 353 17 is_stmt 0 view .LVU685
+ 2240 01d6 94ED7F7A 		vldr.32	s14, [r4, #508]
+ 354:zita-rev1/source/reverb.cpp ****             _g1 += _d1;
+ 2241              		.loc 2 354 17 view .LVU686
+ 2242 01da 77EEA67A 		vadd.f32	s15, s15, s13
+ 353:zita-rev1/source/reverb.cpp ****             _g1 += _d1;
+ 2243              		.loc 2 353 17 view .LVU687
+ 2244 01de 94ED806A 		vldr.32	s12, [r4, #512]
+ 355:zita-rev1/source/reverb.cpp **** 	    q0 [i] = _g0 * x0;
+ 356:zita-rev1/source/reverb.cpp **** 	    q1 [i] = _g1 * x1;
+ 357:zita-rev1/source/reverb.cpp **** 	    q2 [i] = _g1 * x4;
+ 2245              		.loc 2 357 13 view .LVU688
+ 2246 01e2 0398     		ldr	r0, [sp, #12]
+ 353:zita-rev1/source/reverb.cpp ****             _g1 += _d1;
+ 2247              		.loc 2 353 17 view .LVU689
+ 2248 01e4 37EE067A 		vadd.f32	s14, s14, s12
+ 354:zita-rev1/source/reverb.cpp **** 	    q0 [i] = _g0 * x0;
+ 2249              		.loc 2 354 17 view .LVU690
+ 2250 01e8 C4ED817A 		vstr.32	s15, [r4, #516]
+ 353:zita-rev1/source/reverb.cpp ****             _g1 += _d1;
+ 2251              		.loc 2 353 17 view .LVU691
+ 2252 01ec 84ED7F7A 		vstr.32	s14, [r4, #508]
+ 354:zita-rev1/source/reverb.cpp **** 	    q0 [i] = _g0 * x0;
+ 2253              		.loc 2 354 13 is_stmt 1 view .LVU692
+ 355:zita-rev1/source/reverb.cpp **** 	    q0 [i] = _g0 * x0;
+ 2254              		.loc 2 355 6 view .LVU693
+ 355:zita-rev1/source/reverb.cpp **** 	    q0 [i] = _g0 * x0;
+ 2255              		.loc 2 355 19 is_stmt 0 view .LVU694
+ 2256 01f0 27EE007A 		vmul.f32	s14, s14, s0
+ 355:zita-rev1/source/reverb.cpp **** 	    q0 [i] = _g0 * x0;
+ 2257              		.loc 2 355 13 view .LVU695
+ 2258 01f4 82ED007A 		vstr.32	s14, [r2]
+ 356:zita-rev1/source/reverb.cpp **** 	    q2 [i] = _g1 * x4;
+ 2259              		.loc 2 356 6 is_stmt 1 view .LVU696
+ 356:zita-rev1/source/reverb.cpp **** 	    q2 [i] = _g1 * x4;
+ 2260              		.loc 2 356 19 is_stmt 0 view .LVU697
+ 2261 01f8 D4ED817A 		vldr.32	s15, [r4, #516]
+ 2262 01fc 67EE887A 		vmul.f32	s15, s15, s16
+ 356:zita-rev1/source/reverb.cpp **** 	    q2 [i] = _g1 * x4;
+ 2263              		.loc 2 356 13 view .LVU698
+ 2264 0200 C3ED007A 		vstr.32	s15, [r3]
+ 2265              		.loc 2 357 6 is_stmt 1 view .LVU699
+ 2266              		.loc 2 357 19 is_stmt 0 view .LVU700
+ 2267 0204 D4ED817A 		vldr.32	s15, [r4, #516]
+ 2268 0208 67EE8A7A 		vmul.f32	s15, s15, s20
+ 2269              		.loc 2 357 13 view .LVU701
+ 2270 020c C0ED007A 		vstr.32	s15, [r0]
+ 358:zita-rev1/source/reverb.cpp **** 	    q3 [i] = _g1 * x2;
+ 2271              		.loc 2 358 6 is_stmt 1 view .LVU702
+ 2272              		.loc 2 358 19 is_stmt 0 view .LVU703
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 55
+
+
+ 2273 0210 D4ED817A 		vldr.32	s15, [r4, #516]
+ 2274              		.loc 2 358 13 view .LVU704
+ 2275 0214 0498     		ldr	r0, [sp, #16]
+ 2276              		.loc 2 358 19 view .LVU705
+ 2277 0216 67EE897A 		vmul.f32	s15, s15, s18
+ 2278              		.loc 2 358 13 view .LVU706
+ 2279 021a C0ED007A 		vstr.32	s15, [r0]
+ 2280              	.L85:
+ 359:zita-rev1/source/reverb.cpp **** 	}
+ 360:zita-rev1/source/reverb.cpp **** 	else
+ 361:zita-rev1/source/reverb.cpp **** 	{
+ 362:zita-rev1/source/reverb.cpp ****             _g1 += _d1;
+ 363:zita-rev1/source/reverb.cpp **** 	    q0 [i] = _g1 * (x1 + x2);
+ 364:zita-rev1/source/reverb.cpp **** 	    q1 [i] = _g1 * (x1 - x2);
+ 365:zita-rev1/source/reverb.cpp **** 	}
+ 366:zita-rev1/source/reverb.cpp **** 
+ 367:zita-rev1/source/reverb.cpp **** 	_delay [0].write (_filt1 [0].process (g * x0));
+ 2281              		.loc 2 367 19 discriminator 2 view .LVU707
+ 2282 021e DFED5B8A 		vldr.32	s17, .L100+4
+ 2283 0222 04F1A800 		add	r0, r4, #168
+ 2284 0226 0791     		str	r1, [sp, #28]
+ 2285              		.loc 2 367 2 is_stmt 1 discriminator 2 view .LVU708
+ 2286              		.loc 2 367 19 is_stmt 0 discriminator 2 view .LVU709
+ 2287 0228 20EE280A 		vmul.f32	s0, s0, s17
+ 2288              	.LVL184:
+ 2289              		.loc 2 367 19 discriminator 2 view .LVU710
+ 2290 022c CDE90823 		strd	r2, r3, [sp, #32]
+ 2291 0230 FFF7FEFF 		bl	_ZN5Filt17processEf
+ 2292              	.LVL185:
+ 2293 0234 0799     		ldr	r1, [sp, #28]
+ 2294 0236 0846     		mov	r0, r1
+ 2295 0238 FFF7FEFF 		bl	_ZN5Delay5writeEf
+ 2296              	.LVL186:
+ 368:zita-rev1/source/reverb.cpp **** 	_delay [1].write (_filt1 [1].process (g * x1));
+ 2297              		.loc 2 368 2 is_stmt 1 discriminator 2 view .LVU711
+ 2298              		.loc 2 368 19 is_stmt 0 discriminator 2 view .LVU712
+ 2299 023c 04F1C000 		add	r0, r4, #192
+ 2300 0240 28EE280A 		vmul.f32	s0, s16, s17
+ 2301 0244 FFF7FEFF 		bl	_ZN5Filt17processEf
+ 2302              	.LVL187:
+ 2303 0248 1DEE100A 		vmov	r0, s26	@ int
+ 2304 024c FFF7FEFF 		bl	_ZN5Delay5writeEf
+ 2305              	.LVL188:
+ 369:zita-rev1/source/reverb.cpp **** 	_delay [2].write (_filt1 [2].process (g * x2));
+ 2306              		.loc 2 369 2 is_stmt 1 discriminator 2 view .LVU713
+ 2307              		.loc 2 369 19 is_stmt 0 discriminator 2 view .LVU714
+ 2308 0250 04F1D800 		add	r0, r4, #216
+ 2309 0254 29EE280A 		vmul.f32	s0, s18, s17
+ 2310 0258 FFF7FEFF 		bl	_ZN5Filt17processEf
+ 2311              	.LVL189:
+ 2312 025c 1DEE900A 		vmov	r0, s27	@ int
+ 2313 0260 FFF7FEFF 		bl	_ZN5Delay5writeEf
+ 2314              	.LVL190:
+ 370:zita-rev1/source/reverb.cpp ****         _delay [3].write (_filt1 [3].process (g * x3));
+ 2315              		.loc 2 370 9 is_stmt 1 discriminator 2 view .LVU715
+ 2316              		.loc 2 370 26 is_stmt 0 discriminator 2 view .LVU716
+ 2317 0264 04F1F000 		add	r0, r4, #240
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 56
+
+
+ 2318 0268 29EEA80A 		vmul.f32	s0, s19, s17
+ 2319 026c FFF7FEFF 		bl	_ZN5Filt17processEf
+ 2320              	.LVL191:
+ 2321 0270 5846     		mov	r0, fp
+ 2322 0272 FFF7FEFF 		bl	_ZN5Delay5writeEf
+ 2323              	.LVL192:
+ 371:zita-rev1/source/reverb.cpp ****         _delay [4].write (_filt1 [4].process (g * x4));
+ 2324              		.loc 2 371 9 is_stmt 1 discriminator 2 view .LVU717
+ 2325              		.loc 2 371 26 is_stmt 0 discriminator 2 view .LVU718
+ 2326 0276 04F58470 		add	r0, r4, #264
+ 2327 027a 2AEE280A 		vmul.f32	s0, s20, s17
+ 2328 027e FFF7FEFF 		bl	_ZN5Filt17processEf
+ 2329              	.LVL193:
+ 2330 0282 1EEE100A 		vmov	r0, s28	@ int
+ 2331 0286 FFF7FEFF 		bl	_ZN5Delay5writeEf
+ 2332              	.LVL194:
+ 372:zita-rev1/source/reverb.cpp ****         _delay [5].write (_filt1 [5].process (g * x5));
+ 2333              		.loc 2 372 9 is_stmt 1 discriminator 2 view .LVU719
+ 2334              		.loc 2 372 26 is_stmt 0 discriminator 2 view .LVU720
+ 2335 028a 04F59070 		add	r0, r4, #288
+ 2336 028e 2AEEA80A 		vmul.f32	s0, s21, s17
+ 2337 0292 FFF7FEFF 		bl	_ZN5Filt17processEf
+ 2338              	.LVL195:
+ 2339 0296 1EEE900A 		vmov	r0, s29	@ int
+ 2340 029a FFF7FEFF 		bl	_ZN5Delay5writeEf
+ 2341              	.LVL196:
+ 373:zita-rev1/source/reverb.cpp ****         _delay [6].write (_filt1 [6].process (g * x6));
+ 2342              		.loc 2 373 9 is_stmt 1 discriminator 2 view .LVU721
+ 2343              		.loc 2 373 26 is_stmt 0 discriminator 2 view .LVU722
+ 2344 029e 04F59C70 		add	r0, r4, #312
+ 2345 02a2 2BEE280A 		vmul.f32	s0, s22, s17
+ 2346 02a6 FFF7FEFF 		bl	_ZN5Filt17processEf
+ 2347              	.LVL197:
+ 2348 02aa 4046     		mov	r0, r8
+ 2349 02ac FFF7FEFF 		bl	_ZN5Delay5writeEf
+ 2350              	.LVL198:
+ 374:zita-rev1/source/reverb.cpp ****         _delay [7].write (_filt1 [7].process (g * x7));
+ 2351              		.loc 2 374 9 is_stmt 1 discriminator 2 view .LVU723
+ 2352              		.loc 2 374 26 is_stmt 0 discriminator 2 view .LVU724
+ 2353 02b0 04F5A870 		add	r0, r4, #336
+ 2354 02b4 2BEEA80A 		vmul.f32	s0, s23, s17
+ 2355 02b8 FFF7FEFF 		bl	_ZN5Filt17processEf
+ 2356              	.LVL199:
+ 2357 02bc 3846     		mov	r0, r7
+ 2358 02be FFF7FEFF 		bl	_ZN5Delay5writeEf
+ 2359              	.LVL200:
+ 322:zita-rev1/source/reverb.cpp ****     {
+ 2360              		.loc 2 322 5 is_stmt 1 discriminator 2 view .LVU725
+ 2361 02c2 0399     		ldr	r1, [sp, #12]
+ 2362 02c4 019B     		ldr	r3, [sp, #4]
+ 2363 02c6 0431     		adds	r1, r1, #4
+ 2364 02c8 089A     		ldr	r2, [sp, #32]
+ 2365 02ca 0133     		adds	r3, r3, #1
+ 2366 02cc 0391     		str	r1, [sp, #12]
+ 2367 02ce 0432     		adds	r2, r2, #4
+ 2368 02d0 0499     		ldr	r1, [sp, #16]
+ 2369 02d2 0193     		str	r3, [sp, #4]
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 57
+
+
+ 2370              	.LVL201:
+ 322:zita-rev1/source/reverb.cpp ****     {
+ 2371              		.loc 2 322 5 is_stmt 0 discriminator 2 view .LVU726
+ 2372 02d4 0431     		adds	r1, r1, #4
+ 2373 02d6 099B     		ldr	r3, [sp, #36]
+ 2374              	.LVL202:
+ 322:zita-rev1/source/reverb.cpp ****     {
+ 2375              		.loc 2 322 5 discriminator 2 view .LVU727
+ 2376 02d8 0491     		str	r1, [sp, #16]
+ 2377 02da 0433     		adds	r3, r3, #4
+ 2378 02dc A9E6     		b	.L86
+ 2379              	.LVL203:
+ 2380              	.L84:
+ 362:zita-rev1/source/reverb.cpp **** 	    q0 [i] = _g1 * (x1 + x2);
+ 2381              		.loc 2 362 13 is_stmt 1 view .LVU728
+ 362:zita-rev1/source/reverb.cpp **** 	    q0 [i] = _g1 * (x1 + x2);
+ 2382              		.loc 2 362 17 is_stmt 0 view .LVU729
+ 2383 02de 77EEA67A 		vadd.f32	s15, s15, s13
+ 363:zita-rev1/source/reverb.cpp **** 	    q1 [i] = _g1 * (x1 - x2);
+ 2384              		.loc 2 363 25 view .LVU730
+ 2385 02e2 38EE097A 		vadd.f32	s14, s16, s18
+ 362:zita-rev1/source/reverb.cpp **** 	    q0 [i] = _g1 * (x1 + x2);
+ 2386              		.loc 2 362 17 view .LVU731
+ 2387 02e6 C4ED817A 		vstr.32	s15, [r4, #516]
+ 363:zita-rev1/source/reverb.cpp **** 	    q1 [i] = _g1 * (x1 - x2);
+ 2388              		.loc 2 363 6 is_stmt 1 view .LVU732
+ 363:zita-rev1/source/reverb.cpp **** 	    q1 [i] = _g1 * (x1 - x2);
+ 2389              		.loc 2 363 19 is_stmt 0 view .LVU733
+ 2390 02ea 67EE277A 		vmul.f32	s15, s14, s15
+ 363:zita-rev1/source/reverb.cpp **** 	    q1 [i] = _g1 * (x1 - x2);
+ 2391              		.loc 2 363 13 view .LVU734
+ 2392 02ee C2ED007A 		vstr.32	s15, [r2]
+ 364:zita-rev1/source/reverb.cpp **** 	}
+ 2393              		.loc 2 364 6 is_stmt 1 view .LVU735
+ 364:zita-rev1/source/reverb.cpp **** 	}
+ 2394              		.loc 2 364 25 is_stmt 0 view .LVU736
+ 2395 02f2 78EE497A 		vsub.f32	s15, s16, s18
+ 364:zita-rev1/source/reverb.cpp **** 	}
+ 2396              		.loc 2 364 19 view .LVU737
+ 2397 02f6 94ED817A 		vldr.32	s14, [r4, #516]
+ 2398 02fa 67EE277A 		vmul.f32	s15, s14, s15
+ 364:zita-rev1/source/reverb.cpp **** 	}
+ 2399              		.loc 2 364 13 view .LVU738
+ 2400 02fe C3ED007A 		vstr.32	s15, [r3]
+ 2401 0302 8CE7     		b	.L85
+ 2402              	.LVL204:
+ 2403              	.L83:
+ 375:zita-rev1/source/reverb.cpp ****     }
+ 376:zita-rev1/source/reverb.cpp **** 
+ 377:zita-rev1/source/reverb.cpp ****     n = _ambis ? 4 : 2;
+ 2404              		.loc 2 377 5 is_stmt 1 view .LVU739
+ 2405              		.loc 2 377 16 is_stmt 0 view .LVU740
+ 2406 0304 2379     		ldrb	r3, [r4, #4]	@ zero_extendqisi2
+ 2407              	.LVL205:
+ 2408              		.loc 2 377 16 view .LVU741
+ 2409 0306 002B     		cmp	r3, #0
+ 2410              	.LBB78:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 58
+
+
+ 2411              	.LBB79:
+ 2412              		.file 3 "zita-rev1/source/pareq.h"
+   1:zita-rev1/source/pareq.h **** // ----------------------------------------------------------------------------
+   2:zita-rev1/source/pareq.h **** //
+   3:zita-rev1/source/pareq.h **** //  Copyright (C) 2009-2017 Fons Adriaensen <fons@linuxaudio.org>
+   4:zita-rev1/source/pareq.h **** //    
+   5:zita-rev1/source/pareq.h **** //  This program is free software; you can redistribute it and/or modify
+   6:zita-rev1/source/pareq.h **** //  it under the terms of the GNU General Public License as published by
+   7:zita-rev1/source/pareq.h **** //  the Free Software Foundation; either version 3 of the License, or
+   8:zita-rev1/source/pareq.h **** //  (at your option) any later version.
+   9:zita-rev1/source/pareq.h **** //
+  10:zita-rev1/source/pareq.h **** //  This program is distributed in the hope that it will be useful,
+  11:zita-rev1/source/pareq.h **** //  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  12:zita-rev1/source/pareq.h **** //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  13:zita-rev1/source/pareq.h **** //  GNU General Public License for more details.
+  14:zita-rev1/source/pareq.h **** //
+  15:zita-rev1/source/pareq.h **** //  You should have received a copy of the GNU General Public License
+  16:zita-rev1/source/pareq.h **** //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  17:zita-rev1/source/pareq.h **** //
+  18:zita-rev1/source/pareq.h **** // ----------------------------------------------------------------------------
+  19:zita-rev1/source/pareq.h **** 
+  20:zita-rev1/source/pareq.h **** 
+  21:zita-rev1/source/pareq.h **** #ifndef __PAREQ_H
+  22:zita-rev1/source/pareq.h **** #define __PAREQ_H
+  23:zita-rev1/source/pareq.h **** 
+  24:zita-rev1/source/pareq.h **** 
+  25:zita-rev1/source/pareq.h **** #include <stdint.h>
+  26:zita-rev1/source/pareq.h **** #include <math.h>
+  27:zita-rev1/source/pareq.h **** #include "global.h"
+  28:zita-rev1/source/pareq.h **** 
+  29:zita-rev1/source/pareq.h **** 
+  30:zita-rev1/source/pareq.h **** class Pareq
+  31:zita-rev1/source/pareq.h **** {
+  32:zita-rev1/source/pareq.h **** public:
+  33:zita-rev1/source/pareq.h **** 
+  34:zita-rev1/source/pareq.h ****     Pareq (void);
+  35:zita-rev1/source/pareq.h ****     ~Pareq (void);
+  36:zita-rev1/source/pareq.h ****     
+  37:zita-rev1/source/pareq.h ****     void setfsamp (float fsamp);
+  38:zita-rev1/source/pareq.h ****     void setparam (float f, float g)
+  39:zita-rev1/source/pareq.h ****     {
+  40:zita-rev1/source/pareq.h **** 	_f0 = f;
+  41:zita-rev1/source/pareq.h **** 	_g0 = powf (10.0f, 0.05f * g);
+  42:zita-rev1/source/pareq.h **** 	_touch0++;
+  43:zita-rev1/source/pareq.h ****     }
+  44:zita-rev1/source/pareq.h ****     void reset (void);
+  45:zita-rev1/source/pareq.h ****     void prepare (int nsamp);
+  46:zita-rev1/source/pareq.h ****     void process (int nsamp, int nchan, float *data[])
+  47:zita-rev1/source/pareq.h ****     {
+  48:zita-rev1/source/pareq.h **** 	if (_state != BYPASS) process1 (nsamp, nchan, data);
+ 2413              		.loc 3 48 2 view .LVU742
+ 2414 0308 D4F81432 		ldr	r3, [r4, #532]
+ 2415              	.LBE79:
+ 2416              	.LBE78:
+ 2417              		.loc 2 377 16 view .LVU743
+ 2418 030c 14BF     		ite	ne
+ 2419 030e 0422     		movne	r2, #4
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 59
+
+
+ 2420 0310 0222     		moveq	r2, #2
+ 2421              	.LVL206:
+ 378:zita-rev1/source/reverb.cpp ****     _pareq1.process (nfram, n, out);
+ 2422              		.loc 2 378 5 is_stmt 1 view .LVU744
+ 2423              	.LBB81:
+ 2424              	.LBI78:
+  46:zita-rev1/source/pareq.h ****     {
+ 2425              		.loc 3 46 10 view .LVU745
+ 2426              	.LBB80:
+ 2427              		.loc 3 48 2 view .LVU746
+ 2428 0312 3BB1     		cbz	r3, .L88
+ 2429              		.loc 3 48 24 view .LVU747
+ 2430              		.loc 3 48 33 is_stmt 0 view .LVU748
+ 2431 0314 2B46     		mov	r3, r5
+ 2432 0316 3146     		mov	r1, r6
+ 2433 0318 04F50370 		add	r0, r4, #524
+ 2434              	.LVL207:
+ 2435              		.loc 3 48 33 view .LVU749
+ 2436 031c 0192     		str	r2, [sp, #4]
+ 2437              	.LVL208:
+ 2438              		.loc 3 48 33 view .LVU750
+ 2439 031e FFF7FEFF 		bl	_ZN5Pareq8process1EiiPPf
+ 2440              	.LVL209:
+ 2441              		.loc 3 48 33 view .LVU751
+ 2442 0322 019A     		ldr	r2, [sp, #4]
+ 2443              	.LVL210:
+ 2444              	.L88:
+ 2445              		.loc 3 48 33 view .LVU752
+ 2446              	.LBE80:
+ 2447              	.LBE81:
+ 379:zita-rev1/source/reverb.cpp ****     _pareq2.process (nfram, n, out);
+ 2448              		.loc 2 379 5 is_stmt 1 view .LVU753
+ 2449              	.LBB82:
+ 2450              	.LBI82:
+  46:zita-rev1/source/pareq.h ****     {
+ 2451              		.loc 3 46 10 view .LVU754
+ 2452              	.LBB83:
+ 2453              		.loc 3 48 2 view .LVU755
+ 2454 0324 D4F86C32 		ldr	r3, [r4, #620]
+ 2455 0328 2BB1     		cbz	r3, .L89
+ 2456              		.loc 3 48 24 view .LVU756
+ 2457              		.loc 3 48 33 is_stmt 0 view .LVU757
+ 2458 032a 2B46     		mov	r3, r5
+ 2459 032c 3146     		mov	r1, r6
+ 2460 032e 04F51970 		add	r0, r4, #612
+ 2461              	.LVL211:
+ 2462              		.loc 3 48 33 view .LVU758
+ 2463 0332 FFF7FEFF 		bl	_ZN5Pareq8process1EiiPPf
+ 2464              	.LVL212:
+ 2465              	.L89:
+ 2466              		.loc 3 48 33 view .LVU759
+ 2467              	.LBE83:
+ 2468              	.LBE82:
+ 380:zita-rev1/source/reverb.cpp ****     if (!_ambis)
+ 2469              		.loc 2 380 5 is_stmt 1 view .LVU760
+ 2470 0336 2379     		ldrb	r3, [r4, #4]	@ zero_extendqisi2
+ 2471 0338 0BBB     		cbnz	r3, .L82
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 60
+
+
+ 2472              	.L91:
+ 2473              	.LVL213:
+ 381:zita-rev1/source/reverb.cpp ****     {
+ 382:zita-rev1/source/reverb.cpp **** 	for (i = 0; i < nfram; i++)
+ 2474              		.loc 2 382 16 discriminator 3 view .LVU761
+ 2475 033a B342     		cmp	r3, r6
+ 2476 033c 1FDA     		bge	.L82
+ 383:zita-rev1/source/reverb.cpp **** 	{
+ 384:zita-rev1/source/reverb.cpp **** 	    _g0 += _d0;
+ 2477              		.loc 2 384 6 discriminator 2 view .LVU762
+ 2478              		.loc 2 384 10 is_stmt 0 discriminator 2 view .LVU763
+ 2479 033e D4ED7F7A 		vldr.32	s15, [r4, #508]
+ 382:zita-rev1/source/reverb.cpp **** 	{
+ 2480              		.loc 2 382 2 discriminator 2 view .LVU764
+ 2481 0342 0133     		adds	r3, r3, #1
+ 2482              	.LVL214:
+ 2483              		.loc 2 384 10 discriminator 2 view .LVU765
+ 2484 0344 94ED807A 		vldr.32	s14, [r4, #512]
+ 385:zita-rev1/source/reverb.cpp **** 	    q0 [i] += _g0 * p0 [i];
+ 2485              		.loc 2 385 27 discriminator 2 view .LVU766
+ 2486 0348 009A     		ldr	r2, [sp]
+ 384:zita-rev1/source/reverb.cpp **** 	    q0 [i] += _g0 * p0 [i];
+ 2487              		.loc 2 384 10 discriminator 2 view .LVU767
+ 2488 034a 77EE877A 		vadd.f32	s15, s15, s14
+ 2489 034e C4ED7F7A 		vstr.32	s15, [r4, #508]
+ 2490              		.loc 2 385 6 is_stmt 1 discriminator 2 view .LVU768
+ 2491              		.loc 2 385 27 is_stmt 0 discriminator 2 view .LVU769
+ 2492 0352 F2EC016A 		vldmia.32	r2!, {s13}
+ 2493              		.loc 2 385 13 discriminator 2 view .LVU770
+ 2494 0356 9AED007A 		vldr.32	s14, [r10]
+ 2495              		.loc 2 385 27 discriminator 2 view .LVU771
+ 2496 035a 0092     		str	r2, [sp]
+ 2497              		.loc 2 385 13 discriminator 2 view .LVU772
+ 2498 035c A7EEA67A 		vfma.f32	s14, s15, s13
+ 386:zita-rev1/source/reverb.cpp **** 	    q1 [i] += _g0 * p1 [i];
+ 2499              		.loc 2 386 27 discriminator 2 view .LVU773
+ 2500 0360 029A     		ldr	r2, [sp, #8]
+ 385:zita-rev1/source/reverb.cpp **** 	    q0 [i] += _g0 * p0 [i];
+ 2501              		.loc 2 385 13 discriminator 2 view .LVU774
+ 2502 0362 AAEC017A 		vstmia.32	r10!, {s14}
+ 2503              		.loc 2 386 6 is_stmt 1 discriminator 2 view .LVU775
+ 2504              		.loc 2 386 27 is_stmt 0 discriminator 2 view .LVU776
+ 2505 0366 B2EC017A 		vldmia.32	r2!, {s14}
+ 2506              		.loc 2 386 13 discriminator 2 view .LVU777
+ 2507 036a D9ED007A 		vldr.32	s15, [r9]
+ 2508 036e D4ED7F6A 		vldr.32	s13, [r4, #508]
+ 2509              		.loc 2 386 27 discriminator 2 view .LVU778
+ 2510 0372 0292     		str	r2, [sp, #8]
+ 2511              		.loc 2 386 13 discriminator 2 view .LVU779
+ 2512 0374 E6EE877A 		vfma.f32	s15, s13, s14
+ 2513 0378 E9EC017A 		vstmia.32	r9!, {s15}
+ 382:zita-rev1/source/reverb.cpp **** 	{
+ 2514              		.loc 2 382 2 is_stmt 1 discriminator 2 view .LVU780
+ 2515              	.LVL215:
+ 382:zita-rev1/source/reverb.cpp **** 	{
+ 2516              		.loc 2 382 2 is_stmt 0 discriminator 2 view .LVU781
+ 2517 037c DDE7     		b	.L91
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 61
+
+
+ 2518              	.LVL216:
+ 2519              	.L82:
+ 387:zita-rev1/source/reverb.cpp **** 	}
+ 388:zita-rev1/source/reverb.cpp ****     }
+ 389:zita-rev1/source/reverb.cpp **** }
+ 2520              		.loc 2 389 1 view .LVU782
+ 2521 037e 0BB0     		add	sp, sp, #44
+ 2522              		.cfi_def_cfa_offset 92
+ 2523              		@ sp needed
+ 2524 0380 BDEC0E8B 		vldm	sp!, {d8-d14}
+ 2525              		.cfi_restore 92
+ 2526              		.cfi_restore 93
+ 2527              		.cfi_restore 90
+ 2528              		.cfi_restore 91
+ 2529              		.cfi_restore 88
+ 2530              		.cfi_restore 89
+ 2531              		.cfi_restore 86
+ 2532              		.cfi_restore 87
+ 2533              		.cfi_restore 84
+ 2534              		.cfi_restore 85
+ 2535              		.cfi_restore 82
+ 2536              		.cfi_restore 83
+ 2537              		.cfi_restore 80
+ 2538              		.cfi_restore 81
+ 2539              		.cfi_def_cfa_offset 36
+ 2540 0384 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 2541              	.LVL217:
+ 2542              	.L101:
+ 2543              		.loc 2 389 1 view .LVU783
+ 2544              		.align	2
+ 2545              	.L100:
+ 2546 0388 9A99993E 		.word	1050253722
+ 2547 038c F304B53E 		.word	1052050675
+ 2548              		.cfi_endproc
+ 2549              	.LFE603:
+ 2551              		.global	_ZN6Reverb7_tdelayE
+ 2552              		.global	_ZN6Reverb7_tdiff1E
+ 2553              		.section	.data._ZN6Reverb7_tdelayE,"aw"
+ 2554              		.align	2
+ 2555              		.set	.LANCHOR1,. + 0
+ 2558              	_ZN6Reverb7_tdelayE:
+ 2559 0000 D9CD1C3E 		.word	1042075097
+ 2560 0004 3770573E 		.word	1045917751
+ 2561 0008 B4E7023E 		.word	1040377780
+ 2562 000c 3887833E 		.word	1048807224
+ 2563 0010 F7E7323E 		.word	1043523575
+ 2564 0014 14EB443E 		.word	1044704020
+ 2565 0018 0000003E 		.word	1040187392
+ 2566 001c 5245613E 		.word	1046562130
+ 2567              		.section	.data._ZN6Reverb7_tdiff1E,"aw"
+ 2568              		.align	2
+ 2569              		.set	.LANCHOR0,. + 0
+ 2572              	_ZN6Reverb7_tdiff1E:
+ 2573 0000 A8ACA63C 		.word	1017556136
+ 2574 0004 8D0EC83C 		.word	1019743885
+ 2575 0008 3273013D 		.word	1023505202
+ 2576 000c 75E9DF3C 		.word	1021307253
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 62
+
+
+ 2577 0010 2BA1BB3C 		.word	1018929451
+ 2578 0014 AEF3EF3C 		.word	1022358446
+ 2579 0018 F17E5C3C 		.word	1012694769
+ 2580 001c D6A79C3C 		.word	1016899542
+ 2581              		.text
+ 2582              	.Letext0:
+ 2583              		.file 4 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/machine/_default_types.h"
+ 2584              		.file 5 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/_stdint.h"
+ 2585              		.file 6 "../libDaisy/Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h"
+ 2586              		.file 7 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/cpp_type_traits.h
+ 2587              		.file 8 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath"
+ 2588              		.file 9 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h"
+ 2589              		.file 10 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v
+ 2590              		.file 11 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/math.h"
+ 2591              		.file 12 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/math.h"
+ 2592              		.file 13 "../libDaisy/Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_comp.h"
+ 2593              		.file 14 "../libDaisy/Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
+ 2594              		.file 15 "<built-in>"
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 63
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 reverb.cpp
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:19     .text._ZN5Diff17processEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:25     .text._ZN5Diff17processEf:0000000000000000 _ZN5Diff17processEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:82     .text._ZN5Filt17processEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:88     .text._ZN5Filt17processEf:0000000000000000 _ZN5Filt17processEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:138    .text._ZN5Filt17processEf:0000000000000044 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:143    .text._ZN5Delay4readEv:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:149    .text._ZN5Delay4readEv:0000000000000000 _ZN5Delay4readEv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:169    .text._ZN5Delay5writeEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:175    .text._ZN5Delay5writeEf:0000000000000000 _ZN5Delay5writeEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:210    .text._ZN6Vdelay4readEv:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:216    .text._ZN6Vdelay4readEv:0000000000000000 _ZN6Vdelay4readEv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:253    .text._ZN6Vdelay5writeEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:259    .text._ZN6Vdelay5writeEf:0000000000000000 _ZN6Vdelay5writeEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:294    .text._ZN5Diff1C2Ev:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:300    .text._ZN5Diff1C2Ev:0000000000000000 _ZN5Diff1C2Ev
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:300    .text._ZN5Diff1C2Ev:0000000000000000 _ZN5Diff1C1Ev
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:322    .text._ZN5Diff14initEif:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:328    .text._ZN5Diff14initEif:0000000000000000 _ZN5Diff14initEif
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:396    .text._ZN5Diff14finiEv:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:402    .text._ZN5Diff14finiEv:0000000000000000 _ZN5Diff14finiEv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:438    .text._ZN5Diff1D2Ev:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:444    .text._ZN5Diff1D2Ev:0000000000000000 _ZN5Diff1D2Ev
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:444    .text._ZN5Diff1D2Ev:0000000000000000 _ZN5Diff1D1Ev
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:477    .text._ZN5DelayC2Ev:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:483    .text._ZN5DelayC2Ev:0000000000000000 _ZN5DelayC2Ev
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:483    .text._ZN5DelayC2Ev:0000000000000000 _ZN5DelayC1Ev
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:504    .text._ZN5Delay4initEi:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:510    .text._ZN5Delay4initEi:0000000000000000 _ZN5Delay4initEi
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:562    .text._ZN5Delay4finiEv:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:568    .text._ZN5Delay4finiEv:0000000000000000 _ZN5Delay4finiEv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:604    .text._ZN5DelayD2Ev:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:610    .text._ZN5DelayD2Ev:0000000000000000 _ZN5DelayD2Ev
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:610    .text._ZN5DelayD2Ev:0000000000000000 _ZN5DelayD1Ev
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:643    .text._ZN6VdelayC2Ev:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:649    .text._ZN6VdelayC2Ev:0000000000000000 _ZN6VdelayC2Ev
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:649    .text._ZN6VdelayC2Ev:0000000000000000 _ZN6VdelayC1Ev
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:670    .text._ZN6Vdelay4initEi:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:676    .text._ZN6Vdelay4initEi:0000000000000000 _ZN6Vdelay4initEi
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:729    .text._ZN6Vdelay4finiEv:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:735    .text._ZN6Vdelay4finiEv:0000000000000000 _ZN6Vdelay4finiEv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:771    .text._ZN6VdelayD2Ev:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:777    .text._ZN6VdelayD2Ev:0000000000000000 _ZN6VdelayD2Ev
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:777    .text._ZN6VdelayD2Ev:0000000000000000 _ZN6VdelayD1Ev
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:810    .text._ZN6Vdelay9set_delayEi:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:816    .text._ZN6Vdelay9set_delayEi:0000000000000000 _ZN6Vdelay9set_delayEi
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:846    .text._ZN5Filt110set_paramsEffffff:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:852    .text._ZN5Filt110set_paramsEffffff:0000000000000000 _ZN5Filt110set_paramsEffffff
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:978    .text._ZN5Filt110set_paramsEffffff:00000000000000a8 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:983    .text._ZN6ReverbC2Ev:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:989    .text._ZN6ReverbC2Ev:0000000000000000 _ZN6ReverbC2Ev
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:989    .text._ZN6ReverbC2Ev:0000000000000000 _ZN6ReverbC1Ev
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:1124   .text._ZN6Reverb4initEfb:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:1130   .text._ZN6Reverb4initEfb:0000000000000000 _ZN6Reverb4initEfb
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:1366   .text._ZN6Reverb4initEfb:0000000000000134 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:1379   .text._ZN6Reverb4finiEv:0000000000000000 $t
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s 			page 64
+
+
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:1385   .text._ZN6Reverb4finiEv:0000000000000000 _ZN6Reverb4finiEv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:1428   .text._ZN6ReverbD2Ev:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:1434   .text._ZN6ReverbD2Ev:0000000000000000 _ZN6ReverbD2Ev
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:1434   .text._ZN6ReverbD2Ev:0000000000000000 _ZN6ReverbD1Ev
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:1558   .text._ZN6Reverb7prepareEi:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:1564   .text._ZN6Reverb7prepareEi:0000000000000000 _ZN6Reverb7prepareEi
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:1857   .text._ZN6Reverb7prepareEi:0000000000000198 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:1867   .text._ZN6Reverb7processEiPPfS1_:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:1873   .text._ZN6Reverb7processEiPPfS1_:0000000000000000 _ZN6Reverb7processEiPPfS1_
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:2546   .text._ZN6Reverb7processEiPPfS1_:0000000000000388 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:2558   .data._ZN6Reverb7_tdelayE:0000000000000000 _ZN6Reverb7_tdelayE
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:2572   .data._ZN6Reverb7_tdiff1E:0000000000000000 _ZN6Reverb7_tdiff1E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:2554   .data._ZN6Reverb7_tdelayE:0000000000000000 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccfsiz5d.s:2568   .data._ZN6Reverb7_tdiff1E:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+_Znaj
+memset
+_ZdaPv
+powf
+sqrtf
+_ZN5PareqC1Ev
+_ZN5Pareq8setfsampEf
+_ZN5PareqD1Ev
+cosf
+_ZN5Pareq7prepareEi
+_ZN5Pareq8process1EiiPPf

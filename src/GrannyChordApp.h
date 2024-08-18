@@ -38,8 +38,9 @@ class GrannyChordApp {
     static DTCMRAM_BSS SynthMode prev_synth_mode_;
     
     /* audio FX and filters */
+    // static DSY_SDRAM_BSS ReverbSc reverb_;
+
     static DTCMRAM_BSS Compressor comp_;
-    static DSY_SDRAM_BSS ReverbSc reverb_;
     static DTCMRAM_BSS MoogLadder lowpass_moog_;
     static DTCMRAM_BSS OnePole hipass_;
 

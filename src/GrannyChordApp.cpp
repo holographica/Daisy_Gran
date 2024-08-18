@@ -11,7 +11,7 @@ DTCMRAM_BSS SynthMode GrannyChordApp::curr_synth_mode_;
 DTCMRAM_BSS SynthMode GrannyChordApp::prev_synth_mode_;
 
 // __attribute__((section(".qspiflash_bss")))ReverbSc GrannyChordApp::reverb_;
-DSY_SDRAM_BSS ReverbSc GrannyChordApp::reverb_;
+// DSY_SDRAM_BSS ReverbSc GrannyChordApp::reverb_;
 
 DTCMRAM_BSS Compressor GrannyChordApp::comp_;
 DTCMRAM_BSS MoogLadder GrannyChordApp::lowpass_moog_;
@@ -259,7 +259,7 @@ void GrannyChordApp::InitWavWriter(){
 /// @brief initialise reverb, compressor, filter configs for FX section 
 void GrannyChordApp::InitFX(){
   comp_.Init(pod_.AudioSampleRate());
-  reverb_.Init(SAMPLE_RATE_FLOAT);
+  // reverb_.Init(SAMPLE_RATE_FLOAT);
   lowpass_moog_.Init(SAMPLE_RATE_FLOAT);
   lowpass_moog_.SetFreq(20000.0f);
   lowpass_moog_.SetRes(0.7f);
@@ -367,7 +367,7 @@ void GrannyChordApp::ProcessSynthesis(AudioHandle::OutputBuffer out, size_t size
     for (size_t i=0; i<size; i++){
       temp_left[i] = out[0][i];
       temp_right[i] = out[1][i];
-      reverb_.Process(temp_left[i],temp_right[i],&out[0][i],&out[1][i]); // NOTE: check this works
+      // reverb_.Process(temp_left[i],temp_right[i],&out[0][i],&out[1][i]); // NOTE: check this works
     }
 }
 
@@ -452,7 +452,7 @@ void GrannyChordApp::UpdateKnob1Params(float knob1_val, SynthMode mode){
       break;
     case SynthMode::Reverb:
       /* set reverb feedback ie tail length */
-      reverb_.SetFeedback(knob1_val); // NOTE check it doesn't clip
+      // reverb_.SetFeedback(knob1_val); // NOTE check it doesn't clip
       break;
     case SynthMode::Filter:
       // knob1_val = fmap(knob1_val, 20.0f, 20000.0f, daisysp::Mapping::EXP);
@@ -490,7 +490,7 @@ void GrannyChordApp::UpdateKnob2Params(float knob2_val, SynthMode mode){
       /* map knob value to frequency range with an exponential curve */
       knob2_val = fmap(knob2_val, 100.0f, 20000.0f, daisysp::Mapping::EXP);
       /* set reverb low pass frequency */
-      reverb_.SetLpFreq(knob2_val);
+      // reverb_.SetLpFreq(knob2_val);
       break;
     case SynthMode::Filter:
       /* again, map knob value to frequency range with an exponential curve */
