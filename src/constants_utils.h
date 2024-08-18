@@ -10,11 +10,11 @@ constexpr size_t CHNL_BUF_SIZE_ABS = 16*1024*1024;
 /* above is absolute size - each sample needs an int16 (2 bytes) so we do (abs_size)/2 */
 constexpr size_t CHNL_BUF_SIZE_SAMPS = 8*1024*1024;
 
-/* this is 60s @ 48kHz * 2 channels 
-nb: we can return out into one channel by interleaving the channels */
-constexpr size_t RECORD_OUT_BUF_SIZE_SAMPS = 60*48000*2;
-/* we need 2 bytes for each sample so we do (buf_samps_size)*2 */
-constexpr size_t RECORD_OUT_BUF_SIZE_ABS = 60*48000*2*2;
+/* chunk size for reading audio into temporary buffer */
+const size_t BUF_CHUNK_SZ = 16384;
+
+static const uint16_t MAX_FILES = 32;                      
+static const uint16_t MAX_FNAME_LEN = 128;
 
 constexpr int BIT_DEPTH = 16;
 /* min/max number of concurrent active grains */
@@ -27,6 +27,13 @@ constexpr size_t MIN_GRAIN_SIZE_SAMPLES = 4800; // 100ms at 48kHz
 constexpr size_t MAX_GRAIN_SIZE_SAMPLES = 144000; // 3s at 48kHz
 constexpr float MIN_PITCH = 0.5f;
 constexpr float MAX_PITCH = 3.0f;
+
+/* integer clamp as can't use std::clamp */
+inline constexpr size_t intclamp(size_t val, size_t min, size_t max){
+  if (val < min) val = min;
+  else if (val > max) val = max;
+  return val;
+}
 
 /* converts milliseconds to number of samples */
 inline constexpr size_t MsToSamples(float ms){

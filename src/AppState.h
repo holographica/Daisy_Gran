@@ -1,13 +1,11 @@
 #pragma once
 
 enum class AppState{
-  Startup,
   SelectFile,
   PlayWAV,
   Synthesis,
   RecordIn,
   // ChordMode
-  // RecordOut? would coexist with another state so maybe not? 
   Error
 };
 

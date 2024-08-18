@@ -1,0 +1,2275 @@
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.arch armv7e-m
+   3              		.fpu fpv5-d16
+   4              		.eabi_attribute 28, 1
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.file	"Grain.cpp"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text._ZN5Grain4InitEPKsS1_,"ax",%progbits
+  19              		.align	1
+  20              		.global	_ZN5Grain4InitEPKsS1_
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  25              	_ZN5Grain4InitEPKsS1_:
+  26              	.LVL0:
+  27              	.LFB4872:
+  28              		.file 1 "Grain.cpp"
+   1:Grain.cpp     **** #include "Grain.h"
+   2:Grain.cpp     **** 
+   3:Grain.cpp     **** size_t Grain::audio_len_;
+   4:Grain.cpp     **** const float Grain::start_decay_ = 0.8f;
+   5:Grain.cpp     **** const float Grain::decay_rate_ = 5.0f;
+   6:Grain.cpp     **** 
+   7:Grain.cpp     **** /// @brief Initialise the Grain instance and its Phasor object 
+   8:Grain.cpp     **** /// @param left Const pointer to the left audio data buffer
+   9:Grain.cpp     **** /// @param right Const pointer to the right audio data buffer
+  10:Grain.cpp     **** /// @param len Length in samples of the audio file loaded in the buffers
+  11:Grain.cpp     **** void Grain::Init(const int16_t *left, const int16_t *right){
+  29              		.loc 1 11 60 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  12:Grain.cpp     ****   left_buf_ = left;
+  34              		.loc 1 12 3 view .LVU1
+  35              	.LBB31:
+  36              	.LBB32:
+  37              		.file 2 "GrainPhasor.h"
+   1:GrainPhasor.h **** #include "constants_utils.h"
+   2:GrainPhasor.h **** class GrainPhasor {
+   3:GrainPhasor.h ****   public:
+   4:GrainPhasor.h ****     enum class Mode {
+   5:GrainPhasor.h ****       OneShot,
+   6:GrainPhasor.h ****       OneShotReverse,
+   7:GrainPhasor.h ****       Cycle,
+   8:GrainPhasor.h ****       PingPong,
+   9:GrainPhasor.h ****     };
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 2
+
+
+  10:GrainPhasor.h **** 
+  11:GrainPhasor.h ****     GrainPhasor(): 
+  12:GrainPhasor.h ****       phase_(0), increment_(0), mode_(Mode::OneShot), 
+  13:GrainPhasor.h ****       direction_(1), grain_finished_(false) {};
+  14:GrainPhasor.h **** 
+  15:GrainPhasor.h ****     ~GrainPhasor() {};
+  16:GrainPhasor.h **** 
+  17:GrainPhasor.h ****     void Init(size_t grain_size, float pitch_ratio, Mode play_mode){
+  18:GrainPhasor.h ****       increment_ = pitch_ratio/static_cast<float>(grain_size);
+  38              		.loc 2 18 31 is_stmt 0 view .LVU2
+  39 0000 F7EE007A 		vmov.f32	s15, #1.0e+0
+  40 0004 9FED0B7A 		vldr.32	s14, .L3
+  41              	.LBE32:
+  42              	.LBE31:
+  13:Grain.cpp     ****   right_buf_ = right;
+  14:Grain.cpp     ****   SetPhasorMode(GrainPhasor::Mode::OneShot);
+  15:Grain.cpp     ****   phasor_.Init(0.0f, 1.0f, phasor_mode_);
+  43              		.loc 1 15 15 view .LVU3
+  44 0008 036A     		ldr	r3, [r0, #32]
+  45              	.LBB35:
+  46              	.LBB33:
+  19:GrainPhasor.h ****       mode_ = play_mode;
+  20:GrainPhasor.h ****       phase_ = 0;
+  47              		.loc 2 20 14 view .LVU4
+  48 000a 80ED037A 		vstr.32	s14, [r0, #12]
+  18:GrainPhasor.h ****       mode_ = play_mode;
+  49              		.loc 2 18 31 view .LVU5
+  50 000e C7EE876A 		vdiv.f32	s13, s15, s14
+  19:GrainPhasor.h ****       mode_ = play_mode;
+  51              		.loc 2 19 13 view .LVU6
+  52 0012 4361     		str	r3, [r0, #20]
+  53              	.LBE33:
+  54              	.LBE35:
+  13:Grain.cpp     ****   right_buf_ = right;
+  55              		.loc 1 13 14 view .LVU7
+  56 0014 C0E90012 		strd	r1, r2, [r0]
+  14:Grain.cpp     ****   phasor_.Init(0.0f, 1.0f, phasor_mode_);
+  57              		.loc 1 14 3 is_stmt 1 view .LVU8
+  58              	.LVL1:
+  16:Grain.cpp     **** }
+  17:Grain.cpp     **** 
+  18:Grain.cpp     **** /// @brief Causes a grain to start playing and assigns its parameters
+  19:Grain.cpp     **** /// @param pos Spawn position of the grain, within the audio buffer 
+  20:Grain.cpp     **** /// @param grain_size Length of the grain in samples
+  21:Grain.cpp     **** /// @param pitch_ratio Pitch of the grain - 1 plays the grain at its regular pitch
+  22:Grain.cpp     **** /// @param pan Position of the grain's audio output in the stereo field
+  23:Grain.cpp     **** void Grain::Trigger(size_t pos, size_t grain_size, float pitch_ratio, float pan) {
+  24:Grain.cpp     ****   if (pos >= audio_len_) pos -= audio_len_;
+  25:Grain.cpp     ****   spawn_pos_ = pos;
+  26:Grain.cpp     ****   grain_size_ = grain_size;
+  27:Grain.cpp     ****   is_active_ = true;
+  28:Grain.cpp     ****   phasor_.Init(grain_size, pitch_ratio, phasor_mode_);
+  29:Grain.cpp     ****   pitch_ratio_ = pitch_ratio;
+  30:Grain.cpp     ****   pan_ = pan;
+  31:Grain.cpp     **** }
+  32:Grain.cpp     **** 
+  33:Grain.cpp     **** /// @brief Processes grain phase, applies envelope and panning and mixes into the output buffers
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 3
+
+
+  34:Grain.cpp     **** /// @param sum_left Pointer to variable storing total left channel audio output of all grains
+  35:Grain.cpp     **** /// @param sum_right Pointer to variable storing total right channel audio output of all grains
+  36:Grain.cpp     **** void Grain::Process(float *sum_left, float *sum_right) {
+  37:Grain.cpp     ****   if (!is_active_) return;
+  38:Grain.cpp     ****   float phase = phasor_.Process();
+  39:Grain.cpp     ****   if (phasor_.GrainFinished()){
+  40:Grain.cpp     ****     is_active_=false;
+  41:Grain.cpp     ****     return;
+  42:Grain.cpp     ****   }
+  43:Grain.cpp     ****   size_t curr_idx = spawn_pos_ + static_cast<size_t>(phase*grain_size_*pitch_ratio_);
+  44:Grain.cpp     ****   
+  45:Grain.cpp     ****   // NOTE: CHANGED THIS TO WRAP AROUND SO CHANGE BACK IF NEEDED
+  46:Grain.cpp     ****   if (curr_idx>=audio_len_-1){
+  47:Grain.cpp     ****     curr_idx %= audio_len_;
+  48:Grain.cpp     ****     // return;
+  49:Grain.cpp     ****   }
+  50:Grain.cpp     ****   else if (curr_idx<0){
+  51:Grain.cpp     ****     curr_idx += audio_len_;
+  52:Grain.cpp     ****     // return;
+  53:Grain.cpp     ****   }
+  54:Grain.cpp     **** 
+  55:Grain.cpp     ****   float left = s162f(left_buf_[curr_idx]);
+  56:Grain.cpp     ****   float right = s162f(right_buf_[curr_idx]);
+  57:Grain.cpp     ****   float env = ApplyEnvelope(phase);
+  58:Grain.cpp     **** 
+  59:Grain.cpp     ****   /* approximate constant power panning - cheaper than using sin/cos
+  60:Grain.cpp     ****   this works since gain_l^2 + gain_r^2 = 1
+  61:Grain.cpp     ****   source: cs.cmu.edu/~music/icm-online/readings/panlaws/panlaws.pdf */
+  62:Grain.cpp     ****   float gain_left = std::sqrt(1.0f-pan_);
+  63:Grain.cpp     ****   float gain_right = std::sqrt(pan_);
+  64:Grain.cpp     ****   *sum_left += (left*env*gain_left);
+  65:Grain.cpp     ****   *sum_right += (right*env*gain_right);
+  66:Grain.cpp     **** }
+  67:Grain.cpp     **** 
+  68:Grain.cpp     **** /// @brief Applies selected amplitude envelope to grain based on its phase
+  69:Grain.cpp     **** /// @param phase Current playback position of the grain within its lifetime (from 0 - 1)
+  70:Grain.cpp     **** /// @return Amplitude of the grain after envelope has been applied
+  71:Grain.cpp     **** float Grain::ApplyEnvelope(float phase){
+  72:Grain.cpp     ****   switch(envelope_type_){
+  73:Grain.cpp     ****     case EnvelopeType::LinearDecay:
+  74:Grain.cpp     ****       return 1.0f - phase;
+  75:Grain.cpp     ****     case EnvelopeType::Rectangular:
+  76:Grain.cpp     ****       return phase;
+  77:Grain.cpp     ****     case EnvelopeType::Decay:
+  78:Grain.cpp     ****     default:
+  79:Grain.cpp     ****       if (phase<=start_decay_) { return 1.0f; }
+  80:Grain.cpp     ****       else { return 1.0f - ((phase - start_decay_) * decay_rate_); }
+  81:Grain.cpp     ****     case EnvelopeType::Triangular:
+  82:Grain.cpp     ****       return 1.0f - std::abs(2.0f*phase - 1.0f);
+  83:Grain.cpp     ****     /* formula from https://uk.mathworks.com/help/signal/ref/hann.html */
+  84:Grain.cpp     ****     case EnvelopeType::Hann:
+  85:Grain.cpp     ****       return 0.5f * (1.0f - std::cos(2.0f * M_PI * phase));
+  86:Grain.cpp     ****   }
+  87:Grain.cpp     **** }
+  88:Grain.cpp     **** 
+  89:Grain.cpp     **** void Grain::SetSpawnPos(size_t spawn_pos){ spawn_pos_ = spawn_pos; }
+  90:Grain.cpp     **** void Grain::SetGrainSize(size_t grain_size) { grain_size_ = grain_size; }
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 4
+
+
+  91:Grain.cpp     **** void Grain::SetPitchRatio(float pitch_ratio) { pitch_ratio_ = pitch_ratio; }
+  92:Grain.cpp     **** void Grain::SetEnvelopeType(EnvelopeType type) { envelope_type_ = type; }
+  93:Grain.cpp     **** void Grain::SetPhasorPitchRatio(float pitch_ratio) { phasor_.SetPitchRatio(pitch_ratio, audio_len_)
+  94:Grain.cpp     **** void Grain::SetPhasorMode(GrainPhasor::Mode mode) { phasor_.SetMode(mode); }...
+  59              		.loc 1 94 53 view .LVU9
+  21:GrainPhasor.h ****       direction_ = 1;
+  22:GrainPhasor.h ****       if (mode_==Mode::OneShotReverse){
+  23:GrainPhasor.h ****         phase_ = 1;
+  24:GrainPhasor.h ****         direction_ = -1;
+  25:GrainPhasor.h ****       }
+  26:GrainPhasor.h ****       grain_finished_ = false;
+  27:GrainPhasor.h ****     }
+  28:GrainPhasor.h **** 
+  29:GrainPhasor.h ****     void Reset(){
+  30:GrainPhasor.h ****       phase_ =0;
+  31:GrainPhasor.h ****       direction_ = 1;
+  32:GrainPhasor.h ****     }
+  33:GrainPhasor.h **** 
+  34:GrainPhasor.h ****     void SetPitchRatio(float pitch_ratio, float grain_size_samples){
+  35:GrainPhasor.h ****       float size_ms = SamplesToMs(grain_size_samples); // NOTE: CHECK - THIS MIGHT NOT WORK PROPERL
+  36:GrainPhasor.h ****       increment_ = pitch_ratio / size_ms;
+  37:GrainPhasor.h ****     }
+  38:GrainPhasor.h **** 
+  39:GrainPhasor.h ****     void SetMode(Mode new_mode){
+  40:GrainPhasor.h ****       mode_ = new_mode;
+  60              		.loc 2 40 7 view .LVU10
+  15:Grain.cpp     ****   phasor_.Init(0.0f, 1.0f, phasor_mode_);
+  61              		.loc 1 15 3 view .LVU11
+  62              	.LBB36:
+  63              	.LBI31:
+  17:GrainPhasor.h ****       increment_ = pitch_ratio/static_cast<float>(grain_size);
+  64              		.loc 2 17 10 view .LVU12
+  65              	.LBB34:
+  18:GrainPhasor.h ****       mode_ = play_mode;
+  66              		.loc 2 18 7 view .LVU13
+  21:GrainPhasor.h ****       if (mode_==Mode::OneShotReverse){
+  67              		.loc 2 21 18 is_stmt 0 view .LVU14
+  68 0018 0122     		movs	r2, #1
+  69              	.LVL2:
+  22:GrainPhasor.h ****         phase_ = 1;
+  70              		.loc 2 22 7 view .LVU15
+  71 001a 9342     		cmp	r3, r2
+  21:GrainPhasor.h ****       if (mode_==Mode::OneShotReverse){
+  72              		.loc 2 21 18 view .LVU16
+  73 001c 8261     		str	r2, [r0, #24]
+  24:GrainPhasor.h ****       }
+  74              		.loc 2 24 20 view .LVU17
+  75 001e 02BF     		ittt	eq
+  76 0020 4FF0FF33 		moveq	r3, #-1
+  77              	.LVL3:
+  23:GrainPhasor.h ****         direction_ = -1;
+  78              		.loc 2 23 16 view .LVU18
+  79 0024 C0ED037A 		vstreq.32	s15, [r0, #12]
+  24:GrainPhasor.h ****       }
+  80              		.loc 2 24 20 view .LVU19
+  81 0028 8361     		streq	r3, [r0, #24]
+  26:GrainPhasor.h ****     }
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 5
+
+
+  82              		.loc 2 26 23 view .LVU20
+  83 002a 0023     		movs	r3, #0
+  84 002c 0377     		strb	r3, [r0, #28]
+  18:GrainPhasor.h ****       mode_ = play_mode;
+  85              		.loc 2 18 18 view .LVU21
+  86 002e C0ED046A 		vstr.32	s13, [r0, #16]
+  19:GrainPhasor.h ****       phase_ = 0;
+  87              		.loc 2 19 7 is_stmt 1 view .LVU22
+  20:GrainPhasor.h ****       direction_ = 1;
+  88              		.loc 2 20 7 view .LVU23
+  21:GrainPhasor.h ****       if (mode_==Mode::OneShotReverse){
+  89              		.loc 2 21 7 view .LVU24
+  22:GrainPhasor.h ****         phase_ = 1;
+  90              		.loc 2 22 7 view .LVU25
+  23:GrainPhasor.h ****         direction_ = -1;
+  91              		.loc 2 23 9 view .LVU26
+  24:GrainPhasor.h ****       }
+  92              		.loc 2 24 9 view .LVU27
+  26:GrainPhasor.h ****     }
+  93              		.loc 2 26 7 view .LVU28
+  94              	.LVL4:
+  26:GrainPhasor.h ****     }
+  95              		.loc 2 26 7 is_stmt 0 view .LVU29
+  96              	.LBE34:
+  97              	.LBE36:
+  16:Grain.cpp     **** }
+  98              		.loc 1 16 1 view .LVU30
+  99 0032 7047     		bx	lr
+ 100              	.L4:
+ 101              		.align	2
+ 102              	.L3:
+ 103 0034 00000000 		.word	0
+ 104              		.cfi_endproc
+ 105              	.LFE4872:
+ 107              		.section	.text._ZN5Grain7TriggerEjjff,"ax",%progbits
+ 108              		.align	1
+ 109              		.global	_ZN5Grain7TriggerEjjff
+ 110              		.syntax unified
+ 111              		.thumb
+ 112              		.thumb_func
+ 114              	_ZN5Grain7TriggerEjjff:
+ 115              	.LVL5:
+ 116              	.LFB4873:
+  23:Grain.cpp     **** void Grain::Trigger(size_t pos, size_t grain_size, float pitch_ratio, float pan) {
+ 117              		.loc 1 23 82 is_stmt 1 view -0
+ 118              		.cfi_startproc
+ 119              		@ args = 0, pretend = 0, frame = 0
+ 120              		@ frame_needed = 0, uses_anonymous_args = 0
+ 121              		@ link register save eliminated.
+  24:Grain.cpp     ****   if (pos >= audio_len_) pos -= audio_len_;
+ 122              		.loc 1 24 3 view .LVU32
+ 123              	.LBB39:
+ 124              	.LBB40:
+  18:GrainPhasor.h ****       mode_ = play_mode;
+ 125              		.loc 2 18 32 is_stmt 0 view .LVU33
+ 126 0000 07EE902A 		vmov	s15, r2	@ int
+ 127              	.LBE40:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 6
+
+
+ 128              	.LBE39:
+  24:Grain.cpp     ****   if (pos >= audio_len_) pos -= audio_len_;
+ 129              		.loc 1 24 11 view .LVU34
+ 130 0004 114B     		ldr	r3, .L8
+  29:Grain.cpp     ****   pitch_ratio_ = pitch_ratio;
+ 131              		.loc 1 29 16 view .LVU35
+ 132 0006 80ED0C0A 		vstr.32	s0, [r0, #48]
+ 133              	.LBB46:
+ 134              	.LBB41:
+  18:GrainPhasor.h ****       mode_ = play_mode;
+ 135              		.loc 2 18 32 view .LVU36
+ 136 000a F8EE677A 		vcvt.f32.u32	s15, s15
+ 137              	.LBE41:
+ 138              	.LBE46:
+  24:Grain.cpp     ****   if (pos >= audio_len_) pos -= audio_len_;
+ 139              		.loc 1 24 11 view .LVU37
+ 140 000e 1B68     		ldr	r3, [r3]
+  30:Grain.cpp     ****   pan_ = pan;
+ 141              		.loc 1 30 8 view .LVU38
+ 142 0010 C0ED090A 		vstr.32	s1, [r0, #36]
+  24:Grain.cpp     ****   if (pos >= audio_len_) pos -= audio_len_;
+ 143              		.loc 1 24 3 view .LVU39
+ 144 0014 8B42     		cmp	r3, r1
+  24:Grain.cpp     ****   if (pos >= audio_len_) pos -= audio_len_;
+ 145              		.loc 1 24 26 is_stmt 1 view .LVU40
+ 146              	.LBB47:
+ 147              	.LBB42:
+  18:GrainPhasor.h ****       mode_ = play_mode;
+ 148              		.loc 2 18 31 is_stmt 0 view .LVU41
+ 149 0016 80EE277A 		vdiv.f32	s14, s0, s15
+ 150              	.LBE42:
+ 151              	.LBE47:
+  24:Grain.cpp     ****   if (pos >= audio_len_) pos -= audio_len_;
+ 152              		.loc 1 24 30 view .LVU42
+ 153 001a 98BF     		it	ls
+ 154 001c C91A     		subls	r1, r1, r3
+ 155              	.LVL6:
+  25:Grain.cpp     ****   spawn_pos_ = pos;
+ 156              		.loc 1 25 3 is_stmt 1 view .LVU43
+  28:Grain.cpp     ****   phasor_.Init(grain_size, pitch_ratio, phasor_mode_);
+ 157              		.loc 1 28 15 is_stmt 0 view .LVU44
+ 158 001e 036A     		ldr	r3, [r0, #32]
+ 159              	.LBB48:
+ 160              	.LBB43:
+  19:GrainPhasor.h ****       phase_ = 0;
+ 161              		.loc 2 19 13 view .LVU45
+ 162 0020 4361     		str	r3, [r0, #20]
+ 163              	.LBE43:
+ 164              	.LBE48:
+  26:Grain.cpp     ****   grain_size_ = grain_size;
+ 165              		.loc 1 26 15 view .LVU46
+ 166 0022 C0E90A12 		strd	r1, r2, [r0, #40]
+  27:Grain.cpp     ****   is_active_ = true;
+ 167              		.loc 1 27 3 is_stmt 1 view .LVU47
+  27:Grain.cpp     ****   is_active_ = true;
+ 168              		.loc 1 27 14 is_stmt 0 view .LVU48
+ 169 0026 0121     		movs	r1, #1
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 7
+
+
+ 170              	.LVL7:
+ 171              	.LBB49:
+ 172              	.LBB44:
+  20:GrainPhasor.h ****       direction_ = 1;
+ 173              		.loc 2 20 14 view .LVU49
+ 174 0028 0022     		movs	r2, #0
+ 175              	.LVL8:
+  22:GrainPhasor.h ****         phase_ = 1;
+ 176              		.loc 2 22 7 view .LVU50
+ 177 002a 8B42     		cmp	r3, r1
+  20:GrainPhasor.h ****       direction_ = 1;
+ 178              		.loc 2 20 14 view .LVU51
+ 179 002c C260     		str	r2, [r0, #12]	@ float
+  21:GrainPhasor.h ****       if (mode_==Mode::OneShotReverse){
+ 180              		.loc 2 21 18 view .LVU52
+ 181 002e 8161     		str	r1, [r0, #24]
+  23:GrainPhasor.h ****         direction_ = -1;
+ 182              		.loc 2 23 16 view .LVU53
+ 183 0030 08BF     		it	eq
+ 184 0032 4FF07E53 		moveq	r3, #1065353216
+ 185              	.LBE44:
+ 186              	.LBE49:
+  27:Grain.cpp     ****   is_active_ = true;
+ 187              		.loc 1 27 14 view .LVU54
+ 188 0036 0172     		strb	r1, [r0, #8]
+  28:Grain.cpp     ****   phasor_.Init(grain_size, pitch_ratio, phasor_mode_);
+ 189              		.loc 1 28 3 is_stmt 1 view .LVU55
+ 190              	.LVL9:
+ 191              	.LBB50:
+ 192              	.LBI39:
+  17:GrainPhasor.h ****       increment_ = pitch_ratio/static_cast<float>(grain_size);
+ 193              		.loc 2 17 10 view .LVU56
+ 194              	.LBB45:
+  18:GrainPhasor.h ****       mode_ = play_mode;
+ 195              		.loc 2 18 7 view .LVU57
+  23:GrainPhasor.h ****         direction_ = -1;
+ 196              		.loc 2 23 16 is_stmt 0 view .LVU58
+ 197 0038 02BF     		ittt	eq
+ 198 003a C360     		streq	r3, [r0, #12]	@ float
+  24:GrainPhasor.h ****       }
+ 199              		.loc 2 24 20 view .LVU59
+ 200 003c 4FF0FF33 		moveq	r3, #-1
+ 201 0040 8361     		streq	r3, [r0, #24]
+  26:GrainPhasor.h ****     }
+ 202              		.loc 2 26 23 view .LVU60
+ 203 0042 0023     		movs	r3, #0
+  18:GrainPhasor.h ****       mode_ = play_mode;
+ 204              		.loc 2 18 18 view .LVU61
+ 205 0044 80ED047A 		vstr.32	s14, [r0, #16]
+  19:GrainPhasor.h ****       phase_ = 0;
+ 206              		.loc 2 19 7 is_stmt 1 view .LVU62
+  20:GrainPhasor.h ****       direction_ = 1;
+ 207              		.loc 2 20 7 view .LVU63
+  21:GrainPhasor.h ****       if (mode_==Mode::OneShotReverse){
+ 208              		.loc 2 21 7 view .LVU64
+  22:GrainPhasor.h ****         phase_ = 1;
+ 209              		.loc 2 22 7 view .LVU65
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 8
+
+
+  23:GrainPhasor.h ****         direction_ = -1;
+ 210              		.loc 2 23 9 view .LVU66
+  24:GrainPhasor.h ****       }
+ 211              		.loc 2 24 9 view .LVU67
+  26:GrainPhasor.h ****     }
+ 212              		.loc 2 26 7 view .LVU68
+  26:GrainPhasor.h ****     }
+ 213              		.loc 2 26 23 is_stmt 0 view .LVU69
+ 214 0048 0377     		strb	r3, [r0, #28]
+ 215              	.LVL10:
+  26:GrainPhasor.h ****     }
+ 216              		.loc 2 26 23 view .LVU70
+ 217              	.LBE45:
+ 218              	.LBE50:
+  29:Grain.cpp     ****   pitch_ratio_ = pitch_ratio;
+ 219              		.loc 1 29 3 is_stmt 1 view .LVU71
+  30:Grain.cpp     ****   pan_ = pan;
+ 220              		.loc 1 30 3 view .LVU72
+  31:Grain.cpp     **** }
+ 221              		.loc 1 31 1 is_stmt 0 view .LVU73
+ 222 004a 7047     		bx	lr
+ 223              	.L9:
+ 224              		.align	2
+ 225              	.L8:
+ 226 004c 00000000 		.word	.LANCHOR0
+ 227              		.cfi_endproc
+ 228              	.LFE4873:
+ 230              		.section	.text._ZN5Grain13ApplyEnvelopeEf,"ax",%progbits
+ 231              		.align	1
+ 232              		.global	_ZN5Grain13ApplyEnvelopeEf
+ 233              		.syntax unified
+ 234              		.thumb
+ 235              		.thumb_func
+ 237              	_ZN5Grain13ApplyEnvelopeEf:
+ 238              	.LVL11:
+ 239              	.LFB4875:
+  71:Grain.cpp     **** float Grain::ApplyEnvelope(float phase){
+ 240              		.loc 1 71 40 is_stmt 1 view -0
+ 241              		.cfi_startproc
+ 242              		@ args = 0, pretend = 0, frame = 0
+ 243              		@ frame_needed = 0, uses_anonymous_args = 0
+  72:Grain.cpp     ****   switch(envelope_type_){
+ 244              		.loc 1 72 3 view .LVU75
+  71:Grain.cpp     **** float Grain::ApplyEnvelope(float phase){
+ 245              		.loc 1 71 40 is_stmt 0 view .LVU76
+ 246 0000 08B5     		push	{r3, lr}
+ 247              		.cfi_def_cfa_offset 8
+ 248              		.cfi_offset 3, -8
+ 249              		.cfi_offset 14, -4
+  72:Grain.cpp     ****   switch(envelope_type_){
+ 250              		.loc 1 72 3 view .LVU77
+ 251 0002 436B     		ldr	r3, [r0, #52]
+ 252 0004 042B     		cmp	r3, #4
+ 253 0006 09D8     		bhi	.L11
+ 254 0008 DFE803F0 		tbb	[pc, r3]
+ 255              	.L13:
+ 256 000c 03       		.byte	(.L16-.L13)/2
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 9
+
+
+ 257 000d 07       		.byte	(.L15-.L13)/2
+ 258 000e 08       		.byte	(.L11-.L13)/2
+ 259 000f 1A       		.byte	(.L14-.L13)/2
+ 260 0010 27       		.byte	(.L12-.L13)/2
+ 261 0011 00       		.p2align 1
+ 262              	.L16:
+  73:Grain.cpp     ****     case EnvelopeType::LinearDecay:
+ 263              		.loc 1 73 5 is_stmt 1 view .LVU78
+  74:Grain.cpp     ****       return 1.0f - phase;
+ 264              		.loc 1 74 7 view .LVU79
+  74:Grain.cpp     ****       return 1.0f - phase;
+ 265              		.loc 1 74 21 is_stmt 0 view .LVU80
+ 266 0012 F7EE007A 		vmov.f32	s15, #1.0e+0
+ 267 0016 37EEC00A 		vsub.f32	s0, s15, s0
+ 268              	.LVL12:
+ 269              	.L15:
+  87:Grain.cpp     **** }
+ 270              		.loc 1 87 1 view .LVU81
+ 271 001a 08BD     		pop	{r3, pc}
+ 272              	.LVL13:
+ 273              	.L11:
+  77:Grain.cpp     ****     case EnvelopeType::Decay:
+ 274              		.loc 1 77 5 is_stmt 1 view .LVU82
+  78:Grain.cpp     ****     default:
+ 275              		.loc 1 78 5 view .LVU83
+  79:Grain.cpp     ****       if (phase<=start_decay_) { return 1.0f; }
+ 276              		.loc 1 79 7 view .LVU84
+ 277 001c DFED1A7A 		vldr.32	s15, .L18+8
+ 278 0020 B7EE007A 		vmov.f32	s14, #1.0e+0
+ 279 0024 B4EEE70A 		vcmpe.f32	s0, s15
+ 280 0028 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 281 002c 05D9     		bls	.L17
+  80:Grain.cpp     ****       else { return 1.0f - ((phase - start_decay_) * decay_rate_); }
+ 282              		.loc 1 80 14 view .LVU85
+  80:Grain.cpp     ****       else { return 1.0f - ((phase - start_decay_) * decay_rate_); }
+ 283              		.loc 1 80 36 is_stmt 0 view .LVU86
+ 284 002e 70EE677A 		vsub.f32	s15, s0, s15
+  80:Grain.cpp     ****       else { return 1.0f - ((phase - start_decay_) * decay_rate_); }
+ 285              		.loc 1 80 65 view .LVU87
+ 286 0032 F1EE046A 		vmov.f32	s13, #5.0e+0
+ 287 0036 A7EEE67A 		vfms.f32	s14, s15, s13
+ 288              	.L17:
+  79:Grain.cpp     ****       if (phase<=start_decay_) { return 1.0f; }
+ 289              		.loc 1 79 41 view .LVU88
+ 290 003a B0EE470A 		vmov.f32	s0, s14
+ 291              	.LVL14:
+  79:Grain.cpp     ****       if (phase<=start_decay_) { return 1.0f; }
+ 292              		.loc 1 79 41 view .LVU89
+ 293 003e ECE7     		b	.L15
+ 294              	.LVL15:
+ 295              	.L14:
+  81:Grain.cpp     ****     case EnvelopeType::Triangular:
+ 296              		.loc 1 81 5 is_stmt 1 view .LVU90
+  82:Grain.cpp     ****       return 1.0f - std::abs(2.0f*phase - 1.0f);
+ 297              		.loc 1 82 7 view .LVU91
+  82:Grain.cpp     ****       return 1.0f - std::abs(2.0f*phase - 1.0f);
+ 298              		.loc 1 82 29 is_stmt 0 view .LVU92
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 10
+
+
+ 299 0040 B0EE007A 		vmov.f32	s14, #2.0e+0
+ 300 0044 FFEE007A 		vmov.f32	s15, #-1.0e+0
+ 301 0048 E0EE077A 		vfma.f32	s15, s0, s14
+ 302              	.LVL16:
+ 303              	.LBB51:
+ 304              	.LBI51:
+ 305              		.file 3 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h"
+   1:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // -*- C++ -*- C library enhancements header.
+   2:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
+   3:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // Copyright (C) 2016-2020 Free Software Foundation, Inc.
+   4:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** //
+   5:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // This file is part of the GNU ISO C++ Library.  This library is free
+   6:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // software; you can redistribute it and/or modify it under the
+   7:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // terms of the GNU General Public License as published by the
+   8:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // Free Software Foundation; either version 3, or (at your option)
+   9:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // any later version.
+  10:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
+  11:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // This library is distributed in the hope that it will be useful,
+  12:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // but WITHOUT ANY WARRANTY; without even the implied warranty of
+  13:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  14:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // GNU General Public License for more details.
+  15:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
+  16:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // Under Section 7 of GPL version 3, you are granted additional
+  17:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // permissions described in the GCC Runtime Library Exception, version
+  18:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // 3.1, as published by the Free Software Foundation.
+  19:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
+  20:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // You should have received a copy of the GNU General Public License and
+  21:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // a copy of the GCC Runtime Library Exception along with this program;
+  22:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
+  23:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // <http://www.gnu.org/licenses/>.
+  24:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
+  25:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** /** @file include/bits/std_abs.h
+  26:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h ****  *  This is an internal header file, included by other library headers.
+  27:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h ****  *  Do not attempt to use it directly. @headername{cmath, cstdlib}
+  28:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h ****  */
+  29:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
+  30:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** #ifndef _GLIBCXX_BITS_STD_ABS_H
+  31:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** #define _GLIBCXX_BITS_STD_ABS_H
+  32:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
+  33:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** #pragma GCC system_header
+  34:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
+  35:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** #include <bits/c++config.h>
+  36:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
+  37:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** #define _GLIBCXX_INCLUDE_NEXT_C_HEADERS
+  38:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** #include_next <stdlib.h>
+  39:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** #ifdef __CORRECT_ISO_CPP_MATH_H_PROTO
+  40:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** # include_next <math.h>
+  41:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** #endif
+  42:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** #undef _GLIBCXX_INCLUDE_NEXT_C_HEADERS
+  43:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
+  44:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** #undef abs
+  45:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
+  46:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** extern "C++"
+  47:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** {
+  48:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** namespace std _GLIBCXX_VISIBILITY(default)
+  49:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** {
+  50:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** _GLIBCXX_BEGIN_NAMESPACE_VERSION
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 11
+
+
+  51:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
+  52:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h ****   using ::abs;
+  53:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
+  54:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** #ifndef __CORRECT_ISO_CPP_STDLIB_H_PROTO
+  55:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h ****   inline long
+  56:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h ****   abs(long __i) { return __builtin_labs(__i); }
+  57:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** #endif
+  58:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
+  59:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** #ifdef _GLIBCXX_USE_LONG_LONG
+  60:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h ****   inline long long
+  61:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h ****   abs(long long __x) { return __builtin_llabs (__x); }
+  62:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** #endif
+  63:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
+  64:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // _GLIBCXX_RESOLVE_LIB_DEFECTS
+  65:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // 2192. Validity and return type of std::abs(0u) is unclear
+  66:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // 2294. <cstdlib> should declare abs(double)
+  67:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // 2735. std::abs(short), std::abs(signed char) and others should return int
+  68:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
+  69:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+  70:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h ****   inline _GLIBCXX_CONSTEXPR double
+  71:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h ****   abs(double __x)
+  72:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h ****   { return __builtin_fabs(__x); }
+  73:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
+  74:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h ****   inline _GLIBCXX_CONSTEXPR float
+  75:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h ****   abs(float __x)
+ 306              		.loc 3 75 3 is_stmt 1 view .LVU93
+ 307              	.LBB52:
+  76:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h ****   { return __builtin_fabsf(__x); }
+ 308              		.loc 3 76 5 view .LVU94
+ 309              		.loc 3 76 5 is_stmt 0 view .LVU95
+ 310              	.LBE52:
+ 311              	.LBE51:
+  82:Grain.cpp     ****       return 1.0f - std::abs(2.0f*phase - 1.0f);
+ 312              		.loc 1 82 47 view .LVU96
+ 313 004c B7EE000A 		vmov.f32	s0, #1.0e+0
+ 314              	.LVL17:
+ 315              	.LBB54:
+ 316              	.LBB53:
+ 317              		.loc 3 76 31 view .LVU97
+ 318 0050 F0EEE77A 		vabs.f32	s15, s15
+ 319              	.LBE53:
+ 320              	.LBE54:
+  82:Grain.cpp     ****       return 1.0f - std::abs(2.0f*phase - 1.0f);
+ 321              		.loc 1 82 47 view .LVU98
+ 322 0054 30EE670A 		vsub.f32	s0, s0, s15
+ 323 0058 DFE7     		b	.L15
+ 324              	.LVL18:
+ 325              	.L12:
+  84:Grain.cpp     ****     case EnvelopeType::Hann:
+ 326              		.loc 1 84 5 is_stmt 1 view .LVU99
+  85:Grain.cpp     ****       return 0.5f * (1.0f - std::cos(2.0f * M_PI * phase));
+ 327              		.loc 1 85 7 view .LVU100
+  85:Grain.cpp     ****       return 0.5f * (1.0f - std::cos(2.0f * M_PI * phase));
+ 328              		.loc 1 85 37 is_stmt 0 view .LVU101
+ 329 005a 9FED097B 		vldr.64	d7, .L18
+  85:Grain.cpp     ****       return 0.5f * (1.0f - std::cos(2.0f * M_PI * phase));
+ 330              		.loc 1 85 52 view .LVU102
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 12
+
+
+ 331 005e B7EEC00A 		vcvt.f64.f32	d0, s0
+ 332              	.LVL19:
+  85:Grain.cpp     ****       return 0.5f * (1.0f - std::cos(2.0f * M_PI * phase));
+ 333              		.loc 1 85 37 view .LVU103
+ 334 0062 20EE070B 		vmul.f64	d0, d0, d7
+ 335 0066 FFF7FEFF 		bl	cos
+ 336              	.LVL20:
+  85:Grain.cpp     ****       return 0.5f * (1.0f - std::cos(2.0f * M_PI * phase));
+ 337              		.loc 1 85 27 view .LVU104
+ 338 006a B7EE007B 		vmov.f64	d7, #1.0e+0
+ 339 006e 37EE400B 		vsub.f64	d0, d7, d0
+  85:Grain.cpp     ****       return 0.5f * (1.0f - std::cos(2.0f * M_PI * phase));
+ 340              		.loc 1 85 19 view .LVU105
+ 341 0072 B6EE007B 		vmov.f64	d7, #5.0e-1
+ 342 0076 20EE070B 		vmul.f64	d0, d0, d7
+  85:Grain.cpp     ****       return 0.5f * (1.0f - std::cos(2.0f * M_PI * phase));
+ 343              		.loc 1 85 58 view .LVU106
+ 344 007a B7EEC00B 		vcvt.f32.f64	s0, d0
+ 345 007e CCE7     		b	.L15
+ 346              	.L19:
+ 347              		.align	3
+ 348              	.L18:
+ 349 0080 182D4454 		.word	1413754136
+ 350 0084 FB211940 		.word	1075388923
+ 351 0088 CDCC4C3F 		.word	1061997773
+ 352              		.cfi_endproc
+ 353              	.LFE4875:
+ 355              		.section	.text._ZN5Grain7ProcessEPfS0_,"ax",%progbits
+ 356              		.align	1
+ 357              		.global	_ZN5Grain7ProcessEPfS0_
+ 358              		.syntax unified
+ 359              		.thumb
+ 360              		.thumb_func
+ 362              	_ZN5Grain7ProcessEPfS0_:
+ 363              	.LVL21:
+ 364              	.LFB4874:
+  36:Grain.cpp     **** void Grain::Process(float *sum_left, float *sum_right) {
+ 365              		.loc 1 36 56 is_stmt 1 view -0
+ 366              		.cfi_startproc
+ 367              		@ args = 0, pretend = 0, frame = 0
+ 368              		@ frame_needed = 0, uses_anonymous_args = 0
+  37:Grain.cpp     ****   if (!is_active_) return;
+ 369              		.loc 1 37 3 view .LVU108
+ 370 0000 037A     		ldrb	r3, [r0, #8]	@ zero_extendqisi2
+  36:Grain.cpp     **** void Grain::Process(float *sum_left, float *sum_right) {
+ 371              		.loc 1 36 56 is_stmt 0 view .LVU109
+ 372 0002 70B5     		push	{r4, r5, r6, lr}
+ 373              		.cfi_def_cfa_offset 16
+ 374              		.cfi_offset 4, -16
+ 375              		.cfi_offset 5, -12
+ 376              		.cfi_offset 6, -8
+ 377              		.cfi_offset 14, -4
+ 378 0004 0446     		mov	r4, r0
+ 379 0006 0E46     		mov	r6, r1
+ 380 0008 1546     		mov	r5, r2
+ 381 000a 2DED048B 		vpush.64	{d8, d9}
+ 382              		.cfi_def_cfa_offset 32
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 13
+
+
+ 383              		.cfi_offset 80, -32
+ 384              		.cfi_offset 81, -28
+ 385              		.cfi_offset 82, -24
+ 386              		.cfi_offset 83, -20
+  37:Grain.cpp     ****   if (!is_active_) return;
+ 387              		.loc 1 37 3 view .LVU110
+ 388 000e 1BB1     		cbz	r3, .L20
+  38:Grain.cpp     ****   float phase = phasor_.Process();
+ 389              		.loc 1 38 3 is_stmt 1 view .LVU111
+ 390              	.LVL22:
+ 391              	.LBB67:
+ 392              	.LBI67:
+  41:GrainPhasor.h ****     }
+  42:GrainPhasor.h **** 
+  43:GrainPhasor.h ****     bool GrainFinished(){
+  44:GrainPhasor.h ****       return grain_finished_;
+  45:GrainPhasor.h ****     }
+  46:GrainPhasor.h **** 
+  47:GrainPhasor.h ****     float Process(){
+ 393              		.loc 2 47 11 view .LVU112
+ 394              	.LBB68:
+  48:GrainPhasor.h ****       if (grain_finished_) { return 0.0f; }
+ 395              		.loc 2 48 7 view .LVU113
+ 396 0010 037F     		ldrb	r3, [r0, #28]	@ zero_extendqisi2
+ 397 0012 23B1     		cbz	r3, .L22
+ 398              	.LVL23:
+ 399              	.L35:
+ 400              		.loc 2 48 7 is_stmt 0 view .LVU114
+ 401              	.LBE68:
+ 402              	.LBE67:
+  40:Grain.cpp     ****     is_active_=false;
+ 403              		.loc 1 40 5 is_stmt 1 view .LVU115
+  40:Grain.cpp     ****     is_active_=false;
+ 404              		.loc 1 40 15 is_stmt 0 view .LVU116
+ 405 0014 0023     		movs	r3, #0
+ 406 0016 2372     		strb	r3, [r4, #8]
+  41:Grain.cpp     ****     return;
+ 407              		.loc 1 41 5 is_stmt 1 view .LVU117
+ 408              	.LVL24:
+ 409              	.L20:
+  66:Grain.cpp     **** }
+ 410              		.loc 1 66 1 is_stmt 0 view .LVU118
+ 411 0018 BDEC048B 		vldm	sp!, {d8-d9}
+ 412              		.cfi_remember_state
+ 413              		.cfi_restore 82
+ 414              		.cfi_restore 83
+ 415              		.cfi_restore 80
+ 416              		.cfi_restore 81
+ 417              		.cfi_def_cfa_offset 16
+ 418 001c 70BD     		pop	{r4, r5, r6, pc}
+ 419              	.LVL25:
+ 420              	.L22:
+ 421              		.cfi_restore_state
+ 422              	.LBB72:
+ 423              	.LBB69:
+  49:GrainPhasor.h ****       float out = phase_;
+ 424              		.loc 2 49 7 is_stmt 1 view .LVU119
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 14
+
+
+  50:GrainPhasor.h ****       out += increment_*direction_;
+ 425              		.loc 2 50 24 is_stmt 0 view .LVU120
+ 426 001e D0ED067A 		vldr.32	s15, [r0, #24]	@ int
+  51:GrainPhasor.h **** 
+  52:GrainPhasor.h ****       switch(mode_){
+ 427              		.loc 2 52 14 view .LVU121
+ 428 0022 4369     		ldr	r3, [r0, #20]
+  50:GrainPhasor.h ****       out += increment_*direction_;
+ 429              		.loc 2 50 24 view .LVU122
+ 430 0024 F8EEE77A 		vcvt.f32.s32	s15, s15
+  49:GrainPhasor.h ****       out += increment_*direction_;
+ 431              		.loc 2 49 13 view .LVU123
+ 432 0028 90ED030A 		vldr.32	s0, [r0, #12]
+ 433              	.LVL26:
+  50:GrainPhasor.h ****       out += increment_*direction_;
+ 434              		.loc 2 50 7 is_stmt 1 view .LVU124
+  50:GrainPhasor.h ****       out += increment_*direction_;
+ 435              		.loc 2 50 11 is_stmt 0 view .LVU125
+ 436 002c 90ED047A 		vldr.32	s14, [r0, #16]
+ 437              		.loc 2 52 7 view .LVU126
+ 438 0030 022B     		cmp	r3, #2
+  50:GrainPhasor.h ****       out += increment_*direction_;
+ 439              		.loc 2 50 11 view .LVU127
+ 440 0032 A7EE270A 		vfma.f32	s0, s14, s15
+ 441              	.LVL27:
+ 442              		.loc 2 52 7 is_stmt 1 view .LVU128
+ 443 0036 72D0     		beq	.L23
+ 444 0038 032B     		cmp	r3, #3
+ 445 003a 00F08180 		beq	.L24
+ 446 003e 012B     		cmp	r3, #1
+ 447 0040 61D0     		beq	.L25
+  53:GrainPhasor.h ****         /* phase increases 0 -> 1 then stops */
+  54:GrainPhasor.h ****         case Mode::OneShot:
+ 448              		.loc 2 54 9 view .LVU129
+  55:GrainPhasor.h ****         default:
+ 449              		.loc 2 55 9 view .LVU130
+  56:GrainPhasor.h ****           if(out>1.0f) {
+ 450              		.loc 2 56 11 view .LVU131
+ 451 0042 F7EE007A 		vmov.f32	s15, #1.0e+0
+ 452 0046 B4EEE70A 		vcmpe.f32	s0, s15
+ 453 004a F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 454 004e 03DD     		ble	.L26
+  57:GrainPhasor.h ****             grain_finished_ = true;
+ 455              		.loc 2 57 13 view .LVU132
+  58:GrainPhasor.h ****             out=1.0f;
+ 456              		.loc 2 58 16 is_stmt 0 view .LVU133
+ 457 0050 B0EE670A 		vmov.f32	s0, s15
+ 458              	.LVL28:
+  57:GrainPhasor.h ****             grain_finished_ = true;
+ 459              		.loc 2 57 29 view .LVU134
+ 460 0054 0123     		movs	r3, #1
+ 461 0056 0377     		strb	r3, [r0, #28]
+ 462              		.loc 2 58 13 is_stmt 1 view .LVU135
+ 463              	.LVL29:
+ 464              	.L26:
+  59:GrainPhasor.h ****           }
+  60:GrainPhasor.h ****           break;
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 15
+
+
+  61:GrainPhasor.h ****         /* phase goes 1 -> 0 then stops */
+  62:GrainPhasor.h ****         case Mode::OneShotReverse:
+  63:GrainPhasor.h ****           direction_ = -1;
+  64:GrainPhasor.h ****           if(out<0.0f) {
+  65:GrainPhasor.h ****             out=0.0f;
+  66:GrainPhasor.h ****             grain_finished_ = true;
+  67:GrainPhasor.h ****           } 
+  68:GrainPhasor.h ****           break;
+  69:GrainPhasor.h ****         /* loops from 0 -> 1 repeatedly */
+  70:GrainPhasor.h ****         case Mode::Cycle:
+  71:GrainPhasor.h ****           if(out>1.0f) out -=1.0f;
+  72:GrainPhasor.h ****           if (out<0.0f) out +=1.0f;
+  73:GrainPhasor.h ****           break;
+  74:GrainPhasor.h ****         /* loops repeatedly forwards from 0 -> 1
+  75:GrainPhasor.h ****           then backwards from 1 -> 0 ...*/
+  76:GrainPhasor.h ****         case Mode::PingPong:
+  77:GrainPhasor.h ****           if (out>1.0f){
+  78:GrainPhasor.h ****             out = 2.0f-out;
+  79:GrainPhasor.h ****             direction_ = -1;
+  80:GrainPhasor.h ****           } else if (out<0.0f){
+  81:GrainPhasor.h ****             out= -out;
+  82:GrainPhasor.h ****             direction_ = 1;
+  83:GrainPhasor.h ****           }
+  84:GrainPhasor.h ****           break;
+  85:GrainPhasor.h ****       }
+  86:GrainPhasor.h ****       phase_ = out;
+ 465              		.loc 2 86 7 view .LVU136
+ 466              	.LBE69:
+ 467              	.LBE72:
+  39:Grain.cpp     ****   if (phasor_.GrainFinished()){
+ 468              		.loc 1 39 3 is_stmt 0 view .LVU137
+ 469 0058 237F     		ldrb	r3, [r4, #28]	@ zero_extendqisi2
+ 470              	.LBB73:
+ 471              	.LBB70:
+ 472              		.loc 2 86 14 view .LVU138
+ 473 005a 84ED030A 		vstr.32	s0, [r4, #12]
+  87:GrainPhasor.h ****       // phase_ += increment_*direction_;
+  88:GrainPhasor.h ****       return out;
+ 474              		.loc 2 88 7 is_stmt 1 view .LVU139
+ 475              	.LVL30:
+ 476              		.loc 2 88 7 is_stmt 0 view .LVU140
+ 477              	.LBE70:
+ 478              	.LBE73:
+  39:Grain.cpp     ****   if (phasor_.GrainFinished()){
+ 479              		.loc 1 39 3 is_stmt 1 view .LVU141
+ 480              	.LBB74:
+ 481              	.LBI74:
+  43:GrainPhasor.h ****       return grain_finished_;
+ 482              		.loc 2 43 10 view .LVU142
+ 483              	.LBB75:
+  44:GrainPhasor.h ****     }
+ 484              		.loc 2 44 7 view .LVU143
+  44:GrainPhasor.h ****     }
+ 485              		.loc 2 44 7 is_stmt 0 view .LVU144
+ 486              	.LBE75:
+ 487              	.LBE74:
+  39:Grain.cpp     ****   if (phasor_.GrainFinished()){
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 16
+
+
+ 488              		.loc 1 39 3 view .LVU145
+ 489 005e 002B     		cmp	r3, #0
+ 490 0060 D8D1     		bne	.L35
+  43:Grain.cpp     ****   size_t curr_idx = spawn_pos_ + static_cast<size_t>(phase*grain_size_*pitch_ratio_);
+ 491              		.loc 1 43 3 is_stmt 1 view .LVU146
+  43:Grain.cpp     ****   size_t curr_idx = spawn_pos_ + static_cast<size_t>(phase*grain_size_*pitch_ratio_);
+ 492              		.loc 1 43 59 is_stmt 0 view .LVU147
+ 493 0062 D4ED0B7A 		vldr.32	s15, [r4, #44]	@ int
+  57:Grain.cpp     ****   float env = ApplyEnvelope(phase);
+ 494              		.loc 1 57 28 view .LVU148
+ 495 0066 2046     		mov	r0, r4
+ 496              	.LVL31:
+  43:Grain.cpp     ****   size_t curr_idx = spawn_pos_ + static_cast<size_t>(phase*grain_size_*pitch_ratio_);
+ 497              		.loc 1 43 71 view .LVU149
+ 498 0068 94ED0C7A 		vldr.32	s14, [r4, #48]
+  43:Grain.cpp     ****   size_t curr_idx = spawn_pos_ + static_cast<size_t>(phase*grain_size_*pitch_ratio_);
+ 499              		.loc 1 43 59 view .LVU150
+ 500 006c F8EE677A 		vcvt.f32.u32	s15, s15
+  43:Grain.cpp     ****   size_t curr_idx = spawn_pos_ + static_cast<size_t>(phase*grain_size_*pitch_ratio_);
+ 501              		.loc 1 43 10 view .LVU151
+ 502 0070 A36A     		ldr	r3, [r4, #40]
+  43:Grain.cpp     ****   size_t curr_idx = spawn_pos_ + static_cast<size_t>(phase*grain_size_*pitch_ratio_);
+ 503              		.loc 1 43 59 view .LVU152
+ 504 0072 67EE807A 		vmul.f32	s15, s15, s0
+  43:Grain.cpp     ****   size_t curr_idx = spawn_pos_ + static_cast<size_t>(phase*grain_size_*pitch_ratio_);
+ 505              		.loc 1 43 71 view .LVU153
+ 506 0076 67EE877A 		vmul.f32	s15, s15, s14
+  43:Grain.cpp     ****   size_t curr_idx = spawn_pos_ + static_cast<size_t>(phase*grain_size_*pitch_ratio_);
+ 507              		.loc 1 43 34 view .LVU154
+ 508 007a FCEEE77A 		vcvt.u32.f32	s15, s15
+  43:Grain.cpp     ****   size_t curr_idx = spawn_pos_ + static_cast<size_t>(phase*grain_size_*pitch_ratio_);
+ 509              		.loc 1 43 10 view .LVU155
+ 510 007e 17EE902A 		vmov	r2, s15	@ int
+ 511              	.LBB76:
+ 512              	.LBB77:
+ 513              		.file 4 "../libDaisy/src/daisy_core.h"
+   1:../libDaisy/src/daisy_core.h **** #pragma once
+   2:../libDaisy/src/daisy_core.h **** #ifndef DSY_CORE_HW_H
+   3:../libDaisy/src/daisy_core.h **** #define DSY_CORE_HW_H /**< & */
+   4:../libDaisy/src/daisy_core.h **** #include <stdint.h>
+   5:../libDaisy/src/daisy_core.h **** #include <stdlib.h>
+   6:../libDaisy/src/daisy_core.h **** 
+   7:../libDaisy/src/daisy_core.h **** #if defined(_MSC_VER)
+   8:../libDaisy/src/daisy_core.h **** #define FORCE_INLINE __forceinline /**< & */
+   9:../libDaisy/src/daisy_core.h **** #elif defined(__clang__)
+  10:../libDaisy/src/daisy_core.h **** #define FORCE_INLINE inline __attribute__((always_inline)) /**< & */
+  11:../libDaisy/src/daisy_core.h **** #pragma clang diagnostic ignored "-Wduplicate-decl-specifier"
+  12:../libDaisy/src/daisy_core.h **** #elif defined(__GNUC__)
+  13:../libDaisy/src/daisy_core.h **** #define FORCE_INLINE inline __attribute__((always_inline)) /**< & */
+  14:../libDaisy/src/daisy_core.h **** #else
+  15:../libDaisy/src/daisy_core.h **** #error unknown compiler
+  16:../libDaisy/src/daisy_core.h **** #endif
+  17:../libDaisy/src/daisy_core.h **** 
+  18:../libDaisy/src/daisy_core.h **** /** @addtogroup utility
+  19:../libDaisy/src/daisy_core.h ****     @{
+  20:../libDaisy/src/daisy_core.h **** */
+  21:../libDaisy/src/daisy_core.h **** 
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 17
+
+
+  22:../libDaisy/src/daisy_core.h **** /** Macro for area of memory that is configured as cacheless
+  23:../libDaisy/src/daisy_core.h **** This should be used primarily for DMA buffers, and the like.
+  24:../libDaisy/src/daisy_core.h **** */
+  25:../libDaisy/src/daisy_core.h **** #define DMA_BUFFER_MEM_SECTION __attribute__((section(".sram1_bss")))
+  26:../libDaisy/src/daisy_core.h **** /** 
+  27:../libDaisy/src/daisy_core.h **** THE DTCM RAM section is also non-cached. However, is not suitable 
+  28:../libDaisy/src/daisy_core.h **** for DMA transfers. Performance is on par with internal SRAM w/ 
+  29:../libDaisy/src/daisy_core.h **** cache enabled.
+  30:../libDaisy/src/daisy_core.h **** */
+  31:../libDaisy/src/daisy_core.h **** #define DTCM_MEM_SECTION __attribute__((section(".dtcmram_bss")))
+  32:../libDaisy/src/daisy_core.h **** 
+  33:../libDaisy/src/daisy_core.h **** #define FBIPMAX 0.999985f             /**< close to 1.0f-LSB at 16 bit */
+  34:../libDaisy/src/daisy_core.h **** #define FBIPMIN (-FBIPMAX)            /**< - (1 - LSB) */
+  35:../libDaisy/src/daisy_core.h **** #define U82F_SCALE 0.0078740f         /**< 1 / 127 */
+  36:../libDaisy/src/daisy_core.h **** #define F2U8_SCALE 127.0f             /**< 128 - 1 */
+  37:../libDaisy/src/daisy_core.h **** #define S82F_SCALE 0.0078125f         /**< 1 / (2**7) */
+  38:../libDaisy/src/daisy_core.h **** #define F2S8_SCALE 127.0f             /**< (2 ** 7) - 1 */
+  39:../libDaisy/src/daisy_core.h **** #define S162F_SCALE 3.0517578125e-05f /**< 1 / (2** 15) */
+  40:../libDaisy/src/daisy_core.h **** #define F2S16_SCALE 32767.0f          /**< (2 ** 15) - 1 */
+  41:../libDaisy/src/daisy_core.h **** #define F2S24_SCALE 8388608.0f        /**< 2 ** 23 */
+  42:../libDaisy/src/daisy_core.h **** #define S242F_SCALE 1.192092896e-07f  /**< 1 / (2 ** 23) */
+  43:../libDaisy/src/daisy_core.h **** #define S24SIGN 0x800000              /**< 2 ** 23 */
+  44:../libDaisy/src/daisy_core.h **** #define S322F_SCALE 4.6566129e-10f    /**< 1 / (2** 31) */
+  45:../libDaisy/src/daisy_core.h **** #define F2S32_SCALE 2147483647.f      /**< (2 ** 31) - 1 */
+  46:../libDaisy/src/daisy_core.h **** 
+  47:../libDaisy/src/daisy_core.h **** 
+  48:../libDaisy/src/daisy_core.h **** /** shorthand macro for simplifying the reading of the left 
+  49:../libDaisy/src/daisy_core.h ****  *  channel of a non-interleaved output buffer named out */
+  50:../libDaisy/src/daisy_core.h **** #define OUT_L out[0]
+  51:../libDaisy/src/daisy_core.h **** 
+  52:../libDaisy/src/daisy_core.h **** /** shorthand macro for simplifying the reading of the right 
+  53:../libDaisy/src/daisy_core.h ****  *  channel of a non-interleaved output buffer named out */
+  54:../libDaisy/src/daisy_core.h **** #define OUT_R out[1]
+  55:../libDaisy/src/daisy_core.h **** 
+  56:../libDaisy/src/daisy_core.h **** /** shorthand macro for simplifying the reading of the left 
+  57:../libDaisy/src/daisy_core.h ****  *  channel of a non-interleaved input buffer named in */
+  58:../libDaisy/src/daisy_core.h **** #define IN_L in[0]
+  59:../libDaisy/src/daisy_core.h **** 
+  60:../libDaisy/src/daisy_core.h **** /** shorthand macro for simplifying the reading of the right 
+  61:../libDaisy/src/daisy_core.h ****  *  channel of a non-interleaved input buffer named in */
+  62:../libDaisy/src/daisy_core.h **** #define IN_R in[1]
+  63:../libDaisy/src/daisy_core.h **** 
+  64:../libDaisy/src/daisy_core.h **** /** 
+  65:../libDaisy/src/daisy_core.h ****     Computes cube.
+  66:../libDaisy/src/daisy_core.h ****     \param x Number to be cubed
+  67:../libDaisy/src/daisy_core.h ****     \return x ^ 3
+  68:../libDaisy/src/daisy_core.h **** */
+  69:../libDaisy/src/daisy_core.h **** FORCE_INLINE float cube(float x)
+  70:../libDaisy/src/daisy_core.h **** {
+  71:../libDaisy/src/daisy_core.h ****     return (x * x) * x;
+  72:../libDaisy/src/daisy_core.h **** }
+  73:../libDaisy/src/daisy_core.h **** 
+  74:../libDaisy/src/daisy_core.h **** /** 
+  75:../libDaisy/src/daisy_core.h ****     Converts unsigned 8-bit to float
+  76:../libDaisy/src/daisy_core.h ****     \param x Number to be scaled.
+  77:../libDaisy/src/daisy_core.h ****     \return Scaled number.
+  78:../libDaisy/src/daisy_core.h **** */
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 18
+
+
+  79:../libDaisy/src/daisy_core.h **** FORCE_INLINE float u82f(uint8_t x)
+  80:../libDaisy/src/daisy_core.h **** {
+  81:../libDaisy/src/daisy_core.h ****     return ((float)x - 127.f) * U82F_SCALE;
+  82:../libDaisy/src/daisy_core.h **** }
+  83:../libDaisy/src/daisy_core.h **** 
+  84:../libDaisy/src/daisy_core.h **** /**
+  85:../libDaisy/src/daisy_core.h ****     Converts float to unsigned 8-bit
+  86:../libDaisy/src/daisy_core.h **** */
+  87:../libDaisy/src/daisy_core.h **** FORCE_INLINE uint8_t f2u8(float x)
+  88:../libDaisy/src/daisy_core.h **** {
+  89:../libDaisy/src/daisy_core.h ****     x = x <= FBIPMIN ? FBIPMIN : x;
+  90:../libDaisy/src/daisy_core.h ****     x = x >= FBIPMAX ? FBIPMAX : x;
+  91:../libDaisy/src/daisy_core.h ****     return (uint8_t)((x * F2U8_SCALE) + F2U8_SCALE);
+  92:../libDaisy/src/daisy_core.h **** }
+  93:../libDaisy/src/daisy_core.h **** 
+  94:../libDaisy/src/daisy_core.h **** 
+  95:../libDaisy/src/daisy_core.h **** /** 
+  96:../libDaisy/src/daisy_core.h ****     Converts Signed 8-bit to float
+  97:../libDaisy/src/daisy_core.h ****     \param x Number to be scaled.
+  98:../libDaisy/src/daisy_core.h ****     \return Scaled number.
+  99:../libDaisy/src/daisy_core.h **** */
+ 100:../libDaisy/src/daisy_core.h **** FORCE_INLINE float s82f(int8_t x)
+ 101:../libDaisy/src/daisy_core.h **** {
+ 102:../libDaisy/src/daisy_core.h ****     return (float)x * S82F_SCALE;
+ 103:../libDaisy/src/daisy_core.h **** }
+ 104:../libDaisy/src/daisy_core.h **** 
+ 105:../libDaisy/src/daisy_core.h **** /**
+ 106:../libDaisy/src/daisy_core.h ****     Converts float to Signed 8-bit
+ 107:../libDaisy/src/daisy_core.h **** */
+ 108:../libDaisy/src/daisy_core.h **** FORCE_INLINE int8_t f2s8(float x)
+ 109:../libDaisy/src/daisy_core.h **** {
+ 110:../libDaisy/src/daisy_core.h ****     x = x <= FBIPMIN ? FBIPMIN : x;
+ 111:../libDaisy/src/daisy_core.h ****     x = x >= FBIPMAX ? FBIPMAX : x;
+ 112:../libDaisy/src/daisy_core.h ****     return (int32_t)(x * F2S8_SCALE);
+ 113:../libDaisy/src/daisy_core.h **** }
+ 114:../libDaisy/src/daisy_core.h **** 
+ 115:../libDaisy/src/daisy_core.h **** /** 
+ 116:../libDaisy/src/daisy_core.h ****     Converts Signed 16-bit to float
+ 117:../libDaisy/src/daisy_core.h ****     \param x Number to be scaled.
+ 118:../libDaisy/src/daisy_core.h ****     \return Scaled number.
+ 119:../libDaisy/src/daisy_core.h **** */
+ 120:../libDaisy/src/daisy_core.h **** FORCE_INLINE float s162f(int16_t x)
+ 121:../libDaisy/src/daisy_core.h **** {
+ 122:../libDaisy/src/daisy_core.h ****     return (float)x * S162F_SCALE;
+ 514              		.loc 4 122 23 view .LVU156
+ 515 0082 DFED3C7A 		vldr.32	s15, .L48
+ 516              	.LBE77:
+ 517              	.LBE76:
+  43:Grain.cpp     ****   size_t curr_idx = spawn_pos_ + static_cast<size_t>(phase*grain_size_*pitch_ratio_);
+ 518              		.loc 1 43 10 view .LVU157
+ 519 0086 1A44     		add	r2, r2, r3
+ 520 0088 1346     		mov	r3, r2
+ 521              	.LVL32:
+  46:Grain.cpp     ****   if (curr_idx>=audio_len_-1){
+ 522              		.loc 1 46 3 is_stmt 1 view .LVU158
+  46:Grain.cpp     ****   if (curr_idx>=audio_len_-1){
+ 523              		.loc 1 46 27 is_stmt 0 view .LVU159
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 19
+
+
+ 524 008a 3B4A     		ldr	r2, .L48+4
+ 525              	.LVL33:
+  46:Grain.cpp     ****   if (curr_idx>=audio_len_-1){
+ 526              		.loc 1 46 27 view .LVU160
+ 527 008c 1268     		ldr	r2, [r2]
+ 528 008e 511E     		subs	r1, r2, #1
+ 529              	.LVL34:
+  46:Grain.cpp     ****   if (curr_idx>=audio_len_-1){
+ 530              		.loc 1 46 3 view .LVU161
+ 531 0090 9942     		cmp	r1, r3
+  47:Grain.cpp     ****     curr_idx %= audio_len_;
+ 532              		.loc 1 47 5 is_stmt 1 view .LVU162
+  47:Grain.cpp     ****     curr_idx %= audio_len_;
+ 533              		.loc 1 47 14 is_stmt 0 view .LVU163
+ 534 0092 9CBF     		itt	ls
+ 535 0094 B3FBF2F1 		udivls	r1, r3, r2
+ 536 0098 02FB1133 		mlsls	r3, r2, r1, r3
+ 537              	.LVL35:
+  55:Grain.cpp     ****   float left = s162f(left_buf_[curr_idx]);
+ 538              		.loc 1 55 3 is_stmt 1 view .LVU164
+ 539              	.LBB82:
+ 540              	.LBI76:
+ 120:../libDaisy/src/daisy_core.h **** {
+ 541              		.loc 4 120 20 view .LVU165
+ 542              	.LBB78:
+ 543              		.loc 4 122 5 view .LVU166
+ 544              	.LBE78:
+ 545              	.LBE82:
+  55:Grain.cpp     ****   float left = s162f(left_buf_[curr_idx]);
+ 546              		.loc 1 55 21 is_stmt 0 view .LVU167
+ 547 009c 2268     		ldr	r2, [r4]
+ 548              	.LBB83:
+ 549              	.LBB79:
+ 550              		.loc 4 122 12 view .LVU168
+ 551 009e 32F91320 		ldrsh	r2, [r2, r3, lsl #1]
+ 552 00a2 08EE902A 		vmov	s17, r2	@ int
+ 553              	.LBE79:
+ 554              	.LBE83:
+  56:Grain.cpp     ****   float right = s162f(right_buf_[curr_idx]);
+ 555              		.loc 1 56 22 view .LVU169
+ 556 00a6 6268     		ldr	r2, [r4, #4]
+ 557              	.LBB84:
+ 558              	.LBB85:
+ 559              		.loc 4 122 12 view .LVU170
+ 560 00a8 32F91330 		ldrsh	r3, [r2, r3, lsl #1]
+ 561              	.LVL36:
+ 562              		.loc 4 122 12 view .LVU171
+ 563              	.LBE85:
+ 564              	.LBE84:
+ 565              	.LBB88:
+ 566              	.LBB80:
+ 567 00ac F8EEE88A 		vcvt.f32.s32	s17, s17
+ 568              	.LBE80:
+ 569              	.LBE88:
+ 570              	.LBB89:
+ 571              	.LBB86:
+ 572 00b0 08EE103A 		vmov	s16, r3	@ int
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 20
+
+
+ 573              	.LBE86:
+ 574              	.LBE89:
+ 575              	.LBB90:
+ 576              	.LBB81:
+ 577              		.loc 4 122 23 view .LVU172
+ 578 00b4 68EEA78A 		vmul.f32	s17, s17, s15
+ 579              	.LVL37:
+ 580              		.loc 4 122 23 view .LVU173
+ 581              	.LBE81:
+ 582              	.LBE90:
+  56:Grain.cpp     ****   float right = s162f(right_buf_[curr_idx]);
+ 583              		.loc 1 56 3 is_stmt 1 view .LVU174
+ 584              	.LBB91:
+ 585              	.LBI84:
+ 120:../libDaisy/src/daisy_core.h **** {
+ 586              		.loc 4 120 20 view .LVU175
+ 587              	.LBB87:
+ 588              		.loc 4 122 5 view .LVU176
+ 589              		.loc 4 122 12 is_stmt 0 view .LVU177
+ 590 00b8 B8EEC88A 		vcvt.f32.s32	s16, s16
+ 591              		.loc 4 122 23 view .LVU178
+ 592 00bc 28EE278A 		vmul.f32	s16, s16, s15
+ 593              	.LVL38:
+ 594              		.loc 4 122 23 view .LVU179
+ 595              	.LBE87:
+ 596              	.LBE91:
+  57:Grain.cpp     ****   float env = ApplyEnvelope(phase);
+ 597              		.loc 1 57 3 is_stmt 1 view .LVU180
+  57:Grain.cpp     ****   float env = ApplyEnvelope(phase);
+ 598              		.loc 1 57 28 is_stmt 0 view .LVU181
+ 599 00c0 FFF7FEFF 		bl	_ZN5Grain13ApplyEnvelopeEf
+ 600              	.LVL39:
+  57:Grain.cpp     ****   float env = ApplyEnvelope(phase);
+ 601              		.loc 1 57 28 view .LVU182
+ 602 00c4 B0EE409A 		vmov.f32	s18, s0
+ 603              	.LVL40:
+  62:Grain.cpp     ****   float gain_left = std::sqrt(1.0f-pan_);
+ 604              		.loc 1 62 3 is_stmt 1 view .LVU183
+ 605              	.LBB92:
+ 606              	.LBI92:
+ 607              		.file 5 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath"
+   1:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // -*- C++ -*- C forwarding header.
+   2:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+   3:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // Copyright (C) 1997-2020 Free Software Foundation, Inc.
+   4:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** //
+   5:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // This file is part of the GNU ISO C++ Library.  This library is free
+   6:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // software; you can redistribute it and/or modify it under the
+   7:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // terms of the GNU General Public License as published by the
+   8:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // Free Software Foundation; either version 3, or (at your option)
+   9:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // any later version.
+  10:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+  11:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // This library is distributed in the hope that it will be useful,
+  12:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // but WITHOUT ANY WARRANTY; without even the implied warranty of
+  13:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  14:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // GNU General Public License for more details.
+  15:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+  16:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // Under Section 7 of GPL version 3, you are granted additional
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 21
+
+
+  17:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // permissions described in the GCC Runtime Library Exception, version
+  18:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // 3.1, as published by the Free Software Foundation.
+  19:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+  20:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // You should have received a copy of the GNU General Public License and
+  21:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // a copy of the GCC Runtime Library Exception along with this program;
+  22:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
+  23:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // <http://www.gnu.org/licenses/>.
+  24:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+  25:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** /** @file include/cmath
+  26:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****  *  This is a Standard C++ Library file.  You should @c \#include this file
+  27:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****  *  in your programs, rather than any of the @a *.h implementation files.
+  28:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****  *
+  29:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****  *  This is the C++ version of the Standard C Library header @c math.h,
+  30:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****  *  and its contents are (mostly) the same as that header, but are all
+  31:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****  *  contained in the namespace @c std (except for names which are defined
+  32:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****  *  as macros in C).
+  33:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****  */
+  34:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+  35:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** //
+  36:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // ISO C++ 14882: 26.5  C library
+  37:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** //
+  38:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+  39:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #pragma GCC system_header
+  40:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+  41:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #include <bits/c++config.h>
+  42:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #include <bits/cpp_type_traits.h>
+  43:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #include <ext/type_traits.h>
+  44:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #define _GLIBCXX_INCLUDE_NEXT_C_HEADERS
+  45:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #include_next <math.h>
+  46:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef _GLIBCXX_INCLUDE_NEXT_C_HEADERS
+  47:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #include <bits/std_abs.h>
+  48:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+  49:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef _GLIBCXX_CMATH
+  50:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #define _GLIBCXX_CMATH 1
+  51:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+  52:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // Get rid of those macros defined in <math.h> in lieu of real functions.
+  53:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef div
+  54:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef acos
+  55:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef asin
+  56:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef atan
+  57:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef atan2
+  58:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef ceil
+  59:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef cos
+  60:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef cosh
+  61:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef exp
+  62:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef fabs
+  63:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef floor
+  64:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef fmod
+  65:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef frexp
+  66:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef ldexp
+  67:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef log
+  68:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef log10
+  69:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef modf
+  70:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef pow
+  71:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef sin
+  72:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef sinh
+  73:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef sqrt
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 22
+
+
+  74:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef tan
+  75:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef tanh
+  76:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+  77:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** extern "C++"
+  78:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** {
+  79:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** namespace std _GLIBCXX_VISIBILITY(default)
+  80:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** {
+  81:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** _GLIBCXX_BEGIN_NAMESPACE_VERSION
+  82:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+  83:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::acos;
+  84:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+  85:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+  86:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
+  87:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   acos(float __x)
+  88:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_acosf(__x); }
+  89:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+  90:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
+  91:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   acos(long double __x)
+  92:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_acosl(__x); }
+  93:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
+  94:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+  95:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
+  96:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline _GLIBCXX_CONSTEXPR
+  97:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+  98:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
+  99:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     acos(_Tp __x)
+ 100:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_acos(__x); }
+ 101:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 102:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::asin;
+ 103:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 104:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+ 105:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
+ 106:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   asin(float __x)
+ 107:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_asinf(__x); }
+ 108:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 109:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
+ 110:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   asin(long double __x)
+ 111:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_asinl(__x); }
+ 112:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
+ 113:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 114:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
+ 115:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline _GLIBCXX_CONSTEXPR
+ 116:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value,
+ 117:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
+ 118:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     asin(_Tp __x)
+ 119:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_asin(__x); }
+ 120:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 121:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::atan;
+ 122:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 123:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+ 124:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
+ 125:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   atan(float __x)
+ 126:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_atanf(__x); }
+ 127:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 128:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
+ 129:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   atan(long double __x)
+ 130:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_atanl(__x); }
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 23
+
+
+ 131:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
+ 132:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 133:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
+ 134:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline _GLIBCXX_CONSTEXPR
+ 135:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value,
+ 136:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
+ 137:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     atan(_Tp __x)
+ 138:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_atan(__x); }
+ 139:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 140:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::atan2;
+ 141:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 142:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+ 143:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
+ 144:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   atan2(float __y, float __x)
+ 145:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_atan2f(__y, __x); }
+ 146:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 147:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
+ 148:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   atan2(long double __y, long double __x)
+ 149:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_atan2l(__y, __x); }
+ 150:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
+ 151:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 152:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp, typename _Up>
+ 153:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline _GLIBCXX_CONSTEXPR
+ 154:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__promote_2<_Tp, _Up>::__type
+ 155:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     atan2(_Tp __y, _Up __x)
+ 156:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     {
+ 157:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****       typedef typename __gnu_cxx::__promote_2<_Tp, _Up>::__type __type;
+ 158:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****       return atan2(__type(__y), __type(__x));
+ 159:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     }
+ 160:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 161:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::ceil;
+ 162:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 163:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+ 164:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
+ 165:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   ceil(float __x)
+ 166:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_ceilf(__x); }
+ 167:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 168:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
+ 169:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   ceil(long double __x)
+ 170:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_ceill(__x); }
+ 171:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
+ 172:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 173:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
+ 174:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline _GLIBCXX_CONSTEXPR
+ 175:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+ 176:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
+ 177:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     ceil(_Tp __x)
+ 178:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_ceil(__x); }
+ 179:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 180:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::cos;
+ 181:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 182:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+ 183:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
+ 184:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   cos(float __x)
+ 185:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_cosf(__x); }
+ 186:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 187:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 24
+
+
+ 188:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   cos(long double __x)
+ 189:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_cosl(__x); }
+ 190:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
+ 191:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 192:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
+ 193:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline _GLIBCXX_CONSTEXPR
+ 194:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value,
+ 195:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
+ 196:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     cos(_Tp __x)
+ 197:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_cos(__x); }
+ 198:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 199:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::cosh;
+ 200:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 201:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+ 202:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
+ 203:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   cosh(float __x)
+ 204:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_coshf(__x); }
+ 205:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 206:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
+ 207:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   cosh(long double __x)
+ 208:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_coshl(__x); }
+ 209:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
+ 210:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 211:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
+ 212:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline _GLIBCXX_CONSTEXPR
+ 213:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value,
+ 214:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
+ 215:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     cosh(_Tp __x)
+ 216:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_cosh(__x); }
+ 217:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 218:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::exp;
+ 219:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 220:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+ 221:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
+ 222:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   exp(float __x)
+ 223:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_expf(__x); }
+ 224:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 225:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
+ 226:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   exp(long double __x)
+ 227:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_expl(__x); }
+ 228:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
+ 229:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 230:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
+ 231:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline _GLIBCXX_CONSTEXPR
+ 232:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value,
+ 233:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
+ 234:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     exp(_Tp __x)
+ 235:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_exp(__x); }
+ 236:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 237:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::fabs;
+ 238:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 239:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+ 240:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
+ 241:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   fabs(float __x)
+ 242:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_fabsf(__x); }
+ 243:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 244:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 25
+
+
+ 245:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   fabs(long double __x)
+ 246:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_fabsl(__x); }
+ 247:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
+ 248:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 249:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
+ 250:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline _GLIBCXX_CONSTEXPR
+ 251:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value,
+ 252:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
+ 253:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     fabs(_Tp __x)
+ 254:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_fabs(__x); }
+ 255:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 256:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::floor;
+ 257:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 258:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+ 259:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
+ 260:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   floor(float __x)
+ 261:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_floorf(__x); }
+ 262:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 263:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
+ 264:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   floor(long double __x)
+ 265:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_floorl(__x); }
+ 266:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
+ 267:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 268:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
+ 269:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline _GLIBCXX_CONSTEXPR
+ 270:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value,
+ 271:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
+ 272:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     floor(_Tp __x)
+ 273:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_floor(__x); }
+ 274:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 275:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::fmod;
+ 276:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 277:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+ 278:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
+ 279:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   fmod(float __x, float __y)
+ 280:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_fmodf(__x, __y); }
+ 281:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 282:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
+ 283:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   fmod(long double __x, long double __y)
+ 284:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_fmodl(__x, __y); }
+ 285:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
+ 286:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 287:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp, typename _Up>
+ 288:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline _GLIBCXX_CONSTEXPR
+ 289:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__promote_2<_Tp, _Up>::__type
+ 290:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     fmod(_Tp __x, _Up __y)
+ 291:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     {
+ 292:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****       typedef typename __gnu_cxx::__promote_2<_Tp, _Up>::__type __type;
+ 293:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****       return fmod(__type(__x), __type(__y));
+ 294:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     }
+ 295:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 296:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::frexp;
+ 297:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 298:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+ 299:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline float
+ 300:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   frexp(float __x, int* __exp)
+ 301:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_frexpf(__x, __exp); }
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 26
+
+
+ 302:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 303:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline long double
+ 304:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   frexp(long double __x, int* __exp)
+ 305:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_frexpl(__x, __exp); }
+ 306:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
+ 307:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 308:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
+ 309:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline _GLIBCXX_CONSTEXPR
+ 310:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+ 311:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
+ 312:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     frexp(_Tp __x, int* __exp)
+ 313:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_frexp(__x, __exp); }
+ 314:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 315:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::ldexp;
+ 316:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 317:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+ 318:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
+ 319:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   ldexp(float __x, int __exp)
+ 320:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_ldexpf(__x, __exp); }
+ 321:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 322:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
+ 323:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   ldexp(long double __x, int __exp)
+ 324:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_ldexpl(__x, __exp); }
+ 325:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
+ 326:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 327:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
+ 328:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline _GLIBCXX_CONSTEXPR
+ 329:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+ 330:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
+ 331:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     ldexp(_Tp __x, int __exp)
+ 332:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_ldexp(__x, __exp); }
+ 333:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 334:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::log;
+ 335:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 336:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+ 337:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
+ 338:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   log(float __x)
+ 339:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_logf(__x); }
+ 340:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 341:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
+ 342:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   log(long double __x)
+ 343:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_logl(__x); }
+ 344:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
+ 345:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 346:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
+ 347:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline _GLIBCXX_CONSTEXPR
+ 348:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+ 349:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
+ 350:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     log(_Tp __x)
+ 351:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_log(__x); }
+ 352:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 353:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::log10;
+ 354:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 355:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+ 356:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
+ 357:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   log10(float __x)
+ 358:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_log10f(__x); }
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 27
+
+
+ 359:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 360:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
+ 361:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   log10(long double __x)
+ 362:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_log10l(__x); }
+ 363:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
+ 364:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 365:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
+ 366:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline _GLIBCXX_CONSTEXPR
+ 367:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value,
+ 368:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
+ 369:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     log10(_Tp __x)
+ 370:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_log10(__x); }
+ 371:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 372:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::modf;
+ 373:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 374:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+ 375:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline float
+ 376:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   modf(float __x, float* __iptr)
+ 377:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_modff(__x, __iptr); }
+ 378:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 379:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline long double
+ 380:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   modf(long double __x, long double* __iptr)
+ 381:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_modfl(__x, __iptr); }
+ 382:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
+ 383:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 384:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::pow;
+ 385:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 386:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+ 387:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
+ 388:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   pow(float __x, float __y)
+ 389:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_powf(__x, __y); }
+ 390:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 391:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
+ 392:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   pow(long double __x, long double __y)
+ 393:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_powl(__x, __y); }
+ 394:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 395:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #if __cplusplus < 201103L
+ 396:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   // _GLIBCXX_RESOLVE_LIB_DEFECTS
+ 397:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   // DR 550. What should the return type of pow(float,int) be?
+ 398:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline double
+ 399:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   pow(double __x, int __i)
+ 400:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_powi(__x, __i); }
+ 401:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 402:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline float
+ 403:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   pow(float __x, int __n)
+ 404:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_powif(__x, __n); }
+ 405:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 406:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline long double
+ 407:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   pow(long double __x, int __n)
+ 408:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_powil(__x, __n); }
+ 409:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
+ 410:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
+ 411:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 412:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp, typename _Up>
+ 413:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline _GLIBCXX_CONSTEXPR
+ 414:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__promote_2<_Tp, _Up>::__type
+ 415:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     pow(_Tp __x, _Up __y)
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 28
+
+
+ 416:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     {
+ 417:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****       typedef typename __gnu_cxx::__promote_2<_Tp, _Up>::__type __type;
+ 418:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****       return pow(__type(__x), __type(__y));
+ 419:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     }
+ 420:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 421:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::sin;
+ 422:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 423:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+ 424:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
+ 425:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   sin(float __x)
+ 426:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_sinf(__x); }
+ 427:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 428:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
+ 429:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   sin(long double __x)
+ 430:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_sinl(__x); }
+ 431:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
+ 432:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 433:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
+ 434:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline _GLIBCXX_CONSTEXPR
+ 435:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+ 436:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
+ 437:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     sin(_Tp __x)
+ 438:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_sin(__x); }
+ 439:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 440:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::sinh;
+ 441:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 442:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+ 443:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
+ 444:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   sinh(float __x)
+ 445:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_sinhf(__x); }
+ 446:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 447:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
+ 448:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   sinh(long double __x)
+ 449:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_sinhl(__x); }
+ 450:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
+ 451:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 452:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
+ 453:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline _GLIBCXX_CONSTEXPR
+ 454:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+ 455:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
+ 456:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     sinh(_Tp __x)
+ 457:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_sinh(__x); }
+ 458:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 459:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::sqrt;
+ 460:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ 461:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+ 462:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
+ 463:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   sqrt(float __x)
+ 608              		.loc 5 463 3 view .LVU184
+ 609              	.LBB93:
+ 464:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_sqrtf(__x); }
+ 610              		.loc 5 464 5 view .LVU185
+ 611              	.LBE93:
+ 612              	.LBE92:
+  62:Grain.cpp     ****   float gain_left = std::sqrt(1.0f-pan_);
+ 613              		.loc 1 62 30 is_stmt 0 view .LVU186
+ 614 00c8 D4ED097A 		vldr.32	s15, [r4, #36]
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 29
+
+
+ 615              	.LBB95:
+ 616              	.LBB94:
+ 617              		.loc 5 464 27 view .LVU187
+ 618 00cc B7EE000A 		vmov.f32	s0, #1.0e+0
+ 619              	.LVL41:
+ 620              		.loc 5 464 27 view .LVU188
+ 621 00d0 30EE670A 		vsub.f32	s0, s0, s15
+ 622              	.LVL42:
+ 623              		.loc 5 464 27 view .LVU189
+ 624 00d4 FFF7FEFF 		bl	sqrtf
+ 625              	.LVL43:
+ 626              		.loc 5 464 27 view .LVU190
+ 627 00d8 F0EE409A 		vmov.f32	s19, s0
+ 628              	.LVL44:
+ 629              		.loc 5 464 27 view .LVU191
+ 630              	.LBE94:
+ 631              	.LBE95:
+  63:Grain.cpp     ****   float gain_right = std::sqrt(pan_);
+ 632              		.loc 1 63 3 is_stmt 1 view .LVU192
+ 633              	.LBB96:
+ 634              	.LBI96:
+ 463:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_sqrtf(__x); }
+ 635              		.loc 5 463 3 view .LVU193
+ 636              	.LBB97:
+ 637              		.loc 5 464 5 view .LVU194
+ 638              		.loc 5 464 27 is_stmt 0 view .LVU195
+ 639 00dc 94ED090A 		vldr.32	s0, [r4, #36]
+ 640              	.LVL45:
+ 641              		.loc 5 464 27 view .LVU196
+ 642 00e0 FFF7FEFF 		bl	sqrtf
+ 643              	.LVL46:
+ 644              		.loc 5 464 27 view .LVU197
+ 645              	.LBE97:
+ 646              	.LBE96:
+  64:Grain.cpp     ****   *sum_left += (left*env*gain_left);
+ 647              		.loc 1 64 3 is_stmt 1 view .LVU198
+  64:Grain.cpp     ****   *sum_left += (left*env*gain_left);
+ 648              		.loc 1 64 21 is_stmt 0 view .LVU199
+ 649 00e4 68EE898A 		vmul.f32	s17, s17, s18
+ 650              	.LVL47:
+  64:Grain.cpp     ****   *sum_left += (left*env*gain_left);
+ 651              		.loc 1 64 13 view .LVU200
+ 652 00e8 D6ED007A 		vldr.32	s15, [r6]
+  65:Grain.cpp     ****   *sum_right += (right*env*gain_right);
+ 653              		.loc 1 65 23 view .LVU201
+ 654 00ec 28EE098A 		vmul.f32	s16, s16, s18
+ 655              	.LVL48:
+  64:Grain.cpp     ****   *sum_left += (left*env*gain_left);
+ 656              		.loc 1 64 13 view .LVU202
+ 657 00f0 E8EEA97A 		vfma.f32	s15, s17, s19
+ 658 00f4 C6ED007A 		vstr.32	s15, [r6]
+  65:Grain.cpp     ****   *sum_right += (right*env*gain_right);
+ 659              		.loc 1 65 3 is_stmt 1 view .LVU203
+  65:Grain.cpp     ****   *sum_right += (right*env*gain_right);
+ 660              		.loc 1 65 14 is_stmt 0 view .LVU204
+ 661 00f8 D5ED007A 		vldr.32	s15, [r5]
+ 662 00fc E8EE007A 		vfma.f32	s15, s16, s0
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 30
+
+
+ 663 0100 C5ED007A 		vstr.32	s15, [r5]
+ 664 0104 88E7     		b	.L20
+ 665              	.LVL49:
+ 666              	.L25:
+ 667              	.LBB98:
+ 668              	.LBB71:
+  62:GrainPhasor.h ****           direction_ = -1;
+ 669              		.loc 2 62 9 is_stmt 1 view .LVU205
+  63:GrainPhasor.h ****           if(out<0.0f) {
+ 670              		.loc 2 63 11 view .LVU206
+  64:GrainPhasor.h ****             out=0.0f;
+ 671              		.loc 2 64 11 is_stmt 0 view .LVU207
+ 672 0106 B5EEC00A 		vcmpe.f32	s0, #0
+  63:GrainPhasor.h ****           if(out<0.0f) {
+ 673              		.loc 2 63 22 view .LVU208
+ 674 010a 4FF0FF32 		mov	r2, #-1
+ 675              	.LVL50:
+  63:GrainPhasor.h ****           if(out<0.0f) {
+ 676              		.loc 2 63 22 view .LVU209
+ 677 010e 8261     		str	r2, [r0, #24]
+  64:GrainPhasor.h ****             out=0.0f;
+ 678              		.loc 2 64 11 is_stmt 1 view .LVU210
+ 679 0110 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 680 0114 A0D5     		bpl	.L26
+  65:GrainPhasor.h ****             grain_finished_ = true;
+ 681              		.loc 2 65 13 view .LVU211
+ 682              	.LVL51:
+  66:GrainPhasor.h ****           } 
+ 683              		.loc 2 66 13 view .LVU212
+  65:GrainPhasor.h ****             grain_finished_ = true;
+ 684              		.loc 2 65 16 is_stmt 0 view .LVU213
+ 685 0116 9FED190A 		vldr.32	s0, .L48+8
+  66:GrainPhasor.h ****           } 
+ 686              		.loc 2 66 29 view .LVU214
+ 687 011a 0377     		strb	r3, [r0, #28]
+ 688 011c 9CE7     		b	.L26
+ 689              	.LVL52:
+ 690              	.L23:
+  70:GrainPhasor.h ****           if(out>1.0f) out -=1.0f;
+ 691              		.loc 2 70 9 is_stmt 1 view .LVU215
+  71:GrainPhasor.h ****           if (out<0.0f) out +=1.0f;
+ 692              		.loc 2 71 11 view .LVU216
+ 693 011e F7EE007A 		vmov.f32	s15, #1.0e+0
+ 694 0122 B4EEE70A 		vcmpe.f32	s0, s15
+ 695 0126 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+  71:GrainPhasor.h ****           if (out<0.0f) out +=1.0f;
+ 696              		.loc 2 71 24 view .LVU217
+  71:GrainPhasor.h ****           if (out<0.0f) out +=1.0f;
+ 697              		.loc 2 71 28 is_stmt 0 view .LVU218
+ 698 012a C8BF     		it	gt
+ 699 012c 30EE670A 		vsubgt.f32	s0, s0, s15
+ 700              	.LVL53:
+  72:GrainPhasor.h ****           break;
+ 701              		.loc 2 72 11 is_stmt 1 view .LVU219
+ 702 0130 B5EEC00A 		vcmpe.f32	s0, #0
+ 703 0134 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 704 0138 8ED5     		bpl	.L26
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 31
+
+
+  72:GrainPhasor.h ****           break;
+ 705              		.loc 2 72 25 view .LVU220
+  72:GrainPhasor.h ****           break;
+ 706              		.loc 2 72 29 is_stmt 0 view .LVU221
+ 707 013a 30EE270A 		vadd.f32	s0, s0, s15
+ 708              	.LVL54:
+  72:GrainPhasor.h ****           break;
+ 709              		.loc 2 72 29 view .LVU222
+ 710 013e 8BE7     		b	.L26
+ 711              	.L24:
+  76:GrainPhasor.h ****           if (out>1.0f){
+ 712              		.loc 2 76 9 is_stmt 1 view .LVU223
+  77:GrainPhasor.h ****             out = 2.0f-out;
+ 713              		.loc 2 77 11 view .LVU224
+ 714 0140 F7EE007A 		vmov.f32	s15, #1.0e+0
+ 715 0144 B4EEE70A 		vcmpe.f32	s0, s15
+ 716 0148 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 717 014c 07DD     		ble	.L46
+  78:GrainPhasor.h ****             direction_ = -1;
+ 718              		.loc 2 78 13 view .LVU225
+  78:GrainPhasor.h ****             direction_ = -1;
+ 719              		.loc 2 78 17 is_stmt 0 view .LVU226
+ 720 014e F0EE007A 		vmov.f32	s15, #2.0e+0
+  79:GrainPhasor.h ****           } else if (out<0.0f){
+ 721              		.loc 2 79 24 view .LVU227
+ 722 0152 4FF0FF33 		mov	r3, #-1
+  78:GrainPhasor.h ****             direction_ = -1;
+ 723              		.loc 2 78 17 view .LVU228
+ 724 0156 37EEC00A 		vsub.f32	s0, s15, s0
+ 725              	.LVL55:
+  79:GrainPhasor.h ****           } else if (out<0.0f){
+ 726              		.loc 2 79 13 is_stmt 1 view .LVU229
+ 727              	.L47:
+  82:GrainPhasor.h ****           }
+ 728              		.loc 2 82 24 is_stmt 0 view .LVU230
+ 729 015a A361     		str	r3, [r4, #24]
+ 730 015c 7CE7     		b	.L26
+ 731              	.L46:
+  80:GrainPhasor.h ****             out= -out;
+ 732              		.loc 2 80 18 is_stmt 1 view .LVU231
+ 733 015e B5EEC00A 		vcmpe.f32	s0, #0
+ 734 0162 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 735 0166 7FF577AF 		bpl	.L26
+  81:GrainPhasor.h ****             direction_ = 1;
+ 736              		.loc 2 81 13 view .LVU232
+  81:GrainPhasor.h ****             direction_ = 1;
+ 737              		.loc 2 81 16 is_stmt 0 view .LVU233
+ 738 016a B1EE400A 		vneg.f32	s0, s0
+ 739              	.LVL56:
+  82:GrainPhasor.h ****           }
+ 740              		.loc 2 82 13 is_stmt 1 view .LVU234
+  82:GrainPhasor.h ****           }
+ 741              		.loc 2 82 24 is_stmt 0 view .LVU235
+ 742 016e 0123     		movs	r3, #1
+ 743 0170 F3E7     		b	.L47
+ 744              	.L49:
+ 745 0172 00BF     		.align	2
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 32
+
+
+ 746              	.L48:
+ 747 0174 00000038 		.word	939524096
+ 748 0178 00000000 		.word	.LANCHOR0
+ 749 017c 00000000 		.word	0
+ 750              	.LBE71:
+ 751              	.LBE98:
+ 752              		.cfi_endproc
+ 753              	.LFE4874:
+ 755              		.section	.text._ZN5Grain11SetSpawnPosEj,"ax",%progbits
+ 756              		.align	1
+ 757              		.global	_ZN5Grain11SetSpawnPosEj
+ 758              		.syntax unified
+ 759              		.thumb
+ 760              		.thumb_func
+ 762              	_ZN5Grain11SetSpawnPosEj:
+ 763              	.LVL57:
+ 764              	.LFB4876:
+  89:Grain.cpp     **** void Grain::SetSpawnPos(size_t spawn_pos){ spawn_pos_ = spawn_pos; }
+ 765              		.loc 1 89 42 is_stmt 1 view -0
+ 766              		.cfi_startproc
+ 767              		@ args = 0, pretend = 0, frame = 0
+ 768              		@ frame_needed = 0, uses_anonymous_args = 0
+ 769              		@ link register save eliminated.
+  89:Grain.cpp     **** void Grain::SetSpawnPos(size_t spawn_pos){ spawn_pos_ = spawn_pos; }
+ 770              		.loc 1 89 44 view .LVU237
+  89:Grain.cpp     **** void Grain::SetSpawnPos(size_t spawn_pos){ spawn_pos_ = spawn_pos; }
+ 771              		.loc 1 89 55 is_stmt 0 view .LVU238
+ 772 0000 8162     		str	r1, [r0, #40]
+  89:Grain.cpp     **** void Grain::SetSpawnPos(size_t spawn_pos){ spawn_pos_ = spawn_pos; }
+ 773              		.loc 1 89 68 view .LVU239
+ 774 0002 7047     		bx	lr
+ 775              		.cfi_endproc
+ 776              	.LFE4876:
+ 778              		.section	.text._ZN5Grain12SetGrainSizeEj,"ax",%progbits
+ 779              		.align	1
+ 780              		.global	_ZN5Grain12SetGrainSizeEj
+ 781              		.syntax unified
+ 782              		.thumb
+ 783              		.thumb_func
+ 785              	_ZN5Grain12SetGrainSizeEj:
+ 786              	.LVL58:
+ 787              	.LFB4877:
+  90:Grain.cpp     **** void Grain::SetGrainSize(size_t grain_size) { grain_size_ = grain_size; }
+ 788              		.loc 1 90 45 is_stmt 1 view -0
+ 789              		.cfi_startproc
+ 790              		@ args = 0, pretend = 0, frame = 0
+ 791              		@ frame_needed = 0, uses_anonymous_args = 0
+ 792              		@ link register save eliminated.
+  90:Grain.cpp     **** void Grain::SetGrainSize(size_t grain_size) { grain_size_ = grain_size; }
+ 793              		.loc 1 90 47 view .LVU241
+  90:Grain.cpp     **** void Grain::SetGrainSize(size_t grain_size) { grain_size_ = grain_size; }
+ 794              		.loc 1 90 59 is_stmt 0 view .LVU242
+ 795 0000 C162     		str	r1, [r0, #44]
+  90:Grain.cpp     **** void Grain::SetGrainSize(size_t grain_size) { grain_size_ = grain_size; }
+ 796              		.loc 1 90 73 view .LVU243
+ 797 0002 7047     		bx	lr
+ 798              		.cfi_endproc
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 33
+
+
+ 799              	.LFE4877:
+ 801              		.section	.text._ZN5Grain13SetPitchRatioEf,"ax",%progbits
+ 802              		.align	1
+ 803              		.global	_ZN5Grain13SetPitchRatioEf
+ 804              		.syntax unified
+ 805              		.thumb
+ 806              		.thumb_func
+ 808              	_ZN5Grain13SetPitchRatioEf:
+ 809              	.LVL59:
+ 810              	.LFB4878:
+  91:Grain.cpp     **** void Grain::SetPitchRatio(float pitch_ratio) { pitch_ratio_ = pitch_ratio; }
+ 811              		.loc 1 91 46 is_stmt 1 view -0
+ 812              		.cfi_startproc
+ 813              		@ args = 0, pretend = 0, frame = 0
+ 814              		@ frame_needed = 0, uses_anonymous_args = 0
+ 815              		@ link register save eliminated.
+  91:Grain.cpp     **** void Grain::SetPitchRatio(float pitch_ratio) { pitch_ratio_ = pitch_ratio; }
+ 816              		.loc 1 91 48 view .LVU245
+  91:Grain.cpp     **** void Grain::SetPitchRatio(float pitch_ratio) { pitch_ratio_ = pitch_ratio; }
+ 817              		.loc 1 91 61 is_stmt 0 view .LVU246
+ 818 0000 80ED0C0A 		vstr.32	s0, [r0, #48]
+  91:Grain.cpp     **** void Grain::SetPitchRatio(float pitch_ratio) { pitch_ratio_ = pitch_ratio; }
+ 819              		.loc 1 91 76 view .LVU247
+ 820 0004 7047     		bx	lr
+ 821              		.cfi_endproc
+ 822              	.LFE4878:
+ 824              		.section	.text._ZN5Grain15SetEnvelopeTypeENS_12EnvelopeTypeE,"ax",%progbits
+ 825              		.align	1
+ 826              		.global	_ZN5Grain15SetEnvelopeTypeENS_12EnvelopeTypeE
+ 827              		.syntax unified
+ 828              		.thumb
+ 829              		.thumb_func
+ 831              	_ZN5Grain15SetEnvelopeTypeENS_12EnvelopeTypeE:
+ 832              	.LVL60:
+ 833              	.LFB4879:
+  92:Grain.cpp     **** void Grain::SetEnvelopeType(EnvelopeType type) { envelope_type_ = type; }
+ 834              		.loc 1 92 48 is_stmt 1 view -0
+ 835              		.cfi_startproc
+ 836              		@ args = 0, pretend = 0, frame = 0
+ 837              		@ frame_needed = 0, uses_anonymous_args = 0
+ 838              		@ link register save eliminated.
+  92:Grain.cpp     **** void Grain::SetEnvelopeType(EnvelopeType type) { envelope_type_ = type; }
+ 839              		.loc 1 92 50 view .LVU249
+  92:Grain.cpp     **** void Grain::SetEnvelopeType(EnvelopeType type) { envelope_type_ = type; }
+ 840              		.loc 1 92 65 is_stmt 0 view .LVU250
+ 841 0000 4163     		str	r1, [r0, #52]
+  92:Grain.cpp     **** void Grain::SetEnvelopeType(EnvelopeType type) { envelope_type_ = type; }
+ 842              		.loc 1 92 73 view .LVU251
+ 843 0002 7047     		bx	lr
+ 844              		.cfi_endproc
+ 845              	.LFE4879:
+ 847              		.section	.text._ZN5Grain19SetPhasorPitchRatioEf,"ax",%progbits
+ 848              		.align	1
+ 849              		.global	_ZN5Grain19SetPhasorPitchRatioEf
+ 850              		.syntax unified
+ 851              		.thumb
+ 852              		.thumb_func
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 34
+
+
+ 854              	_ZN5Grain19SetPhasorPitchRatioEf:
+ 855              	.LVL61:
+ 856              	.LFB4880:
+  93:Grain.cpp     **** void Grain::SetPhasorPitchRatio(float pitch_ratio) { phasor_.SetPitchRatio(pitch_ratio, audio_len_)
+ 857              		.loc 1 93 52 is_stmt 1 view -0
+ 858              		.cfi_startproc
+ 859              		@ args = 0, pretend = 0, frame = 0
+ 860              		@ frame_needed = 0, uses_anonymous_args = 0
+ 861              		@ link register save eliminated.
+  93:Grain.cpp     **** void Grain::SetPhasorPitchRatio(float pitch_ratio) { phasor_.SetPitchRatio(pitch_ratio, audio_len_)
+ 862              		.loc 1 93 54 view .LVU253
+ 863              	.LBB103:
+ 864              	.LBI103:
+  34:GrainPhasor.h ****       float size_ms = SamplesToMs(grain_size_samples); // NOTE: CHECK - THIS MIGHT NOT WORK PROPERL
+ 865              		.loc 2 34 10 view .LVU254
+ 866              	.LBB104:
+  35:GrainPhasor.h ****       increment_ = pitch_ratio / size_ms;
+ 867              		.loc 2 35 7 view .LVU255
+ 868              	.LBB105:
+ 869              	.LBI105:
+ 870              		.file 6 "constants_utils.h"
+   1:constants_utils.h **** #pragma once
+   2:constants_utils.h **** #include "stddef.h"
+   3:constants_utils.h **** #include <time.h>
+   4:constants_utils.h **** 
+   5:constants_utils.h **** constexpr int SAMPLE_RATE = 48000;
+   6:constants_utils.h **** constexpr float SAMPLE_RATE_FLOAT = 48000.f;
+   7:constants_utils.h **** 
+   8:constants_utils.h **** /* 16mb - max size of one stereo channel to be loaded into buffers */
+   9:constants_utils.h **** constexpr size_t CHNL_BUF_SIZE_ABS = 16*1024*1024;
+  10:constants_utils.h **** /* above is absolute size - each sample needs an int16 (2 bytes) so we do (abs_size)/2 */
+  11:constants_utils.h **** constexpr size_t CHNL_BUF_SIZE_SAMPS = 8*1024*1024;
+  12:constants_utils.h **** 
+  13:constants_utils.h **** /* chunk size for reading audio into temporary buffer */
+  14:constants_utils.h **** const size_t BUF_CHUNK_SZ = 16384;
+  15:constants_utils.h **** 
+  16:constants_utils.h **** static const uint16_t MAX_FILES = 32;                      
+  17:constants_utils.h **** static const uint16_t MAX_FNAME_LEN = 128;
+  18:constants_utils.h **** 
+  19:constants_utils.h **** constexpr int BIT_DEPTH = 16;
+  20:constants_utils.h **** /* min/max number of concurrent active grains */
+  21:constants_utils.h **** constexpr int MIN_GRAINS = 1;
+  22:constants_utils.h **** constexpr int MAX_GRAINS = 20;
+  23:constants_utils.h **** 
+  24:constants_utils.h **** constexpr float MIN_GRAIN_SIZE_MS = 100.0f;
+  25:constants_utils.h **** constexpr float MAX_GRAIN_SIZE_MS = 3000.0f;
+  26:constants_utils.h **** constexpr size_t MIN_GRAIN_SIZE_SAMPLES = 4800; // 100ms at 48kHz
+  27:constants_utils.h **** constexpr size_t MAX_GRAIN_SIZE_SAMPLES = 144000; // 3s at 48kHz
+  28:constants_utils.h **** constexpr float MIN_PITCH = 0.5f;
+  29:constants_utils.h **** constexpr float MAX_PITCH = 3.0f;
+  30:constants_utils.h **** 
+  31:constants_utils.h **** /* integer clamp as can't use std::clamp */
+  32:constants_utils.h **** inline constexpr size_t intclamp(size_t val, size_t min, size_t max){
+  33:constants_utils.h ****   if (val < min) val = min;
+  34:constants_utils.h ****   else if (val > max) val = max;
+  35:constants_utils.h ****   return val;
+  36:constants_utils.h **** }
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 35
+
+
+  37:constants_utils.h **** 
+  38:constants_utils.h **** /* converts milliseconds to number of samples */
+  39:constants_utils.h **** inline constexpr size_t MsToSamples(float ms){
+  40:constants_utils.h ****   return static_cast<size_t>(SAMPLE_RATE_FLOAT * (ms*0.001f));
+  41:constants_utils.h **** }
+  42:constants_utils.h **** 
+  43:constants_utils.h **** /* converts number of samples to milliseconds */
+  44:constants_utils.h **** inline constexpr float SamplesToMs(size_t samples){
+ 871              		.loc 6 44 24 view .LVU256
+ 872              	.LBB106:
+  45:constants_utils.h ****   return (static_cast<float>(samples) * 1000.0f) / SAMPLE_RATE_FLOAT; 
+ 873              		.loc 6 45 3 view .LVU257
+ 874              		.loc 6 45 3 is_stmt 0 view .LVU258
+ 875              	.LBE106:
+ 876              	.LBE105:
+  36:GrainPhasor.h ****     }
+ 877              		.loc 2 36 7 is_stmt 1 view .LVU259
+ 878              	.LBE104:
+ 879              	.LBE103:
+  93:Grain.cpp     **** void Grain::SetPhasorPitchRatio(float pitch_ratio) { phasor_.SetPitchRatio(pitch_ratio, audio_len_)
+ 880              		.loc 1 93 75 is_stmt 0 view .LVU260
+ 881 0000 0A4B     		ldr	r3, .L55
+ 882              	.LBB116:
+ 883              	.LBB113:
+ 884              	.LBB110:
+ 885              	.LBB107:
+ 886              		.loc 6 45 39 view .LVU261
+ 887 0002 9FED0B7A 		vldr.32	s14, .L55+4
+ 888              	.LBE107:
+ 889              	.LBE110:
+ 890              	.LBE113:
+ 891              	.LBE116:
+  93:Grain.cpp     **** void Grain::SetPhasorPitchRatio(float pitch_ratio) { phasor_.SetPitchRatio(pitch_ratio, audio_len_)
+ 892              		.loc 1 93 75 view .LVU262
+ 893 0006 D3ED007A 		vldr.32	s15, [r3]	@ int
+ 894              	.LBB117:
+ 895              	.LBB114:
+ 896              	.LBB111:
+ 897              	.LBB108:
+ 898              		.loc 6 45 52 view .LVU263
+ 899 000a DFED0A6A 		vldr.32	s13, .L55+8
+ 900              	.LBE108:
+ 901              	.LBE111:
+ 902              	.LBE114:
+ 903              	.LBE117:
+  93:Grain.cpp     **** void Grain::SetPhasorPitchRatio(float pitch_ratio) { phasor_.SetPitchRatio(pitch_ratio, audio_len_)
+ 904              		.loc 1 93 75 view .LVU264
+ 905 000e F8EE677A 		vcvt.f32.u32	s15, s15
+ 906              	.LVL62:
+ 907              	.LBB118:
+ 908              	.LBB115:
+  35:GrainPhasor.h ****       increment_ = pitch_ratio / size_ms;
+ 909              		.loc 2 35 34 view .LVU265
+ 910 0012 FCEEE77A 		vcvt.u32.f32	s15, s15
+ 911              	.LVL63:
+ 912              	.LBB112:
+ 913              	.LBB109:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 36
+
+
+ 914              		.loc 6 45 11 view .LVU266
+ 915 0016 F8EE677A 		vcvt.f32.u32	s15, s15
+ 916              		.loc 6 45 39 view .LVU267
+ 917 001a 67EE877A 		vmul.f32	s15, s15, s14
+ 918              		.loc 6 45 52 view .LVU268
+ 919 001e 87EEA67A 		vdiv.f32	s14, s15, s13
+ 920              	.LBE109:
+ 921              	.LBE112:
+  36:GrainPhasor.h ****     }
+ 922              		.loc 2 36 32 view .LVU269
+ 923 0022 C0EE077A 		vdiv.f32	s15, s0, s14
+  36:GrainPhasor.h ****     }
+ 924              		.loc 2 36 18 view .LVU270
+ 925 0026 C0ED047A 		vstr.32	s15, [r0, #16]
+ 926              	.LVL64:
+  36:GrainPhasor.h ****     }
+ 927              		.loc 2 36 18 view .LVU271
+ 928              	.LBE115:
+ 929              	.LBE118:
+  93:Grain.cpp     **** void Grain::SetPhasorPitchRatio(float pitch_ratio) { phasor_.SetPitchRatio(pitch_ratio, audio_len_)
+ 930              		.loc 1 93 102 view .LVU272
+ 931 002a 7047     		bx	lr
+ 932              	.L56:
+ 933              		.align	2
+ 934              	.L55:
+ 935 002c 00000000 		.word	.LANCHOR0
+ 936 0030 00007A44 		.word	1148846080
+ 937 0034 00803B47 		.word	1195081728
+ 938              		.cfi_endproc
+ 939              	.LFE4880:
+ 941              		.section	.text._ZN5Grain13SetPhasorModeEN11GrainPhasor4ModeE,"ax",%progbits
+ 942              		.align	1
+ 943              		.global	_ZN5Grain13SetPhasorModeEN11GrainPhasor4ModeE
+ 944              		.syntax unified
+ 945              		.thumb
+ 946              		.thumb_func
+ 948              	_ZN5Grain13SetPhasorModeEN11GrainPhasor4ModeE:
+ 949              	.LVL65:
+ 950              	.LFB4881:
+ 951              		.loc 1 94 51 is_stmt 1 view -0
+ 952              		.cfi_startproc
+ 953              		@ args = 0, pretend = 0, frame = 0
+ 954              		@ frame_needed = 0, uses_anonymous_args = 0
+ 955              		@ link register save eliminated.
+ 956              		.loc 1 94 53 view .LVU274
+ 957              	.LBB119:
+ 958              	.LBI119:
+  39:GrainPhasor.h ****       mode_ = new_mode;
+ 959              		.loc 2 39 10 view .LVU275
+ 960              	.LBB120:
+  40:GrainPhasor.h ****     }
+ 961              		.loc 2 40 7 view .LVU276
+  40:GrainPhasor.h ****     }
+ 962              		.loc 2 40 13 is_stmt 0 view .LVU277
+ 963 0000 4161     		str	r1, [r0, #20]
+ 964              	.LVL66:
+  40:GrainPhasor.h ****     }
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 37
+
+
+ 965              		.loc 2 40 13 view .LVU278
+ 966              	.LBE120:
+ 967              	.LBE119:
+ 968              		.loc 1 94 76 view .LVU279
+ 969 0002 7047     		bx	lr
+ 970              		.cfi_endproc
+ 971              	.LFE4881:
+ 973              		.global	_ZN5Grain11decay_rate_E
+ 974              		.global	_ZN5Grain12start_decay_E
+ 975              		.global	_ZN5Grain10audio_len_E
+ 976              		.section	.bss._ZN5Grain10audio_len_E,"aw",%nobits
+ 977              		.align	2
+ 978              		.set	.LANCHOR0,. + 0
+ 981              	_ZN5Grain10audio_len_E:
+ 982 0000 00000000 		.space	4
+ 983              		.section	.rodata._ZN5Grain11decay_rate_E,"a"
+ 984              		.align	2
+ 987              	_ZN5Grain11decay_rate_E:
+ 988 0000 0000A040 		.word	1084227584
+ 989              		.section	.rodata._ZN5Grain12start_decay_E,"a"
+ 990              		.align	2
+ 993              	_ZN5Grain12start_decay_E:
+ 994 0000 CDCC4C3F 		.word	1061997773
+ 995              		.text
+ 996              	.Letext0:
+ 997              		.file 7 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/machine/_default_types.h"
+ 998              		.file 8 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/_stdint.h"
+ 999              		.file 9 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdint.h"
+ 1000              		.file 10 "/Library/DaisyToolchain/0.2.0/arm/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h"
+ 1001              		.file 11 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdlib"
+ 1002              		.file 12 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdint"
+ 1003              		.file 13 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/type_traits"
+ 1004              		.file 14 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/debug/debug.h"
+ 1005              		.file 15 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v
+ 1006              		.file 16 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/algorithmfwd.h"
+ 1007              		.file 17 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_pair.h"
+ 1008              		.file 18 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/exception_ptr.h"
+ 1009              		.file 19 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdarg"
+ 1010              		.file 20 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdio"
+ 1011              		.file 21 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstring"
+ 1012              		.file 22 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cwchar"
+ 1013              		.file 23 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/clocale"
+ 1014              		.file 24 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/basic_string.h"
+ 1015              		.file 25 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_iterator.h"
+ 1016              		.file 26 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/predefined_ops.h
+ 1017              		.file 27 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/_types.h"
+ 1018              		.file 28 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/reent.h"
+ 1019              		.file 29 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/lock.h"
+ 1020              		.file 30 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/math.h"
+ 1021              		.file 31 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdlib.h"
+ 1022              		.file 32 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/math.h"
+ 1023              		.file 33 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/stdlib.h"
+ 1024              		.file 34 "../libDaisy/src/util/wav_format.h"
+ 1025              		.file 35 "../libDaisy/src/dev/max11300.h"
+ 1026              		.file 36 "../libDaisy/src/daisy_seed.h"
+ 1027              		.file 37 "/Library/DaisyToolchain/0.2.0/arm/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h"
+ 1028              		.file 38 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdio.h"
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 38
+
+
+ 1029              		.file 39 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/string.h"
+ 1030              		.file 40 "../DaisySP/Source/Control/adenv.h"
+ 1031              		.file 41 "../DaisySP/Source/Utility/dsp.h"
+ 1032              		.file 42 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/wchar.h"
+ 1033              		.file 43 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/time.h"
+ 1034              		.file 44 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/locale.h"
+ 1035              		.file 45 "../libDaisy/src/dev/sr_595.h"
+ 1036              		.file 46 "Grain.h"
+ 1037              		.file 47 "<built-in>"
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s 			page 39
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 Grain.cpp
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:19     .text._ZN5Grain4InitEPKsS1_:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:25     .text._ZN5Grain4InitEPKsS1_:0000000000000000 _ZN5Grain4InitEPKsS1_
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:103    .text._ZN5Grain4InitEPKsS1_:0000000000000034 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:108    .text._ZN5Grain7TriggerEjjff:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:114    .text._ZN5Grain7TriggerEjjff:0000000000000000 _ZN5Grain7TriggerEjjff
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:226    .text._ZN5Grain7TriggerEjjff:000000000000004c $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:231    .text._ZN5Grain13ApplyEnvelopeEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:237    .text._ZN5Grain13ApplyEnvelopeEf:0000000000000000 _ZN5Grain13ApplyEnvelopeEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:256    .text._ZN5Grain13ApplyEnvelopeEf:000000000000000c $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:349    .text._ZN5Grain13ApplyEnvelopeEf:0000000000000080 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:356    .text._ZN5Grain7ProcessEPfS0_:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:362    .text._ZN5Grain7ProcessEPfS0_:0000000000000000 _ZN5Grain7ProcessEPfS0_
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:747    .text._ZN5Grain7ProcessEPfS0_:0000000000000174 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:756    .text._ZN5Grain11SetSpawnPosEj:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:762    .text._ZN5Grain11SetSpawnPosEj:0000000000000000 _ZN5Grain11SetSpawnPosEj
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:779    .text._ZN5Grain12SetGrainSizeEj:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:785    .text._ZN5Grain12SetGrainSizeEj:0000000000000000 _ZN5Grain12SetGrainSizeEj
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:802    .text._ZN5Grain13SetPitchRatioEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:808    .text._ZN5Grain13SetPitchRatioEf:0000000000000000 _ZN5Grain13SetPitchRatioEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:825    .text._ZN5Grain15SetEnvelopeTypeENS_12EnvelopeTypeE:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:831    .text._ZN5Grain15SetEnvelopeTypeENS_12EnvelopeTypeE:0000000000000000 _ZN5Grain15SetEnvelopeTypeENS_12EnvelopeTypeE
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:848    .text._ZN5Grain19SetPhasorPitchRatioEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:854    .text._ZN5Grain19SetPhasorPitchRatioEf:0000000000000000 _ZN5Grain19SetPhasorPitchRatioEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:935    .text._ZN5Grain19SetPhasorPitchRatioEf:000000000000002c $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:942    .text._ZN5Grain13SetPhasorModeEN11GrainPhasor4ModeE:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:948    .text._ZN5Grain13SetPhasorModeEN11GrainPhasor4ModeE:0000000000000000 _ZN5Grain13SetPhasorModeEN11GrainPhasor4ModeE
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:987    .rodata._ZN5Grain11decay_rate_E:0000000000000000 _ZN5Grain11decay_rate_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:993    .rodata._ZN5Grain12start_decay_E:0000000000000000 _ZN5Grain12start_decay_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:981    .bss._ZN5Grain10audio_len_E:0000000000000000 _ZN5Grain10audio_len_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:977    .bss._ZN5Grain10audio_len_E:0000000000000000 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:984    .rodata._ZN5Grain11decay_rate_E:0000000000000000 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:990    .rodata._ZN5Grain12start_decay_E:0000000000000000 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:261    .text._ZN5Grain13ApplyEnvelopeEf:0000000000000011 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccUjG47U.s:261    .text._ZN5Grain13ApplyEnvelopeEf:0000000000000012 $t
+
+UNDEFINED SYMBOLS
+cos
+sqrtf
