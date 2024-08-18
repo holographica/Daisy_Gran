@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
    1:constants_utils.h **** #pragma once
    2:constants_utils.h **** #include "stddef.h"
    3:constants_utils.h **** #include <time.h>
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 2
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 2
 
 
    4:constants_utils.h **** 
@@ -118,7 +118,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
   53:constants_utils.h ****   rng_state ^= rng_state << 13;
   52              		.loc 2 53 3 view .LVU3
   53              		.loc 2 53 26 is_stmt 0 view .LVU4
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 3
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 3
 
 
   54 0000 084A     		ldr	r2, .L3
@@ -178,7 +178,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
   17:GranularSynth.cpp **** DTCMRAM_BSS size_t GranularSynth::spawn_pos_;
   18:GranularSynth.cpp **** DTCMRAM_BSS size_t GranularSynth::active_count_;
   19:GranularSynth.cpp **** DTCMRAM_BSS float GranularSynth::pitch_ratio_;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 4
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 4
 
 
   20:GranularSynth.cpp **** DTCMRAM_BSS float GranularSynth::pan_;
@@ -238,7 +238,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  127              	.LBB205:
  128              		.loc 1 40 22 view .LVU26
  129              	.L6:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 5
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 5
 
 
   41:GranularSynth.cpp ****     grain.Init();
@@ -298,7 +298,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  165              		.loc 1 50 15 is_stmt 0 view .LVU44
  166 0040 4FF49652 		mov	r2, #4800
   51:GranularSynth.cpp ****   spawn_pos_ = 0;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 6
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 6
 
 
  167              		.loc 1 51 14 view .LVU45
@@ -358,7 +358,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  208              		.align	2
  209              	.L8:
  210 0080 00000000 		.word	.LANCHOR0
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 7
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 7
 
 
  211 0084 00000000 		.word	_ZN5Grain9left_buf_E
@@ -418,7 +418,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  261              		.loc 1 72 3 view .LVU73
  262              		.loc 1 72 16 is_stmt 0 view .LVU74
  263 0000 014B     		ldr	r3, .L14
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 8
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 8
 
 
  264 0002 C3F8CC13 		str	r1, [r3, #972]
@@ -478,7 +478,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
   20:../DaisySP/Source/Utility/dsp.h **** */
   21:../DaisySP/Source/Utility/dsp.h **** #define PI_F 3.1415927410125732421875f
   22:../DaisySP/Source/Utility/dsp.h **** #define TWOPI_F (2.0f * PI_F)
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 9
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 9
 
 
   23:../DaisySP/Source/Utility/dsp.h **** #define HALFPI_F (PI_F * 0.5f)
@@ -538,7 +538,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
   77:../DaisySP/Source/Utility/dsp.h ****     l  = *lp;
   78:../DaisySP/Source/Utility/dsp.h ****     l -= 0x3F800000;
   79:../DaisySP/Source/Utility/dsp.h ****     l <<= (n - 1);
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 10
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 10
 
 
   80:../DaisySP/Source/Utility/dsp.h ****     l += 0x3F800000;
@@ -598,7 +598,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  134:../DaisySP/Source/Utility/dsp.h ****     return fastlog2f(f) * 0.3010299956639812f;
  135:../DaisySP/Source/Utility/dsp.h **** }
  136:../DaisySP/Source/Utility/dsp.h **** 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 11
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 11
 
 
  137:../DaisySP/Source/Utility/dsp.h **** /** Midi to frequency helper
@@ -658,7 +658,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  186:../DaisySP/Source/Utility/dsp.h ****             return fclamp(min * powf(10, in / a), min, max);
  187:../DaisySP/Source/Utility/dsp.h ****         }
  188:../DaisySP/Source/Utility/dsp.h ****         case Mapping::LINEAR:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 12
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 12
 
 
  298              		.loc 3 188 9 view .LVU80
@@ -718,7 +718,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  343              	.LBE210:
  344              	.LBE209:
  345              	.LBB211:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 13
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 13
 
 
  346              	.LBI211:
@@ -778,7 +778,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  387 0036 7047     		bx	lr
  388              	.L18:
  389              		.align	2
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 14
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 14
 
 
  390              	.L17:
@@ -838,7 +838,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  442              		.syntax unified
  443              		.thumb
  444              		.thumb_func
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 15
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 15
 
 
  446              	_ZN13GranularSynth15SetActiveGrainsEf:
@@ -898,7 +898,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  490              		.loc 3 40 14 view .LVU126
  491              	.LBB227:
   42:../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 16
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 16
 
 
  492              		.loc 3 42 5 view .LVU127
@@ -958,7 +958,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
    7:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // terms of the GNU General Public License as published by the
    8:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // Free Software Foundation; either version 3, or (at your option)
    9:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // any later version.
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 17
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 17
 
 
   10:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
@@ -1018,7 +1018,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
   64:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef fmod
   65:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef frexp
   66:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef ldexp
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 18
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 18
 
 
   67:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef log
@@ -1078,7 +1078,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  121:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::atan;
  122:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  123:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 19
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 19
 
 
  124:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
@@ -1138,7 +1138,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  178:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_ceil(__x); }
  179:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  180:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::cos;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 20
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 20
 
 
  181:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
@@ -1198,7 +1198,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  235:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_exp(__x); }
  236:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  237:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::fabs;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 21
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 21
 
 
  238:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
@@ -1258,7 +1258,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  292:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****       typedef typename __gnu_cxx::__promote_2<_Tp, _Up>::__type __type;
  293:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****       return fmod(__type(__x), __type(__y));
  294:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     }
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 22
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 22
 
 
  295:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
@@ -1318,7 +1318,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  349:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
  350:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     log(_Tp __x)
  351:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_log(__x); }
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 23
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 23
 
 
  352:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
@@ -1378,7 +1378,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  406:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline long double
  407:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   pow(long double __x, int __n)
  408:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_powil(__x, __n); }
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 24
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 24
 
 
  409:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
@@ -1438,7 +1438,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  463:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   sqrt(float __x)
  464:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_sqrtf(__x); }
  465:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 25
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 25
 
 
  466:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
@@ -1498,7 +1498,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  520:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef fpclassify
  521:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef isfinite
  522:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef isinf
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 26
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 26
 
 
  523:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef isnan
@@ -1558,7 +1558,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  577:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                               bool>::__type
  578:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     isfinite(_Tp __x)
  579:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return true; }
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 27
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 27
 
 
  580:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
@@ -1618,7 +1618,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  634:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
  635:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  636:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 28
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 28
 
 
  637:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   constexpr bool
@@ -1678,7 +1678,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  691:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   isgreater(long double __x, long double __y)
  692:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_isgreater(__x, __y); }
  693:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 29
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 29
 
 
  694:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
@@ -1738,7 +1738,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  748:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp, typename _Up>
  749:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     constexpr typename
  750:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     __gnu_cxx::__enable_if<(__is_arithmetic<_Tp>::__value
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 30
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 30
 
 
  751:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 			    && __is_arithmetic<_Up>::__value), bool>::__type
@@ -1798,7 +1798,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  805:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     {
  806:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****       typedef typename __gnu_cxx::__promote_2<_Tp, _Up>::__type __type;
  807:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****       return __builtin_islessgreater(__type(__x), __type(__y));
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 31
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 31
 
 
  808:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     }
@@ -1858,7 +1858,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  862:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     {
  863:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****       typedef typename __gnu_cxx::__promote<_Tp>::__type __type;
  864:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****       return __builtin_isinf(__type(__f));
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 32
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 32
 
 
  865:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     }
@@ -1918,7 +1918,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  919:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     }
  920:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  921:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 33
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 33
 
 
  922:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline typename __gnu_cxx::__enable_if<__is_arithmetic<_Tp>::__value,
@@ -1978,7 +1978,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  976:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef erfcl
  977:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef exp2
  978:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef exp2f
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 34
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 34
 
 
  979:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef exp2l
@@ -2038,7 +2038,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
 1033:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef nextafter
 1034:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef nextafterf
 1035:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef nextafterl
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 35
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 35
 
 
 1036:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef nexttoward
@@ -2098,7 +2098,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
 1090:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::erff;
 1091:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::erfl;
 1092:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 36
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 36
 
 
 1093:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::erfc;
@@ -2158,7 +2158,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
 1147:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::log2;
 1148:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::log2f;
 1149:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::log2l;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 37
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 37
 
 
 1150:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
@@ -2218,7 +2218,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
 1204:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::tgammaf;
 1205:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::tgammal;
 1206:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 38
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 38
 
 
 1207:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::trunc;
@@ -2278,7 +2278,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
 1261:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                               double>::__type
 1262:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     atanh(_Tp __x)
 1263:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_atanh(__x); }
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 39
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 39
 
 
 1264:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
@@ -2338,7 +2338,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
 1318:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     erf(_Tp __x)
 1319:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_erf(__x); }
 1320:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 40
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 40
 
 
 1321:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
@@ -2398,7 +2398,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
 1375:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
 1376:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
 1377:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   constexpr float
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 41
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 41
 
 
 1378:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   fdim(float __x, float __y)
@@ -2458,7 +2458,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
 1432:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****       return fmax(__type(__x), __type(__y));
 1433:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     }
 1434:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 42
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 42
 
 
 1435:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
@@ -2518,7 +2518,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
 1489:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
 1490:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     int>::__type
 1491:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     ilogb(_Tp __x)
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 43
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 43
 
 
 1492:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_ilogb(__x); }
@@ -2578,7 +2578,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
 1546:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_llround(__x); }
 1547:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
 1548:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 44
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 44
 
 
 1549:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
@@ -2638,7 +2638,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
 1603:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
 1604:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
 1605:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   constexpr long
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 45
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 45
 
 
 1606:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   lrint(float __x)
@@ -2698,7 +2698,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
 1660:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   nextafter(float __x, float __y)
 1661:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_nextafterf(__x, __y); }
 1662:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 46
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 46
 
 
 1663:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   constexpr long double
@@ -2758,7 +2758,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
 1717:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline float
 1718:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   remquo(float __x, float __y, int* __pquo)
 1719:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_remquof(__x, __y, __pquo); }
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 47
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 47
 
 
 1720:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
@@ -2818,7 +2818,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  546              		.loc 1 92 1 view .LVU144
  547 002a 7047     		bx	lr
  548              	.L24:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 48
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 48
 
 
  549              		.align	2
@@ -2878,7 +2878,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  598              	.LBE246:
  599              	.LBE249:
   66:../DaisySP/Source/Utility/dsp.h **** }
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 49
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 49
 
 
  600              		.loc 3 66 5 view .LVU156
@@ -2938,7 +2938,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  643              	.LBE250:
  644              		.loc 1 95 16 view .LVU168
  645 001e C3EDF87A 		vstr.32	s15, [r3, #992]
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 50
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 50
 
 
   96:GranularSynth.cpp **** }
@@ -2998,7 +2998,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  696              		@ frame_needed = 0, uses_anonymous_args = 0
  104:GranularSynth.cpp ****   for (Grain& grain:grains_){
  697              		.loc 1 104 3 view .LVU175
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 51
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 51
 
 
  698              	.LBB251:
@@ -3058,7 +3058,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  108:GranularSynth.cpp ****   }
  109:GranularSynth.cpp **** }
  743              		.loc 1 109 1 is_stmt 0 view .LVU190
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 52
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 52
 
 
  744 0032 03B0     		add	sp, sp, #12
@@ -3118,7 +3118,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  790              		.loc 1 118 33 view .LVU199
  791 0016 F7EE007A 		vmov.f32	s15, #1.0e+0
  792 001a 94EDFA7A 		vldr.32	s14, [r4, #1000]
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 53
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 53
 
 
  793              	.LBB255:
@@ -3178,7 +3178,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  837              	.LBB258:
  838              	.LBI258:
   40:../DaisySP/Source/Utility/dsp.h **** {
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 54
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 54
 
 
  839              		.loc 3 40 14 view .LVU211
@@ -3238,7 +3238,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
   59:../DaisySP/Source/Utility/dsp.h **** }
  883              		.loc 3 59 5 is_stmt 0 view .LVU222
  884              		.thumb
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 55
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 55
 
 
  885              		.syntax unified
@@ -3298,7 +3298,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  927 004e 66EEA76A 		vmul.f32	s13, s13, s15
   40:constants_utils.h **** }
  928              		.loc 2 40 52 view .LVU235
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 56
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 56
 
 
  929 0052 C6EE867A 		vdiv.f32	s15, s13, s12
@@ -3358,7 +3358,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  972              	.LBB288:
  973              	.LBI288:
   30:constants_utils.h ****   /* hardcoded sample rate here to help performance 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 57
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 57
 
 
  974              		.loc 2 30 25 view .LVU247
@@ -3418,7 +3418,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  188:../DaisySP/Source/Utility/dsp.h ****         default: return fclamp(min + in * (max - min), min, max);
  1014              		.loc 3 188 9 view .LVU258
  1015              		.loc 3 189 9 view .LVU259
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 58
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 58
 
 
  1016              		.loc 3 189 18 view .LVU260
@@ -3478,7 +3478,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  1062              	.LBE301:
  1063              	.LBB303:
  1064              	.LBI303:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 59
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 59
 
 
   51:../DaisySP/Source/Utility/dsp.h **** {
@@ -3538,7 +3538,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  1107              	.L39:
   26:constants_utils.h **** }
  1108              		.loc 2 26 3 is_stmt 0 view .LVU287
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 60
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 60
 
 
  1109              	.LBE312:
@@ -3598,7 +3598,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  1155              	.LBE342:
   66:../DaisySP/Source/Utility/dsp.h **** }
  1156              		.loc 3 66 5 view .LVU299
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 61
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 61
 
 
  1157              	.LBB343:
@@ -3658,7 +3658,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  1200              	.LBB330:
  1201              	.LBI330:
   64:../DaisySP/Source/Utility/dsp.h **** {
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 62
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 62
 
 
  1202              		.loc 3 64 14 view .LVU311
@@ -3718,7 +3718,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  1246              		.syntax unified
  1247              	@ 55 "../DaisySP/Source/Utility/dsp.h" 1
  1248 010c C7FEC77A 		vminnm.f32 s15, s15, s14
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 63
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 63
 
 
  1249              	@ 0 "" 2
@@ -3778,7 +3778,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  1294              	.LBB372:
  1295              	.LBB369:
  1296              	.LBB358:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 64
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 64
 
 
  1297              	.LBB355:
@@ -3838,7 +3838,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  1339              	.LBI352:
   51:../DaisySP/Source/Utility/dsp.h **** {
  1340              		.loc 3 51 14 is_stmt 1 view .LVU346
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 65
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 65
 
 
  1341              	.LBB353:
@@ -3898,7 +3898,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
   44:../DaisySP/Source/Utility/dsp.h **** #else
  1385              		.loc 3 44 5 view .LVU358
  1386 0156 B6EE007A 		vmov.f32	s14, #5.0e-1
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 66
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 66
 
 
  1387              		.syntax unified
@@ -3958,7 +3958,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  152:GranularSynth.cpp ****   //   if (RngFloat() < rnd_phasor_){
  153:GranularSynth.cpp ****   //     int random_phasor_mode = static_cast<int>(RngFloat()) * NUM_PHASOR_MODES;
  154:GranularSynth.cpp ****   //     phasor_mode_ = static_cast<GrainPhasor::Mode>(random_phasor_mode);
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 67
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 67
 
 
  155:GranularSynth.cpp ****   //   }
@@ -4018,7 +4018,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  1463              		.loc 3 182 50 view .LVU379
  1464 0198 37EE666A 		vsub.f32	s12, s14, s13
  182:../DaisySP/Source/Utility/dsp.h ****         case Mapping::LOG:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 68
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 68
 
 
  1465              		.loc 3 182 26 view .LVU380
@@ -4078,7 +4078,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  1509              	.LVL76:
   59:../DaisySP/Source/Utility/dsp.h **** }
  1510              		.loc 3 59 5 view .LVU391
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 69
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 69
 
 
   59:../DaisySP/Source/Utility/dsp.h **** }
@@ -4138,7 +4138,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  1559              		.thumb
  1560              		.thumb_func
  1562              	_ZN13GranularSynth12TriggerGrainEv:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 70
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 70
 
 
  1563              	.LVL79:
@@ -4198,7 +4198,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  1603              		.loc 1 168 3 is_stmt 1 discriminator 3 view .LVU413
  168:GranularSynth.cpp ****     if (grain.is_active_) { count++; }
  1604              		.loc 1 168 20 is_stmt 0 discriminator 3 view .LVU414
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 71
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 71
 
 
  1605 0016 013B     		subs	r3, r3, #1
@@ -4258,7 +4258,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  1643              	.LVL86:
  1644              	.L60:
  172:GranularSynth.cpp ****       count++;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 72
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 72
 
 
  1645              		.loc 1 172 20 view .LVU426
@@ -4318,7 +4318,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  1692              	.LBB402:
  185:GranularSynth.cpp ****     TriggerGrain();
  1693              		.loc 1 185 5 view .LVU433
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 73
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 73
 
 
  1694              		.loc 1 185 17 is_stmt 0 view .LVU434
@@ -4378,7 +4378,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  191:GranularSynth.cpp ****     }
  192:GranularSynth.cpp ****     out_left[i]=sum_left;
  1736              		.loc 1 192 5 discriminator 2 view .LVU450
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 74
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 74
 
 
  1737              		.loc 1 192 16 is_stmt 0 discriminator 2 view .LVU451
@@ -4438,7 +4438,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  1786              	.LBB414:
  1787              	.LBI414:
  1788              		.loc 1 195 1 view .LVU462
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 75
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 75
 
 
  1789              	.LVL97:
@@ -4498,7 +4498,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
    3:GrainPhasor.h ****   public:
    4:GrainPhasor.h ****     enum class Mode {
    5:GrainPhasor.h ****       OneShot,
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 76
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 76
 
 
    6:GrainPhasor.h ****       OneShotReverse,
@@ -4558,7 +4558,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
   11:GranularSynth.cpp **** DTCMRAM_BSS Grain GranularSynth::grains_[MAX_GRAINS];
  1854              		.loc 1 11 52 view .LVU478
  1855 0032 E7D1     		bne	.L73
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 77
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 77
 
 
   11:GranularSynth.cpp **** DTCMRAM_BSS Grain GranularSynth::grains_[MAX_GRAINS];
@@ -4618,7 +4618,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  1918              	_ZN13GranularSynth9env_type_E:
  1919 03d0 00000000 		.space	4
  1922              	_ZN13GranularSynth11grain_size_E:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 78
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 78
 
 
  1923 03d4 00000000 		.space	4
@@ -4678,7 +4678,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  1999              		.file 36 "../libDaisy/src/daisy_core.h"
  2000              		.file 37 "../libDaisy/src/per/tim.h"
  2001              		.file 38 "../libDaisy/src/sys/system.h"
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 79
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 79
 
 
  2002              		.file 39 "../libDaisy/src/per/qspi.h"
@@ -4714,78 +4714,78 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 1
  2032              		.file 69 "GranularSynth.h"
  2033              		.file 70 "../libDaisy/src/dev/sr_595.h"
  2034              		.file 71 "<built-in>"
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 80
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 80
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 GranularSynth.cpp
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:19     .text.__tcf_0:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:24     .text.__tcf_0:0000000000000000 __tcf_0
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:38     .text._Z8RngFloatv:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:44     .text._Z8RngFloatv:0000000000000000 _Z8RngFloatv
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:82     .text._Z8RngFloatv:0000000000000024 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:88     .text._ZN13GranularSynth4InitEPKsS1_j:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:94     .text._ZN13GranularSynth4InitEPKsS1_j:0000000000000000 _ZN13GranularSynth4InitEPKsS1_j
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:210    .text._ZN13GranularSynth4InitEPKsS1_j:0000000000000080 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:219    .text._ZN13GranularSynth15SetEnvelopeTypeEN5Grain12EnvelopeTypeE:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:225    .text._ZN13GranularSynth15SetEnvelopeTypeEN5Grain12EnvelopeTypeE:0000000000000000 _ZN13GranularSynth15SetEnvelopeTypeEN5Grain12EnvelopeTypeE
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:242    .text._ZN13GranularSynth15SetEnvelopeTypeEN5Grain12EnvelopeTypeE:0000000000000008 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:247    .text._ZN13GranularSynth13SetPhasorModeEN11GrainPhasor4ModeE:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:253    .text._ZN13GranularSynth13SetPhasorModeEN11GrainPhasor4ModeE:0000000000000000 _ZN13GranularSynth13SetPhasorModeEN11GrainPhasor4ModeE
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:270    .text._ZN13GranularSynth13SetPhasorModeEN11GrainPhasor4ModeE:0000000000000008 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:275    .text._ZN13GranularSynth12SetGrainSizeEf:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:281    .text._ZN13GranularSynth12SetGrainSizeEf:0000000000000000 _ZN13GranularSynth12SetGrainSizeEf
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:391    .text._ZN13GranularSynth12SetGrainSizeEf:0000000000000038 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:401    .text._ZN13GranularSynth11SetSpawnPosEf:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:407    .text._ZN13GranularSynth11SetSpawnPosEf:0000000000000000 _ZN13GranularSynth11SetSpawnPosEf
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:435    .text._ZN13GranularSynth11SetSpawnPosEf:000000000000001c $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:440    .text._ZN13GranularSynth15SetActiveGrainsEf:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:446    .text._ZN13GranularSynth15SetActiveGrainsEf:0000000000000000 _ZN13GranularSynth15SetActiveGrainsEf
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:551    .text._ZN13GranularSynth15SetActiveGrainsEf:000000000000002c $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:556    .text._ZN13GranularSynth13SetPitchRatioEf:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:562    .text._ZN13GranularSynth13SetPitchRatioEf:0000000000000000 _ZN13GranularSynth13SetPitchRatioEf
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:651    .text._ZN13GranularSynth13SetPitchRatioEf:0000000000000024 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:656    .text._ZN13GranularSynth6SetPanEf:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:662    .text._ZN13GranularSynth6SetPanEf:0000000000000000 _ZN13GranularSynth6SetPanEf
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:679    .text._ZN13GranularSynth6SetPanEf:0000000000000008 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:684    .text._ZN13GranularSynth17UpdateGrainParamsEv:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:690    .text._ZN13GranularSynth17UpdateGrainParamsEv:0000000000000000 _ZN13GranularSynth17UpdateGrainParamsEv
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:753    .text._ZN13GranularSynth17UpdateGrainParamsEv:0000000000000038 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:758    .text._ZN13GranularSynth15ApplyRandomnessEv:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:764    .text._ZN13GranularSynth15ApplyRandomnessEv:0000000000000000 _ZN13GranularSynth15ApplyRandomnessEv
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:1545   .text._ZN13GranularSynth15ApplyRandomnessEv:00000000000001b8 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:1556   .text._ZN13GranularSynth12TriggerGrainEv:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:1562   .text._ZN13GranularSynth12TriggerGrainEv:0000000000000000 _ZN13GranularSynth12TriggerGrainEv
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:1648   .text._ZN13GranularSynth12TriggerGrainEv:0000000000000040 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:1654   .text._ZN13GranularSynth13ProcessGrainsEPfS0_j:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:1660   .text._ZN13GranularSynth13ProcessGrainsEPfS0_j:0000000000000000 _ZN13GranularSynth13ProcessGrainsEPfS0_j
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:1769   .text._ZN13GranularSynth13ProcessGrainsEPfS0_j:0000000000000054 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:1774   .text.startup._GLOBAL__sub_I__ZN13GranularSynth9left_buf_E:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:1779   .text.startup._GLOBAL__sub_I__ZN13GranularSynth9left_buf_E:0000000000000000 _GLOBAL__sub_I__ZN13GranularSynth9left_buf_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:1864   .text.startup._GLOBAL__sub_I__ZN13GranularSynth9left_buf_E:000000000000003c $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:1873   .init_array:0000000000000000 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:1966   .dtcmram_bss:0000000000000400 _ZN13GranularSynth11rnd_phasor_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:1962   .dtcmram_bss:00000000000003fc _ZN13GranularSynth13rnd_envelope_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:1958   .dtcmram_bss:00000000000003f8 _ZN13GranularSynth8rnd_pan_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:1954   .dtcmram_bss:00000000000003f4 _ZN13GranularSynth10rnd_pitch_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:1950   .dtcmram_bss:00000000000003f0 _ZN13GranularSynth10rnd_count_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:1946   .dtcmram_bss:00000000000003ec _ZN13GranularSynth14rnd_spawn_pos_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:1942   .dtcmram_bss:00000000000003e8 _ZN13GranularSynth9rnd_size_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:1938   .dtcmram_bss:00000000000003e4 _ZN13GranularSynth4pan_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:1934   .dtcmram_bss:00000000000003e0 _ZN13GranularSynth12pitch_ratio_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:1930   .dtcmram_bss:00000000000003dc _ZN13GranularSynth13active_count_E
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s 			page 81
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:19     .text.__tcf_0:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:24     .text.__tcf_0:0000000000000000 __tcf_0
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:38     .text._Z8RngFloatv:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:44     .text._Z8RngFloatv:0000000000000000 _Z8RngFloatv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:82     .text._Z8RngFloatv:0000000000000024 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:88     .text._ZN13GranularSynth4InitEPKsS1_j:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:94     .text._ZN13GranularSynth4InitEPKsS1_j:0000000000000000 _ZN13GranularSynth4InitEPKsS1_j
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:210    .text._ZN13GranularSynth4InitEPKsS1_j:0000000000000080 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:219    .text._ZN13GranularSynth15SetEnvelopeTypeEN5Grain12EnvelopeTypeE:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:225    .text._ZN13GranularSynth15SetEnvelopeTypeEN5Grain12EnvelopeTypeE:0000000000000000 _ZN13GranularSynth15SetEnvelopeTypeEN5Grain12EnvelopeTypeE
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:242    .text._ZN13GranularSynth15SetEnvelopeTypeEN5Grain12EnvelopeTypeE:0000000000000008 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:247    .text._ZN13GranularSynth13SetPhasorModeEN11GrainPhasor4ModeE:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:253    .text._ZN13GranularSynth13SetPhasorModeEN11GrainPhasor4ModeE:0000000000000000 _ZN13GranularSynth13SetPhasorModeEN11GrainPhasor4ModeE
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:270    .text._ZN13GranularSynth13SetPhasorModeEN11GrainPhasor4ModeE:0000000000000008 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:275    .text._ZN13GranularSynth12SetGrainSizeEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:281    .text._ZN13GranularSynth12SetGrainSizeEf:0000000000000000 _ZN13GranularSynth12SetGrainSizeEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:391    .text._ZN13GranularSynth12SetGrainSizeEf:0000000000000038 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:401    .text._ZN13GranularSynth11SetSpawnPosEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:407    .text._ZN13GranularSynth11SetSpawnPosEf:0000000000000000 _ZN13GranularSynth11SetSpawnPosEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:435    .text._ZN13GranularSynth11SetSpawnPosEf:000000000000001c $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:440    .text._ZN13GranularSynth15SetActiveGrainsEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:446    .text._ZN13GranularSynth15SetActiveGrainsEf:0000000000000000 _ZN13GranularSynth15SetActiveGrainsEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:551    .text._ZN13GranularSynth15SetActiveGrainsEf:000000000000002c $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:556    .text._ZN13GranularSynth13SetPitchRatioEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:562    .text._ZN13GranularSynth13SetPitchRatioEf:0000000000000000 _ZN13GranularSynth13SetPitchRatioEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:651    .text._ZN13GranularSynth13SetPitchRatioEf:0000000000000024 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:656    .text._ZN13GranularSynth6SetPanEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:662    .text._ZN13GranularSynth6SetPanEf:0000000000000000 _ZN13GranularSynth6SetPanEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:679    .text._ZN13GranularSynth6SetPanEf:0000000000000008 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:684    .text._ZN13GranularSynth17UpdateGrainParamsEv:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:690    .text._ZN13GranularSynth17UpdateGrainParamsEv:0000000000000000 _ZN13GranularSynth17UpdateGrainParamsEv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:753    .text._ZN13GranularSynth17UpdateGrainParamsEv:0000000000000038 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:758    .text._ZN13GranularSynth15ApplyRandomnessEv:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:764    .text._ZN13GranularSynth15ApplyRandomnessEv:0000000000000000 _ZN13GranularSynth15ApplyRandomnessEv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:1545   .text._ZN13GranularSynth15ApplyRandomnessEv:00000000000001b8 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:1556   .text._ZN13GranularSynth12TriggerGrainEv:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:1562   .text._ZN13GranularSynth12TriggerGrainEv:0000000000000000 _ZN13GranularSynth12TriggerGrainEv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:1648   .text._ZN13GranularSynth12TriggerGrainEv:0000000000000040 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:1654   .text._ZN13GranularSynth13ProcessGrainsEPfS0_j:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:1660   .text._ZN13GranularSynth13ProcessGrainsEPfS0_j:0000000000000000 _ZN13GranularSynth13ProcessGrainsEPfS0_j
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:1769   .text._ZN13GranularSynth13ProcessGrainsEPfS0_j:0000000000000054 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:1774   .text.startup._GLOBAL__sub_I__ZN13GranularSynth9left_buf_E:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:1779   .text.startup._GLOBAL__sub_I__ZN13GranularSynth9left_buf_E:0000000000000000 _GLOBAL__sub_I__ZN13GranularSynth9left_buf_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:1864   .text.startup._GLOBAL__sub_I__ZN13GranularSynth9left_buf_E:000000000000003c $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:1873   .init_array:0000000000000000 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:1966   .dtcmram_bss:0000000000000400 _ZN13GranularSynth11rnd_phasor_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:1962   .dtcmram_bss:00000000000003fc _ZN13GranularSynth13rnd_envelope_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:1958   .dtcmram_bss:00000000000003f8 _ZN13GranularSynth8rnd_pan_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:1954   .dtcmram_bss:00000000000003f4 _ZN13GranularSynth10rnd_pitch_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:1950   .dtcmram_bss:00000000000003f0 _ZN13GranularSynth10rnd_count_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:1946   .dtcmram_bss:00000000000003ec _ZN13GranularSynth14rnd_spawn_pos_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:1942   .dtcmram_bss:00000000000003e8 _ZN13GranularSynth9rnd_size_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:1938   .dtcmram_bss:00000000000003e4 _ZN13GranularSynth4pan_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:1934   .dtcmram_bss:00000000000003e0 _ZN13GranularSynth12pitch_ratio_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:1930   .dtcmram_bss:00000000000003dc _ZN13GranularSynth13active_count_E
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s 			page 81
 
 
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:1926   .dtcmram_bss:00000000000003d8 _ZN13GranularSynth10spawn_pos_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:1922   .dtcmram_bss:00000000000003d4 _ZN13GranularSynth11grain_size_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:1918   .dtcmram_bss:00000000000003d0 _ZN13GranularSynth9env_type_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:1914   .dtcmram_bss:00000000000003cc _ZN13GranularSynth12phasor_mode_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:1910   .dtcmram_bss:000000000000000c _ZN13GranularSynth7grains_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:1906   .dtcmram_bss:0000000000000008 _ZN13GranularSynth10audio_len_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:1902   .dtcmram_bss:0000000000000004 _ZN13GranularSynth10right_buf_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:1898   .dtcmram_bss:0000000000000000 _ZN13GranularSynth9left_buf_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccI0csBY.s:1894   .dtcmram_bss:0000000000000000 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:1926   .dtcmram_bss:00000000000003d8 _ZN13GranularSynth10spawn_pos_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:1922   .dtcmram_bss:00000000000003d4 _ZN13GranularSynth11grain_size_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:1918   .dtcmram_bss:00000000000003d0 _ZN13GranularSynth9env_type_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:1914   .dtcmram_bss:00000000000003cc _ZN13GranularSynth12phasor_mode_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:1910   .dtcmram_bss:000000000000000c _ZN13GranularSynth7grains_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:1906   .dtcmram_bss:0000000000000008 _ZN13GranularSynth10audio_len_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:1902   .dtcmram_bss:0000000000000004 _ZN13GranularSynth10right_buf_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:1898   .dtcmram_bss:0000000000000000 _ZN13GranularSynth9left_buf_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDPqxcF.s:1894   .dtcmram_bss:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 rng_state

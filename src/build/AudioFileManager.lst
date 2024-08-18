@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
   16:AudioFileManager.cpp ****   SdmmcHandler::Config sd_cfg;
   38              		.loc 1 16 30 is_stmt 0 view .LVU3
   39 0000 7FB5     		push	{r0, r1, r2, r3, r4, r5, r6, lr}
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 2
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 2
 
 
   40              		.cfi_def_cfa_offset 32
@@ -118,7 +118,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
   46:../libDaisy/src/per/sdmmc.h ****     };
   47:../libDaisy/src/per/sdmmc.h **** 
   48:../libDaisy/src/per/sdmmc.h ****     /** 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 3
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 3
 
 
   49:../libDaisy/src/per/sdmmc.h ****     Sets the desired clock speed of the SD card bus. \n 
@@ -178,7 +178,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
   75              		.loc 2 73 13 is_stmt 0 view .LVU14
   76              	.LBE16:
   77              	.LBE17:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 4
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 4
 
 
   78              		.loc 1 19 3 is_stmt 1 view .LVU15
@@ -238,7 +238,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
   35:../libDaisy/src/sys/fatfs.h ****         ERR_NO_MEDIA_SELECTED,
   36:../libDaisy/src/sys/fatfs.h ****         ERR_GENERIC,
   37:../libDaisy/src/sys/fatfs.h ****     };
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 5
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 5
 
 
   38:../libDaisy/src/sys/fatfs.h **** 
@@ -298,7 +298,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
   92:../libDaisy/src/sys/fatfs.h ****     /** Returns reference to filesystem object for the SD volume. */
   93:../libDaisy/src/sys/fatfs.h ****     FATFS& GetSDFileSystem() { return fs_[0]; }
   94              		.loc 3 93 12 view .LVU21
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 6
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 6
 
 
   95              	.LBB19:
@@ -358,7 +358,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
   25:AudioFileManager.cpp **** 
   26:AudioFileManager.cpp **** /// @brief Scans for list of WAVs on SD card and stores filenames
   27:AudioFileManager.cpp **** /// @return False if directory fails to open or there are no valid files, else true
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 7
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 7
 
 
   28:AudioFileManager.cpp **** bool AudioFileManager::ScanWavFiles(){
@@ -418,7 +418,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
  189              	.LVL11:
  190              		.loc 1 33 3 view .LVU42
  191 0016 0028     		cmp	r0, #0
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 8
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 8
 
 
  192 0018 3DD1     		bne	.L13
@@ -478,7 +478,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
  233 0058 0DF14600 		add	r0, sp, #70
  234 005c FFF7FEFF 		bl	strstr
  235              	.LVL15:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 9
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 9
 
 
  236              		.loc 1 44 33 view .LVU56
@@ -538,7 +538,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
  281              		@ sp needed
  282 0094 70BD     		pop	{r4, r5, r6, pc}
  283              	.L13:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 10
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 10
 
 
  284              		.cfi_restore_state
@@ -598,7 +598,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
  311              		@ args = 0, pretend = 0, frame = 48
  312              		@ frame_needed = 0, uses_anonymous_args = 0
   81:AudioFileManager.cpp ****   WAV_FormatTypeDef header;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 11
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 11
 
 
  313              		.loc 1 81 3 view .LVU75
@@ -658,7 +658,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
  349              		.loc 1 96 3 view .LVU90
  350 001c 1E4B     		ldr	r3, .L34
  351 001e 019A     		ldr	r2, [sp, #4]
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 12
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 12
 
 
  352 0020 9A42     		cmp	r2, r3
@@ -718,7 +718,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
  393              	.LVL23:
  100:AudioFileManager.cpp ****     header_.file_size = header.SubCHunk2Size;
  394              		.loc 1 100 23 view .LVU105
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 13
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 13
 
 
  395 006e A2F80E38 		strh	r3, [r2, #2062]	@ movhi
@@ -778,7 +778,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
  131:AudioFileManager.cpp ****   //       if (f_read(file, &header_.sample_rate, 4, &bytes_read)!=FR_OK || bytes_read!=4){
  132:AudioFileManager.cpp ****   //         return false;
  133:AudioFileManager.cpp ****   //       }
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 14
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 14
 
 
  134:AudioFileManager.cpp ****   //       f_lseek(file, f_tell(file)+6); /* skip byte rate and block align - 6 bytes */
@@ -838,7 +838,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
  447              	.LVL27:
  448              	.LFB2588:
  158:AudioFileManager.cpp **** 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 15
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 15
 
 
  159:AudioFileManager.cpp **** /// @brief Clear data buffers, check file length is within bounds, call audio loader
@@ -898,7 +898,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
  476 0012 0446     		mov	r4, r0
  477              	.LVL30:
  478              		.loc 1 180 3 is_stmt 1 view .LVU127
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 16
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 16
 
 
  479              	.L45:
@@ -958,7 +958,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
   28:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****  * Hewlett-Packard Company
   29:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****  *
   30:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****  * Permission to use, copy, modify, distribute and sell this software
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 17
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 17
 
 
   31:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****  * and its documentation for any purpose is hereby granted without fee,
@@ -1018,7 +1018,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
   85:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    * @param __num The number of elements of type _Tp (not bytes).
   86:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    */
   87:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****   template<typename _Tp, typename _Up>
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 18
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 18
 
 
   88:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     _GLIBCXX14_CONSTEXPR
@@ -1078,7 +1078,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
  142:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    *  @param  __a  An iterator.
  143:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    *  @param  __b  Another iterator.
  144:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    *  @return   Nothing.
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 19
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 19
 
 
  145:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****    *
@@ -1138,7 +1138,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
  199:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     _GLIBCXX20_CONSTEXPR
  200:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     _ForwardIterator2
  201:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h ****     swap_ranges(_ForwardIterator1 __first1, _ForwardIterator1 __last1,
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 20
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 20
 
 
  202:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_algobase.h **** 		_ForwardIterator2 __first2)
@@ -1198,7 +1198,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
  516              	.LBB27:
  517              		.loc 4 237 14 view .LVU141
  518 0032 28BF     		it	cs
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 21
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 21
 
 
  519 0034 4FF48043 		movcs	r3, #16384
@@ -1258,7 +1258,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
  552              	.L39:
  553              		.cfi_restore_state
  554              	.LBB31:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 22
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 22
 
 
  194:AudioFileManager.cpp ****     for (size_t i=0; i<samples_in_chunk; i++){
@@ -1318,7 +1318,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
  595 0094 21F802CC 		strheq	ip, [r1, #-2]	@ movhi
  201:AudioFileManager.cpp ****       }
  596              		.loc 1 201 56 view .LVU166
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 23
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 23
 
 
  597 0098 3CF923C0 		ldrshne	ip, [ip, r3, lsl #2]
@@ -1378,7 +1378,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
  635 00ba 00BF     		.align	2
  636              	.L47:
  637 00bc 00000000 		.word	.LANCHOR1
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 24
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 24
 
 
  638 00c0 00000000 		.word	.LANCHOR2
@@ -1438,7 +1438,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
  684              	.LBB32:
  685              	.LBI32:
  686              		.file 5 "AudioFileManager.h"
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 25
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 25
 
 
    1:AudioFileManager.h **** #pragma once
@@ -1498,7 +1498,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
  712              	.LVL48:
  168:AudioFileManager.cpp **** }
  713              		.loc 1 168 24 view .LVU202
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 26
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 26
 
 
  714 003a FFF7FEBF 		b	_ZN16AudioFileManager14Load16BitAudioEj
@@ -1558,7 +1558,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
  762 000c 25D3     		bcc	.L55
   64:AudioFileManager.cpp **** 
  763              		.loc 1 64 3 is_stmt 1 view .LVU211
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 27
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 27
 
 
  764 000e B6F81638 		ldrh	r3, [r6, #2070]
@@ -1618,7 +1618,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
   74:AudioFileManager.cpp **** 
  805              		.loc 1 74 1 view .LVU225
  806 004c BDE87040 		pop	{r4, r5, r6, lr}
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 28
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 28
 
 
  807              		.cfi_remember_state
@@ -1678,7 +1678,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
  214:AudioFileManager.cpp ****   return f_close(curr_file_) == FR_OK;
  853              		.loc 1 214 3 view .LVU233
  213:AudioFileManager.cpp ****   return f_close(curr_file_) == FR_OK;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 29
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 29
 
 
  854              		.loc 1 213 35 is_stmt 0 view .LVU234
@@ -1738,7 +1738,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
  901 0010 00000000 		.word	.LANCHOR1
  902              		.cfi_endproc
  903              	.LFE2590:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 30
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 30
 
 
  905              		.global	_ZN16AudioFileManager10right_buf_E
@@ -1798,7 +1798,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
  966              		.file 19 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/exception_ptr.h"
  967              		.file 20 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/initializer_list"
  968              		.file 21 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdarg"
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 31
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 31
 
 
  969              		.file 22 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdio"
@@ -1847,44 +1847,44 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 1
  1012              		.file 65 "../libDaisy/src/dev/sr_595.h"
  1013              		.file 66 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/new"
  1014              		.file 67 "<built-in>"
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s 			page 32
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s 			page 32
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 AudioFileManager.cpp
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:22     .text._ZN16AudioFileManager4InitEv:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:28     .text._ZN16AudioFileManager4InitEv:0000000000000000 _ZN16AudioFileManager4InitEv
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:126    .text._ZN16AudioFileManager4InitEv:0000000000000040 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:138    .text._ZN16AudioFileManager12ScanWavFilesEv:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:144    .text._ZN16AudioFileManager12ScanWavFilesEv:0000000000000000 _ZN16AudioFileManager12ScanWavFilesEv
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:291    .text._ZN16AudioFileManager12ScanWavFilesEv:000000000000009c $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:300    .text._ZN16AudioFileManager12GetWavHeaderEP3FIL:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:306    .text._ZN16AudioFileManager12GetWavHeaderEP3FIL:0000000000000000 _ZN16AudioFileManager12GetWavHeaderEP3FIL
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:434    .text._ZN16AudioFileManager12GetWavHeaderEP3FIL:0000000000000098 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:440    .text._ZN16AudioFileManager14Load16BitAudioEj:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:446    .text._ZN16AudioFileManager14Load16BitAudioEj:0000000000000000 _ZN16AudioFileManager14Load16BitAudioEj
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:637    .text._ZN16AudioFileManager14Load16BitAudioEj:00000000000000bc $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:644    .text._ZN16AudioFileManager13LoadAudioDataEv:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:650    .text._ZN16AudioFileManager13LoadAudioDataEv:0000000000000000 _ZN16AudioFileManager13LoadAudioDataEv
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:726    .text._ZN16AudioFileManager13LoadAudioDataEv:0000000000000044 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:733    .text._ZN16AudioFileManager8LoadFileEt:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:739    .text._ZN16AudioFileManager8LoadFileEt:0000000000000000 _ZN16AudioFileManager8LoadFileEt
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:834    .text._ZN16AudioFileManager8LoadFileEt:0000000000000060 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:840    .text._ZN16AudioFileManager9CloseFileEv:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:846    .text._ZN16AudioFileManager9CloseFileEv:0000000000000000 _ZN16AudioFileManager9CloseFileEv
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:873    .text._ZN16AudioFileManager10SetBuffersEPsS0_:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:879    .text._ZN16AudioFileManager10SetBuffersEPsS0_:0000000000000000 _ZN16AudioFileManager10SetBuffersEPsS0_
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:900    .text._ZN16AudioFileManager10SetBuffersEPsS0_:000000000000000c $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:917    .bss._ZN16AudioFileManager10right_buf_E:0000000000000000 _ZN16AudioFileManager10right_buf_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:924    .bss._ZN16AudioFileManager9left_buf_E:0000000000000000 _ZN16AudioFileManager9left_buf_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:944    .dtcmram_bss:0000000000000814 _ZN16AudioFileManager17audio_data_start_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:940    .dtcmram_bss:0000000000000804 _ZN16AudioFileManager7header_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:931    .dtcmram_bss:0000000000000000 _ZN16AudioFileManager11file_count_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:949    .dtcmram_bss:0000000000000816 _ZN16AudioFileManager9curr_idx_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:935    .dtcmram_bss:0000000000000002 _ZN16AudioFileManager6names_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:913    .bss._ZN16AudioFileManager10right_buf_E:0000000000000000 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:920    .bss._ZN16AudioFileManager9left_buf_E:0000000000000000 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN58kEG.s:927    .dtcmram_bss:0000000000000000 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:22     .text._ZN16AudioFileManager4InitEv:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:28     .text._ZN16AudioFileManager4InitEv:0000000000000000 _ZN16AudioFileManager4InitEv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:126    .text._ZN16AudioFileManager4InitEv:0000000000000040 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:138    .text._ZN16AudioFileManager12ScanWavFilesEv:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:144    .text._ZN16AudioFileManager12ScanWavFilesEv:0000000000000000 _ZN16AudioFileManager12ScanWavFilesEv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:291    .text._ZN16AudioFileManager12ScanWavFilesEv:000000000000009c $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:300    .text._ZN16AudioFileManager12GetWavHeaderEP3FIL:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:306    .text._ZN16AudioFileManager12GetWavHeaderEP3FIL:0000000000000000 _ZN16AudioFileManager12GetWavHeaderEP3FIL
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:434    .text._ZN16AudioFileManager12GetWavHeaderEP3FIL:0000000000000098 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:440    .text._ZN16AudioFileManager14Load16BitAudioEj:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:446    .text._ZN16AudioFileManager14Load16BitAudioEj:0000000000000000 _ZN16AudioFileManager14Load16BitAudioEj
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:637    .text._ZN16AudioFileManager14Load16BitAudioEj:00000000000000bc $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:644    .text._ZN16AudioFileManager13LoadAudioDataEv:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:650    .text._ZN16AudioFileManager13LoadAudioDataEv:0000000000000000 _ZN16AudioFileManager13LoadAudioDataEv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:726    .text._ZN16AudioFileManager13LoadAudioDataEv:0000000000000044 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:733    .text._ZN16AudioFileManager8LoadFileEt:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:739    .text._ZN16AudioFileManager8LoadFileEt:0000000000000000 _ZN16AudioFileManager8LoadFileEt
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:834    .text._ZN16AudioFileManager8LoadFileEt:0000000000000060 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:840    .text._ZN16AudioFileManager9CloseFileEv:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:846    .text._ZN16AudioFileManager9CloseFileEv:0000000000000000 _ZN16AudioFileManager9CloseFileEv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:873    .text._ZN16AudioFileManager10SetBuffersEPsS0_:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:879    .text._ZN16AudioFileManager10SetBuffersEPsS0_:0000000000000000 _ZN16AudioFileManager10SetBuffersEPsS0_
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:900    .text._ZN16AudioFileManager10SetBuffersEPsS0_:000000000000000c $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:917    .bss._ZN16AudioFileManager10right_buf_E:0000000000000000 _ZN16AudioFileManager10right_buf_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:924    .bss._ZN16AudioFileManager9left_buf_E:0000000000000000 _ZN16AudioFileManager9left_buf_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:944    .dtcmram_bss:0000000000000814 _ZN16AudioFileManager17audio_data_start_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:940    .dtcmram_bss:0000000000000804 _ZN16AudioFileManager7header_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:931    .dtcmram_bss:0000000000000000 _ZN16AudioFileManager11file_count_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:949    .dtcmram_bss:0000000000000816 _ZN16AudioFileManager9curr_idx_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:935    .dtcmram_bss:0000000000000002 _ZN16AudioFileManager6names_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:913    .bss._ZN16AudioFileManager10right_buf_E:0000000000000000 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:920    .bss._ZN16AudioFileManager9left_buf_E:0000000000000000 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccce9ZGr.s:927    .dtcmram_bss:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 _ZN5daisy12SdmmcHandler4InitERKNS0_6ConfigE

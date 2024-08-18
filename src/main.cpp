@@ -17,6 +17,8 @@ using namespace daisy;
 using namespace daisysp;
 using namespace std;
 
+// 33556144b without reverb, reverb is 396100 b in qspiflash
+
 /* SDRAM buffers for storing WAV files or recorded input audio */
 DSY_SDRAM_BSS alignas(16) int16_t left_buf[CHNL_BUF_SIZE_SAMPS];
 DSY_SDRAM_BSS alignas(16) int16_t right_buf[CHNL_BUF_SIZE_SAMPS];

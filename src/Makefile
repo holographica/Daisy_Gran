@@ -11,7 +11,8 @@ CPP_SOURCES = main.cpp AudioFileManager.cpp GranularSynth.cpp GrannyChordApp.cpp
 # Library locations
 LIBDAISY_DIR = ../libDaisy
 DAISYSP_DIR = ../DaisySP
-APP_TYPE = BOOT_SRAM
+APP_TYPE = BOOT_SRAM_EDITED
+
 
 # Core location, and generic Makefile
 SYSTEM_FILES_DIR = $(LIBDAISY_DIR)/core

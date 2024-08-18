@@ -9,7 +9,10 @@ int16_t* GrannyChordApp::right_buf_=nullptr;
 DTCMRAM_BSS AppState GrannyChordApp::curr_state_;
 DTCMRAM_BSS SynthMode GrannyChordApp::curr_synth_mode_;
 DTCMRAM_BSS SynthMode GrannyChordApp::prev_synth_mode_;
-SRAM_BSS ReverbSc GrannyChordApp::reverb_;
+
+// __attribute__((section(".qspiflash_bss")))ReverbSc GrannyChordApp::reverb_;
+DSY_SDRAM_BSS ReverbSc GrannyChordApp::reverb_;
+
 DTCMRAM_BSS Compressor GrannyChordApp::comp_;
 DTCMRAM_BSS MoogLadder GrannyChordApp::lowpass_moog_;
 DTCMRAM_BSS OnePole GrannyChordApp::hipass_;
