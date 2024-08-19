@@ -40,8 +40,8 @@ void GrannyChordApp::Run(){
   // size_t count = 0;
   pod_.seed.PrintLine("app is running");
   while(true){
-    count++;
-    if (count%2000==0){
+    loop_count++;
+    if (loop_count%2000==0){
       const float avgLoad = loadmeter.GetAvgCpuLoad();
       const float maxLoad = loadmeter.GetMaxCpuLoad();
       const float minLoad = loadmeter.GetMinCpuLoad();
@@ -53,8 +53,15 @@ void GrannyChordApp::Run(){
       pod_.seed.PrintLine("Max: " FLT_FMT3, FLT_VAR3(maxLoad * 100.0f));
       pod_.seed.PrintLine("Avg: " FLT_FMT3, FLT_VAR3(avgLoad * 100.0f));
       pod_.seed.PrintLine("Min: " FLT_FMT3, FLT_VAR3(minLoad * 100.0f));
-      count=0;
+      loop_count=0;
       System::Delay(500);
+    }
+    if (recording_out_) {
+      sd_writer_.Write();
+      if (sd_writer_.GetLengthSeconds()>120){
+        sd_writer_.SaveFile();
+        recording_out_ = 0;
+      }
     }
     UpdateUI();
     UpdateSynthParams();
@@ -76,9 +83,11 @@ void GrannyChordApp::UpdateUI(){
   int32_t encoder_inc = pod_.encoder.Increment();
   if (encoder_inc!=0){
     if (next_state_== AppState::SelectFile){
+      recorded_in_ = false;
       HandleFileSelection(encoder_inc);
     }
     else if (curr_state_==AppState::PlayWAV){
+      recorded_in_ = false;
       next_state_ = AppState::SelectFile;
     }
   }
@@ -97,7 +106,7 @@ void GrannyChordApp::HandleStateChange(){
       curr_state_ = AppState::SelectFile;
       return; 
     case AppState::RecordIn:
-      ClearAudioBuffers();
+      InitRecordIn();
       curr_state_ = AppState::RecordIn;  
       return;
     case AppState::PlayWAV:
@@ -126,6 +135,7 @@ void GrannyChordApp::HandleEncoderPressed(){
       next_state_ = AppState::PlayWAV;
       return;
     case AppState::RecordIn: 
+      recorded_in_ = true;
       next_state_ = AppState::PlayWAV; // NOTE: NEED TO CHANGE THIS
                                         // ATM IT LOADS + PLAYS A WAV FILE
                                         // NEED IT TO PLAY BUFFERS
@@ -144,15 +154,12 @@ void GrannyChordApp::HandleEncoderLongPress(){
   DebugPrint(pod_,"in long press method");
   switch(curr_state_){
     case AppState::Synthesis:
-      next_state_ = AppState::SelectFile;
-      return;
     case AppState::RecordIn:  
       next_state_ = AppState::SelectFile;
       return;
     case AppState::SelectFile:
-      next_state_ = AppState::RecordIn;
-      return;
     case AppState::PlayWAV: 
+      recorded_in_ = true;
       next_state_ = AppState::RecordIn;  
       return;
     default:
@@ -267,23 +274,25 @@ void GrannyChordApp::InitSynth(){
 
 }
 
-/// @brief Resets current file index and audio data buffers
-///        Calls method to handle WAV file selection
-void GrannyChordApp::ClearAudioBuffers(){
-  pod_.seed.PrintLine("clearing audio buffers");
-  memset(left_buf_, 0, CHNL_BUF_SIZE_ABS);
-  memset(right_buf_, 0, CHNL_BUF_SIZE_ABS);
-}
+// /// @brief Resets current file index and audio data buffers
+// ///        Calls method to handle WAV file selection
+// void GrannyChordApp::ClearAudioBuffers(){
+//   pod_.seed.PrintLine("clearing audio buffers");
+//   memset(left_buf_, 0, CHNL_BUF_SIZE_ABS);
+//   memset(right_buf_, 0, CHNL_BUF_SIZE_ABS);
+// }
 
 /// @brief Initialises WAV playback state, resets playhead, sets current file audio length
 void GrannyChordApp::InitPlayback(){
   wav_playhead_ = 0;
   DebugPrint(pod_, "loading file");
-  // audio_len_ = filemgr_.GetSamplesPerChannel();
-  if (!filemgr_.LoadFile(file_idx_)) {
-    DebugPrint(pod_,"failed to load file");
-    curr_state_=AppState::Error;
-    return;
+  record_in_pos_  = 0;
+  if (!recorded_in_){
+    if (!filemgr_.LoadFile(file_idx_)) {
+      DebugPrint(pod_,"failed to load file");
+      curr_state_=AppState::Error;
+      return;
+    }
   }
   DebugPrint(pod_, "loaded file");
   pod_.StartAudio(AudioCallback);
@@ -294,18 +303,17 @@ void GrannyChordApp::InitPlayback(){
 void GrannyChordApp::InitRecordIn(){
   memset(left_buf_, 0, CHNL_BUF_SIZE_ABS);
   memset(right_buf_, 0, CHNL_BUF_SIZE_ABS);
-
-  // DebugPrint(pod_, "cleared audio buffers for recording in");
+  record_in_pos_ = 0;
 }
 
 // /// @brief Initialise object for recording out to SD card
-// void GrannyChordApp::InitWavWriter(){
-//   WavWriter<16384>::Config cfg;
-//   cfg.bitspersample = BIT_DEPTH;
-//   cfg.channels = filemgr_.GetNumChannels();
-//   cfg.samplerate = SAMPLE_RATE;
-//   sd_out_writer_.Init(cfg);
-// }
+void GrannyChordApp::InitWavWriter(){
+  WavWriter<16384>::Config cfg;
+  cfg.bitspersample = BIT_DEPTH;
+  cfg.channels = filemgr_.GetNumChannels();
+  cfg.samplerate = SAMPLE_RATE;
+  sd_writer_.Init(cfg);
+}
 
 /// @brief initialise reverb, compressor, filter configs for FX section 
 void GrannyChordApp::InitFX(){
@@ -326,7 +334,6 @@ void GrannyChordApp::InitPrevParamVals(){
         prev_param_vals_k2[i] = 0.5f;
       } 
 };
-
 
 /// @brief Master audio callback, called at audio rate, calls all audio processing methods
 /// @param in Audio input buffer
@@ -392,20 +399,19 @@ void GrannyChordApp::ProcessWAVPlayback(AudioHandle::OutputBuffer out, size_t si
 /// @param out Output audio buffer
 /// @param size Number of samples to process in this call
 void GrannyChordApp::ProcessRecordIn(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, size_t size){
-  const size_t MAX_RECORDING_LEN = 60*48000; /* 60s @ 48kHZ */
-  size_t record_pos = 0;
+  const size_t MAX_RECORDING_LEN = 120*48000; /* 120s @ 48kHZ */
   for (size_t i=0; i<size;i++){
     /* send audio in straight to output for monitoring */
     out[0][i]=in[0][i];
     out[1][i]=in[1][i];
 
     /* record audio in to SDRAM buffers */
-    left_buf_[record_pos] = in[0][i];
-    right_buf_[record_pos] = in[1][i];
+    left_buf_[record_in_pos_] = in[0][i];
+    right_buf_[record_in_pos_] = in[1][i];
 
-    /* wrap around recording length - if it exceeds 60s,
+    /* wrap around recording length - if it exceeds 120s,
       the start of the recording will be overwritten */
-    record_pos = (record_pos+1)%MAX_RECORDING_LEN;
+    record_in_pos_ = (record_in_pos_+1)%MAX_RECORDING_LEN;
   }
 }
 
@@ -419,9 +425,15 @@ void GrannyChordApp::ProcessSynthesis(AudioHandle::OutputBuffer out, size_t size
     out[0][i] = samp.left;
     // out[1][i] = comp_.Process(samp.right);
     out[1][i] = samp.right;
-    // reverb_.ProcessMix
-    //   (comp_.Process(samp.left), comp_.Process(samp.right),
-    //   &out[0][i], &out[1][i]);
+    reverb_.ProcessMix
+      (comp_.Process(samp.left), comp_.Process(samp.right),
+      &out[0][i], &out[1][i]);
+    
+    if (recording_out_ && sd_writer_.GetLengthSeconds()<120){
+      temp_interleaved_buf_[0]=out[0][i];
+      temp_interleaved_buf_[1]=out[1][i];
+      sd_writer_.Sample(temp_interleaved_buf_);
+    }
   }
 }
 
@@ -440,13 +452,14 @@ void GrannyChordApp::ProcessSynthesis(AudioHandle::OutputBuffer out, size_t size
 /// @brief Record granular synth or chord output audio to SD card
 /// @param out Output audio buffer
 /// @param size Number of samples to process in this call
-// void GrannyChordApp::RecordOutToSD(AudioHandle::OutputBuffer out, size_t size){
-//   InitWavWriter();
-//   char name[32];
-//   sprintf(name,"recording_%d",recording_count_);
-//   sd_out_writer_.OpenFile(name);
-//   recording_count_++;
-//   recording_out_ = true;
+void GrannyChordApp::RecordOutToSD(AudioHandle::OutputBuffer out, size_t size){
+  InitWavWriter();
+  char name[32];
+  sprintf(name,"recording_%d",recording_count_);
+  recording_count_++;
+  sd_writer_.OpenFile(name);
+  recording_out_ = true;
+}
 // // NOTE: 
 // // USE THIS 
 // // https://electro-smith.github.io/libDaisy/classdaisy_1_1_wav_writer.html
@@ -470,6 +483,10 @@ void GrannyChordApp::ProcessSynthesis(AudioHandle::OutputBuffer out, size_t size
 /// @brief Helper function to mark when audio output recording starts
 void GrannyChordApp::ToggleRecordOut(){
   recording_out_ = !recording_out_;
+}
+
+void GrannyChordApp::FinishRecording(){
+  sd_writer_.SaveFile();
 }
 
 
@@ -569,7 +586,6 @@ inline constexpr float GrannyChordApp::MapKnobDeadzone(float knob_val ){
   'passes through' the stored value - meaning if we set grain size to 0.1 then switch modes 
   and move the knob to 0.8, if we switch back, grain size won't be updated again until the 
   knob passes through this value.  */
-
 inline constexpr float GrannyChordApp::UpdateKnobPassThru(float curr_knob_val, float *stored_knob_val, bool *pass_thru){
   if (!(*pass_thru)){
     if (curr_knob_val >= (*stored_knob_val) || curr_knob_val <= (*stored_knob_val)) {
@@ -587,21 +603,180 @@ void GrannyChordApp::DebugPrintState(AppState state){
   switch(state){
     case AppState::SelectFile:
       DebugPrint(pod_, "State now in: SelectFile");
-        return;
+      return;
     case AppState::RecordIn:
       DebugPrint(pod_, "State now in: RecordIn");
-        return;
+      return;
     case AppState::PlayWAV:
       DebugPrint(pod_, "State now in: PlayWAV");
-        return;
+      return;
     case AppState::Synthesis:
       DebugPrint(pod_, "State now in: Synthesis");
-        return;
+      return;
     // case AppState::ChordMode:
       DebugPrint(pod_, "State now in: ChordMode");
     case AppState::Error:
     default:
       DebugPrint(pod_, "State now in: Error");
-        return;
+      return;
   }
 };
+
+void GrannyChordApp::DebugPrintMode(SynthMode mode){
+  switch(mode){
+    case SynthMode::Size_Position:
+      DebugPrint(pod_, "State now in: SizePos");
+      return;
+    case SynthMode::Size_Position_Rnd:
+      DebugPrint(pod_, "State now in: SizePosRnd");
+      return;
+    case SynthMode::Pitch_ActiveGrains:
+      DebugPrint(pod_, "State now in: PitchGrains");
+      return;
+    case SynthMode::Pitch_ActiveGrains_Rnd:
+      DebugPrint(pod_, "State now in: PitchGrainsRnd");
+      return;
+    case SynthMode::Pan_PanRnd:
+      DebugPrint(pod_, "State now in: PanPanRnd");
+    case SynthMode::PhasorMode_EnvType:
+      DebugPrint(pod_, "State now in: PhasorEnv");
+      return;
+    case SynthMode::PhasorMode_EnvType_Rnd:
+      DebugPrint(pod_, "State now in: PhasorEnvRnd");
+      return;
+    case SynthMode::Reverb:
+      DebugPrint(pod_, "State now in: Reverb");
+      return;
+    case SynthMode::Filter:
+      DebugPrint(pod_, "State now in: Filter");
+      return;
+  }
+};
+
+
+void GrannyChordApp::SetupTimer(){
+  TimerHandle::Config cfg;
+  cfg.periph = TimerHandle::Config::Peripheral::TIM_5;
+  cfg.period = 2000;
+  cfg.enable_irq = true;
+  timer_.Init(cfg);
+  timer_.SetPrescaler(9999);
+  timer_.SetCallback(StaticLedCallback, nullptr);
+}
+
+
+
+// void GrannyChordApp::StartLedPulse(){
+//   timer_.Start();
+// }
+
+// void GrannyChordApp::StopLedPulse(){
+//   timer_.Stop();
+// }
+
+
+void GrannyChordApp::LedCallback(void* data){
+  if (led_flash_count_ < 6) {
+      /* flash for the first 6 callbacks (3 cycles) */
+      if (led_flash_count_%2==0) pod_.led1.Set(0,0,0);
+      else pod_.led1.Set(0.7f, 0, 0.7f);
+      led_flash_count_++;
+  } 
+  else pod_.led1.Set(1,0,1); /* stay solid after 3 flashes */
+  pod_.UpdateLeds();
+}
+
+void GrannyChordApp::SetLedAppState(){
+  switch(curr_state_){
+    case AppState::SelectFile:
+      SetRgb1(0, 0, 0.7f); /* blue ? */
+      break;
+    case AppState::PlayWAV:
+      SetRgb1(0, 0.7f, 0.7f); /* cyan */
+      break;
+    case AppState::Synthesis:
+      SetRgb1(0, 0.7f, 0); /* green */
+      break;
+    case AppState::RecordIn:
+      SetRgb1(0.7f,0.7f,0);  /* yellow? */
+      break;
+    // case AppState::ChordMode:
+      // SetRgb1(0.7f,0,1); /* violet/purple */
+      // break;
+    case AppState::Error:
+      SetRgb1(1, 0, 0); /* red */
+      pod_.led2.SetRed(1);
+      break;
+    default:
+      break;
+  }
+}
+
+void GrannyChordApp::SetLedSynthMode(){
+  if (curr_state_ == AppState::Synthesis){
+    switch(curr_synth_mode_){
+      case SynthMode::Size_Position:
+        SetRgb2(0, 0.7f, 0); /* green */
+        break;
+      case SynthMode::Pitch_ActiveGrains:
+        SetRgb2(0.7f, 0.5f, 0); /* orange */
+        break;
+      case SynthMode::PhasorMode_EnvType:
+        SetRgb2(0, 0, 0.7f); /* blue */
+        break;
+      case SynthMode::Pan_PanRnd:
+        SetRgb2(0.7f, 0, 0.7f); /* pink */
+        break;
+      default:
+        break;
+    }
+  }
+}
+
+void GrannyChordApp::SetRgb1(float r, float g, float b){
+  led1_rgb_[0]= r;
+  led1_rgb_[1]= g;
+  led1_rgb_[2]= b;
+}
+
+void GrannyChordApp::SetRgb2(float r, float g, float b){
+  led2_rgb_[0]= r;
+  led2_rgb_[1]= g;
+  led2_rgb_[2]= b;
+}
+
+
+void GrannyChordApp::SetLedFXMode(){
+
+}
+
+void GrannyChordApp::SetLedRandomMode(){
+
+}
+
+
+// SelectFile: BLUE
+// RecordIn: WHITE
+// PlayWAV: CYAN
+// Synthesis: GREEN
+// ChordMode: GOLD (orange)
+
+// Error: solid RED
+// RecordIn: seed led flashing red (ie pod_.seed.SetLed(1/0)
+
+// don't use purple - looks like blue
+// can use floats or ints
+// can use magenta (255,0,255)
+// can use yellow (255,255,0)
+
+// red 	1, 0, 0
+// green	0, 1, 0
+// blue	0, 0, 1
+// magenta 1,0 ,1
+// yellow  1,1,0
+// ORANGE  1, 0.7f, 0   or slightly less bright: (0.7f,0.5f,0);
+// VIOLET  0.7f, 0, 1
+// PURPLE  0.7f, 0, 0.7f  
+// CYAN	0, 0.7f, 0.7f  
+
+// */

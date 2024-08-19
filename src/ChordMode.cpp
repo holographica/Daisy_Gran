@@ -21,7 +21,7 @@ void ChordMode::AddScalePitchSet(ScaleType type, const string &name, const vecto
   Scale scale;
   scale.equal_temperament_ = true;
   scale.name_ = name;
-  for (int i=0; i<pitch_class_set.size();i++){
+  for (uint16_t i=0; i<pitch_class_set.size();i++){
     scale.ratios_.emplace_back(PitchClassToRatio(pitch_class_set[i]));
   }
   int scale_type = static_cast<int>(type);
@@ -57,7 +57,7 @@ vector<float> ChordMode::GenerateChord(){
   }
 
   /* convert degrees of chord to pitch ratios */
-  for (int i=0; i<degrees.size();i++){
+  for (size_t i=0; i<degrees.size();i++){
     chord.emplace_back(GetNotePitch(degrees[i]));
   }
 
@@ -92,8 +92,7 @@ void ChordMode::SetChordSizeRnd(float sz_randomness){
   chord_size_rnd_ = sz_randomness;
 }
 
-std::vector<float> ChordMode::GenerateChord(){
-std::vector<float> chord;
+// std::vector<float> chord;
 
   // calculate ratios / degrees of chord
 
@@ -102,11 +101,7 @@ std::vector<float> chord;
   // convert to ratio
 
   // convert to key? 
-  
 
-
-  return chord;
-}
 
 
 

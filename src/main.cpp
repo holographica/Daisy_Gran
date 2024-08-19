@@ -32,7 +32,7 @@ FatFSInterface fsi;
 DaisyPod pod;
 FIL file;
 
-ReverbSc reverb;
+DSY_SDRAM_BSS ReverbSc reverb;
 /* software classes to run app */
 AudioFileManager filemgr(sd, fsi, pod, &file);
 static GranularSynth synth(pod);
@@ -40,6 +40,7 @@ GrannyChordApp app(pod, synth, filemgr, reverb);
 
 /* we set rng state here so we can use RNG fns across classes */
 uint32_t rng_state;
+
 
 int main (void){
   pod.Init();

@@ -62,20 +62,33 @@ class GrannyChordApp {
     /* previous values for parameters controlled by knob 1*/
     float prev_param_vals_k1[NUM_SYNTH_MODES];
     float prev_param_vals_k2[NUM_SYNTH_MODES];
+    WavWriter<16384> sd_writer_;
 
+    
+    bool recorded_in_ = false;
+    size_t record_in_pos_ = 0;
     bool recording_out_ = false;
-    size_t count = 0;
+    size_t recording_count_ = 0;
+    size_t loop_count=0;
+    float temp_interleaved_buf_[2];
+
+    TimerHandle timer_;
+    float led1_rgb_[3] = {0};
+    float led2_rgb_[3] = {0};
+    int led_flash_count_=0;
+
+
     void UpdateUI();
     void UpdateSynthMode();
 
     /* audio input/output/recording methods based on state */
-    void AudioIdle(AudioHandle::OutputBuffer out, size_t size);
     void ProcessWAVPlayback(AudioHandle::OutputBuffer out, size_t size);
     void ProcessRecordIn(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, size_t size);
     void ProcessSynthesis(AudioHandle::OutputBuffer out, size_t size);
     void ProcessChordMode(AudioHandle::OutputBuffer out, size_t size);
-    // void RecordOutToSD(AudioHandle::OutputBuffer out, size_t size);
+    void RecordOutToSD(AudioHandle::OutputBuffer out, size_t size);
     void ToggleRecordOut();
+    void FinishRecording();
 
     void HandleEncoderPressed();
     void HandleEncoderLongPress();
@@ -93,10 +106,10 @@ class GrannyChordApp {
     void InitSynth();
     void InitFX();
     void InitRecordIn();
+    void InitWavWriter();
     void InitPrevParamVals();
 
     void HandleStateChange();
-    // void HandleStateChange(AppState prev, AppState curr);
     void HandleFileSelection(int32_t encoder_inc);
 
     /* methods to update/init synth parameters */
@@ -109,6 +122,22 @@ class GrannyChordApp {
     inline constexpr float UpdateKnobPassThru(float curr_knob_val, float *stored_knob_val, bool *pass_thru);
 
     void DebugPrintState(AppState state);
+    void DebugPrintMode(SynthMode mode);
+
+    /* has to be static - timer won't take class member function in callback */
+    static void StaticLedCallback(void* data){
+      instance_ -> LedCallback(data);
+    }
+
+    void SetupTimer();
+    // void StartLeds();
+    void LedCallback(void* data);
+    void SetLedAppState();
+    void SetLedSynthMode();
+    void SetLedRandomMode();
+    void SetLedFXMode();
+    void SetRgb1(float r, float g, float b);
+    void SetRgb2(float r, float g, float b);
 
 
 };

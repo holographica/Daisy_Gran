@@ -92,7 +92,7 @@ class WavWriter
      ** \param in should be a pointer to an array of samples */
     void Sample(const float *in)
     {
-        for(size_t i = 0; i < cfg_.channels; i++)
+        for(int32_t i = 0; i < cfg_.channels; i++)
         {
             switch(cfg_.bitspersample)
             {
