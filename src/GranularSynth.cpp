@@ -38,34 +38,34 @@ void GranularSynth::InitParams(){
 }
 
 void GranularSynth::SetEnvelopeType(Grain::EnvelopeType type){
-  if (type==Grain::EnvelopeType::LinearDecay){
-    DebugPrint(pod_, "set env to linear decya");
-  }
-  if (type==Grain::EnvelopeType::Decay){
-    DebugPrint(pod_, "set env to decay");
-  }
-  if (type==Grain::EnvelopeType::Rectangular){
-    DebugPrint(pod_, "set env to rect");
-  }
-  if (type==Grain::EnvelopeType::Hann){
-    DebugPrint(pod_, "set env to hann");
-  }
+  // if (type==Grain::EnvelopeType::LinearDecay){
+  //   DebugPrint(pod_, "set env to linear decya");
+  // }
+  // if (type==Grain::EnvelopeType::Decay){
+  //   DebugPrint(pod_, "set env to decay");
+  // }
+  // if (type==Grain::EnvelopeType::Rectangular){
+  //   DebugPrint(pod_, "set env to rect");
+  // }
+  // if (type==Grain::EnvelopeType::Hann){
+  //   DebugPrint(pod_, "set env to hann");
+  // }
   env_type_ = type; 
 }
 
 void GranularSynth::SetPhasorMode(GrainPhasor::Mode mode){
-  if (mode==GrainPhasor::Mode::OneShot){
-    DebugPrint(pod_, "set phasor to oneshot");
-  }
-  if (mode==GrainPhasor::Mode::OneShotReverse){
-    DebugPrint(pod_, "set phasor to reverse");
-  }
-  if (mode==GrainPhasor::Mode::Cycle){
-    DebugPrint(pod_, "set phasor to cycle");
-  }
-  if (mode==GrainPhasor::Mode::PingPong){
-    DebugPrint(pod_, "set phasor to pingpong");
-  }
+  // if (mode==GrainPhasor::Mode::OneShot){
+  //   DebugPrint(pod_, "set phasor to oneshot");
+  // }
+  // if (mode==GrainPhasor::Mode::OneShotReverse){
+  //   DebugPrint(pod_, "set phasor to reverse");
+  // }
+  // if (mode==GrainPhasor::Mode::Cycle){
+  //   DebugPrint(pod_, "set phasor to cycle");
+  // }
+  // if (mode==GrainPhasor::Mode::PingPong){
+  //   DebugPrint(pod_, "set phasor to pingpong");
+  // }
   phasor_mode_ = mode;
 }
 
@@ -165,8 +165,8 @@ void GranularSynth::TriggerGrain(){
   for(Grain& grain:grains_){
     if (grain.is_active_) { count++; }
     else if (count<active_count_){
-      ApplyRandomness();
-      grain.SetEnvelopeType(env_type_);
+      // ApplyRandomness();
+      // grain.SetEnvelopeType(env_type_);
       grain.SetPhasorMode(phasor_mode_);
       grain.Trigger(spawn_pos_,grain_size_,pitch_ratio_,pan_);
       count++;
@@ -184,24 +184,29 @@ Sample GranularSynth::ProcessGrains(){
   TriggerGrain();
 
   /* apply normalisation to grain, scaled by number of active grains */
-  float normalise_per_grain = 1.0f/fmax(1.0f, sqrt(active_count_));
-
+  // float normalise_per_grain = 1.0f/daisysp::fmax(1.0f, fastroot(active_count_,1));
+  int count = 0;
   for (Grain& grain:grains_){
     if (grain.is_active_){
-      // sample_ += grain.Process(sample_, normalise_per_grain);
-      sample_ = grain.Process(sample_, normalise_per_grain);
+      count++;
+      // sample_ = grain.Process(sample_, normalise_per_grain);
+      sample_ = grain.Process(sample_,1);
+      // sample_ = grain.Process(sample_, normalise_per_grain);
     }
   }
 
-  /* attempt to normalise overall gaint */
-  float normalise_output = 1.0f/fmax(1.0f, log2(active_count_+1));
-  // sample_.left *= normalise_output);
+  /* attempt to normalise overall gain */
+  // float normalise_output = 1.0f/daisysp::fmax(1.0f, fastlog2f(active_count_+1));
+  // sample_.left *= normalise_output;
   // sample_.right *= normalise_output;
 
   // NOTE: try above and below see which is better
   
-  sample_.left = SoftClip(sample_.left*normalise_output);
-  sample_.right = SoftClip(sample_.left*normalise_output);
+  // sample_.left = SoftClip(sample_.left*normalise_output);
+  // sample_.right = SoftClip(sample_.right*normalise_output);
+  
+  // sample_.left = SoftClip(sample_.left);
+  // sample_.right = SoftClip(sample_.right);
 
   return sample_;
 }

@@ -95,4 +95,9 @@ void Grain::SetGrainSize(size_t grain_size) { grain_size_ = grain_size; }
 void Grain::SetPitchRatio(float pitch_ratio) { pitch_ratio_ = pitch_ratio; }
 void Grain::SetEnvelopeType(EnvelopeType type) { envelope_type_ = type; }
 void Grain::SetPhasorPitchRatio(float pitch_ratio) { phasor_.SetPitchRatio(pitch_ratio, audio_len_); }
-void Grain::SetPhasorMode(GrainPhasor::Mode mode) { phasor_.SetMode(mode); }
+void Grain::SetPhasorMode(GrainPhasor::Mode mode) {
+  if (static_cast<int>(mode) >=2){
+    phasor_.SetDirection(1);
+  }
+  else phasor_.SetDirection(0);
+}

@@ -32,12 +32,19 @@ class GrainPhasor {
     }
 
     void SetPitchRatio(float pitch_ratio, float grain_size_samples){
-      float size_ms = SamplesToMs(grain_size_samples); // NOTE: CHECK - THIS MIGHT NOT WORK PROPERLY
+      float size_ms = SamplesToMs(grain_size_samples);
       increment_ = pitch_ratio / size_ms;
     }
 
     void SetMode(Mode new_mode){
       mode_ = new_mode;
+    }
+
+    void SetDirection(float direction){
+      if (direction>0.5){
+        direction_ = -1;
+      }
+      else direction = 1;
     }
 
     bool GrainFinished(){
@@ -56,6 +63,10 @@ class GrainPhasor {
           if(out>1.0f) {
             grain_finished_ = true;
             out=1.0f;
+          }
+          if (out<0.0f){
+            grain_finished_ = true;
+            out=0.0f;
           }
           break;
         /* phase goes 1 -> 0 then stops */

@@ -55,7 +55,6 @@ class GranularSynth{
     size_t active_count_;
     float pitch_ratio_;
     float pan_;
-    // DelayLine<float, DELAY_TIME> delay_line_;
 
     /* amount of randomness to apply to synth/grain parameters*/
     float rnd_size_;

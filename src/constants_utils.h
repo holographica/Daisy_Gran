@@ -10,6 +10,9 @@ constexpr int BIT_DEPTH = 16;
 /* delay line buffer size (2s @ 48kHz) */
 constexpr size_t DELAY_TIME = 96000;
 
+/* maximum length of recording to SD card */
+constexpr size_t MAX_REC_OUT_LEN = 120;
+
 /* 16mb - max size of one stereo channel to be loaded into buffers */
 constexpr size_t CHNL_BUF_SIZE_ABS = 16*1024*1024;
 /* above is absolute size - each sample needs an int16 (2 bytes) so we do (abs_size)/2 */
@@ -24,34 +27,17 @@ static const uint16_t MAX_FNAME_LEN = 128;
 
 /* granular synth parameter constants */
 constexpr int MIN_GRAINS = 1;
-constexpr int MAX_GRAINS = 20;
+constexpr int MAX_GRAINS = 10;
 static constexpr int NUM_ENV_TYPES = 4;
 static constexpr int NUM_PHASOR_MODES = 4;
 static constexpr int NUM_SYNTH_MODES = 7;
 constexpr float PARAM_CHANGE_THRESHOLD = 0.01f;
-constexpr float MIN_GRAIN_SIZE_MS = 50.0f;
-constexpr float MAX_GRAIN_SIZE_MS = 1000.0f;
+constexpr float MIN_GRAIN_SIZE_MS = 100.0f;
+constexpr float MAX_GRAIN_SIZE_MS = 3000.0f;
 constexpr size_t MIN_GRAIN_SIZE_SAMPLES = 4800; /* 100ms at 48kHz */
 constexpr size_t MAX_GRAIN_SIZE_SAMPLES = 144000; /* 3s at 48kHz */
 constexpr float MIN_PITCH = 0.5f;
 constexpr float MAX_PITCH = 3.0f;
-
-/* integer clamp as can't use std::clamp */
-inline constexpr size_t intclamp(size_t val, size_t min, size_t max){
-  if (val < min) val = min;
-  else if (val > max) val = max;
-  return val;
-}
-
-/* converts milliseconds to number of samples */
-inline constexpr size_t MsToSamples(float ms){
-  return static_cast<size_t>(SAMPLE_RATE_FLOAT * (ms*0.001f));
-}
-
-/* converts number of samples to milliseconds */
-inline constexpr float SamplesToMs(size_t samples){
-  return (static_cast<float>(samples) * 1000.0f) / SAMPLE_RATE_FLOAT; 
-}
 
 /* button event constants */
 const unsigned long DEBOUNCE_DELAY = 50; 
@@ -59,11 +45,13 @@ const unsigned long LONG_PRESS_TIME = 1000;
 
 /* hipass filter frequency range */
 const float HIPASS_LOWER_BOUND = 0.0004f;
-const float HIPASS_UPPER_BOUND = 0.005f;
+const float HIPASS_UPPER_BOUND = 0.01f;
 
 /* lowpass filter frequency range */
 const float LOPASS_LOWER_BOUND = 20.0f;
 const float LOPASS_UPPER_BOUND = 18000.0f;
+
+const float HICUT_FREQ = 0.4f;
 
 /* random number generator variables and helper functions */
 extern uint32_t rng_state;
@@ -81,22 +69,19 @@ inline float RngFloat(){
   return out;
 }
 
+/* integer clamp as can't use std::clamp */
+inline constexpr size_t intclamp(size_t val, size_t min, size_t max){
+  if (val < min) val = min;
+  else if (val > max) val = max;
+  return val;
+}
 
+/* converts milliseconds to number of samples */
+inline constexpr size_t MsToSamples(float ms){
+  return static_cast<size_t>(SAMPLE_RATE_FLOAT * (ms*0.001f));
+}
 
-// TODO: is there a point in using this?
-// need to actually test performance using both and compare
-/* fast square root using quake inverse root from 
-https://www.geeksforgeeks.org/fast-inverse-square-root/
-this works because x*(1/sqrt(x)) === x  */
-// inline constexpr float Fast_Sqrt(float num){ 
-//   const float threehalfs = 1.5F; 
-//   float x2 = num * 0.5F; 
-//   float y = num; 
-//   long i = * ( long * ) &y; 
-//   i = 0x5f3759df - ( i >> 1 ); 
-//   y = * ( float * ) &i; 
-//   y = y * ( threehalfs - ( x2 * y * y ) ); 
-// // now multiply by original num to get the regular sqrt
-//   y *= num;
-//   return y; 
-// } 
+/* converts number of samples to milliseconds */
+inline constexpr float SamplesToMs(size_t samples){
+  return (static_cast<float>(samples) * 1000.0f) / SAMPLE_RATE_FLOAT; 
+}

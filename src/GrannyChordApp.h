@@ -41,6 +41,7 @@ class GrannyChordApp {
     AppState next_state_;
     SynthMode curr_synth_mode_;
     SynthMode prev_synth_mode_;
+    bool mode_changed_;
 
     /* audio FX and filters */
     Compressor comp_;
@@ -48,6 +49,8 @@ class GrannyChordApp {
     ReverbSc& reverb_;
     MoogLadder lowpass_moog_;
     OnePole hipass_;
+    /* filter to reduce high end noise */
+    OnePole hicut_;
 
     /* audio data channel buffers */
     int16_t *left_buf_;
@@ -59,14 +62,14 @@ class GrannyChordApp {
     char fname_[MAX_FNAME_LEN];
 
     /* previous values for parameters controlled by knob 1*/
-    float prev_param_vals_k1[NUM_SYNTH_MODES] = {0};
-    float prev_param_vals_k2[NUM_SYNTH_MODES] = {0};
+    float prev_param_k1[NUM_SYNTH_MODES] = {0};
+    float prev_param_k2[NUM_SYNTH_MODES] = {0};
 
     /* stored previous knob values for passthru mode */
-    float pass_thru_stored_k1[NUM_SYNTH_MODES] {0.5f};
-    float pass_thru_stored_k2[NUM_SYNTH_MODES] {0.5f};
-    bool pass_thru_k1[NUM_SYNTH_MODES] = {false};
-    bool pass_thru_k2[NUM_SYNTH_MODES] = {false};
+    float stored_k1[NUM_SYNTH_MODES] = {0.5f};
+    float stored_k2[NUM_SYNTH_MODES] = {0.5f};
+    bool pass_thru_k1 = false;
+    bool pass_thru_k2 = false;
 
     /* objects/variables for recording in and out */
     WavWriter<16384> sd_writer_;
@@ -102,7 +105,6 @@ class GrannyChordApp {
     void InitWavWriter();
     void InitPrevParamVals();
     void ResetPassThru();
-    void ResetNewModePassThru();
 
     /* state change handlers */
     void UpdateUI();
@@ -145,8 +147,9 @@ class GrannyChordApp {
     // void UpdateChordParams();
     inline bool CheckParamDelta(float curr_val, float prev_val);
     inline float MapKnobDeadzone(float knob_val);
-    // inline float UpdateKnobPassThru(float curr_knob_val, float *stored_knob_val, bool *pass_thru);
     inline float UpdateKnobPassThru(float curr_knob_val, float *stored_knob_val, float prev_param_val, bool *pass_thru);
+    inline bool UpdateKnobPassThru2(float curr_knob_val, int mode_idx);
+    // inline float UpdateKnobPassThru(float curr_knob_val, float *stored_knob_val, bool *pass_thru);
 
     /* timer and led methods */
     void SetupTimer();
@@ -158,7 +161,6 @@ class GrannyChordApp {
     void SetLed1AppState();
     void SetLed1SynthMode();
     void SetLed2();
-    void SetLedFXMode();
     void SetRgb1(float r, float g, float b);
     void SetRgb2(float r, float g, float b);
 

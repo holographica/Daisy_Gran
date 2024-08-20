@@ -324,9 +324,9 @@ void GrannyChordApp::UpdateSynthMode(){
       break;
   }
   DebugPrintMode(curr_synth_mode_);
-
   ResetPassThru();
   SetLed1SynthMode();
+  mode_changed_ = true;
 }
 
 /// @brief Updates synth parameters based on current synth mode and adjusts
@@ -340,32 +340,14 @@ void GrannyChordApp::UpdateSynthParams(){
   float knob2_val = MapKnobDeadzone(pod_.knob2.Process());
 
   /* only update parameter if knob has passed through previous value in this mode */
-  // paramcount++;
-  // if (paramcount%50000==0){
-  //   DebugPrint(pod_, "old knob1 is %.2f", knob1_val);
-  // }
-  knob1_val = UpdateKnobPassThru(knob1_val, &pass_thru_stored_k1[mode_idx], prev_param_vals_k1[mode_idx], &pass_thru_k1[mode_idx]);
-  // if (paramcount%50000==0){
-  //   DebugPrint(pod_, "new knob1 is %.2f", knob1_val);
-  // }
-  // if (paramcount%50000==0){
-  //   DebugPrint(pod_, "old knob2 is %.2f", knob2_val);
-  // }
-  knob2_val = UpdateKnobPassThru(knob2_val, &pass_thru_stored_k2[mode_idx], prev_param_vals_k2[mode_idx], &pass_thru_k2[mode_idx]);
-  // if (paramcount%50000==0){
-  //   DebugPrint(pod_, "new knob2 is %.2f", knob2_val);
-  //   paramcount=0;
-  // }
-
-  if (CheckParamDelta(knob1_val,prev_param_vals_k1[mode_idx])){
+  if (UpdateKnobPassThru2(knob1_val,mode_idx)){
     UpdateKnob1Params(knob1_val,curr_synth_mode_);
-    prev_param_vals_k1[mode_idx] = knob1_val;
+    prev_param_k1[mode_idx] = knob1_val;
   }
-  if(CheckParamDelta(knob2_val, prev_param_vals_k2[mode_idx])){
+  if (UpdateKnobPassThru2(knob2_val,mode_idx)){
     UpdateKnob2Params(knob2_val, curr_synth_mode_);
-    prev_param_vals_k2[mode_idx] = knob2_val;
+    prev_param_k2[mode_idx] = knob2_val;
   }
-  synth_.UpdateGrainParams(); // NOTE: ADDED THIS
 }
 
 /// @brief toggles on/off grain parameter randomness controls 
@@ -378,9 +360,9 @@ void GrannyChordApp::ToggleRandomnessControls(){
       so we can XOR their enum value to get the corresponding mode */
     curr_synth_mode_ = static_cast<SynthMode>(static_cast<int>(curr_synth_mode_) ^ 1);
     DebugPrintMode(curr_synth_mode_);
-
     ResetPassThru();
     SetLed2();
+    mode_changed_ = true;
   }
 }
 
@@ -403,7 +385,7 @@ void GrannyChordApp::ToggleFX(bool is_reverb_mode){
   }
   DebugPrint(pod_, "changed fx, now:");
   DebugPrintMode(curr_synth_mode_);
-
+  mode_changed_ = true;
   ResetPassThru();
   SetLed2();
 }
@@ -467,32 +449,30 @@ void GrannyChordApp::InitFX(){
 
   reverb_.Init(SAMPLE_RATE_FLOAT);
   lowpass_moog_.Init(SAMPLE_RATE_FLOAT);
-  lowpass_moog_.SetFreq(20000.0f);
+  lowpass_moog_.SetFreq(LOPASS_UPPER_BOUND);
   lowpass_moog_.SetRes(0.7f);
   hipass_.Init();
   hipass_.SetFilterMode(daisysp::OnePole::FilterMode::FILTER_MODE_HIGH_PASS);
-  hipass_.SetFrequency(0.0f); // NOTE: CHECK THIS
+  hipass_.SetFrequency(HIPASS_LOWER_BOUND);
+
+  hicut_.SetFilterMode(daisysp::OnePole::FilterMode::FILTER_MODE_LOW_PASS);
+  hicut_.SetFrequency(HICUT_FREQ);
 }
 
 /// @brief Initialise previous parameter value arrays to defaults
 void GrannyChordApp::InitPrevParamVals(){
   for (int i=0; i < NUM_SYNTH_MODES;i++){
-    prev_param_vals_k1[i] = 0.5f;
-    prev_param_vals_k2[i] = 0.5f;
+    prev_param_k1[i] = 0.5f;
+    prev_param_k2[i] = 0.5f;
   } 
 }
 
 void GrannyChordApp::ResetPassThru(){
-  for (int i=0; i<NUM_SYNTH_MODES;i++){
-    pass_thru_k1[i]=false;
-    pass_thru_k2[i]=false;
-  }
-}
-
-void GrannyChordApp::ResetNewModePassThru(){
-  int mode_idx = static_cast<int>(curr_synth_mode_);
-  pass_thru_k1[mode_idx] = false;
-  pass_thru_k2[mode_idx] = false;
+    int mode_idx = static_cast<int>(curr_synth_mode_);
+    stored_k1[mode_idx] = pod_.knob1.Process();
+    stored_k2[mode_idx] = pod_.knob2.Process();
+    pass_thru_k1 = false;
+    pass_thru_k2 = false;
 }
 
 /// @brief Master audio callback, called at audio rate, calls all audio processing methods
@@ -568,14 +548,12 @@ void GrannyChordApp::ProcessSynthesis(AudioHandle::OutputBuffer out, size_t size
     samp = ProcessFX(samp);
     // out[0][i] = samp.left;
     // out[1][i] = samp.right;
-  }
-  limiter_.ProcessBlock(&samp.left, size, 1.0f);
-  limiter_.ProcessBlock(&samp.right, size, 1.0f);
-
-  for (size_t i=0; i<size; i++){
+    limiter_.ProcessBlock(&samp.left, 1, 1.0f);
+    limiter_.ProcessBlock(&samp.right, 1, 1.0f);
     out[0][i] = samp.left;
-    out[1][i] = samp.right;    
-    if (recording_out_ && sd_writer_.GetLengthSeconds()<120){
+    out[1][i] = samp.right;
+
+    if (recording_out_ && sd_writer_.GetLengthSeconds()<MAX_REC_OUT_LEN){
       temp_interleaved_buf_[0]=out[0][i];
       temp_interleaved_buf_[1]=out[1][i];
       sd_writer_.Sample(temp_interleaved_buf_);
@@ -588,16 +566,20 @@ Sample GrannyChordApp::ProcessFX(Sample in){
   /* hipass: remove rumble */
   out.left = hipass_.Process(in.left);
   out.right = hipass_.Process(in.right);
+
   // /* apply compression to reduce gain changes */
   // out.left = comp_.Process(out.left);
   // out.right = comp_.Process(out.right);
 
-  /* apply lowpass filter to sculpt sound */
+  /* apply lowpass filter */
   out.left = lowpass_moog_.Process(out.left);
   out.right = lowpass_moog_.Process(out.right);
 
   /* apply reverb */
   reverb_.ProcessMix(out.left, out.right, &out.left, &out.right);
+
+  out.left = hicut_.Process(out.left);
+  out.right = hicut_.Process(out.right);
   return out;
 }
 
@@ -688,7 +670,6 @@ void GrannyChordApp::UpdateKnob2Params(float knob2_val, SynthMode mode){
       return;
     case SynthMode::PhasorMode_EnvType:
       knob2_val = round(fmap(knob2_val, 0, NUM_ENV_TYPES));
-
       DebugPrint(pod_, "set env type to %.2f", knob2_val);
       synth_.SetEnvelopeType(static_cast<Grain::EnvelopeType>(knob2_val));
       return;
@@ -713,7 +694,7 @@ void GrannyChordApp::UpdateKnob2Params(float knob2_val, SynthMode mode){
   }
 }
 
-/* check parameter value change is over a certain level to avoid reading knob jitter */
+// /* check parameter value change is over a certain level to avoid reading knob jitter */
 inline bool GrannyChordApp::CheckParamDelta(float curr_val, float prev_val){
   return (fabsf(curr_val - prev_val)>0.01f);
 }
@@ -733,25 +714,47 @@ inline float GrannyChordApp::MapKnobDeadzone(float knob_val ){
   knob passes through this value.  */
 // inline float GrannyChordApp::UpdateKnobPassThru(float curr_knob_val, float *stored_knob_val, bool *pass_thru){
 //   if (!(*pass_thru)){
-//     if (curr_knob_val >= (*stored_knob_val) || curr_knob_val <= (*stored_knob_val)) {
+//     // if (curr_knob_val >= (*stored_knob_val) || curr_knob_val <= (*stored_knob_val)) {
+//     if (fabsf(curr_knob_val - *stored_knob_val)<0.01) {
 //       (*pass_thru) = true;
 //     }
 //   } 
 //   if (*pass_thru){
-//     (*stored_knob_val) = curr_knob_val;
-//     return curr_knob_val;
+//     if (fabsf(curr_knob_val- (*stored_knob_val) >= 0.01)){
+//       (*stored_knob_val) = curr_knob_val;
+//       return curr_knob_val;
+//     }
 //   }
 //   return (*stored_knob_val);
 // }
 
-inline float GrannyChordApp::UpdateKnobPassThru(float curr_knob_val, float *stored_knob_val, float prev_param_val, bool *pass_thru){ // NOTE: DONE 
-  if (!(*pass_thru)){
-    if ((curr_knob_val >= prev_param_val && (*stored_knob_val) <= (prev_param_val)) ||
-        (curr_knob_val <= prev_param_val && (*stored_knob_val) >= (prev_param_val))) {
-          (*pass_thru) = true;
+inline bool GrannyChordApp::UpdateKnobPassThru2(float curr_knob_val, int mode_idx){
+  if (mode_changed_){
+    if (fabs(curr_knob_val - prev_param_k2[mode_idx])<0.01){
+      mode_changed_ = false;
+      return true;
     }
-} 
-  if (*pass_thru){
+    else return false;
+  }
+  else return true;
+}
+
+
+
+
+inline float GrannyChordApp::UpdateKnobPassThru(float curr_knob_val, float *stored_knob_val, float prev_param_val, bool *pass_thru){
+  if (!(*pass_thru)){
+    if (fabsf(curr_knob_val - (*stored_knob_val) < 0.01)){
+      (*pass_thru) = true;
+    }
+    else return prev_param_val;
+  } 
+    // if ((curr_knob_val >= prev_param_val && (*stored_knob_val) < (prev_param_val)) ||
+    //     (curr_knob_val <= prev_param_val && (*stored_knob_val) > (prev_param_val))) {
+    //       (*pass_thru) = true;
+    // }
+  
+  if (fabsf(curr_knob_val-prev_param_val)>=0.01){
     (*stored_knob_val) = curr_knob_val;
     return curr_knob_val;
   }
