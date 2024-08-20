@@ -36,7 +36,7 @@ void Grain::Trigger(size_t pos, size_t grain_size, float pitch_ratio, float pan)
 /// @brief Processes grain phase, applies envelope and panning and mixes into the output buffers
 /// @param sum_left Pointer to variable storing total left channel audio output of all grains
 /// @param sum_right Pointer to variable storing total right channel audio output of all grains
-Sample Grain::Process(Sample sample) {
+Sample Grain::Process(Sample sample, float scale) {
   if (!is_active_) return {0.0f, 0.0f};
   float phase = phasor_.Process();
   if (phasor_.GrainFinished()){
@@ -64,8 +64,8 @@ Sample Grain::Process(Sample sample) {
   source: cs.cmu.edu/~music/icm-online/readings/panlaws/panlaws.pdf */
   float gain_left = std::sqrt(1.0f-pan_);
   float gain_right = std::sqrt(pan_);
-  sample.left += (left*env*gain_left);
-  sample.right += (right*env*gain_right);
+  sample.left += (left*env*gain_left*scale);
+  sample.right += (right*env*gain_right*scale);
   return sample;
 }
 
@@ -77,7 +77,7 @@ float Grain::ApplyEnvelope(float phase){
     case EnvelopeType::LinearDecay:
       return 1.0f - phase;
     case EnvelopeType::Rectangular:
-      return phase;
+      return 1.0f;
     case EnvelopeType::Decay:
     default:
       if (phase<=start_decay_) { return 1.0f; }

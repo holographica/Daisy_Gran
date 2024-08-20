@@ -21,7 +21,7 @@ class GrannyChordApp {
             instance_ = this;
           };
 
-    void Init(int16_t *left, int16_t *right, int16_t *temp);
+    void Init(int16_t *left, int16_t *right);
     void Run();
 
     CpuLoadMeter loadmeter;
@@ -44,6 +44,7 @@ class GrannyChordApp {
 
     /* audio FX and filters */
     Compressor comp_;
+    Limiter limiter_;
     ReverbSc& reverb_;
     MoogLadder lowpass_moog_;
     OnePole hipass_;
@@ -52,19 +53,23 @@ class GrannyChordApp {
     int16_t *left_buf_;
     int16_t *right_buf_;
 
-    int16_t *temp_buf_;
-
     int file_idx_ = 0;
     size_t wav_playhead_ = 0;
     uint32_t audio_len_ = 0;
     char fname_[MAX_FNAME_LEN];
 
     /* previous values for parameters controlled by knob 1*/
-    float prev_param_vals_k1[NUM_SYNTH_MODES];
-    float prev_param_vals_k2[NUM_SYNTH_MODES];
-    WavWriter<16384> sd_writer_;
+    float prev_param_vals_k1[NUM_SYNTH_MODES] = {0};
+    float prev_param_vals_k2[NUM_SYNTH_MODES] = {0};
 
-    
+    /* stored previous knob values for passthru mode */
+    float pass_thru_stored_k1[NUM_SYNTH_MODES] {0.5f};
+    float pass_thru_stored_k2[NUM_SYNTH_MODES] {0.5f};
+    bool pass_thru_k1[NUM_SYNTH_MODES] = {false};
+    bool pass_thru_k2[NUM_SYNTH_MODES] = {false};
+
+    /* objects/variables for recording in and out */
+    WavWriter<16384> sd_writer_;
     bool recorded_in_ = false;
     size_t record_in_pos_ = 0;
     bool recording_out_ = false;
@@ -72,35 +77,23 @@ class GrannyChordApp {
     size_t loop_count=0;
     float temp_interleaved_buf_[2];
 
+    /* hardware input handler variables */
+    size_t last_action_time_ = 0;
+    /* these bools track whether the button has just been long pressed
+      vs whether it's already known to be pressed down */
+    bool btn1_long_press_fired_ = false;
+    bool btn2_long_press_fired_ = false;
+    bool both_btns_long_press_fired_ = false;
+
+    /* timer object and led callback variables */
     TimerHandle timer_;
-    float led1_rgb_[3] = {0};
-    float led2_rgb_[3] = {0};
-    int led_flash_count_=0;
-
-
-    void UpdateUI();
-    void UpdateSynthMode();
-
-    /* audio input/output/recording methods based on state */
-    void ProcessWAVPlayback(AudioHandle::OutputBuffer out, size_t size);
-    void ProcessRecordIn(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, size_t size);
-    void ProcessSynthesis(AudioHandle::OutputBuffer out, size_t size);
-    void ProcessChordMode(AudioHandle::OutputBuffer out, size_t size);
-    void RecordOutToSD(AudioHandle::OutputBuffer out, size_t size);
-    void ToggleRecordOut();
-    void FinishRecording();
-
-    void HandleEncoderPressed();
-    void HandleEncoderLongPress();
-    void HandleButton1();
-    void HandleButton2();
-    void HandleButton1LongPress();
-    void HandleButton2LongPress();
-    void ToggleRandomnessControls();
-    void ToggleFX(bool which_fx);
+    float rgb1_[3] = {0};
+    float rgb2_[3] = {0};
+    int led1_flash_count_=0;
+    int led2_flash_count_=0;
+    bool seed_led_state_=false;
 
     /* methods to init / prepare for state change */
-    void ClearAudioBuffers();
     bool InitFileMgr();
     void InitPlayback();
     void InitSynth();
@@ -108,36 +101,72 @@ class GrannyChordApp {
     void InitRecordIn();
     void InitWavWriter();
     void InitPrevParamVals();
+    void ResetPassThru();
+    void ResetNewModePassThru();
 
+    /* state change handlers */
+    void UpdateUI();
+    void UpdateSynthMode();
     void HandleStateChange();
     void HandleFileSelection(int32_t encoder_inc);
+
+    /* audio input/output/recording methods based on state */
+    void ProcessWAVPlayback(AudioHandle::OutputBuffer out, size_t size);
+    void ProcessRecordIn(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, size_t size);
+    void ProcessSynthesis(AudioHandle::OutputBuffer out, size_t size);
+    Sample ProcessFX(Sample in);
+    void ProcessChordMode(AudioHandle::OutputBuffer out, size_t size);
+    void RecordOutToSD();
+    void FinishRecording();
+
+
+    size_t paramcount=0;
+
+
+    
+
+    /* hardware input handler methods */
+    void ButtonHandler();
+    void HandleEncoderIncrement(int encoder_inc);
+    void HandleEncoderPressed();
+    void HandleEncoderLongPress();
+    void HandleButton1();
+    void HandleButton2();
+    void HandleButton1LongPress();
+    void HandleButton2LongPress();
+    void ToggleRandomnessControls();
+    /* true if reverb, false if filter */
+    void ToggleFX(bool is_reverb_mode);
 
     /* methods to update/init synth parameters */
     void UpdateSynthParams();
     void UpdateKnob1Params(float knob1_val, SynthMode mode);
     void UpdateKnob2Params(float knob2_val, SynthMode mode);
     // void UpdateChordParams();
-    inline constexpr bool CheckParamDelta(float curr_val, float prev_val);
-    inline constexpr float MapKnobDeadzone(float knob_val);
-    inline constexpr float UpdateKnobPassThru(float curr_knob_val, float *stored_knob_val, bool *pass_thru);
+    inline bool CheckParamDelta(float curr_val, float prev_val);
+    inline float MapKnobDeadzone(float knob_val);
+    // inline float UpdateKnobPassThru(float curr_knob_val, float *stored_knob_val, bool *pass_thru);
+    inline float UpdateKnobPassThru(float curr_knob_val, float *stored_knob_val, float prev_param_val, bool *pass_thru);
 
-    void DebugPrintState(AppState state);
-    void DebugPrintMode(SynthMode mode);
-
+    /* timer and led methods */
+    void SetupTimer();
     /* has to be static - timer won't take class member function in callback */
     static void StaticLedCallback(void* data){
       instance_ -> LedCallback(data);
     }
-
-    void SetupTimer();
-    // void StartLeds();
     void LedCallback(void* data);
-    void SetLedAppState();
-    void SetLedSynthMode();
-    void SetLedRandomMode();
+    void SetLed1AppState();
+    void SetLed1SynthMode();
+    void SetLed2();
     void SetLedFXMode();
     void SetRgb1(float r, float g, float b);
     void SetRgb2(float r, float g, float b);
+
+    void DebugPrintState(AppState state);
+    void DebugPrintMode(SynthMode mode);
+    #ifdef DEBUG_MODE
+    void PrintCPULoad();
+    #endif
 
 
 };

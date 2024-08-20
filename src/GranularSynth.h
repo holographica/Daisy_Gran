@@ -3,8 +3,6 @@
 #include "Grain.h"
 #include "daisy_pod.h"
 #include "debug_print.h"
-
-// #include "sample.h"
 #include <vector>
 
 class GranularSynth{
@@ -57,6 +55,7 @@ class GranularSynth{
     size_t active_count_;
     float pitch_ratio_;
     float pan_;
+    // DelayLine<float, DELAY_TIME> delay_line_;
 
     /* amount of randomness to apply to synth/grain parameters*/
     float rnd_size_;
@@ -66,8 +65,4 @@ class GranularSynth{
     float rnd_pan_;
     float rnd_envelope_;
     float rnd_phasor_;
-
-
-
-
 };

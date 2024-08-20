@@ -2,8 +2,13 @@
 #include "stddef.h"
 #include <time.h>
 
+/* audio constants */
 constexpr int SAMPLE_RATE = 48000;
 constexpr float SAMPLE_RATE_FLOAT = 48000.f;
+constexpr int BIT_DEPTH = 16;
+
+/* delay line buffer size (2s @ 48kHz) */
+constexpr size_t DELAY_TIME = 96000;
 
 /* 16mb - max size of one stereo channel to be loaded into buffers */
 constexpr size_t CHNL_BUF_SIZE_ABS = 16*1024*1024;
@@ -13,18 +18,21 @@ constexpr size_t CHNL_BUF_SIZE_SAMPS = 8*1024*1024;
 /* chunk size for reading audio into temporary buffer */
 const size_t BUF_CHUNK_SZ = 16384;
 
+/* file reading constants*/
 static const uint16_t MAX_FILES = 32;                      
 static const uint16_t MAX_FNAME_LEN = 128;
 
-constexpr int BIT_DEPTH = 16;
-/* min/max number of concurrent active grains */
+/* granular synth parameter constants */
 constexpr int MIN_GRAINS = 1;
 constexpr int MAX_GRAINS = 20;
-
-constexpr float MIN_GRAIN_SIZE_MS = 100.0f;
-constexpr float MAX_GRAIN_SIZE_MS = 3000.0f;
-constexpr size_t MIN_GRAIN_SIZE_SAMPLES = 4800; // 100ms at 48kHz
-constexpr size_t MAX_GRAIN_SIZE_SAMPLES = 144000; // 3s at 48kHz
+static constexpr int NUM_ENV_TYPES = 4;
+static constexpr int NUM_PHASOR_MODES = 4;
+static constexpr int NUM_SYNTH_MODES = 7;
+constexpr float PARAM_CHANGE_THRESHOLD = 0.01f;
+constexpr float MIN_GRAIN_SIZE_MS = 50.0f;
+constexpr float MAX_GRAIN_SIZE_MS = 1000.0f;
+constexpr size_t MIN_GRAIN_SIZE_SAMPLES = 4800; /* 100ms at 48kHz */
+constexpr size_t MAX_GRAIN_SIZE_SAMPLES = 144000; /* 3s at 48kHz */
 constexpr float MIN_PITCH = 0.5f;
 constexpr float MAX_PITCH = 3.0f;
 
@@ -45,17 +53,23 @@ inline constexpr float SamplesToMs(size_t samples){
   return (static_cast<float>(samples) * 1000.0f) / SAMPLE_RATE_FLOAT; 
 }
 
-static constexpr int NUM_ENV_TYPES = 4;
-static constexpr int NUM_PHASOR_MODES = 4;
-static constexpr int NUM_SYNTH_MODES = 7;
-constexpr float PARAM_CHANGE_THRESHOLD = 0.01f;
+/* button event constants */
+const unsigned long DEBOUNCE_DELAY = 50; 
+const unsigned long LONG_PRESS_TIME = 1000;
 
+/* hipass filter frequency range */
+const float HIPASS_LOWER_BOUND = 0.0004f;
+const float HIPASS_UPPER_BOUND = 0.005f;
+
+/* lowpass filter frequency range */
+const float LOPASS_LOWER_BOUND = 20.0f;
+const float LOPASS_UPPER_BOUND = 18000.0f;
+
+/* random number generator variables and helper functions */
 extern uint32_t rng_state;
-
 inline void SeedRng(){
   rng_state = static_cast<uint32_t>(time(nullptr));
 }
-
 inline float RngFloat(){
   /* xorshift32 from https://en.wikipedia.org/wiki/Xorshift 
   for simple fast random floats */

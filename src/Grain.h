@@ -16,22 +16,23 @@ class Grain {
       LinearDecay,
       /* No fade in or out */
       Rectangular,
-      /* Simple fade out starting at phase=0.8f ie: |‾\  */
+      // /* Simple fade out starting at phase=0.8f ie: |‾\  */
       Decay,
-      /* Smooth symmetric increase/decrease
-        ie linear fade in and out: /\  */
+      // /* Smooth symmetric increase/decrease
+      //   ie linear fade in and out: /\  */
       Triangular,
-      /* smooth curve on/off, crosses 0 at both sides */
+      // /* smooth curve on/off, crosses 0 at both sides */
       Hann,
       // could add option for ADSR where user sets params? 
     };
 
     Grain():
-      is_active_(false), envelope_type_(EnvelopeType::Decay){}
+      is_active_(false), envelope_type_(EnvelopeType::Rectangular){}
+      // is_active_(false), envelope_type_(EnvelopeType::Decay){}
 
     void Init(int16_t *left, int16_t *right);
     void Trigger(size_t pos, size_t grain_size, float pitch_ratio=1.0f, float pan=0.5f);
-    Sample Process(Sample sample);
+    Sample Process(Sample sample, float scale);
   
     void SetSpawnPos(size_t spawn_pos);
     void SetGrainSize(size_t grain_size);

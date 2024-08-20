@@ -16,7 +16,7 @@ class AudioFileManager {
     
     bool Init();
     bool ScanWavFiles();
-    void SetBuffers(int16_t *left, int16_t *right, int16_t* temp_buf);
+    void SetBuffers(int16_t *left, int16_t *right);
     bool LoadFile(uint16_t file_idx);
     
     bool CloseFile();
@@ -59,7 +59,7 @@ class AudioFileManager {
     char names_ [MAX_FILES][MAX_FNAME_LEN];
     /* index of currently selected file */
     uint16_t curr_idx_;
-    uint16_t file_count_;
+    uint16_t file_count_=0;
     /* header data for currently selected file */
     WavHeader header_;
     /* byte in original wav file at which audio samples start - usually 44 */

@@ -20,7 +20,6 @@ using namespace std;
 /* SDRAM buffers for storing WAV files or recorded input audio */
 DSY_SDRAM_BSS alignas(16) int16_t left_buf[CHNL_BUF_SIZE_SAMPS];
 DSY_SDRAM_BSS alignas(16) int16_t right_buf[CHNL_BUF_SIZE_SAMPS];
-DSY_SDRAM_BSS alignas(16) int16_t temp_buf[BUF_CHUNK_SZ];
 
 /* SDRAM buffer for temporarily storing recorded output audio
     before it's written to SD card */
@@ -32,6 +31,7 @@ FatFSInterface fsi;
 DaisyPod pod;
 FIL file;
 
+// ReverbSc reverb;
 DSY_SDRAM_BSS ReverbSc reverb;
 /* software classes to run app */
 AudioFileManager filemgr(sd, fsi, pod, &file);
@@ -46,7 +46,7 @@ int main (void){
   pod.Init();
   pod.seed.StartLog(true);
   DebugPrint(pod,"started log");
-  app.Init(left_buf, right_buf, temp_buf);
+  app.Init(left_buf, right_buf);
   app.Run();
 }
 
