@@ -10,7 +10,7 @@ const float Grain::decay_rate_ = 5.0f;
 /// @brief Initialise the Grain instance and its Phasor object 
 /// @param len Length in samples of the audio file loaded in the buffers
 void Grain::Init(){
-  phasor_.Init(0.0f, 1.0f, 1);
+  phasor_.Init(0.0f, 1.0f, 0.0f);
 }
 
 /// @brief Causes a grain to start playing and assigns its parameters
@@ -20,12 +20,16 @@ void Grain::Init(){
 /// @param pan Position of the grain's audio output in the stereo field
 void Grain::Trigger(size_t pos, size_t grain_size, float pitch_ratio, float pan, float direction) {
   if (pos >= audio_len_) pos -= audio_len_;
-  spawn_pos_ = pos;
-  grain_size_ = grain_size;
+  // spawn_pos_ = pos;
+  SetSpawnPos(pos);
+  SetGrainSize(grain_size);
+  SetPitchRatio(pitch_ratio);
+  pan_=pan;
+  // grain_size_ = grain_size;
   is_active_ = true;
-  phasor_.Init(grain_size, pitch_ratio, direction);
-  pitch_ratio_ = pitch_ratio;
-  pan_ = pan;
+  phasor_.Init(grain_size_, pitch_ratio_, 1.0f);
+  // pitch_ratio_ = pitch_ratio;
+  // pan_ = pan;
 }
 
 /// @brief Processes grain phase, applies envelope and panning and mixes into the output buffers
@@ -78,5 +82,5 @@ float Grain::ApplyEnvelope(float phase){
 void Grain::SetSpawnPos(size_t spawn_pos){ spawn_pos_ = spawn_pos; }
 void Grain::SetGrainSize(size_t grain_size) { grain_size_ = grain_size; }
 void Grain::SetPitchRatio(float pitch_ratio) { pitch_ratio_ = pitch_ratio; }
-void Grain::SetPhasorPitchRatio(float pitch_ratio) { phasor_.SetPitchRatio(pitch_ratio, audio_len_); }
+// void Grain::SetPhasorPitchRatio(float pitch_ratio) { phasor_.SetPitchRatio(pitch_ratio, audio_len_); }
 void Grain::SetPhasorDirection(float direction) { phasor_.SetDirection(direction); }

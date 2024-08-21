@@ -316,7 +316,8 @@ void GrannyChordApp::UpdateSynthModeA(){
   // ResetPassThru();
   SetLed1SynthMode();
   SetLed2();
-  mode_changed_ = true;
+  knob1_latched = true;
+  knob2_latched = true;
 }
 
 /// @brief iterates through synth parameter control modes when button 2 pressed
@@ -337,7 +338,8 @@ void GrannyChordApp::UpdateSynthModeB(){
   // ResetPassThru();
   SetLed1SynthMode();
   SetLed2();
-  mode_changed_ = true;
+  knob1_latched = true;
+  knob2_latched = true;
 }
 
 /// @brief Updates synth parameters based on current synth mode and adjusts
@@ -353,20 +355,21 @@ void GrannyChordApp::UpdateSynthParams(){
   counter++;
 
   /* only update parameter if knob has passed through previous value in this mode */
-  // if (UpdateKnobPassThru(knob1_val,prev_param_k1[mode_idx])){
+  if (UpdateKnobPassThru(&knob1_latched, knob1_val,prev_param_k1[mode_idx])){
     UpdateKnob1Params(knob1_val,curr_synth_mode_);
     prev_param_k1[mode_idx] = knob1_val;
     if (counter%96000==0){
       DebugPrint(pod_, "new k1v: %f",knob1_val);
     }
-  // }
-  // if (UpdateKnobPassThru(knob2_val,prev_param_k2[mode_idx])){
+  }
+
+  if (UpdateKnobPassThru(&knob2_latched, knob2_val,prev_param_k2[mode_idx])){
     UpdateKnob2Params(knob2_val, curr_synth_mode_);
     prev_param_k2[mode_idx] = knob2_val;
     if (counter%96000==0){
       DebugPrint(pod_, "new k2v: %f",knob2_val);
     }
-  // }
+  }
 }
 
 /// @brief Initialises file manager, sets audio data buffers and scans SD card for WAV files
@@ -444,13 +447,13 @@ void GrannyChordApp::InitPrevParamVals(){
   } 
 }
 
-void GrannyChordApp::ResetPassThru(){
-    int mode_idx = static_cast<int>(curr_synth_mode_);
-    stored_k1[mode_idx] = pod_.knob1.Process();
-    stored_k2[mode_idx] = pod_.knob2.Process();
-    pass_thru_k1 = false;
-    pass_thru_k2 = false;
-}
+// void GrannyChordApp::ResetPassThru(){
+//     int mode_idx = static_cast<int>(curr_synth_mode_);
+//     stored_k1[mode_idx] = pod_.knob1.Process();
+//     stored_k2[mode_idx] = pod_.knob2.Process();
+//     pass_thru_k1 = false;
+//     pass_thru_k2 = false;
+// }
 
 /// @brief Master audio callback, called at audio rate, calls all audio processing methods
 /// @param in Audio input buffer
@@ -469,6 +472,7 @@ void GrannyChordApp::ProcessAudio(AudioHandle::InputBuffer in, AudioHandle::Outp
         return;
       }
       ProcessWAVPlayback(out,size);
+      // ProcessSynthesis(out,size);
       return;  
     case AppState::RecordIn:
       ProcessRecordIn(in, out, size);
@@ -527,21 +531,19 @@ void GrannyChordApp::ProcessSynthesis(AudioHandle::OutputBuffer out, size_t size
   // Sample samp;
   for (size_t i=0; i<size; i++){ 
     Sample samp = synth_.ProcessGrains();
-    out[0][i] = samp.left;
-    out[1][i] = samp.right;
-  }
+    counter++;
 
     // samp = ProcessFX(samp);
     // out[0][i] = samp.left;
     // out[1][i] = samp.right;
-    // limiter_.ProcessBlock(&samp.left, 1, 0.0f);
-    // limiter_.ProcessBlock(&samp.right, 1, 0.0f);
-    // if (counter%128000==0){
-    //   counter=0;
-    //   DebugPrint(pod_, "l: %f, r: %f", samp.left, samp.right);
-    // }
-    // out[0][i] = samp.left;
-    // out[1][i] = samp.right;
+    limiter_.ProcessBlock(&samp.left, 1, 1.0f);
+    limiter_.ProcessBlock(&samp.right, 1, 1.0f);
+    if (counter%128000==0){
+      counter=0;
+      DebugPrint(pod_, "l: %f, r: %f", samp.left, samp.right);
+    }
+    out[0][i] = samp.left;
+    out[1][i] = samp.right;
 
     //NOTE: TURN BACK ON 
     // if (recording_out_ && sd_writer_.GetLengthSeconds()<MAX_REC_OUT_LEN){
@@ -549,7 +551,7 @@ void GrannyChordApp::ProcessSynthesis(AudioHandle::OutputBuffer out, size_t size
     //   temp_interleaved_buf_[1]=out[1][i];
     //   sd_writer_.Sample(temp_interleaved_buf_);
     // }
-  // }
+  } 
 }
 
 Sample GrannyChordApp::ProcessFX(Sample in){
@@ -559,25 +561,25 @@ Sample GrannyChordApp::ProcessFX(Sample in){
   out.right = hipass_.Process(in.right);
 
   // /* apply compression to reduce gain changes */
-  out.left = comp_.Process(out.left);
-  out.right = comp_.Process(out.right);
+  // out.left = comp_.Process(out.left);
+  // out.right = comp_.Process(out.right);
 
   /* apply lowpass filter */
   out.left = lowpass_moog_.Process(out.left);
   out.right = lowpass_moog_.Process(out.right);
 
   /* apply stereo rotation */
-  out = rotator_.Process(out);
+  // out = rotator_.Process(out);
 
   /* apply chorus */
-  out.left = chorus_.Process(out.left);
-  out.right = chorus_.Process(out.right);
+  // out.left = chorus_.Process(out.left);
+  // out.right = chorus_.Process(out.right);
 
   /* apply reverb */
-  reverb_.ProcessMix(out.left, out.right, &out.left, &out.right);
+  // reverb_.ProcessMix(out.left, out.right, &out.left, &out.right);
 
-  out.left = hicut_.Process(out.left);
-  out.right = hicut_.Process(out.right);
+  // out.left = hicut_.Process(out.left);
+  // out.right = hicut_.Process(out.right);
   return out;
 }
 
@@ -619,13 +621,13 @@ void GrannyChordApp::UpdateKnob1Params(float knob1_val, SynthMode mode){
     case SynthMode::Size_Position:
       synth_.SetGrainSize(knob1_val);
       if (counter%128000==0){
-        DebugPrint(pod_, "set grain size to %u",synth_.GetSize());
+        // DebugPrint(pod_, "set grain size to %u",synth_.GetSize());
       }
       return;
     case SynthMode::Pitch_ActiveGrains:
       synth_.SetPitchRatio(knob1_val);
       if (counter%128000==0){
-        DebugPrint(pod_, "set pitch to %f",synth_.GetPitch());
+        // DebugPrint(pod_, "set pitch to %f",synth_.GetPitch());
       }
       return;
     case SynthMode::Pan_Direction:
@@ -660,15 +662,15 @@ void GrannyChordApp::UpdateKnob2Params(float knob2_val, SynthMode mode){
   switch (mode){
     case SynthMode::Size_Position:
       synth_.SetSpawnPos(knob2_val);
-      if (counter%128000==0){
-        DebugPrint(pod_, "set pos to %u",synth_.GetPos());
-      }
+      // if (counter%128000==0){
+      //   // DebugPrint(pod_, "set pos to %u",synth_.GetPos());
+      // }
       return;
     case SynthMode::Pitch_ActiveGrains:
       synth_.SetActiveGrains(knob2_val);
-      if (counter%128000==0){
-        DebugPrint(pod_, "set active grains to %u",synth_.GetCount());
-      }
+      // if (counter%128000==0){
+      //   // DebugPrint(pod_, "set active grains to %u",synth_.GetCount());
+      // }
       return;
     case SynthMode::Pan_Direction:
       synth_.SetDirection(knob2_val);
@@ -696,6 +698,18 @@ void GrannyChordApp::UpdateKnob2Params(float knob2_val, SynthMode mode){
   }
 }
 
+
+
+/*
+
+encoder for strum??? nice clicks 
+knob1 pitch? 
+knob2 position?
+buttons chords? 
+click encoder for granular stuff
+
+*/
+
 /* knobs on the Pod have deadzones around 0 and 1 so we adjust for this */
 inline float GrannyChordApp::MapKnobDeadzone(float knob_val ){
   if (knob_val<=0.01f) return 0.0f;
@@ -703,10 +717,10 @@ inline float GrannyChordApp::MapKnobDeadzone(float knob_val ){
   return knob_val;
 }
 
-inline bool GrannyChordApp::UpdateKnobPassThru(float curr_knob_val, float prev_param){
-  if (mode_changed_){
+inline bool GrannyChordApp::UpdateKnobPassThru(bool *knob_latched, float curr_knob_val, float prev_param){
+  if ((*knob_latched)){
     if (fabs(curr_knob_val - prev_param)<0.0001){
-      mode_changed_ = false;
+      (*knob_latched) = false;
       return true;
     }
     else return false;

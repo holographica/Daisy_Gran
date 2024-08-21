@@ -21,7 +21,7 @@ class Grain {
     void SetGrainSize(size_t grain_size);
     void SetPitchRatio(float pitch_ratio);
 
-    void SetPhasorPitchRatio(float pitch_ratio);
+    // void SetPhasorPitchRatio(float pitch_ratio);
     void SetPhasorDirection(float direction);
 
     static size_t audio_len_;

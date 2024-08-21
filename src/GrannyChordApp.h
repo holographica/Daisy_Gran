@@ -42,7 +42,9 @@ class GrannyChordApp {
     AppState next_state_;
     SynthMode curr_synth_mode_;
     SynthMode prev_synth_mode_;
-    bool mode_changed_;
+    bool knob1_latched;
+    bool knob2_latched;
+
 
     /* audio FX and filters */
     Compressor comp_;
@@ -69,10 +71,10 @@ class GrannyChordApp {
     float prev_param_k2[NUM_SYNTH_MODES] = {0};
 
     /* stored previous knob values for passthru mode */
-    float stored_k1[NUM_SYNTH_MODES] = {0.5f};
-    float stored_k2[NUM_SYNTH_MODES] = {0.5f};
-    bool pass_thru_k1 = false;
-    bool pass_thru_k2 = false;
+    // float stored_k1[NUM_SYNTH_MODES] = {0.5f};
+    // float stored_k2[NUM_SYNTH_MODES] = {0.5f};
+    // bool pass_thru_k1 = false;
+    // bool pass_thru_k2 = false;
 
     /* objects/variables for recording in and out */
     WavWriter<16384> sd_writer_;
@@ -107,7 +109,7 @@ class GrannyChordApp {
     void InitRecordIn();
     void InitWavWriter();
     void InitPrevParamVals();
-    void ResetPassThru();
+    // void ResetPassThru();
 
     /* state change handlers */
     void UpdateUI();
@@ -141,7 +143,7 @@ class GrannyChordApp {
     void UpdateKnob2Params(float knob2_val, SynthMode mode);
     // void UpdateChordParams();
     inline float MapKnobDeadzone(float knob_val);
-    inline bool UpdateKnobPassThru(float curr_knob_val, float prev_param);
+    inline bool UpdateKnobPassThru(bool *knob_latched, float curr_knob_val, float prev_param);
 
     /* timer and led methods */
     void SetupTimer();

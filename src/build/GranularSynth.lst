@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
   29:constants_utils.h **** constexpr int MIN_GRAINS = 1;
   30:constants_utils.h **** constexpr int MAX_GRAINS = 10;
   31:constants_utils.h **** static constexpr int NUM_SYNTH_MODES = 8;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 2
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 2
 
 
   32:constants_utils.h **** constexpr float PARAM_CHANGE_THRESHOLD = 0.01f;
@@ -118,7 +118,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
   46 0010 07EE903A 		vmov	s15, r3	@ int
   65:constants_utils.h ****   rng_state ^= rng_state << 5;
   47              		.loc 1 65 13 view .LVU9
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 3
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 3
 
 
   48 0014 1360     		str	r3, [r2]
@@ -151,7 +151,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
   73              		.thumb_func
   75              	_ZN13GranularSynth10InitParamsEv:
   76              	.LVL2:
-  77              	.LFB4891:
+  77              	.LFB4890:
   78              		.file 2 "GranularSynth.cpp"
    1:GranularSynth.cpp **** #include "GranularSynth.h"
    2:GranularSynth.cpp **** 
@@ -178,7 +178,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
   23:GranularSynth.cpp ****   audio_len_ = len;
   24:GranularSynth.cpp ****   for (Grain& grain: grains_){
   25:GranularSynth.cpp ****     grain.Init();
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 4
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 4
 
 
   26:GranularSynth.cpp ****   }
@@ -223,7 +223,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  105              		.loc 2 38 1 view .LVU26
  106 0026 7047     		bx	lr
  107              		.cfi_endproc
- 108              	.LFE4891:
+ 108              	.LFE4890:
  110              		.section	.text._ZN13GranularSynth4InitEPsS0_j,"ax",%progbits
  111              		.align	1
  112              		.global	_ZN13GranularSynth4InitEPsS0_j
@@ -232,13 +232,13 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  115              		.thumb_func
  117              	_ZN13GranularSynth4InitEPsS0_j:
  118              	.LVL3:
- 119              	.LFB4889:
+ 119              	.LFB4888:
    9:GranularSynth.cpp ****   left_buf_ = left;
  120              		.loc 2 9 74 is_stmt 1 view -0
  121              		.cfi_startproc
  122              		@ args = 0, pretend = 0, frame = 0
  123              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 5
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 5
 
 
   10:GranularSynth.cpp ****   right_buf_ = right;
@@ -298,7 +298,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  165              		.loc 2 14 15 discriminator 2 view .LVU40
  166 0024 FFF7FEFF 		bl	_ZN5Grain4InitEv
  167              	.LVL7:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 6
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 6
 
 
   13:GranularSynth.cpp ****     grain.Init();
@@ -358,14 +358,14 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  207              		.loc 2 19 13 view .LVU55
  208              		.align	2
  209              	.L8:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 7
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 7
 
 
  210 0040 00000000 		.word	_ZN5Grain10audio_len_E
  211 0044 00000000 		.word	_ZN5Grain9left_buf_E
  212 0048 00000000 		.word	_ZN5Grain10right_buf_E
  213              		.cfi_endproc
- 214              	.LFE4889:
+ 214              	.LFE4888:
  216              		.section	.text._ZN13GranularSynth5ResetEj,"ax",%progbits
  217              		.align	1
  218              		.global	_ZN13GranularSynth5ResetEj
@@ -374,7 +374,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  221              		.thumb_func
  223              	_ZN13GranularSynth5ResetEj:
  224              	.LVL11:
- 225              	.LFB4890:
+ 225              	.LFB4889:
   22:GranularSynth.cpp ****   audio_len_ = len;
  226              		.loc 2 22 38 is_stmt 1 view -0
  227              		.cfi_startproc
@@ -418,7 +418,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  256              		.loc 2 25 15 is_stmt 0 discriminator 2 view .LVU65
  257 0012 2846     		mov	r0, r5
   24:GranularSynth.cpp ****     grain.Init();
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 8
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 8
 
 
  258              		.loc 2 24 3 discriminator 2 view .LVU66
@@ -457,7 +457,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  283 0022 FFF7FEBF 		b	_ZN13GranularSynth10InitParamsEv
  284              	.LVL18:
  285              		.cfi_endproc
- 286              	.LFE4890:
+ 286              	.LFE4889:
  288              		.section	.text._ZN13GranularSynth12SetGrainSizeEf,"ax",%progbits
  289              		.align	1
  290              		.global	_ZN13GranularSynth12SetGrainSizeEf
@@ -466,7 +466,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  293              		.thumb_func
  295              	_ZN13GranularSynth12SetGrainSizeEf:
  296              	.LVL19:
- 297              	.LFB4892:
+ 297              	.LFB4891:
   39:GranularSynth.cpp **** 
   40:GranularSynth.cpp **** /* these setters take a normalised value (ie float from 0-1) 
   41:GranularSynth.cpp ****   from the user input knobs and convert this to the correct units */
@@ -478,7 +478,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  301              		@ frame_needed = 0, uses_anonymous_args = 0
  302              		@ link register save eliminated.
   44:GranularSynth.cpp ****   float size_ms = fmap(knob_val, MIN_GRAIN_SIZE_MS, MAX_GRAIN_SIZE_MS);
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 9
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 9
 
 
  303              		.loc 2 44 3 view .LVU76
@@ -538,7 +538,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
   51:../DaisySP/Source/Utility/dsp.h **** inline float fmin(float a, float b)
   52:../DaisySP/Source/Utility/dsp.h **** {
   53:../DaisySP/Source/Utility/dsp.h ****     float r;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 10
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 10
 
 
   54:../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
@@ -598,7 +598,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  108:../DaisySP/Source/Utility/dsp.h **** inline float pow10f(float f)
  109:../DaisySP/Source/Utility/dsp.h **** {
  110:../DaisySP/Source/Utility/dsp.h ****     return expf(2.302585092994046f * f);
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 11
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 11
 
 
  111:../DaisySP/Source/Utility/dsp.h **** }
@@ -658,7 +658,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  165:../DaisySP/Source/Utility/dsp.h ****  *
  166:../DaisySP/Source/Utility/dsp.h ****  *  \param in a value between 0 to 1 that will be mapped to the new range.
  167:../DaisySP/Source/Utility/dsp.h ****  *  \param min the new minimum value
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 12
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 12
 
 
  168:../DaisySP/Source/Utility/dsp.h ****  *  \param max the new maxmimum value
@@ -718,7 +718,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  335              		.loc 3 42 5 view .LVU86
   44:../DaisySP/Source/Utility/dsp.h **** #else
  336              		.loc 3 44 5 view .LVU87
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 13
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 13
 
 
  337              		.syntax unified
@@ -778,7 +778,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
   78:constants_utils.h **** /* converts milliseconds to number of samples */
   79:constants_utils.h **** inline constexpr size_t MsToSamples(float ms){
  374              		.loc 1 79 25 view .LVU97
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 14
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 14
 
 
  375              	.LBB213:
@@ -808,7 +808,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  397 0044 6F12833A 		.word	981668463
  398 0048 00803B47 		.word	1195081728
  399              		.cfi_endproc
- 400              	.LFE4892:
+ 400              	.LFE4891:
  402              		.section	.text._ZN13GranularSynth11SetSpawnPosEf,"ax",%progbits
  403              		.align	1
  404              		.global	_ZN13GranularSynth11SetSpawnPosEf
@@ -817,7 +817,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  407              		.thumb_func
  409              	_ZN13GranularSynth11SetSpawnPosEf:
  410              	.LVL25:
- 411              	.LFB4893:
+ 411              	.LFB4892:
   47:GranularSynth.cpp **** 
   48:GranularSynth.cpp **** void GranularSynth::SetSpawnPos(float knob_val){
  412              		.loc 2 48 48 is_stmt 1 view -0
@@ -838,7 +838,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  425 000c 27EE800A 		vmul.f32	s0, s15, s0
  426              	.LVL26:
  427              		.loc 2 50 16 view .LVU108
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 15
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 15
 
 
  428 0010 BCEEC00A 		vcvt.u32.f32	s0, s0
@@ -847,7 +847,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  430              		.loc 2 51 1 view .LVU109
  431 0018 7047     		bx	lr
  432              		.cfi_endproc
- 433              	.LFE4893:
+ 433              	.LFE4892:
  435              		.section	.text._ZN13GranularSynth15SetActiveGrainsEf,"ax",%progbits
  436              		.align	1
  437              		.global	_ZN13GranularSynth15SetActiveGrainsEf
@@ -856,7 +856,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  440              		.thumb_func
  442              	_ZN13GranularSynth15SetActiveGrainsEf:
  443              	.LVL27:
- 444              	.LFB4894:
+ 444              	.LFB4893:
   52:GranularSynth.cpp **** 
   53:GranularSynth.cpp **** void GranularSynth::SetActiveGrains(float knob_val){
  445              		.loc 2 53 52 is_stmt 1 view -0
@@ -898,7 +898,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  475              	.LBB222:
  476              	.LBB221:
  477              	.LBB217:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 16
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 16
 
 
  478              	.LBI217:
@@ -958,7 +958,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
    2:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
    3:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // Copyright (C) 1997-2020 Free Software Foundation, Inc.
    4:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** //
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 17
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 17
 
 
    5:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // This file is part of the GNU ISO C++ Library.  This library is free
@@ -1018,7 +1018,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
   59:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef cos
   60:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef cosh
   61:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef exp
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 18
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 18
 
 
   62:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef fabs
@@ -1078,7 +1078,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  116:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value,
  117:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
  118:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     asin(_Tp __x)
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 19
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 19
 
 
  119:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_asin(__x); }
@@ -1138,7 +1138,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  173:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
  174:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline _GLIBCXX_CONSTEXPR
  175:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 20
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 20
 
 
  176:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
@@ -1198,7 +1198,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  230:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
  231:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline _GLIBCXX_CONSTEXPR
  232:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value,
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 21
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 21
 
 
  233:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
@@ -1258,7 +1258,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  287:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp, typename _Up>
  288:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline _GLIBCXX_CONSTEXPR
  289:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__promote_2<_Tp, _Up>::__type
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 22
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 22
 
 
  290:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     fmod(_Tp __x, _Up __y)
@@ -1318,7 +1318,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  344:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
  345:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  346:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 23
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 23
 
 
  347:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline _GLIBCXX_CONSTEXPR
@@ -1378,7 +1378,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  401:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  402:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline float
  403:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   pow(float __x, int __n)
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 24
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 24
 
 
  404:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_powif(__x, __n); }
@@ -1438,7 +1438,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  458:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  459:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::sqrt;
  460:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 25
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 25
 
 
  461:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
@@ -1498,7 +1498,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  515:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  516:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #if _GLIBCXX_USE_C99_MATH
  517:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #if !_GLIBCXX_USE_C99_FP_MACROS_DYNAMIC
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 26
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 26
 
 
  518:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
@@ -1558,7 +1558,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  572:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
  573:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  574:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 27
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 27
 
 
  575:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
@@ -1618,7 +1618,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  629:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
  630:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     constexpr typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value,
  631:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                               bool>::__type
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 28
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 28
 
 
  632:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     isnan(_Tp __x)
@@ -1678,7 +1678,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  686:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   constexpr bool
  687:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   isgreater(double __x, double __y)
  688:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_isgreater(__x, __y); }
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 29
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 29
 
 
  689:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
@@ -1738,7 +1738,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  743:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   isless(long double __x, long double __y)
  744:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_isless(__x, __y); }
  745:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 30
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 30
 
 
  746:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
@@ -1798,7 +1798,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  800:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp, typename _Up>
  801:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     constexpr typename
  802:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     __gnu_cxx::__enable_if<(__is_arithmetic<_Tp>::__value
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 31
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 31
 
 
  803:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 			    && __is_arithmetic<_Up>::__value), bool>::__type
@@ -1858,7 +1858,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  857:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  858:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
  859:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline typename __gnu_cxx::__enable_if<__is_arithmetic<_Tp>::__value,
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 32
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 32
 
 
  860:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 					   int>::__type
@@ -1918,7 +1918,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  914:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 					   int>::__type
  915:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     isless(_Tp __f1, _Tp __f2)
  916:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     {
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 33
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 33
 
 
  917:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****       typedef typename __gnu_cxx::__promote<_Tp>::__type __type;
@@ -1978,7 +1978,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  971:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef erf
  972:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef erff
  973:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef erfl
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 34
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 34
 
 
  974:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef erfc
@@ -2038,7 +2038,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
 1028:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef nanf
 1029:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef nanl
 1030:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef nearbyint
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 35
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 35
 
 
 1031:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef nearbyintf
@@ -2098,7 +2098,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
 1085:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::copysign;
 1086:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::copysignf;
 1087:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::copysignl;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 36
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 36
 
 
 1088:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
@@ -2158,7 +2158,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
 1142:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
 1143:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::log1p;
 1144:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::log1pf;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 37
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 37
 
 
 1145:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::log1pl;
@@ -2218,7 +2218,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
 1199:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::scalbn;
 1200:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::scalbnf;
 1201:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::scalbnl;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 38
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 38
 
 
 1202:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
@@ -2278,7 +2278,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
 1256:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
 1257:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
 1258:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 39
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 39
 
 
 1259:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
@@ -2338,7 +2338,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
 1313:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
 1314:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
 1315:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 40
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 40
 
 
 1316:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     constexpr typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
@@ -2398,7 +2398,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
 1370:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     constexpr typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
 1371:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                               double>::__type
 1372:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     expm1(_Tp __x)
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 41
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 41
 
 
 1373:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_expm1(__x); }
@@ -2458,7 +2458,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
 1427:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp, typename _Up>
 1428:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     constexpr typename __gnu_cxx::__promote_2<_Tp, _Up>::__type
 1429:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     fmax(_Tp __x, _Up __y)
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 42
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 42
 
 
 1430:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     {
@@ -2518,7 +2518,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
 1484:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
 1485:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
 1486:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 43
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 43
 
 
 1487:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
@@ -2578,7 +2578,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
 1541:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
 1542:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
 1543:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     constexpr typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 44
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 44
 
 
 1544:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                               long long>::__type
@@ -2638,7 +2638,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
 1598:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     constexpr typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
 1599:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                               double>::__type
 1600:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     logb(_Tp __x)
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 45
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 45
 
 
 1601:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_logb(__x); }
@@ -2698,7 +2698,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
 1655:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_nearbyint(__x); }
 1656:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
 1657:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 46
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 46
 
 
 1658:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
@@ -2758,7 +2758,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
 1712:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****       return remainder(__type(__x), __type(__y));
 1713:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     }
 1714:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 47
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 47
 
 
 1715:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
@@ -2818,7 +2818,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  530              		.loc 2 55 20 is_stmt 0 view .LVU136
  531 0020 FCEEE77A 		vcvt.u32.f32	s15, s15
  532              	.LVL33:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 48
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 48
 
 
  533              		.loc 2 55 20 view .LVU137
@@ -2827,7 +2827,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  535              		.loc 2 56 1 view .LVU138
  536 0028 7047     		bx	lr
  537              		.cfi_endproc
- 538              	.LFE4894:
+ 538              	.LFE4893:
  540              		.section	.text._ZN13GranularSynth13SetPitchRatioEf,"ax",%progbits
  541              		.align	1
  542              		.global	_ZN13GranularSynth13SetPitchRatioEf
@@ -2836,7 +2836,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  545              		.thumb_func
  547              	_ZN13GranularSynth13SetPitchRatioEf:
  548              	.LVL34:
- 549              	.LFB4895:
+ 549              	.LFB4894:
   57:GranularSynth.cpp **** 
   58:GranularSynth.cpp **** void GranularSynth::SetPitchRatio(float ratio){
  550              		.loc 2 58 47 is_stmt 1 view -0
@@ -2878,7 +2878,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  580              	.LBB235:
  581              	.LBB234:
  582              	.LBB230:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 49
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 49
 
 
  583              	.LBI230:
@@ -2937,8 +2937,8 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  624              		.loc 2 60 1 view .LVU161
  625 0020 7047     		bx	lr
  626              		.cfi_endproc
- 627              	.LFE4895:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 50
+ 627              	.LFE4894:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 50
 
 
  629              		.section	.text._ZN13GranularSynth6SetPanEf,"ax",%progbits
@@ -2949,7 +2949,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  634              		.thumb_func
  636              	_ZN13GranularSynth6SetPanEf:
  637              	.LVL39:
- 638              	.LFB4896:
+ 638              	.LFB4895:
   61:GranularSynth.cpp **** 
   62:GranularSynth.cpp **** void GranularSynth::SetPan(float pan){ 
  639              		.loc 2 62 38 is_stmt 1 view -0
@@ -2965,7 +2965,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  647              		.loc 2 64 1 view .LVU165
  648 0004 7047     		bx	lr
  649              		.cfi_endproc
- 650              	.LFE4896:
+ 650              	.LFE4895:
  652              		.section	.text._ZN13GranularSynth12SetDirectionEf,"ax",%progbits
  653              		.align	1
  654              		.global	_ZN13GranularSynth12SetDirectionEf
@@ -2974,7 +2974,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  657              		.thumb_func
  659              	_ZN13GranularSynth12SetDirectionEf:
  660              	.LVL40:
- 661              	.LFB4897:
+ 661              	.LFB4896:
   65:GranularSynth.cpp **** 
   66:GranularSynth.cpp **** void GranularSynth::SetDirection(float direction){
  662              		.loc 2 66 50 is_stmt 1 view -0
@@ -2990,7 +2990,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  670              		.loc 2 68 1 view .LVU169
  671 0004 7047     		bx	lr
  672              		.cfi_endproc
- 673              	.LFE4897:
+ 673              	.LFE4896:
  675              		.section	.text._ZN13GranularSynth17UpdateGrainParamsEv,"ax",%progbits
  676              		.align	1
  677              		.global	_ZN13GranularSynth17UpdateGrainParamsEv
@@ -2998,11 +2998,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  679              		.thumb
  680              		.thumb_func
  682              	_ZN13GranularSynth17UpdateGrainParamsEv:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 51
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 51
 
 
  683              	.LVL41:
- 684              	.LFB4898:
+ 684              	.LFB4897:
   69:GranularSynth.cpp **** 
   70:GranularSynth.cpp **** /// @brief Update grain audio parameters
   71:GranularSynth.cpp **** void GranularSynth::UpdateGrainParams(){
@@ -3033,7 +3033,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  706              	.L23:
  707              		.loc 2 72 21 is_stmt 1 discriminator 3 view .LVU176
  708 000c B542     		cmp	r5, r6
- 709 000e 15D0     		beq	.L21
+ 709 000e 10D0     		beq	.L21
  710              	.LVL44:
   73:GranularSynth.cpp ****     grain.SetGrainSize(grain_size_);
  711              		.loc 2 73 5 discriminator 2 view .LVU177
@@ -3045,8 +3045,8 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
   74:GranularSynth.cpp ****     grain.SetSpawnPos(spawn_pos_);
  717              		.loc 2 74 5 is_stmt 1 discriminator 2 view .LVU179
  718              		.loc 2 74 22 is_stmt 0 discriminator 2 view .LVU180
- 719 001a D4F82812 		ldr	r1, [r4, #552]
- 720 001e 2846     		mov	r0, r5
+ 719 001a 2846     		mov	r0, r5
+ 720 001c D4F82812 		ldr	r1, [r4, #552]
  721 0020 FFF7FEFF 		bl	_ZN5Grain11SetSpawnPosEj
  722              	.LVL46:
   75:GranularSynth.cpp ****     grain.SetPitchRatio(pitch_ratio_);
@@ -3054,1381 +3054,1365 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  724              		.loc 2 75 24 is_stmt 0 discriminator 2 view .LVU182
  725 0024 2846     		mov	r0, r5
  726 0026 94ED8C0A 		vldr.32	s0, [r4, #560]
- 727 002a FFF7FEFF 		bl	_ZN5Grain13SetPitchRatioEf
- 728              	.LVL47:
-  76:GranularSynth.cpp ****     grain.SetPhasorDirection(direction_);
- 729              		.loc 2 76 5 is_stmt 1 discriminator 2 view .LVU183
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 52
+  72:GranularSynth.cpp ****     grain.SetGrainSize(grain_size_);
+ 727              		.loc 2 72 3 discriminator 2 view .LVU183
+ 728 002a 3435     		adds	r5, r5, #52
+ 729              	.LVL47:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 52
 
 
- 730              		.loc 2 76 29 is_stmt 0 discriminator 2 view .LVU184
- 731 002e 2846     		mov	r0, r5
- 732 0030 94ED8E0A 		vldr.32	s0, [r4, #568]
+ 730              		.loc 2 75 24 discriminator 2 view .LVU184
+ 731 002c FFF7FEFF 		bl	_ZN5Grain13SetPitchRatioEf
+ 732              	.LVL48:
   72:GranularSynth.cpp ****     grain.SetGrainSize(grain_size_);
- 733              		.loc 2 72 3 discriminator 2 view .LVU185
- 734 0034 3435     		adds	r5, r5, #52
- 735              	.LVL48:
- 736              		.loc 2 76 29 discriminator 2 view .LVU186
- 737 0036 FFF7FEFF 		bl	_ZN5Grain18SetPhasorDirectionEf
- 738              	.LVL49:
+ 733              		.loc 2 72 3 is_stmt 1 discriminator 2 view .LVU185
   72:GranularSynth.cpp ****     grain.SetGrainSize(grain_size_);
- 739              		.loc 2 72 3 is_stmt 1 discriminator 2 view .LVU187
+ 734              		.loc 2 72 3 is_stmt 0 discriminator 2 view .LVU186
+ 735 0030 ECE7     		b	.L23
+ 736              	.LVL49:
+ 737              	.L21:
   72:GranularSynth.cpp ****     grain.SetGrainSize(grain_size_);
- 740              		.loc 2 72 3 is_stmt 0 discriminator 2 view .LVU188
- 741 003a E7E7     		b	.L23
- 742              	.LVL50:
- 743              	.L21:
-  72:GranularSynth.cpp ****     grain.SetGrainSize(grain_size_);
- 744              		.loc 2 72 3 discriminator 2 view .LVU189
- 745              	.LBE238:
+ 738              		.loc 2 72 3 discriminator 2 view .LVU187
+ 739              	.LBE238:
+  76:GranularSynth.cpp ****     // grain.SetPhasorDirection(direction_);
   77:GranularSynth.cpp ****   }
   78:GranularSynth.cpp **** }
- 746              		.loc 2 78 1 view .LVU190
- 747 003c 70BD     		pop	{r4, r5, r6, pc}
- 748              		.loc 2 78 1 view .LVU191
- 749              		.cfi_endproc
- 750              	.LFE4898:
- 752              		.section	.text._ZN13GranularSynth15ApplyRandomnessEv,"ax",%progbits
- 753              		.align	1
- 754              		.global	_ZN13GranularSynth15ApplyRandomnessEv
- 755              		.syntax unified
- 756              		.thumb
- 757              		.thumb_func
- 759              	_ZN13GranularSynth15ApplyRandomnessEv:
- 760              	.LVL51:
- 761              	.LFB4899:
+ 740              		.loc 2 78 1 view .LVU188
+ 741 0032 70BD     		pop	{r4, r5, r6, pc}
+ 742              		.loc 2 78 1 view .LVU189
+ 743              		.cfi_endproc
+ 744              	.LFE4897:
+ 746              		.section	.text._ZN13GranularSynth15ApplyRandomnessEv,"ax",%progbits
+ 747              		.align	1
+ 748              		.global	_ZN13GranularSynth15ApplyRandomnessEv
+ 749              		.syntax unified
+ 750              		.thumb
+ 751              		.thumb_func
+ 753              	_ZN13GranularSynth15ApplyRandomnessEv:
+ 754              	.LVL50:
+ 755              	.LFB4898:
   79:GranularSynth.cpp **** 
   80:GranularSynth.cpp **** 
   81:GranularSynth.cpp **** /// @brief We take a random number, map it into a certain range
   82:GranularSynth.cpp **** ///        determined by the user randomness setting for that parameter,
   83:GranularSynth.cpp **** ///        then clamp it so it stays in the correct range for the parameter 
   84:GranularSynth.cpp **** void GranularSynth::ApplyRandomness(){
- 762              		.loc 2 84 38 is_stmt 1 view -0
- 763              		.cfi_startproc
- 764              		@ args = 0, pretend = 0, frame = 0
- 765              		@ frame_needed = 0, uses_anonymous_args = 0
+ 756              		.loc 2 84 38 is_stmt 1 view -0
+ 757              		.cfi_startproc
+ 758              		@ args = 0, pretend = 0, frame = 0
+ 759              		@ frame_needed = 0, uses_anonymous_args = 0
   85:GranularSynth.cpp ****   /* here we map a randomly generated num between 1 +/- user randomness setting 
   86:GranularSynth.cpp ****       then convert it to ms so we can use fclamp to clamp it within the correct range */
   87:GranularSynth.cpp ****   if (rnd_size_>0){
- 766              		.loc 2 87 3 view .LVU193
- 767              	.LBB239:
- 768 0000 D0ED8F7A 		vldr.32	s15, [r0, #572]
- 769 0004 F5EEC07A 		vcmpe.f32	s15, #0
- 770              	.LBE239:
+ 760              		.loc 2 87 3 view .LVU191
+ 761              	.LBB239:
+ 762 0000 D0ED8F7A 		vldr.32	s15, [r0, #572]
+ 763 0004 F5EEC07A 		vcmpe.f32	s15, #0
+ 764              	.LBE239:
   84:GranularSynth.cpp ****   /* here we map a randomly generated num between 1 +/- user randomness setting 
- 771              		.loc 2 84 38 is_stmt 0 view .LVU194
- 772 0008 10B5     		push	{r4, lr}
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 53
+ 765              		.loc 2 84 38 is_stmt 0 view .LVU192
+ 766 0008 10B5     		push	{r4, lr}
+ 767              		.cfi_def_cfa_offset 8
+ 768              		.cfi_offset 4, -8
+ 769              		.cfi_offset 14, -4
+ 770              	.LBB279:
+ 771              		.loc 2 87 3 view .LVU193
+ 772 000a F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 53
 
 
- 773              		.cfi_def_cfa_offset 8
- 774              		.cfi_offset 4, -8
- 775              		.cfi_offset 14, -4
- 776              	.LBB279:
+ 773              	.LBE279:
+  84:GranularSynth.cpp ****   /* here we map a randomly generated num between 1 +/- user randomness setting 
+ 774              		.loc 2 84 38 view .LVU194
+ 775 000e 0446     		mov	r4, r0
+ 776              	.LBB280:
  777              		.loc 2 87 3 view .LVU195
- 778 000a F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 779              	.LBE279:
-  84:GranularSynth.cpp ****   /* here we map a randomly generated num between 1 +/- user randomness setting 
- 780              		.loc 2 84 38 view .LVU196
- 781 000e 0446     		mov	r4, r0
- 782              	.LBB280:
- 783              		.loc 2 87 3 view .LVU197
- 784 0010 35DD     		ble	.L25
- 785              	.LBB240:
+ 778 0010 35DD     		ble	.L25
+ 779              	.LBB240:
   88:GranularSynth.cpp ****     float rnd_size_factor = fmap(RngFloat(),1.0f-rnd_size_, 1.0f+rnd_size_, Mapping::EXP);
- 786              		.loc 2 88 5 is_stmt 1 view .LVU198
- 787              		.loc 2 88 33 is_stmt 0 view .LVU199
- 788 0012 FFF7FEFF 		bl	_Z8RngFloatv
- 789              	.LVL52:
- 790              		.loc 2 88 33 view .LVU200
- 791 0016 F7EE007A 		vmov.f32	s15, #1.0e+0
- 792              		.loc 2 88 50 view .LVU201
- 793 001a 94ED8F7A 		vldr.32	s14, [r4, #572]
- 794              	.LBB241:
- 795              	.LBB242:
+ 780              		.loc 2 88 5 is_stmt 1 view .LVU196
+ 781              		.loc 2 88 33 is_stmt 0 view .LVU197
+ 782 0012 FFF7FEFF 		bl	_Z8RngFloatv
+ 783              	.LVL51:
+ 784              		.loc 2 88 33 view .LVU198
+ 785 0016 F7EE007A 		vmov.f32	s15, #1.0e+0
+ 786              		.loc 2 88 50 view .LVU199
+ 787 001a 94ED8F7A 		vldr.32	s14, [r4, #572]
+ 788              	.LBB241:
+ 789              	.LBB242:
  182:../DaisySP/Source/Utility/dsp.h ****         case Mapping::LOG:
- 796              		.loc 3 182 37 view .LVU202
- 797 001e 20EE000A 		vmul.f32	s0, s0, s0
- 798              	.LBE242:
- 799              	.LBE241:
- 800              		.loc 2 88 33 view .LVU203
- 801 0022 77EEC76A 		vsub.f32	s13, s15, s14
- 802 0026 37EE277A 		vadd.f32	s14, s14, s15
- 803              	.LVL53:
- 804              	.LBB255:
- 805              	.LBI241:
+ 790              		.loc 3 182 37 view .LVU200
+ 791 001e 20EE000A 		vmul.f32	s0, s0, s0
+ 792              	.LBE242:
+ 793              	.LBE241:
+ 794              		.loc 2 88 33 view .LVU201
+ 795 0022 77EEC76A 		vsub.f32	s13, s15, s14
+ 796 0026 37EE277A 		vadd.f32	s14, s14, s15
+ 797              	.LVL52:
+ 798              	.LBB255:
+ 799              	.LBI241:
  177:../DaisySP/Source/Utility/dsp.h **** {
- 806              		.loc 3 177 1 is_stmt 1 view .LVU204
- 807              	.LBE255:
- 808              	.LBE240:
- 809              	.LBE280:
+ 800              		.loc 3 177 1 is_stmt 1 view .LVU202
+ 801              	.LBE255:
+ 802              	.LBE240:
+ 803              	.LBE280:
  179:../DaisySP/Source/Utility/dsp.h ****     {
- 810              		.loc 3 179 5 view .LVU205
- 811              	.LBB281:
- 812              	.LBB276:
- 813              	.LBB256:
- 814              	.LBB252:
+ 804              		.loc 3 179 5 view .LVU203
+ 805              	.LBB281:
+ 806              	.LBB276:
+ 807              	.LBB256:
+ 808              	.LBB252:
  181:../DaisySP/Source/Utility/dsp.h ****             return fclamp(min + (in * in) * (max - min), min, max);
- 815              		.loc 3 181 9 view .LVU206
+ 809              		.loc 3 181 9 view .LVU204
  182:../DaisySP/Source/Utility/dsp.h ****         case Mapping::LOG:
- 816              		.loc 3 182 13 view .LVU207
+ 810              		.loc 3 182 13 view .LVU205
  182:../DaisySP/Source/Utility/dsp.h ****         case Mapping::LOG:
- 817              		.loc 3 182 26 is_stmt 0 view .LVU208
- 818 002a F0EE667A 		vmov.f32	s15, s13
+ 811              		.loc 3 182 26 is_stmt 0 view .LVU206
+ 812 002a F0EE667A 		vmov.f32	s15, s13
  182:../DaisySP/Source/Utility/dsp.h ****         case Mapping::LOG:
- 819              		.loc 3 182 50 view .LVU209
- 820 002e 37EE666A 		vsub.f32	s12, s14, s13
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 54
+ 813              		.loc 3 182 50 view .LVU207
+ 814 002e 37EE666A 		vsub.f32	s12, s14, s13
+ 182:../DaisySP/Source/Utility/dsp.h ****         case Mapping::LOG:
+ 815              		.loc 3 182 26 view .LVU208
+ 816 0032 E0EE067A 		vfma.f32	s15, s0, s12
+ 817              	.LVL53:
+ 818              	.LBB243:
+ 819              	.LBI243:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 54
 
 
- 182:../DaisySP/Source/Utility/dsp.h ****         case Mapping::LOG:
- 821              		.loc 3 182 26 view .LVU210
- 822 0032 E0EE067A 		vfma.f32	s15, s0, s12
- 823              	.LVL54:
- 824              	.LBB243:
- 825              	.LBI243:
   64:../DaisySP/Source/Utility/dsp.h **** {
- 826              		.loc 3 64 14 is_stmt 1 view .LVU211
- 827              	.LBE243:
- 828              	.LBE252:
- 829              	.LBE256:
- 830              	.LBE276:
- 831              	.LBE281:
+ 820              		.loc 3 64 14 is_stmt 1 view .LVU209
+ 821              	.LBE243:
+ 822              	.LBE252:
+ 823              	.LBE256:
+ 824              	.LBE276:
+ 825              	.LBE281:
   66:../DaisySP/Source/Utility/dsp.h **** }
- 832              		.loc 3 66 5 view .LVU212
- 833              	.LBB282:
- 834              	.LBB277:
- 835              	.LBB257:
- 836              	.LBB253:
- 837              	.LBB250:
- 838              	.LBB244:
- 839              	.LBI244:
+ 826              		.loc 3 66 5 view .LVU210
+ 827              	.LBB282:
+ 828              	.LBB277:
+ 829              	.LBB257:
+ 830              	.LBB253:
+ 831              	.LBB250:
+ 832              	.LBB244:
+ 833              	.LBI244:
   40:../DaisySP/Source/Utility/dsp.h **** {
- 840              		.loc 3 40 14 view .LVU213
- 841              	.LBB245:
+ 834              		.loc 3 40 14 view .LVU211
+ 835              	.LBB245:
   42:../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
- 842              		.loc 3 42 5 view .LVU214
+ 836              		.loc 3 42 5 view .LVU212
   44:../DaisySP/Source/Utility/dsp.h **** #else
- 843              		.loc 3 44 5 view .LVU215
- 844              	.LBE245:
- 845              	.LBE244:
- 846              	.LBE250:
- 847              	.LBE253:
- 848              	.LBE257:
- 849              	.LBB258:
- 850              	.LBB259:
+ 837              		.loc 3 44 5 view .LVU213
+ 838              	.LBE245:
+ 839              	.LBE244:
+ 840              	.LBE250:
+ 841              	.LBE253:
+ 842              	.LBE257:
+ 843              	.LBB258:
+ 844              	.LBB259:
   81:constants_utils.h **** }
   82:constants_utils.h **** 
   83:constants_utils.h **** /* converts number of samples to milliseconds */
   84:constants_utils.h **** inline constexpr float SamplesToMs(size_t samples){
   85:constants_utils.h ****   return (static_cast<float>(samples) * 1000.0f) / SAMPLE_RATE_FLOAT; 
- 851              		.loc 1 85 52 is_stmt 0 view .LVU216
- 852 0036 9FED646A 		vldr.32	s12, .L40
- 853              	.LBE259:
- 854              	.LBE258:
- 855              	.LBB262:
- 856              	.LBB254:
- 857              	.LBB251:
- 858              	.LBB247:
- 859              	.LBB246:
+ 845              		.loc 1 85 52 is_stmt 0 view .LVU214
+ 846 0036 9FED646A 		vldr.32	s12, .L40
+ 847              	.LBE259:
+ 848              	.LBE258:
+ 849              	.LBB262:
+ 850              	.LBB254:
+ 851              	.LBB251:
+ 852              	.LBB247:
+ 853              	.LBB246:
   44:../DaisySP/Source/Utility/dsp.h **** #else
- 860              		.loc 3 44 5 view .LVU217
- 861              		.syntax unified
- 862              	@ 44 "../DaisySP/Source/Utility/dsp.h" 1
- 863 003a C7FEA67A 		vmaxnm.f32 s15, s15, s13
- 864              	@ 0 "" 2
- 865              	.LVL55:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 55
+ 854              		.loc 3 44 5 view .LVU215
+ 855              		.syntax unified
+ 856              	@ 44 "../DaisySP/Source/Utility/dsp.h" 1
+ 857 003a C7FEA67A 		vmaxnm.f32 s15, s15, s13
+ 858              	@ 0 "" 2
+ 859              	.LVL54:
+  48:../DaisySP/Source/Utility/dsp.h **** }
+ 860              		.loc 3 48 5 is_stmt 1 view .LVU216
+  48:../DaisySP/Source/Utility/dsp.h **** }
+ 861              		.loc 3 48 5 is_stmt 0 view .LVU217
+ 862              		.thumb
+ 863              		.syntax unified
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 55
 
 
-  48:../DaisySP/Source/Utility/dsp.h **** }
- 866              		.loc 3 48 5 is_stmt 1 view .LVU218
-  48:../DaisySP/Source/Utility/dsp.h **** }
- 867              		.loc 3 48 5 is_stmt 0 view .LVU219
- 868              		.thumb
- 869              		.syntax unified
- 870              	.LBE246:
- 871              	.LBE247:
- 872              	.LBB248:
- 873              	.LBI248:
+ 864              	.LBE246:
+ 865              	.LBE247:
+ 866              	.LBB248:
+ 867              	.LBI248:
   51:../DaisySP/Source/Utility/dsp.h **** {
- 874              		.loc 3 51 14 is_stmt 1 view .LVU220
- 875              	.LBB249:
+ 868              		.loc 3 51 14 is_stmt 1 view .LVU218
+ 869              	.LBB249:
   53:../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
- 876              		.loc 3 53 5 view .LVU221
+ 870              		.loc 3 53 5 view .LVU219
   55:../DaisySP/Source/Utility/dsp.h **** #else
- 877              		.loc 3 55 5 view .LVU222
- 878              		.syntax unified
- 879              	@ 55 "../DaisySP/Source/Utility/dsp.h" 1
- 880 003e 87FEC77A 		vminnm.f32 s14, s15, s14
- 881              	@ 0 "" 2
- 882              	.LVL56:
+ 871              		.loc 3 55 5 view .LVU220
+ 872              		.syntax unified
+ 873              	@ 55 "../DaisySP/Source/Utility/dsp.h" 1
+ 874 003e 87FEC77A 		vminnm.f32 s14, s15, s14
+ 875              	@ 0 "" 2
+ 876              	.LVL55:
   59:../DaisySP/Source/Utility/dsp.h **** }
- 883              		.loc 3 59 5 view .LVU223
+ 877              		.loc 3 59 5 view .LVU221
   59:../DaisySP/Source/Utility/dsp.h **** }
- 884              		.loc 3 59 5 is_stmt 0 view .LVU224
- 885              		.thumb
- 886              		.syntax unified
- 887              	.LBE249:
- 888              	.LBE248:
- 889              	.LBE251:
- 890              	.LBE254:
- 891              	.LBE262:
+ 878              		.loc 3 59 5 is_stmt 0 view .LVU222
+ 879              		.thumb
+ 880              		.syntax unified
+ 881              	.LBE249:
+ 882              	.LBE248:
+ 883              	.LBE251:
+ 884              	.LBE254:
+ 885              	.LBE262:
   89:GranularSynth.cpp ****     float size_ms = SamplesToMs(grain_size_) * rnd_size_factor;
- 892              		.loc 2 89 5 is_stmt 1 view .LVU225
- 893              	.LBB263:
- 894              	.LBI258:
+ 886              		.loc 2 89 5 is_stmt 1 view .LVU223
+ 887              	.LBB263:
+ 888              	.LBI258:
   84:constants_utils.h ****   return (static_cast<float>(samples) * 1000.0f) / SAMPLE_RATE_FLOAT; 
- 895              		.loc 1 84 24 view .LVU226
- 896              	.LBB260:
- 897              		.loc 1 85 3 view .LVU227
- 898              		.loc 1 85 3 is_stmt 0 view .LVU228
- 899              	.LBE260:
- 900              	.LBE263:
+ 889              		.loc 1 84 24 view .LVU224
+ 890              	.LBB260:
+ 891              		.loc 1 85 3 view .LVU225
+ 892              		.loc 1 85 3 is_stmt 0 view .LVU226
+ 893              	.LBE260:
+ 894              	.LBE263:
   90:GranularSynth.cpp ****     size_ms = fclamp(size_ms, MIN_GRAIN_SIZE_MS, MAX_GRAIN_SIZE_MS);
- 901              		.loc 2 90 5 is_stmt 1 view .LVU229
- 902              	.LBB264:
- 903              	.LBI264:
+ 895              		.loc 2 90 5 is_stmt 1 view .LVU227
+ 896              	.LBB264:
+ 897              	.LBI264:
   64:../DaisySP/Source/Utility/dsp.h **** {
- 904              		.loc 3 64 14 view .LVU230
- 905              	.LBE264:
- 906              	.LBE277:
- 907              	.LBE282:
+ 898              		.loc 3 64 14 view .LVU228
+ 899              	.LBE264:
+ 900              	.LBE277:
+ 901              	.LBE282:
   66:../DaisySP/Source/Utility/dsp.h **** }
- 908              		.loc 3 66 5 view .LVU231
- 909              	.LBB283:
- 910              	.LBB278:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 56
-
-
- 911              	.LBB271:
- 912              	.LBB265:
- 913              	.LBI265:
+ 902              		.loc 3 66 5 view .LVU229
+ 903              	.LBB283:
+ 904              	.LBB278:
+ 905              	.LBB271:
+ 906              	.LBB265:
+ 907              	.LBI265:
   40:../DaisySP/Source/Utility/dsp.h **** {
- 914              		.loc 3 40 14 view .LVU232
- 915              	.LBB266:
+ 908              		.loc 3 40 14 view .LVU230
+ 909              	.LBB266:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 56
+
+
   42:../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
- 916              		.loc 3 42 5 view .LVU233
+ 910              		.loc 3 42 5 view .LVU231
   44:../DaisySP/Source/Utility/dsp.h **** #else
- 917              		.loc 3 44 5 view .LVU234
- 918              	.LBE266:
- 919              	.LBE265:
- 920              	.LBE271:
- 921              	.LBB272:
- 922              	.LBB261:
- 923              		.loc 1 85 11 is_stmt 0 view .LVU235
- 924 0042 D4ED897A 		vldr.32	s15, [r4, #548]	@ int
- 925 0046 F8EE676A 		vcvt.f32.u32	s13, s15
- 926              		.loc 1 85 39 view .LVU236
- 927 004a DFED607A 		vldr.32	s15, .L40+4
- 928 004e 66EEA76A 		vmul.f32	s13, s13, s15
- 929              		.loc 1 85 52 view .LVU237
- 930 0052 C6EE867A 		vdiv.f32	s15, s13, s12
- 931              	.LBE261:
- 932              	.LBE272:
+ 911              		.loc 3 44 5 view .LVU232
+ 912              	.LBE266:
+ 913              	.LBE265:
+ 914              	.LBE271:
+ 915              	.LBB272:
+ 916              	.LBB261:
+ 917              		.loc 1 85 11 is_stmt 0 view .LVU233
+ 918 0042 D4ED897A 		vldr.32	s15, [r4, #548]	@ int
+ 919 0046 F8EE676A 		vcvt.f32.u32	s13, s15
+ 920              		.loc 1 85 39 view .LVU234
+ 921 004a DFED607A 		vldr.32	s15, .L40+4
+ 922 004e 66EEA76A 		vmul.f32	s13, s13, s15
+ 923              		.loc 1 85 52 view .LVU235
+ 924 0052 C6EE867A 		vdiv.f32	s15, s13, s12
+ 925              	.LBE261:
+ 926              	.LBE272:
   89:GranularSynth.cpp ****     size_ms = fclamp(size_ms, MIN_GRAIN_SIZE_MS, MAX_GRAIN_SIZE_MS);
- 933              		.loc 2 89 48 view .LVU238
- 934 0056 67EE877A 		vmul.f32	s15, s15, s14
- 935              	.LBB273:
- 936              	.LBB268:
- 937              	.LBB267:
+ 927              		.loc 2 89 48 view .LVU236
+ 928 0056 67EE877A 		vmul.f32	s15, s15, s14
+ 929              	.LBB273:
+ 930              	.LBB268:
+ 931              	.LBB267:
   44:../DaisySP/Source/Utility/dsp.h **** #else
- 938              		.loc 3 44 5 view .LVU239
- 939 005a 9FED5D7A 		vldr.32	s14, .L40+8
+ 932              		.loc 3 44 5 view .LVU237
+ 933 005a 9FED5D7A 		vldr.32	s14, .L40+8
+ 934              	.LVL56:
+  44:../DaisySP/Source/Utility/dsp.h **** #else
+ 935              		.loc 3 44 5 view .LVU238
+ 936              		.syntax unified
+ 937              	@ 44 "../DaisySP/Source/Utility/dsp.h" 1
+ 938 005e C7FE877A 		vmaxnm.f32 s15, s15, s14
+ 939              	@ 0 "" 2
  940              	.LVL57:
-  44:../DaisySP/Source/Utility/dsp.h **** #else
- 941              		.loc 3 44 5 view .LVU240
- 942              		.syntax unified
- 943              	@ 44 "../DaisySP/Source/Utility/dsp.h" 1
- 944 005e C7FE877A 		vmaxnm.f32 s15, s15, s14
- 945              	@ 0 "" 2
- 946              	.LVL58:
   48:../DaisySP/Source/Utility/dsp.h **** }
- 947              		.loc 3 48 5 is_stmt 1 view .LVU241
+ 941              		.loc 3 48 5 is_stmt 1 view .LVU239
   48:../DaisySP/Source/Utility/dsp.h **** }
- 948              		.loc 3 48 5 is_stmt 0 view .LVU242
- 949              		.thumb
- 950              		.syntax unified
- 951              	.LBE267:
- 952              	.LBE268:
- 953              	.LBB269:
- 954              	.LBI269:
+ 942              		.loc 3 48 5 is_stmt 0 view .LVU240
+ 943              		.thumb
+ 944              		.syntax unified
+ 945              	.LBE267:
+ 946              	.LBE268:
+ 947              	.LBB269:
+ 948              	.LBI269:
   51:../DaisySP/Source/Utility/dsp.h **** {
- 955              		.loc 3 51 14 is_stmt 1 view .LVU243
- 956              	.LBB270:
+ 949              		.loc 3 51 14 is_stmt 1 view .LVU241
+ 950              	.LBB270:
   53:../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
- 957              		.loc 3 53 5 view .LVU244
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 57
-
-
+ 951              		.loc 3 53 5 view .LVU242
   55:../DaisySP/Source/Utility/dsp.h **** #else
- 958              		.loc 3 55 5 view .LVU245
- 959 0062 9FED5C7A 		vldr.32	s14, .L40+12
- 960              		.syntax unified
- 961              	@ 55 "../DaisySP/Source/Utility/dsp.h" 1
- 962 0066 C7FEC77A 		vminnm.f32 s15, s15, s14
- 963              	@ 0 "" 2
- 964              	.LVL59:
+ 952              		.loc 3 55 5 view .LVU243
+ 953 0062 9FED5C7A 		vldr.32	s14, .L40+12
+ 954              		.syntax unified
+ 955              	@ 55 "../DaisySP/Source/Utility/dsp.h" 1
+ 956 0066 C7FEC77A 		vminnm.f32 s15, s15, s14
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 57
+
+
+ 957              	@ 0 "" 2
+ 958              	.LVL58:
   59:../DaisySP/Source/Utility/dsp.h **** }
- 965              		.loc 3 59 5 view .LVU246
+ 959              		.loc 3 59 5 view .LVU244
   59:../DaisySP/Source/Utility/dsp.h **** }
- 966              		.loc 3 59 5 is_stmt 0 view .LVU247
- 967              		.thumb
- 968              		.syntax unified
- 969              	.LBE270:
- 970              	.LBE269:
- 971              	.LBE273:
+ 960              		.loc 3 59 5 is_stmt 0 view .LVU245
+ 961              		.thumb
+ 962              		.syntax unified
+ 963              	.LBE270:
+ 964              	.LBE269:
+ 965              	.LBE273:
   91:GranularSynth.cpp ****     grain_size_ = MsToSamples(size_ms);
- 972              		.loc 2 91 5 is_stmt 1 view .LVU248
- 973              	.LBB274:
- 974              	.LBI274:
+ 966              		.loc 2 91 5 is_stmt 1 view .LVU246
+ 967              	.LBB274:
+ 968              	.LBI274:
   79:constants_utils.h ****   return static_cast<size_t>(SAMPLE_RATE_FLOAT * (ms*0.001f));
- 975              		.loc 1 79 25 view .LVU249
- 976              	.LBB275:
+ 969              		.loc 1 79 25 view .LVU247
+ 970              	.LBB275:
   80:constants_utils.h **** }
- 977              		.loc 1 80 3 view .LVU250
+ 971              		.loc 1 80 3 view .LVU248
   80:constants_utils.h **** }
- 978              		.loc 1 80 53 is_stmt 0 view .LVU251
- 979 006a 9FED5B7A 		vldr.32	s14, .L40+16
- 980 006e 67EE877A 		vmul.f32	s15, s15, s14
- 981              	.LVL60:
+ 972              		.loc 1 80 53 is_stmt 0 view .LVU249
+ 973 006a 9FED5B7A 		vldr.32	s14, .L40+16
+ 974 006e 67EE877A 		vmul.f32	s15, s15, s14
+ 975              	.LVL59:
   80:constants_utils.h **** }
- 982              		.loc 1 80 48 view .LVU252
- 983 0072 67EE867A 		vmul.f32	s15, s15, s12
+ 976              		.loc 1 80 48 view .LVU250
+ 977 0072 67EE867A 		vmul.f32	s15, s15, s12
   80:constants_utils.h **** }
- 984              		.loc 1 80 61 view .LVU253
- 985 0076 FCEEE77A 		vcvt.u32.f32	s15, s15
- 986 007a C4ED897A 		vstr.32	s15, [r4, #548]	@ int
- 987              	.L25:
+ 978              		.loc 1 80 61 view .LVU251
+ 979 0076 FCEEE77A 		vcvt.u32.f32	s15, s15
+ 980 007a C4ED897A 		vstr.32	s15, [r4, #548]	@ int
+ 981              	.L25:
   80:constants_utils.h **** }
- 988              		.loc 1 80 61 view .LVU254
- 989              	.LBE275:
- 990              	.LBE274:
- 991              	.LBE278:
- 992              	.LBE283:
+ 982              		.loc 1 80 61 view .LVU252
+ 983              	.LBE275:
+ 984              	.LBE274:
+ 985              	.LBE278:
+ 986              	.LBE283:
   92:GranularSynth.cpp ****   }
   93:GranularSynth.cpp ****   
   94:GranularSynth.cpp ****   /* here we map a random num between -1/+1 and multiply by the audio sample 
   95:GranularSynth.cpp ****       length and user random setting to add spray to grain spawn position
   96:GranularSynth.cpp ****       if it overruns, wrap it back round to start/end of audio  */
   97:GranularSynth.cpp ****   if (rnd_spawn_pos_>0){
- 993              		.loc 2 97 3 is_stmt 1 view .LVU255
- 994              	.LBB284:
- 995 007e D4ED907A 		vldr.32	s15, [r4, #576]
- 996 0082 F5EEC07A 		vcmpe.f32	s15, #0
- 997 0086 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 998 008a 22DD     		ble	.L27
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 58
-
-
- 999              	.LBB285:
+ 987              		.loc 2 97 3 is_stmt 1 view .LVU253
+ 988              	.LBB284:
+ 989 007e D4ED907A 		vldr.32	s15, [r4, #576]
+ 990 0082 F5EEC07A 		vcmpe.f32	s15, #0
+ 991 0086 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 992 008a 22DD     		ble	.L27
+ 993              	.LBB285:
   98:GranularSynth.cpp ****     size_t rnd_offset = static_cast<size_t>(fmap(RngFloat(), -1.0f, 1.0f, Mapping::LINEAR));
- 1000              		.loc 2 98 5 view .LVU256
- 1001              		.loc 2 98 49 is_stmt 0 view .LVU257
- 1002 008c FFF7FEFF 		bl	_Z8RngFloatv
- 1003              	.LVL61:
- 1004              	.LBB286:
- 1005              	.LBI286:
+ 994              		.loc 2 98 5 view .LVU254
+ 995              		.loc 2 98 49 is_stmt 0 view .LVU255
+ 996 008c FFF7FEFF 		bl	_Z8RngFloatv
+ 997              	.LVL60:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 58
+
+
+ 998              	.LBB286:
+ 999              	.LBI286:
  177:../DaisySP/Source/Utility/dsp.h **** {
- 1006              		.loc 3 177 1 is_stmt 1 view .LVU258
- 1007              	.LBE286:
- 1008              	.LBE285:
- 1009              	.LBE284:
+ 1000              		.loc 3 177 1 is_stmt 1 view .LVU256
+ 1001              	.LBE286:
+ 1002              	.LBE285:
+ 1003              	.LBE284:
  179:../DaisySP/Source/Utility/dsp.h ****     {
- 1010              		.loc 3 179 5 view .LVU259
- 1011              	.LBB303:
- 1012              	.LBB301:
- 1013              	.LBB296:
- 1014              	.LBB287:
+ 1004              		.loc 3 179 5 view .LVU257
+ 1005              	.LBB303:
+ 1006              	.LBB301:
+ 1007              	.LBB296:
+ 1008              	.LBB287:
  188:../DaisySP/Source/Utility/dsp.h ****         default: return fclamp(min + in * (max - min), min, max);
- 1015              		.loc 3 188 9 view .LVU260
- 1016              		.loc 3 189 9 view .LVU261
- 1017              		.loc 3 189 18 view .LVU262
- 1018              		.loc 3 189 31 is_stmt 0 view .LVU263
- 1019 0090 BFEE007A 		vmov.f32	s14, #-1.0e+0
- 1020 0094 F0EE006A 		vmov.f32	s13, #2.0e+0
- 1021              	.LBE287:
- 1022              	.LBE296:
+ 1009              		.loc 3 188 9 view .LVU258
+ 1010              		.loc 3 189 9 view .LVU259
+ 1011              		.loc 3 189 18 view .LVU260
+ 1012              		.loc 3 189 31 is_stmt 0 view .LVU261
+ 1013 0090 BFEE007A 		vmov.f32	s14, #-1.0e+0
+ 1014 0094 F0EE006A 		vmov.f32	s13, #2.0e+0
+ 1015              	.LBE287:
+ 1016              	.LBE296:
   99:GranularSynth.cpp ****     spawn_pos_ += audio_len_ * static_cast<size_t>(rnd_spawn_pos_ * rnd_offset);
- 1023              		.loc 2 99 16 view .LVU264
- 1024 0098 D4F82832 		ldr	r3, [r4, #552]
- 1025              		.loc 2 99 30 view .LVU265
- 1026 009c E268     		ldr	r2, [r4, #12]
- 1027              	.LBB297:
- 1028              	.LBB294:
- 1029              		.loc 3 189 31 view .LVU266
- 1030 009e F0EE477A 		vmov.f32	s15, s14
- 1031 00a2 E0EE267A 		vfma.f32	s15, s0, s13
- 1032              	.LVL62:
- 1033              	.LBB288:
- 1034              	.LBI288:
+ 1017              		.loc 2 99 16 view .LVU262
+ 1018 0098 D4F82832 		ldr	r3, [r4, #552]
+ 1019              		.loc 2 99 30 view .LVU263
+ 1020 009c E268     		ldr	r2, [r4, #12]
+ 1021              	.LBB297:
+ 1022              	.LBB294:
+ 1023              		.loc 3 189 31 view .LVU264
+ 1024 009e F0EE477A 		vmov.f32	s15, s14
+ 1025 00a2 E0EE267A 		vfma.f32	s15, s0, s13
+ 1026              	.LVL61:
+ 1027              	.LBB288:
+ 1028              	.LBI288:
   64:../DaisySP/Source/Utility/dsp.h **** {
- 1035              		.loc 3 64 14 is_stmt 1 view .LVU267
- 1036              	.LBE288:
- 1037              	.LBE294:
- 1038              	.LBE297:
- 1039              	.LBE301:
- 1040              	.LBE303:
+ 1029              		.loc 3 64 14 is_stmt 1 view .LVU265
+ 1030              	.LBE288:
+ 1031              	.LBE294:
+ 1032              	.LBE297:
+ 1033              	.LBE301:
+ 1034              	.LBE303:
   66:../DaisySP/Source/Utility/dsp.h **** }
- 1041              		.loc 3 66 5 view .LVU268
- 1042              	.LBB304:
- 1043              	.LBB302:
- 1044              	.LBB298:
- 1045              	.LBB295:
- 1046              	.LBB293:
- 1047              	.LBB289:
- 1048              	.LBI289:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 59
-
-
+ 1035              		.loc 3 66 5 view .LVU266
+ 1036              	.LBB304:
+ 1037              	.LBB302:
+ 1038              	.LBB298:
+ 1039              	.LBB295:
+ 1040              	.LBB293:
+ 1041              	.LBB289:
+ 1042              	.LBI289:
   40:../DaisySP/Source/Utility/dsp.h **** {
- 1049              		.loc 3 40 14 view .LVU269
- 1050              	.LBB290:
+ 1043              		.loc 3 40 14 view .LVU267
+ 1044              	.LBB290:
   42:../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
- 1051              		.loc 3 42 5 view .LVU270
+ 1045              		.loc 3 42 5 view .LVU268
   44:../DaisySP/Source/Utility/dsp.h **** #else
- 1052              		.loc 3 44 5 view .LVU271
- 1053              		.syntax unified
- 1054              	@ 44 "../DaisySP/Source/Utility/dsp.h" 1
- 1055 00a6 C7FE877A 		vmaxnm.f32 s15, s15, s14
- 1056              	@ 0 "" 2
- 1057              	.LVL63:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 59
+
+
+ 1046              		.loc 3 44 5 view .LVU269
+ 1047              		.syntax unified
+ 1048              	@ 44 "../DaisySP/Source/Utility/dsp.h" 1
+ 1049 00a6 C7FE877A 		vmaxnm.f32 s15, s15, s14
+ 1050              	@ 0 "" 2
+ 1051              	.LVL62:
   48:../DaisySP/Source/Utility/dsp.h **** }
- 1058              		.loc 3 48 5 view .LVU272
+ 1052              		.loc 3 48 5 view .LVU270
   48:../DaisySP/Source/Utility/dsp.h **** }
- 1059              		.loc 3 48 5 is_stmt 0 view .LVU273
- 1060              		.thumb
- 1061              		.syntax unified
- 1062              	.LBE290:
- 1063              	.LBE289:
- 1064              	.LBB291:
- 1065              	.LBI291:
+ 1053              		.loc 3 48 5 is_stmt 0 view .LVU271
+ 1054              		.thumb
+ 1055              		.syntax unified
+ 1056              	.LBE290:
+ 1057              	.LBE289:
+ 1058              	.LBB291:
+ 1059              	.LBI291:
   51:../DaisySP/Source/Utility/dsp.h **** {
- 1066              		.loc 3 51 14 is_stmt 1 view .LVU274
- 1067              	.LBB292:
+ 1060              		.loc 3 51 14 is_stmt 1 view .LVU272
+ 1061              	.LBB292:
   53:../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
- 1068              		.loc 3 53 5 view .LVU275
+ 1062              		.loc 3 53 5 view .LVU273
   55:../DaisySP/Source/Utility/dsp.h **** #else
- 1069              		.loc 3 55 5 view .LVU276
- 1070 00aa B7EE007A 		vmov.f32	s14, #1.0e+0
+ 1063              		.loc 3 55 5 view .LVU274
+ 1064 00aa B7EE007A 		vmov.f32	s14, #1.0e+0
+ 1065              	.LVL63:
+  55:../DaisySP/Source/Utility/dsp.h **** #else
+ 1066              		.loc 3 55 5 is_stmt 0 view .LVU275
+ 1067              		.syntax unified
+ 1068              	@ 55 "../DaisySP/Source/Utility/dsp.h" 1
+ 1069 00ae C7FEC77A 		vminnm.f32 s15, s15, s14
+ 1070              	@ 0 "" 2
  1071              	.LVL64:
-  55:../DaisySP/Source/Utility/dsp.h **** #else
- 1072              		.loc 3 55 5 is_stmt 0 view .LVU277
- 1073              		.syntax unified
- 1074              	@ 55 "../DaisySP/Source/Utility/dsp.h" 1
- 1075 00ae C7FEC77A 		vminnm.f32 s15, s15, s14
- 1076              	@ 0 "" 2
- 1077              	.LVL65:
   59:../DaisySP/Source/Utility/dsp.h **** }
- 1078              		.loc 3 59 5 is_stmt 1 view .LVU278
+ 1072              		.loc 3 59 5 is_stmt 1 view .LVU276
   59:../DaisySP/Source/Utility/dsp.h **** }
- 1079              		.loc 3 59 5 is_stmt 0 view .LVU279
- 1080              		.thumb
- 1081              		.syntax unified
- 1082              	.LBE292:
- 1083              	.LBE291:
- 1084              	.LBE293:
- 1085              	.LBE295:
- 1086              	.LBE298:
- 1087              		.loc 2 99 5 is_stmt 1 view .LVU280
+ 1073              		.loc 3 59 5 is_stmt 0 view .LVU277
+ 1074              		.thumb
+ 1075              		.syntax unified
+ 1076              	.LBE292:
+ 1077              	.LBE291:
+ 1078              	.LBE293:
+ 1079              	.LBE295:
+ 1080              	.LBE298:
+ 1081              		.loc 2 99 5 is_stmt 1 view .LVU278
   98:GranularSynth.cpp ****     spawn_pos_ += audio_len_ * static_cast<size_t>(rnd_spawn_pos_ * rnd_offset);
- 1088              		.loc 2 98 91 is_stmt 0 view .LVU281
- 1089 00b2 FCEEE77A 		vcvt.u32.f32	s15, s15
- 1090              	.LVL66:
- 1091              		.loc 2 99 67 view .LVU282
- 1092 00b6 94ED907A 		vldr.32	s14, [r4, #576]
- 1093 00ba F8EE677A 		vcvt.f32.u32	s15, s15
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 60
+ 1082              		.loc 2 98 91 is_stmt 0 view .LVU279
+ 1083 00b2 FCEEE77A 		vcvt.u32.f32	s15, s15
+ 1084              	.LVL65:
+ 1085              		.loc 2 99 67 view .LVU280
+ 1086 00b6 94ED907A 		vldr.32	s14, [r4, #576]
+ 1087 00ba F8EE677A 		vcvt.f32.u32	s15, s15
+ 1088 00be 67EE877A 		vmul.f32	s15, s15, s14
+ 1089              		.loc 2 99 32 view .LVU281
+ 1090 00c2 FCEEE77A 		vcvt.u32.f32	s15, s15
+ 1091              		.loc 2 99 16 view .LVU282
+ 1092 00c6 17EE901A 		vmov	r1, s15	@ int
+ 1093 00ca 02FB0133 		mla	r3, r2, r1, r3
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 60
 
 
- 1094 00be 67EE877A 		vmul.f32	s15, s15, s14
- 1095              		.loc 2 99 32 view .LVU283
- 1096 00c2 FCEEE77A 		vcvt.u32.f32	s15, s15
- 1097              		.loc 2 99 16 view .LVU284
- 1098 00c6 17EE901A 		vmov	r1, s15	@ int
- 1099 00ca 02FB0133 		mla	r3, r2, r1, r3
- 1100 00ce C4F82832 		str	r3, [r4, #552]
+ 1094 00ce C4F82832 		str	r3, [r4, #552]
  100:GranularSynth.cpp ****     intclamp(spawn_pos_, 0, audio_len_-1);
- 1101              		.loc 2 100 5 is_stmt 1 view .LVU285
- 1102              	.LVL67:
- 1103              	.LBB299:
- 1104              	.LBI299:
+ 1095              		.loc 2 100 5 is_stmt 1 view .LVU283
+ 1096              	.LVL66:
+ 1097              	.LBB299:
+ 1098              	.LBI299:
   72:constants_utils.h ****   if (val < min) val = min;
- 1105              		.loc 1 72 25 view .LVU286
- 1106              	.LBB300:
+ 1099              		.loc 1 72 25 view .LVU284
+ 1100              	.LBB300:
   73:constants_utils.h ****   else if (val > max) val = max;
- 1107              		.loc 1 73 3 view .LVU287
+ 1101              		.loc 1 73 3 view .LVU285
   74:constants_utils.h ****   return val;
- 1108              		.loc 1 74 8 view .LVU288
+ 1102              		.loc 1 74 8 view .LVU286
   75:constants_utils.h **** }
- 1109              		.loc 1 75 3 view .LVU289
- 1110              	.L27:
+ 1103              		.loc 1 75 3 view .LVU287
+ 1104              	.L27:
   75:constants_utils.h **** }
- 1111              		.loc 1 75 3 is_stmt 0 view .LVU290
- 1112              	.LBE300:
- 1113              	.LBE299:
- 1114              	.LBE302:
- 1115              	.LBE304:
+ 1105              		.loc 1 75 3 is_stmt 0 view .LVU288
+ 1106              	.LBE300:
+ 1107              	.LBE299:
+ 1108              	.LBE302:
+ 1109              	.LBE304:
  101:GranularSynth.cpp ****   }
  102:GranularSynth.cpp **** 
  103:GranularSynth.cpp ****   if (rnd_pan_>0){
- 1116              		.loc 2 103 3 is_stmt 1 view .LVU291
- 1117              	.LBB305:
- 1118 00d2 D4ED937A 		vldr.32	s15, [r4, #588]
- 1119 00d6 F5EEC07A 		vcmpe.f32	s15, #0
- 1120 00da F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 1121 00de 1DDD     		ble	.L29
- 1122              	.LBB306:
+ 1110              		.loc 2 103 3 is_stmt 1 view .LVU289
+ 1111              	.LBB305:
+ 1112 00d2 D4ED937A 		vldr.32	s15, [r4, #588]
+ 1113 00d6 F5EEC07A 		vcmpe.f32	s15, #0
+ 1114 00da F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 1115 00de 1DDD     		ble	.L29
+ 1116              	.LBB306:
  104:GranularSynth.cpp ****     float rnd_pan_offset = fmap(RngFloat(), -rnd_pan_, rnd_pan_, Mapping::LINEAR);
- 1123              		.loc 2 104 5 view .LVU292
- 1124              		.loc 2 104 32 is_stmt 0 view .LVU293
- 1125 00e0 FFF7FEFF 		bl	_Z8RngFloatv
- 1126              	.LVL68:
- 1127              		.loc 2 104 46 view .LVU294
- 1128 00e4 94ED937A 		vldr.32	s14, [r4, #588]
- 1129              	.LVL69:
- 1130              	.LBB307:
- 1131              	.LBI307:
+ 1117              		.loc 2 104 5 view .LVU290
+ 1118              		.loc 2 104 32 is_stmt 0 view .LVU291
+ 1119 00e0 FFF7FEFF 		bl	_Z8RngFloatv
+ 1120              	.LVL67:
+ 1121              		.loc 2 104 46 view .LVU292
+ 1122 00e4 94ED937A 		vldr.32	s14, [r4, #588]
+ 1123              	.LVL68:
+ 1124              	.LBB307:
+ 1125              	.LBI307:
  177:../DaisySP/Source/Utility/dsp.h **** {
- 1132              		.loc 3 177 1 is_stmt 1 view .LVU295
- 1133              	.LBE307:
- 1134              	.LBE306:
- 1135              	.LBE305:
+ 1126              		.loc 3 177 1 is_stmt 1 view .LVU293
+ 1127              	.LBE307:
+ 1128              	.LBE306:
+ 1129              	.LBE305:
  179:../DaisySP/Source/Utility/dsp.h ****     {
- 1136              		.loc 3 179 5 view .LVU296
- 1137              	.LBB330:
- 1138              	.LBB327:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 61
-
-
- 1139              	.LBB316:
- 1140              	.LBB308:
+ 1130              		.loc 3 179 5 view .LVU294
+ 1131              	.LBB330:
+ 1132              	.LBB327:
+ 1133              	.LBB316:
+ 1134              	.LBB308:
  188:../DaisySP/Source/Utility/dsp.h ****         default: return fclamp(min + in * (max - min), min, max);
- 1141              		.loc 3 188 9 view .LVU297
- 1142              		.loc 3 189 9 view .LVU298
- 1143              		.loc 3 189 18 view .LVU299
- 1144              		.loc 3 189 48 is_stmt 0 view .LVU300
- 1145 00e8 37EE076A 		vadd.f32	s12, s14, s14
- 1146 00ec F0EE477A 		vmov.f32	s15, s14
- 1147 00f0 F1EE476A 		vneg.f32	s13, s14
- 1148              	.LVL70:
- 1149              		.loc 3 189 48 view .LVU301
- 1150 00f4 D0EE067A 		vfnms.f32	s15, s0, s12
- 1151              	.LVL71:
- 1152              	.LBB309:
- 1153              	.LBI309:
+ 1135              		.loc 3 188 9 view .LVU295
+ 1136              		.loc 3 189 9 view .LVU296
+ 1137              		.loc 3 189 18 view .LVU297
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 61
+
+
+ 1138              		.loc 3 189 48 is_stmt 0 view .LVU298
+ 1139 00e8 37EE076A 		vadd.f32	s12, s14, s14
+ 1140 00ec F0EE477A 		vmov.f32	s15, s14
+ 1141 00f0 F1EE476A 		vneg.f32	s13, s14
+ 1142              	.LVL69:
+ 1143              		.loc 3 189 48 view .LVU299
+ 1144 00f4 D0EE067A 		vfnms.f32	s15, s0, s12
+ 1145              	.LVL70:
+ 1146              	.LBB309:
+ 1147              	.LBI309:
   64:../DaisySP/Source/Utility/dsp.h **** {
- 1154              		.loc 3 64 14 is_stmt 1 view .LVU302
- 1155              	.LBE309:
- 1156              	.LBE308:
- 1157              	.LBE316:
- 1158              	.LBE327:
- 1159              	.LBE330:
+ 1148              		.loc 3 64 14 is_stmt 1 view .LVU300
+ 1149              	.LBE309:
+ 1150              	.LBE308:
+ 1151              	.LBE316:
+ 1152              	.LBE327:
+ 1153              	.LBE330:
   66:../DaisySP/Source/Utility/dsp.h **** }
- 1160              		.loc 3 66 5 view .LVU303
- 1161              	.LBB331:
- 1162              	.LBB328:
- 1163              	.LBB317:
- 1164              	.LBB315:
- 1165              	.LBB314:
- 1166              	.LBB310:
- 1167              	.LBI310:
+ 1154              		.loc 3 66 5 view .LVU301
+ 1155              	.LBB331:
+ 1156              	.LBB328:
+ 1157              	.LBB317:
+ 1158              	.LBB315:
+ 1159              	.LBB314:
+ 1160              	.LBB310:
+ 1161              	.LBI310:
   40:../DaisySP/Source/Utility/dsp.h **** {
- 1168              		.loc 3 40 14 view .LVU304
- 1169              	.LBB311:
+ 1162              		.loc 3 40 14 view .LVU302
+ 1163              	.LBB311:
   42:../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
- 1170              		.loc 3 42 5 view .LVU305
+ 1164              		.loc 3 42 5 view .LVU303
   44:../DaisySP/Source/Utility/dsp.h **** #else
- 1171              		.loc 3 44 5 view .LVU306
- 1172              		.syntax unified
- 1173              	@ 44 "../DaisySP/Source/Utility/dsp.h" 1
- 1174 00f8 C7FEA67A 		vmaxnm.f32 s15, s15, s13
- 1175              	@ 0 "" 2
- 1176              	.LVL72:
+ 1165              		.loc 3 44 5 view .LVU304
+ 1166              		.syntax unified
+ 1167              	@ 44 "../DaisySP/Source/Utility/dsp.h" 1
+ 1168 00f8 C7FEA67A 		vmaxnm.f32 s15, s15, s13
+ 1169              	@ 0 "" 2
+ 1170              	.LVL71:
   48:../DaisySP/Source/Utility/dsp.h **** }
- 1177              		.loc 3 48 5 view .LVU307
+ 1171              		.loc 3 48 5 view .LVU305
   48:../DaisySP/Source/Utility/dsp.h **** }
- 1178              		.loc 3 48 5 is_stmt 0 view .LVU308
- 1179              		.thumb
- 1180              		.syntax unified
- 1181              	.LBE311:
- 1182              	.LBE310:
- 1183              	.LBB312:
- 1184              	.LBI312:
+ 1172              		.loc 3 48 5 is_stmt 0 view .LVU306
+ 1173              		.thumb
+ 1174              		.syntax unified
+ 1175              	.LBE311:
+ 1176              	.LBE310:
+ 1177              	.LBB312:
+ 1178              	.LBI312:
   51:../DaisySP/Source/Utility/dsp.h **** {
- 1185              		.loc 3 51 14 is_stmt 1 view .LVU309
- 1186              	.LBB313:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 62
-
-
+ 1179              		.loc 3 51 14 is_stmt 1 view .LVU307
+ 1180              	.LBB313:
   53:../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
- 1187              		.loc 3 53 5 view .LVU310
+ 1181              		.loc 3 53 5 view .LVU308
   55:../DaisySP/Source/Utility/dsp.h **** #else
- 1188              		.loc 3 55 5 view .LVU311
- 1189              		.syntax unified
- 1190              	@ 55 "../DaisySP/Source/Utility/dsp.h" 1
- 1191 00fc C7FEC77A 		vminnm.f32 s15, s15, s14
- 1192              	@ 0 "" 2
- 1193              	.LVL73:
+ 1182              		.loc 3 55 5 view .LVU309
+ 1183              		.syntax unified
+ 1184              	@ 55 "../DaisySP/Source/Utility/dsp.h" 1
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 62
+
+
+ 1185 00fc C7FEC77A 		vminnm.f32 s15, s15, s14
+ 1186              	@ 0 "" 2
+ 1187              	.LVL72:
   59:../DaisySP/Source/Utility/dsp.h **** }
- 1194              		.loc 3 59 5 view .LVU312
+ 1188              		.loc 3 59 5 view .LVU310
   59:../DaisySP/Source/Utility/dsp.h **** }
- 1195              		.loc 3 59 5 is_stmt 0 view .LVU313
- 1196              		.thumb
- 1197              		.syntax unified
- 1198              	.LBE313:
- 1199              	.LBE312:
- 1200              	.LBE314:
- 1201              	.LBE315:
- 1202              	.LBE317:
+ 1189              		.loc 3 59 5 is_stmt 0 view .LVU311
+ 1190              		.thumb
+ 1191              		.syntax unified
+ 1192              	.LBE313:
+ 1193              	.LBE312:
+ 1194              	.LBE314:
+ 1195              	.LBE315:
+ 1196              	.LBE317:
  105:GranularSynth.cpp ****     pan_ = fclamp(pan_+rnd_pan_offset, 0.0f, 1.0f);
- 1203              		.loc 2 105 5 is_stmt 1 view .LVU314
- 1204              	.LBB318:
- 1205              	.LBI318:
+ 1197              		.loc 2 105 5 is_stmt 1 view .LVU312
+ 1198              	.LBB318:
+ 1199              	.LBI318:
   64:../DaisySP/Source/Utility/dsp.h **** {
- 1206              		.loc 3 64 14 view .LVU315
- 1207              	.LBE318:
- 1208              	.LBE328:
- 1209              	.LBE331:
+ 1200              		.loc 3 64 14 view .LVU313
+ 1201              	.LBE318:
+ 1202              	.LBE328:
+ 1203              	.LBE331:
   66:../DaisySP/Source/Utility/dsp.h **** }
- 1210              		.loc 3 66 5 view .LVU316
- 1211              	.LBB332:
- 1212              	.LBB329:
- 1213              	.LBB325:
- 1214              	.LBB319:
- 1215              	.LBI319:
+ 1204              		.loc 3 66 5 view .LVU314
+ 1205              	.LBB332:
+ 1206              	.LBB329:
+ 1207              	.LBB325:
+ 1208              	.LBB319:
+ 1209              	.LBI319:
   40:../DaisySP/Source/Utility/dsp.h **** {
- 1216              		.loc 3 40 14 view .LVU317
- 1217              	.LBB320:
+ 1210              		.loc 3 40 14 view .LVU315
+ 1211              	.LBB320:
   42:../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
- 1218              		.loc 3 42 5 view .LVU318
+ 1212              		.loc 3 42 5 view .LVU316
   44:../DaisySP/Source/Utility/dsp.h **** #else
- 1219              		.loc 3 44 5 view .LVU319
- 1220              	.LBE320:
- 1221              	.LBE319:
- 1222              	.LBE325:
- 1223              		.loc 2 105 18 is_stmt 0 view .LVU320
- 1224 0100 94ED8D7A 		vldr.32	s14, [r4, #564]
- 1225 0104 77EE877A 		vadd.f32	s15, s15, s14
- 1226              	.LVL74:
- 1227              	.LBB326:
- 1228              	.LBB322:
- 1229              	.LBB321:
+ 1213              		.loc 3 44 5 view .LVU317
+ 1214              	.LBE320:
+ 1215              	.LBE319:
+ 1216              	.LBE325:
+ 1217              		.loc 2 105 18 is_stmt 0 view .LVU318
+ 1218 0100 94ED8D7A 		vldr.32	s14, [r4, #564]
+ 1219 0104 77EE877A 		vadd.f32	s15, s15, s14
+ 1220              	.LVL73:
+ 1221              	.LBB326:
+ 1222              	.LBB322:
+ 1223              	.LBB321:
   44:../DaisySP/Source/Utility/dsp.h **** #else
- 1230              		.loc 3 44 5 view .LVU321
- 1231 0108 9FED347A 		vldr.32	s14, .L40+20
- 1232              		.syntax unified
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 63
+ 1224              		.loc 3 44 5 view .LVU319
+ 1225 0108 9FED347A 		vldr.32	s14, .L40+20
+ 1226              		.syntax unified
+ 1227              	@ 44 "../DaisySP/Source/Utility/dsp.h" 1
+ 1228 010c C7FE877A 		vmaxnm.f32 s15, s15, s14
+ 1229              	@ 0 "" 2
+ 1230              	.LVL74:
+  48:../DaisySP/Source/Utility/dsp.h **** }
+ 1231              		.loc 3 48 5 is_stmt 1 view .LVU320
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 63
 
 
- 1233              	@ 44 "../DaisySP/Source/Utility/dsp.h" 1
- 1234 010c C7FE877A 		vmaxnm.f32 s15, s15, s14
- 1235              	@ 0 "" 2
- 1236              	.LVL75:
   48:../DaisySP/Source/Utility/dsp.h **** }
- 1237              		.loc 3 48 5 is_stmt 1 view .LVU322
-  48:../DaisySP/Source/Utility/dsp.h **** }
- 1238              		.loc 3 48 5 is_stmt 0 view .LVU323
- 1239              		.thumb
- 1240              		.syntax unified
- 1241              	.LBE321:
- 1242              	.LBE322:
- 1243              	.LBB323:
- 1244              	.LBI323:
+ 1232              		.loc 3 48 5 is_stmt 0 view .LVU321
+ 1233              		.thumb
+ 1234              		.syntax unified
+ 1235              	.LBE321:
+ 1236              	.LBE322:
+ 1237              	.LBB323:
+ 1238              	.LBI323:
   51:../DaisySP/Source/Utility/dsp.h **** {
- 1245              		.loc 3 51 14 is_stmt 1 view .LVU324
- 1246              	.LBB324:
+ 1239              		.loc 3 51 14 is_stmt 1 view .LVU322
+ 1240              	.LBB324:
   53:../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
- 1247              		.loc 3 53 5 view .LVU325
+ 1241              		.loc 3 53 5 view .LVU323
   55:../DaisySP/Source/Utility/dsp.h **** #else
- 1248              		.loc 3 55 5 view .LVU326
- 1249 0110 B7EE007A 		vmov.f32	s14, #1.0e+0
- 1250              		.syntax unified
- 1251              	@ 55 "../DaisySP/Source/Utility/dsp.h" 1
- 1252 0114 C7FEC77A 		vminnm.f32 s15, s15, s14
- 1253              	@ 0 "" 2
- 1254              	.LVL76:
+ 1242              		.loc 3 55 5 view .LVU324
+ 1243 0110 B7EE007A 		vmov.f32	s14, #1.0e+0
+ 1244              		.syntax unified
+ 1245              	@ 55 "../DaisySP/Source/Utility/dsp.h" 1
+ 1246 0114 C7FEC77A 		vminnm.f32 s15, s15, s14
+ 1247              	@ 0 "" 2
+ 1248              	.LVL75:
   59:../DaisySP/Source/Utility/dsp.h **** }
- 1255              		.loc 3 59 5 view .LVU327
+ 1249              		.loc 3 59 5 view .LVU325
   59:../DaisySP/Source/Utility/dsp.h **** }
- 1256              		.loc 3 59 5 is_stmt 0 view .LVU328
- 1257              		.thumb
- 1258              		.syntax unified
- 1259              	.LBE324:
- 1260              	.LBE323:
- 1261              	.LBE326:
- 1262              		.loc 2 105 10 view .LVU329
- 1263 0118 C4ED8D7A 		vstr.32	s15, [r4, #564]
- 1264              	.L29:
- 1265              		.loc 2 105 10 view .LVU330
- 1266              	.LBE329:
- 1267              	.LBE332:
+ 1250              		.loc 3 59 5 is_stmt 0 view .LVU326
+ 1251              		.thumb
+ 1252              		.syntax unified
+ 1253              	.LBE324:
+ 1254              	.LBE323:
+ 1255              	.LBE326:
+ 1256              		.loc 2 105 10 view .LVU327
+ 1257 0118 C4ED8D7A 		vstr.32	s15, [r4, #564]
+ 1258              	.L29:
+ 1259              		.loc 2 105 10 view .LVU328
+ 1260              	.LBE329:
+ 1261              	.LBE332:
  106:GranularSynth.cpp ****   }
  107:GranularSynth.cpp **** 
  108:GranularSynth.cpp ****   if (rnd_pitch_>0){
- 1268              		.loc 2 108 3 is_stmt 1 view .LVU331
- 1269              	.LBB333:
- 1270 011c D4ED927A 		vldr.32	s15, [r4, #584]
- 1271 0120 F5EEC07A 		vcmpe.f32	s15, #0
- 1272 0124 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 1273 0128 23DD     		ble	.L31
- 1274              	.LBB334:
+ 1262              		.loc 2 108 3 is_stmt 1 view .LVU329
+ 1263              	.LBB333:
+ 1264 011c D4ED927A 		vldr.32	s15, [r4, #584]
+ 1265 0120 F5EEC07A 		vcmpe.f32	s15, #0
+ 1266 0124 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 1267 0128 23DD     		ble	.L31
+ 1268              	.LBB334:
  109:GranularSynth.cpp ****     float rnd_pitch_factor = fmap(RngFloat(), 1.0f-rnd_pitch_, 1.0+rnd_pitch_, Mapping::EXP);
- 1275              		.loc 2 109 5 view .LVU332
- 1276              		.loc 2 109 34 is_stmt 0 view .LVU333
- 1277 012a FFF7FEFF 		bl	_Z8RngFloatv
- 1278              	.LVL77:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 64
-
-
- 1279 012e B7EE007A 		vmov.f32	s14, #1.0e+0
- 1280              		.loc 2 109 52 view .LVU334
- 1281 0132 D4ED927A 		vldr.32	s15, [r4, #584]
- 1282              	.LBB335:
- 1283              	.LBB336:
+ 1269              		.loc 2 109 5 view .LVU330
+ 1270              		.loc 2 109 34 is_stmt 0 view .LVU331
+ 1271 012a FFF7FEFF 		bl	_Z8RngFloatv
+ 1272              	.LVL76:
+ 1273 012e B7EE007A 		vmov.f32	s14, #1.0e+0
+ 1274              		.loc 2 109 52 view .LVU332
+ 1275 0132 D4ED927A 		vldr.32	s15, [r4, #584]
+ 1276              	.LBB335:
+ 1277              	.LBB336:
  182:../DaisySP/Source/Utility/dsp.h ****         case Mapping::LOG:
- 1284              		.loc 3 182 37 view .LVU335
- 1285 0136 20EE000A 		vmul.f32	s0, s0, s0
- 1286              	.LBE336:
- 1287              	.LBE335:
- 1288              		.loc 2 109 34 view .LVU336
- 1289 013a 77EE676A 		vsub.f32	s13, s14, s15
- 1290 013e 37EE877A 		vadd.f32	s14, s15, s14
- 1291              	.LVL78:
- 1292              	.LBB345:
- 1293              	.LBI335:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 64
+
+
+ 1278              		.loc 3 182 37 view .LVU333
+ 1279 0136 20EE000A 		vmul.f32	s0, s0, s0
+ 1280              	.LBE336:
+ 1281              	.LBE335:
+ 1282              		.loc 2 109 34 view .LVU334
+ 1283 013a 77EE676A 		vsub.f32	s13, s14, s15
+ 1284 013e 37EE877A 		vadd.f32	s14, s15, s14
+ 1285              	.LVL77:
+ 1286              	.LBB345:
+ 1287              	.LBI335:
  177:../DaisySP/Source/Utility/dsp.h **** {
- 1294              		.loc 3 177 1 is_stmt 1 view .LVU337
- 1295              	.LBE345:
- 1296              	.LBE334:
- 1297              	.LBE333:
+ 1288              		.loc 3 177 1 is_stmt 1 view .LVU335
+ 1289              	.LBE345:
+ 1290              	.LBE334:
+ 1291              	.LBE333:
  179:../DaisySP/Source/Utility/dsp.h ****     {
- 1298              		.loc 3 179 5 view .LVU338
- 1299              	.LBB360:
- 1300              	.LBB357:
- 1301              	.LBB346:
- 1302              	.LBB343:
+ 1292              		.loc 3 179 5 view .LVU336
+ 1293              	.LBB360:
+ 1294              	.LBB357:
+ 1295              	.LBB346:
+ 1296              	.LBB343:
  181:../DaisySP/Source/Utility/dsp.h ****             return fclamp(min + (in * in) * (max - min), min, max);
- 1303              		.loc 3 181 9 view .LVU339
+ 1297              		.loc 3 181 9 view .LVU337
  182:../DaisySP/Source/Utility/dsp.h ****         case Mapping::LOG:
- 1304              		.loc 3 182 13 view .LVU340
+ 1298              		.loc 3 182 13 view .LVU338
  182:../DaisySP/Source/Utility/dsp.h ****         case Mapping::LOG:
- 1305              		.loc 3 182 26 is_stmt 0 view .LVU341
- 1306 0142 F0EE667A 		vmov.f32	s15, s13
+ 1299              		.loc 3 182 26 is_stmt 0 view .LVU339
+ 1300 0142 F0EE667A 		vmov.f32	s15, s13
  182:../DaisySP/Source/Utility/dsp.h ****         case Mapping::LOG:
- 1307              		.loc 3 182 50 view .LVU342
- 1308 0146 37EE666A 		vsub.f32	s12, s14, s13
+ 1301              		.loc 3 182 50 view .LVU340
+ 1302 0146 37EE666A 		vsub.f32	s12, s14, s13
  182:../DaisySP/Source/Utility/dsp.h ****         case Mapping::LOG:
- 1309              		.loc 3 182 26 view .LVU343
- 1310 014a E0EE067A 		vfma.f32	s15, s0, s12
- 1311              	.LVL79:
- 1312              	.LBB337:
- 1313              	.LBI337:
+ 1303              		.loc 3 182 26 view .LVU341
+ 1304 014a E0EE067A 		vfma.f32	s15, s0, s12
+ 1305              	.LVL78:
+ 1306              	.LBB337:
+ 1307              	.LBI337:
   64:../DaisySP/Source/Utility/dsp.h **** {
- 1314              		.loc 3 64 14 is_stmt 1 view .LVU344
- 1315              	.LBE337:
- 1316              	.LBE343:
- 1317              	.LBE346:
- 1318              	.LBE357:
- 1319              	.LBE360:
+ 1308              		.loc 3 64 14 is_stmt 1 view .LVU342
+ 1309              	.LBE337:
+ 1310              	.LBE343:
+ 1311              	.LBE346:
+ 1312              	.LBE357:
+ 1313              	.LBE360:
   66:../DaisySP/Source/Utility/dsp.h **** }
- 1320              		.loc 3 66 5 view .LVU345
- 1321              	.LBB361:
- 1322              	.LBB358:
- 1323              	.LBB347:
- 1324              	.LBB344:
- 1325              	.LBB342:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 65
-
-
- 1326              	.LBB338:
- 1327              	.LBI338:
+ 1314              		.loc 3 66 5 view .LVU343
+ 1315              	.LBB361:
+ 1316              	.LBB358:
+ 1317              	.LBB347:
+ 1318              	.LBB344:
+ 1319              	.LBB342:
+ 1320              	.LBB338:
+ 1321              	.LBI338:
   40:../DaisySP/Source/Utility/dsp.h **** {
- 1328              		.loc 3 40 14 view .LVU346
- 1329              	.LBB339:
+ 1322              		.loc 3 40 14 view .LVU344
+ 1323              	.LBB339:
   42:../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
- 1330              		.loc 3 42 5 view .LVU347
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 65
+
+
+ 1324              		.loc 3 42 5 view .LVU345
   44:../DaisySP/Source/Utility/dsp.h **** #else
- 1331              		.loc 3 44 5 view .LVU348
- 1332              		.syntax unified
- 1333              	@ 44 "../DaisySP/Source/Utility/dsp.h" 1
- 1334 014e C7FEA67A 		vmaxnm.f32 s15, s15, s13
- 1335              	@ 0 "" 2
- 1336              	.LVL80:
+ 1325              		.loc 3 44 5 view .LVU346
+ 1326              		.syntax unified
+ 1327              	@ 44 "../DaisySP/Source/Utility/dsp.h" 1
+ 1328 014e C7FEA67A 		vmaxnm.f32 s15, s15, s13
+ 1329              	@ 0 "" 2
+ 1330              	.LVL79:
   48:../DaisySP/Source/Utility/dsp.h **** }
- 1337              		.loc 3 48 5 view .LVU349
+ 1331              		.loc 3 48 5 view .LVU347
   48:../DaisySP/Source/Utility/dsp.h **** }
- 1338              		.loc 3 48 5 is_stmt 0 view .LVU350
- 1339              		.thumb
- 1340              		.syntax unified
- 1341              	.LBE339:
- 1342              	.LBE338:
- 1343              	.LBB340:
- 1344              	.LBI340:
+ 1332              		.loc 3 48 5 is_stmt 0 view .LVU348
+ 1333              		.thumb
+ 1334              		.syntax unified
+ 1335              	.LBE339:
+ 1336              	.LBE338:
+ 1337              	.LBB340:
+ 1338              	.LBI340:
   51:../DaisySP/Source/Utility/dsp.h **** {
- 1345              		.loc 3 51 14 is_stmt 1 view .LVU351
- 1346              	.LBB341:
+ 1339              		.loc 3 51 14 is_stmt 1 view .LVU349
+ 1340              	.LBB341:
   53:../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
- 1347              		.loc 3 53 5 view .LVU352
+ 1341              		.loc 3 53 5 view .LVU350
   55:../DaisySP/Source/Utility/dsp.h **** #else
- 1348              		.loc 3 55 5 view .LVU353
- 1349              		.syntax unified
- 1350              	@ 55 "../DaisySP/Source/Utility/dsp.h" 1
- 1351 0152 C7FEC77A 		vminnm.f32 s15, s15, s14
- 1352              	@ 0 "" 2
- 1353              	.LVL81:
+ 1342              		.loc 3 55 5 view .LVU351
+ 1343              		.syntax unified
+ 1344              	@ 55 "../DaisySP/Source/Utility/dsp.h" 1
+ 1345 0152 C7FEC77A 		vminnm.f32 s15, s15, s14
+ 1346              	@ 0 "" 2
+ 1347              	.LVL80:
   59:../DaisySP/Source/Utility/dsp.h **** }
- 1354              		.loc 3 59 5 view .LVU354
+ 1348              		.loc 3 59 5 view .LVU352
   59:../DaisySP/Source/Utility/dsp.h **** }
- 1355              		.loc 3 59 5 is_stmt 0 view .LVU355
- 1356              		.thumb
- 1357              		.syntax unified
- 1358              	.LBE341:
- 1359              	.LBE340:
- 1360              	.LBE342:
- 1361              	.LBE344:
- 1362              	.LBE347:
+ 1349              		.loc 3 59 5 is_stmt 0 view .LVU353
+ 1350              		.thumb
+ 1351              		.syntax unified
+ 1352              	.LBE341:
+ 1353              	.LBE340:
+ 1354              	.LBE342:
+ 1355              	.LBE344:
+ 1356              	.LBE347:
  110:GranularSynth.cpp ****     pitch_ratio_ = fclamp((pitch_ratio_*rnd_pitch_factor), MIN_PITCH, MAX_PITCH);
- 1363              		.loc 2 110 5 is_stmt 1 view .LVU356
- 1364              	.LBB348:
- 1365              	.LBI348:
+ 1357              		.loc 2 110 5 is_stmt 1 view .LVU354
+ 1358              	.LBB348:
+ 1359              	.LBI348:
   64:../DaisySP/Source/Utility/dsp.h **** {
- 1366              		.loc 3 64 14 view .LVU357
- 1367              	.LBE348:
- 1368              	.LBE358:
- 1369              	.LBE361:
+ 1360              		.loc 3 64 14 view .LVU355
+ 1361              	.LBE348:
+ 1362              	.LBE358:
+ 1363              	.LBE361:
   66:../DaisySP/Source/Utility/dsp.h **** }
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 66
+ 1364              		.loc 3 66 5 view .LVU356
+ 1365              	.LBB362:
+ 1366              	.LBB359:
+ 1367              	.LBB355:
+ 1368              	.LBB349:
+ 1369              	.LBI349:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 66
 
 
- 1370              		.loc 3 66 5 view .LVU358
- 1371              	.LBB362:
- 1372              	.LBB359:
- 1373              	.LBB355:
- 1374              	.LBB349:
- 1375              	.LBI349:
   40:../DaisySP/Source/Utility/dsp.h **** {
- 1376              		.loc 3 40 14 view .LVU359
- 1377              	.LBB350:
+ 1370              		.loc 3 40 14 view .LVU357
+ 1371              	.LBB350:
   42:../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
- 1378              		.loc 3 42 5 view .LVU360
+ 1372              		.loc 3 42 5 view .LVU358
   44:../DaisySP/Source/Utility/dsp.h **** #else
- 1379              		.loc 3 44 5 view .LVU361
- 1380              	.LBE350:
- 1381              	.LBE349:
- 1382              	.LBE355:
- 1383              		.loc 2 110 26 is_stmt 0 view .LVU362
- 1384 0156 94ED8C7A 		vldr.32	s14, [r4, #560]
- 1385 015a 67EE877A 		vmul.f32	s15, s15, s14
- 1386              	.LVL82:
- 1387              	.LBB356:
- 1388              	.LBB352:
- 1389              	.LBB351:
+ 1373              		.loc 3 44 5 view .LVU359
+ 1374              	.LBE350:
+ 1375              	.LBE349:
+ 1376              	.LBE355:
+ 1377              		.loc 2 110 26 is_stmt 0 view .LVU360
+ 1378 0156 94ED8C7A 		vldr.32	s14, [r4, #560]
+ 1379 015a 67EE877A 		vmul.f32	s15, s15, s14
+ 1380              	.LVL81:
+ 1381              	.LBB356:
+ 1382              	.LBB352:
+ 1383              	.LBB351:
   44:../DaisySP/Source/Utility/dsp.h **** #else
- 1390              		.loc 3 44 5 view .LVU363
- 1391 015e B6EE007A 		vmov.f32	s14, #5.0e-1
- 1392              		.syntax unified
- 1393              	@ 44 "../DaisySP/Source/Utility/dsp.h" 1
- 1394 0162 C7FE877A 		vmaxnm.f32 s15, s15, s14
- 1395              	@ 0 "" 2
- 1396              	.LVL83:
+ 1384              		.loc 3 44 5 view .LVU361
+ 1385 015e B6EE007A 		vmov.f32	s14, #5.0e-1
+ 1386              		.syntax unified
+ 1387              	@ 44 "../DaisySP/Source/Utility/dsp.h" 1
+ 1388 0162 C7FE877A 		vmaxnm.f32 s15, s15, s14
+ 1389              	@ 0 "" 2
+ 1390              	.LVL82:
   48:../DaisySP/Source/Utility/dsp.h **** }
- 1397              		.loc 3 48 5 is_stmt 1 view .LVU364
+ 1391              		.loc 3 48 5 is_stmt 1 view .LVU362
   48:../DaisySP/Source/Utility/dsp.h **** }
- 1398              		.loc 3 48 5 is_stmt 0 view .LVU365
- 1399              		.thumb
- 1400              		.syntax unified
- 1401              	.LBE351:
- 1402              	.LBE352:
- 1403              	.LBB353:
- 1404              	.LBI353:
+ 1392              		.loc 3 48 5 is_stmt 0 view .LVU363
+ 1393              		.thumb
+ 1394              		.syntax unified
+ 1395              	.LBE351:
+ 1396              	.LBE352:
+ 1397              	.LBB353:
+ 1398              	.LBI353:
   51:../DaisySP/Source/Utility/dsp.h **** {
- 1405              		.loc 3 51 14 is_stmt 1 view .LVU366
- 1406              	.LBB354:
+ 1399              		.loc 3 51 14 is_stmt 1 view .LVU364
+ 1400              	.LBB354:
   53:../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
- 1407              		.loc 3 53 5 view .LVU367
+ 1401              		.loc 3 53 5 view .LVU365
   55:../DaisySP/Source/Utility/dsp.h **** #else
- 1408              		.loc 3 55 5 view .LVU368
- 1409 0166 B0EE087A 		vmov.f32	s14, #3.0e+0
- 1410              		.syntax unified
- 1411              	@ 55 "../DaisySP/Source/Utility/dsp.h" 1
- 1412 016a C7FEC77A 		vminnm.f32 s15, s15, s14
- 1413              	@ 0 "" 2
- 1414              	.LVL84:
+ 1402              		.loc 3 55 5 view .LVU366
+ 1403 0166 B0EE087A 		vmov.f32	s14, #3.0e+0
+ 1404              		.syntax unified
+ 1405              	@ 55 "../DaisySP/Source/Utility/dsp.h" 1
+ 1406 016a C7FEC77A 		vminnm.f32 s15, s15, s14
+ 1407              	@ 0 "" 2
+ 1408              	.LVL83:
   59:../DaisySP/Source/Utility/dsp.h **** }
- 1415              		.loc 3 59 5 view .LVU369
+ 1409              		.loc 3 59 5 view .LVU367
   59:../DaisySP/Source/Utility/dsp.h **** }
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 67
+ 1410              		.loc 3 59 5 is_stmt 0 view .LVU368
+ 1411              		.thumb
+ 1412              		.syntax unified
+ 1413              	.LBE354:
+ 1414              	.LBE353:
+ 1415              	.LBE356:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 67
 
 
- 1416              		.loc 3 59 5 is_stmt 0 view .LVU370
- 1417              		.thumb
- 1418              		.syntax unified
- 1419              	.LBE354:
- 1420              	.LBE353:
- 1421              	.LBE356:
- 1422              		.loc 2 110 18 view .LVU371
- 1423 016e C4ED8C7A 		vstr.32	s15, [r4, #560]
- 1424              	.L31:
- 1425              		.loc 2 110 18 view .LVU372
- 1426              	.LBE359:
- 1427              	.LBE362:
+ 1416              		.loc 2 110 18 view .LVU369
+ 1417 016e C4ED8C7A 		vstr.32	s15, [r4, #560]
+ 1418              	.L31:
+ 1419              		.loc 2 110 18 view .LVU370
+ 1420              	.LBE359:
+ 1421              	.LBE362:
  111:GranularSynth.cpp ****   }
  112:GranularSynth.cpp **** 
  113:GranularSynth.cpp ****   if (rnd_count_>0){
- 1428              		.loc 2 113 3 is_stmt 1 view .LVU373
- 1429              	.LBB363:
- 1430              		.loc 2 113 7 is_stmt 0 view .LVU374
- 1431 0172 D4ED917A 		vldr.32	s15, [r4, #580]
- 1432              		.loc 2 113 3 view .LVU375
- 1433 0176 F5EEC07A 		vcmpe.f32	s15, #0
- 1434 017a F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 1435 017e 22DD     		ble	.L24
- 1436              	.LBB364:
+ 1422              		.loc 2 113 3 is_stmt 1 view .LVU371
+ 1423              	.LBB363:
+ 1424              		.loc 2 113 7 is_stmt 0 view .LVU372
+ 1425 0172 D4ED917A 		vldr.32	s15, [r4, #580]
+ 1426              		.loc 2 113 3 view .LVU373
+ 1427 0176 F5EEC07A 		vcmpe.f32	s15, #0
+ 1428 017a F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 1429 017e 22DD     		ble	.L24
+ 1430              	.LBB364:
  114:GranularSynth.cpp ****     rnd_count_/=2;
- 1437              		.loc 2 114 5 is_stmt 1 view .LVU376
- 1438              		.loc 2 114 15 is_stmt 0 view .LVU377
- 1439 0180 B6EE007A 		vmov.f32	s14, #5.0e-1
- 1440 0184 67EE877A 		vmul.f32	s15, s15, s14
- 1441 0188 C4ED917A 		vstr.32	s15, [r4, #580]
+ 1431              		.loc 2 114 5 is_stmt 1 view .LVU374
+ 1432              		.loc 2 114 15 is_stmt 0 view .LVU375
+ 1433 0180 B6EE007A 		vmov.f32	s14, #5.0e-1
+ 1434 0184 67EE877A 		vmul.f32	s15, s15, s14
+ 1435 0188 C4ED917A 		vstr.32	s15, [r4, #580]
  115:GranularSynth.cpp ****     float rnd_count_factor = fmap(RngFloat(),1.0f-rnd_count_,1.0f+rnd_count_, Mapping::LINEAR);
- 1442              		.loc 2 115 5 is_stmt 1 view .LVU378
- 1443              		.loc 2 115 34 is_stmt 0 view .LVU379
- 1444 018c FFF7FEFF 		bl	_Z8RngFloatv
- 1445              	.LVL85:
- 1446 0190 F7EE007A 		vmov.f32	s15, #1.0e+0
- 1447              		.loc 2 115 51 view .LVU380
- 1448 0194 94ED917A 		vldr.32	s14, [r4, #580]
+ 1436              		.loc 2 115 5 is_stmt 1 view .LVU376
+ 1437              		.loc 2 115 34 is_stmt 0 view .LVU377
+ 1438 018c FFF7FEFF 		bl	_Z8RngFloatv
+ 1439              	.LVL84:
+ 1440 0190 F7EE007A 		vmov.f32	s15, #1.0e+0
+ 1441              		.loc 2 115 51 view .LVU378
+ 1442 0194 94ED917A 		vldr.32	s14, [r4, #580]
  116:GranularSynth.cpp ****     active_count_ *= static_cast<size_t>(rnd_count_factor);
- 1449              		.loc 2 116 19 view .LVU381
- 1450 0198 D4F82C32 		ldr	r3, [r4, #556]
+ 1443              		.loc 2 116 19 view .LVU379
+ 1444 0198 D4F82C32 		ldr	r3, [r4, #556]
  115:GranularSynth.cpp ****     float rnd_count_factor = fmap(RngFloat(),1.0f-rnd_count_,1.0f+rnd_count_, Mapping::LINEAR);
- 1451              		.loc 2 115 34 view .LVU382
- 1452 019c 77EEC76A 		vsub.f32	s13, s15, s14
- 1453 01a0 37EE277A 		vadd.f32	s14, s14, s15
- 1454              	.LVL86:
- 1455              	.LBB365:
- 1456              	.LBI365:
+ 1445              		.loc 2 115 34 view .LVU380
+ 1446 019c 77EEC76A 		vsub.f32	s13, s15, s14
+ 1447 01a0 37EE277A 		vadd.f32	s14, s14, s15
+ 1448              	.LVL85:
+ 1449              	.LBB365:
+ 1450              	.LBI365:
  177:../DaisySP/Source/Utility/dsp.h **** {
- 1457              		.loc 3 177 1 is_stmt 1 view .LVU383
- 1458              	.LBE365:
- 1459              	.LBE364:
- 1460              	.LBE363:
+ 1451              		.loc 3 177 1 is_stmt 1 view .LVU381
+ 1452              	.LBE365:
+ 1453              	.LBE364:
+ 1454              	.LBE363:
  179:../DaisySP/Source/Utility/dsp.h ****     {
- 1461              		.loc 3 179 5 view .LVU384
- 1462              	.LBB380:
- 1463              	.LBB378:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 68
-
-
- 1464              	.LBB374:
- 1465              	.LBB366:
+ 1455              		.loc 3 179 5 view .LVU382
+ 1456              	.LBB380:
+ 1457              	.LBB378:
+ 1458              	.LBB374:
+ 1459              	.LBB366:
  188:../DaisySP/Source/Utility/dsp.h ****         default: return fclamp(min + in * (max - min), min, max);
- 1466              		.loc 3 188 9 view .LVU385
- 1467              		.loc 3 189 9 view .LVU386
- 1468              		.loc 3 189 18 view .LVU387
- 1469              		.loc 3 189 31 is_stmt 0 view .LVU388
- 1470 01a4 F0EE667A 		vmov.f32	s15, s13
- 1471              		.loc 3 189 48 view .LVU389
- 1472 01a8 37EE666A 		vsub.f32	s12, s14, s13
- 1473              		.loc 3 189 31 view .LVU390
- 1474 01ac E0EE067A 		vfma.f32	s15, s0, s12
- 1475              	.LVL87:
- 1476              	.LBB367:
- 1477              	.LBI367:
+ 1460              		.loc 3 188 9 view .LVU383
+ 1461              		.loc 3 189 9 view .LVU384
+ 1462              		.loc 3 189 18 view .LVU385
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 68
+
+
+ 1463              		.loc 3 189 31 is_stmt 0 view .LVU386
+ 1464 01a4 F0EE667A 		vmov.f32	s15, s13
+ 1465              		.loc 3 189 48 view .LVU387
+ 1466 01a8 37EE666A 		vsub.f32	s12, s14, s13
+ 1467              		.loc 3 189 31 view .LVU388
+ 1468 01ac E0EE067A 		vfma.f32	s15, s0, s12
+ 1469              	.LVL86:
+ 1470              	.LBB367:
+ 1471              	.LBI367:
   64:../DaisySP/Source/Utility/dsp.h **** {
- 1478              		.loc 3 64 14 is_stmt 1 view .LVU391
- 1479              	.LBE367:
- 1480              	.LBE366:
- 1481              	.LBE374:
- 1482              	.LBE378:
- 1483              	.LBE380:
+ 1472              		.loc 3 64 14 is_stmt 1 view .LVU389
+ 1473              	.LBE367:
+ 1474              	.LBE366:
+ 1475              	.LBE374:
+ 1476              	.LBE378:
+ 1477              	.LBE380:
   66:../DaisySP/Source/Utility/dsp.h **** }
- 1484              		.loc 3 66 5 view .LVU392
- 1485              	.LBB381:
- 1486              	.LBB379:
- 1487              	.LBB375:
- 1488              	.LBB373:
- 1489              	.LBB372:
- 1490              	.LBB368:
- 1491              	.LBI368:
+ 1478              		.loc 3 66 5 view .LVU390
+ 1479              	.LBB381:
+ 1480              	.LBB379:
+ 1481              	.LBB375:
+ 1482              	.LBB373:
+ 1483              	.LBB372:
+ 1484              	.LBB368:
+ 1485              	.LBI368:
   40:../DaisySP/Source/Utility/dsp.h **** {
- 1492              		.loc 3 40 14 view .LVU393
- 1493              	.LBB369:
+ 1486              		.loc 3 40 14 view .LVU391
+ 1487              	.LBB369:
   42:../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
- 1494              		.loc 3 42 5 view .LVU394
+ 1488              		.loc 3 42 5 view .LVU392
   44:../DaisySP/Source/Utility/dsp.h **** #else
- 1495              		.loc 3 44 5 view .LVU395
- 1496              		.syntax unified
- 1497              	@ 44 "../DaisySP/Source/Utility/dsp.h" 1
- 1498 01b0 C7FEA67A 		vmaxnm.f32 s15, s15, s13
- 1499              	@ 0 "" 2
- 1500              	.LVL88:
+ 1489              		.loc 3 44 5 view .LVU393
+ 1490              		.syntax unified
+ 1491              	@ 44 "../DaisySP/Source/Utility/dsp.h" 1
+ 1492 01b0 C7FEA67A 		vmaxnm.f32 s15, s15, s13
+ 1493              	@ 0 "" 2
+ 1494              	.LVL87:
   48:../DaisySP/Source/Utility/dsp.h **** }
- 1501              		.loc 3 48 5 view .LVU396
+ 1495              		.loc 3 48 5 view .LVU394
   48:../DaisySP/Source/Utility/dsp.h **** }
- 1502              		.loc 3 48 5 is_stmt 0 view .LVU397
- 1503              		.thumb
- 1504              		.syntax unified
- 1505              	.LBE369:
- 1506              	.LBE368:
- 1507              	.LBB370:
- 1508              	.LBI370:
+ 1496              		.loc 3 48 5 is_stmt 0 view .LVU395
+ 1497              		.thumb
+ 1498              		.syntax unified
+ 1499              	.LBE369:
+ 1500              	.LBE368:
+ 1501              	.LBB370:
+ 1502              	.LBI370:
   51:../DaisySP/Source/Utility/dsp.h **** {
- 1509              		.loc 3 51 14 is_stmt 1 view .LVU398
- 1510              	.LBB371:
+ 1503              		.loc 3 51 14 is_stmt 1 view .LVU396
+ 1504              	.LBB371:
   53:../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 69
-
-
- 1511              		.loc 3 53 5 view .LVU399
+ 1505              		.loc 3 53 5 view .LVU397
   55:../DaisySP/Source/Utility/dsp.h **** #else
- 1512              		.loc 3 55 5 view .LVU400
- 1513              		.syntax unified
- 1514              	@ 55 "../DaisySP/Source/Utility/dsp.h" 1
- 1515 01b4 C7FEC77A 		vminnm.f32 s15, s15, s14
- 1516              	@ 0 "" 2
- 1517              	.LVL89:
+ 1506              		.loc 3 55 5 view .LVU398
+ 1507              		.syntax unified
+ 1508              	@ 55 "../DaisySP/Source/Utility/dsp.h" 1
+ 1509 01b4 C7FEC77A 		vminnm.f32 s15, s15, s14
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 69
+
+
+ 1510              	@ 0 "" 2
+ 1511              	.LVL88:
   59:../DaisySP/Source/Utility/dsp.h **** }
- 1518              		.loc 3 59 5 view .LVU401
+ 1512              		.loc 3 59 5 view .LVU399
   59:../DaisySP/Source/Utility/dsp.h **** }
- 1519              		.loc 3 59 5 is_stmt 0 view .LVU402
- 1520              		.thumb
- 1521              		.syntax unified
- 1522              	.LBE371:
- 1523              	.LBE370:
- 1524              	.LBE372:
- 1525              	.LBE373:
- 1526              	.LBE375:
- 1527              		.loc 2 116 5 is_stmt 1 view .LVU403
- 1528              		.loc 2 116 22 is_stmt 0 view .LVU404
- 1529 01b8 FCEEE77A 		vcvt.u32.f32	s15, s15
- 1530              	.LVL90:
- 1531              		.loc 2 116 19 view .LVU405
- 1532 01bc 17EE902A 		vmov	r2, s15	@ int
- 1533 01c0 5343     		muls	r3, r2, r3
- 1534 01c2 C4F82C32 		str	r3, [r4, #556]
+ 1513              		.loc 3 59 5 is_stmt 0 view .LVU400
+ 1514              		.thumb
+ 1515              		.syntax unified
+ 1516              	.LBE371:
+ 1517              	.LBE370:
+ 1518              	.LBE372:
+ 1519              	.LBE373:
+ 1520              	.LBE375:
+ 1521              		.loc 2 116 5 is_stmt 1 view .LVU401
+ 1522              		.loc 2 116 22 is_stmt 0 view .LVU402
+ 1523 01b8 FCEEE77A 		vcvt.u32.f32	s15, s15
+ 1524              	.LVL89:
+ 1525              		.loc 2 116 19 view .LVU403
+ 1526 01bc 17EE902A 		vmov	r2, s15	@ int
+ 1527 01c0 5343     		muls	r3, r2, r3
+ 1528 01c2 C4F82C32 		str	r3, [r4, #556]
  117:GranularSynth.cpp ****     intclamp(active_count_, MIN_GRAINS, MAX_GRAINS);
- 1535              		.loc 2 117 5 is_stmt 1 view .LVU406
- 1536              	.LVL91:
- 1537              	.LBB376:
- 1538              	.LBI376:
+ 1529              		.loc 2 117 5 is_stmt 1 view .LVU404
+ 1530              	.LVL90:
+ 1531              	.LBB376:
+ 1532              	.LBI376:
   72:constants_utils.h ****   if (val < min) val = min;
- 1539              		.loc 1 72 25 view .LVU407
- 1540              	.LBB377:
+ 1533              		.loc 1 72 25 view .LVU405
+ 1534              	.LBB377:
   73:constants_utils.h ****   else if (val > max) val = max;
- 1541              		.loc 1 73 3 view .LVU408
- 1542              	.L24:
+ 1535              		.loc 1 73 3 view .LVU406
+ 1536              	.L24:
   73:constants_utils.h ****   else if (val > max) val = max;
- 1543              		.loc 1 73 3 is_stmt 0 view .LVU409
- 1544              	.LBE377:
- 1545              	.LBE376:
- 1546              	.LBE379:
- 1547              	.LBE381:
+ 1537              		.loc 1 73 3 is_stmt 0 view .LVU407
+ 1538              	.LBE377:
+ 1539              	.LBE376:
+ 1540              	.LBE379:
+ 1541              	.LBE381:
  118:GranularSynth.cpp ****   }
  119:GranularSynth.cpp **** }
- 1548              		.loc 2 119 1 view .LVU410
- 1549 01c6 10BD     		pop	{r4, pc}
- 1550              	.LVL92:
- 1551              	.L41:
- 1552              		.loc 2 119 1 view .LVU411
- 1553              		.align	2
- 1554              	.L40:
- 1555 01c8 00803B47 		.word	1195081728
- 1556 01cc 00007A44 		.word	1148846080
- 1557 01d0 0000C842 		.word	1120403456
- 1558 01d4 00803B45 		.word	1161527296
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 70
+ 1542              		.loc 2 119 1 view .LVU408
+ 1543 01c6 10BD     		pop	{r4, pc}
+ 1544              	.LVL91:
+ 1545              	.L41:
+ 1546              		.loc 2 119 1 view .LVU409
+ 1547              		.align	2
+ 1548              	.L40:
+ 1549 01c8 00803B47 		.word	1195081728
+ 1550 01cc 00007A44 		.word	1148846080
+ 1551 01d0 0000C842 		.word	1120403456
+ 1552 01d4 00803B45 		.word	1161527296
+ 1553 01d8 6F12833A 		.word	981668463
+ 1554 01dc 00000000 		.word	0
+ 1555              		.cfi_endproc
+ 1556              	.LFE4898:
+ 1558              		.section	.text._ZN13GranularSynth12TriggerGrainEv,"ax",%progbits
+ 1559              		.align	1
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 70
 
 
- 1559 01d8 6F12833A 		.word	981668463
- 1560 01dc 00000000 		.word	0
- 1561              		.cfi_endproc
- 1562              	.LFE4899:
- 1564              		.section	.text._ZN13GranularSynth12TriggerGrainEv,"ax",%progbits
- 1565              		.align	1
- 1566              		.global	_ZN13GranularSynth12TriggerGrainEv
- 1567              		.syntax unified
- 1568              		.thumb
- 1569              		.thumb_func
- 1571              	_ZN13GranularSynth12TriggerGrainEv:
- 1572              	.LVL93:
- 1573              	.LFB4900:
+ 1560              		.global	_ZN13GranularSynth12TriggerGrainEv
+ 1561              		.syntax unified
+ 1562              		.thumb
+ 1563              		.thumb_func
+ 1565              	_ZN13GranularSynth12TriggerGrainEv:
+ 1566              	.LVL92:
+ 1567              	.LFB4899:
  120:GranularSynth.cpp **** 
  121:GranularSynth.cpp **** /// @brief Triggers new grains and applies randomness to grain parameters
  122:GranularSynth.cpp **** void GranularSynth::TriggerGrain(){
- 1574              		.loc 2 122 35 is_stmt 1 view -0
- 1575              		.cfi_startproc
- 1576              		@ args = 0, pretend = 0, frame = 0
- 1577              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1568              		.loc 2 122 35 is_stmt 1 view -0
+ 1569              		.cfi_startproc
+ 1570              		@ args = 0, pretend = 0, frame = 0
+ 1571              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1572              		@ link register save eliminated.
  123:GranularSynth.cpp ****   size_t count = 0;
- 1578              		.loc 2 123 3 view .LVU413
+ 1573              		.loc 2 123 3 view .LVU411
  124:GranularSynth.cpp ****   for(Grain& grain:grains_){
- 1579              		.loc 2 124 3 view .LVU414
+ 1574              		.loc 2 124 3 view .LVU412
  122:GranularSynth.cpp ****   size_t count = 0;
- 1580              		.loc 2 122 35 is_stmt 0 view .LVU415
- 1581 0000 38B5     		push	{r3, r4, r5, lr}
- 1582              		.cfi_def_cfa_offset 16
- 1583              		.cfi_offset 3, -16
- 1584              		.cfi_offset 4, -12
- 1585              		.cfi_offset 5, -8
- 1586              		.cfi_offset 14, -4
+ 1575              		.loc 2 122 35 is_stmt 0 view .LVU413
+ 1576 0000 0346     		mov	r3, r0
+ 1577              	.LVL93:
+ 122:GranularSynth.cpp ****   size_t count = 0;
+ 1578              		.loc 2 122 35 view .LVU414
+ 1579 0002 1022     		movs	r2, #16
  123:GranularSynth.cpp ****   size_t count = 0;
- 1587              		.loc 2 123 10 view .LVU416
- 1588 0002 0022     		movs	r2, #0
+ 1580              		.loc 2 123 10 view .LVU415
+ 1581 0004 0021     		movs	r1, #0
  122:GranularSynth.cpp ****   size_t count = 0;
- 1589              		.loc 2 122 35 view .LVU417
- 1590 0004 0446     		mov	r4, r0
- 1591              	.LVL94:
- 122:GranularSynth.cpp ****   size_t count = 0;
- 1592              		.loc 2 122 35 view .LVU418
- 1593 0006 1023     		movs	r3, #16
- 1594              	.LVL95:
- 1595              	.L46:
- 1596              	.LBB382:
- 1597              		.loc 2 124 20 discriminator 1 view .LVU419
- 1598 0008 B3F5067F 		cmp	r3, #536
- 1599 000c 04EB0305 		add	r5, r4, r3
- 1600              	.LVL96:
- 1601              		.loc 2 124 20 is_stmt 1 discriminator 1 view .LVU420
- 1602 0010 18D0     		beq	.L42
- 1603              	.LVL97:
- 125:GranularSynth.cpp ****     if (grain.is_active_) { count++; }
- 1604              		.loc 2 125 5 discriminator 2 view .LVU421
- 1605 0012 E15C     		ldrb	r1, [r4, r3]	@ zero_extendqisi2
- 1606 0014 11B1     		cbz	r1, .L44
- 1607              		.loc 2 125 29 discriminator 1 view .LVU422
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 71
+ 1582              		.loc 2 122 35 view .LVU416
+ 1583 0006 10B4     		push	{r4}
+ 1584              		.cfi_def_cfa_offset 4
+ 1585              		.cfi_offset 4, -4
+ 1586              	.LVL94:
+ 1587              	.L46:
+ 1588              	.LBB382:
+ 1589              		.loc 2 124 20 discriminator 1 view .LVU417
+ 1590 0008 B2F5067F 		cmp	r2, #536
+ 1591 000c 03EB0200 		add	r0, r3, r2
+ 1592              	.LVL95:
+ 1593              		.loc 2 124 20 is_stmt 1 discriminator 1 view .LVU418
+ 1594 0010 14D0     		beq	.L42
+ 1595              	.LVL96:
+ 125:GranularSynth.cpp ****     // UpdateGrainParams();
+ 126:GranularSynth.cpp ****     if (grain.is_active_) { count++; }
+ 1596              		.loc 2 126 5 discriminator 2 view .LVU419
+ 1597 0012 9C5C     		ldrb	r4, [r3, r2]	@ zero_extendqisi2
+ 1598 0014 14B1     		cbz	r4, .L44
+ 1599              		.loc 2 126 29 discriminator 1 view .LVU420
+ 1600              		.loc 2 126 34 is_stmt 0 discriminator 1 view .LVU421
+ 1601 0016 0131     		adds	r1, r1, #1
+ 1602              	.LVL97:
+ 1603              	.L45:
+ 124:GranularSynth.cpp ****     // UpdateGrainParams();
+ 1604              		.loc 2 124 3 is_stmt 1 discriminator 3 view .LVU422
+ 1605 0018 3432     		adds	r2, r2, #52
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 71
 
 
- 1608              		.loc 2 125 34 is_stmt 0 discriminator 1 view .LVU423
- 1609 0016 0132     		adds	r2, r2, #1
- 1610              	.LVL98:
- 1611              	.L45:
- 124:GranularSynth.cpp ****   for(Grain& grain:grains_){
- 1612              		.loc 2 124 3 is_stmt 1 discriminator 3 view .LVU424
- 1613 0018 3433     		adds	r3, r3, #52
- 1614 001a F5E7     		b	.L46
- 1615              	.L44:
- 126:GranularSynth.cpp ****     else if (count<active_count_){
- 1616              		.loc 2 126 10 view .LVU425
- 1617 001c D4F82C12 		ldr	r1, [r4, #556]
- 1618 0020 9142     		cmp	r1, r2
- 1619 0022 F9D9     		bls	.L45
- 127:GranularSynth.cpp ****       // ApplyRandomness();
- 128:GranularSynth.cpp ****       // grain.SetEnvelopeType(env_type_);
- 129:GranularSynth.cpp ****       UpdateGrainParams();
- 1620              		.loc 2 129 7 view .LVU426
- 1621              		.loc 2 129 24 is_stmt 0 view .LVU427
- 1622 0024 2046     		mov	r0, r4
- 1623              	.LVL99:
- 1624              		.loc 2 129 24 view .LVU428
- 1625 0026 FFF7FEFF 		bl	_ZN13GranularSynth17UpdateGrainParamsEv
- 1626              	.LVL100:
- 130:GranularSynth.cpp ****       grain.Trigger(spawn_pos_,grain_size_,pitch_ratio_,pan_,direction_);
- 1627              		.loc 2 130 7 is_stmt 1 view .LVU429
- 1628              		.loc 2 130 20 is_stmt 0 view .LVU430
- 1629 002a 94ED8E1A 		vldr.32	s2, [r4, #568]
- 1630 002e D4ED8D0A 		vldr.32	s1, [r4, #564]
- 1631 0032 2846     		mov	r0, r5
- 1632 0034 94ED8C0A 		vldr.32	s0, [r4, #560]
- 1633 0038 D4E98921 		ldrd	r2, r1, [r4, #548]
- 1634              	.LBE382:
- 131:GranularSynth.cpp ****       count++;
- 132:GranularSynth.cpp ****       break;
- 133:GranularSynth.cpp ****     }
- 134:GranularSynth.cpp ****   }
- 135:GranularSynth.cpp **** }
- 1635              		.loc 2 135 1 view .LVU431
- 1636 003c BDE83840 		pop	{r3, r4, r5, lr}
- 1637              		.cfi_remember_state
- 1638              		.cfi_restore 14
- 1639              		.cfi_restore 5
- 1640              		.cfi_restore 4
- 1641              		.cfi_restore 3
- 1642              		.cfi_def_cfa_offset 0
- 1643              	.LVL101:
- 1644              	.LBB383:
- 130:GranularSynth.cpp ****       grain.Trigger(spawn_pos_,grain_size_,pitch_ratio_,pan_,direction_);
- 1645              		.loc 2 130 20 view .LVU432
- 1646 0040 FFF7FEBF 		b	_ZN5Grain7TriggerEjjfff
- 1647              	.LVL102:
- 1648              	.L42:
- 1649              		.cfi_restore_state
- 130:GranularSynth.cpp ****       grain.Trigger(spawn_pos_,grain_size_,pitch_ratio_,pan_,direction_);
- 1650              		.loc 2 130 20 view .LVU433
- 1651              	.LBE383:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 72
+ 1606 001a F5E7     		b	.L46
+ 1607              	.L44:
+ 127:GranularSynth.cpp ****     else if (count<active_count_){
+ 1608              		.loc 2 127 10 view .LVU423
+ 1609 001c D3F82C42 		ldr	r4, [r3, #556]
+ 1610 0020 8C42     		cmp	r4, r1
+ 1611 0022 F9D9     		bls	.L45
+ 128:GranularSynth.cpp ****       // ApplyRandomness();
+ 129:GranularSynth.cpp ****       grain.Trigger(spawn_pos_,grain_size_,pitch_ratio_,pan_,direction_);
+ 1612              		.loc 2 129 7 view .LVU424
+ 1613              		.loc 2 129 20 is_stmt 0 view .LVU425
+ 1614 0024 93ED8E1A 		vldr.32	s2, [r3, #568]
+ 1615 0028 D3ED8D0A 		vldr.32	s1, [r3, #564]
+ 1616 002c 93ED8C0A 		vldr.32	s0, [r3, #560]
+ 1617              	.LBE382:
+ 130:GranularSynth.cpp ****       count++;
+ 131:GranularSynth.cpp ****       break;
+ 132:GranularSynth.cpp ****     }
+ 133:GranularSynth.cpp ****   }
+ 134:GranularSynth.cpp **** }
+ 1618              		.loc 2 134 1 view .LVU426
+ 1619 0030 5DF8044B 		ldr	r4, [sp], #4
+ 1620              		.cfi_remember_state
+ 1621              		.cfi_restore 4
+ 1622              		.cfi_def_cfa_offset 0
+ 1623              	.LBB383:
+ 129:GranularSynth.cpp ****       count++;
+ 1624              		.loc 2 129 20 view .LVU427
+ 1625 0034 D3E98921 		ldrd	r2, r1, [r3, #548]
+ 1626              	.LVL98:
+ 129:GranularSynth.cpp ****       count++;
+ 1627              		.loc 2 129 20 view .LVU428
+ 1628 0038 FFF7FEBF 		b	_ZN5Grain7TriggerEjjfff
+ 1629              	.LVL99:
+ 1630              	.L42:
+ 1631              		.cfi_restore_state
+ 129:GranularSynth.cpp ****       count++;
+ 1632              		.loc 2 129 20 view .LVU429
+ 1633              	.LBE383:
+ 1634              		.loc 2 134 1 view .LVU430
+ 1635 003c 5DF8044B 		ldr	r4, [sp], #4
+ 1636              		.cfi_restore 4
+ 1637              		.cfi_def_cfa_offset 0
+ 1638 0040 7047     		bx	lr
+ 1639              		.cfi_endproc
+ 1640              	.LFE4899:
+ 1642              		.section	.rodata._ZN13GranularSynth13ProcessGrainsEv.str1.1,"aMS",%progbits,1
+ 1643              	.LC0:
+ 1644 0000 73616D70 		.ascii	"sampL %f, sampR%f\000"
+ 1644      4C202566 
+ 1644      2C207361 
+ 1644      6D705225 
+ 1644      6600
+ 1645              		.section	.text._ZN13GranularSynth13ProcessGrainsEv,"ax",%progbits
+ 1646              		.align	1
+ 1647              		.global	_ZN13GranularSynth13ProcessGrainsEv
+ 1648              		.syntax unified
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 72
 
 
- 1652              		.loc 2 135 1 view .LVU434
- 1653 0044 38BD     		pop	{r3, r4, r5, pc}
- 1654              		.loc 2 135 1 view .LVU435
- 1655              		.cfi_endproc
- 1656              	.LFE4900:
- 1658              		.section	.rodata._ZN13GranularSynth13ProcessGrainsEv.str1.1,"aMS",%progbits,1
- 1659              	.LC0:
- 1660 0000 73616D70 		.ascii	"sampL %f, sampR%f\000"
- 1660      4C202566 
- 1660      2C207361 
- 1660      6D705225 
- 1660      6600
- 1661              		.section	.text._ZN13GranularSynth13ProcessGrainsEv,"ax",%progbits
- 1662              		.align	1
- 1663              		.global	_ZN13GranularSynth13ProcessGrainsEv
- 1664              		.syntax unified
- 1665              		.thumb
- 1666              		.thumb_func
- 1668              	_ZN13GranularSynth13ProcessGrainsEv:
- 1669              	.LVL103:
- 1670              	.LFB4901:
- 136:GranularSynth.cpp **** 
- 137:GranularSynth.cpp **** /// @brief Processes and sums audio of active grains, then mixes to output buffers
- 138:GranularSynth.cpp **** /// @param out_left Pointer to left channel audio output buffer
- 139:GranularSynth.cpp **** /// @param out_right Pointer to right channel audio output buffer
- 140:GranularSynth.cpp **** /// @param size Number of samples to process in this call 
- 141:GranularSynth.cpp **** Sample GranularSynth::ProcessGrains(){
- 1671              		.loc 2 141 38 is_stmt 1 view -0
- 1672              		.cfi_startproc
- 1673              		@ args = 0, pretend = 0, frame = 16
- 1674              		@ frame_needed = 0, uses_anonymous_args = 0
- 142:GranularSynth.cpp ****   sample_.left=0.0f, sample_.right=0.0f;
- 1675              		.loc 2 142 3 view .LVU437
- 1676              		.loc 2 142 15 is_stmt 0 view .LVU438
- 1677 0000 0023     		movs	r3, #0
+ 1649              		.thumb
+ 1650              		.thumb_func
+ 1652              	_ZN13GranularSynth13ProcessGrainsEv:
+ 1653              	.LVL100:
+ 1654              	.LFB4900:
+ 135:GranularSynth.cpp **** 
+ 136:GranularSynth.cpp **** /// @brief Processes and sums audio of active grains, then mixes to output buffers
+ 137:GranularSynth.cpp **** /// @param out_left Pointer to left channel audio output buffer
+ 138:GranularSynth.cpp **** /// @param out_right Pointer to right channel audio output buffer
+ 139:GranularSynth.cpp **** /// @param size Number of samples to process in this call 
+ 140:GranularSynth.cpp **** Sample GranularSynth::ProcessGrains(){
+ 1655              		.loc 2 140 38 is_stmt 1 view -0
+ 1656              		.cfi_startproc
+ 1657              		@ args = 0, pretend = 0, frame = 16
+ 1658              		@ frame_needed = 0, uses_anonymous_args = 0
  141:GranularSynth.cpp ****   sample_.left=0.0f, sample_.right=0.0f;
- 1678              		.loc 2 141 38 view .LVU439
- 1679 0002 30B5     		push	{r4, r5, lr}
- 1680              		.cfi_def_cfa_offset 12
- 1681              		.cfi_offset 4, -12
- 1682              		.cfi_offset 5, -8
- 1683              		.cfi_offset 14, -4
- 143:GranularSynth.cpp ****   TriggerGrain();
- 1684              		.loc 2 143 15 view .LVU440
- 1685 0004 1025     		movs	r5, #16
+ 1659              		.loc 2 141 3 view .LVU432
+ 1660              		.loc 2 141 15 is_stmt 0 view .LVU433
+ 1661 0000 0023     		movs	r3, #0
+ 140:GranularSynth.cpp ****   sample_.left=0.0f, sample_.right=0.0f;
+ 1662              		.loc 2 140 38 view .LVU434
+ 1663 0002 30B5     		push	{r4, r5, lr}
+ 1664              		.cfi_def_cfa_offset 12
+ 1665              		.cfi_offset 4, -12
+ 1666              		.cfi_offset 5, -8
+ 1667              		.cfi_offset 14, -4
+ 142:GranularSynth.cpp ****   TriggerGrain();
+ 1668              		.loc 2 142 15 view .LVU435
+ 1669 0004 1025     		movs	r5, #16
+ 140:GranularSynth.cpp ****   sample_.left=0.0f, sample_.right=0.0f;
+ 1670              		.loc 2 140 38 view .LVU436
+ 1671 0006 87B0     		sub	sp, sp, #28
+ 1672              		.cfi_def_cfa_offset 40
  141:GranularSynth.cpp ****   sample_.left=0.0f, sample_.right=0.0f;
- 1686              		.loc 2 141 38 view .LVU441
- 1687 0006 87B0     		sub	sp, sp, #28
- 1688              		.cfi_def_cfa_offset 40
- 142:GranularSynth.cpp ****   sample_.left=0.0f, sample_.right=0.0f;
- 1689              		.loc 2 142 15 view .LVU442
- 1690 0008 C0F81832 		str	r3, [r0, #536]	@ float
+ 1673              		.loc 2 141 15 view .LVU437
+ 1674 0008 C0F81832 		str	r3, [r0, #536]	@ float
+ 140:GranularSynth.cpp ****   sample_.left=0.0f, sample_.right=0.0f;
+ 1675              		.loc 2 140 38 view .LVU438
+ 1676 000c 0446     		mov	r4, r0
  141:GranularSynth.cpp ****   sample_.left=0.0f, sample_.right=0.0f;
- 1691              		.loc 2 141 38 view .LVU443
- 1692 000c 0446     		mov	r4, r0
- 142:GranularSynth.cpp ****   sample_.left=0.0f, sample_.right=0.0f;
- 1693              		.loc 2 142 35 view .LVU444
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 73
+ 1677              		.loc 2 141 35 view .LVU439
+ 1678 000e C0F81C32 		str	r3, [r0, #540]	@ float
+ 1679              		.loc 2 142 3 is_stmt 1 view .LVU440
+ 1680              		.loc 2 142 15 is_stmt 0 view .LVU441
+ 1681 0012 FFF7FEFF 		bl	_ZN13GranularSynth12TriggerGrainEv
+ 1682              	.LVL101:
+ 143:GranularSynth.cpp ****   // int cnt=0;
+ 144:GranularSynth.cpp ****   for (Grain& grain:grains_){
+ 1683              		.loc 2 144 3 is_stmt 1 view .LVU442
+ 1684              	.L51:
+ 1685              	.LBB387:
+ 1686              		.loc 2 144 21 is_stmt 0 discriminator 1 view .LVU443
+ 1687 0016 B5F5067F 		cmp	r5, #536
+ 1688 001a 04EB0500 		add	r0, r4, r5
+ 1689              	.LVL102:
+ 1690              		.loc 2 144 21 is_stmt 1 discriminator 1 view .LVU444
+ 1691 001e 0FD0     		beq	.L49
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 73
 
 
- 1694 000e C0F81C32 		str	r3, [r0, #540]	@ float
- 1695              		.loc 2 143 3 is_stmt 1 view .LVU445
- 1696              		.loc 2 143 15 is_stmt 0 view .LVU446
- 1697 0012 FFF7FEFF 		bl	_ZN13GranularSynth12TriggerGrainEv
- 1698              	.LVL104:
- 144:GranularSynth.cpp ****   // int cnt=0;
- 145:GranularSynth.cpp ****   for (Grain& grain:grains_){
- 1699              		.loc 2 145 3 is_stmt 1 view .LVU447
- 1700              	.L51:
- 1701              	.LBB387:
- 1702              		.loc 2 145 21 is_stmt 0 discriminator 1 view .LVU448
- 1703 0016 B5F5067F 		cmp	r5, #536
- 1704 001a 04EB0500 		add	r0, r4, r5
- 1705              	.LVL105:
- 1706              		.loc 2 145 21 is_stmt 1 discriminator 1 view .LVU449
- 1707 001e 0FD0     		beq	.L49
- 1708              	.LVL106:
- 146:GranularSynth.cpp ****     if (grain.is_active_){
- 1709              		.loc 2 146 5 discriminator 2 view .LVU450
- 1710 0020 635D     		ldrb	r3, [r4, r5]	@ zero_extendqisi2
- 1711 0022 5BB1     		cbz	r3, .L50
- 147:GranularSynth.cpp ****       // cnt++;
- 148:GranularSynth.cpp ****       sample_ = grain.Process(sample_,1.0f);
- 1712              		.loc 2 148 7 view .LVU451
- 1713              		.loc 2 148 43 is_stmt 0 view .LVU452
- 1714 0024 94ED860A 		vldr.32	s0, [r4, #536]
- 1715 0028 B7EE001A 		vmov.f32	s2, #1.0e+0
- 1716 002c D4ED870A 		vldr.32	s1, [r4, #540]
- 1717 0030 FFF7FEFF 		bl	_ZN5Grain7ProcessE6Samplef
- 1718              	.LVL107:
- 1719              		.loc 2 148 43 view .LVU453
- 1720 0034 84ED860A 		vstr.32	s0, [r4, #536]
- 1721 0038 C4ED870A 		vstr.32	s1, [r4, #540]
- 1722              	.L50:
+ 1692              	.LVL103:
  145:GranularSynth.cpp ****     if (grain.is_active_){
- 1723              		.loc 2 145 3 is_stmt 1 discriminator 3 view .LVU454
- 1724              	.LVL108:
- 145:GranularSynth.cpp ****     if (grain.is_active_){
- 1725              		.loc 2 145 3 is_stmt 0 discriminator 3 view .LVU455
- 1726 003c 3435     		adds	r5, r5, #52
- 1727              	.LVL109:
- 145:GranularSynth.cpp ****     if (grain.is_active_){
- 1728              		.loc 2 145 3 discriminator 3 view .LVU456
- 1729 003e EAE7     		b	.L51
- 1730              	.LVL110:
- 1731              	.L49:
- 145:GranularSynth.cpp ****     if (grain.is_active_){
- 1732              		.loc 2 145 3 discriminator 3 view .LVU457
- 1733              	.LBE387:
- 149:GranularSynth.cpp ****     }
- 150:GranularSynth.cpp ****   }
- 151:GranularSynth.cpp ****   count++;
- 1734              		.loc 2 151 3 is_stmt 1 view .LVU458
- 1735              		.loc 2 151 8 is_stmt 0 view .LVU459
- 1736 0040 D4F82032 		ldr	r3, [r4, #544]
- 1737 0044 4EF66021 		movw	r1, #60000
- 1738 0048 0133     		adds	r3, r3, #1
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 74
-
-
- 152:GranularSynth.cpp ****   if (count%60000==0){
- 1739              		.loc 2 152 3 is_stmt 1 view .LVU460
+ 1693              		.loc 2 145 5 discriminator 2 view .LVU445
+ 1694 0020 635D     		ldrb	r3, [r4, r5]	@ zero_extendqisi2
+ 1695 0022 5BB1     		cbz	r3, .L50
+ 146:GranularSynth.cpp ****       // cnt++;
+ 147:GranularSynth.cpp ****       sample_ = grain.Process(sample_,1.0f);
+ 1696              		.loc 2 147 7 view .LVU446
+ 1697              		.loc 2 147 43 is_stmt 0 view .LVU447
+ 1698 0024 94ED860A 		vldr.32	s0, [r4, #536]
+ 1699 0028 B7EE001A 		vmov.f32	s2, #1.0e+0
+ 1700 002c D4ED870A 		vldr.32	s1, [r4, #540]
+ 1701 0030 FFF7FEFF 		bl	_ZN5Grain7ProcessE6Samplef
+ 1702              	.LVL104:
+ 1703              		.loc 2 147 43 view .LVU448
+ 1704 0034 84ED860A 		vstr.32	s0, [r4, #536]
+ 1705 0038 C4ED870A 		vstr.32	s1, [r4, #540]
+ 1706              	.L50:
+ 144:GranularSynth.cpp ****     if (grain.is_active_){
+ 1707              		.loc 2 144 3 is_stmt 1 discriminator 3 view .LVU449
+ 1708              	.LVL105:
+ 144:GranularSynth.cpp ****     if (grain.is_active_){
+ 1709              		.loc 2 144 3 is_stmt 0 discriminator 3 view .LVU450
+ 1710 003c 3435     		adds	r5, r5, #52
+ 1711              	.LVL106:
+ 144:GranularSynth.cpp ****     if (grain.is_active_){
+ 1712              		.loc 2 144 3 discriminator 3 view .LVU451
+ 1713 003e EAE7     		b	.L51
+ 1714              	.LVL107:
+ 1715              	.L49:
+ 144:GranularSynth.cpp ****     if (grain.is_active_){
+ 1716              		.loc 2 144 3 discriminator 3 view .LVU452
+ 1717              	.LBE387:
+ 148:GranularSynth.cpp ****     }
+ 149:GranularSynth.cpp ****   }
+ 150:GranularSynth.cpp ****   count++;
+ 1718              		.loc 2 150 3 is_stmt 1 view .LVU453
+ 1719              		.loc 2 150 8 is_stmt 0 view .LVU454
+ 1720 0040 D4F82032 		ldr	r3, [r4, #544]
+ 1721 0044 4EF66021 		movw	r1, #60000
+ 1722 0048 0133     		adds	r3, r3, #1
  151:GranularSynth.cpp ****   if (count%60000==0){
- 1740              		.loc 2 151 8 is_stmt 0 view .LVU461
- 1741 004a B3FBF1F2 		udiv	r2, r3, r1
- 1742 004e 01FB1232 		mls	r2, r1, r2, r3
- 1743              		.loc 2 152 3 view .LVU462
- 1744 0052 62B1     		cbz	r2, .L52
- 151:GranularSynth.cpp ****   if (count%60000==0){
- 1745              		.loc 2 151 8 view .LVU463
- 1746 0054 C4F82032 		str	r3, [r4, #544]
- 1747              	.LVL111:
- 1748              	.L53:
- 153:GranularSynth.cpp ****     count=0;
- 154:GranularSynth.cpp ****     // DebugPrint(pod_, "lbuf %f, rbuf %f, envv %f",grains_[0].lbuf, grains_[0].rbuf, grains_[0].en
- 155:GranularSynth.cpp ****     DebugPrint(pod_, "sampL %f, sampR%f", sample_.left, sample_.right);
- 156:GranularSynth.cpp ****     // DebugPrint(pod_, "activecount %u pan %f",active_count_,pan_); 
- 157:GranularSynth.cpp ****   }
+ 1723              		.loc 2 151 3 is_stmt 1 view .LVU455
+ 150:GranularSynth.cpp ****   if (count%60000==0){
+ 1724              		.loc 2 150 8 is_stmt 0 view .LVU456
+ 1725 004a B3FBF1F2 		udiv	r2, r3, r1
+ 1726 004e 01FB1232 		mls	r2, r1, r2, r3
+ 1727              		.loc 2 151 3 view .LVU457
+ 1728 0052 62B1     		cbz	r2, .L52
+ 150:GranularSynth.cpp ****   if (count%60000==0){
+ 1729              		.loc 2 150 8 view .LVU458
+ 1730 0054 C4F82032 		str	r3, [r4, #544]
+ 1731              	.LVL108:
+ 1732              	.L53:
+ 152:GranularSynth.cpp ****     count=0;
+ 153:GranularSynth.cpp ****     // DebugPrint(pod_, "lbuf %f, rbuf %f, envv %f",grains_[0].lbuf, grains_[0].rbuf, grains_[0].en
+ 154:GranularSynth.cpp ****     DebugPrint(pod_, "sampL %f, sampR%f", sample_.left, sample_.right);
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 74
+
+
+ 155:GranularSynth.cpp ****     // DebugPrint(pod_, "activecount %u pan %f",active_count_,pan_); 
+ 156:GranularSynth.cpp ****   }
+ 157:GranularSynth.cpp **** 
  158:GranularSynth.cpp **** 
  159:GranularSynth.cpp **** 
- 160:GranularSynth.cpp **** 
- 161:GranularSynth.cpp ****   
- 162:GranularSynth.cpp ****   // sample_.left = SoftClip(sample_.left);
- 163:GranularSynth.cpp ****   // sample_.right = SoftClip(sample_.right);
- 164:GranularSynth.cpp **** 
- 165:GranularSynth.cpp ****   return sample_;
- 1749              		.loc 2 165 3 is_stmt 1 view .LVU464
- 1750              		.loc 2 165 10 is_stmt 0 view .LVU465
- 1751 0058 06AB     		add	r3, sp, #24
- 1752 005a D4E98601 		ldrd	r0, r1, [r4, #536]
- 1753 005e 03E90300 		stmdb	r3, {r0, r1}
- 166:GranularSynth.cpp **** }
- 1754              		.loc 2 166 1 view .LVU466
- 1755 0062 9DED040A 		vldr.32	s0, [sp, #16]
- 1756 0066 DDED050A 		vldr.32	s1, [sp, #20]
- 1757 006a 07B0     		add	sp, sp, #28
- 1758              		.cfi_remember_state
- 1759              		.cfi_def_cfa_offset 12
- 1760              		@ sp needed
- 1761 006c 30BD     		pop	{r4, r5, pc}
- 1762              	.LVL112:
- 1763              	.L52:
- 1764              		.cfi_restore_state
- 153:GranularSynth.cpp ****     count=0;
- 1765              		.loc 2 153 5 is_stmt 1 view .LVU467
- 1766              	.LBB388:
- 1767              	.LBB389:
- 1768              		.file 5 "../libDaisy/src/daisy_seed.h"
+ 160:GranularSynth.cpp ****   
+ 161:GranularSynth.cpp ****   // sample_.left = SoftClip(sample_.left);
+ 162:GranularSynth.cpp ****   // sample_.right = SoftClip(sample_.right);
+ 163:GranularSynth.cpp **** 
+ 164:GranularSynth.cpp ****   return sample_;
+ 1733              		.loc 2 164 3 is_stmt 1 view .LVU459
+ 1734              		.loc 2 164 10 is_stmt 0 view .LVU460
+ 1735 0058 06AB     		add	r3, sp, #24
+ 1736 005a D4E98601 		ldrd	r0, r1, [r4, #536]
+ 1737 005e 03E90300 		stmdb	r3, {r0, r1}
+ 165:GranularSynth.cpp **** }
+ 1738              		.loc 2 165 1 view .LVU461
+ 1739 0062 9DED040A 		vldr.32	s0, [sp, #16]
+ 1740 0066 DDED050A 		vldr.32	s1, [sp, #20]
+ 1741 006a 07B0     		add	sp, sp, #28
+ 1742              		.cfi_remember_state
+ 1743              		.cfi_def_cfa_offset 12
+ 1744              		@ sp needed
+ 1745 006c 30BD     		pop	{r4, r5, pc}
+ 1746              	.LVL109:
+ 1747              	.L52:
+ 1748              		.cfi_restore_state
+ 152:GranularSynth.cpp ****     count=0;
+ 1749              		.loc 2 152 5 is_stmt 1 view .LVU462
+ 1750              	.LBB388:
+ 1751              	.LBB389:
+ 1752              		.file 5 "../libDaisy/src/daisy_seed.h"
    1:../libDaisy/src/daisy_seed.h **** #pragma once
    2:../libDaisy/src/daisy_seed.h **** #ifndef DSY_SEED_H
    3:../libDaisy/src/daisy_seed.h **** #define DSY_SEED_H
@@ -4438,9 +4422,6 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
    7:../libDaisy/src/daisy_seed.h **** //Uncomment this out if you're still using the rev2 hardware
    8:../libDaisy/src/daisy_seed.h **** //#define SEED_REV2
    9:../libDaisy/src/daisy_seed.h **** 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 75
-
-
   10:../libDaisy/src/daisy_seed.h **** namespace daisy
   11:../libDaisy/src/daisy_seed.h **** {
   12:../libDaisy/src/daisy_seed.h **** /**
@@ -4457,6 +4438,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
   23:../libDaisy/src/daisy_seed.h **** 
   24:../libDaisy/src/daisy_seed.h ****     /** This function used to provide a pre-initialization configuraiton 
   25:../libDaisy/src/daisy_seed.h ****      *  it has since been deprecated, and does nothing.
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 75
+
+
   26:../libDaisy/src/daisy_seed.h ****      */
   27:../libDaisy/src/daisy_seed.h ****     void Configure();
   28:../libDaisy/src/daisy_seed.h **** 
@@ -4498,9 +4482,6 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
   64:../libDaisy/src/daisy_seed.h ****     the specified callback will get called whenever
   65:../libDaisy/src/daisy_seed.h ****     new data is ready to be prepared.
   66:../libDaisy/src/daisy_seed.h ****     This will use the newer non-interleaved callback.
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 76
-
-
   67:../libDaisy/src/daisy_seed.h ****     */
   68:../libDaisy/src/daisy_seed.h ****     void StartAudio(AudioHandle::AudioCallback cb);
   69:../libDaisy/src/daisy_seed.h **** 
@@ -4517,6 +4498,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
   80:../libDaisy/src/daisy_seed.h **** 
   81:../libDaisy/src/daisy_seed.h ****     /** Updates the Audio Sample Rate, and reinitializes.
   82:../libDaisy/src/daisy_seed.h ****      ** Audio must be stopped for this to work.
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 76
+
+
   83:../libDaisy/src/daisy_seed.h ****      */
   84:../libDaisy/src/daisy_seed.h ****     void SetAudioSampleRate(SaiHandle::Config::SampleRate samplerate);
   85:../libDaisy/src/daisy_seed.h **** 
@@ -4558,170 +4542,167 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 1
  121:../libDaisy/src/daisy_seed.h ****     }
  122:../libDaisy/src/daisy_seed.h **** 
  123:../libDaisy/src/daisy_seed.h ****     /** Print formatted debug log message with automatic line termination
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 77
-
-
  124:../libDaisy/src/daisy_seed.h ****     */
  125:../libDaisy/src/daisy_seed.h ****     template <typename... VA>
  126:../libDaisy/src/daisy_seed.h ****     static void PrintLine(const char* format, VA... va)
  127:../libDaisy/src/daisy_seed.h ****     {
  128:../libDaisy/src/daisy_seed.h ****         Log::PrintLine(format, va...);
- 1769              		.loc 5 128 23 is_stmt 0 view .LVU468
- 1770 006e 94ED877A 		vldr.32	s14, [r4, #540]
- 1771 0072 D4ED866A 		vldr.32	s13, [r4, #536]
- 1772 0076 B7EEC77A 		vcvt.f64.f32	d7, s14
- 1773              	.LBE389:
- 1774              	.LBE388:
- 153:GranularSynth.cpp ****     // DebugPrint(pod_, "lbuf %f, rbuf %f, envv %f",grains_[0].lbuf, grains_[0].rbuf, grains_[0].en
- 1775              		.loc 2 153 10 view .LVU469
- 1776 007a C4F82022 		str	r2, [r4, #544]
- 155:GranularSynth.cpp ****     // DebugPrint(pod_, "activecount %u pan %f",active_count_,pan_); 
- 1777              		.loc 2 155 5 is_stmt 1 view .LVU470
- 155:GranularSynth.cpp ****     // DebugPrint(pod_, "activecount %u pan %f",active_count_,pan_); 
- 1778              		.loc 2 155 5 view .LVU471
- 1779              	.LVL113:
- 1780              	.LBB391:
- 1781              	.LBI388:
+ 1753              		.loc 5 128 23 is_stmt 0 view .LVU463
+ 1754 006e 94ED877A 		vldr.32	s14, [r4, #540]
+ 1755 0072 D4ED866A 		vldr.32	s13, [r4, #536]
+ 1756 0076 B7EEC77A 		vcvt.f64.f32	d7, s14
+ 1757              	.LBE389:
+ 1758              	.LBE388:
+ 152:GranularSynth.cpp ****     // DebugPrint(pod_, "lbuf %f, rbuf %f, envv %f",grains_[0].lbuf, grains_[0].rbuf, grains_[0].en
+ 1759              		.loc 2 152 10 view .LVU464
+ 1760 007a C4F82022 		str	r2, [r4, #544]
+ 154:GranularSynth.cpp ****     // DebugPrint(pod_, "activecount %u pan %f",active_count_,pan_); 
+ 1761              		.loc 2 154 5 is_stmt 1 view .LVU465
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 77
+
+
+ 154:GranularSynth.cpp ****     // DebugPrint(pod_, "activecount %u pan %f",active_count_,pan_); 
+ 1762              		.loc 2 154 5 view .LVU466
+ 1763              	.LVL110:
+ 1764              	.LBB391:
+ 1765              	.LBI388:
  126:../libDaisy/src/daisy_seed.h ****     {
- 1782              		.loc 5 126 17 view .LVU472
- 1783              	.LBB390:
- 1784              		.loc 5 128 23 is_stmt 0 view .LVU473
- 1785 007e 0548     		ldr	r0, .L57
- 1786              	.LVL114:
- 1787              		.loc 5 128 23 view .LVU474
- 1788 0080 8DED007B 		vstr.64	d7, [sp]
- 1789              	.LVL115:
- 1790              		.loc 5 128 23 view .LVU475
- 1791 0084 B7EEE67A 		vcvt.f64.f32	d7, s13
- 1792 0088 53EC172B 		vmov	r2, r3, d7
- 1793 008c FFF7FEFF 		bl	_ZN5daisy6LoggerILNS_17LoggerDestinationE1EE9PrintLineEPKcz
- 1794              	.LVL116:
+ 1766              		.loc 5 126 17 view .LVU467
+ 1767              	.LBB390:
+ 1768              		.loc 5 128 23 is_stmt 0 view .LVU468
+ 1769 007e 0548     		ldr	r0, .L57
+ 1770              	.LVL111:
+ 1771              		.loc 5 128 23 view .LVU469
+ 1772 0080 8DED007B 		vstr.64	d7, [sp]
+ 1773              	.LVL112:
+ 1774              		.loc 5 128 23 view .LVU470
+ 1775 0084 B7EEE67A 		vcvt.f64.f32	d7, s13
+ 1776 0088 53EC172B 		vmov	r2, r3, d7
+ 1777 008c FFF7FEFF 		bl	_ZN5daisy6LoggerILNS_17LoggerDestinationE1EE9PrintLineEPKcz
+ 1778              	.LVL113:
  129:../libDaisy/src/daisy_seed.h ****     }
- 1795              		.loc 5 129 5 view .LVU476
- 1796 0090 E2E7     		b	.L53
- 1797              	.L58:
- 1798 0092 00BF     		.align	2
- 1799              	.L57:
- 1800 0094 00000000 		.word	.LC0
- 1801              	.LBE390:
- 1802              	.LBE391:
- 1803              		.cfi_endproc
- 1804              	.LFE4901:
- 1806              		.text
- 1807              	.Letext0:
- 1808              		.file 6 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/machine/_default_types.h"
- 1809              		.file 7 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/_stdint.h"
- 1810              		.file 8 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdint.h"
- 1811              		.file 9 "/Library/DaisyToolchain/0.2.0/arm/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h"
- 1812              		.file 10 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h"
- 1813              		.file 11 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdlib"
- 1814              		.file 12 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdint"
- 1815              		.file 13 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v
- 1816              		.file 14 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/type_traits"
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 78
+ 1779              		.loc 5 129 5 view .LVU471
+ 1780 0090 E2E7     		b	.L53
+ 1781              	.L58:
+ 1782 0092 00BF     		.align	2
+ 1783              	.L57:
+ 1784 0094 00000000 		.word	.LC0
+ 1785              	.LBE390:
+ 1786              	.LBE391:
+ 1787              		.cfi_endproc
+ 1788              	.LFE4900:
+ 1790              		.text
+ 1791              	.Letext0:
+ 1792              		.file 6 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/machine/_default_types.h"
+ 1793              		.file 7 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/_stdint.h"
+ 1794              		.file 8 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdint.h"
+ 1795              		.file 9 "/Library/DaisyToolchain/0.2.0/arm/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h"
+ 1796              		.file 10 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h"
+ 1797              		.file 11 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdlib"
+ 1798              		.file 12 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdint"
+ 1799              		.file 13 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v
+ 1800              		.file 14 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/type_traits"
+ 1801              		.file 15 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/debug/debug.h"
+ 1802              		.file 16 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/algorithmfwd.h"
+ 1803              		.file 17 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_pair.h"
+ 1804              		.file 18 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/exception_ptr.h"
+ 1805              		.file 19 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/initializer_list"
+ 1806              		.file 20 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdarg"
+ 1807              		.file 21 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdio"
+ 1808              		.file 22 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstring"
+ 1809              		.file 23 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cwchar"
+ 1810              		.file 24 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/clocale"
+ 1811              		.file 25 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/basic_string.h"
+ 1812              		.file 26 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_iterator.h"
+ 1813              		.file 27 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/predefined_ops.h
+ 1814              		.file 28 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/_types.h"
+ 1815              		.file 29 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/reent.h"
+ 1816              		.file 30 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/lock.h"
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 78
 
 
- 1817              		.file 15 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/debug/debug.h"
- 1818              		.file 16 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/algorithmfwd.h"
- 1819              		.file 17 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_pair.h"
- 1820              		.file 18 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/exception_ptr.h"
- 1821              		.file 19 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/initializer_list"
- 1822              		.file 20 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdarg"
- 1823              		.file 21 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdio"
- 1824              		.file 22 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstring"
- 1825              		.file 23 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cwchar"
- 1826              		.file 24 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/clocale"
- 1827              		.file 25 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/basic_string.h"
- 1828              		.file 26 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_iterator.h"
- 1829              		.file 27 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/predefined_ops.h
- 1830              		.file 28 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/_types.h"
- 1831              		.file 29 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/reent.h"
- 1832              		.file 30 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/lock.h"
- 1833              		.file 31 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/math.h"
- 1834              		.file 32 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdlib.h"
- 1835              		.file 33 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/math.h"
- 1836              		.file 34 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/stdlib.h"
- 1837              		.file 35 "../libDaisy/src/daisy_core.h"
- 1838              		.file 36 "../libDaisy/src/per/tim.h"
- 1839              		.file 37 "../libDaisy/src/sys/system.h"
- 1840              		.file 38 "../libDaisy/src/per/qspi.h"
- 1841              		.file 39 "../libDaisy/src/per/dac.h"
- 1842              		.file 40 "../libDaisy/src/per/sai.h"
- 1843              		.file 41 "../libDaisy/src/hid/audio.h"
- 1844              		.file 42 "../libDaisy/src/per/adc.h"
- 1845              		.file 43 "../libDaisy/src/per/uart.h"
- 1846              		.file 44 "../libDaisy/src/hid/MidiEvent.h"
- 1847              		.file 45 "../libDaisy/src/hid/midi_parser.h"
- 1848              		.file 46 "../libDaisy/src/hid/usb.h"
- 1849              		.file 47 "../libDaisy/src/hid/midi.h"
- 1850              		.file 48 "../libDaisy/src/util/FIFO.h"
- 1851              		.file 49 "../libDaisy/src/hid/switch.h"
- 1852              		.file 50 "../libDaisy/src/hid/encoder.h"
- 1853              		.file 51 "../libDaisy/src/hid/ctrl.h"
- 1854              		.file 52 "../libDaisy/src/hid/logger_impl.h"
- 1855              		.file 53 "../libDaisy/src/util/wav_format.h"
- 1856              		.file 54 "../libDaisy/src/hid/led.h"
- 1857              		.file 55 "../libDaisy/src/util/color.h"
- 1858              		.file 56 "../libDaisy/src/hid/rgb_led.h"
- 1859              		.file 57 "../libDaisy/src/dev/max11300.h"
- 1860              		.file 58 "../libDaisy/src/hid/logger.h"
- 1861              		.file 59 "../libDaisy/src/daisy_pod.h"
- 1862              		.file 60 "../libDaisy/src/per/gpio.h"
- 1863              		.file 61 "../libDaisy/src/dev/sdram.h"
- 1864              		.file 62 "/Library/DaisyToolchain/0.2.0/arm/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h"
- 1865              		.file 63 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdio.h"
- 1866              		.file 64 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/string.h"
- 1867              		.file 65 "../DaisySP/Source/Control/adenv.h"
- 1868              		.file 66 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/wchar.h"
- 1869              		.file 67 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/time.h"
- 1870              		.file 68 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/locale.h"
- 1871              		.file 69 "sample.h"
- 1872              		.file 70 "../libDaisy/src/dev/sr_595.h"
- 1873              		.file 71 "GrainPhasor.h"
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 79
-
-
- 1874              		.file 72 "Grain.h"
- 1875              		.file 73 "GranularSynth.h"
- 1876              		.file 74 "<built-in>"
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s 			page 80
+ 1817              		.file 31 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/math.h"
+ 1818              		.file 32 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdlib.h"
+ 1819              		.file 33 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/math.h"
+ 1820              		.file 34 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/stdlib.h"
+ 1821              		.file 35 "../libDaisy/src/daisy_core.h"
+ 1822              		.file 36 "../libDaisy/src/per/tim.h"
+ 1823              		.file 37 "../libDaisy/src/sys/system.h"
+ 1824              		.file 38 "../libDaisy/src/per/qspi.h"
+ 1825              		.file 39 "../libDaisy/src/per/dac.h"
+ 1826              		.file 40 "../libDaisy/src/per/sai.h"
+ 1827              		.file 41 "../libDaisy/src/hid/audio.h"
+ 1828              		.file 42 "../libDaisy/src/per/adc.h"
+ 1829              		.file 43 "../libDaisy/src/per/uart.h"
+ 1830              		.file 44 "../libDaisy/src/hid/MidiEvent.h"
+ 1831              		.file 45 "../libDaisy/src/hid/midi_parser.h"
+ 1832              		.file 46 "../libDaisy/src/hid/usb.h"
+ 1833              		.file 47 "../libDaisy/src/hid/midi.h"
+ 1834              		.file 48 "../libDaisy/src/util/FIFO.h"
+ 1835              		.file 49 "../libDaisy/src/hid/switch.h"
+ 1836              		.file 50 "../libDaisy/src/hid/encoder.h"
+ 1837              		.file 51 "../libDaisy/src/hid/ctrl.h"
+ 1838              		.file 52 "../libDaisy/src/hid/logger_impl.h"
+ 1839              		.file 53 "../libDaisy/src/util/wav_format.h"
+ 1840              		.file 54 "../libDaisy/src/hid/led.h"
+ 1841              		.file 55 "../libDaisy/src/util/color.h"
+ 1842              		.file 56 "../libDaisy/src/hid/rgb_led.h"
+ 1843              		.file 57 "../libDaisy/src/dev/max11300.h"
+ 1844              		.file 58 "../libDaisy/src/hid/logger.h"
+ 1845              		.file 59 "../libDaisy/src/daisy_pod.h"
+ 1846              		.file 60 "../libDaisy/src/per/gpio.h"
+ 1847              		.file 61 "../libDaisy/src/dev/sdram.h"
+ 1848              		.file 62 "/Library/DaisyToolchain/0.2.0/arm/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h"
+ 1849              		.file 63 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdio.h"
+ 1850              		.file 64 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/string.h"
+ 1851              		.file 65 "../DaisySP/Source/Control/adenv.h"
+ 1852              		.file 66 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/wchar.h"
+ 1853              		.file 67 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/time.h"
+ 1854              		.file 68 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/locale.h"
+ 1855              		.file 69 "sample.h"
+ 1856              		.file 70 "../libDaisy/src/dev/sr_595.h"
+ 1857              		.file 71 "GrainPhasor.h"
+ 1858              		.file 72 "Grain.h"
+ 1859              		.file 73 "GranularSynth.h"
+ 1860              		.file 74 "<built-in>"
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s 			page 79
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 GranularSynth.cpp
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:19     .text._Z8RngFloatv:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:25     .text._Z8RngFloatv:0000000000000000 _Z8RngFloatv
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:63     .text._Z8RngFloatv:0000000000000024 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:69     .text._ZN13GranularSynth10InitParamsEv:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:75     .text._ZN13GranularSynth10InitParamsEv:0000000000000000 _ZN13GranularSynth10InitParamsEv
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:111    .text._ZN13GranularSynth4InitEPsS0_j:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:117    .text._ZN13GranularSynth4InitEPsS0_j:0000000000000000 _ZN13GranularSynth4InitEPsS0_j
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:210    .text._ZN13GranularSynth4InitEPsS0_j:0000000000000040 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:217    .text._ZN13GranularSynth5ResetEj:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:223    .text._ZN13GranularSynth5ResetEj:0000000000000000 _ZN13GranularSynth5ResetEj
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:289    .text._ZN13GranularSynth12SetGrainSizeEf:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:295    .text._ZN13GranularSynth12SetGrainSizeEf:0000000000000000 _ZN13GranularSynth12SetGrainSizeEf
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:394    .text._ZN13GranularSynth12SetGrainSizeEf:0000000000000038 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:403    .text._ZN13GranularSynth11SetSpawnPosEf:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:409    .text._ZN13GranularSynth11SetSpawnPosEf:0000000000000000 _ZN13GranularSynth11SetSpawnPosEf
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:436    .text._ZN13GranularSynth15SetActiveGrainsEf:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:442    .text._ZN13GranularSynth15SetActiveGrainsEf:0000000000000000 _ZN13GranularSynth15SetActiveGrainsEf
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:541    .text._ZN13GranularSynth13SetPitchRatioEf:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:547    .text._ZN13GranularSynth13SetPitchRatioEf:0000000000000000 _ZN13GranularSynth13SetPitchRatioEf
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:630    .text._ZN13GranularSynth6SetPanEf:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:636    .text._ZN13GranularSynth6SetPanEf:0000000000000000 _ZN13GranularSynth6SetPanEf
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:653    .text._ZN13GranularSynth12SetDirectionEf:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:659    .text._ZN13GranularSynth12SetDirectionEf:0000000000000000 _ZN13GranularSynth12SetDirectionEf
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:676    .text._ZN13GranularSynth17UpdateGrainParamsEv:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:682    .text._ZN13GranularSynth17UpdateGrainParamsEv:0000000000000000 _ZN13GranularSynth17UpdateGrainParamsEv
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:753    .text._ZN13GranularSynth15ApplyRandomnessEv:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:759    .text._ZN13GranularSynth15ApplyRandomnessEv:0000000000000000 _ZN13GranularSynth15ApplyRandomnessEv
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:1555   .text._ZN13GranularSynth15ApplyRandomnessEv:00000000000001c8 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:1565   .text._ZN13GranularSynth12TriggerGrainEv:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:1571   .text._ZN13GranularSynth12TriggerGrainEv:0000000000000000 _ZN13GranularSynth12TriggerGrainEv
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:1662   .text._ZN13GranularSynth13ProcessGrainsEv:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:1668   .text._ZN13GranularSynth13ProcessGrainsEv:0000000000000000 _ZN13GranularSynth13ProcessGrainsEv
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc7M9Za3.s:1800   .text._ZN13GranularSynth13ProcessGrainsEv:0000000000000094 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:19     .text._Z8RngFloatv:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:25     .text._Z8RngFloatv:0000000000000000 _Z8RngFloatv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:63     .text._Z8RngFloatv:0000000000000024 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:69     .text._ZN13GranularSynth10InitParamsEv:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:75     .text._ZN13GranularSynth10InitParamsEv:0000000000000000 _ZN13GranularSynth10InitParamsEv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:111    .text._ZN13GranularSynth4InitEPsS0_j:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:117    .text._ZN13GranularSynth4InitEPsS0_j:0000000000000000 _ZN13GranularSynth4InitEPsS0_j
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:210    .text._ZN13GranularSynth4InitEPsS0_j:0000000000000040 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:217    .text._ZN13GranularSynth5ResetEj:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:223    .text._ZN13GranularSynth5ResetEj:0000000000000000 _ZN13GranularSynth5ResetEj
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:289    .text._ZN13GranularSynth12SetGrainSizeEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:295    .text._ZN13GranularSynth12SetGrainSizeEf:0000000000000000 _ZN13GranularSynth12SetGrainSizeEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:394    .text._ZN13GranularSynth12SetGrainSizeEf:0000000000000038 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:403    .text._ZN13GranularSynth11SetSpawnPosEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:409    .text._ZN13GranularSynth11SetSpawnPosEf:0000000000000000 _ZN13GranularSynth11SetSpawnPosEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:436    .text._ZN13GranularSynth15SetActiveGrainsEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:442    .text._ZN13GranularSynth15SetActiveGrainsEf:0000000000000000 _ZN13GranularSynth15SetActiveGrainsEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:541    .text._ZN13GranularSynth13SetPitchRatioEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:547    .text._ZN13GranularSynth13SetPitchRatioEf:0000000000000000 _ZN13GranularSynth13SetPitchRatioEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:630    .text._ZN13GranularSynth6SetPanEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:636    .text._ZN13GranularSynth6SetPanEf:0000000000000000 _ZN13GranularSynth6SetPanEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:653    .text._ZN13GranularSynth12SetDirectionEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:659    .text._ZN13GranularSynth12SetDirectionEf:0000000000000000 _ZN13GranularSynth12SetDirectionEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:676    .text._ZN13GranularSynth17UpdateGrainParamsEv:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:682    .text._ZN13GranularSynth17UpdateGrainParamsEv:0000000000000000 _ZN13GranularSynth17UpdateGrainParamsEv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:747    .text._ZN13GranularSynth15ApplyRandomnessEv:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:753    .text._ZN13GranularSynth15ApplyRandomnessEv:0000000000000000 _ZN13GranularSynth15ApplyRandomnessEv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:1549   .text._ZN13GranularSynth15ApplyRandomnessEv:00000000000001c8 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:1559   .text._ZN13GranularSynth12TriggerGrainEv:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:1565   .text._ZN13GranularSynth12TriggerGrainEv:0000000000000000 _ZN13GranularSynth12TriggerGrainEv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:1646   .text._ZN13GranularSynth13ProcessGrainsEv:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:1652   .text._ZN13GranularSynth13ProcessGrainsEv:0000000000000000 _ZN13GranularSynth13ProcessGrainsEv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccN7nZmV.s:1784   .text._ZN13GranularSynth13ProcessGrainsEv:0000000000000094 $d
 
 UNDEFINED SYMBOLS
 rng_state
@@ -4732,7 +4713,6 @@ _ZN5Grain10right_buf_E
 _ZN5Grain12SetGrainSizeEj
 _ZN5Grain11SetSpawnPosEj
 _ZN5Grain13SetPitchRatioEf
-_ZN5Grain18SetPhasorDirectionEf
 _ZN5Grain7TriggerEjjfff
 _ZN5Grain7ProcessE6Samplef
 _ZN5daisy6LoggerILNS_17LoggerDestinationE1EE9PrintLineEPKcz

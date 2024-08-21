@@ -73,7 +73,7 @@ void GranularSynth::UpdateGrainParams(){
     grain.SetGrainSize(grain_size_);
     grain.SetSpawnPos(spawn_pos_);
     grain.SetPitchRatio(pitch_ratio_);
-    grain.SetPhasorDirection(direction_);
+    // grain.SetPhasorDirection(direction_);
   }
 }
 
@@ -122,11 +122,10 @@ void GranularSynth::ApplyRandomness(){
 void GranularSynth::TriggerGrain(){
   size_t count = 0;
   for(Grain& grain:grains_){
+    // UpdateGrainParams();
     if (grain.is_active_) { count++; }
     else if (count<active_count_){
       // ApplyRandomness();
-      // grain.SetEnvelopeType(env_type_);
-      UpdateGrainParams();
       grain.Trigger(spawn_pos_,grain_size_,pitch_ratio_,pan_,direction_);
       count++;
       break;
