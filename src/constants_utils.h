@@ -28,9 +28,7 @@ static const uint16_t MAX_FNAME_LEN = 128;
 /* granular synth parameter constants */
 constexpr int MIN_GRAINS = 1;
 constexpr int MAX_GRAINS = 10;
-static constexpr int NUM_ENV_TYPES = 4;
-static constexpr int NUM_PHASOR_MODES = 4;
-static constexpr int NUM_SYNTH_MODES = 7;
+static constexpr int NUM_SYNTH_MODES = 8;
 constexpr float PARAM_CHANGE_THRESHOLD = 0.01f;
 constexpr float MIN_GRAIN_SIZE_MS = 100.0f;
 constexpr float MAX_GRAIN_SIZE_MS = 3000.0f;
@@ -51,7 +49,8 @@ const float HIPASS_UPPER_BOUND = 0.01f;
 const float LOPASS_LOWER_BOUND = 20.0f;
 const float LOPASS_UPPER_BOUND = 18000.0f;
 
-const float HICUT_FREQ = 0.4f;
+// const float HICUT_FREQ = 0.3125f; /* 15000Hz @ 48kHz sample rate */
+const float HICUT_FREQ = 0.34375; /* 16500Hz @ 48kHz sample rate */
 
 /* random number generator variables and helper functions */
 extern uint32_t rng_state;

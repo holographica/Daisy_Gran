@@ -11,7 +11,7 @@ void GranularSynth::Init(int16_t *left, int16_t *right, size_t audio_len){
   right_buf_ = right;
   audio_len_ = audio_len;
   for (Grain& grain: grains_){
-    grain.Init(left,right);
+    grain.Init();
   }
   Grain::audio_len_ = audio_len;
   Grain::left_buf_ = left;
@@ -22,51 +22,19 @@ void GranularSynth::Init(int16_t *left, int16_t *right, size_t audio_len){
 void GranularSynth::Reset(size_t len){
   audio_len_ = len;
   for (Grain& grain: grains_){
-    grain.Init(left_buf_,right_buf_);
+    grain.Init();
   }
   InitParams();
 }
 
 /// @brief  Set intial grain parameter values
 void GranularSynth::InitParams(){
-  phasor_mode_ = GrainPhasor::Mode::OneShot;
   grain_size_ = 4800;
   spawn_pos_ = 0;
   active_count_ = 1;
   pitch_ratio_ = 1.0f;
   pan_ = 0.5f;
-}
-
-void GranularSynth::SetEnvelopeType(Grain::EnvelopeType type){
-  // if (type==Grain::EnvelopeType::LinearDecay){
-  //   DebugPrint(pod_, "set env to linear decya");
-  // }
-  // if (type==Grain::EnvelopeType::Decay){
-  //   DebugPrint(pod_, "set env to decay");
-  // }
-  // if (type==Grain::EnvelopeType::Rectangular){
-  //   DebugPrint(pod_, "set env to rect");
-  // }
-  // if (type==Grain::EnvelopeType::Hann){
-  //   DebugPrint(pod_, "set env to hann");
-  // }
-  env_type_ = type; 
-}
-
-void GranularSynth::SetPhasorMode(GrainPhasor::Mode mode){
-  // if (mode==GrainPhasor::Mode::OneShot){
-  //   DebugPrint(pod_, "set phasor to oneshot");
-  // }
-  // if (mode==GrainPhasor::Mode::OneShotReverse){
-  //   DebugPrint(pod_, "set phasor to reverse");
-  // }
-  // if (mode==GrainPhasor::Mode::Cycle){
-  //   DebugPrint(pod_, "set phasor to cycle");
-  // }
-  // if (mode==GrainPhasor::Mode::PingPong){
-  //   DebugPrint(pod_, "set phasor to pingpong");
-  // }
-  phasor_mode_ = mode;
+  direction_ = 0.0f;
 }
 
 /* these setters take a normalised value (ie float from 0-1) 
@@ -95,12 +63,17 @@ void GranularSynth::SetPan(float pan){
   pan_ = pan;
 }
 
+void GranularSynth::SetDirection(float direction){
+  direction_ = direction;
+}
+
 /// @brief Update grain audio parameters
 void GranularSynth::UpdateGrainParams(){
   for (Grain& grain:grains_){
     grain.SetGrainSize(grain_size_);
     grain.SetSpawnPos(spawn_pos_);
     grain.SetPitchRatio(pitch_ratio_);
+    grain.SetPhasorDirection(direction_);
   }
 }
 
@@ -137,20 +110,6 @@ void GranularSynth::ApplyRandomness(){
     pitch_ratio_ = fclamp((pitch_ratio_*rnd_pitch_factor), MIN_PITCH, MAX_PITCH);
   }
 
-  if (rnd_envelope_>0){
-    if (RngFloat() < rnd_envelope_){
-      int random_env_type =  static_cast<int>(RngFloat()) * NUM_ENV_TYPES;
-      env_type_ = static_cast<Grain::EnvelopeType>(random_env_type);
-    }
-  }
-
-  if (rnd_phasor_>0){
-    if (RngFloat() < rnd_phasor_){
-      int random_phasor_mode = static_cast<int>(RngFloat()) * NUM_PHASOR_MODES;
-      phasor_mode_ = static_cast<GrainPhasor::Mode>(random_phasor_mode);
-    }
-  }
-
   if (rnd_count_>0){
     rnd_count_/=2;
     float rnd_count_factor = fmap(RngFloat(),1.0f-rnd_count_,1.0f+rnd_count_, Mapping::LINEAR);
@@ -167,8 +126,7 @@ void GranularSynth::TriggerGrain(){
     else if (count<active_count_){
       // ApplyRandomness();
       // grain.SetEnvelopeType(env_type_);
-      grain.SetPhasorMode(phasor_mode_);
-      grain.Trigger(spawn_pos_,grain_size_,pitch_ratio_,pan_);
+      grain.Trigger(spawn_pos_,grain_size_,pitch_ratio_,pan_,direction_);
       count++;
       break;
     }
@@ -183,27 +141,13 @@ Sample GranularSynth::ProcessGrains(){
   sample_.left=0.0f, sample_.right=0.0f;
   TriggerGrain();
 
-  /* apply normalisation to grain, scaled by number of active grains */
-  // float normalise_per_grain = 1.0f/daisysp::fmax(1.0f, fastroot(active_count_,1));
   int count = 0;
   for (Grain& grain:grains_){
     if (grain.is_active_){
       count++;
-      // sample_ = grain.Process(sample_, normalise_per_grain);
       sample_ = grain.Process(sample_,1);
-      // sample_ = grain.Process(sample_, normalise_per_grain);
     }
   }
-
-  /* attempt to normalise overall gain */
-  // float normalise_output = 1.0f/daisysp::fmax(1.0f, fastlog2f(active_count_+1));
-  // sample_.left *= normalise_output;
-  // sample_.right *= normalise_output;
-
-  // NOTE: try above and below see which is better
-  
-  // sample_.left = SoftClip(sample_.left*normalise_output);
-  // sample_.right = SoftClip(sample_.right*normalise_output);
   
   // sample_.left = SoftClip(sample_.left);
   // sample_.right = SoftClip(sample_.right);

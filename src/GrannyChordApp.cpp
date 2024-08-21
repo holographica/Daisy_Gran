@@ -269,31 +269,22 @@ void GrannyChordApp::ButtonHandler(){
 
 /// @brief Switch between synth parameter control modes
 void GrannyChordApp::HandleButton1(){
-  if (curr_synth_mode_!=SynthMode::Reverb &&
-      curr_synth_mode_!=SynthMode::Filter)
-  {
-    UpdateSynthMode();
-  }
+  UpdateSynthModeA();
 }
 
 /// @brief Toggles on/off synth parameter randomness controls
 void GrannyChordApp::HandleButton2(){
-  if (curr_synth_mode_ != SynthMode::Reverb &&
-      curr_synth_mode_ != SynthMode::Filter &&
-      curr_synth_mode_ != SynthMode::Pan_PanRnd)
-  {
-    ToggleRandomnessControls();
-  }
+    UpdateSynthModeB();
 }
 
 /// @brief Toggles on/off reverb control mode 
 void GrannyChordApp::HandleButton1LongPress(){
-  ToggleFX(true);
+  // TODO: chord mode? 
 }
 
 /// @brief Toggles on/off filter control mode
 void GrannyChordApp::HandleButton2LongPress(){
-  ToggleFX(false);
+  // TODO: RECORD OUT? 
 }
 
 /// @brief Scrolls through list of files for user selection
@@ -304,28 +295,44 @@ void GrannyChordApp::HandleFileSelection(int32_t encoder_inc){
   DebugPrint(pod_, "selected file %d %s",file_idx_,fname_);
 }
 
-/// @brief iterates through synth parameter control modes
-void GrannyChordApp::UpdateSynthMode(){
+/// @brief iterates through synth parameter control modes when button 1 pressed
+/// if we are in an 'even' mode, go to the next 'eveb' mode. 
+/// if we are in an 'odd' mode, go to the corresponding 'even' mode
+void GrannyChordApp::UpdateSynthModeA(){
   DebugPrint(pod_, "next synth mode");
-  switch(curr_synth_mode_){
-    case SynthMode::Size_Position:
-      curr_synth_mode_ = SynthMode::Pitch_ActiveGrains;
-      break;
-    case SynthMode::Pitch_ActiveGrains:
-      curr_synth_mode_ = SynthMode::PhasorMode_EnvType;
-      break;
-    case SynthMode::PhasorMode_EnvType:
-      curr_synth_mode_ = SynthMode::Pan_PanRnd;
-      break;
-    case SynthMode::Pan_PanRnd:
-      curr_synth_mode_ = SynthMode::Size_Position;
-      break;
-    default:
-      break;
+  int mode_idx = static_cast<int>(curr_synth_mode_);
+  if (mode_idx%2 == 0){
+    mode_idx = (mode_idx + 2) % 8;
   }
+  else {
+    /* XOR the enum value to get corresponding mode index */
+    mode_idx = mode_idx ^ 1;
+  }
+
+  curr_synth_mode_ = static_cast<SynthMode>(mode_idx);
   DebugPrintMode(curr_synth_mode_);
   ResetPassThru();
   SetLed1SynthMode();
+  mode_changed_ = true;
+}
+
+/// @brief iterates through synth parameter control modes when button 2 pressed
+/// if we are in an 'even' mode, go to the corresponding 'odd' mode. 
+/// if we are in an 'odd' mode, go to the next 'odd' mode
+void GrannyChordApp::UpdateSynthModeB(){
+  DebugPrint(pod_, "next synth mode");
+  int mode_idx = static_cast<int>(curr_synth_mode_);
+  if (mode_idx %2 != 0){
+    mode_idx = (mode_idx + 2) % 8;
+  }
+  else {
+    mode_idx = mode_idx ^ 1;
+  }
+
+  curr_synth_mode_ = static_cast<SynthMode>(mode_idx);
+  DebugPrintMode(curr_synth_mode_);
+  ResetPassThru();
+  SetLed2();
   mode_changed_ = true;
 }
 
@@ -340,54 +347,14 @@ void GrannyChordApp::UpdateSynthParams(){
   float knob2_val = MapKnobDeadzone(pod_.knob2.Process());
 
   /* only update parameter if knob has passed through previous value in this mode */
-  if (UpdateKnobPassThru2(knob1_val,mode_idx)){
+  if (UpdateKnobPassThru(knob1_val,mode_idx)){
     UpdateKnob1Params(knob1_val,curr_synth_mode_);
     prev_param_k1[mode_idx] = knob1_val;
   }
-  if (UpdateKnobPassThru2(knob2_val,mode_idx)){
+  if (UpdateKnobPassThru(knob2_val,mode_idx)){
     UpdateKnob2Params(knob2_val, curr_synth_mode_);
     prev_param_k2[mode_idx] = knob2_val;
   }
-}
-
-/// @brief toggles on/off grain parameter randomness controls 
-void GrannyChordApp::ToggleRandomnessControls(){
-  DebugPrint(pod_, "rnd toggled changing from: ");
-  DebugPrintMode(curr_synth_mode_);
-  DebugPrint(pod_, "to :");
-  if (curr_synth_mode_ <= SynthMode::PhasorMode_EnvType_Rnd){
-    /* below works because regular modes are even, random modes are odd
-      so we can XOR their enum value to get the corresponding mode */
-    curr_synth_mode_ = static_cast<SynthMode>(static_cast<int>(curr_synth_mode_) ^ 1);
-    DebugPrintMode(curr_synth_mode_);
-    ResetPassThru();
-    SetLed2();
-    mode_changed_ = true;
-  }
-}
-
-/// @brief Toggles on/off FX controls 
-/// @param is_reverb_mode True for reverb mode, false for filter mode
-void GrannyChordApp::ToggleFX(bool is_reverb_mode){
-  switch (curr_synth_mode_){
-    case SynthMode::Reverb:
-      if (is_reverb_mode) curr_synth_mode_ = prev_synth_mode_;
-      else curr_synth_mode_ = SynthMode::Filter;
-      break;
-    case SynthMode::Filter:
-      if (!is_reverb_mode) curr_synth_mode_ = prev_synth_mode_;
-      else curr_synth_mode_ = SynthMode::Reverb;
-      break;
-    default:
-      prev_synth_mode_ = curr_synth_mode_;
-      if (is_reverb_mode) curr_synth_mode_= SynthMode::Reverb;
-      else curr_synth_mode_ = SynthMode::Filter;
-  }
-  DebugPrint(pod_, "changed fx, now:");
-  DebugPrintMode(curr_synth_mode_);
-  mode_changed_ = true;
-  ResetPassThru();
-  SetLed2();
 }
 
 /// @brief Initialises file manager, sets audio data buffers and scans SD card for WAV files
@@ -439,18 +406,16 @@ void GrannyChordApp::InitWavWriter(){
 
 /// @brief initialise reverb, compressor, filter configs for FX section 
 void GrannyChordApp::InitFX(){
-  comp_.Init(pod_.AudioSampleRate());
-
-  comp_.SetRatio(4.0f);
-  comp_.SetAttack(0.01f);
-  comp_.SetThreshold(-24.0f);
-  comp_.SetRelease(0.2f);
+  comp_.Init(SAMPLE_RATE_FLOAT);
   limiter_.Init();
-
+  
+  chorus_.Init(SAMPLE_RATE_FLOAT);
   reverb_.Init(SAMPLE_RATE_FLOAT);
+  
   lowpass_moog_.Init(SAMPLE_RATE_FLOAT);
   lowpass_moog_.SetFreq(LOPASS_UPPER_BOUND);
   lowpass_moog_.SetRes(0.7f);
+  
   hipass_.Init();
   hipass_.SetFilterMode(daisysp::OnePole::FilterMode::FILTER_MODE_HIGH_PASS);
   hipass_.SetFrequency(HIPASS_LOWER_BOUND);
@@ -568,12 +533,16 @@ Sample GrannyChordApp::ProcessFX(Sample in){
   out.right = hipass_.Process(in.right);
 
   // /* apply compression to reduce gain changes */
-  // out.left = comp_.Process(out.left);
-  // out.right = comp_.Process(out.right);
+  out.left = comp_.Process(out.left);
+  out.right = comp_.Process(out.right);
 
   /* apply lowpass filter */
   out.left = lowpass_moog_.Process(out.left);
   out.right = lowpass_moog_.Process(out.right);
+
+  /* apply chorus */
+  out.left = chorus_.Process(out.left);
+  out.right = chorus_.Process(out.right);
 
   /* apply reverb */
   reverb_.ProcessMix(out.left, out.right, &out.left, &out.right);
@@ -624,13 +593,12 @@ void GrannyChordApp::UpdateKnob1Params(float knob1_val, SynthMode mode){
     case SynthMode::Pitch_ActiveGrains:
       synth_.SetPitchRatio(knob1_val);
       return;
-    case SynthMode::Pan_PanRnd:
+    case SynthMode::Pan_Direction:
       synth_.SetPan(knob1_val);
       return;
-    case SynthMode::PhasorMode_EnvType:
-      knob1_val = round(fmap(knob1_val, 0, NUM_PHASOR_MODES));
-      DebugPrint(pod_, "set phasor mode to %.2f", knob1_val);
-      synth_.SetPhasorMode(static_cast<GrainPhasor::Mode>(knob1_val));
+    case SynthMode::Reverb:
+       /* set reverb feedback ie tail length */
+      reverb_.SetFeedback(knob1_val); // NOTE check it doesn't clip
       return;
     case SynthMode::Size_Position_Rnd:
       synth_.SetSizeRnd(knob1_val);
@@ -638,13 +606,9 @@ void GrannyChordApp::UpdateKnob1Params(float knob1_val, SynthMode mode){
     case SynthMode::Pitch_ActiveGrains_Rnd:
       synth_.SetPitchRnd(knob1_val);
       return;
-    case SynthMode::PhasorMode_EnvType_Rnd:
-      synth_.SetPhasorRnd(knob1_val);
-      return;
-    case SynthMode::Reverb:
-      /* set reverb feedback ie tail length */
-      reverb_.SetFeedback(knob1_val); // NOTE check it doesn't clip
-      return;
+    case SynthMode::PanRnd_Chorus:
+      synth_.SetPanRnd(knob1_val);
+      return;     
     case SynthMode::Filter:
       /* map knob value to frequency range with an exponential curve */
       knob1_val = fmap(knob1_val, LOPASS_LOWER_BOUND, LOPASS_UPPER_BOUND, daisysp::Mapping::EXP);
@@ -665,25 +629,22 @@ void GrannyChordApp::UpdateKnob2Params(float knob2_val, SynthMode mode){
     case SynthMode::Pitch_ActiveGrains:
       synth_.SetActiveGrains(knob2_val);
       return;
-    case SynthMode::Pan_PanRnd:
-      synth_.SetPanRnd(knob2_val);
+    case SynthMode::Pan_Direction:
+      synth_.SetDirection(knob2_val);
       return;
-    case SynthMode::PhasorMode_EnvType:
-      knob2_val = round(fmap(knob2_val, 0, NUM_ENV_TYPES));
-      DebugPrint(pod_, "set env type to %.2f", knob2_val);
-      synth_.SetEnvelopeType(static_cast<Grain::EnvelopeType>(knob2_val));
-      return;
+    case SynthMode::Reverb:
+        reverb_.SetMix(knob2_val);
+        return;
     case SynthMode::Size_Position_Rnd:
       synth_.SetPositionRnd(knob2_val);
       return;
     case SynthMode::Pitch_ActiveGrains_Rnd:
       synth_.SetCountRnd(knob2_val);
       return;
-    case SynthMode::PhasorMode_EnvType_Rnd:
-      synth_.SetEnvRnd(knob2_val);
-      return;
-    case SynthMode::Reverb:
-      reverb_.SetMix(knob2_val);
+    case SynthMode::PanRnd_Chorus:
+      /* set chorus left/right channel to (synth pan +/- 10%) */
+      chorus_.SetPan(fclamp(synth_.GetPan()+0.1f,0,1), (fclamp(synth_.GetPan()-0.1f,0,1)));
+      chorus_.SetLfoDepth(knob2_val);
       return;
     case SynthMode::Filter:
       /* map knob value to frequency range with linear curve */
@@ -694,12 +655,6 @@ void GrannyChordApp::UpdateKnob2Params(float knob2_val, SynthMode mode){
   }
 }
 
-// /* check parameter value change is over a certain level to avoid reading knob jitter */
-inline bool GrannyChordApp::CheckParamDelta(float curr_val, float prev_val){
-  return (fabsf(curr_val - prev_val)>0.01f);
-}
-
-
 /* knobs on the Pod have deadzones around 0 and 1 so we adjust for this */
 inline float GrannyChordApp::MapKnobDeadzone(float knob_val ){
   if (knob_val<=0.01f) return 0.0f;
@@ -707,28 +662,7 @@ inline float GrannyChordApp::MapKnobDeadzone(float knob_val ){
   return knob_val;
 }
 
-/* here we check if the current value of the knob has moved through the last stored value 
-  before the synth mode changed, and only update the parameter once the current knob value
-  'passes through' the stored value - meaning if we set grain size to 0.1 then switch modes 
-  and move the knob to 0.8, if we switch back, grain size won't be updated again until the 
-  knob passes through this value.  */
-// inline float GrannyChordApp::UpdateKnobPassThru(float curr_knob_val, float *stored_knob_val, bool *pass_thru){
-//   if (!(*pass_thru)){
-//     // if (curr_knob_val >= (*stored_knob_val) || curr_knob_val <= (*stored_knob_val)) {
-//     if (fabsf(curr_knob_val - *stored_knob_val)<0.01) {
-//       (*pass_thru) = true;
-//     }
-//   } 
-//   if (*pass_thru){
-//     if (fabsf(curr_knob_val- (*stored_knob_val) >= 0.01)){
-//       (*stored_knob_val) = curr_knob_val;
-//       return curr_knob_val;
-//     }
-//   }
-//   return (*stored_knob_val);
-// }
-
-inline bool GrannyChordApp::UpdateKnobPassThru2(float curr_knob_val, int mode_idx){
+inline bool GrannyChordApp::UpdateKnobPassThru(float curr_knob_val, int mode_idx){
   if (mode_changed_){
     if (fabs(curr_knob_val - prev_param_k2[mode_idx])<0.01){
       mode_changed_ = false;
@@ -738,29 +672,6 @@ inline bool GrannyChordApp::UpdateKnobPassThru2(float curr_knob_val, int mode_id
   }
   else return true;
 }
-
-
-
-
-inline float GrannyChordApp::UpdateKnobPassThru(float curr_knob_val, float *stored_knob_val, float prev_param_val, bool *pass_thru){
-  if (!(*pass_thru)){
-    if (fabsf(curr_knob_val - (*stored_knob_val) < 0.01)){
-      (*pass_thru) = true;
-    }
-    else return prev_param_val;
-  } 
-    // if ((curr_knob_val >= prev_param_val && (*stored_knob_val) < (prev_param_val)) ||
-    //     (curr_knob_val <= prev_param_val && (*stored_knob_val) > (prev_param_val))) {
-    //       (*pass_thru) = true;
-    // }
-  
-  if (fabsf(curr_knob_val-prev_param_val)>=0.01){
-    (*stored_knob_val) = curr_knob_val;
-    return curr_knob_val;
-  }
-  return prev_param_val;
-}
-
 
 
 
@@ -801,14 +712,11 @@ void GrannyChordApp::DebugPrintMode(SynthMode mode){
     case SynthMode::Pitch_ActiveGrains_Rnd:
       DebugPrint(pod_, "State now in: PitchGrainsRnd");
       return;
-    case SynthMode::Pan_PanRnd:
+    case SynthMode::Pan_Direction:
       DebugPrint(pod_, "State now in: PanPanRnd");
       return;
-    case SynthMode::PhasorMode_EnvType:
+    case SynthMode::PanRnd_Chorus:
       DebugPrint(pod_, "State now in: PhasorEnv");
-      return;
-    case SynthMode::PhasorMode_EnvType_Rnd:
-      DebugPrint(pod_, "State now in: PhasorEnvRnd");
       return;
     case SynthMode::Reverb:
       DebugPrint(pod_, "State now in: Reverb");
@@ -904,21 +812,22 @@ void GrannyChordApp::SetLed1SynthMode(){
     switch(curr_synth_mode_){
       case SynthMode::Size_Position:
         SetRgb1(0, 0.7f, 0); /* green */
-        break;
+        return;
       case SynthMode::Pitch_ActiveGrains:
         SetRgb1(0.9f, 0.6f, 0); /* orange */
-        break;
-      case SynthMode::PhasorMode_EnvType:
-        SetRgb1(0, 0, 0.7f); /* blue */
-        break;
-      case SynthMode::Pan_PanRnd:
-        SetRgb1(0.7f, 0, 0.7f); /* pink */
-        break;
+        return;
+      case SynthMode::Pan_Direction:
+        SetRgb1(0,0.7f,0.7f); /* cyan */
+        return;
+      case SynthMode::Reverb:
+        SetRgb1(0.8f, 0, 0.7f); /* pink */
+        return;
       default:
-        break;
+        return;
     }
   }
 }
+        // SetRgb2(0.9f,0.9f,0); /* yellow */
 
 /// @brief sets led 2 colours based on synth mode (random, regular or FX)
 void GrannyChordApp::SetLed2(){
@@ -926,20 +835,23 @@ void GrannyChordApp::SetLed2(){
     switch(curr_synth_mode_){
       case SynthMode::Size_Position:
       case SynthMode::Pitch_ActiveGrains:
-      case SynthMode::PhasorMode_EnvType:
-      case SynthMode::Pan_PanRnd:
-        SetRgb2(0, 0.7f, 0); /* green for regular mode */
+      case SynthMode::Pan_Direction:
+      case SynthMode::Reverb:
+        SetRgb2(0, 0, 0); /* off in even mode */
         return;
       case SynthMode::Size_Position_Rnd:
-      case SynthMode::Pitch_ActiveGrains_Rnd:
-      case SynthMode::PhasorMode_EnvType_Rnd:
-        SetRgb2(0.7f, 0, 0); /* red for random mode */
+        SetRgb2(0, 0.7f, 0); /* green */
         return;
-      case SynthMode::Reverb:
-        SetRgb2(0,0.7f,0.7f); /* cyan for reverb */
+      case SynthMode::Pitch_ActiveGrains_Rnd:
+        SetRgb2(0.9f, 0.6f, 0); /* orange */
+        return;
+      case SynthMode::PanRnd_Chorus:
+         SetRgb2(0,0.7f,0.7f); /* cyan */
         return;
       case SynthMode::Filter:
-        SetRgb2(0.9f,0.9f,0); /* yellow for filter */
+        SetRgb2(0,0.7f,0.7f); /* cyan for reverb */
+        return;
+      default:
         return;
     }
   }

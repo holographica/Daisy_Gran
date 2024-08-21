@@ -47,6 +47,7 @@ class GrannyChordApp {
     Compressor comp_;
     Limiter limiter_;
     ReverbSc& reverb_;
+    Chorus chorus_;
     MoogLadder lowpass_moog_;
     OnePole hipass_;
     /* filter to reduce high end noise */
@@ -108,7 +109,8 @@ class GrannyChordApp {
 
     /* state change handlers */
     void UpdateUI();
-    void UpdateSynthMode();
+    void UpdateSynthModeA();
+    void UpdateSynthModeB();
     void HandleStateChange();
     void HandleFileSelection(int32_t encoder_inc);
 
@@ -121,12 +123,6 @@ class GrannyChordApp {
     void RecordOutToSD();
     void FinishRecording();
 
-
-    size_t paramcount=0;
-
-
-    
-
     /* hardware input handler methods */
     void ButtonHandler();
     void HandleEncoderIncrement(int encoder_inc);
@@ -136,20 +132,14 @@ class GrannyChordApp {
     void HandleButton2();
     void HandleButton1LongPress();
     void HandleButton2LongPress();
-    void ToggleRandomnessControls();
-    /* true if reverb, false if filter */
-    void ToggleFX(bool is_reverb_mode);
 
     /* methods to update/init synth parameters */
     void UpdateSynthParams();
     void UpdateKnob1Params(float knob1_val, SynthMode mode);
     void UpdateKnob2Params(float knob2_val, SynthMode mode);
     // void UpdateChordParams();
-    inline bool CheckParamDelta(float curr_val, float prev_val);
     inline float MapKnobDeadzone(float knob_val);
-    inline float UpdateKnobPassThru(float curr_knob_val, float *stored_knob_val, float prev_param_val, bool *pass_thru);
-    inline bool UpdateKnobPassThru2(float curr_knob_val, int mode_idx);
-    // inline float UpdateKnobPassThru(float curr_knob_val, float *stored_knob_val, bool *pass_thru);
+    inline bool UpdateKnobPassThru(float curr_knob_val, int mode_idx);
 
     /* timer and led methods */
     void SetupTimer();
@@ -169,6 +159,4 @@ class GrannyChordApp {
     #ifdef DEBUG_MODE
     void PrintCPULoad();
     #endif
-
-
 };

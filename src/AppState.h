@@ -16,10 +16,9 @@ enum class SynthMode{
   Size_Position_Rnd,
   Pitch_ActiveGrains,   /* param 1 = grain pitch, param 2 = num of active grains */
   Pitch_ActiveGrains_Rnd,
-  PhasorMode_EnvType,   /* param 1 = phasor mode, param 2 = grain envelope type */
-  PhasorMode_EnvType_Rnd,
   /* NOTE: pan is diff to other modes */
-  Pan_PanRnd, /* knob1 controls pan, knob2 controls randomness of pan */
+  Pan_Direction, /* knob1 controls pan, knob2 controls phasor direction */
+  PanRnd_Chorus,
   /* FX modes */
   Reverb,
   Filter

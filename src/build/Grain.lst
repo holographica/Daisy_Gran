@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 1
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -18,15 +18,15 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 1
   15              		.text
   16              	.Ltext0:
   17              		.cfi_sections	.debug_frame
-  18              		.section	.text._ZN5Grain4InitEPsS0_,"ax",%progbits
+  18              		.section	.text._ZN5Grain4InitEv,"ax",%progbits
   19              		.align	1
-  20              		.global	_ZN5Grain4InitEPsS0_
+  20              		.global	_ZN5Grain4InitEv
   21              		.syntax unified
   22              		.thumb
   23              		.thumb_func
-  25              	_ZN5Grain4InitEPsS0_:
+  25              	_ZN5Grain4InitEv:
   26              	.LVL0:
-  27              	.LFB4874:
+  27              	.LFB4873:
   28              		.file 1 "Grain.cpp"
    1:Grain.cpp     **** #include "Grain.h"
    2:Grain.cpp     **** 
@@ -38,953 +38,595 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 1
    8:Grain.cpp     **** const float Grain::decay_rate_ = 5.0f;
    9:Grain.cpp     **** 
   10:Grain.cpp     **** /// @brief Initialise the Grain instance and its Phasor object 
-  11:Grain.cpp     **** /// @param left Const pointer to the left audio data buffer
-  12:Grain.cpp     **** /// @param right Const pointer to the right audio data buffer
-  13:Grain.cpp     **** /// @param len Length in samples of the audio file loaded in the buffers
-  14:Grain.cpp     **** void Grain::Init(int16_t *left, int16_t *right){
-  29              		.loc 1 14 48 view -0
+  11:Grain.cpp     **** /// @param len Length in samples of the audio file loaded in the buffers
+  12:Grain.cpp     **** void Grain::Init(){
+  29              		.loc 1 12 19 view -0
   30              		.cfi_startproc
   31              		@ args = 0, pretend = 0, frame = 0
   32              		@ frame_needed = 0, uses_anonymous_args = 0
   33              		@ link register save eliminated.
-  15:Grain.cpp     ****   // left_buf_ = left;
-  16:Grain.cpp     ****   // right_buf_ = right;
-  17:Grain.cpp     ****   SetPhasorMode(GrainPhasor::Mode::OneShot);
-  34              		.loc 1 17 3 view .LVU1
-  18:Grain.cpp     ****   phasor_.Init(0.0f, 1.0f, phasor_mode_);
-  19:Grain.cpp     **** }
-  20:Grain.cpp     **** 
-  21:Grain.cpp     **** /// @brief Causes a grain to start playing and assigns its parameters
-  22:Grain.cpp     **** /// @param pos Spawn position of the grain, within the audio buffer 
-  23:Grain.cpp     **** /// @param grain_size Length of the grain in samples
-  24:Grain.cpp     **** /// @param pitch_ratio Pitch of the grain - 1 plays the grain at its regular pitch
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 2
-
-
-  25:Grain.cpp     **** /// @param pan Position of the grain's audio output in the stereo field
-  26:Grain.cpp     **** void Grain::Trigger(size_t pos, size_t grain_size, float pitch_ratio, float pan) {
-  27:Grain.cpp     ****   if (pos >= audio_len_) pos -= audio_len_;
-  28:Grain.cpp     ****   spawn_pos_ = pos;
-  29:Grain.cpp     ****   grain_size_ = grain_size;
-  30:Grain.cpp     ****   is_active_ = true;
-  31:Grain.cpp     ****   phasor_.Init(grain_size, pitch_ratio, phasor_mode_);
-  32:Grain.cpp     ****   pitch_ratio_ = pitch_ratio;
-  33:Grain.cpp     ****   pan_ = pan;
-  34:Grain.cpp     **** }
-  35:Grain.cpp     **** 
-  36:Grain.cpp     **** /// @brief Processes grain phase, applies envelope and panning and mixes into the output buffers
-  37:Grain.cpp     **** /// @param sum_left Pointer to variable storing total left channel audio output of all grains
-  38:Grain.cpp     **** /// @param sum_right Pointer to variable storing total right channel audio output of all grains
-  39:Grain.cpp     **** Sample Grain::Process(Sample sample, float scale) {
-  40:Grain.cpp     ****   if (!is_active_) return {0.0f, 0.0f};
-  41:Grain.cpp     ****   float phase = phasor_.Process();
-  42:Grain.cpp     ****   if (phasor_.GrainFinished()){
-  43:Grain.cpp     ****     is_active_=false;
-  44:Grain.cpp     ****     return {0.0f, 0.0f};
-  45:Grain.cpp     ****   }
-  46:Grain.cpp     ****   size_t curr_idx = spawn_pos_ + static_cast<size_t>(phase*grain_size_*pitch_ratio_);
-  47:Grain.cpp     ****   
-  48:Grain.cpp     ****   // NOTE: CHANGED THIS TO WRAP AROUND SO CHANGE BACK IF NEEDED
-  49:Grain.cpp     ****   if (curr_idx>=audio_len_-1){
-  50:Grain.cpp     ****     curr_idx %= audio_len_;
-  51:Grain.cpp     ****     // return;
-  52:Grain.cpp     ****   }
-  53:Grain.cpp     ****   else if (curr_idx<0){
-  54:Grain.cpp     ****     curr_idx += audio_len_;
-  55:Grain.cpp     ****     // return;
-  56:Grain.cpp     ****   }
-  57:Grain.cpp     **** 
-  58:Grain.cpp     ****   float left = s162f(left_buf_[curr_idx]);
-  59:Grain.cpp     ****   float right = s162f(right_buf_[curr_idx]);
-  60:Grain.cpp     ****   float env = ApplyEnvelope(phase);
-  61:Grain.cpp     **** 
-  62:Grain.cpp     ****   /* approximate constant power panning - cheaper than using sin/cos
-  63:Grain.cpp     ****   this works since gain_l^2 + gain_r^2 = 1
-  64:Grain.cpp     ****   source: cs.cmu.edu/~music/icm-online/readings/panlaws/panlaws.pdf */
-  65:Grain.cpp     ****   float gain_left = std::sqrt(1.0f-pan_);
-  66:Grain.cpp     ****   float gain_right = std::sqrt(pan_);
-  67:Grain.cpp     ****   sample.left += (left*env*gain_left*scale);
-  68:Grain.cpp     ****   sample.right += (right*env*gain_right*scale);
-  69:Grain.cpp     ****   return sample;
-  70:Grain.cpp     **** }
-  71:Grain.cpp     **** 
-  72:Grain.cpp     **** /// @brief Applies selected amplitude envelope to grain based on its phase
-  73:Grain.cpp     **** /// @param phase Current playback position of the grain within its lifetime (from 0 - 1)
-  74:Grain.cpp     **** /// @return Amplitude of the grain after envelope has been applied
-  75:Grain.cpp     **** float Grain::ApplyEnvelope(float phase){
-  76:Grain.cpp     ****   switch(envelope_type_){
-  77:Grain.cpp     ****     case EnvelopeType::LinearDecay:
-  78:Grain.cpp     ****       return 1.0f - phase;
-  79:Grain.cpp     ****     case EnvelopeType::Rectangular:
-  80:Grain.cpp     ****       return 1.0f;
-  81:Grain.cpp     ****     case EnvelopeType::Decay:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 3
-
-
-  82:Grain.cpp     ****     default:
-  83:Grain.cpp     ****       if (phase<=start_decay_) { return 1.0f; }
-  84:Grain.cpp     ****       else { return 1.0f - ((phase - start_decay_) * decay_rate_); }
-  85:Grain.cpp     ****     case EnvelopeType::Triangular:
-  86:Grain.cpp     ****       return 1.0f - std::abs(2.0f*phase - 1.0f);
-  87:Grain.cpp     ****     /* formula from https://uk.mathworks.com/help/signal/ref/hann.html */
-  88:Grain.cpp     ****     case EnvelopeType::Hann:
-  89:Grain.cpp     ****       return 0.5f * (1.0f - std::cos(2.0f * M_PI * phase));
-  90:Grain.cpp     ****   }
-  91:Grain.cpp     **** }
-  92:Grain.cpp     **** 
-  93:Grain.cpp     **** void Grain::SetSpawnPos(size_t spawn_pos){ spawn_pos_ = spawn_pos; }
-  94:Grain.cpp     **** void Grain::SetGrainSize(size_t grain_size) { grain_size_ = grain_size; }
-  95:Grain.cpp     **** void Grain::SetPitchRatio(float pitch_ratio) { pitch_ratio_ = pitch_ratio; }
-  96:Grain.cpp     **** void Grain::SetEnvelopeType(EnvelopeType type) { envelope_type_ = type; }
-  97:Grain.cpp     **** void Grain::SetPhasorPitchRatio(float pitch_ratio) { phasor_.SetPitchRatio(pitch_ratio, audio_len_)
-  98:Grain.cpp     **** void Grain::SetPhasorMode(GrainPhasor::Mode mode) {
-  99:Grain.cpp     ****   if (static_cast<int>(mode) >=2){
-  35              		.loc 1 99 3 view .LVU2
-  18:Grain.cpp     ****   phasor_.Init(0.0f, 1.0f, phasor_mode_);
-  36              		.loc 1 18 3 view .LVU3
-  37              	.LBB30:
-  38              	.LBB31:
-  39              		.file 2 "GrainPhasor.h"
+  13:Grain.cpp     ****   phasor_.Init(0.0f, 1.0f, 1);
+  34              		.loc 1 13 3 view .LVU1
+  35              	.LBB24:
+  36              	.LBI24:
+  37              		.file 2 "GrainPhasor.h"
    1:GrainPhasor.h **** #include "constants_utils.h"
    2:GrainPhasor.h **** class GrainPhasor {
    3:GrainPhasor.h ****   public:
-   4:GrainPhasor.h ****     enum class Mode {
-   5:GrainPhasor.h ****       OneShot,
-   6:GrainPhasor.h ****       OneShotReverse,
-   7:GrainPhasor.h ****       Cycle,
-   8:GrainPhasor.h ****       PingPong,
-   9:GrainPhasor.h ****     };
-  10:GrainPhasor.h **** 
-  11:GrainPhasor.h ****     GrainPhasor(): 
-  12:GrainPhasor.h ****       phase_(0), increment_(0), mode_(Mode::OneShot), 
-  13:GrainPhasor.h ****       direction_(1), grain_finished_(false) {};
-  14:GrainPhasor.h **** 
-  15:GrainPhasor.h ****     ~GrainPhasor() {};
+   4:GrainPhasor.h **** 
+   5:GrainPhasor.h ****     GrainPhasor(): 
+   6:GrainPhasor.h ****       phase_(0), increment_(0), direction_(1), grain_finished_(false) {};
+   7:GrainPhasor.h **** 
+   8:GrainPhasor.h ****     ~GrainPhasor() {};
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 2
+
+
+   9:GrainPhasor.h **** 
+  10:GrainPhasor.h ****     void Init(size_t grain_size, float pitch_ratio, int direction){
+  38              		.loc 2 10 10 view .LVU2
+  39              	.LBB25:
+  11:GrainPhasor.h ****       increment_ = pitch_ratio/static_cast<float>(grain_size);
+  40              		.loc 2 11 7 view .LVU3
+  41              		.loc 2 11 31 is_stmt 0 view .LVU4
+  42 0000 F7EE006A 		vmov.f32	s13, #1.0e+0
+  43 0004 DFED067A 		vldr.32	s15, .L2
+  12:GrainPhasor.h ****       phase_ = 0;
+  13:GrainPhasor.h ****       direction_ = direction;
+  44              		.loc 2 13 18 view .LVU5
+  45 0008 0123     		movs	r3, #1
+  12:GrainPhasor.h ****       phase_ = 0;
+  46              		.loc 2 12 14 view .LVU6
+  47 000a C0ED017A 		vstr.32	s15, [r0, #4]
+  11:GrainPhasor.h ****       increment_ = pitch_ratio/static_cast<float>(grain_size);
+  48              		.loc 2 11 31 view .LVU7
+  49 000e 86EEA77A 		vdiv.f32	s14, s13, s15
+  50              		.loc 2 13 18 view .LVU8
+  51 0012 C360     		str	r3, [r0, #12]
+  14:GrainPhasor.h ****       grain_finished_ = false;
+  52              		.loc 2 14 23 view .LVU9
+  53 0014 0023     		movs	r3, #0
+  54 0016 0374     		strb	r3, [r0, #16]
+  11:GrainPhasor.h ****       increment_ = pitch_ratio/static_cast<float>(grain_size);
+  55              		.loc 2 11 18 view .LVU10
+  56 0018 80ED027A 		vstr.32	s14, [r0, #8]
+  12:GrainPhasor.h ****       phase_ = 0;
+  57              		.loc 2 12 7 is_stmt 1 view .LVU11
+  13:GrainPhasor.h ****       grain_finished_ = false;
+  58              		.loc 2 13 7 view .LVU12
+  59              		.loc 2 14 7 view .LVU13
+  60              	.LVL1:
+  61              		.loc 2 14 7 is_stmt 0 view .LVU14
+  62              	.LBE25:
+  63              	.LBE24:
+  14:Grain.cpp     **** }
+  64              		.loc 1 14 1 view .LVU15
+  65 001c 7047     		bx	lr
+  66              	.L3:
+  67 001e 00BF     		.align	2
+  68              	.L2:
+  69 0020 00000000 		.word	0
+  70              		.cfi_endproc
+  71              	.LFE4873:
+  73              		.section	.text._ZN5Grain7TriggerEjjfff,"ax",%progbits
+  74              		.align	1
+  75              		.global	_ZN5Grain7TriggerEjjfff
+  76              		.syntax unified
+  77              		.thumb
+  78              		.thumb_func
+  80              	_ZN5Grain7TriggerEjjfff:
+  81              	.LVL2:
+  82              	.LFB4874:
+  15:Grain.cpp     **** 
+  16:Grain.cpp     **** /// @brief Causes a grain to start playing and assigns its parameters
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 3
+
+
+  17:Grain.cpp     **** /// @param pos Spawn position of the grain, within the audio buffer 
+  18:Grain.cpp     **** /// @param grain_size Length of the grain in samples
+  19:Grain.cpp     **** /// @param pitch_ratio Pitch of the grain - 1 plays the grain at its regular pitch
+  20:Grain.cpp     **** /// @param pan Position of the grain's audio output in the stereo field
+  21:Grain.cpp     **** void Grain::Trigger(size_t pos, size_t grain_size, float pitch_ratio, float pan, float direction) {
+  83              		.loc 1 21 99 is_stmt 1 view -0
+  84              		.cfi_startproc
+  85              		@ args = 0, pretend = 0, frame = 0
+  86              		@ frame_needed = 0, uses_anonymous_args = 0
+  87              		@ link register save eliminated.
+  22:Grain.cpp     ****   if (pos >= audio_len_) pos -= audio_len_;
+  88              		.loc 1 22 3 view .LVU17
+  89              	.LBB26:
+  90              	.LBB27:
+  11:GrainPhasor.h ****       phase_ = 0;
+  91              		.loc 2 11 32 is_stmt 0 view .LVU18
+  92 0000 07EE902A 		vmov	s15, r2	@ int
+  93              	.LBE27:
+  94              	.LBE26:
+  95              		.loc 1 22 11 view .LVU19
+  96 0004 0D4B     		ldr	r3, .L6
+  23:Grain.cpp     ****   spawn_pos_ = pos;
+  24:Grain.cpp     ****   grain_size_ = grain_size;
+  25:Grain.cpp     ****   is_active_ = true;
+  26:Grain.cpp     ****   phasor_.Init(grain_size, pitch_ratio, direction);
+  97              		.loc 1 26 15 view .LVU20
+  98 0006 BDEEC11A 		vcvt.s32.f32	s2, s2
+  99              	.LVL3:
+  27:Grain.cpp     ****   pitch_ratio_ = pitch_ratio;
+ 100              		.loc 1 27 16 view .LVU21
+ 101 000a 80ED080A 		vstr.32	s0, [r0, #32]
+ 102              	.LBB32:
+ 103              	.LBB28:
+  11:GrainPhasor.h ****       phase_ = 0;
+ 104              		.loc 2 11 32 view .LVU22
+ 105 000e F8EE677A 		vcvt.f32.u32	s15, s15
+ 106              	.LBE28:
+ 107              	.LBE32:
+  22:Grain.cpp     ****   spawn_pos_ = pos;
+ 108              		.loc 1 22 11 view .LVU23
+ 109 0012 1B68     		ldr	r3, [r3]
+  28:Grain.cpp     ****   pan_ = pan;
+ 110              		.loc 1 28 8 view .LVU24
+ 111 0014 C0ED050A 		vstr.32	s1, [r0, #20]
+  22:Grain.cpp     ****   spawn_pos_ = pos;
+ 112              		.loc 1 22 3 view .LVU25
+ 113 0018 8B42     		cmp	r3, r1
+  22:Grain.cpp     ****   spawn_pos_ = pos;
+ 114              		.loc 1 22 26 is_stmt 1 view .LVU26
+  26:Grain.cpp     ****   pitch_ratio_ = pitch_ratio;
+ 115              		.loc 1 26 15 is_stmt 0 view .LVU27
+ 116 001a 80ED031A 		vstr.32	s2, [r0, #12]	@ int
+ 117              	.LBB33:
+ 118              	.LBB29:
+  11:GrainPhasor.h ****       phase_ = 0;
+ 119              		.loc 2 11 31 view .LVU28
+ 120 001e 80EE277A 		vdiv.f32	s14, s0, s15
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 4
+
+
+ 121              	.LBE29:
+ 122              	.LBE33:
+  22:Grain.cpp     ****   spawn_pos_ = pos;
+ 123              		.loc 1 22 30 view .LVU29
+ 124 0022 98BF     		it	ls
+ 125 0024 C91A     		subls	r1, r1, r3
+ 126              	.LVL4:
+  23:Grain.cpp     ****   grain_size_ = grain_size;
+ 127              		.loc 1 23 3 is_stmt 1 view .LVU30
+  25:Grain.cpp     ****   phasor_.Init(grain_size, pitch_ratio, direction);
+ 128              		.loc 1 25 14 is_stmt 0 view .LVU31
+ 129 0026 0123     		movs	r3, #1
+ 130 0028 0370     		strb	r3, [r0]
+ 131              	.LBB34:
+ 132              	.LBB30:
+  12:GrainPhasor.h ****       direction_ = direction;
+ 133              		.loc 2 12 14 view .LVU32
+ 134 002a 0023     		movs	r3, #0
+ 135 002c 4360     		str	r3, [r0, #4]	@ float
+ 136              		.loc 2 14 23 view .LVU33
+ 137 002e 0023     		movs	r3, #0
+ 138              	.LBE30:
+ 139              	.LBE34:
+  24:Grain.cpp     ****   is_active_ = true;
+ 140              		.loc 1 24 15 view .LVU34
+ 141 0030 C0E90612 		strd	r1, r2, [r0, #24]
+  25:Grain.cpp     ****   phasor_.Init(grain_size, pitch_ratio, direction);
+ 142              		.loc 1 25 3 is_stmt 1 view .LVU35
+  26:Grain.cpp     ****   pitch_ratio_ = pitch_ratio;
+ 143              		.loc 1 26 3 view .LVU36
+ 144              	.LVL5:
+ 145              	.LBB35:
+ 146              	.LBI26:
+  10:GrainPhasor.h ****       increment_ = pitch_ratio/static_cast<float>(grain_size);
+ 147              		.loc 2 10 10 view .LVU37
+ 148              	.LBB31:
+  11:GrainPhasor.h ****       phase_ = 0;
+ 149              		.loc 2 11 7 view .LVU38
+ 150              		.loc 2 14 23 is_stmt 0 view .LVU39
+ 151 0034 0374     		strb	r3, [r0, #16]
+  11:GrainPhasor.h ****       phase_ = 0;
+ 152              		.loc 2 11 18 view .LVU40
+ 153 0036 80ED027A 		vstr.32	s14, [r0, #8]
+  12:GrainPhasor.h ****       direction_ = direction;
+ 154              		.loc 2 12 7 is_stmt 1 view .LVU41
+  13:GrainPhasor.h ****       grain_finished_ = false;
+ 155              		.loc 2 13 7 view .LVU42
+ 156              		.loc 2 14 7 view .LVU43
+ 157              	.LVL6:
+ 158              		.loc 2 14 7 is_stmt 0 view .LVU44
+ 159              	.LBE31:
+ 160              	.LBE35:
+  27:Grain.cpp     ****   pan_ = pan;
+ 161              		.loc 1 27 3 is_stmt 1 view .LVU45
+ 162              		.loc 1 28 3 view .LVU46
+  29:Grain.cpp     **** }
+ 163              		.loc 1 29 1 is_stmt 0 view .LVU47
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 5
+
+
+ 164 003a 7047     		bx	lr
+ 165              	.L7:
+ 166              		.align	2
+ 167              	.L6:
+ 168 003c 00000000 		.word	.LANCHOR0
+ 169              		.cfi_endproc
+ 170              	.LFE4874:
+ 172              		.section	.text._ZN5Grain13ApplyEnvelopeEf,"ax",%progbits
+ 173              		.align	1
+ 174              		.global	_ZN5Grain13ApplyEnvelopeEf
+ 175              		.syntax unified
+ 176              		.thumb
+ 177              		.thumb_func
+ 179              	_ZN5Grain13ApplyEnvelopeEf:
+ 180              	.LVL7:
+ 181              	.LFB4876:
+  30:Grain.cpp     **** 
+  31:Grain.cpp     **** /// @brief Processes grain phase, applies envelope and panning and mixes into the output buffers
+  32:Grain.cpp     **** /// @param sum_left Pointer to variable storing total left channel audio output of all grains
+  33:Grain.cpp     **** /// @param sum_right Pointer to variable storing total right channel audio output of all grains
+  34:Grain.cpp     **** Sample Grain::Process(Sample sample, float scale) {
+  35:Grain.cpp     ****   if (!is_active_) return {0.0f, 0.0f};
+  36:Grain.cpp     ****   float phase = phasor_.Process();
+  37:Grain.cpp     ****   if (phasor_.GrainFinished()){
+  38:Grain.cpp     ****     is_active_=false;
+  39:Grain.cpp     ****     return {0.0f, 0.0f};
+  40:Grain.cpp     ****   }
+  41:Grain.cpp     ****   size_t curr_idx = spawn_pos_ + static_cast<size_t>(phase*grain_size_*pitch_ratio_);
+  42:Grain.cpp     ****   
+  43:Grain.cpp     ****   if (curr_idx>=audio_len_-1){
+  44:Grain.cpp     ****     curr_idx %= audio_len_;
+  45:Grain.cpp     ****   }
+  46:Grain.cpp     ****   else if (curr_idx<0){
+  47:Grain.cpp     ****     curr_idx += audio_len_;
+  48:Grain.cpp     ****   }
+  49:Grain.cpp     **** 
+  50:Grain.cpp     ****   float left = s162f(left_buf_[curr_idx]);
+  51:Grain.cpp     ****   float right = s162f(right_buf_[curr_idx]);
+  52:Grain.cpp     ****   float env = ApplyEnvelope(phase);
+  53:Grain.cpp     **** 
+  54:Grain.cpp     ****   /* approximate constant power panning - cheaper than using sin/cos
+  55:Grain.cpp     ****   this works since gain_l^2 + gain_r^2 = 1
+  56:Grain.cpp     ****   source: cs.cmu.edu/~music/icm-online/readings/panlaws/panlaws.pdf */
+  57:Grain.cpp     ****   float gain_left = std::sqrt(1.0f-pan_);
+  58:Grain.cpp     ****   float gain_right = std::sqrt(pan_);
+  59:Grain.cpp     ****   sample.left += (left*env*gain_left*scale);
+  60:Grain.cpp     ****   sample.right += (right*env*gain_right*scale);
+  61:Grain.cpp     ****   return sample;
+  62:Grain.cpp     **** }
+  63:Grain.cpp     **** 
+  64:Grain.cpp     **** /// @brief Applies amplitude envelope (Hann window) to grain based on its phase
+  65:Grain.cpp     **** /// @param phase Current playback position of the grain within its lifetime (from 0 - 1)
+  66:Grain.cpp     **** /// @return Amplitude of the grain after envelope has been applied
+  67:Grain.cpp     **** float Grain::ApplyEnvelope(float phase){
+ 182              		.loc 1 67 40 is_stmt 1 view -0
+ 183              		.cfi_startproc
+ 184              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 6
+
+
+ 185              		@ frame_needed = 0, uses_anonymous_args = 0
+  68:Grain.cpp     ****     /* Hann formula from https://uk.mathworks.com/help/signal/ref/hann.html */
+  69:Grain.cpp     ****       return 0.5f * (1.0f - std::cos(2.0f * M_PI * phase));
+ 186              		.loc 1 69 7 view .LVU49
+ 187              		.loc 1 69 37 is_stmt 0 view .LVU50
+ 188 0000 9FED097B 		vldr.64	d7, .L9
+ 189              		.loc 1 69 52 view .LVU51
+ 190 0004 B7EEC00A 		vcvt.f64.f32	d0, s0
+ 191              	.LVL8:
+  67:Grain.cpp     ****     /* Hann formula from https://uk.mathworks.com/help/signal/ref/hann.html */
+ 192              		.loc 1 67 40 view .LVU52
+ 193 0008 08B5     		push	{r3, lr}
+ 194              		.cfi_def_cfa_offset 8
+ 195              		.cfi_offset 3, -8
+ 196              		.cfi_offset 14, -4
+ 197              		.loc 1 69 37 view .LVU53
+ 198 000a 20EE070B 		vmul.f64	d0, d0, d7
+ 199 000e FFF7FEFF 		bl	cos
+ 200              	.LVL9:
+ 201              		.loc 1 69 27 view .LVU54
+ 202 0012 B7EE007B 		vmov.f64	d7, #1.0e+0
+ 203 0016 37EE400B 		vsub.f64	d0, d7, d0
+ 204              		.loc 1 69 19 view .LVU55
+ 205 001a B6EE007B 		vmov.f64	d7, #5.0e-1
+ 206 001e 20EE070B 		vmul.f64	d0, d0, d7
+  70:Grain.cpp     **** }
+ 207              		.loc 1 70 1 view .LVU56
+ 208 0022 B7EEC00B 		vcvt.f32.f64	s0, d0
+ 209 0026 08BD     		pop	{r3, pc}
+ 210              	.L10:
+ 211              		.align	3
+ 212              	.L9:
+ 213 0028 182D4454 		.word	1413754136
+ 214 002c FB211940 		.word	1075388923
+ 215              		.cfi_endproc
+ 216              	.LFE4876:
+ 218              		.section	.text._ZN5Grain7ProcessE6Samplef,"ax",%progbits
+ 219              		.align	1
+ 220              		.global	_ZN5Grain7ProcessE6Samplef
+ 221              		.syntax unified
+ 222              		.thumb
+ 223              		.thumb_func
+ 225              	_ZN5Grain7ProcessE6Samplef:
+ 226              	.LVL10:
+ 227              	.LFB4875:
+  34:Grain.cpp     ****   if (!is_active_) return {0.0f, 0.0f};
+ 228              		.loc 1 34 51 is_stmt 1 view -0
+ 229              		.cfi_startproc
+ 230              		@ args = 0, pretend = 0, frame = 24
+ 231              		@ frame_needed = 0, uses_anonymous_args = 0
+  34:Grain.cpp     ****   if (!is_active_) return {0.0f, 0.0f};
+ 232              		.loc 1 34 51 is_stmt 0 view .LVU58
+ 233 0000 10B5     		push	{r4, lr}
+ 234              		.cfi_def_cfa_offset 8
+ 235              		.cfi_offset 4, -8
+ 236              		.cfi_offset 14, -4
+  35:Grain.cpp     ****   float phase = phasor_.Process();
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 7
+
+
+ 237              		.loc 1 35 3 view .LVU59
+ 238 0002 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
+  34:Grain.cpp     ****   if (!is_active_) return {0.0f, 0.0f};
+ 239              		.loc 1 34 51 view .LVU60
+ 240 0004 0446     		mov	r4, r0
+ 241 0006 2DED088B 		vpush.64	{d8, d9, d10, d11}
+ 242              		.cfi_def_cfa_offset 40
+ 243              		.cfi_offset 80, -40
+ 244              		.cfi_offset 81, -36
+ 245              		.cfi_offset 82, -32
+ 246              		.cfi_offset 83, -28
+ 247              		.cfi_offset 84, -24
+ 248              		.cfi_offset 85, -20
+ 249              		.cfi_offset 86, -16
+ 250              		.cfi_offset 87, -12
+ 251 000a 86B0     		sub	sp, sp, #24
+ 252              		.cfi_def_cfa_offset 64
+ 253              	.LVL11:
+  35:Grain.cpp     ****   float phase = phasor_.Process();
+ 254              		.loc 1 35 3 is_stmt 1 view .LVU61
+  34:Grain.cpp     ****   if (!is_active_) return {0.0f, 0.0f};
+ 255              		.loc 1 34 51 is_stmt 0 view .LVU62
+ 256 000c F0EE409A 		vmov.f32	s19, s0
+ 257 0010 B0EE609A 		vmov.f32	s18, s1
+ 258 0014 B0EE41AA 		vmov.f32	s20, s2
+ 259 0018 8DED020A 		vstr.32	s0, [sp, #8]
+ 260              	.LVL12:
+  34:Grain.cpp     ****   if (!is_active_) return {0.0f, 0.0f};
+ 261              		.loc 1 34 51 view .LVU63
+ 262 001c CDED030A 		vstr.32	s1, [sp, #12]
+ 263              	.LVL13:
+  35:Grain.cpp     ****   float phase = phasor_.Process();
+ 264              		.loc 1 35 3 view .LVU64
+ 265 0020 53B9     		cbnz	r3, .L12
+ 266              	.L23:
+  39:Grain.cpp     ****   }
+ 267              		.loc 1 39 5 is_stmt 1 view .LVU65
+  39:Grain.cpp     ****   }
+ 268              		.loc 1 39 23 is_stmt 0 view .LVU66
+ 269 0022 0023     		movs	r3, #0
+ 270 0024 0493     		str	r3, [sp, #16]	@ float
+ 271 0026 0593     		str	r3, [sp, #20]	@ float
+ 272              	.LVL14:
+ 273              	.L13:
+  62:Grain.cpp     **** 
+ 274              		.loc 1 62 1 view .LVU67
+ 275 0028 9DED040A 		vldr.32	s0, [sp, #16]
+ 276 002c DDED050A 		vldr.32	s1, [sp, #20]
+ 277 0030 06B0     		add	sp, sp, #24
+ 278              		.cfi_remember_state
+ 279              		.cfi_def_cfa_offset 40
+ 280              		@ sp needed
+ 281 0032 BDEC088B 		vldm	sp!, {d8-d11}
+ 282              		.cfi_restore 86
+ 283              		.cfi_restore 87
+ 284              		.cfi_restore 84
+ 285              		.cfi_restore 85
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 8
+
+
+ 286              		.cfi_restore 82
+ 287              		.cfi_restore 83
+ 288              		.cfi_restore 80
+ 289              		.cfi_restore 81
+ 290              		.cfi_def_cfa_offset 8
+ 291              	.LVL15:
+  62:Grain.cpp     **** 
+ 292              		.loc 1 62 1 view .LVU68
+ 293 0036 10BD     		pop	{r4, pc}
+ 294              	.LVL16:
+ 295              	.L12:
+ 296              		.cfi_restore_state
+  36:Grain.cpp     ****   if (phasor_.GrainFinished()){
+ 297              		.loc 1 36 3 is_stmt 1 view .LVU69
+ 298              	.LBB50:
+ 299              	.LBI50:
+  15:GrainPhasor.h ****     }
   16:GrainPhasor.h **** 
-  17:GrainPhasor.h ****     void Init(size_t grain_size, float pitch_ratio, Mode play_mode){
-  18:GrainPhasor.h ****       increment_ = pitch_ratio/static_cast<float>(grain_size);
-  40              		.loc 2 18 31 is_stmt 0 view .LVU4
-  41 0000 F7EE007A 		vmov.f32	s15, #1.0e+0
-  42 0004 9FED0B7A 		vldr.32	s14, .L3
-  43              	.LBE31:
-  44              	.LBE30:
-  18:Grain.cpp     ****   phasor_.Init(0.0f, 1.0f, phasor_mode_);
-  45              		.loc 1 18 15 view .LVU5
-  46 0008 8369     		ldr	r3, [r0, #24]
-  47              	.LVL1:
-  48              	.LBB33:
-  49              	.LBI30:
-  17:GrainPhasor.h ****       increment_ = pitch_ratio/static_cast<float>(grain_size);
-  50              		.loc 2 17 10 is_stmt 1 view .LVU6
-  51              	.LBB32:
-  52              		.loc 2 18 7 view .LVU7
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 4
+  17:GrainPhasor.h ****     void Reset(){
+  18:GrainPhasor.h ****       phase_ = 0;
+  19:GrainPhasor.h ****       direction_ = 1;
+  20:GrainPhasor.h ****     }
+  21:GrainPhasor.h **** 
+  22:GrainPhasor.h ****     void SetPitchRatio(float pitch_ratio, float grain_size_samples){
+  23:GrainPhasor.h ****       float size_ms = SamplesToMs(grain_size_samples);
+  24:GrainPhasor.h ****       increment_ = pitch_ratio / size_ms;
+  25:GrainPhasor.h ****     }
+  26:GrainPhasor.h **** 
+  27:GrainPhasor.h ****     /* set playback direction to forward if */
+  28:GrainPhasor.h ****     void SetDirection(float direction){
+  29:GrainPhasor.h ****       direction_ = direction>0.5 ? -1: 1;
+  30:GrainPhasor.h ****     }
+  31:GrainPhasor.h **** 
+  32:GrainPhasor.h ****     bool GrainFinished(){
+  33:GrainPhasor.h ****       return grain_finished_;
+  34:GrainPhasor.h ****     }
+  35:GrainPhasor.h **** 
+  36:GrainPhasor.h ****     float Process(){
+ 300              		.loc 2 36 11 view .LVU70
+ 301              	.LBB51:
+  37:GrainPhasor.h ****       if (grain_finished_) { return 0.0f; }
+ 302              		.loc 2 37 7 view .LVU71
+ 303 0038 037C     		ldrb	r3, [r0, #16]	@ zero_extendqisi2
+ 304 003a 13B1     		cbz	r3, .L14
+ 305              	.LVL17:
+ 306              	.L19:
+ 307              		.loc 2 37 7 is_stmt 0 view .LVU72
+ 308              	.LBE51:
+ 309              	.LBE50:
+  38:Grain.cpp     ****     return {0.0f, 0.0f};
+ 310              		.loc 1 38 5 is_stmt 1 view .LVU73
+  38:Grain.cpp     ****     return {0.0f, 0.0f};
+ 311              		.loc 1 38 15 is_stmt 0 view .LVU74
+ 312 003c 0023     		movs	r3, #0
+ 313 003e 2370     		strb	r3, [r4]
+ 314 0040 EFE7     		b	.L23
+ 315              	.LVL18:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 9
 
 
-  19:GrainPhasor.h ****       mode_ = play_mode;
-  20:GrainPhasor.h ****       phase_ = 0;
-  21:GrainPhasor.h ****       direction_ = 1;
-  53              		.loc 2 21 18 is_stmt 0 view .LVU8
-  54 000a 0122     		movs	r2, #1
-  55              	.LVL2:
-  20:GrainPhasor.h ****       direction_ = 1;
-  56              		.loc 2 20 14 view .LVU9
-  57 000c 80ED017A 		vstr.32	s14, [r0, #4]
-  18:GrainPhasor.h ****       mode_ = play_mode;
-  58              		.loc 2 18 31 view .LVU10
-  59 0010 C7EE876A 		vdiv.f32	s13, s15, s14
-  22:GrainPhasor.h ****       if (mode_==Mode::OneShotReverse){
-  60              		.loc 2 22 7 view .LVU11
-  61 0014 9342     		cmp	r3, r2
-  19:GrainPhasor.h ****       phase_ = 0;
-  62              		.loc 2 19 13 view .LVU12
-  63 0016 C360     		str	r3, [r0, #12]
-  23:GrainPhasor.h ****         phase_ = 1;
-  24:GrainPhasor.h ****         direction_ = -1;
-  64              		.loc 2 24 20 view .LVU13
-  65 0018 08BF     		it	eq
-  66 001a 4FF0FF33 		moveq	r3, #-1
-  67              	.LVL3:
-  21:GrainPhasor.h ****       if (mode_==Mode::OneShotReverse){
-  68              		.loc 2 21 18 view .LVU14
-  69 001e 0261     		str	r2, [r0, #16]
-  23:GrainPhasor.h ****         phase_ = 1;
-  70              		.loc 2 23 16 view .LVU15
-  71 0020 04BF     		itt	eq
-  72 0022 C0ED017A 		vstreq.32	s15, [r0, #4]
-  73              		.loc 2 24 20 view .LVU16
-  74 0026 0361     		streq	r3, [r0, #16]
-  25:GrainPhasor.h ****       }
-  26:GrainPhasor.h ****       grain_finished_ = false;
-  75              		.loc 2 26 23 view .LVU17
-  76 0028 0023     		movs	r3, #0
-  77 002a 0375     		strb	r3, [r0, #20]
-  18:GrainPhasor.h ****       mode_ = play_mode;
-  78              		.loc 2 18 18 view .LVU18
-  79 002c C0ED026A 		vstr.32	s13, [r0, #8]
-  19:GrainPhasor.h ****       phase_ = 0;
-  80              		.loc 2 19 7 is_stmt 1 view .LVU19
-  20:GrainPhasor.h ****       direction_ = 1;
-  81              		.loc 2 20 7 view .LVU20
-  21:GrainPhasor.h ****       if (mode_==Mode::OneShotReverse){
-  82              		.loc 2 21 7 view .LVU21
-  22:GrainPhasor.h ****         phase_ = 1;
-  83              		.loc 2 22 7 view .LVU22
-  23:GrainPhasor.h ****         direction_ = -1;
-  84              		.loc 2 23 9 view .LVU23
-  24:GrainPhasor.h ****       }
-  85              		.loc 2 24 9 view .LVU24
-  86              		.loc 2 26 7 view .LVU25
-  87              	.LVL4:
-  88              		.loc 2 26 7 is_stmt 0 view .LVU26
-  89              	.LBE32:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 5
+ 316              	.L14:
+ 317              	.LBB61:
+ 318              	.LBB58:
+ 319              	.LBB52:
+ 320              	.LBI52:
+  36:GrainPhasor.h ****       if (grain_finished_) { return 0.0f; }
+ 321              		.loc 2 36 11 is_stmt 1 view .LVU75
+ 322              	.LBB53:
+  38:GrainPhasor.h ****       float out = phase_;
+ 323              		.loc 2 38 7 view .LVU76
+  39:GrainPhasor.h ****       out += increment_*direction_;
+ 324              		.loc 2 39 25 is_stmt 0 view .LVU77
+ 325 0042 C368     		ldr	r3, [r0, #12]
+  40:GrainPhasor.h **** 
+  41:GrainPhasor.h ****       if (out>1.0f && direction_==1){
+ 326              		.loc 2 41 7 view .LVU78
+ 327 0044 B7EE00BA 		vmov.f32	s22, #1.0e+0
+  38:GrainPhasor.h ****       out += increment_*direction_;
+ 328              		.loc 2 38 13 view .LVU79
+ 329 0048 D0ED017A 		vldr.32	s15, [r0, #4]
+ 330              	.LVL19:
+  39:GrainPhasor.h ****       out += increment_*direction_;
+ 331              		.loc 2 39 7 is_stmt 1 view .LVU80
+  39:GrainPhasor.h ****       out += increment_*direction_;
+ 332              		.loc 2 39 24 is_stmt 0 view .LVU81
+ 333 004c 07EE103A 		vmov	s14, r3	@ int
+  39:GrainPhasor.h ****       out += increment_*direction_;
+ 334              		.loc 2 39 11 view .LVU82
+ 335 0050 D0ED026A 		vldr.32	s13, [r0, #8]
+  39:GrainPhasor.h ****       out += increment_*direction_;
+ 336              		.loc 2 39 24 view .LVU83
+ 337 0054 B8EEC77A 		vcvt.f32.s32	s14, s14
+  39:GrainPhasor.h ****       out += increment_*direction_;
+ 338              		.loc 2 39 11 view .LVU84
+ 339 0058 E6EE877A 		vfma.f32	s15, s13, s14
+ 340              	.LVL20:
+ 341              		.loc 2 41 7 view .LVU85
+ 342 005c F4EECB7A 		vcmpe.f32	s15, s22
+  39:GrainPhasor.h ****       out += increment_*direction_;
+ 343              		.loc 2 39 11 view .LVU86
+ 344 0060 B0EE670A 		vmov.f32	s0, s15
+ 345              	.LVL21:
+ 346              		.loc 2 41 7 is_stmt 1 view .LVU87
+ 347 0064 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 348 0068 5BDD     		ble	.L15
+ 349              		.loc 2 41 20 is_stmt 0 view .LVU88
+ 350 006a 012B     		cmp	r3, #1
+ 351 006c 59D1     		bne	.L15
+  42:GrainPhasor.h ****         grain_finished_=true;
+ 352              		.loc 2 42 9 is_stmt 1 view .LVU89
+  43:GrainPhasor.h ****         out=0.0f;
+ 353              		.loc 2 43 12 is_stmt 0 view .LVU90
+ 354 006e 9FED330A 		vldr.32	s0, .L24
+ 355              	.LVL22:
+  42:GrainPhasor.h ****         grain_finished_=true;
+ 356              		.loc 2 42 24 view .LVU91
+ 357 0072 0374     		strb	r3, [r0, #16]
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 10
 
 
-  90              	.LBE33:
-  19:Grain.cpp     **** 
-  91              		.loc 1 19 1 view .LVU27
-  92 0030 7047     		bx	lr
-  93              	.L4:
-  94 0032 00BF     		.align	2
-  95              	.L3:
-  96 0034 00000000 		.word	0
-  97              		.cfi_endproc
-  98              	.LFE4874:
- 100              		.section	.text._ZN5Grain7TriggerEjjff,"ax",%progbits
- 101              		.align	1
- 102              		.global	_ZN5Grain7TriggerEjjff
- 103              		.syntax unified
- 104              		.thumb
- 105              		.thumb_func
- 107              	_ZN5Grain7TriggerEjjff:
- 108              	.LVL5:
- 109              	.LFB4875:
-  26:Grain.cpp     ****   if (pos >= audio_len_) pos -= audio_len_;
- 110              		.loc 1 26 82 is_stmt 1 view -0
- 111              		.cfi_startproc
- 112              		@ args = 0, pretend = 0, frame = 0
- 113              		@ frame_needed = 0, uses_anonymous_args = 0
- 114              		@ link register save eliminated.
-  27:Grain.cpp     ****   spawn_pos_ = pos;
- 115              		.loc 1 27 3 view .LVU29
- 116              	.LBB36:
- 117              	.LBB37:
-  18:GrainPhasor.h ****       mode_ = play_mode;
- 118              		.loc 2 18 32 is_stmt 0 view .LVU30
- 119 0000 07EE902A 		vmov	s15, r2	@ int
- 120              	.LBE37:
- 121              	.LBE36:
-  27:Grain.cpp     ****   spawn_pos_ = pos;
- 122              		.loc 1 27 11 view .LVU31
- 123 0004 114B     		ldr	r3, .L8
-  32:Grain.cpp     ****   pan_ = pan;
- 124              		.loc 1 32 16 view .LVU32
- 125 0006 80ED0A0A 		vstr.32	s0, [r0, #40]
- 126              	.LBB43:
- 127              	.LBB38:
-  18:GrainPhasor.h ****       mode_ = play_mode;
- 128              		.loc 2 18 32 view .LVU33
- 129 000a F8EE677A 		vcvt.f32.u32	s15, s15
- 130              	.LBE38:
- 131              	.LBE43:
-  27:Grain.cpp     ****   spawn_pos_ = pos;
- 132              		.loc 1 27 11 view .LVU34
- 133 000e 1B68     		ldr	r3, [r3]
-  33:Grain.cpp     **** }
- 134              		.loc 1 33 8 view .LVU35
- 135 0010 C0ED070A 		vstr.32	s1, [r0, #28]
-  27:Grain.cpp     ****   spawn_pos_ = pos;
- 136              		.loc 1 27 3 view .LVU36
- 137 0014 8B42     		cmp	r3, r1
-  27:Grain.cpp     ****   spawn_pos_ = pos;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 6
-
-
- 138              		.loc 1 27 26 is_stmt 1 view .LVU37
- 139              	.LBB44:
- 140              	.LBB39:
-  18:GrainPhasor.h ****       mode_ = play_mode;
- 141              		.loc 2 18 31 is_stmt 0 view .LVU38
- 142 0016 80EE277A 		vdiv.f32	s14, s0, s15
- 143              	.LBE39:
- 144              	.LBE44:
-  27:Grain.cpp     ****   spawn_pos_ = pos;
- 145              		.loc 1 27 30 view .LVU39
- 146 001a 98BF     		it	ls
- 147 001c C91A     		subls	r1, r1, r3
- 148              	.LVL6:
-  28:Grain.cpp     ****   grain_size_ = grain_size;
- 149              		.loc 1 28 3 is_stmt 1 view .LVU40
-  31:Grain.cpp     ****   pitch_ratio_ = pitch_ratio;
- 150              		.loc 1 31 15 is_stmt 0 view .LVU41
- 151 001e 8369     		ldr	r3, [r0, #24]
- 152              	.LBB45:
- 153              	.LBB40:
-  19:GrainPhasor.h ****       phase_ = 0;
- 154              		.loc 2 19 13 view .LVU42
- 155 0020 C360     		str	r3, [r0, #12]
- 156              	.LBE40:
- 157              	.LBE45:
-  29:Grain.cpp     ****   is_active_ = true;
- 158              		.loc 1 29 15 view .LVU43
- 159 0022 C0E90812 		strd	r1, r2, [r0, #32]
-  30:Grain.cpp     ****   phasor_.Init(grain_size, pitch_ratio, phasor_mode_);
- 160              		.loc 1 30 3 is_stmt 1 view .LVU44
-  30:Grain.cpp     ****   phasor_.Init(grain_size, pitch_ratio, phasor_mode_);
- 161              		.loc 1 30 14 is_stmt 0 view .LVU45
- 162 0026 0121     		movs	r1, #1
- 163              	.LVL7:
- 164              	.LBB46:
- 165              	.LBB41:
-  20:GrainPhasor.h ****       direction_ = 1;
- 166              		.loc 2 20 14 view .LVU46
- 167 0028 0022     		movs	r2, #0
- 168              	.LVL8:
-  22:GrainPhasor.h ****         phase_ = 1;
- 169              		.loc 2 22 7 view .LVU47
- 170 002a 8B42     		cmp	r3, r1
-  20:GrainPhasor.h ****       direction_ = 1;
- 171              		.loc 2 20 14 view .LVU48
- 172 002c 4260     		str	r2, [r0, #4]	@ float
-  21:GrainPhasor.h ****       if (mode_==Mode::OneShotReverse){
- 173              		.loc 2 21 18 view .LVU49
- 174 002e 0161     		str	r1, [r0, #16]
-  23:GrainPhasor.h ****         direction_ = -1;
- 175              		.loc 2 23 16 view .LVU50
- 176 0030 08BF     		it	eq
- 177 0032 4FF07E53 		moveq	r3, #1065353216
- 178              	.LBE41:
- 179              	.LBE46:
-  30:Grain.cpp     ****   phasor_.Init(grain_size, pitch_ratio, phasor_mode_);
- 180              		.loc 1 30 14 view .LVU51
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 7
-
-
- 181 0036 0170     		strb	r1, [r0]
-  31:Grain.cpp     ****   pitch_ratio_ = pitch_ratio;
- 182              		.loc 1 31 3 is_stmt 1 view .LVU52
- 183              	.LVL9:
- 184              	.LBB47:
- 185              	.LBI36:
-  17:GrainPhasor.h ****       increment_ = pitch_ratio/static_cast<float>(grain_size);
- 186              		.loc 2 17 10 view .LVU53
- 187              	.LBB42:
-  18:GrainPhasor.h ****       mode_ = play_mode;
- 188              		.loc 2 18 7 view .LVU54
-  23:GrainPhasor.h ****         direction_ = -1;
- 189              		.loc 2 23 16 is_stmt 0 view .LVU55
- 190 0038 02BF     		ittt	eq
- 191 003a 4360     		streq	r3, [r0, #4]	@ float
-  24:GrainPhasor.h ****       }
- 192              		.loc 2 24 20 view .LVU56
- 193 003c 4FF0FF33 		moveq	r3, #-1
- 194 0040 0361     		streq	r3, [r0, #16]
- 195              		.loc 2 26 23 view .LVU57
- 196 0042 0023     		movs	r3, #0
-  18:GrainPhasor.h ****       mode_ = play_mode;
- 197              		.loc 2 18 18 view .LVU58
- 198 0044 80ED027A 		vstr.32	s14, [r0, #8]
-  19:GrainPhasor.h ****       phase_ = 0;
- 199              		.loc 2 19 7 is_stmt 1 view .LVU59
-  20:GrainPhasor.h ****       direction_ = 1;
- 200              		.loc 2 20 7 view .LVU60
-  21:GrainPhasor.h ****       if (mode_==Mode::OneShotReverse){
- 201              		.loc 2 21 7 view .LVU61
-  22:GrainPhasor.h ****         phase_ = 1;
- 202              		.loc 2 22 7 view .LVU62
-  23:GrainPhasor.h ****         direction_ = -1;
- 203              		.loc 2 23 9 view .LVU63
-  24:GrainPhasor.h ****       }
- 204              		.loc 2 24 9 view .LVU64
- 205              		.loc 2 26 7 view .LVU65
- 206              		.loc 2 26 23 is_stmt 0 view .LVU66
- 207 0048 0375     		strb	r3, [r0, #20]
- 208              	.LVL10:
- 209              		.loc 2 26 23 view .LVU67
- 210              	.LBE42:
- 211              	.LBE47:
-  32:Grain.cpp     ****   pan_ = pan;
- 212              		.loc 1 32 3 is_stmt 1 view .LVU68
-  33:Grain.cpp     **** }
- 213              		.loc 1 33 3 view .LVU69
-  34:Grain.cpp     **** 
- 214              		.loc 1 34 1 is_stmt 0 view .LVU70
- 215 004a 7047     		bx	lr
- 216              	.L9:
- 217              		.align	2
- 218              	.L8:
- 219 004c 00000000 		.word	.LANCHOR0
- 220              		.cfi_endproc
- 221              	.LFE4875:
- 223              		.section	.text._ZN5Grain13ApplyEnvelopeEf,"ax",%progbits
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 8
-
-
- 224              		.align	1
- 225              		.global	_ZN5Grain13ApplyEnvelopeEf
- 226              		.syntax unified
- 227              		.thumb
- 228              		.thumb_func
- 230              	_ZN5Grain13ApplyEnvelopeEf:
- 231              	.LVL11:
- 232              	.LFB4877:
-  75:Grain.cpp     ****   switch(envelope_type_){
- 233              		.loc 1 75 40 is_stmt 1 view -0
- 234              		.cfi_startproc
- 235              		@ args = 0, pretend = 0, frame = 0
- 236              		@ frame_needed = 0, uses_anonymous_args = 0
-  76:Grain.cpp     ****     case EnvelopeType::LinearDecay:
- 237              		.loc 1 76 3 view .LVU72
-  75:Grain.cpp     ****   switch(envelope_type_){
- 238              		.loc 1 75 40 is_stmt 0 view .LVU73
- 239 0000 08B5     		push	{r3, lr}
- 240              		.cfi_def_cfa_offset 8
- 241              		.cfi_offset 3, -8
- 242              		.cfi_offset 14, -4
-  76:Grain.cpp     ****     case EnvelopeType::LinearDecay:
- 243              		.loc 1 76 3 view .LVU74
- 244 0002 C36A     		ldr	r3, [r0, #44]
-  75:Grain.cpp     ****   switch(envelope_type_){
- 245              		.loc 1 75 40 view .LVU75
- 246 0004 B0EE407A 		vmov.f32	s14, s0
-  76:Grain.cpp     ****     case EnvelopeType::LinearDecay:
- 247              		.loc 1 76 3 view .LVU76
- 248 0008 042B     		cmp	r3, #4
- 249 000a 09D8     		bhi	.L11
- 250 000c DFE803F0 		tbb	[pc, r3]
- 251              	.L13:
- 252 0010 03       		.byte	(.L16-.L13)/2
- 253 0011 38       		.byte	(.L17-.L13)/2
- 254 0012 08       		.byte	(.L11-.L13)/2
- 255 0013 18       		.byte	(.L14-.L13)/2
- 256 0014 25       		.byte	(.L12-.L13)/2
- 257 0015 00       		.p2align 1
- 258              	.L16:
-  77:Grain.cpp     ****       return 1.0f - phase;
- 259              		.loc 1 77 5 is_stmt 1 view .LVU77
-  78:Grain.cpp     ****     case EnvelopeType::Rectangular:
- 260              		.loc 1 78 7 view .LVU78
-  78:Grain.cpp     ****     case EnvelopeType::Rectangular:
- 261              		.loc 1 78 21 is_stmt 0 view .LVU79
- 262 0016 F7EE007A 		vmov.f32	s15, #1.0e+0
- 263 001a 37EEC00A 		vsub.f32	s0, s15, s0
- 264              	.LVL12:
- 265              	.L10:
-  91:Grain.cpp     **** 
- 266              		.loc 1 91 1 view .LVU80
- 267 001e 08BD     		pop	{r3, pc}
- 268              	.LVL13:
- 269              	.L11:
-  81:Grain.cpp     ****     default:
- 270              		.loc 1 81 5 is_stmt 1 view .LVU81
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 9
-
-
-  82:Grain.cpp     ****       if (phase<=start_decay_) { return 1.0f; }
- 271              		.loc 1 82 5 view .LVU82
-  83:Grain.cpp     ****       else { return 1.0f - ((phase - start_decay_) * decay_rate_); }
- 272              		.loc 1 83 7 view .LVU83
- 273 0020 DFED1B7A 		vldr.32	s15, .L19+8
- 274 0024 B4EEE70A 		vcmpe.f32	s0, s15
- 275 0028 B7EE000A 		vmov.f32	s0, #1.0e+0
- 276              	.LVL14:
-  83:Grain.cpp     ****       else { return 1.0f - ((phase - start_decay_) * decay_rate_); }
- 277              		.loc 1 83 7 is_stmt 0 view .LVU84
- 278 002c F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 279 0030 F5D9     		bls	.L10
-  84:Grain.cpp     ****     case EnvelopeType::Triangular:
- 280              		.loc 1 84 14 is_stmt 1 view .LVU85
-  84:Grain.cpp     ****     case EnvelopeType::Triangular:
- 281              		.loc 1 84 36 is_stmt 0 view .LVU86
- 282 0032 37EE677A 		vsub.f32	s14, s14, s15
- 283              	.LVL15:
-  84:Grain.cpp     ****     case EnvelopeType::Triangular:
- 284              		.loc 1 84 65 view .LVU87
- 285 0036 F1EE047A 		vmov.f32	s15, #5.0e+0
- 286 003a A7EE670A 		vfms.f32	s0, s14, s15
- 287 003e EEE7     		b	.L10
- 288              	.LVL16:
- 289              	.L14:
-  85:Grain.cpp     ****       return 1.0f - std::abs(2.0f*phase - 1.0f);
- 290              		.loc 1 85 5 is_stmt 1 view .LVU88
-  86:Grain.cpp     ****     /* formula from https://uk.mathworks.com/help/signal/ref/hann.html */
- 291              		.loc 1 86 7 view .LVU89
-  86:Grain.cpp     ****     /* formula from https://uk.mathworks.com/help/signal/ref/hann.html */
- 292              		.loc 1 86 29 is_stmt 0 view .LVU90
- 293 0040 F0EE007A 		vmov.f32	s15, #2.0e+0
- 294 0044 BFEE000A 		vmov.f32	s0, #-1.0e+0
- 295              	.LVL17:
-  86:Grain.cpp     ****     /* formula from https://uk.mathworks.com/help/signal/ref/hann.html */
- 296              		.loc 1 86 29 view .LVU91
- 297 0048 A7EE270A 		vfma.f32	s0, s14, s15
- 298              	.LVL18:
- 299              	.LBB48:
- 300              	.LBI48:
- 301              		.file 3 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h"
-   1:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // -*- C++ -*- C library enhancements header.
-   2:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
-   3:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // Copyright (C) 2016-2020 Free Software Foundation, Inc.
-   4:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** //
-   5:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // This file is part of the GNU ISO C++ Library.  This library is free
-   6:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // software; you can redistribute it and/or modify it under the
-   7:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // terms of the GNU General Public License as published by the
-   8:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // Free Software Foundation; either version 3, or (at your option)
-   9:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // any later version.
-  10:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
-  11:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // This library is distributed in the hope that it will be useful,
-  12:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // but WITHOUT ANY WARRANTY; without even the implied warranty of
-  13:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  14:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // GNU General Public License for more details.
-  15:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
-  16:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // Under Section 7 of GPL version 3, you are granted additional
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 10
-
-
-  17:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // permissions described in the GCC Runtime Library Exception, version
-  18:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // 3.1, as published by the Free Software Foundation.
-  19:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
-  20:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // You should have received a copy of the GNU General Public License and
-  21:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // a copy of the GCC Runtime Library Exception along with this program;
-  22:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
-  23:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // <http://www.gnu.org/licenses/>.
-  24:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
-  25:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** /** @file include/bits/std_abs.h
-  26:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h ****  *  This is an internal header file, included by other library headers.
-  27:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h ****  *  Do not attempt to use it directly. @headername{cmath, cstdlib}
-  28:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h ****  */
-  29:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
-  30:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** #ifndef _GLIBCXX_BITS_STD_ABS_H
-  31:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** #define _GLIBCXX_BITS_STD_ABS_H
-  32:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
-  33:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** #pragma GCC system_header
-  34:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
-  35:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** #include <bits/c++config.h>
-  36:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
-  37:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** #define _GLIBCXX_INCLUDE_NEXT_C_HEADERS
-  38:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** #include_next <stdlib.h>
-  39:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** #ifdef __CORRECT_ISO_CPP_MATH_H_PROTO
-  40:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** # include_next <math.h>
-  41:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** #endif
-  42:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** #undef _GLIBCXX_INCLUDE_NEXT_C_HEADERS
-  43:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
-  44:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** #undef abs
-  45:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
-  46:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** extern "C++"
-  47:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** {
-  48:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** namespace std _GLIBCXX_VISIBILITY(default)
-  49:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** {
-  50:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** _GLIBCXX_BEGIN_NAMESPACE_VERSION
-  51:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
-  52:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h ****   using ::abs;
-  53:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
-  54:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** #ifndef __CORRECT_ISO_CPP_STDLIB_H_PROTO
-  55:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h ****   inline long
-  56:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h ****   abs(long __i) { return __builtin_labs(__i); }
-  57:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** #endif
-  58:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
-  59:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** #ifdef _GLIBCXX_USE_LONG_LONG
-  60:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h ****   inline long long
-  61:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h ****   abs(long long __x) { return __builtin_llabs (__x); }
-  62:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** #endif
-  63:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
-  64:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // _GLIBCXX_RESOLVE_LIB_DEFECTS
-  65:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // 2192. Validity and return type of std::abs(0u) is unclear
-  66:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // 2294. <cstdlib> should declare abs(double)
-  67:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** // 2735. std::abs(short), std::abs(signed char) and others should return int
-  68:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
-  69:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
-  70:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h ****   inline _GLIBCXX_CONSTEXPR double
-  71:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h ****   abs(double __x)
-  72:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h ****   { return __builtin_fabs(__x); }
-  73:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h **** 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 11
-
-
-  74:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h ****   inline _GLIBCXX_CONSTEXPR float
-  75:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h ****   abs(float __x)
- 302              		.loc 3 75 3 is_stmt 1 view .LVU92
- 303              	.LBB49:
-  76:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h ****   { return __builtin_fabsf(__x); }
- 304              		.loc 3 76 5 view .LVU93
- 305              		.loc 3 76 31 is_stmt 0 view .LVU94
- 306 004c B0EEC07A 		vabs.f32	s14, s0
- 307              	.LVL19:
- 308              		.loc 3 76 31 view .LVU95
- 309              	.LBE49:
- 310              	.LBE48:
-  86:Grain.cpp     ****     /* formula from https://uk.mathworks.com/help/signal/ref/hann.html */
- 311              		.loc 1 86 47 view .LVU96
- 312 0050 B7EE000A 		vmov.f32	s0, #1.0e+0
- 313 0054 30EE470A 		vsub.f32	s0, s0, s14
- 314 0058 E1E7     		b	.L10
- 315              	.LVL20:
- 316              	.L12:
-  88:Grain.cpp     ****       return 0.5f * (1.0f - std::cos(2.0f * M_PI * phase));
- 317              		.loc 1 88 5 is_stmt 1 view .LVU97
-  89:Grain.cpp     ****   }
- 318              		.loc 1 89 7 view .LVU98
-  89:Grain.cpp     ****   }
- 319              		.loc 1 89 37 is_stmt 0 view .LVU99
- 320 005a 9FED0B7B 		vldr.64	d7, .L19
-  89:Grain.cpp     ****   }
- 321              		.loc 1 89 52 view .LVU100
- 322 005e B7EEC00A 		vcvt.f64.f32	d0, s0
- 323              	.LVL21:
-  89:Grain.cpp     ****   }
- 324              		.loc 1 89 37 view .LVU101
- 325 0062 20EE070B 		vmul.f64	d0, d0, d7
- 326 0066 FFF7FEFF 		bl	cos
- 327              	.LVL22:
-  89:Grain.cpp     ****   }
- 328              		.loc 1 89 27 view .LVU102
- 329 006a B7EE007B 		vmov.f64	d7, #1.0e+0
- 330 006e 37EE400B 		vsub.f64	d0, d7, d0
-  89:Grain.cpp     ****   }
- 331              		.loc 1 89 19 view .LVU103
- 332 0072 B6EE007B 		vmov.f64	d7, #5.0e-1
- 333 0076 20EE070B 		vmul.f64	d0, d0, d7
-  89:Grain.cpp     ****   }
- 334              		.loc 1 89 58 view .LVU104
- 335 007a B7EEC00B 		vcvt.f32.f64	s0, d0
- 336 007e CEE7     		b	.L10
- 337              	.LVL23:
- 338              	.L17:
-  76:Grain.cpp     ****     case EnvelopeType::LinearDecay:
- 339              		.loc 1 76 3 view .LVU105
- 340 0080 B7EE000A 		vmov.f32	s0, #1.0e+0
- 341              	.LVL24:
-  76:Grain.cpp     ****     case EnvelopeType::LinearDecay:
- 342              		.loc 1 76 3 view .LVU106
- 343 0084 CBE7     		b	.L10
- 344              	.L20:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 12
-
-
- 345 0086 00BF     		.align	3
- 346              	.L19:
- 347 0088 182D4454 		.word	1413754136
- 348 008c FB211940 		.word	1075388923
- 349 0090 CDCC4C3F 		.word	1061997773
- 350              		.cfi_endproc
- 351              	.LFE4877:
- 353              		.section	.text._ZN5Grain7ProcessE6Samplef,"ax",%progbits
- 354              		.align	1
- 355              		.global	_ZN5Grain7ProcessE6Samplef
- 356              		.syntax unified
- 357              		.thumb
- 358              		.thumb_func
- 360              	_ZN5Grain7ProcessE6Samplef:
- 361              	.LVL25:
- 362              	.LFB4876:
-  39:Grain.cpp     ****   if (!is_active_) return {0.0f, 0.0f};
- 363              		.loc 1 39 51 is_stmt 1 view -0
- 364              		.cfi_startproc
- 365              		@ args = 0, pretend = 0, frame = 24
- 366              		@ frame_needed = 0, uses_anonymous_args = 0
-  39:Grain.cpp     ****   if (!is_active_) return {0.0f, 0.0f};
- 367              		.loc 1 39 51 is_stmt 0 view .LVU108
- 368 0000 10B5     		push	{r4, lr}
- 369              		.cfi_def_cfa_offset 8
- 370              		.cfi_offset 4, -8
- 371              		.cfi_offset 14, -4
-  40:Grain.cpp     ****   float phase = phasor_.Process();
- 372              		.loc 1 40 3 view .LVU109
- 373 0002 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
-  39:Grain.cpp     ****   if (!is_active_) return {0.0f, 0.0f};
- 374              		.loc 1 39 51 view .LVU110
- 375 0004 0446     		mov	r4, r0
- 376 0006 2DED088B 		vpush.64	{d8, d9, d10, d11}
- 377              		.cfi_def_cfa_offset 40
- 378              		.cfi_offset 80, -40
- 379              		.cfi_offset 81, -36
- 380              		.cfi_offset 82, -32
- 381              		.cfi_offset 83, -28
- 382              		.cfi_offset 84, -24
- 383              		.cfi_offset 85, -20
- 384              		.cfi_offset 86, -16
- 385              		.cfi_offset 87, -12
- 386 000a 86B0     		sub	sp, sp, #24
- 387              		.cfi_def_cfa_offset 64
- 388              	.LVL26:
-  40:Grain.cpp     ****   float phase = phasor_.Process();
- 389              		.loc 1 40 3 is_stmt 1 view .LVU111
-  39:Grain.cpp     ****   if (!is_active_) return {0.0f, 0.0f};
- 390              		.loc 1 39 51 is_stmt 0 view .LVU112
- 391 000c F0EE409A 		vmov.f32	s19, s0
- 392 0010 B0EE609A 		vmov.f32	s18, s1
- 393 0014 B0EE41AA 		vmov.f32	s20, s2
- 394 0018 8DED020A 		vstr.32	s0, [sp, #8]
- 395              	.LVL27:
-  39:Grain.cpp     ****   if (!is_active_) return {0.0f, 0.0f};
- 396              		.loc 1 39 51 view .LVU113
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 13
-
-
- 397 001c CDED030A 		vstr.32	s1, [sp, #12]
- 398              	.LVL28:
-  40:Grain.cpp     ****   float phase = phasor_.Process();
- 399              		.loc 1 40 3 view .LVU114
- 400 0020 53B9     		cbnz	r3, .L22
- 401              	.L50:
-  44:Grain.cpp     ****   }
- 402              		.loc 1 44 5 is_stmt 1 view .LVU115
-  44:Grain.cpp     ****   }
- 403              		.loc 1 44 23 is_stmt 0 view .LVU116
- 404 0022 0023     		movs	r3, #0
- 405 0024 0493     		str	r3, [sp, #16]	@ float
- 406 0026 0593     		str	r3, [sp, #20]	@ float
- 407              	.LVL29:
- 408              	.L23:
-  70:Grain.cpp     **** 
- 409              		.loc 1 70 1 view .LVU117
- 410 0028 9DED040A 		vldr.32	s0, [sp, #16]
- 411 002c DDED050A 		vldr.32	s1, [sp, #20]
- 412 0030 06B0     		add	sp, sp, #24
- 413              		.cfi_remember_state
- 414              		.cfi_def_cfa_offset 40
- 415              		@ sp needed
- 416 0032 BDEC088B 		vldm	sp!, {d8-d11}
- 417              		.cfi_restore 86
- 418              		.cfi_restore 87
- 419              		.cfi_restore 84
- 420              		.cfi_restore 85
- 421              		.cfi_restore 82
- 422              		.cfi_restore 83
- 423              		.cfi_restore 80
- 424              		.cfi_restore 81
- 425              		.cfi_def_cfa_offset 8
- 426              	.LVL30:
-  70:Grain.cpp     **** 
- 427              		.loc 1 70 1 view .LVU118
- 428 0036 10BD     		pop	{r4, pc}
- 429              	.LVL31:
- 430              	.L22:
- 431              		.cfi_restore_state
-  41:Grain.cpp     ****   if (phasor_.GrainFinished()){
- 432              		.loc 1 41 3 is_stmt 1 view .LVU119
- 433              	.LBB62:
- 434              	.LBI62:
-  27:GrainPhasor.h ****     }
-  28:GrainPhasor.h **** 
-  29:GrainPhasor.h ****     void Reset(){
-  30:GrainPhasor.h ****       phase_ =0;
-  31:GrainPhasor.h ****       direction_ = 1;
-  32:GrainPhasor.h ****     }
-  33:GrainPhasor.h **** 
-  34:GrainPhasor.h ****     void SetPitchRatio(float pitch_ratio, float grain_size_samples){
-  35:GrainPhasor.h ****       float size_ms = SamplesToMs(grain_size_samples);
-  36:GrainPhasor.h ****       increment_ = pitch_ratio / size_ms;
-  37:GrainPhasor.h ****     }
-  38:GrainPhasor.h **** 
-  39:GrainPhasor.h ****     void SetMode(Mode new_mode){
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 14
-
-
-  40:GrainPhasor.h ****       mode_ = new_mode;
-  41:GrainPhasor.h ****     }
-  42:GrainPhasor.h **** 
-  43:GrainPhasor.h ****     void SetDirection(float direction){
-  44:GrainPhasor.h ****       if (direction>0.5){
-  45:GrainPhasor.h ****         direction_ = -1;
-  46:GrainPhasor.h ****       }
-  47:GrainPhasor.h ****       else direction = 1;
-  48:GrainPhasor.h ****     }
+ 358              		.loc 2 43 9 is_stmt 1 view .LVU92
+ 359              	.LVL23:
+  44:GrainPhasor.h ****       }
+  45:GrainPhasor.h ****       if (out<0.0f && direction_==-1){
+ 360              		.loc 2 45 7 view .LVU93
+ 361              	.L17:
+  46:GrainPhasor.h ****         grain_finished_=true;
+  47:GrainPhasor.h ****         out = 1.0f;
+  48:GrainPhasor.h ****       }
   49:GrainPhasor.h **** 
-  50:GrainPhasor.h ****     bool GrainFinished(){
-  51:GrainPhasor.h ****       return grain_finished_;
-  52:GrainPhasor.h ****     }
-  53:GrainPhasor.h **** 
-  54:GrainPhasor.h ****     float Process(){
- 435              		.loc 2 54 11 view .LVU120
- 436              	.LBB63:
-  55:GrainPhasor.h ****       if (grain_finished_) { return 0.0f; }
- 437              		.loc 2 55 7 view .LVU121
- 438 0038 037D     		ldrb	r3, [r0, #20]	@ zero_extendqisi2
- 439 003a 13B1     		cbz	r3, .L24
- 440              	.LVL32:
- 441              	.L39:
- 442              		.loc 2 55 7 is_stmt 0 view .LVU122
- 443              	.LBE63:
- 444              	.LBE62:
-  43:Grain.cpp     ****     return {0.0f, 0.0f};
- 445              		.loc 1 43 5 is_stmt 1 view .LVU123
-  43:Grain.cpp     ****     return {0.0f, 0.0f};
- 446              		.loc 1 43 15 is_stmt 0 view .LVU124
- 447 003c 0023     		movs	r3, #0
- 448 003e 2370     		strb	r3, [r4]
- 449 0040 EFE7     		b	.L50
- 450              	.LVL33:
- 451              	.L24:
- 452              	.LBB67:
- 453              	.LBB64:
-  56:GrainPhasor.h ****       float out = phase_;
- 454              		.loc 2 56 7 is_stmt 1 view .LVU125
-  57:GrainPhasor.h ****       out += increment_*direction_;
- 455              		.loc 2 57 24 is_stmt 0 view .LVU126
- 456 0042 90ED047A 		vldr.32	s14, [r0, #16]	@ int
-  56:GrainPhasor.h ****       float out = phase_;
- 457              		.loc 2 56 13 view .LVU127
- 458 0046 D0ED017A 		vldr.32	s15, [r0, #4]
- 459              	.LVL34:
- 460              		.loc 2 57 7 is_stmt 1 view .LVU128
- 461              		.loc 2 57 24 is_stmt 0 view .LVU129
- 462 004a B8EEC77A 		vcvt.f32.s32	s14, s14
- 463              		.loc 2 57 11 view .LVU130
- 464 004e D0ED026A 		vldr.32	s13, [r0, #8]
-  58:GrainPhasor.h **** 
-  59:GrainPhasor.h ****       switch(mode_){
- 465              		.loc 2 59 14 view .LVU131
- 466 0052 C368     		ldr	r3, [r0, #12]
-  57:GrainPhasor.h ****       out += increment_*direction_;
- 467              		.loc 2 57 11 view .LVU132
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 15
+  50:GrainPhasor.h ****       phase_ = out;
+ 362              		.loc 2 50 7 view .LVU94
+ 363              	.LBE53:
+ 364              	.LBE52:
+ 365              	.LBE58:
+ 366              	.LBE61:
+  37:Grain.cpp     ****     is_active_=false;
+ 367              		.loc 1 37 3 is_stmt 0 view .LVU95
+ 368 0074 237C     		ldrb	r3, [r4, #16]	@ zero_extendqisi2
+ 369              	.LBB62:
+ 370              	.LBB59:
+ 371              	.LBB56:
+ 372              	.LBB54:
+ 373              		.loc 2 50 14 view .LVU96
+ 374 0076 84ED010A 		vstr.32	s0, [r4, #4]
+  51:GrainPhasor.h ****       return out;
+ 375              		.loc 2 51 7 is_stmt 1 view .LVU97
+ 376              	.LVL24:
+ 377              		.loc 2 51 7 is_stmt 0 view .LVU98
+ 378              	.LBE54:
+ 379              	.LBE56:
+ 380              	.LBE59:
+ 381              	.LBE62:
+  37:Grain.cpp     ****     is_active_=false;
+ 382              		.loc 1 37 3 is_stmt 1 view .LVU99
+ 383              	.LBB63:
+ 384              	.LBI63:
+  32:GrainPhasor.h ****       return grain_finished_;
+ 385              		.loc 2 32 10 view .LVU100
+ 386              	.LBB64:
+  33:GrainPhasor.h ****     }
+ 387              		.loc 2 33 7 view .LVU101
+  33:GrainPhasor.h ****     }
+ 388              		.loc 2 33 7 is_stmt 0 view .LVU102
+ 389              	.LBE64:
+ 390              	.LBE63:
+  37:Grain.cpp     ****     is_active_=false;
+ 391              		.loc 1 37 3 view .LVU103
+ 392 007a 002B     		cmp	r3, #0
+ 393 007c DED1     		bne	.L19
+  41:Grain.cpp     ****   
+ 394              		.loc 1 41 3 is_stmt 1 view .LVU104
+  41:Grain.cpp     ****   
+ 395              		.loc 1 41 59 is_stmt 0 view .LVU105
+ 396 007e D4ED077A 		vldr.32	s15, [r4, #28]	@ int
+  52:Grain.cpp     **** 
+ 397              		.loc 1 52 28 view .LVU106
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 11
 
 
- 468 0054 E6EE877A 		vfma.f32	s15, s13, s14
- 469              	.LVL35:
- 470              		.loc 2 59 7 view .LVU133
- 471 0058 022B     		cmp	r3, #2
-  57:GrainPhasor.h ****       out += increment_*direction_;
- 472              		.loc 2 57 11 view .LVU134
- 473 005a B0EE670A 		vmov.f32	s0, s15
- 474              	.LVL36:
- 475              		.loc 2 59 7 is_stmt 1 view .LVU135
- 476 005e 75D0     		beq	.L25
- 477 0060 032B     		cmp	r3, #3
- 478 0062 00F08480 		beq	.L26
- 479 0066 012B     		cmp	r3, #1
- 480 0068 63D0     		beq	.L27
-  60:GrainPhasor.h ****         /* phase increases 0 -> 1 then stops */
-  61:GrainPhasor.h ****         case Mode::OneShot:
- 481              		.loc 2 61 9 view .LVU136
-  62:GrainPhasor.h ****         default:
- 482              		.loc 2 62 9 view .LVU137
-  63:GrainPhasor.h ****           if(out>1.0f) {
- 483              		.loc 2 63 11 view .LVU138
- 484 006a F7EE007A 		vmov.f32	s15, #1.0e+0
- 485 006e B4EEE70A 		vcmpe.f32	s0, s15
- 486 0072 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 487 0076 5FDD     		ble	.L46
-  64:GrainPhasor.h ****             grain_finished_ = true;
- 488              		.loc 2 64 13 view .LVU139
-  65:GrainPhasor.h ****             out=1.0f;
- 489              		.loc 2 65 16 is_stmt 0 view .LVU140
- 490 0078 B0EE670A 		vmov.f32	s0, s15
- 491              	.LVL37:
-  64:GrainPhasor.h ****             grain_finished_ = true;
- 492              		.loc 2 64 29 view .LVU141
- 493 007c 0123     		movs	r3, #1
- 494 007e 0375     		strb	r3, [r0, #20]
- 495              		.loc 2 65 13 is_stmt 1 view .LVU142
- 496              	.LVL38:
-  66:GrainPhasor.h ****           }
-  67:GrainPhasor.h ****           if (out<0.0f){
- 497              		.loc 2 67 11 view .LVU143
- 498              	.L30:
-  68:GrainPhasor.h ****             grain_finished_ = true;
-  69:GrainPhasor.h ****             out=0.0f;
-  70:GrainPhasor.h ****           }
-  71:GrainPhasor.h ****           break;
-  72:GrainPhasor.h ****         /* phase goes 1 -> 0 then stops */
-  73:GrainPhasor.h ****         case Mode::OneShotReverse:
-  74:GrainPhasor.h ****           direction_ = -1;
-  75:GrainPhasor.h ****           if(out<0.0f) {
-  76:GrainPhasor.h ****             out=0.0f;
-  77:GrainPhasor.h ****             grain_finished_ = true;
-  78:GrainPhasor.h ****           } 
-  79:GrainPhasor.h ****           break;
-  80:GrainPhasor.h ****         /* loops from 0 -> 1 repeatedly */
-  81:GrainPhasor.h ****         case Mode::Cycle:
-  82:GrainPhasor.h ****           if(out>1.0f) out -=1.0f;
-  83:GrainPhasor.h ****           if (out<0.0f) out +=1.0f;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 16
-
-
-  84:GrainPhasor.h ****           break;
-  85:GrainPhasor.h ****         /* loops repeatedly forwards from 0 -> 1
-  86:GrainPhasor.h ****           then backwards from 1 -> 0 ...*/
-  87:GrainPhasor.h ****         case Mode::PingPong:
-  88:GrainPhasor.h ****           if (out>1.0f){
-  89:GrainPhasor.h ****             out = 2.0f-out;
-  90:GrainPhasor.h ****             direction_ = -1;
-  91:GrainPhasor.h ****           } else if (out<0.0f){
-  92:GrainPhasor.h ****             out= -out;
-  93:GrainPhasor.h ****             direction_ = 1;
-  94:GrainPhasor.h ****           }
-  95:GrainPhasor.h ****           break;
-  96:GrainPhasor.h ****       }
-  97:GrainPhasor.h ****       phase_ = out;
- 499              		.loc 2 97 7 view .LVU144
- 500              	.LBE64:
- 501              	.LBE67:
-  42:Grain.cpp     ****     is_active_=false;
- 502              		.loc 1 42 3 is_stmt 0 view .LVU145
- 503 0080 237D     		ldrb	r3, [r4, #20]	@ zero_extendqisi2
- 504              	.LBB68:
- 505              	.LBB65:
- 506              		.loc 2 97 14 view .LVU146
- 507 0082 84ED010A 		vstr.32	s0, [r4, #4]
-  98:GrainPhasor.h ****       // phase_ += increment_*direction_;
-  99:GrainPhasor.h ****       return out;
- 508              		.loc 2 99 7 is_stmt 1 view .LVU147
- 509              	.LVL39:
- 510              		.loc 2 99 7 is_stmt 0 view .LVU148
- 511              	.LBE65:
- 512              	.LBE68:
-  42:Grain.cpp     ****     is_active_=false;
- 513              		.loc 1 42 3 is_stmt 1 view .LVU149
- 514              	.LBB69:
- 515              	.LBI69:
-  50:GrainPhasor.h ****       return grain_finished_;
- 516              		.loc 2 50 10 view .LVU150
- 517              	.LBB70:
-  51:GrainPhasor.h ****     }
- 518              		.loc 2 51 7 view .LVU151
-  51:GrainPhasor.h ****     }
- 519              		.loc 2 51 7 is_stmt 0 view .LVU152
- 520              	.LBE70:
- 521              	.LBE69:
-  42:Grain.cpp     ****     is_active_=false;
- 522              		.loc 1 42 3 view .LVU153
- 523 0086 002B     		cmp	r3, #0
- 524 0088 D8D1     		bne	.L39
-  46:Grain.cpp     ****   
- 525              		.loc 1 46 3 is_stmt 1 view .LVU154
-  46:Grain.cpp     ****   
- 526              		.loc 1 46 59 is_stmt 0 view .LVU155
- 527 008a D4ED097A 		vldr.32	s15, [r4, #36]	@ int
-  60:Grain.cpp     **** 
- 528              		.loc 1 60 28 view .LVU156
- 529 008e 2046     		mov	r0, r4
- 530              	.LVL40:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 17
-
-
-  46:Grain.cpp     ****   
- 531              		.loc 1 46 71 view .LVU157
- 532 0090 94ED0A7A 		vldr.32	s14, [r4, #40]
-  46:Grain.cpp     ****   
- 533              		.loc 1 46 59 view .LVU158
- 534 0094 F8EE677A 		vcvt.f32.u32	s15, s15
-  46:Grain.cpp     ****   
- 535              		.loc 1 46 10 view .LVU159
- 536 0098 236A     		ldr	r3, [r4, #32]
-  46:Grain.cpp     ****   
- 537              		.loc 1 46 59 view .LVU160
- 538 009a 67EE807A 		vmul.f32	s15, s15, s0
-  46:Grain.cpp     ****   
- 539              		.loc 1 46 71 view .LVU161
- 540 009e 67EE877A 		vmul.f32	s15, s15, s14
-  46:Grain.cpp     ****   
- 541              		.loc 1 46 34 view .LVU162
- 542 00a2 FCEEE77A 		vcvt.u32.f32	s15, s15
-  46:Grain.cpp     ****   
- 543              		.loc 1 46 10 view .LVU163
- 544 00a6 17EE902A 		vmov	r2, s15	@ int
- 545              	.LBB71:
- 546              	.LBB72:
- 547              		.file 4 "../libDaisy/src/daisy_core.h"
+ 398 0082 2046     		mov	r0, r4
+ 399              	.LVL25:
+  41:Grain.cpp     ****   
+ 400              		.loc 1 41 71 view .LVU107
+ 401 0084 94ED087A 		vldr.32	s14, [r4, #32]
+  41:Grain.cpp     ****   
+ 402              		.loc 1 41 59 view .LVU108
+ 403 0088 F8EE677A 		vcvt.f32.u32	s15, s15
+  41:Grain.cpp     ****   
+ 404              		.loc 1 41 10 view .LVU109
+ 405 008c A369     		ldr	r3, [r4, #24]
+  41:Grain.cpp     ****   
+ 406              		.loc 1 41 59 view .LVU110
+ 407 008e 67EE807A 		vmul.f32	s15, s15, s0
+  41:Grain.cpp     ****   
+ 408              		.loc 1 41 71 view .LVU111
+ 409 0092 67EE877A 		vmul.f32	s15, s15, s14
+  41:Grain.cpp     ****   
+ 410              		.loc 1 41 34 view .LVU112
+ 411 0096 FCEEE77A 		vcvt.u32.f32	s15, s15
+  41:Grain.cpp     ****   
+ 412              		.loc 1 41 10 view .LVU113
+ 413 009a 17EE902A 		vmov	r2, s15	@ int
+ 414              	.LBB65:
+ 415              	.LBB66:
+ 416              		.file 3 "../libDaisy/src/daisy_core.h"
    1:../libDaisy/src/daisy_core.h **** #pragma once
    2:../libDaisy/src/daisy_core.h **** #ifndef DSY_CORE_HW_H
    3:../libDaisy/src/daisy_core.h **** #define DSY_CORE_HW_H /**< & */
@@ -1016,11 +658,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 1
   29:../libDaisy/src/daisy_core.h **** cache enabled.
   30:../libDaisy/src/daisy_core.h **** */
   31:../libDaisy/src/daisy_core.h **** #define DTCM_MEM_SECTION __attribute__((section(".dtcmram_bss")))
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 12
+
+
   32:../libDaisy/src/daisy_core.h **** 
   33:../libDaisy/src/daisy_core.h **** #define FBIPMAX 0.999985f             /**< close to 1.0f-LSB at 16 bit */
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 18
-
-
   34:../libDaisy/src/daisy_core.h **** #define FBIPMIN (-FBIPMAX)            /**< - (1 - LSB) */
   35:../libDaisy/src/daisy_core.h **** #define U82F_SCALE 0.0078740f         /**< 1 / 127 */
   36:../libDaisy/src/daisy_core.h **** #define F2U8_SCALE 127.0f             /**< 128 - 1 */
@@ -1076,11 +718,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 1
   86:../libDaisy/src/daisy_core.h **** */
   87:../libDaisy/src/daisy_core.h **** FORCE_INLINE uint8_t f2u8(float x)
   88:../libDaisy/src/daisy_core.h **** {
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 13
+
+
   89:../libDaisy/src/daisy_core.h ****     x = x <= FBIPMIN ? FBIPMIN : x;
   90:../libDaisy/src/daisy_core.h ****     x = x >= FBIPMAX ? FBIPMAX : x;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 19
-
-
   91:../libDaisy/src/daisy_core.h ****     return (uint8_t)((x * F2U8_SCALE) + F2U8_SCALE);
   92:../libDaisy/src/daisy_core.h **** }
   93:../libDaisy/src/daisy_core.h **** 
@@ -1113,124 +755,124 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 1
  120:../libDaisy/src/daisy_core.h **** FORCE_INLINE float s162f(int16_t x)
  121:../libDaisy/src/daisy_core.h **** {
  122:../libDaisy/src/daisy_core.h ****     return (float)x * S162F_SCALE;
- 548              		.loc 4 122 23 view .LVU164
- 549 00aa DFED3D7A 		vldr.32	s15, .L51
- 550              	.LBE72:
- 551              	.LBE71:
-  46:Grain.cpp     ****   
- 552              		.loc 1 46 10 view .LVU165
- 553 00ae 1A44     		add	r2, r2, r3
- 554 00b0 1346     		mov	r3, r2
- 555              	.LVL41:
-  49:Grain.cpp     ****     curr_idx %= audio_len_;
- 556              		.loc 1 49 3 is_stmt 1 view .LVU166
-  49:Grain.cpp     ****     curr_idx %= audio_len_;
- 557              		.loc 1 49 27 is_stmt 0 view .LVU167
- 558 00b2 3C4A     		ldr	r2, .L51+4
- 559              	.LVL42:
-  49:Grain.cpp     ****     curr_idx %= audio_len_;
- 560              		.loc 1 49 27 view .LVU168
- 561 00b4 1268     		ldr	r2, [r2]
- 562 00b6 511E     		subs	r1, r2, #1
-  49:Grain.cpp     ****     curr_idx %= audio_len_;
- 563              		.loc 1 49 3 view .LVU169
- 564 00b8 9942     		cmp	r1, r3
-  50:Grain.cpp     ****     // return;
- 565              		.loc 1 50 5 is_stmt 1 view .LVU170
-  50:Grain.cpp     ****     // return;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 20
+ 417              		.loc 3 122 23 view .LVU114
+ 418 009e DFED287A 		vldr.32	s15, .L24+4
+ 419              	.LBE66:
+ 420              	.LBE65:
+  41:Grain.cpp     ****   
+ 421              		.loc 1 41 10 view .LVU115
+ 422 00a2 1A44     		add	r2, r2, r3
+ 423 00a4 1346     		mov	r3, r2
+ 424              	.LVL26:
+  43:Grain.cpp     ****     curr_idx %= audio_len_;
+ 425              		.loc 1 43 3 is_stmt 1 view .LVU116
+  43:Grain.cpp     ****     curr_idx %= audio_len_;
+ 426              		.loc 1 43 27 is_stmt 0 view .LVU117
+ 427 00a6 274A     		ldr	r2, .L24+8
+ 428              	.LVL27:
+  43:Grain.cpp     ****     curr_idx %= audio_len_;
+ 429              		.loc 1 43 27 view .LVU118
+ 430 00a8 1268     		ldr	r2, [r2]
+ 431 00aa 511E     		subs	r1, r2, #1
+  43:Grain.cpp     ****     curr_idx %= audio_len_;
+ 432              		.loc 1 43 3 view .LVU119
+ 433 00ac 9942     		cmp	r1, r3
+  44:Grain.cpp     ****   }
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 14
 
 
- 566              		.loc 1 50 14 is_stmt 0 view .LVU171
- 567 00ba 9CBF     		itt	ls
- 568 00bc B3FBF2F1 		udivls	r1, r3, r2
- 569 00c0 02FB1133 		mlsls	r3, r2, r1, r3
- 570              	.LVL43:
-  58:Grain.cpp     ****   float right = s162f(right_buf_[curr_idx]);
- 571              		.loc 1 58 3 is_stmt 1 view .LVU172
- 572              	.LBB77:
- 573              	.LBI71:
+ 434              		.loc 1 44 5 is_stmt 1 view .LVU120
+  44:Grain.cpp     ****   }
+ 435              		.loc 1 44 14 is_stmt 0 view .LVU121
+ 436 00ae 9CBF     		itt	ls
+ 437 00b0 B3FBF2F1 		udivls	r1, r3, r2
+ 438 00b4 02FB1133 		mlsls	r3, r2, r1, r3
+ 439              	.LVL28:
+  50:Grain.cpp     ****   float right = s162f(right_buf_[curr_idx]);
+ 440              		.loc 1 50 3 is_stmt 1 view .LVU122
+ 441              	.LBB71:
+ 442              	.LBI65:
  120:../libDaisy/src/daisy_core.h **** {
- 574              		.loc 4 120 20 view .LVU173
- 575              	.LBB73:
- 576              		.loc 4 122 5 view .LVU174
- 577              	.LBE73:
- 578              	.LBE77:
-  58:Grain.cpp     ****   float right = s162f(right_buf_[curr_idx]);
- 579              		.loc 1 58 40 is_stmt 0 view .LVU175
- 580 00c4 384A     		ldr	r2, .L51+8
-  58:Grain.cpp     ****   float right = s162f(right_buf_[curr_idx]);
- 581              		.loc 1 58 21 view .LVU176
- 582 00c6 1268     		ldr	r2, [r2]
- 583              	.LBB78:
- 584              	.LBB74:
- 585              		.loc 4 122 12 view .LVU177
- 586 00c8 32F91320 		ldrsh	r2, [r2, r3, lsl #1]
- 587 00cc 08EE902A 		vmov	s17, r2	@ int
- 588              	.LBE74:
- 589              	.LBE78:
-  59:Grain.cpp     ****   float env = ApplyEnvelope(phase);
- 590              		.loc 1 59 42 view .LVU178
- 591 00d0 364A     		ldr	r2, .L51+12
-  59:Grain.cpp     ****   float env = ApplyEnvelope(phase);
- 592              		.loc 1 59 22 view .LVU179
- 593 00d2 1268     		ldr	r2, [r2]
- 594              	.LBB79:
- 595              	.LBB75:
- 596              		.loc 4 122 12 view .LVU180
- 597 00d4 F8EEE88A 		vcvt.f32.s32	s17, s17
- 598              	.LBE75:
- 599              	.LBE79:
- 600              	.LBB80:
- 601              	.LBB81:
- 602 00d8 32F91330 		ldrsh	r3, [r2, r3, lsl #1]
- 603              	.LVL44:
- 604              		.loc 4 122 12 view .LVU181
- 605              	.LBE81:
- 606              	.LBE80:
- 607              	.LBB83:
- 608              	.LBB76:
- 609              		.loc 4 122 23 view .LVU182
- 610 00dc 68EEA78A 		vmul.f32	s17, s17, s15
- 611              	.LVL45:
- 612              		.loc 4 122 23 view .LVU183
- 613              	.LBE76:
- 614              	.LBE83:
-  59:Grain.cpp     ****   float env = ApplyEnvelope(phase);
- 615              		.loc 1 59 3 is_stmt 1 view .LVU184
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 21
+ 443              		.loc 3 120 20 view .LVU123
+ 444              	.LBB67:
+ 445              		.loc 3 122 5 view .LVU124
+ 446              	.LBE67:
+ 447              	.LBE71:
+  50:Grain.cpp     ****   float right = s162f(right_buf_[curr_idx]);
+ 448              		.loc 1 50 40 is_stmt 0 view .LVU125
+ 449 00b8 234A     		ldr	r2, .L24+12
+  50:Grain.cpp     ****   float right = s162f(right_buf_[curr_idx]);
+ 450              		.loc 1 50 21 view .LVU126
+ 451 00ba 1268     		ldr	r2, [r2]
+ 452              	.LBB72:
+ 453              	.LBB68:
+ 454              		.loc 3 122 12 view .LVU127
+ 455 00bc 32F91320 		ldrsh	r2, [r2, r3, lsl #1]
+ 456 00c0 08EE902A 		vmov	s17, r2	@ int
+ 457              	.LBE68:
+ 458              	.LBE72:
+  51:Grain.cpp     ****   float env = ApplyEnvelope(phase);
+ 459              		.loc 1 51 42 view .LVU128
+ 460 00c4 214A     		ldr	r2, .L24+16
+  51:Grain.cpp     ****   float env = ApplyEnvelope(phase);
+ 461              		.loc 1 51 22 view .LVU129
+ 462 00c6 1268     		ldr	r2, [r2]
+ 463              	.LBB73:
+ 464              	.LBB69:
+ 465              		.loc 3 122 12 view .LVU130
+ 466 00c8 F8EEE88A 		vcvt.f32.s32	s17, s17
+ 467              	.LBE69:
+ 468              	.LBE73:
+ 469              	.LBB74:
+ 470              	.LBB75:
+ 471 00cc 32F91330 		ldrsh	r3, [r2, r3, lsl #1]
+ 472              	.LVL29:
+ 473              		.loc 3 122 12 view .LVU131
+ 474              	.LBE75:
+ 475              	.LBE74:
+ 476              	.LBB77:
+ 477              	.LBB70:
+ 478              		.loc 3 122 23 view .LVU132
+ 479 00d0 68EEA78A 		vmul.f32	s17, s17, s15
+ 480              	.LVL30:
+ 481              		.loc 3 122 23 view .LVU133
+ 482              	.LBE70:
+ 483              	.LBE77:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 15
 
 
- 616              	.LBB84:
- 617              	.LBI80:
+  51:Grain.cpp     ****   float env = ApplyEnvelope(phase);
+ 484              		.loc 1 51 3 is_stmt 1 view .LVU134
+ 485              	.LBB78:
+ 486              	.LBI74:
  120:../libDaisy/src/daisy_core.h **** {
- 618              		.loc 4 120 20 view .LVU185
- 619              	.LBB82:
- 620              		.loc 4 122 5 view .LVU186
- 621              		.loc 4 122 12 is_stmt 0 view .LVU187
- 622 00e0 08EE103A 		vmov	s16, r3	@ int
- 623 00e4 B8EEC88A 		vcvt.f32.s32	s16, s16
- 624              		.loc 4 122 23 view .LVU188
- 625 00e8 28EE278A 		vmul.f32	s16, s16, s15
- 626              	.LVL46:
- 627              		.loc 4 122 23 view .LVU189
- 628              	.LBE82:
- 629              	.LBE84:
-  60:Grain.cpp     **** 
- 630              		.loc 1 60 3 is_stmt 1 view .LVU190
-  60:Grain.cpp     **** 
- 631              		.loc 1 60 28 is_stmt 0 view .LVU191
- 632 00ec FFF7FEFF 		bl	_ZN5Grain13ApplyEnvelopeEf
- 633              	.LVL47:
-  60:Grain.cpp     **** 
- 634              		.loc 1 60 28 view .LVU192
- 635 00f0 F0EE40AA 		vmov.f32	s21, s0
- 636              	.LVL48:
-  65:Grain.cpp     ****   float gain_right = std::sqrt(pan_);
- 637              		.loc 1 65 3 is_stmt 1 view .LVU193
- 638              	.LBB85:
- 639              	.LBI85:
- 640              		.file 5 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath"
+ 487              		.loc 3 120 20 view .LVU135
+ 488              	.LBB76:
+ 489              		.loc 3 122 5 view .LVU136
+ 490              		.loc 3 122 12 is_stmt 0 view .LVU137
+ 491 00d4 08EE103A 		vmov	s16, r3	@ int
+ 492 00d8 B8EEC88A 		vcvt.f32.s32	s16, s16
+ 493              		.loc 3 122 23 view .LVU138
+ 494 00dc 28EE278A 		vmul.f32	s16, s16, s15
+ 495              	.LVL31:
+ 496              		.loc 3 122 23 view .LVU139
+ 497              	.LBE76:
+ 498              	.LBE78:
+  52:Grain.cpp     **** 
+ 499              		.loc 1 52 3 is_stmt 1 view .LVU140
+  52:Grain.cpp     **** 
+ 500              		.loc 1 52 28 is_stmt 0 view .LVU141
+ 501 00e0 FFF7FEFF 		bl	_ZN5Grain13ApplyEnvelopeEf
+ 502              	.LVL32:
+  52:Grain.cpp     **** 
+ 503              		.loc 1 52 28 view .LVU142
+ 504 00e4 F0EE40AA 		vmov.f32	s21, s0
+ 505              	.LVL33:
+  57:Grain.cpp     ****   float gain_right = std::sqrt(pan_);
+ 506              		.loc 1 57 3 is_stmt 1 view .LVU143
+ 507              	.LBB79:
+ 508              	.LBI79:
+ 509              		.file 4 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath"
    1:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // -*- C++ -*- C forwarding header.
    2:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
    3:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // Copyright (C) 1997-2020 Free Software Foundation, Inc.
@@ -1256,11 +898,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 1
   23:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // <http://www.gnu.org/licenses/>.
   24:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
   25:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** /** @file include/cmath
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 16
+
+
   26:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****  *  This is a Standard C++ Library file.  You should @c \#include this file
   27:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****  *  in your programs, rather than any of the @a *.h implementation files.
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 22
-
-
   28:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****  *
   29:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****  *  This is the C++ version of the Standard C Library header @c math.h,
   30:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****  *  and its contents are (mostly) the same as that header, but are all
@@ -1316,11 +958,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 1
   80:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** {
   81:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** _GLIBCXX_BEGIN_NAMESPACE_VERSION
   82:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 17
+
+
   83:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::acos;
   84:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 23
-
-
   85:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
   86:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
   87:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   acos(float __x)
@@ -1376,11 +1018,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 1
  137:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     atan(_Tp __x)
  138:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_atan(__x); }
  139:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 18
+
+
  140:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::atan2;
  141:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 24
-
-
  142:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
  143:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
  144:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   atan2(float __y, float __x)
@@ -1436,11 +1078,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 1
  194:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value,
  195:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
  196:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     cos(_Tp __x)
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 19
+
+
  197:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_cos(__x); }
  198:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 25
-
-
  199:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::cosh;
  200:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  201:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
@@ -1496,11 +1138,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 1
  251:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value,
  252:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
  253:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     fabs(_Tp __x)
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 20
+
+
  254:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_fabs(__x); }
  255:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 26
-
-
  256:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::floor;
  257:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  258:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
@@ -1556,11 +1198,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 1
  308:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
  309:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline _GLIBCXX_CONSTEXPR
  310:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 21
+
+
  311:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
  312:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     frexp(_Tp __x, int* __exp)
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 27
-
-
  313:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_frexp(__x, __exp); }
  314:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  315:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::ldexp;
@@ -1616,11 +1258,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 1
  365:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
  366:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline _GLIBCXX_CONSTEXPR
  367:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value,
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 22
+
+
  368:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
  369:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     log10(_Tp __x)
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 28
-
-
  370:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     { return __builtin_log10(__x); }
  371:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  372:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::modf;
@@ -1676,11 +1318,11 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 1
  422:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  423:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
  424:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 23
+
+
  425:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   sin(float __x)
  426:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_sinf(__x); }
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 29
-
-
  427:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  428:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
  429:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   sin(long double __x)
@@ -1718,353 +1360,230 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 1
  461:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
  462:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
  463:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   sqrt(float __x)
- 641              		.loc 5 463 3 view .LVU194
- 642              	.LBB86:
+ 510              		.loc 4 463 3 view .LVU144
+ 511              	.LBB80:
  464:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_sqrtf(__x); }
- 643              		.loc 5 464 5 view .LVU195
- 644              	.LBE86:
- 645              	.LBE85:
-  65:Grain.cpp     ****   float gain_right = std::sqrt(pan_);
- 646              		.loc 1 65 30 is_stmt 0 view .LVU196
- 647 00f4 D4ED077A 		vldr.32	s15, [r4, #28]
- 648              	.LBB88:
- 649              	.LBB87:
- 650              		.loc 5 464 27 view .LVU197
- 651 00f8 B7EE000A 		vmov.f32	s0, #1.0e+0
- 652              	.LVL49:
- 653              		.loc 5 464 27 view .LVU198
- 654 00fc 30EE670A 		vsub.f32	s0, s0, s15
- 655              	.LVL50:
- 656              		.loc 5 464 27 view .LVU199
- 657 0100 FFF7FEFF 		bl	sqrtf
- 658              	.LVL51:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 30
+ 512              		.loc 4 464 5 view .LVU145
+ 513              	.LBE80:
+ 514              	.LBE79:
+  57:Grain.cpp     ****   float gain_right = std::sqrt(pan_);
+ 515              		.loc 1 57 30 is_stmt 0 view .LVU146
+ 516 00e8 94ED050A 		vldr.32	s0, [r4, #20]
+ 517              	.LVL34:
+ 518              	.LBB82:
+ 519              	.LBB81:
+ 520              		.loc 4 464 27 view .LVU147
+ 521 00ec 3BEE400A 		vsub.f32	s0, s22, s0
+ 522 00f0 FFF7FEFF 		bl	sqrtf
+ 523              	.LVL35:
+ 524              		.loc 4 464 27 view .LVU148
+ 525 00f4 B0EE40BA 		vmov.f32	s22, s0
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 24
 
 
- 659              		.loc 5 464 27 view .LVU200
- 660 0104 B0EE40BA 		vmov.f32	s22, s0
- 661              	.LVL52:
- 662              		.loc 5 464 27 view .LVU201
- 663              	.LBE87:
- 664              	.LBE88:
-  66:Grain.cpp     ****   sample.left += (left*env*gain_left*scale);
- 665              		.loc 1 66 3 is_stmt 1 view .LVU202
- 666              	.LBB89:
- 667              	.LBI89:
+ 526              	.LVL36:
+ 527              		.loc 4 464 27 view .LVU149
+ 528              	.LBE81:
+ 529              	.LBE82:
+  58:Grain.cpp     ****   sample.left += (left*env*gain_left*scale);
+ 530              		.loc 1 58 3 is_stmt 1 view .LVU150
+ 531              	.LBB83:
+ 532              	.LBI83:
  463:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_sqrtf(__x); }
- 668              		.loc 5 463 3 view .LVU203
- 669              	.LBB90:
- 670              		.loc 5 464 5 view .LVU204
- 671              		.loc 5 464 27 is_stmt 0 view .LVU205
- 672 0108 94ED070A 		vldr.32	s0, [r4, #28]
- 673              	.LVL53:
- 674              		.loc 5 464 27 view .LVU206
- 675 010c FFF7FEFF 		bl	sqrtf
- 676              	.LVL54:
- 677              		.loc 5 464 27 view .LVU207
- 678              	.LBE90:
- 679              	.LBE89:
-  67:Grain.cpp     ****   sample.right += (right*env*gain_right*scale);
- 680              		.loc 1 67 3 is_stmt 1 view .LVU208
-  67:Grain.cpp     ****   sample.right += (right*env*gain_right*scale);
- 681              		.loc 1 67 23 is_stmt 0 view .LVU209
- 682 0110 68EEAA7A 		vmul.f32	s15, s17, s21
-  68:Grain.cpp     ****   return sample;
- 683              		.loc 1 68 25 view .LVU210
- 684 0114 28EE2A8A 		vmul.f32	s16, s16, s21
- 685              	.LVL55:
-  67:Grain.cpp     ****   sample.right += (right*env*gain_right*scale);
- 686              		.loc 1 67 27 view .LVU211
- 687 0118 67EE8B8A 		vmul.f32	s17, s15, s22
- 688              	.LVL56:
-  68:Grain.cpp     ****   return sample;
- 689              		.loc 1 68 29 view .LVU212
- 690 011c 28EE008A 		vmul.f32	s16, s16, s0
-  67:Grain.cpp     ****   sample.right += (right*env*gain_right*scale);
- 691              		.loc 1 67 15 view .LVU213
- 692 0120 E8EE8A9A 		vfma.f32	s19, s17, s20
- 693              	.LVL57:
-  68:Grain.cpp     ****   return sample;
- 694              		.loc 1 68 3 is_stmt 1 view .LVU214
-  68:Grain.cpp     ****   return sample;
- 695              		.loc 1 68 16 is_stmt 0 view .LVU215
- 696 0124 A8EE0A9A 		vfma.f32	s18, s16, s20
- 697              	.LVL58:
-  69:Grain.cpp     **** }
- 698              		.loc 1 69 3 is_stmt 1 view .LVU216
-  69:Grain.cpp     **** }
- 699              		.loc 1 69 10 is_stmt 0 view .LVU217
- 700 0128 CDED049A 		vstr.32	s19, [sp, #16]
- 701 012c 8DED059A 		vstr.32	s18, [sp, #20]
- 702 0130 7AE7     		b	.L23
- 703              	.LVL59:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 31
+ 533              		.loc 4 463 3 view .LVU151
+ 534              	.LBB84:
+ 535              		.loc 4 464 5 view .LVU152
+ 536              		.loc 4 464 27 is_stmt 0 view .LVU153
+ 537 00f8 94ED050A 		vldr.32	s0, [r4, #20]
+ 538              	.LVL37:
+ 539              		.loc 4 464 27 view .LVU154
+ 540 00fc FFF7FEFF 		bl	sqrtf
+ 541              	.LVL38:
+ 542              		.loc 4 464 27 view .LVU155
+ 543              	.LBE84:
+ 544              	.LBE83:
+  59:Grain.cpp     ****   sample.right += (right*env*gain_right*scale);
+ 545              		.loc 1 59 3 is_stmt 1 view .LVU156
+  59:Grain.cpp     ****   sample.right += (right*env*gain_right*scale);
+ 546              		.loc 1 59 23 is_stmt 0 view .LVU157
+ 547 0100 68EEAA7A 		vmul.f32	s15, s17, s21
+  60:Grain.cpp     ****   return sample;
+ 548              		.loc 1 60 25 view .LVU158
+ 549 0104 28EE2A8A 		vmul.f32	s16, s16, s21
+ 550              	.LVL39:
+  59:Grain.cpp     ****   sample.right += (right*env*gain_right*scale);
+ 551              		.loc 1 59 27 view .LVU159
+ 552 0108 67EE8B8A 		vmul.f32	s17, s15, s22
+ 553              	.LVL40:
+  60:Grain.cpp     ****   return sample;
+ 554              		.loc 1 60 29 view .LVU160
+ 555 010c 28EE008A 		vmul.f32	s16, s16, s0
+  59:Grain.cpp     ****   sample.right += (right*env*gain_right*scale);
+ 556              		.loc 1 59 15 view .LVU161
+ 557 0110 E8EE8A9A 		vfma.f32	s19, s17, s20
+ 558              	.LVL41:
+  60:Grain.cpp     ****   return sample;
+ 559              		.loc 1 60 3 is_stmt 1 view .LVU162
+  60:Grain.cpp     ****   return sample;
+ 560              		.loc 1 60 16 is_stmt 0 view .LVU163
+ 561 0114 A8EE0A9A 		vfma.f32	s18, s16, s20
+ 562              	.LVL42:
+  61:Grain.cpp     **** }
+ 563              		.loc 1 61 3 is_stmt 1 view .LVU164
+  61:Grain.cpp     **** }
+ 564              		.loc 1 61 10 is_stmt 0 view .LVU165
+ 565 0118 CDED049A 		vstr.32	s19, [sp, #16]
+ 566 011c 8DED059A 		vstr.32	s18, [sp, #20]
+ 567 0120 82E7     		b	.L13
+ 568              	.LVL43:
+ 569              	.L15:
+ 570              	.LBB85:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 25
 
 
- 704              	.L27:
- 705              	.LBB91:
- 706              	.LBB66:
-  73:GrainPhasor.h ****           direction_ = -1;
- 707              		.loc 2 73 9 is_stmt 1 view .LVU218
-  74:GrainPhasor.h ****           if(out<0.0f) {
- 708              		.loc 2 74 11 view .LVU219
-  74:GrainPhasor.h ****           if(out<0.0f) {
- 709              		.loc 2 74 22 is_stmt 0 view .LVU220
- 710 0132 4FF0FF33 		mov	r3, #-1
- 711 0136 0361     		str	r3, [r0, #16]
-  75:GrainPhasor.h ****             out=0.0f;
- 712              		.loc 2 75 11 is_stmt 1 view .LVU221
- 713              	.L46:
-  67:GrainPhasor.h ****             grain_finished_ = true;
- 714              		.loc 2 67 11 view .LVU222
- 715 0138 B5EEC00A 		vcmpe.f32	s0, #0
- 716 013c F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 717 0140 9ED5     		bpl	.L30
-  68:GrainPhasor.h ****             out=0.0f;
- 718              		.loc 2 68 13 view .LVU223
-  68:GrainPhasor.h ****             out=0.0f;
- 719              		.loc 2 68 29 is_stmt 0 view .LVU224
- 720 0142 0123     		movs	r3, #1
-  69:GrainPhasor.h ****           }
- 721              		.loc 2 69 16 view .LVU225
- 722 0144 9FED1A0A 		vldr.32	s0, .L51+16
- 723              	.LVL60:
-  68:GrainPhasor.h ****             out=0.0f;
- 724              		.loc 2 68 29 view .LVU226
- 725 0148 2375     		strb	r3, [r4, #20]
-  69:GrainPhasor.h ****           }
- 726              		.loc 2 69 13 is_stmt 1 view .LVU227
- 727              	.LVL61:
-  69:GrainPhasor.h ****           }
- 728              		.loc 2 69 13 is_stmt 0 view .LVU228
- 729 014a 99E7     		b	.L30
- 730              	.LVL62:
- 731              	.L25:
-  81:GrainPhasor.h ****           if(out>1.0f) out -=1.0f;
- 732              		.loc 2 81 9 is_stmt 1 view .LVU229
-  82:GrainPhasor.h ****           if (out<0.0f) out +=1.0f;
- 733              		.loc 2 82 11 view .LVU230
- 734 014c F7EE007A 		vmov.f32	s15, #1.0e+0
- 735 0150 B4EEE70A 		vcmpe.f32	s0, s15
- 736 0154 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
-  82:GrainPhasor.h ****           if (out<0.0f) out +=1.0f;
- 737              		.loc 2 82 24 view .LVU231
-  82:GrainPhasor.h ****           if (out<0.0f) out +=1.0f;
- 738              		.loc 2 82 28 is_stmt 0 view .LVU232
- 739 0158 C8BF     		it	gt
- 740 015a 30EE670A 		vsubgt.f32	s0, s0, s15
- 741              	.LVL63:
-  83:GrainPhasor.h ****           break;
- 742              		.loc 2 83 11 is_stmt 1 view .LVU233
- 743 015e B5EEC00A 		vcmpe.f32	s0, #0
- 744 0162 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 32
+ 571              	.LBB60:
+ 572              	.LBB57:
+ 573              	.LBB55:
+  45:GrainPhasor.h ****         grain_finished_=true;
+ 574              		.loc 2 45 7 is_stmt 1 view .LVU166
+ 575 0122 B5EEC00A 		vcmpe.f32	s0, #0
+ 576 0126 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 577 012a A3D5     		bpl	.L17
+  45:GrainPhasor.h ****         grain_finished_=true;
+ 578              		.loc 2 45 20 is_stmt 0 view .LVU167
+ 579 012c 0133     		adds	r3, r3, #1
+  46:GrainPhasor.h ****         out = 1.0f;
+ 580              		.loc 2 46 9 is_stmt 1 view .LVU168
+  46:GrainPhasor.h ****         out = 1.0f;
+ 581              		.loc 2 46 24 is_stmt 0 view .LVU169
+ 582 012e 02BF     		ittt	eq
+ 583 0130 0123     		moveq	r3, #1
+  47:GrainPhasor.h ****       }
+ 584              		.loc 2 47 13 view .LVU170
+ 585 0132 B7EE000A 		vmoveq.f32	s0, #1.0e+0
+ 586              	.LVL44:
+  46:GrainPhasor.h ****         out = 1.0f;
+ 587              		.loc 2 46 24 view .LVU171
+ 588 0136 2374     		strbeq	r3, [r4, #16]
+  47:GrainPhasor.h ****       }
+ 589              		.loc 2 47 9 is_stmt 1 view .LVU172
+ 590              	.LVL45:
+  47:GrainPhasor.h ****       }
+ 591              		.loc 2 47 9 is_stmt 0 view .LVU173
+ 592 0138 9CE7     		b	.L17
+ 593              	.L25:
+ 594 013a 00BF     		.align	2
+ 595              	.L24:
+ 596 013c 00000000 		.word	0
+ 597 0140 00000038 		.word	939524096
+ 598 0144 00000000 		.word	.LANCHOR0
+ 599 0148 00000000 		.word	.LANCHOR1
+ 600 014c 00000000 		.word	.LANCHOR2
+ 601              	.LBE55:
+ 602              	.LBE57:
+ 603              	.LBE60:
+ 604              	.LBE85:
+ 605              		.cfi_endproc
+ 606              	.LFE4875:
+ 608              		.section	.text._ZN5Grain11SetSpawnPosEj,"ax",%progbits
+ 609              		.align	1
+ 610              		.global	_ZN5Grain11SetSpawnPosEj
+ 611              		.syntax unified
+ 612              		.thumb
+ 613              		.thumb_func
+ 615              	_ZN5Grain11SetSpawnPosEj:
+ 616              	.LVL46:
+ 617              	.LFB4877:
+  71:Grain.cpp     **** 
+  72:Grain.cpp     **** void Grain::SetSpawnPos(size_t spawn_pos){ spawn_pos_ = spawn_pos; }
+ 618              		.loc 1 72 42 is_stmt 1 view -0
+ 619              		.cfi_startproc
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 26
 
 
- 745 0166 8BD5     		bpl	.L30
-  83:GrainPhasor.h ****           break;
- 746              		.loc 2 83 25 view .LVU234
-  83:GrainPhasor.h ****           break;
- 747              		.loc 2 83 29 is_stmt 0 view .LVU235
- 748 0168 30EE270A 		vadd.f32	s0, s0, s15
- 749              	.LVL64:
-  83:GrainPhasor.h ****           break;
- 750              		.loc 2 83 29 view .LVU236
- 751 016c 88E7     		b	.L30
- 752              	.L26:
-  87:GrainPhasor.h ****           if (out>1.0f){
- 753              		.loc 2 87 9 is_stmt 1 view .LVU237
-  88:GrainPhasor.h ****             out = 2.0f-out;
- 754              		.loc 2 88 11 view .LVU238
- 755 016e F7EE007A 		vmov.f32	s15, #1.0e+0
- 756 0172 B4EEE70A 		vcmpe.f32	s0, s15
- 757 0176 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 758 017a 07DD     		ble	.L47
-  89:GrainPhasor.h ****             direction_ = -1;
- 759              		.loc 2 89 13 view .LVU239
-  89:GrainPhasor.h ****             direction_ = -1;
- 760              		.loc 2 89 17 is_stmt 0 view .LVU240
- 761 017c F0EE007A 		vmov.f32	s15, #2.0e+0
-  90:GrainPhasor.h ****           } else if (out<0.0f){
- 762              		.loc 2 90 24 view .LVU241
- 763 0180 4FF0FF33 		mov	r3, #-1
-  89:GrainPhasor.h ****             direction_ = -1;
- 764              		.loc 2 89 17 view .LVU242
- 765 0184 37EEC00A 		vsub.f32	s0, s15, s0
- 766              	.LVL65:
-  90:GrainPhasor.h ****           } else if (out<0.0f){
- 767              		.loc 2 90 13 is_stmt 1 view .LVU243
- 768              	.L49:
-  93:GrainPhasor.h ****           }
- 769              		.loc 2 93 24 is_stmt 0 view .LVU244
- 770 0188 2361     		str	r3, [r4, #16]
- 771 018a 79E7     		b	.L30
- 772              	.L47:
-  91:GrainPhasor.h ****             out= -out;
- 773              		.loc 2 91 18 is_stmt 1 view .LVU245
- 774 018c B5EEC00A 		vcmpe.f32	s0, #0
- 775 0190 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 776 0194 7FF574AF 		bpl	.L30
-  92:GrainPhasor.h ****             direction_ = 1;
- 777              		.loc 2 92 13 view .LVU246
-  92:GrainPhasor.h ****             direction_ = 1;
- 778              		.loc 2 92 16 is_stmt 0 view .LVU247
- 779 0198 B1EE400A 		vneg.f32	s0, s0
- 780              	.LVL66:
-  93:GrainPhasor.h ****           }
- 781              		.loc 2 93 13 is_stmt 1 view .LVU248
-  93:GrainPhasor.h ****           }
- 782              		.loc 2 93 24 is_stmt 0 view .LVU249
- 783 019c 0123     		movs	r3, #1
- 784 019e F3E7     		b	.L49
- 785              	.L52:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 33
+ 620              		@ args = 0, pretend = 0, frame = 0
+ 621              		@ frame_needed = 0, uses_anonymous_args = 0
+ 622              		@ link register save eliminated.
+ 623              		.loc 1 72 44 view .LVU175
+ 624              		.loc 1 72 55 is_stmt 0 view .LVU176
+ 625 0000 8161     		str	r1, [r0, #24]
+ 626              		.loc 1 72 68 view .LVU177
+ 627 0002 7047     		bx	lr
+ 628              		.cfi_endproc
+ 629              	.LFE4877:
+ 631              		.section	.text._ZN5Grain12SetGrainSizeEj,"ax",%progbits
+ 632              		.align	1
+ 633              		.global	_ZN5Grain12SetGrainSizeEj
+ 634              		.syntax unified
+ 635              		.thumb
+ 636              		.thumb_func
+ 638              	_ZN5Grain12SetGrainSizeEj:
+ 639              	.LVL47:
+ 640              	.LFB4878:
+  73:Grain.cpp     **** void Grain::SetGrainSize(size_t grain_size) { grain_size_ = grain_size; }
+ 641              		.loc 1 73 45 is_stmt 1 view -0
+ 642              		.cfi_startproc
+ 643              		@ args = 0, pretend = 0, frame = 0
+ 644              		@ frame_needed = 0, uses_anonymous_args = 0
+ 645              		@ link register save eliminated.
+ 646              		.loc 1 73 47 view .LVU179
+ 647              		.loc 1 73 59 is_stmt 0 view .LVU180
+ 648 0000 C161     		str	r1, [r0, #28]
+ 649              		.loc 1 73 73 view .LVU181
+ 650 0002 7047     		bx	lr
+ 651              		.cfi_endproc
+ 652              	.LFE4878:
+ 654              		.section	.text._ZN5Grain13SetPitchRatioEf,"ax",%progbits
+ 655              		.align	1
+ 656              		.global	_ZN5Grain13SetPitchRatioEf
+ 657              		.syntax unified
+ 658              		.thumb
+ 659              		.thumb_func
+ 661              	_ZN5Grain13SetPitchRatioEf:
+ 662              	.LVL48:
+ 663              	.LFB4879:
+  74:Grain.cpp     **** void Grain::SetPitchRatio(float pitch_ratio) { pitch_ratio_ = pitch_ratio; }
+ 664              		.loc 1 74 46 is_stmt 1 view -0
+ 665              		.cfi_startproc
+ 666              		@ args = 0, pretend = 0, frame = 0
+ 667              		@ frame_needed = 0, uses_anonymous_args = 0
+ 668              		@ link register save eliminated.
+ 669              		.loc 1 74 48 view .LVU183
+ 670              		.loc 1 74 61 is_stmt 0 view .LVU184
+ 671 0000 80ED080A 		vstr.32	s0, [r0, #32]
+ 672              		.loc 1 74 76 view .LVU185
+ 673 0004 7047     		bx	lr
+ 674              		.cfi_endproc
+ 675              	.LFE4879:
+ 677              		.section	.text._ZN5Grain19SetPhasorPitchRatioEf,"ax",%progbits
+ 678              		.align	1
+ 679              		.global	_ZN5Grain19SetPhasorPitchRatioEf
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 27
 
 
- 786              		.align	2
- 787              	.L51:
- 788 01a0 00000038 		.word	939524096
- 789 01a4 00000000 		.word	.LANCHOR0
- 790 01a8 00000000 		.word	.LANCHOR1
- 791 01ac 00000000 		.word	.LANCHOR2
- 792 01b0 00000000 		.word	0
- 793              	.LBE66:
- 794              	.LBE91:
- 795              		.cfi_endproc
- 796              	.LFE4876:
- 798              		.section	.text._ZN5Grain11SetSpawnPosEj,"ax",%progbits
- 799              		.align	1
- 800              		.global	_ZN5Grain11SetSpawnPosEj
- 801              		.syntax unified
- 802              		.thumb
- 803              		.thumb_func
- 805              	_ZN5Grain11SetSpawnPosEj:
- 806              	.LVL67:
- 807              	.LFB4878:
-  93:Grain.cpp     **** void Grain::SetGrainSize(size_t grain_size) { grain_size_ = grain_size; }
- 808              		.loc 1 93 42 is_stmt 1 view -0
- 809              		.cfi_startproc
- 810              		@ args = 0, pretend = 0, frame = 0
- 811              		@ frame_needed = 0, uses_anonymous_args = 0
- 812              		@ link register save eliminated.
-  93:Grain.cpp     **** void Grain::SetGrainSize(size_t grain_size) { grain_size_ = grain_size; }
- 813              		.loc 1 93 44 view .LVU251
-  93:Grain.cpp     **** void Grain::SetGrainSize(size_t grain_size) { grain_size_ = grain_size; }
- 814              		.loc 1 93 55 is_stmt 0 view .LVU252
- 815 0000 0162     		str	r1, [r0, #32]
-  93:Grain.cpp     **** void Grain::SetGrainSize(size_t grain_size) { grain_size_ = grain_size; }
- 816              		.loc 1 93 68 view .LVU253
- 817 0002 7047     		bx	lr
- 818              		.cfi_endproc
- 819              	.LFE4878:
- 821              		.section	.text._ZN5Grain12SetGrainSizeEj,"ax",%progbits
- 822              		.align	1
- 823              		.global	_ZN5Grain12SetGrainSizeEj
- 824              		.syntax unified
- 825              		.thumb
- 826              		.thumb_func
- 828              	_ZN5Grain12SetGrainSizeEj:
- 829              	.LVL68:
- 830              	.LFB4879:
-  94:Grain.cpp     **** void Grain::SetPitchRatio(float pitch_ratio) { pitch_ratio_ = pitch_ratio; }
- 831              		.loc 1 94 45 is_stmt 1 view -0
- 832              		.cfi_startproc
- 833              		@ args = 0, pretend = 0, frame = 0
- 834              		@ frame_needed = 0, uses_anonymous_args = 0
- 835              		@ link register save eliminated.
-  94:Grain.cpp     **** void Grain::SetPitchRatio(float pitch_ratio) { pitch_ratio_ = pitch_ratio; }
- 836              		.loc 1 94 47 view .LVU255
-  94:Grain.cpp     **** void Grain::SetPitchRatio(float pitch_ratio) { pitch_ratio_ = pitch_ratio; }
- 837              		.loc 1 94 59 is_stmt 0 view .LVU256
- 838 0000 4162     		str	r1, [r0, #36]
-  94:Grain.cpp     **** void Grain::SetPitchRatio(float pitch_ratio) { pitch_ratio_ = pitch_ratio; }
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 34
-
-
- 839              		.loc 1 94 73 view .LVU257
- 840 0002 7047     		bx	lr
- 841              		.cfi_endproc
- 842              	.LFE4879:
- 844              		.section	.text._ZN5Grain13SetPitchRatioEf,"ax",%progbits
- 845              		.align	1
- 846              		.global	_ZN5Grain13SetPitchRatioEf
- 847              		.syntax unified
- 848              		.thumb
- 849              		.thumb_func
- 851              	_ZN5Grain13SetPitchRatioEf:
- 852              	.LVL69:
- 853              	.LFB4880:
-  95:Grain.cpp     **** void Grain::SetEnvelopeType(EnvelopeType type) { envelope_type_ = type; }
- 854              		.loc 1 95 46 is_stmt 1 view -0
- 855              		.cfi_startproc
- 856              		@ args = 0, pretend = 0, frame = 0
- 857              		@ frame_needed = 0, uses_anonymous_args = 0
- 858              		@ link register save eliminated.
-  95:Grain.cpp     **** void Grain::SetEnvelopeType(EnvelopeType type) { envelope_type_ = type; }
- 859              		.loc 1 95 48 view .LVU259
-  95:Grain.cpp     **** void Grain::SetEnvelopeType(EnvelopeType type) { envelope_type_ = type; }
- 860              		.loc 1 95 61 is_stmt 0 view .LVU260
- 861 0000 80ED0A0A 		vstr.32	s0, [r0, #40]
-  95:Grain.cpp     **** void Grain::SetEnvelopeType(EnvelopeType type) { envelope_type_ = type; }
- 862              		.loc 1 95 76 view .LVU261
- 863 0004 7047     		bx	lr
- 864              		.cfi_endproc
- 865              	.LFE4880:
- 867              		.section	.text._ZN5Grain15SetEnvelopeTypeENS_12EnvelopeTypeE,"ax",%progbits
- 868              		.align	1
- 869              		.global	_ZN5Grain15SetEnvelopeTypeENS_12EnvelopeTypeE
- 870              		.syntax unified
- 871              		.thumb
- 872              		.thumb_func
- 874              	_ZN5Grain15SetEnvelopeTypeENS_12EnvelopeTypeE:
- 875              	.LVL70:
- 876              	.LFB4881:
-  96:Grain.cpp     **** void Grain::SetPhasorPitchRatio(float pitch_ratio) { phasor_.SetPitchRatio(pitch_ratio, audio_len_)
- 877              		.loc 1 96 48 is_stmt 1 view -0
- 878              		.cfi_startproc
- 879              		@ args = 0, pretend = 0, frame = 0
- 880              		@ frame_needed = 0, uses_anonymous_args = 0
- 881              		@ link register save eliminated.
-  96:Grain.cpp     **** void Grain::SetPhasorPitchRatio(float pitch_ratio) { phasor_.SetPitchRatio(pitch_ratio, audio_len_)
- 882              		.loc 1 96 50 view .LVU263
-  96:Grain.cpp     **** void Grain::SetPhasorPitchRatio(float pitch_ratio) { phasor_.SetPitchRatio(pitch_ratio, audio_len_)
- 883              		.loc 1 96 65 is_stmt 0 view .LVU264
- 884 0000 C162     		str	r1, [r0, #44]
-  96:Grain.cpp     **** void Grain::SetPhasorPitchRatio(float pitch_ratio) { phasor_.SetPitchRatio(pitch_ratio, audio_len_)
- 885              		.loc 1 96 73 view .LVU265
- 886 0002 7047     		bx	lr
- 887              		.cfi_endproc
- 888              	.LFE4881:
- 890              		.section	.text._ZN5Grain19SetPhasorPitchRatioEf,"ax",%progbits
- 891              		.align	1
- 892              		.global	_ZN5Grain19SetPhasorPitchRatioEf
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 35
-
-
- 893              		.syntax unified
- 894              		.thumb
- 895              		.thumb_func
- 897              	_ZN5Grain19SetPhasorPitchRatioEf:
- 898              	.LVL71:
- 899              	.LFB4882:
-  97:Grain.cpp     **** void Grain::SetPhasorMode(GrainPhasor::Mode mode) {
- 900              		.loc 1 97 52 is_stmt 1 view -0
- 901              		.cfi_startproc
- 902              		@ args = 0, pretend = 0, frame = 0
- 903              		@ frame_needed = 0, uses_anonymous_args = 0
- 904              		@ link register save eliminated.
-  97:Grain.cpp     **** void Grain::SetPhasorMode(GrainPhasor::Mode mode) {
- 905              		.loc 1 97 54 view .LVU267
- 906              	.LBB96:
- 907              	.LBI96:
-  34:GrainPhasor.h ****       float size_ms = SamplesToMs(grain_size_samples);
- 908              		.loc 2 34 10 view .LVU268
- 909              	.LBB97:
-  35:GrainPhasor.h ****       increment_ = pitch_ratio / size_ms;
- 910              		.loc 2 35 7 view .LVU269
- 911              	.LBB98:
- 912              	.LBI98:
- 913              		.file 6 "constants_utils.h"
+ 680              		.syntax unified
+ 681              		.thumb
+ 682              		.thumb_func
+ 684              	_ZN5Grain19SetPhasorPitchRatioEf:
+ 685              	.LVL49:
+ 686              	.LFB4880:
+  75:Grain.cpp     **** void Grain::SetPhasorPitchRatio(float pitch_ratio) { phasor_.SetPitchRatio(pitch_ratio, audio_len_)
+ 687              		.loc 1 75 52 is_stmt 1 view -0
+ 688              		.cfi_startproc
+ 689              		@ args = 0, pretend = 0, frame = 0
+ 690              		@ frame_needed = 0, uses_anonymous_args = 0
+ 691              		@ link register save eliminated.
+ 692              		.loc 1 75 54 view .LVU187
+ 693              	.LBB90:
+ 694              	.LBI90:
+  22:GrainPhasor.h ****       float size_ms = SamplesToMs(grain_size_samples);
+ 695              		.loc 2 22 10 view .LVU188
+ 696              	.LBB91:
+  23:GrainPhasor.h ****       increment_ = pitch_ratio / size_ms;
+ 697              		.loc 2 23 7 view .LVU189
+ 698              	.LBB92:
+ 699              	.LBI92:
+ 700              		.file 5 "constants_utils.h"
    1:constants_utils.h **** #pragma once
    2:constants_utils.h **** #include "stddef.h"
    3:constants_utils.h **** #include <time.h>
@@ -2095,316 +1614,304 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 1
   28:constants_utils.h **** /* granular synth parameter constants */
   29:constants_utils.h **** constexpr int MIN_GRAINS = 1;
   30:constants_utils.h **** constexpr int MAX_GRAINS = 10;
-  31:constants_utils.h **** static constexpr int NUM_ENV_TYPES = 4;
-  32:constants_utils.h **** static constexpr int NUM_PHASOR_MODES = 4;
-  33:constants_utils.h **** static constexpr int NUM_SYNTH_MODES = 7;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 36
+  31:constants_utils.h **** static constexpr int NUM_SYNTH_MODES = 8;
+  32:constants_utils.h **** constexpr float PARAM_CHANGE_THRESHOLD = 0.01f;
+  33:constants_utils.h **** constexpr float MIN_GRAIN_SIZE_MS = 100.0f;
+  34:constants_utils.h **** constexpr float MAX_GRAIN_SIZE_MS = 3000.0f;
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 28
 
 
-  34:constants_utils.h **** constexpr float PARAM_CHANGE_THRESHOLD = 0.01f;
-  35:constants_utils.h **** constexpr float MIN_GRAIN_SIZE_MS = 50.0f;
-  36:constants_utils.h **** constexpr float MAX_GRAIN_SIZE_MS = 1000.0f;
-  37:constants_utils.h **** constexpr size_t MIN_GRAIN_SIZE_SAMPLES = 4800; /* 100ms at 48kHz */
-  38:constants_utils.h **** constexpr size_t MAX_GRAIN_SIZE_SAMPLES = 144000; /* 3s at 48kHz */
-  39:constants_utils.h **** constexpr float MIN_PITCH = 0.5f;
-  40:constants_utils.h **** constexpr float MAX_PITCH = 3.0f;
-  41:constants_utils.h **** 
-  42:constants_utils.h **** /* button event constants */
-  43:constants_utils.h **** const unsigned long DEBOUNCE_DELAY = 50; 
-  44:constants_utils.h **** const unsigned long LONG_PRESS_TIME = 1000;
-  45:constants_utils.h **** 
-  46:constants_utils.h **** /* hipass filter frequency range */
-  47:constants_utils.h **** const float HIPASS_LOWER_BOUND = 0.0004f;
-  48:constants_utils.h **** const float HIPASS_UPPER_BOUND = 0.01f;
-  49:constants_utils.h **** 
-  50:constants_utils.h **** /* lowpass filter frequency range */
-  51:constants_utils.h **** const float LOPASS_LOWER_BOUND = 20.0f;
-  52:constants_utils.h **** const float LOPASS_UPPER_BOUND = 18000.0f;
-  53:constants_utils.h **** 
-  54:constants_utils.h **** const float HICUT_FREQ = 0.425f;
-  55:constants_utils.h **** 
-  56:constants_utils.h **** /* random number generator variables and helper functions */
-  57:constants_utils.h **** extern uint32_t rng_state;
-  58:constants_utils.h **** inline void SeedRng(){
-  59:constants_utils.h ****   rng_state = static_cast<uint32_t>(time(nullptr));
-  60:constants_utils.h **** }
-  61:constants_utils.h **** inline float RngFloat(){
-  62:constants_utils.h ****   /* xorshift32 from https://en.wikipedia.org/wiki/Xorshift 
-  63:constants_utils.h ****   for simple fast random floats */
-  64:constants_utils.h ****   rng_state ^= rng_state << 13;
-  65:constants_utils.h ****   rng_state ^= rng_state >> 17;
-  66:constants_utils.h ****   rng_state ^= rng_state << 5;
-  67:constants_utils.h ****   /* ensures output is between 0-1 */
-  68:constants_utils.h ****   float out = static_cast<float>(rng_state) / static_cast<float>(UINT32_MAX);
-  69:constants_utils.h ****   return out;
-  70:constants_utils.h **** }
-  71:constants_utils.h **** 
-  72:constants_utils.h **** /* integer clamp as can't use std::clamp */
-  73:constants_utils.h **** inline constexpr size_t intclamp(size_t val, size_t min, size_t max){
-  74:constants_utils.h ****   if (val < min) val = min;
-  75:constants_utils.h ****   else if (val > max) val = max;
-  76:constants_utils.h ****   return val;
-  77:constants_utils.h **** }
-  78:constants_utils.h **** 
-  79:constants_utils.h **** /* converts milliseconds to number of samples */
-  80:constants_utils.h **** inline constexpr size_t MsToSamples(float ms){
-  81:constants_utils.h ****   return static_cast<size_t>(SAMPLE_RATE_FLOAT * (ms*0.001f));
-  82:constants_utils.h **** }
-  83:constants_utils.h **** 
-  84:constants_utils.h **** /* converts number of samples to milliseconds */
-  85:constants_utils.h **** inline constexpr float SamplesToMs(size_t samples){
- 914              		.loc 6 85 24 view .LVU270
- 915              	.LBB99:
-  86:constants_utils.h ****   return (static_cast<float>(samples) * 1000.0f) / SAMPLE_RATE_FLOAT; 
- 916              		.loc 6 86 3 view .LVU271
- 917              		.loc 6 86 3 is_stmt 0 view .LVU272
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 37
+  35:constants_utils.h **** constexpr size_t MIN_GRAIN_SIZE_SAMPLES = 4800; /* 100ms at 48kHz */
+  36:constants_utils.h **** constexpr size_t MAX_GRAIN_SIZE_SAMPLES = 144000; /* 3s at 48kHz */
+  37:constants_utils.h **** constexpr float MIN_PITCH = 0.5f;
+  38:constants_utils.h **** constexpr float MAX_PITCH = 3.0f;
+  39:constants_utils.h **** 
+  40:constants_utils.h **** /* button event constants */
+  41:constants_utils.h **** const unsigned long DEBOUNCE_DELAY = 50; 
+  42:constants_utils.h **** const unsigned long LONG_PRESS_TIME = 1000;
+  43:constants_utils.h **** 
+  44:constants_utils.h **** /* hipass filter frequency range */
+  45:constants_utils.h **** const float HIPASS_LOWER_BOUND = 0.0004f;
+  46:constants_utils.h **** const float HIPASS_UPPER_BOUND = 0.01f;
+  47:constants_utils.h **** 
+  48:constants_utils.h **** /* lowpass filter frequency range */
+  49:constants_utils.h **** const float LOPASS_LOWER_BOUND = 20.0f;
+  50:constants_utils.h **** const float LOPASS_UPPER_BOUND = 18000.0f;
+  51:constants_utils.h **** 
+  52:constants_utils.h **** // const float HICUT_FREQ = 0.3125f; /* 15000Hz @ 48kHz sample rate */
+  53:constants_utils.h **** const float HICUT_FREQ = 0.34375; /* 16500Hz @ 48kHz sample rate */
+  54:constants_utils.h **** 
+  55:constants_utils.h **** /* random number generator variables and helper functions */
+  56:constants_utils.h **** extern uint32_t rng_state;
+  57:constants_utils.h **** inline void SeedRng(){
+  58:constants_utils.h ****   rng_state = static_cast<uint32_t>(time(nullptr));
+  59:constants_utils.h **** }
+  60:constants_utils.h **** inline float RngFloat(){
+  61:constants_utils.h ****   /* xorshift32 from https://en.wikipedia.org/wiki/Xorshift 
+  62:constants_utils.h ****   for simple fast random floats */
+  63:constants_utils.h ****   rng_state ^= rng_state << 13;
+  64:constants_utils.h ****   rng_state ^= rng_state >> 17;
+  65:constants_utils.h ****   rng_state ^= rng_state << 5;
+  66:constants_utils.h ****   /* ensures output is between 0-1 */
+  67:constants_utils.h ****   float out = static_cast<float>(rng_state) / static_cast<float>(UINT32_MAX);
+  68:constants_utils.h ****   return out;
+  69:constants_utils.h **** }
+  70:constants_utils.h **** 
+  71:constants_utils.h **** /* integer clamp as can't use std::clamp */
+  72:constants_utils.h **** inline constexpr size_t intclamp(size_t val, size_t min, size_t max){
+  73:constants_utils.h ****   if (val < min) val = min;
+  74:constants_utils.h ****   else if (val > max) val = max;
+  75:constants_utils.h ****   return val;
+  76:constants_utils.h **** }
+  77:constants_utils.h **** 
+  78:constants_utils.h **** /* converts milliseconds to number of samples */
+  79:constants_utils.h **** inline constexpr size_t MsToSamples(float ms){
+  80:constants_utils.h ****   return static_cast<size_t>(SAMPLE_RATE_FLOAT * (ms*0.001f));
+  81:constants_utils.h **** }
+  82:constants_utils.h **** 
+  83:constants_utils.h **** /* converts number of samples to milliseconds */
+  84:constants_utils.h **** inline constexpr float SamplesToMs(size_t samples){
+ 701              		.loc 5 84 24 view .LVU190
+ 702              	.LBB93:
+  85:constants_utils.h ****   return (static_cast<float>(samples) * 1000.0f) / SAMPLE_RATE_FLOAT; 
+ 703              		.loc 5 85 3 view .LVU191
+ 704              		.loc 5 85 3 is_stmt 0 view .LVU192
+ 705              	.LBE93:
+ 706              	.LBE92:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 29
 
 
- 918              	.LBE99:
- 919              	.LBE98:
-  36:GrainPhasor.h ****     }
- 920              		.loc 2 36 7 is_stmt 1 view .LVU273
- 921              	.LBE97:
- 922              	.LBE96:
-  97:Grain.cpp     **** void Grain::SetPhasorMode(GrainPhasor::Mode mode) {
- 923              		.loc 1 97 75 is_stmt 0 view .LVU274
- 924 0000 0A4B     		ldr	r3, .L58
- 925              	.LBB109:
- 926              	.LBB106:
- 927              	.LBB103:
- 928              	.LBB100:
- 929              		.loc 6 86 39 view .LVU275
- 930 0002 9FED0B7A 		vldr.32	s14, .L58+4
- 931              	.LBE100:
- 932              	.LBE103:
- 933              	.LBE106:
- 934              	.LBE109:
-  97:Grain.cpp     **** void Grain::SetPhasorMode(GrainPhasor::Mode mode) {
- 935              		.loc 1 97 75 view .LVU276
- 936 0006 D3ED007A 		vldr.32	s15, [r3]	@ int
- 937              	.LBB110:
- 938              	.LBB107:
- 939              	.LBB104:
- 940              	.LBB101:
- 941              		.loc 6 86 52 view .LVU277
- 942 000a DFED0A6A 		vldr.32	s13, .L58+8
- 943              	.LBE101:
- 944              	.LBE104:
- 945              	.LBE107:
- 946              	.LBE110:
-  97:Grain.cpp     **** void Grain::SetPhasorMode(GrainPhasor::Mode mode) {
- 947              		.loc 1 97 75 view .LVU278
- 948 000e F8EE677A 		vcvt.f32.u32	s15, s15
- 949              	.LVL72:
- 950              	.LBB111:
- 951              	.LBB108:
-  35:GrainPhasor.h ****       increment_ = pitch_ratio / size_ms;
- 952              		.loc 2 35 34 view .LVU279
- 953 0012 FCEEE77A 		vcvt.u32.f32	s15, s15
- 954              	.LVL73:
- 955              	.LBB105:
- 956              	.LBB102:
- 957              		.loc 6 86 11 view .LVU280
- 958 0016 F8EE677A 		vcvt.f32.u32	s15, s15
- 959              		.loc 6 86 39 view .LVU281
- 960 001a 67EE877A 		vmul.f32	s15, s15, s14
- 961              		.loc 6 86 52 view .LVU282
- 962 001e 87EEA67A 		vdiv.f32	s14, s15, s13
- 963              	.LBE102:
- 964              	.LBE105:
-  36:GrainPhasor.h ****     }
- 965              		.loc 2 36 32 view .LVU283
- 966 0022 C0EE077A 		vdiv.f32	s15, s0, s14
-  36:GrainPhasor.h ****     }
- 967              		.loc 2 36 18 view .LVU284
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 38
+  24:GrainPhasor.h ****     }
+ 707              		.loc 2 24 7 is_stmt 1 view .LVU193
+ 708              	.LBE91:
+ 709              	.LBE90:
+ 710              		.loc 1 75 75 is_stmt 0 view .LVU194
+ 711 0000 0A4B     		ldr	r3, .L30
+ 712              	.LBB103:
+ 713              	.LBB100:
+ 714              	.LBB97:
+ 715              	.LBB94:
+ 716              		.loc 5 85 39 view .LVU195
+ 717 0002 9FED0B7A 		vldr.32	s14, .L30+4
+ 718              	.LBE94:
+ 719              	.LBE97:
+ 720              	.LBE100:
+ 721              	.LBE103:
+ 722              		.loc 1 75 75 view .LVU196
+ 723 0006 D3ED007A 		vldr.32	s15, [r3]	@ int
+ 724              	.LBB104:
+ 725              	.LBB101:
+ 726              	.LBB98:
+ 727              	.LBB95:
+ 728              		.loc 5 85 52 view .LVU197
+ 729 000a DFED0A6A 		vldr.32	s13, .L30+8
+ 730              	.LBE95:
+ 731              	.LBE98:
+ 732              	.LBE101:
+ 733              	.LBE104:
+ 734              		.loc 1 75 75 view .LVU198
+ 735 000e F8EE677A 		vcvt.f32.u32	s15, s15
+ 736              	.LVL50:
+ 737              	.LBB105:
+ 738              	.LBB102:
+  23:GrainPhasor.h ****       increment_ = pitch_ratio / size_ms;
+ 739              		.loc 2 23 34 view .LVU199
+ 740 0012 FCEEE77A 		vcvt.u32.f32	s15, s15
+ 741              	.LVL51:
+ 742              	.LBB99:
+ 743              	.LBB96:
+ 744              		.loc 5 85 11 view .LVU200
+ 745 0016 F8EE677A 		vcvt.f32.u32	s15, s15
+ 746              		.loc 5 85 39 view .LVU201
+ 747 001a 67EE877A 		vmul.f32	s15, s15, s14
+ 748              		.loc 5 85 52 view .LVU202
+ 749 001e 87EEA67A 		vdiv.f32	s14, s15, s13
+ 750              	.LBE96:
+ 751              	.LBE99:
+  24:GrainPhasor.h ****     }
+ 752              		.loc 2 24 32 view .LVU203
+ 753 0022 C0EE077A 		vdiv.f32	s15, s0, s14
+  24:GrainPhasor.h ****     }
+ 754              		.loc 2 24 18 view .LVU204
+ 755 0026 C0ED027A 		vstr.32	s15, [r0, #8]
+ 756              	.LVL52:
+  24:GrainPhasor.h ****     }
+ 757              		.loc 2 24 18 view .LVU205
+ 758              	.LBE102:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 30
 
 
- 968 0026 C0ED027A 		vstr.32	s15, [r0, #8]
- 969              	.LVL74:
-  36:GrainPhasor.h ****     }
- 970              		.loc 2 36 18 view .LVU285
- 971              	.LBE108:
- 972              	.LBE111:
-  97:Grain.cpp     **** void Grain::SetPhasorMode(GrainPhasor::Mode mode) {
- 973              		.loc 1 97 102 view .LVU286
- 974 002a 7047     		bx	lr
- 975              	.L59:
- 976              		.align	2
- 977              	.L58:
- 978 002c 00000000 		.word	.LANCHOR0
- 979 0030 00007A44 		.word	1148846080
- 980 0034 00803B47 		.word	1195081728
- 981              		.cfi_endproc
- 982              	.LFE4882:
- 984              		.section	.text._ZN5Grain13SetPhasorModeEN11GrainPhasor4ModeE,"ax",%progbits
- 985              		.align	1
- 986              		.global	_ZN5Grain13SetPhasorModeEN11GrainPhasor4ModeE
- 987              		.syntax unified
- 988              		.thumb
- 989              		.thumb_func
- 991              	_ZN5Grain13SetPhasorModeEN11GrainPhasor4ModeE:
- 992              	.LVL75:
- 993              	.LFB4883:
-  98:Grain.cpp     ****   if (static_cast<int>(mode) >=2){
- 994              		.loc 1 98 51 is_stmt 1 view -0
- 995              		.cfi_startproc
- 996              		@ args = 0, pretend = 0, frame = 0
- 997              		@ frame_needed = 0, uses_anonymous_args = 0
- 998              		@ link register save eliminated.
- 999              		.loc 1 99 3 view .LVU288
- 1000 0000 0129     		cmp	r1, #1
- 100:Grain.cpp     ****     phasor_.SetDirection(1);
- 1001              		.loc 1 100 5 view .LVU289
- 1002              	.LVL76:
- 1003              	.LBB112:
- 1004              	.LBI112:
-  43:GrainPhasor.h ****       if (direction>0.5){
- 1005              		.loc 2 43 10 view .LVU290
- 1006              	.LBB113:
-  44:GrainPhasor.h ****         direction_ = -1;
- 1007              		.loc 2 44 7 view .LVU291
-  45:GrainPhasor.h ****       }
- 1008              		.loc 2 45 9 view .LVU292
-  45:GrainPhasor.h ****       }
- 1009              		.loc 2 45 20 is_stmt 0 view .LVU293
- 1010 0002 C4BF     		itt	gt
- 1011 0004 4FF0FF33 		movgt	r3, #-1
- 1012 0008 0361     		strgt	r3, [r0, #16]
- 1013              	.LVL77:
-  45:GrainPhasor.h ****       }
- 1014              		.loc 2 45 20 view .LVU294
- 1015              	.LBE113:
- 1016              	.LBE112:
- 101:Grain.cpp     ****   }
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 39
+ 759              	.LBE105:
+ 760              		.loc 1 75 102 view .LVU206
+ 761 002a 7047     		bx	lr
+ 762              	.L31:
+ 763              		.align	2
+ 764              	.L30:
+ 765 002c 00000000 		.word	.LANCHOR0
+ 766 0030 00007A44 		.word	1148846080
+ 767 0034 00803B47 		.word	1195081728
+ 768              		.cfi_endproc
+ 769              	.LFE4880:
+ 771              		.section	.text._ZN5Grain18SetPhasorDirectionEf,"ax",%progbits
+ 772              		.align	1
+ 773              		.global	_ZN5Grain18SetPhasorDirectionEf
+ 774              		.syntax unified
+ 775              		.thumb
+ 776              		.thumb_func
+ 778              	_ZN5Grain18SetPhasorDirectionEf:
+ 779              	.LVL53:
+ 780              	.LFB4881:
+  76:Grain.cpp     **** void Grain::SetPhasorDirection(float direction) { phasor_.SetDirection(direction); }
+ 781              		.loc 1 76 49 is_stmt 1 view -0
+ 782              		.cfi_startproc
+ 783              		@ args = 0, pretend = 0, frame = 0
+ 784              		@ frame_needed = 0, uses_anonymous_args = 0
+ 785              		@ link register save eliminated.
+ 786              		.loc 1 76 51 view .LVU208
+ 787              	.LBB106:
+ 788              	.LBI106:
+  28:GrainPhasor.h ****       direction_ = direction>0.5 ? -1: 1;
+ 789              		.loc 2 28 10 view .LVU209
+ 790              	.LBB107:
+  29:GrainPhasor.h ****     }
+ 791              		.loc 2 29 7 view .LVU210
+  29:GrainPhasor.h ****     }
+ 792              		.loc 2 29 34 is_stmt 0 view .LVU211
+ 793 0000 F6EE007A 		vmov.f32	s15, #5.0e-1
+ 794 0004 B4EEE70A 		vcmpe.f32	s0, s15
+ 795 0008 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 796 000c CCBF     		ite	gt
+ 797 000e 4FF0FF33 		movgt	r3, #-1
+ 798 0012 0123     		movle	r3, #1
+  29:GrainPhasor.h ****     }
+ 799              		.loc 2 29 18 view .LVU212
+ 800 0014 C360     		str	r3, [r0, #12]
+ 801              	.LVL54:
+  29:GrainPhasor.h ****     }
+ 802              		.loc 2 29 18 view .LVU213
+ 803              	.LBE107:
+ 804              	.LBE106:
+ 805              		.loc 1 76 84 view .LVU214
+ 806 0016 7047     		bx	lr
+ 807              		.cfi_endproc
+ 808              	.LFE4881:
+ 810              		.global	_ZN5Grain11decay_rate_E
+ 811              		.global	_ZN5Grain12start_decay_E
+ 812              		.global	_ZN5Grain10right_buf_E
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 31
 
 
- 102:Grain.cpp     ****   else phasor_.SetDirection(0);
- 103:Grain.cpp     **** }...
- 1017              		.loc 1 103 1 view .LVU295
- 1018 000a 7047     		bx	lr
- 1019              		.cfi_endproc
- 1020              	.LFE4883:
- 1022              		.global	_ZN5Grain11decay_rate_E
- 1023              		.global	_ZN5Grain12start_decay_E
- 1024              		.global	_ZN5Grain10right_buf_E
- 1025              		.global	_ZN5Grain9left_buf_E
- 1026              		.global	_ZN5Grain10audio_len_E
- 1027              		.section	.bss._ZN5Grain10audio_len_E,"aw",%nobits
- 1028              		.align	2
- 1029              		.set	.LANCHOR0,. + 0
- 1032              	_ZN5Grain10audio_len_E:
- 1033 0000 00000000 		.space	4
- 1034              		.section	.bss._ZN5Grain10right_buf_E,"aw",%nobits
- 1035              		.align	2
- 1036              		.set	.LANCHOR2,. + 0
- 1039              	_ZN5Grain10right_buf_E:
- 1040 0000 00000000 		.space	4
- 1041              		.section	.bss._ZN5Grain9left_buf_E,"aw",%nobits
- 1042              		.align	2
- 1043              		.set	.LANCHOR1,. + 0
- 1046              	_ZN5Grain9left_buf_E:
- 1047 0000 00000000 		.space	4
- 1048              		.section	.rodata._ZN5Grain11decay_rate_E,"a"
- 1049              		.align	2
- 1052              	_ZN5Grain11decay_rate_E:
- 1053 0000 0000A040 		.word	1084227584
- 1054              		.section	.rodata._ZN5Grain12start_decay_E,"a"
- 1055              		.align	2
- 1058              	_ZN5Grain12start_decay_E:
- 1059 0000 CDCC4C3F 		.word	1061997773
- 1060              		.text
- 1061              	.Letext0:
- 1062              		.file 7 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/machine/_default_types.h"
- 1063              		.file 8 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/_stdint.h"
- 1064              		.file 9 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdint.h"
- 1065              		.file 10 "/Library/DaisyToolchain/0.2.0/arm/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h"
- 1066              		.file 11 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdlib"
- 1067              		.file 12 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdint"
- 1068              		.file 13 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/type_traits"
- 1069              		.file 14 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/debug/debug.h"
- 1070              		.file 15 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v
- 1071              		.file 16 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/algorithmfwd.h"
- 1072              		.file 17 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_pair.h"
- 1073              		.file 18 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/exception_ptr.h"
- 1074              		.file 19 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdarg"
- 1075              		.file 20 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdio"
- 1076              		.file 21 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstring"
- 1077              		.file 22 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cwchar"
- 1078              		.file 23 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/clocale"
- 1079              		.file 24 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/basic_string.h"
- 1080              		.file 25 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_iterator.h"
- 1081              		.file 26 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/predefined_ops.h
- 1082              		.file 27 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/_types.h"
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 40
+ 813              		.global	_ZN5Grain9left_buf_E
+ 814              		.global	_ZN5Grain10audio_len_E
+ 815              		.section	.bss._ZN5Grain10audio_len_E,"aw",%nobits
+ 816              		.align	2
+ 817              		.set	.LANCHOR0,. + 0
+ 820              	_ZN5Grain10audio_len_E:
+ 821 0000 00000000 		.space	4
+ 822              		.section	.bss._ZN5Grain10right_buf_E,"aw",%nobits
+ 823              		.align	2
+ 824              		.set	.LANCHOR2,. + 0
+ 827              	_ZN5Grain10right_buf_E:
+ 828 0000 00000000 		.space	4
+ 829              		.section	.bss._ZN5Grain9left_buf_E,"aw",%nobits
+ 830              		.align	2
+ 831              		.set	.LANCHOR1,. + 0
+ 834              	_ZN5Grain9left_buf_E:
+ 835 0000 00000000 		.space	4
+ 836              		.section	.rodata._ZN5Grain11decay_rate_E,"a"
+ 837              		.align	2
+ 840              	_ZN5Grain11decay_rate_E:
+ 841 0000 0000A040 		.word	1084227584
+ 842              		.section	.rodata._ZN5Grain12start_decay_E,"a"
+ 843              		.align	2
+ 846              	_ZN5Grain12start_decay_E:
+ 847 0000 CDCC4C3F 		.word	1061997773
+ 848              		.text
+ 849              	.Letext0:
+ 850              		.file 6 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/machine/_default_types.h"
+ 851              		.file 7 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/_stdint.h"
+ 852              		.file 8 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdint.h"
+ 853              		.file 9 "/Library/DaisyToolchain/0.2.0/arm/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h"
+ 854              		.file 10 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h"
+ 855              		.file 11 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdlib"
+ 856              		.file 12 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdint"
+ 857              		.file 13 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/type_traits"
+ 858              		.file 14 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/debug/debug.h"
+ 859              		.file 15 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v
+ 860              		.file 16 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/algorithmfwd.h"
+ 861              		.file 17 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_pair.h"
+ 862              		.file 18 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/exception_ptr.h"
+ 863              		.file 19 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdarg"
+ 864              		.file 20 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdio"
+ 865              		.file 21 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstring"
+ 866              		.file 22 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cwchar"
+ 867              		.file 23 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/clocale"
+ 868              		.file 24 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/basic_string.h"
+ 869              		.file 25 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_iterator.h"
+ 870              		.file 26 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/predefined_ops.h
+ 871              		.file 27 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/_types.h"
+ 872              		.file 28 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/reent.h"
+ 873              		.file 29 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/lock.h"
+ 874              		.file 30 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/math.h"
+ 875              		.file 31 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdlib.h"
+ 876              		.file 32 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/math.h"
+ 877              		.file 33 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/stdlib.h"
+ 878              		.file 34 "../libDaisy/src/util/wav_format.h"
+ 879              		.file 35 "../libDaisy/src/dev/max11300.h"
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 32
 
 
- 1083              		.file 28 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/reent.h"
- 1084              		.file 29 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/lock.h"
- 1085              		.file 30 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/math.h"
- 1086              		.file 31 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdlib.h"
- 1087              		.file 32 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/math.h"
- 1088              		.file 33 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/stdlib.h"
- 1089              		.file 34 "../libDaisy/src/util/wav_format.h"
- 1090              		.file 35 "../libDaisy/src/dev/max11300.h"
- 1091              		.file 36 "../libDaisy/src/daisy_seed.h"
- 1092              		.file 37 "/Library/DaisyToolchain/0.2.0/arm/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h"
- 1093              		.file 38 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdio.h"
- 1094              		.file 39 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/string.h"
- 1095              		.file 40 "../DaisySP/Source/Control/adenv.h"
- 1096              		.file 41 "../DaisySP/Source/Utility/dsp.h"
- 1097              		.file 42 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/wchar.h"
- 1098              		.file 43 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/time.h"
- 1099              		.file 44 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/locale.h"
- 1100              		.file 45 "sample.h"
- 1101              		.file 46 "../libDaisy/src/dev/sr_595.h"
- 1102              		.file 47 "Grain.h"
- 1103              		.file 48 "<built-in>"
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s 			page 41
+ 880              		.file 36 "../libDaisy/src/daisy_seed.h"
+ 881              		.file 37 "/Library/DaisyToolchain/0.2.0/arm/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h"
+ 882              		.file 38 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdio.h"
+ 883              		.file 39 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/string.h"
+ 884              		.file 40 "../DaisySP/Source/Control/adenv.h"
+ 885              		.file 41 "../DaisySP/Source/Utility/dsp.h"
+ 886              		.file 42 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/wchar.h"
+ 887              		.file 43 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/time.h"
+ 888              		.file 44 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/locale.h"
+ 889              		.file 45 "sample.h"
+ 890              		.file 46 "../libDaisy/src/dev/sr_595.h"
+ 891              		.file 47 "Grain.h"
+ 892              		.file 48 "<built-in>"
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s 			page 33
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 Grain.cpp
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:19     .text._ZN5Grain4InitEPsS0_:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:25     .text._ZN5Grain4InitEPsS0_:0000000000000000 _ZN5Grain4InitEPsS0_
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:96     .text._ZN5Grain4InitEPsS0_:0000000000000034 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:101    .text._ZN5Grain7TriggerEjjff:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:107    .text._ZN5Grain7TriggerEjjff:0000000000000000 _ZN5Grain7TriggerEjjff
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:219    .text._ZN5Grain7TriggerEjjff:000000000000004c $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:224    .text._ZN5Grain13ApplyEnvelopeEf:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:230    .text._ZN5Grain13ApplyEnvelopeEf:0000000000000000 _ZN5Grain13ApplyEnvelopeEf
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:252    .text._ZN5Grain13ApplyEnvelopeEf:0000000000000010 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:347    .text._ZN5Grain13ApplyEnvelopeEf:0000000000000088 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:354    .text._ZN5Grain7ProcessE6Samplef:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:360    .text._ZN5Grain7ProcessE6Samplef:0000000000000000 _ZN5Grain7ProcessE6Samplef
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:788    .text._ZN5Grain7ProcessE6Samplef:00000000000001a0 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:799    .text._ZN5Grain11SetSpawnPosEj:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:805    .text._ZN5Grain11SetSpawnPosEj:0000000000000000 _ZN5Grain11SetSpawnPosEj
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:822    .text._ZN5Grain12SetGrainSizeEj:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:828    .text._ZN5Grain12SetGrainSizeEj:0000000000000000 _ZN5Grain12SetGrainSizeEj
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:845    .text._ZN5Grain13SetPitchRatioEf:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:851    .text._ZN5Grain13SetPitchRatioEf:0000000000000000 _ZN5Grain13SetPitchRatioEf
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:868    .text._ZN5Grain15SetEnvelopeTypeENS_12EnvelopeTypeE:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:874    .text._ZN5Grain15SetEnvelopeTypeENS_12EnvelopeTypeE:0000000000000000 _ZN5Grain15SetEnvelopeTypeENS_12EnvelopeTypeE
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:891    .text._ZN5Grain19SetPhasorPitchRatioEf:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:897    .text._ZN5Grain19SetPhasorPitchRatioEf:0000000000000000 _ZN5Grain19SetPhasorPitchRatioEf
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:978    .text._ZN5Grain19SetPhasorPitchRatioEf:000000000000002c $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:985    .text._ZN5Grain13SetPhasorModeEN11GrainPhasor4ModeE:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:991    .text._ZN5Grain13SetPhasorModeEN11GrainPhasor4ModeE:0000000000000000 _ZN5Grain13SetPhasorModeEN11GrainPhasor4ModeE
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:1052   .rodata._ZN5Grain11decay_rate_E:0000000000000000 _ZN5Grain11decay_rate_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:1058   .rodata._ZN5Grain12start_decay_E:0000000000000000 _ZN5Grain12start_decay_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:1039   .bss._ZN5Grain10right_buf_E:0000000000000000 _ZN5Grain10right_buf_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:1046   .bss._ZN5Grain9left_buf_E:0000000000000000 _ZN5Grain9left_buf_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:1032   .bss._ZN5Grain10audio_len_E:0000000000000000 _ZN5Grain10audio_len_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:1028   .bss._ZN5Grain10audio_len_E:0000000000000000 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:1035   .bss._ZN5Grain10right_buf_E:0000000000000000 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:1042   .bss._ZN5Grain9left_buf_E:0000000000000000 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:1049   .rodata._ZN5Grain11decay_rate_E:0000000000000000 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:1055   .rodata._ZN5Grain12start_decay_E:0000000000000000 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:257    .text._ZN5Grain13ApplyEnvelopeEf:0000000000000015 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccJRI4BE.s:257    .text._ZN5Grain13ApplyEnvelopeEf:0000000000000016 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:19     .text._ZN5Grain4InitEv:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:25     .text._ZN5Grain4InitEv:0000000000000000 _ZN5Grain4InitEv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:69     .text._ZN5Grain4InitEv:0000000000000020 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:74     .text._ZN5Grain7TriggerEjjfff:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:80     .text._ZN5Grain7TriggerEjjfff:0000000000000000 _ZN5Grain7TriggerEjjfff
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:168    .text._ZN5Grain7TriggerEjjfff:000000000000003c $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:173    .text._ZN5Grain13ApplyEnvelopeEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:179    .text._ZN5Grain13ApplyEnvelopeEf:0000000000000000 _ZN5Grain13ApplyEnvelopeEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:213    .text._ZN5Grain13ApplyEnvelopeEf:0000000000000028 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:219    .text._ZN5Grain7ProcessE6Samplef:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:225    .text._ZN5Grain7ProcessE6Samplef:0000000000000000 _ZN5Grain7ProcessE6Samplef
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:596    .text._ZN5Grain7ProcessE6Samplef:000000000000013c $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:609    .text._ZN5Grain11SetSpawnPosEj:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:615    .text._ZN5Grain11SetSpawnPosEj:0000000000000000 _ZN5Grain11SetSpawnPosEj
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:632    .text._ZN5Grain12SetGrainSizeEj:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:638    .text._ZN5Grain12SetGrainSizeEj:0000000000000000 _ZN5Grain12SetGrainSizeEj
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:655    .text._ZN5Grain13SetPitchRatioEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:661    .text._ZN5Grain13SetPitchRatioEf:0000000000000000 _ZN5Grain13SetPitchRatioEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:678    .text._ZN5Grain19SetPhasorPitchRatioEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:684    .text._ZN5Grain19SetPhasorPitchRatioEf:0000000000000000 _ZN5Grain19SetPhasorPitchRatioEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:765    .text._ZN5Grain19SetPhasorPitchRatioEf:000000000000002c $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:772    .text._ZN5Grain18SetPhasorDirectionEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:778    .text._ZN5Grain18SetPhasorDirectionEf:0000000000000000 _ZN5Grain18SetPhasorDirectionEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:840    .rodata._ZN5Grain11decay_rate_E:0000000000000000 _ZN5Grain11decay_rate_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:846    .rodata._ZN5Grain12start_decay_E:0000000000000000 _ZN5Grain12start_decay_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:827    .bss._ZN5Grain10right_buf_E:0000000000000000 _ZN5Grain10right_buf_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:834    .bss._ZN5Grain9left_buf_E:0000000000000000 _ZN5Grain9left_buf_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:820    .bss._ZN5Grain10audio_len_E:0000000000000000 _ZN5Grain10audio_len_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:816    .bss._ZN5Grain10audio_len_E:0000000000000000 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:823    .bss._ZN5Grain10right_buf_E:0000000000000000 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:830    .bss._ZN5Grain9left_buf_E:0000000000000000 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:837    .rodata._ZN5Grain11decay_rate_E:0000000000000000 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccd1Zm11.s:843    .rodata._ZN5Grain12start_decay_E:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 cos

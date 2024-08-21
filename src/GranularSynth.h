@@ -19,22 +19,21 @@ class GranularSynth{
     void TriggerGrain();
     Sample ProcessGrains();
 
-    void SetEnvelopeType(Grain::EnvelopeType type);
-    void SetPhasorMode(GrainPhasor::Mode mode);
-    void SetPan(float pan);
-    
+    void SetPan(float pan);    
     void SetGrainSize(float knob_val);
     void SetSpawnPos(float knob_val);
     void SetActiveGrains(float knob_val);
     void SetPitchRatio(float ratio);
+    void SetDirection(float direction);
 
     void SetSizeRnd(float rnd){ rnd_size_ = rnd; }
     void SetPositionRnd(float rnd){ rnd_spawn_pos_ = rnd; }
     void SetPitchRnd(float rnd){ rnd_pitch_ = rnd; }
     void SetCountRnd(float rnd){ rnd_count_ = rnd; }
     void SetPanRnd(float rnd){ rnd_pan_ = rnd; }
-    void SetEnvRnd(float rnd){ rnd_envelope_ = rnd; }
-    void SetPhasorRnd(float rnd){ rnd_phasor_ = rnd; }
+
+    /* used to set chorus pan */
+    float GetPan(){ return pan_; }
 
   private:
     DaisyPod& pod_;
@@ -48,13 +47,12 @@ class GranularSynth{
     
 
     /* parameters affecting audio output */
-    GrainPhasor::Mode phasor_mode_;
-    Grain::EnvelopeType env_type_;
     size_t grain_size_;
     size_t spawn_pos_;
     size_t active_count_;
     float pitch_ratio_;
     float pan_;
+    float direction_;
 
     /* amount of randomness to apply to synth/grain parameters*/
     float rnd_size_;
@@ -62,6 +60,4 @@ class GranularSynth{
     float rnd_count_;
     float rnd_pitch_;
     float rnd_pan_;
-    float rnd_envelope_;
-    float rnd_phasor_;
 };
