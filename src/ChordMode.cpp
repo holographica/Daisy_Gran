@@ -103,6 +103,9 @@ void ChordMode::SetChordSizeRnd(float sz_randomness){
   // convert to key? 
 
 
+/*
 
+
+*/
 
 

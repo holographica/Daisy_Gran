@@ -126,6 +126,7 @@ void GranularSynth::TriggerGrain(){
     else if (count<active_count_){
       // ApplyRandomness();
       // grain.SetEnvelopeType(env_type_);
+      UpdateGrainParams();
       grain.Trigger(spawn_pos_,grain_size_,pitch_ratio_,pan_,direction_);
       count++;
       break;
@@ -140,14 +141,23 @@ void GranularSynth::TriggerGrain(){
 Sample GranularSynth::ProcessGrains(){
   sample_.left=0.0f, sample_.right=0.0f;
   TriggerGrain();
-
-  int count = 0;
+  // int cnt=0;
   for (Grain& grain:grains_){
     if (grain.is_active_){
-      count++;
-      sample_ = grain.Process(sample_,1);
+      // cnt++;
+      sample_ = grain.Process(sample_,1.0f);
     }
   }
+  count++;
+  if (count%60000==0){
+    count=0;
+    // DebugPrint(pod_, "lbuf %f, rbuf %f, envv %f",grains_[0].lbuf, grains_[0].rbuf, grains_[0].envv);
+    DebugPrint(pod_, "sampL %f, sampR%f", sample_.left, sample_.right);
+    // DebugPrint(pod_, "activecount %u pan %f",active_count_,pan_); 
+  }
+
+
+
   
   // sample_.left = SoftClip(sample_.left);
   // sample_.right = SoftClip(sample_.right);

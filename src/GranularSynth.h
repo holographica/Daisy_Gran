@@ -34,6 +34,10 @@ class GranularSynth{
 
     /* used to set chorus pan */
     float GetPan(){ return pan_; }
+    size_t GetSize(){ return grain_size_; }
+    float GetPitch(){ return pitch_ratio_; }
+    size_t GetPos() { return spawn_pos_; }
+    size_t GetCount(){ return active_count_; }
 
   private:
     DaisyPod& pod_;
@@ -44,6 +48,8 @@ class GranularSynth{
     size_t audio_len_;
     Grain grains_[MAX_GRAINS];
     Sample sample_;
+
+    size_t count=0;
     
 
     /* parameters affecting audio output */

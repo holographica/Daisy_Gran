@@ -8,6 +8,7 @@
 #include "DaisySP-LGPL-FX/reverb.h"
 #include "DaisySP-LGPL-FX/compressor.h"
 #include "DaisySP-LGPL-FX/moogladder.h"
+#include "StereoRotator.h"
 #include "AppState.h"
 
 using namespace daisy;
@@ -50,6 +51,7 @@ class GrannyChordApp {
     Chorus chorus_;
     MoogLadder lowpass_moog_;
     OnePole hipass_;
+    StereoRotator rotator_;
     /* filter to reduce high end noise */
     OnePole hicut_;
 
@@ -139,15 +141,15 @@ class GrannyChordApp {
     void UpdateKnob2Params(float knob2_val, SynthMode mode);
     // void UpdateChordParams();
     inline float MapKnobDeadzone(float knob_val);
-    inline bool UpdateKnobPassThru(float curr_knob_val, int mode_idx);
+    inline bool UpdateKnobPassThru(float curr_knob_val, float prev_param);
 
     /* timer and led methods */
     void SetupTimer();
     /* has to be static - timer won't take class member function in callback */
     static void StaticLedCallback(void* data){
-      instance_ -> LedCallback(data);
+      instance_ -> LedCallback();
     }
-    void LedCallback(void* data);
+    void LedCallback();
     void SetLed1AppState();
     void SetLed1SynthMode();
     void SetLed2();
@@ -159,4 +161,7 @@ class GrannyChordApp {
     #ifdef DEBUG_MODE
     void PrintCPULoad();
     #endif
+
+
+    size_t counter=0;
 };

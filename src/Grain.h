@@ -29,15 +29,18 @@ class Grain {
     static int16_t *right_buf_;
     bool is_active_;
 
-  private:
-    /* Object that manages the phase of the grain */
     GrainPhasor phasor_;
-
+    float lbuf = 0;
+    float rbuf=0;
+    float envv=0;
+    size_t count = 0;
     /* Grain audio parameters */
     float pan_;
     size_t spawn_pos_;
     size_t grain_size_;
     float pitch_ratio_;
+  private:
+    /* Object that manages the phase of the grain */
 
     static const float start_decay_;
     static const float decay_rate_;

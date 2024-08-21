@@ -32,7 +32,10 @@ void Grain::Trigger(size_t pos, size_t grain_size, float pitch_ratio, float pan,
 /// @param sum_left Pointer to variable storing total left channel audio output of all grains
 /// @param sum_right Pointer to variable storing total right channel audio output of all grains
 Sample Grain::Process(Sample sample, float scale) {
-  if (!is_active_) return {0.0f, 0.0f};
+  count++;
+  if (!is_active_) {
+      return {0.0f, 0.0f};
+  }
   float phase = phasor_.Process();
   if (phasor_.GrainFinished()){
     is_active_=false;
@@ -56,8 +59,10 @@ Sample Grain::Process(Sample sample, float scale) {
   source: cs.cmu.edu/~music/icm-online/readings/panlaws/panlaws.pdf */
   float gain_left = std::sqrt(1.0f-pan_);
   float gain_right = std::sqrt(pan_);
-  sample.left += (left*env*gain_left*scale);
-  sample.right += (right*env*gain_right*scale);
+  sample.left += (left*env*gain_left);
+  // sample.left = (left);
+  sample.right += (right*env*gain_right);
+  // sample.right  = (right);
   return sample;
 }
 
@@ -65,8 +70,9 @@ Sample Grain::Process(Sample sample, float scale) {
 /// @param phase Current playback position of the grain within its lifetime (from 0 - 1)
 /// @return Amplitude of the grain after envelope has been applied
 float Grain::ApplyEnvelope(float phase){
-    /* Hann formula from https://uk.mathworks.com/help/signal/ref/hann.html */
-      return 0.5f * (1.0f - std::cos(2.0f * M_PI * phase));
+  /* Hann formula from https://uk.mathworks.com/help/signal/ref/hann.html */
+  // return 0.5f * (1.0f - std::cos(2.0f * M_PI * phase));
+  return 1.0f;
 }
 
 void Grain::SetSpawnPos(size_t spawn_pos){ spawn_pos_ = spawn_pos; }

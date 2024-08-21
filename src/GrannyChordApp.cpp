@@ -19,6 +19,7 @@ void GrannyChordApp::Init(int16_t *left, int16_t *right){
   pod_.SetAudioSampleRate(SaiHandle::Config::SampleRate::SAI_48KHZ);
 
   curr_state_ = AppState::SelectFile;
+  // SetupTimer();
   if (!InitFileMgr()){
     DebugPrint(pod_,"File manager failed to init");
     pod_.led1.SetRed(1);
@@ -103,6 +104,7 @@ void GrannyChordApp::HandleStateChange(){
   switch(next_state_){
     case AppState::SelectFile:
       pod_.StopAudio();
+      DebugPrint(pod_, "stopped audio for select file");
       curr_state_ = AppState::SelectFile;
       break; 
     case AppState::RecordIn:
@@ -311,8 +313,9 @@ void GrannyChordApp::UpdateSynthModeA(){
 
   curr_synth_mode_ = static_cast<SynthMode>(mode_idx);
   DebugPrintMode(curr_synth_mode_);
-  ResetPassThru();
+  // ResetPassThru();
   SetLed1SynthMode();
+  SetLed2();
   mode_changed_ = true;
 }
 
@@ -331,7 +334,8 @@ void GrannyChordApp::UpdateSynthModeB(){
 
   curr_synth_mode_ = static_cast<SynthMode>(mode_idx);
   DebugPrintMode(curr_synth_mode_);
-  ResetPassThru();
+  // ResetPassThru();
+  SetLed1SynthMode();
   SetLed2();
   mode_changed_ = true;
 }
@@ -345,16 +349,24 @@ void GrannyChordApp::UpdateSynthParams(){
   /* set to 0 or 1 if very close to these bounds */
   float knob1_val = MapKnobDeadzone(pod_.knob1.Process());
   float knob2_val = MapKnobDeadzone(pod_.knob2.Process());
+  
+  counter++;
 
   /* only update parameter if knob has passed through previous value in this mode */
-  if (UpdateKnobPassThru(knob1_val,mode_idx)){
+  // if (UpdateKnobPassThru(knob1_val,prev_param_k1[mode_idx])){
     UpdateKnob1Params(knob1_val,curr_synth_mode_);
     prev_param_k1[mode_idx] = knob1_val;
-  }
-  if (UpdateKnobPassThru(knob2_val,mode_idx)){
+    if (counter%96000==0){
+      DebugPrint(pod_, "new k1v: %f",knob1_val);
+    }
+  // }
+  // if (UpdateKnobPassThru(knob2_val,prev_param_k2[mode_idx])){
     UpdateKnob2Params(knob2_val, curr_synth_mode_);
     prev_param_k2[mode_idx] = knob2_val;
-  }
+    if (counter%96000==0){
+      DebugPrint(pod_, "new k2v: %f",knob2_val);
+    }
+  // }
 }
 
 /// @brief Initialises file manager, sets audio data buffers and scans SD card for WAV files
@@ -453,7 +465,7 @@ void GrannyChordApp::ProcessAudio(AudioHandle::InputBuffer in, AudioHandle::Outp
     case AppState::PlayWAV:
       if (wav_playhead_>= filemgr_.GetSamplesPerChannel() -1){
         instance_->pod_.StopAudio();
-        DebugPrint(pod_, "stopped audio > len");
+        DebugPrint(pod_, "stopped audio > len"); 
         return;
       }
       ProcessWAVPlayback(out,size);
@@ -476,10 +488,15 @@ void GrannyChordApp::ProcessAudio(AudioHandle::InputBuffer in, AudioHandle::Outp
 /// @param size Number of samples to process in this call
 void GrannyChordApp::ProcessWAVPlayback(AudioHandle::OutputBuffer out, size_t size){
   for (size_t i=0; i<size; i++){
+    counter++;
     if (wav_playhead_ < filemgr_.GetSamplesPerChannel()){
       out[0][i] = s162f(left_buf_[wav_playhead_]) * 0.5f;
       out[1][i] = s162f(right_buf_[wav_playhead_]) * 0.5f;
       wav_playhead_++;
+    }
+    if (counter%128000==0){
+      counter=0;
+      DebugPrint(pod_, "l: %f, r: %f", out[0][i],out[1][i]);
     }
   }
 }
@@ -507,23 +524,32 @@ void GrannyChordApp::ProcessRecordIn(AudioHandle::InputBuffer in, AudioHandle::O
 /// @param out Output audio buffer
 /// @param size Number of samples to process in this call
 void GrannyChordApp::ProcessSynthesis(AudioHandle::OutputBuffer out, size_t size){
-  Sample samp;
+  // Sample samp;
   for (size_t i=0; i<size; i++){ 
-    samp = synth_.ProcessGrains();
-    samp = ProcessFX(samp);
-    // out[0][i] = samp.left;
-    // out[1][i] = samp.right;
-    limiter_.ProcessBlock(&samp.left, 1, 1.0f);
-    limiter_.ProcessBlock(&samp.right, 1, 1.0f);
+    Sample samp = synth_.ProcessGrains();
     out[0][i] = samp.left;
     out[1][i] = samp.right;
-
-    if (recording_out_ && sd_writer_.GetLengthSeconds()<MAX_REC_OUT_LEN){
-      temp_interleaved_buf_[0]=out[0][i];
-      temp_interleaved_buf_[1]=out[1][i];
-      sd_writer_.Sample(temp_interleaved_buf_);
-    }
   }
+
+    // samp = ProcessFX(samp);
+    // out[0][i] = samp.left;
+    // out[1][i] = samp.right;
+    // limiter_.ProcessBlock(&samp.left, 1, 0.0f);
+    // limiter_.ProcessBlock(&samp.right, 1, 0.0f);
+    // if (counter%128000==0){
+    //   counter=0;
+    //   DebugPrint(pod_, "l: %f, r: %f", samp.left, samp.right);
+    // }
+    // out[0][i] = samp.left;
+    // out[1][i] = samp.right;
+
+    //NOTE: TURN BACK ON 
+    // if (recording_out_ && sd_writer_.GetLengthSeconds()<MAX_REC_OUT_LEN){
+    //   temp_interleaved_buf_[0]=out[0][i];
+    //   temp_interleaved_buf_[1]=out[1][i];
+    //   sd_writer_.Sample(temp_interleaved_buf_);
+    // }
+  // }
 }
 
 Sample GrannyChordApp::ProcessFX(Sample in){
@@ -539,6 +565,9 @@ Sample GrannyChordApp::ProcessFX(Sample in){
   /* apply lowpass filter */
   out.left = lowpass_moog_.Process(out.left);
   out.right = lowpass_moog_.Process(out.right);
+
+  /* apply stereo rotation */
+  out = rotator_.Process(out);
 
   /* apply chorus */
   out.left = chorus_.Process(out.left);
@@ -589,31 +618,37 @@ void GrannyChordApp::UpdateKnob1Params(float knob1_val, SynthMode mode){
   switch (mode){
     case SynthMode::Size_Position:
       synth_.SetGrainSize(knob1_val);
+      if (counter%128000==0){
+        DebugPrint(pod_, "set grain size to %u",synth_.GetSize());
+      }
       return;
     case SynthMode::Pitch_ActiveGrains:
       synth_.SetPitchRatio(knob1_val);
+      if (counter%128000==0){
+        DebugPrint(pod_, "set pitch to %f",synth_.GetPitch());
+      }
       return;
     case SynthMode::Pan_Direction:
-      synth_.SetPan(knob1_val);
+      // synth_.SetPan(knob1_val);
       return;
     case SynthMode::Reverb:
        /* set reverb feedback ie tail length */
-      reverb_.SetFeedback(knob1_val); // NOTE check it doesn't clip
+      // reverb_.SetFeedback(knob1_val); // NOTE check it doesn't clip
       return;
     case SynthMode::Size_Position_Rnd:
-      synth_.SetSizeRnd(knob1_val);
+      // synth_.SetSizeRnd(knob1_val);
       return;
     case SynthMode::Pitch_ActiveGrains_Rnd:
-      synth_.SetPitchRnd(knob1_val);
+      // synth_.SetPitchRnd(knob1_val);
       return;
     case SynthMode::PanRnd_Chorus:
-      synth_.SetPanRnd(knob1_val);
+      // rotator_.SetFreq(knob1_val*2.0f);
       return;     
     case SynthMode::Filter:
       /* map knob value to frequency range with an exponential curve */
-      knob1_val = fmap(knob1_val, LOPASS_LOWER_BOUND, LOPASS_UPPER_BOUND, daisysp::Mapping::EXP);
+      // knob1_val = fmap(knob1_val, LOPASS_LOWER_BOUND, LOPASS_UPPER_BOUND, daisysp::Mapping::EXP);
       /* set cutoff frequency of low pass moog filter */
-      lowpass_moog_.SetFreq(knob1_val);
+      // lowpass_moog_.SetFreq(knob1_val);
       return;
   }
 }
@@ -625,32 +660,38 @@ void GrannyChordApp::UpdateKnob2Params(float knob2_val, SynthMode mode){
   switch (mode){
     case SynthMode::Size_Position:
       synth_.SetSpawnPos(knob2_val);
+      if (counter%128000==0){
+        DebugPrint(pod_, "set pos to %u",synth_.GetPos());
+      }
       return;
     case SynthMode::Pitch_ActiveGrains:
       synth_.SetActiveGrains(knob2_val);
+      if (counter%128000==0){
+        DebugPrint(pod_, "set active grains to %u",synth_.GetCount());
+      }
       return;
     case SynthMode::Pan_Direction:
       synth_.SetDirection(knob2_val);
       return;
     case SynthMode::Reverb:
-        reverb_.SetMix(knob2_val);
+        // reverb_.SetMix(knob2_val);
         return;
     case SynthMode::Size_Position_Rnd:
-      synth_.SetPositionRnd(knob2_val);
+      // synth_.SetPositionRnd(knob2_val);
       return;
     case SynthMode::Pitch_ActiveGrains_Rnd:
-      synth_.SetCountRnd(knob2_val);
+      // synth_.SetCountRnd(knob2_val);
       return;
     case SynthMode::PanRnd_Chorus:
       /* set chorus left/right channel to (synth pan +/- 10%) */
-      chorus_.SetPan(fclamp(synth_.GetPan()+0.1f,0,1), (fclamp(synth_.GetPan()-0.1f,0,1)));
-      chorus_.SetLfoDepth(knob2_val);
+      // chorus_.SetPan(fclamp(synth_.GetPan()+0.1f,0,1), (fclamp(synth_.GetPan()-0.1f,0,1)));
+      // chorus_.SetLfoDepth(knob2_val);
       return;
     case SynthMode::Filter:
       /* map knob value to frequency range with linear curve */
-      knob2_val = fmap(knob2_val, HIPASS_LOWER_BOUND, HIPASS_UPPER_BOUND, daisysp::Mapping::EXP);
+      // knob2_val = fmap(knob2_val, HIPASS_LOWER_BOUND, HIPASS_UPPER_BOUND, daisysp::Mapping::EXP);
       /* set cutoff frequency for high pass filter */
-      hipass_.SetFrequency(knob2_val);
+      // hipass_.SetFrequency(knob2_val);
       return;
   }
 }
@@ -662,9 +703,9 @@ inline float GrannyChordApp::MapKnobDeadzone(float knob_val ){
   return knob_val;
 }
 
-inline bool GrannyChordApp::UpdateKnobPassThru(float curr_knob_val, int mode_idx){
+inline bool GrannyChordApp::UpdateKnobPassThru(float curr_knob_val, float prev_param){
   if (mode_changed_){
-    if (fabs(curr_knob_val - prev_param_k2[mode_idx])<0.01){
+    if (fabs(curr_knob_val - prev_param)<0.0001){
       mode_changed_ = false;
       return true;
     }
@@ -713,10 +754,10 @@ void GrannyChordApp::DebugPrintMode(SynthMode mode){
       DebugPrint(pod_, "State now in: PitchGrainsRnd");
       return;
     case SynthMode::Pan_Direction:
-      DebugPrint(pod_, "State now in: PanPanRnd");
+      DebugPrint(pod_, "State now in: PanDirection");
       return;
     case SynthMode::PanRnd_Chorus:
-      DebugPrint(pod_, "State now in: PhasorEnv");
+      DebugPrint(pod_, "State now in: Rotator_Chorus");
       return;
     case SynthMode::Reverb:
       DebugPrint(pod_, "State now in: Reverb");
@@ -733,29 +774,32 @@ void GrannyChordApp::DebugPrintMode(SynthMode mode){
 void GrannyChordApp::SetupTimer(){
   TimerHandle::Config cfg;
   cfg.periph = TimerHandle::Config::Peripheral::TIM_5;
-  cfg.period = 2000;
+  cfg.period = 4000;
   cfg.enable_irq = true;
   timer_.Init(cfg);
   timer_.SetPrescaler(9999);
   timer_.SetCallback(StaticLedCallback, nullptr);
+  SetLed1AppState();
+  timer_.Start();
 }
 
 /// @brief callback function called every timer period 
-void GrannyChordApp::LedCallback(void* data){
-  if (led1_flash_count_ < 6) {
+void GrannyChordApp::LedCallback(){
+  if (led1_flash_count_ < 7) {
       /* flash on/off for the first 6 callbacks (3 cycles) */
-      if (led1_flash_count_%2==0) pod_.led1.Set(rgb1_[0],rgb1_[1],rgb1_[2]);
-      else pod_.led1.Set(0,0,0);
+      if (led1_flash_count_%2==0) { pod_.led1.Set(rgb1_[0],rgb1_[1],rgb1_[2]); }
+      else { pod_.led1.Set(0,0,0);}
       led1_flash_count_++;
-  } 
+  }
   else pod_.led1.Set(rgb1_[0],rgb1_[1],rgb1_[2]); /* stay solid after 3 flashes */
 
-  if (led2_flash_count_ <6){
-    if (led2_flash_count_%2==0) pod_.led2.Set(rgb2_[0],rgb2_[1],rgb2_[2]);
-    else pod_.led2.Set(0,0,0);
+  if (led2_flash_count_ <7){
+    if (led2_flash_count_%2==0) { pod_.led2.Set(rgb2_[0],rgb2_[1],rgb2_[2]); }
+    else { pod_.led2.Set(0,0,0); }
     led2_flash_count_++;
   } 
   else pod_.led2.Set(rgb2_[0],rgb2_[1],rgb2_[2]);
+
   if (recording_out_ || curr_state_ == AppState::RecordIn){
     pod_.seed.SetLed(seed_led_state_);
     seed_led_state_ = !seed_led_state_;
@@ -804,6 +848,7 @@ void GrannyChordApp::SetLed1AppState(){
       break;
   }
   if (curr_state_ != AppState::Synthesis) SetRgb2(0,0,0); /* turn off led2 */
+  led1_flash_count_=0;
 }
 
 /// @brief sets led 1 colours based on synth mode (regular param controls)
@@ -812,20 +857,21 @@ void GrannyChordApp::SetLed1SynthMode(){
     switch(curr_synth_mode_){
       case SynthMode::Size_Position:
         SetRgb1(0, 0.7f, 0); /* green */
-        return;
+        break;
       case SynthMode::Pitch_ActiveGrains:
         SetRgb1(0.9f, 0.6f, 0); /* orange */
-        return;
+        break;
       case SynthMode::Pan_Direction:
         SetRgb1(0,0.7f,0.7f); /* cyan */
-        return;
+        break;
       case SynthMode::Reverb:
         SetRgb1(0.8f, 0, 0.7f); /* pink */
-        return;
+        break;
       default:
-        return;
+        break;
     }
   }
+  led2_flash_count_=0;
 }
         // SetRgb2(0.9f,0.9f,0); /* yellow */
 
@@ -838,21 +884,22 @@ void GrannyChordApp::SetLed2(){
       case SynthMode::Pan_Direction:
       case SynthMode::Reverb:
         SetRgb2(0, 0, 0); /* off in even mode */
-        return;
+        break;
       case SynthMode::Size_Position_Rnd:
         SetRgb2(0, 0.7f, 0); /* green */
-        return;
+        break;
       case SynthMode::Pitch_ActiveGrains_Rnd:
         SetRgb2(0.9f, 0.6f, 0); /* orange */
-        return;
+        break;
       case SynthMode::PanRnd_Chorus:
          SetRgb2(0,0.7f,0.7f); /* cyan */
-        return;
+        break;
       case SynthMode::Filter:
         SetRgb2(0,0.7f,0.7f); /* cyan for reverb */
-        return;
+        break;
       default:
-        return;
+        break;
     }
   }
+  led2_flash_count_=0;
 }

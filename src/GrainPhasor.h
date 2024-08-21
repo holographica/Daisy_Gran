@@ -38,14 +38,14 @@ class GrainPhasor {
       float out = phase_;
       out += increment_*direction_;
 
-      if (out>1.0f && direction_==1){
-        grain_finished_=true;
-        out=0.0f;
-      }
-      if (out<0.0f && direction_==-1){
-        grain_finished_=true;
-        out = 1.0f;
-      }
+      // if (out>1.0f && direction_==1){
+      //   grain_finished_=true;
+      //   out=0.0f;
+      // }
+      // if (out<0.0f && direction_==-1){
+      //   grain_finished_=true;
+      //   out = 1.0f;
+      // }
 
       phase_ = out;
       return out;
