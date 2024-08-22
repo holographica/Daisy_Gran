@@ -104,6 +104,7 @@ build/main.o: main.cpp \
  ../DaisySP/Source/Dynamics/crossfade.h \
  ../DaisySP/Source/Dynamics/limiter.h ../DaisySP/Source/Effects/autowah.h \
  ../DaisySP/Source/Effects/chorus.h ../DaisySP/Source/Utility/delayline.h \
+ ../DaisySP/Source/Effects/../../../src/sample.h \
  ../DaisySP/Source/Effects/decimator.h \
  ../DaisySP/Source/Effects/flanger.h \
  ../DaisySP/Source/Effects/overdrive.h \
@@ -204,8 +205,8 @@ build/main.o: main.cpp \
  ../libDaisy/src/util/VoctCalibration.h \
  ../libDaisy/src/util/WaveTableLoader.h ../libDaisy/src/sys/fatfs.h \
  ../libDaisy/src/util/WavWriter.h AudioFileManager.h constants_utils.h \
- debug_print.h GranularSynth.h Grain.h sample.h GrainPhasor.h \
- GrannyChordApp.h DaisySP-LGPL-FX/reverb.h DaisySP-LGPL-FX/compressor.h \
+ debug_print.h GranularSynth.h Grain.h GrainPhasor.h GrannyChordApp.h \
+ DaisySP-LGPL-FX/reverb.h DaisySP-LGPL-FX/compressor.h \
  DaisySP-LGPL-FX/moogladder.h StereoRotator.h AppState.h
 ../libDaisy/Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:
 ../libDaisy/Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h750xx.h:
@@ -318,6 +319,7 @@ build/main.o: main.cpp \
 ../DaisySP/Source/Effects/autowah.h:
 ../DaisySP/Source/Effects/chorus.h:
 ../DaisySP/Source/Utility/delayline.h:
+../DaisySP/Source/Effects/../../../src/sample.h:
 ../DaisySP/Source/Effects/decimator.h:
 ../DaisySP/Source/Effects/flanger.h:
 ../DaisySP/Source/Effects/overdrive.h:
@@ -467,7 +469,6 @@ constants_utils.h:
 debug_print.h:
 GranularSynth.h:
 Grain.h:
-sample.h:
 GrainPhasor.h:
 GrannyChordApp.h:
 DaisySP-LGPL-FX/reverb.h:

@@ -13,6 +13,7 @@ https://opensource.org/licenses/MIT.
 
 #include <stdint.h>
 #include "Utility/delayline.h"
+#include "../../../src/sample.h"
 
 /** @file chorus.h */
 
@@ -178,12 +179,17 @@ class Chorus
     */
     void SetFeedback(float feedback);
 
+
+    Sample ProcessMix(Sample in);
+    void SetMix(float mix);
+
   private:
     ChorusEngine engines_[2];
     float        gain_frac_;
     float        pan_[2];
 
     float sigl_, sigr_;
+    float wet_mix_;
 };
 } //namespace daisysp
 #endif

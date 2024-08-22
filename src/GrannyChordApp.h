@@ -93,12 +93,17 @@ class GrannyChordApp {
     bool btn2_long_press_fired_ = false;
     bool both_btns_long_press_fired_ = false;
 
-    /* timer object and led callback variables */
-    TimerHandle timer_;
-    float rgb1_[3] = {0};
-    float rgb2_[3] = {0};
-    int led1_flash_count_=0;
-    int led2_flash_count_=0;
+    struct Colours{
+      Color BLUE;
+      Color GREEN;
+      Color RED;
+      Color CYAN;
+      Color PURPLE;
+      Color ORANGE;
+      Color YELLOW;
+      Color PINK;
+    };
+    Colours colours;
     bool seed_led_state_=false;
 
     /* methods to init / prepare for state change */
@@ -113,8 +118,8 @@ class GrannyChordApp {
 
     /* state change handlers */
     void UpdateUI();
-    void UpdateSynthModeA();
-    void UpdateSynthModeB();
+    void NextSynthMode();
+    void PrevSynthMode();
     void HandleStateChange();
     void HandleFileSelection(int32_t encoder_inc);
 
@@ -145,18 +150,9 @@ class GrannyChordApp {
     inline float MapKnobDeadzone(float knob_val);
     inline bool UpdateKnobPassThru(bool *knob_latched, float curr_knob_val, float prev_param);
 
-    /* timer and led methods */
-    void SetupTimer();
-    /* has to be static - timer won't take class member function in callback */
-    static void StaticLedCallback(void* data){
-      instance_ -> LedCallback();
-    }
-    void LedCallback();
-    void SetLed1AppState();
-    void SetLed1SynthMode();
-    void SetLed2();
-    void SetRgb1(float r, float g, float b);
-    void SetRgb2(float r, float g, float b);
+    void SetLedAppState();
+    void SetLedSynthMode();
+    void InitColours();
 
     void DebugPrintState(AppState state);
     void DebugPrintMode(SynthMode mode);

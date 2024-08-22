@@ -19,7 +19,18 @@ class StereoRotator{
       return out;
     }
 
+    Sample ProcessMix(Sample in){
+      Sample out;
+      Sample processed = Process(in);
+      out.left = wet_mix_*processed.left + ((1.0f-wet_mix_)*in.left);
+      out.right = wet_mix_*processed.right + ((1.0f-wet_mix_)*in.right);
+      return out;
+    }
+
+    void SetMix(float mix) { wet_mix_ = mix; }
+
   private:
     float rotation_ =0.0f; /* angle of rotation */
     float freq_=0.1f; /* frequency of rotation in Hz*/
+    float wet_mix_ =0.0f;
 };

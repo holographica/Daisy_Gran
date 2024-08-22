@@ -1,4 +1,4 @@
-#include "dsp.h"
+#include "Utility/dsp.h"
 #include "chorus.h"
 #include <math.h>
 
@@ -109,6 +109,32 @@ float Chorus::Process(float in)
 
     return sigl_;
 }
+
+Sample Chorus::ProcessMix(Sample in){
+  sigl_ = 0.f;
+  sigr_ = 0.f;
+  for(int i = 0; i < 2; i++)
+    {
+        float sigL = engines_[i].Process(in.left);
+        float sigR = engines_[i].Process(in.right);
+        sigl_ += (1.f - pan_[i]) * sigL;
+        sigr_ += pan_[i] * sigR;
+    }
+
+    sigl_ *= gain_frac_;
+    sigr_ *= gain_frac_;
+
+    Sample processed= {sigl_, sigr_};
+    Sample out;
+    out.left = wet_mix_*processed.left + ((1.0f-wet_mix_)*in.left);
+    out.right = wet_mix_*processed.right + ((1.0f-wet_mix_)*in.right);
+    return out;
+}
+
+void Chorus::SetMix(float mix){
+  wet_mix_ = mix;
+}
+
 
 float Chorus::GetLeft()
 {

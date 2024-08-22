@@ -35,15 +35,15 @@ void Grain::Trigger(size_t pos, size_t grain_size, float pitch_ratio, float pan,
 /// @brief Processes grain phase, applies envelope and panning and mixes into the output buffers
 /// @param sum_left Pointer to variable storing total left channel audio output of all grains
 /// @param sum_right Pointer to variable storing total right channel audio output of all grains
-Sample Grain::Process(Sample sample, float scale) {
+Sample Grain::Process(Sample sample) {
   count++;
   if (!is_active_) {
-      return {0.0f, 0.0f};
+      return {-0.42069f,-0.42069f};
   }
   float phase = phasor_.Process();
   if (phasor_.GrainFinished()){
     is_active_=false;
-    return {0.0f, 0.0f};
+    return {-0.42069f,-0.42069f};
   }
   size_t curr_idx = spawn_pos_ + static_cast<size_t>(phase*grain_size_*pitch_ratio_);
   
@@ -55,8 +55,11 @@ Sample Grain::Process(Sample sample, float scale) {
   }
 
   float left = s162f(left_buf_[curr_idx]);
+  lbuf = left;
   float right = s162f(right_buf_[curr_idx]);
+  rbuf = right;
   float env = ApplyEnvelope(phase);
+  envv = env;
 
   /* approximate constant power panning - cheaper than using sin/cos
   this works since gain_l^2 + gain_r^2 = 1
@@ -64,9 +67,7 @@ Sample Grain::Process(Sample sample, float scale) {
   float gain_left = std::sqrt(1.0f-pan_);
   float gain_right = std::sqrt(pan_);
   sample.left += (left*env*gain_left);
-  // sample.left = (left);
   sample.right += (right*env*gain_right);
-  // sample.right  = (right);
   return sample;
 }
 

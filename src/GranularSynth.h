@@ -26,11 +26,9 @@ class GranularSynth{
     void SetPitchRatio(float ratio);
     void SetDirection(float direction);
 
-    void SetSizeRnd(float rnd){ rnd_size_ = rnd; }
-    void SetPositionRnd(float rnd){ rnd_spawn_pos_ = rnd; }
-    void SetPitchRnd(float rnd){ rnd_pitch_ = rnd; }
-    void SetCountRnd(float rnd){ rnd_count_ = rnd; }
-    void SetPanRnd(float rnd){ rnd_pan_ = rnd; }
+    void SetRndAmount(float amount);
+    void SetRndRefreshFreq(float freq);
+    float GetRnd();
 
     /* used to set chorus pan */
     float GetPan(){ return pan_; }
@@ -50,7 +48,7 @@ class GranularSynth{
     Sample sample_;
 
     size_t count=0;
-    
+    SmoothRandomGenerator rng_;
 
     /* parameters affecting audio output */
     size_t grain_size_;

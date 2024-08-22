@@ -15,7 +15,7 @@ class Grain {
 
     void Init();
     void Trigger(size_t pos, size_t grain_size, float pitch_ratio=1.0f, float pan=0.5f, float direction=0.0f);
-    Sample Process(Sample sample, float scale);
+    Sample Process(Sample sample);
   
     void SetSpawnPos(size_t spawn_pos);
     void SetGrainSize(size_t grain_size);
@@ -34,12 +34,12 @@ class Grain {
     float rbuf=0;
     float envv=0;
     size_t count = 0;
+  private:
     /* Grain audio parameters */
     float pan_;
     size_t spawn_pos_;
     size_t grain_size_;
     float pitch_ratio_;
-  private:
     /* Object that manages the phase of the grain */
 
     static const float start_decay_;

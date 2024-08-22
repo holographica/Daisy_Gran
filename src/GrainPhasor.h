@@ -8,7 +8,6 @@ class GrainPhasor {
     ~GrainPhasor() {};
 
     void Init(size_t grain_size, float pitch_ratio, int direction){
-      // SetPitchRatio(pitch_ratio, grain_size);
       increment_ = pitch_ratio/static_cast<float>(grain_size);
       phase_ = 0;
       SetDirection(direction);
@@ -19,11 +18,6 @@ class GrainPhasor {
       phase_ = 0;
       direction_ = 1;
     }
-
-    // void SetPitchRatio(float pitch_ratio, float grain_size_samples){
-    //   float size_ms = SamplesToMs(grain_size_samples);
-    //   increment_ = pitch_ratio / size_ms;
-    // }
 
     /* set playback direction to forward if knob is over halfway point */
     void SetDirection(float direction){
@@ -36,24 +30,15 @@ class GrainPhasor {
 
     float Process(){
       if (grain_finished_) { return 0.0f; }
-      // float out = phase_;
-      // out += increment_;
-      phase_ = phase_ + increment_;
-
-      if (phase_ > 1.0f){
+      phase_ = phase_ + (increment_ * direction_);
+      if (phase_ >1.0f && direction_ == 1){
         grain_finished_=true;
-        phase_=0.0f;
+        phase_ =0.0f;
       }
-      // if (out>1.0f && direction_==1){
-      //   grain_finished_=true;
-      //   out=0.0f;
-      // }
-      // if (out<0.0f && direction_==-1){
-      //   grain_finished_=true;
-      //   out = 1.0f;
-      // }
-
-      // phase_ = out;
+      if (phase_ <0.0f && direction_ == -1){
+        grain_finished_=true;
+        phase_  = 1.0f;
+      }
       return phase_;
     }
 

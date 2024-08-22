@@ -153,6 +153,7 @@ build/Grain.o: Grain.cpp \
  ../DaisySP/Source/Dynamics/crossfade.h \
  ../DaisySP/Source/Dynamics/limiter.h ../DaisySP/Source/Effects/autowah.h \
  ../DaisySP/Source/Effects/chorus.h ../DaisySP/Source/Utility/delayline.h \
+ ../DaisySP/Source/Effects/../../../src/sample.h \
  ../DaisySP/Source/Effects/decimator.h \
  ../DaisySP/Source/Effects/flanger.h \
  ../DaisySP/Source/Effects/overdrive.h \
@@ -203,8 +204,8 @@ build/Grain.o: Grain.cpp \
  ../DaisySP/Source/../DaisySP-LGPL/Source/PhysicalModeling/pluck.h \
  ../DaisySP/Source/../DaisySP-LGPL/Source/Synthesis/blosc.h \
  ../DaisySP/Source/../DaisySP-LGPL/Source/Utility/jitter.h \
- ../DaisySP/Source/../DaisySP-LGPL/Source/Utility/port.h sample.h \
- GrainPhasor.h constants_utils.h
+ ../DaisySP/Source/../DaisySP-LGPL/Source/Utility/port.h GrainPhasor.h \
+ constants_utils.h
 ../libDaisy/Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:
 ../libDaisy/Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h750xx.h:
 ../libDaisy/Drivers/CMSIS/Include/core_cm7.h:
@@ -404,6 +405,7 @@ Grain.h:
 ../DaisySP/Source/Effects/autowah.h:
 ../DaisySP/Source/Effects/chorus.h:
 ../DaisySP/Source/Utility/delayline.h:
+../DaisySP/Source/Effects/../../../src/sample.h:
 ../DaisySP/Source/Effects/decimator.h:
 ../DaisySP/Source/Effects/flanger.h:
 ../DaisySP/Source/Effects/overdrive.h:
@@ -461,6 +463,5 @@ Grain.h:
 ../DaisySP/Source/../DaisySP-LGPL/Source/Synthesis/blosc.h:
 ../DaisySP/Source/../DaisySP-LGPL/Source/Utility/jitter.h:
 ../DaisySP/Source/../DaisySP-LGPL/Source/Utility/port.h:
-sample.h:
 GrainPhasor.h:
 constants_utils.h:

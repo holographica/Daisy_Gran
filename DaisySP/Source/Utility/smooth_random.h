@@ -20,12 +20,12 @@ https://opensource.org/licenses/MIT.
 namespace daisysp
 {
 /**  
-       @brief Smooth random generator for internal modulation. \n
-       @author Ported by Ben Sergentanis 
-       @date Jan 2021 
-       Ported from pichenettes/eurorack/plaits/dsp/noise/smooth_random_generator.h \n
-       to an independent module. \n
-       Original code written by Emilie Gillet in 2016. \n
+    @brief Smooth random generator for internal modulation. \n
+    @author Ported by Ben Sergentanis 
+    @date Jan 2021 
+    Ported from pichenettes/eurorack/plaits/dsp/noise/smooth_random_generator.h \n
+    to an independent module. \n
+    Original code written by Emilie Gillet in 2016. \n
 */
 class SmoothRandomGenerator
 {
@@ -44,6 +44,8 @@ class SmoothRandomGenerator
         phase_    = 0.0f;
         from_     = 0.0f;
         interval_ = 0.0f;
+        amount_ = 0.01f;
+
     }
 
     /** Get the next float. Ranges from -1 to 1. */
@@ -54,7 +56,7 @@ class SmoothRandomGenerator
         {
             phase_ -= 1.0f;
             from_ += interval_;
-            interval_ = rand() * kRandFrac * 2.0f - 1.0f - from_;
+            interval_ = (rand() * kRandFrac * 2.0f - 1.0f - from_) * amount_;
         }
         float t = phase_ * phase_ * (3.0f - 2.0f * phase_);
         return from_ + interval_ * t;
@@ -69,11 +71,17 @@ class SmoothRandomGenerator
         frequency_ = fclamp(freq, 0.f, 1.f);
     }
 
+    void SetAmount(float amount){
+      amount_ = fclamp(amount, 0.01f, 1.0f);
+    }
+
   private:
     float frequency_;
     float phase_;
     float from_;
     float interval_;
+    float amount_;
+    float smoothness_;
 
     float sample_rate_;
 

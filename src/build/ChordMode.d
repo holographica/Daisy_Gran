@@ -105,6 +105,7 @@ build/ChordMode.o: ChordMode.cpp \
  ../DaisySP/Source/Dynamics/crossfade.h \
  ../DaisySP/Source/Dynamics/limiter.h ../DaisySP/Source/Effects/autowah.h \
  ../DaisySP/Source/Effects/chorus.h ../DaisySP/Source/Utility/delayline.h \
+ ../DaisySP/Source/Effects/../../../src/sample.h \
  ../DaisySP/Source/Effects/decimator.h \
  ../DaisySP/Source/Effects/flanger.h \
  ../DaisySP/Source/Effects/overdrive.h \
@@ -268,6 +269,7 @@ ChordMode.h:
 ../DaisySP/Source/Effects/autowah.h:
 ../DaisySP/Source/Effects/chorus.h:
 ../DaisySP/Source/Utility/delayline.h:
+../DaisySP/Source/Effects/../../../src/sample.h:
 ../DaisySP/Source/Effects/decimator.h:
 ../DaisySP/Source/Effects/flanger.h:
 ../DaisySP/Source/Effects/overdrive.h:
