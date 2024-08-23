@@ -17,8 +17,16 @@ void GranularSynth::Init(int16_t *left, int16_t *right, size_t audio_len){
   Grain::left_buf_ = left;
   Grain::right_buf_ = right;
   InitParams();
-  rng_.Init(SAMPLE_RATE_FLOAT);
-  rng_.SetFreq(3.0f);
+  rng_->Init(SAMPLE_RATE_FLOAT);
+  rng_->SetFreq(100.0f);
+  rnd_bias_ = 1.0f;
+  rnd_amount_ = 0.4f;
+  DebugPrint(pod_, "rnd %f", rng_->Process());
+  DebugPrint(pod_, "rnd %f", rng_->Process());
+  DebugPrint(pod_, "rnd %f", rng_->Process());
+  DebugPrint(pod_, "rnd %f", rng_->Process());
+  rnd_bias_=0.0f;
+  rnd_amount_=0.0f;
 }
 
 void GranularSynth::Reset(size_t len){
@@ -33,24 +41,35 @@ void GranularSynth::Reset(size_t len){
 void GranularSynth::InitParams(){
   grain_size_ = 4800;
   spawn_pos_ = 0;
-  active_count_ = 1;
+  curr_active_count_ = 1;
   pitch_ratio_ = 1.0f;
   pan_ = 0.5f;
   direction_ = 0.0f;
 }
 
 void GranularSynth::SetRndAmount(float amount){
-  rng_.SetAmount(amount);
+  rnd_amount_ = fclamp(amount, 0.01f, 1.0f);
 }
 
-void GranularSynth::SetRndRefreshFreq(float freq){
-  /* map knob input between 0.1Hz and 20Hz on an exponential curve */
-  freq = fmap(freq, 0.1f, 20.0f, daisysp::Mapping::EXP);
-  rng_.SetFreq(freq);
+void GranularSynth::SetRndBias(float bias){
+  rnd_bias_ = fclamp(bias, 0.0f, 1.0f);
 }
+
+// void GranularSynth::SetRndRefreshFreq(float freq){
+//   /* map knob input between 0.1Hz and 20Hz on an exponential curve */
+//   freq = fmap(freq, 0.1f, 20.0f, daisysp::Mapping::EXP);
+//   rng_->SetFreq(freq);
+// }
 
 float GranularSynth::GetRnd(){
-  return fmap(rng_.Process(), -0.5f, 0.5f);
+  float rnd = GetRndBias(rng_->Process());
+  return (rnd*rnd_amount_);
+}
+
+float GranularSynth::GetRndBias(float rnd){
+  rnd = rnd +0.5f;
+  float biased_rnd = fmap(rnd_bias_, rnd, rnd-1.0f, daisysp::Mapping::EXP);
+  return (biased_rnd-0.5f);
 }
 
 /* these setters take a normalised value (ie float from 0-1) 
@@ -72,10 +91,21 @@ void GranularSynth::SetSpawnPos(float knob_val){
   spawn_pos_ = static_cast<size_t>(knob_val * static_cast<float>(audio_len_-1));
 }
 
-void GranularSynth::SetActiveGrains(float knob_val){
-  float randomness = GetRnd();
-  float count = round(fmap(knob_val+randomness, 1.0f, 20.0f));
-  active_count_ = (static_cast<size_t>(count));
+void GranularSynth::SetTargetActiveGrains(float knob_val){
+  // float randomness = GetRnd();
+  // float count = round(fmap(knob_val+randomness, MIN_GRAINS, MAX_GRAINS));
+  knob_val = round(fmap(knob_val, MIN_GRAINS, MAX_GRAINS));
+  target_active_count_ = (static_cast<size_t>(knob_val));
+}
+
+/* this increases the number of active grains more smoothly - had dropout issues without */
+void GranularSynth::UpdateActiveGrains(){
+  curr_active_count_ = (curr_active_count_ * GRAIN_INCREASE_SMOOTHNESS)
+                        + (target_active_count_ * (1.0f-GRAIN_INCREASE_SMOOTHNESS));
+}
+
+size_t GranularSynth::GetActiveGrains(){
+  return static_cast<size_t>(curr_active_count_);
 }
 
 void GranularSynth::SetPitchRatio(float ratio){
@@ -92,7 +122,8 @@ void GranularSynth::SetPan(float pan){
 
 /* don't add randomness as it wouldn't sound great */
 void GranularSynth::SetDirection(float direction){
-  direction_ = direction;
+  if (direction >0.5) direction_ = -1.0f;
+  else direction = 1.0f;
 }
 
 /// @brief Update grain audio parameters
@@ -101,7 +132,7 @@ void GranularSynth::UpdateGrainParams(){
     grain.SetGrainSize(grain_size_);
     grain.SetSpawnPos(spawn_pos_);
     grain.SetPitchRatio(pitch_ratio_);
-    grain.SetPhasorDirection(direction_);
+    grain.SetDirection(direction_);
   }
 }
 
@@ -111,9 +142,8 @@ void GranularSynth::TriggerGrain(){
   for(Grain& grain:grains_){
     // UpdateGrainParams();
     if (grain.is_active_) { count++; }
-    else if (count<active_count_){
-      // ApplyRandomness();
-      grain.Trigger(spawn_pos_,grain_size_,pitch_ratio_,pan_,direction_);
+    else if (count<GetActiveGrains()){
+      grain.Trigger(spawn_pos_,grain_size_,pitch_ratio_,pan_);
       count++;
       break;
     }
@@ -125,24 +155,25 @@ void GranularSynth::TriggerGrain(){
 /// @param out_right Pointer to right channel audio output buffer
 /// @param size Number of samples to process in this call 
 Sample GranularSynth::ProcessGrains(){
+  // UpdateActiveGrains();
   sample_.left=0.0f, sample_.right=0.0f;
   TriggerGrain();
   for (Grain& grain:grains_){
     if (grain.is_active_){
       sample_ = grain.Process(sample_);
-      if (count%60000==0){
-        // DebugPrint(pod_, "lbuf %f, rbuf %f, envv %f",grains_[0].lbuf, grains_[0].rbuf, grains_[0].envv);
-        DebugPrint(pod_, "lbuf %f, rbuf%f env %f",grain.lbuf, grain.rbuf, grain.envv);
-        // DebugPrint(pod_, "activecount %u pan %f",active_count_,pan_); 
-      }
+      // if (count%60000==0){
+      //   // DebugPrint(pod_, "lbuf %f, rbuf %f, envv %f",grains_[0].lbuf, grains_[0].rbuf, grains_[0].envv);
+      //   DebugPrint(pod_, "lbuf %f, rbuf%f env %f",grain.lbuf, grain.rbuf, grain.envv);
+      //   // DebugPrint(pod_, "activecount %u pan %f",active_count_,pan_); 
+      // }
     }
   }
   count++;
   if (count%60000==0){
     count=0;
   //   // DebugPrint(pod_, "lbuf %f, rbuf %f, envv %f",grains_[0].lbuf, grains_[0].rbuf, grains_[0].envv);
-  //   DebugPrint(pod_, "sampL %f, sampR%f", sample_.left, sample_.right);
-  //   // DebugPrint(pod_, "activecount %u pan %f",active_count_,pan_); 
+    DebugPrint(pod_, "sampL %f, sampR%f", sample_.left, sample_.right);
+    DebugPrint(pod_, "activecount %u pan %f",GetActiveGrains(),pan_); 
   }
   return sample_;
 }

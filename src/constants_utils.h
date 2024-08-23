@@ -28,6 +28,7 @@ static const uint16_t MAX_FNAME_LEN = 128;
 /* granular synth parameter constants */
 constexpr int MIN_GRAINS = 1;
 constexpr int MAX_GRAINS = 10;
+constexpr float GRAIN_INCREASE_SMOOTHNESS = 0.99f;
 static constexpr int NUM_SYNTH_MODES = 8;
 constexpr float PARAM_CHANGE_THRESHOLD = 0.01f;
 constexpr float MIN_GRAIN_SIZE_MS = 100.0f;
@@ -36,6 +37,7 @@ constexpr size_t MIN_GRAIN_SIZE_SAMPLES = 4800; /* 100ms at 48kHz */
 constexpr size_t MAX_GRAIN_SIZE_SAMPLES = 144000; /* 3s at 48kHz */
 constexpr float MIN_PITCH = 0.5f;
 constexpr float MAX_PITCH = 3.0f;
+
 
 /* button event constants */
 const unsigned long DEBOUNCE_DELAY = 50; 
@@ -54,10 +56,10 @@ const float HICUT_FREQ = 0.34375; /* 16500Hz @ 48kHz sample rate */
 
 /* random number generator variables and helper functions */
 extern uint32_t rng_state;
-inline void SeedRng(){
+static inline void SeedRng(){
   rng_state = static_cast<uint32_t>(time(nullptr));
 }
-inline float RngFloat(){
+static inline float RngFloat(){
   /* xorshift32 from https://en.wikipedia.org/wiki/Xorshift 
   for simple fast random floats */
   rng_state ^= rng_state << 13;
@@ -69,18 +71,46 @@ inline float RngFloat(){
 }
 
 /* integer clamp as can't use std::clamp */
-inline constexpr size_t intclamp(size_t val, size_t min, size_t max){
+static inline constexpr size_t intclamp(size_t val, size_t min, size_t max){
   if (val < min) val = min;
   else if (val > max) val = max;
   return val;
 }
 
 /* converts milliseconds to number of samples */
-inline constexpr size_t MsToSamples(float ms){
+static inline constexpr size_t MsToSamples(float ms){
   return static_cast<size_t>(SAMPLE_RATE_FLOAT * (ms*0.001f));
 }
 
 /* converts number of samples to milliseconds */
-inline constexpr float SamplesToMs(size_t samples){
+static inline constexpr float SamplesToMs(size_t samples){
   return (static_cast<float>(samples) * 1000.0f) / SAMPLE_RATE_FLOAT; 
+}
+
+/* fast cos and sin approximations
+  thanks and credit to Jack Ganssle: 
+  https://www.ganssle.com/item/approximations-for-trig-c-code.htm
+  https://www.ganssle.com/approx/sincos.cpp
+*/
+constexpr float halfpi = M_PI/2.0f;
+
+static inline constexpr float FastCos(float x){
+  const float c1= 0.99940307;
+  const float c2=-0.49558072;
+  const float c3= 0.03679168;
+
+  float x2 = x * x;
+  return (c1 + x2*(c2 + c3 * x2));
+}
+
+
+static inline constexpr float FastSin(float x){
+	return FastCos(halfpi-x);
+}
+
+/* keep angle of rotation within bounds +-pi */
+static inline constexpr float NormaliseRotationAngle(float rotation){
+  while (rotation > M_PI) rotation -= 2*M_PI;
+  while (rotation < -M_PI) rotation += 2*M_PI;
+  return rotation;
 }

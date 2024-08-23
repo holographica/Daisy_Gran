@@ -16,9 +16,10 @@ using namespace daisysp;
 
 class GrannyChordApp {
   public:
-  GrannyChordApp(DaisyPod& pod, GranularSynth& synth, AudioFileManager& filemgr, ReverbSc &reverb)
+  GrannyChordApp(DaisyPod& pod, GranularSynth& synth, AudioFileManager& filemgr,\
+                ReverbSc &reverb, Chorus& chorus)
         : pod_(pod), synth_(synth), 
-          filemgr_(filemgr), reverb_(reverb){
+          filemgr_(filemgr), reverb_(reverb), chorus_(chorus){
             instance_ = this;
           };
 
@@ -50,7 +51,7 @@ class GrannyChordApp {
     Compressor comp_;
     Limiter limiter_;
     ReverbSc& reverb_;
-    Chorus chorus_;
+    Chorus& chorus_;
     MoogLadder lowpass_moog_;
     OnePole hipass_;
     StereoRotator rotator_;

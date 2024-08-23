@@ -5,20 +5,28 @@ class StereoRotator{
     StereoRotator(){}
 
     void SetFreq(float freq){
-      freq_ = freq;
+      /* map to 0.01Hz to 1.0Hz - don't want it too fast */
+      freq_ = fmap(freq, 0.01f, 0.5f, daisysp::Mapping::EXP);
     }
 
     Sample Process(Sample in){
+      /* increment the rotation in the stereo field */
       rotation_  += (2*M_PI*freq_)/SAMPLE_RATE_FLOAT;
-      if (rotation_ >2*M_PI){
-        rotation_  -= 2*M_PI;
-      }
+      /* normalise angle to keep within bounds of +- pi for accurate-ish(?) results */
+      rotation_ = NormaliseRotationAngle(rotation_);
+
       Sample out;
-      out.left = (in.left*cos(rotation_)) - (in.right*sin(rotation_));
-      out.right =(in.left*sin(rotation_)) - (in.right*cos(rotation_));
+      /* from https://en.wikipedia.org/wiki/Rotation_matrix:
+        treat left as x coord, right as y coord to rotate around centre
+      */
+      float cos_rotation = FastCos(rotation_);
+      float sin_rotation = FastSin(rotation_);
+      out.left = (in.left*cos_rotation) - (in.right*sin_rotation);
+      out.right =(in.left*sin_rotation) - (in.right*cos_rotation);
       return out;
     }
 
+    /* process the input then mix by the wet/dry amount controlled by knob */
     Sample ProcessMix(Sample in){
       Sample out;
       Sample processed = Process(in);

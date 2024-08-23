@@ -33,19 +33,35 @@ FIL file;
 
 // ReverbSc reverb;
 DSY_SDRAM_BSS ReverbSc reverb;
+DSY_SDRAM_BSS SmoothRandomGenerator rng;
+DSY_SDRAM_BSS Chorus chorus;
 /* software classes to run app */
 AudioFileManager filemgr(sd, fsi, pod, &file);
-static GranularSynth synth(pod);
-GrannyChordApp app(pod, synth, filemgr, reverb);
+static GranularSynth synth(pod, &rng);
+// static GranularSynth synth(pod, &rng);
+GrannyChordApp app(pod, synth, filemgr, reverb, chorus);
 
 /* we set rng state here so we can use RNG fns across classes */
 uint32_t rng_state;
-
 
 int main (void){
   pod.Init();
   pod.seed.StartLog(true);
   DebugPrint(pod,"started log");
+  // rng.Init(SAMPLE_RATE_FLOAT);
+  // rng.SetFreq(1.f);
+  // float x;
+  // float y;
+
+  // while (1){
+  //   pod.ProcessDigitalControls();
+  //   if (pod.button1.FallingEdge()){
+  //     x = rng.Process();
+  //     pod.seed.PrintLine("smooth rng %.9f", x);
+  //   }
+  // }
+
+
   app.Init(left_buf, right_buf);
   app.Run();
 }

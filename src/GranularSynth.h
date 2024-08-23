@@ -7,35 +7,40 @@
 
 class GranularSynth{
   public:
-    GranularSynth(DaisyPod& pod) 
+    // GranularSynth(DaisyPod& pod) 
+    GranularSynth(DaisyPod& pod, SmoothRandomGenerator* rng) 
       : pod_(pod), left_buf_(nullptr), right_buf_(nullptr), audio_len_(0),
-        grains_(){}
+        grains_(), rng_(rng){}
+        // grains_(){}
 
     void Init(int16_t *left, int16_t *right, size_t audio_len);
     void Reset(size_t len);
     void InitParams();
     void UpdateGrainParams();
-    void ApplyRandomness();
     void TriggerGrain();
     Sample ProcessGrains();
 
     void SetPan(float pan);    
     void SetGrainSize(float knob_val);
     void SetSpawnPos(float knob_val);
-    void SetActiveGrains(float knob_val);
+    void SetTargetActiveGrains(float knob_val);
+    void UpdateActiveGrains();
+    size_t GetActiveGrains();
     void SetPitchRatio(float ratio);
     void SetDirection(float direction);
 
     void SetRndAmount(float amount);
-    void SetRndRefreshFreq(float freq);
+    void SetRndBias(float bias);
+    // void SetRndRefreshFreq(float freq);
     float GetRnd();
+    float GetRndBias(float rnd);
 
     /* used to set chorus pan */
     float GetPan(){ return pan_; }
     size_t GetSize(){ return grain_size_; }
     float GetPitch(){ return pitch_ratio_; }
     size_t GetPos() { return spawn_pos_; }
-    size_t GetCount(){ return active_count_; }
+    size_t GetCount(){ return curr_active_count_; }
 
   private:
     DaisyPod& pod_;
@@ -48,20 +53,19 @@ class GranularSynth{
     Sample sample_;
 
     size_t count=0;
-    SmoothRandomGenerator rng_;
+    SmoothRandomGenerator* rng_;
 
     /* parameters affecting audio output */
     size_t grain_size_;
     size_t spawn_pos_;
-    size_t active_count_;
+    size_t curr_active_count_;
+    size_t target_active_count_;
+
     float pitch_ratio_;
     float pan_;
     float direction_;
 
     /* amount of randomness to apply to synth/grain parameters*/
-    float rnd_size_;
-    float rnd_spawn_pos_;
-    float rnd_count_;
-    float rnd_pitch_;
-    float rnd_pan_;
+    float rnd_amount_;
+    float rnd_bias_;
 };
