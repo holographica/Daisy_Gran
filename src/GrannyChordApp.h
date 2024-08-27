@@ -17,9 +17,9 @@ using namespace daisysp;
 class GrannyChordApp {
   public:
   GrannyChordApp(DaisyPod& pod, GranularSynth& synth, AudioFileManager& filemgr,\
-                ReverbSc &reverb, Chorus& chorus)
+                ReverbSc &reverb)
         : pod_(pod), synth_(synth), 
-          filemgr_(filemgr), reverb_(reverb), chorus_(chorus){
+          filemgr_(filemgr), reverb_(reverb){
             instance_ = this;
           };
 
@@ -51,7 +51,6 @@ class GrannyChordApp {
     Compressor comp_;
     Limiter limiter_;
     ReverbSc& reverb_;
-    Chorus& chorus_;
     MoogLadder lowpass_moog_;
     OnePole hipass_;
     StereoRotator rotator_;
@@ -71,11 +70,8 @@ class GrannyChordApp {
     float prev_param_k1[NUM_SYNTH_MODES] = {0};
     float prev_param_k2[NUM_SYNTH_MODES] = {0};
 
-    /* stored previous knob values for passthru mode */
-    // float stored_k1[NUM_SYNTH_MODES] = {0.5f};
-    // float stored_k2[NUM_SYNTH_MODES] = {0.5f};
-    // bool pass_thru_k1 = false;
-    // bool pass_thru_k2 = false;
+    float prev_k1_pos[NUM_SYNTH_MODES] = {0.5};
+    float prev_k2_pos[NUM_SYNTH_MODES] = {0.5};
 
     /* objects/variables for recording in and out */
     WavWriter<16384> sd_writer_;
@@ -85,14 +81,6 @@ class GrannyChordApp {
     size_t recording_count_ = 0;
     size_t loop_count=0;
     float temp_interleaved_buf_[2];
-
-    /* hardware input handler variables */
-    size_t last_action_time_ = 0;
-    /* these bools track whether the button has just been long pressed
-      vs whether it's already known to be pressed down */
-    bool btn1_long_press_fired_ = false;
-    bool btn2_long_press_fired_ = false;
-    bool both_btns_long_press_fired_ = false;
 
     struct Colours{
       Color BLUE;
@@ -135,6 +123,7 @@ class GrannyChordApp {
 
     /* hardware input handler methods */
     void ButtonHandler();
+    void ButtonLongPressHandler();
     void HandleEncoderIncrement(int encoder_inc);
     void HandleEncoderPressed();
     void HandleEncoderLongPress();

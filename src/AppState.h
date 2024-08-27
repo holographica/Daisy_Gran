@@ -17,7 +17,6 @@ enum class SynthMode{
   RndAmount_RndFreq,
   /* FX modes */
   StereoRotate,
-  Chorus,
   Reverb,
   Filter
 };

@@ -14,7 +14,7 @@ class Grain {
       is_active_(false){}
 
     void Init();
-    void Trigger(size_t pos, size_t grain_size, float pitch_ratio=1.0f, float pan=0.5f);
+    void Trigger(size_t pos, size_t grain_size, float pitch_ratio=1.0f, float pan=0.5f, float direction=1.0f);
     Sample Process(Sample sample);
   
     void SetSpawnPos(size_t spawn_pos);

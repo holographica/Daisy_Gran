@@ -19,12 +19,12 @@ void GranularSynth::Init(int16_t *left, int16_t *right, size_t audio_len){
   InitParams();
   rng_->Init(SAMPLE_RATE_FLOAT);
   rng_->SetFreq(100.0f);
-  rnd_bias_ = 1.0f;
+  rnd_bias_ = 0.0f;
   rnd_amount_ = 0.4f;
-  DebugPrint(pod_, "rnd %f", rng_->Process());
-  DebugPrint(pod_, "rnd %f", rng_->Process());
-  DebugPrint(pod_, "rnd %f", rng_->Process());
-  DebugPrint(pod_, "rnd %f", rng_->Process());
+  // DebugPrint(pod_, "rnd %f", rng_->Process());
+  // DebugPrint(pod_, "rnd %f", rng_->Process());
+  // DebugPrint(pod_, "rnd %f", rng_->Process());
+  // DebugPrint(pod_, "rnd %f", rng_->Process());
   rnd_bias_=0.0f;
   rnd_amount_=0.0f;
 }
@@ -44,7 +44,7 @@ void GranularSynth::InitParams(){
   curr_active_count_ = 1;
   pitch_ratio_ = 1.0f;
   pan_ = 0.5f;
-  direction_ = 0.0f;
+  direction_ = 1.0f;
 }
 
 void GranularSynth::SetRndAmount(float amount){
@@ -52,7 +52,7 @@ void GranularSynth::SetRndAmount(float amount){
 }
 
 void GranularSynth::SetRndBias(float bias){
-  rnd_bias_ = fclamp(bias, 0.0f, 1.0f);
+  rnd_bias_ = fclamp(bias, 0.01f, 1.0f);
 }
 
 // void GranularSynth::SetRndRefreshFreq(float freq){
@@ -61,15 +61,16 @@ void GranularSynth::SetRndBias(float bias){
 //   rng_->SetFreq(freq);
 // }
 
+/* get random number then map it to bias
+    - at low bias, range is clustered around random number generated
+    - at mid bias, range is more of a uniform distribution
+    - at high bias,  */
 float GranularSynth::GetRnd(){
-  float rnd = GetRndBias(rng_->Process());
-  return (rnd*rnd_amount_);
-}
-
-float GranularSynth::GetRndBias(float rnd){
-  rnd = rnd +0.5f;
-  float biased_rnd = fmap(rnd_bias_, rnd, rnd-1.0f, daisysp::Mapping::EXP);
-  return (biased_rnd-0.5f);
+  float rnd = rng_->Process();
+  return rnd*rnd_amount_;
+  /* find the bias range for random number distribution  */
+  // float bias = fmap(rnd_bias_, rnd, -rnd, daisysp::Mapping::EXP);
+  // return (bias * rnd_amount_);
 }
 
 /* these setters take a normalised value (ie float from 0-1) 
@@ -115,11 +116,15 @@ void GranularSynth::SetPitchRatio(float ratio){
   pitch_ratio_ = fmap(ratio, 0.5, 2, daisysp::Mapping::LINEAR);
 }
 
+// void GranularSynth::SetActiveGrains(float count){
+//   curr_active_count_ = static_cast<size_t>(round(fmap(count, 1.0f, 20.0f)));
+// }
+
+
 /* we don't add randomness to pan since we have the stereo rotator FX */
 void GranularSynth::SetPan(float pan){
   pan_ = pan;
 }
-
 /* don't add randomness as it wouldn't sound great */
 void GranularSynth::SetDirection(float direction){
   if (direction >0.5) direction_ = -1.0f;
@@ -142,9 +147,10 @@ void GranularSynth::TriggerGrain(){
   for(Grain& grain:grains_){
     // UpdateGrainParams();
     if (grain.is_active_) { count++; }
-    else if (count<GetActiveGrains()){
-      grain.Trigger(spawn_pos_,grain_size_,pitch_ratio_,pan_);
-      count++;
+    else{
+    // else if (count<GetActiveGrains()){
+      grain.Trigger(spawn_pos_,grain_size_,pitch_ratio_,pan_, direction_);
+      // count++;
       break;
     }
   }
@@ -168,15 +174,33 @@ Sample GranularSynth::ProcessGrains(){
       // }
     }
   }
-  count++;
-  if (count%60000==0){
-    count=0;
-  //   // DebugPrint(pod_, "lbuf %f, rbuf %f, envv %f",grains_[0].lbuf, grains_[0].rbuf, grains_[0].envv);
-    DebugPrint(pod_, "sampL %f, sampR%f", sample_.left, sample_.right);
-    DebugPrint(pod_, "activecount %u pan %f",GetActiveGrains(),pan_); 
-  }
+  // count++;
+  // if (count%60000==0){
+  //   count=0;
+  // //   // DebugPrint(pod_, "lbuf %f, rbuf %f, envv %f",grains_[0].lbuf, grains_[0].rbuf, grains_[0].envv);
+  //   DebugPrint(pod_, "sampL %f, sampR%f", sample_.left, sample_.right);
+  //   DebugPrint(pod_, "activecount %u pan %f",GetActiveGrains(),pan_); 
+  // }
   return sample_;
 }
+
+
+// NOTE //TODO
+// NOTE //TODO
+// TODO //NOTE
+// TODO //NOTE
+/*
+have 2 parameters for randomness
+- one is fixed eg 0.05*random number added to every parameter 
+    so there is always some degree of randomness
+
+- one is controlled by randomness parameter
+
+NEED TO FIX REVERB/FX SINCE NOT WORKING PROPERLY ATM - WHY?
+
+
+
+*/
 
 
 

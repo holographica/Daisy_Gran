@@ -11,6 +11,7 @@ const float Grain::decay_rate_ = 5.0f;
 /// @param len Length in samples of the audio file loaded in the buffers
 void Grain::Init(){
   phasor_.Init(0.0f, 1.0f);
+  direction_ = 1.0f;
 }
 
 /// @brief Causes a grain to start playing and assigns its parameters
@@ -18,7 +19,7 @@ void Grain::Init(){
 /// @param grain_size Length of the grain in samples
 /// @param pitch_ratio Pitch of the grain - 1 plays the grain at its regular pitch
 /// @param pan Position of the grain's audio output in the stereo field
-void Grain::Trigger(size_t pos, size_t grain_size, float pitch_ratio, float pan) {
+void Grain::Trigger(size_t pos, size_t grain_size, float pitch_ratio, float pan, float direction) {
   if (pos >= audio_len_) pos -= audio_len_;
   // spawn_pos_ = pos;
   SetSpawnPos(pos);

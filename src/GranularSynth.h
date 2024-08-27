@@ -26,14 +26,13 @@ class GranularSynth{
     void SetTargetActiveGrains(float knob_val);
     void UpdateActiveGrains();
     size_t GetActiveGrains();
+    void SetActiveGrains(float count);
     void SetPitchRatio(float ratio);
     void SetDirection(float direction);
 
     void SetRndAmount(float amount);
     void SetRndBias(float bias);
-    // void SetRndRefreshFreq(float freq);
     float GetRnd();
-    float GetRndBias(float rnd);
 
     /* used to set chorus pan */
     float GetPan(){ return pan_; }

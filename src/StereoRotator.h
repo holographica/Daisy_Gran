@@ -16,17 +16,16 @@ class StereoRotator{
       rotation_ = NormaliseRotationAngle(rotation_);
 
       Sample out;
-      /* from https://en.wikipedia.org/wiki/Rotation_matrix:
-        treat left as x coord, right as y coord to rotate around centre
-      */
       float cos_rotation = FastCos(rotation_);
       float sin_rotation = FastSin(rotation_);
+      /* from https://en.wikipedia.org/wiki/Rotation_matrix:
+        treat left as x coord, right as y coord to rotate around centre */
       out.left = (in.left*cos_rotation) - (in.right*sin_rotation);
       out.right =(in.left*sin_rotation) - (in.right*cos_rotation);
       return out;
     }
 
-    /* process the input then mix by the wet/dry amount controlled by knob */
+    /* process input then mix by the wet/dry amount controlled by knob */
     Sample ProcessMix(Sample in){
       Sample out;
       Sample processed = Process(in);

@@ -21,10 +21,6 @@ using namespace std;
 DSY_SDRAM_BSS alignas(16) int16_t left_buf[CHNL_BUF_SIZE_SAMPS];
 DSY_SDRAM_BSS alignas(16) int16_t right_buf[CHNL_BUF_SIZE_SAMPS];
 
-/* SDRAM buffer for temporarily storing recorded output audio
-    before it's written to SD card */
-// DSY_SDRAM_BSS alignas(16) int16_t record_out_buf[RECORD_OUT_BUF_SIZE_SAMPS];
-
 /* hardware interfaces */
 SdmmcHandler sd;
 FatFSInterface fsi;
@@ -34,12 +30,10 @@ FIL file;
 // ReverbSc reverb;
 DSY_SDRAM_BSS ReverbSc reverb;
 DSY_SDRAM_BSS SmoothRandomGenerator rng;
-DSY_SDRAM_BSS Chorus chorus;
 /* software classes to run app */
 AudioFileManager filemgr(sd, fsi, pod, &file);
 static GranularSynth synth(pod, &rng);
-// static GranularSynth synth(pod, &rng);
-GrannyChordApp app(pod, synth, filemgr, reverb, chorus);
+GrannyChordApp app(pod, synth, filemgr, reverb);
 
 /* we set rng state here so we can use RNG fns across classes */
 uint32_t rng_state;
