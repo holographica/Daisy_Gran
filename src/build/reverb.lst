@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 1
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -11,68 +11,23 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 1
    8              		.eabi_attribute 24, 1
    9              		.eabi_attribute 25, 1
   10              		.eabi_attribute 26, 1
-  11              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 30, 4
   12              		.eabi_attribute 34, 1
   13              		.eabi_attribute 18, 4
   14              		.file	"reverb.cpp"
   15              		.text
   16              	.Ltext0:
   17              		.cfi_sections	.debug_frame
-  18              		.section	.rodata._ZL13kReverbParams,"a"
-  19              		.align	2
-  22              	_ZL13kReverbParams:
-  23 0000 8207533D 		.word	1028851586
-  24 0004 6F12833A 		.word	981668463
-  25 0008 66664640 		.word	1078355558
-  26 000c 00C0F544 		.word	1156956160
-  27 0010 0A1E6C3D 		.word	1030495754
-  28 0014 E02D903A 		.word	982527456
-  29 0018 00006040 		.word	1080033280
-  30 001c 0066E646 		.word	1189504512
-  31 0020 3842893D 		.word	1032405560
-  32 0024 89D2DE3A 		.word	987681417
-  33 0028 7B148E3F 		.word	1066275963
-  34 002c 0032B346 		.word	1186148864
-  35 0030 EDC3973D 		.word	1033356269
-  36 0034 52491D3A 		.word	974997842
-  37 0038 A2457E40 		.word	1082017186
-  38 003c 00981946 		.word	1176082432
-  39 0040 DCB2A63D 		.word	1034334940
-  40 0044 6F12833A 		.word	981668463
-  41 0048 F2D21540 		.word	1075172082
-  42 004c 0046A146 		.word	1184974336
-  43 0050 D815B03D 		.word	1034950104
-  44 0054 E02D903A 		.word	982527456
-  45 0058 E5D0F23F 		.word	1072877797
-  46 005c 0032B346 		.word	1186148864
-  47 0060 8DDE363D 		.word	1027006093
-  48 0064 89D2DE3A 		.word	987681417
-  49 0068 9318643F 		.word	1063524499
-  50 006c 0066E646 		.word	1189504512
-  51 0070 08F3243D 		.word	1025831688
-  52 0074 52491D3A 		.word	974997842
-  53 0078 DD244E40 		.word	1078863069
-  54 007c 00446146 		.word	1180779520
-  55              		.section	.rodata._ZL11kOutputGain,"a"
-  56              		.align	2
-  59              	_ZL11kOutputGain:
-  60 0000 3333B33E 		.word	1051931443
-  61              		.section	.rodata._ZL8kJpScale,"a"
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 2
-
-
-  62              		.align	2
-  65              	_ZL8kJpScale:
-  66 0000 0000803E 		.word	1048576000
-  67              		.section	.text._ZN7daisysp8ReverbSc4InitEf,"ax",%progbits
-  68              		.align	1
-  69              		.global	_ZN7daisysp8ReverbSc4InitEf
-  70              		.syntax unified
-  71              		.thumb
-  72              		.thumb_func
-  74              	_ZN7daisysp8ReverbSc4InitEf:
-  75              	.LFB555:
-  76              		.file 1 "DaisySP-LGPL-FX/reverb.cpp"
+  18              		.section	.text._ZN7daisysp8ReverbSc17NextRandomLinesegEPNS_10ReverbScDlEi,"ax",%progbits
+  19              		.align	1
+  20              		.global	_ZN7daisysp8ReverbSc17NextRandomLinesegEPNS_10ReverbScDlEi
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  25              	_ZN7daisysp8ReverbSc17NextRandomLinesegEPNS_10ReverbScDlEi:
+  26              	.LVL0:
+  27              	.LFB558:
+  28              		.file 1 "DaisySP-LGPL-FX/reverb.cpp"
    1:DaisySP-LGPL-FX/reverb.cpp **** #include <math.h>
    2:DaisySP-LGPL-FX/reverb.cpp **** #include <stdlib.h>
    3:DaisySP-LGPL-FX/reverb.cpp **** #include <stdint.h>
@@ -103,6 +58,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 1
   28:DaisySP-LGPL-FX/reverb.cpp **** 
   29:DaisySP-LGPL-FX/reverb.cpp **** static const float kReverbParams[8][4]
   30:DaisySP-LGPL-FX/reverb.cpp ****     = {{(2473.0 / DEFAULT_SRATE), 0.0010, 3.100, 1966.0},
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 2
+
+
   31:DaisySP-LGPL-FX/reverb.cpp ****        {(2767.0 / DEFAULT_SRATE), 0.0011, 3.500, 29491.0},
   32:DaisySP-LGPL-FX/reverb.cpp ****        {(3217.0 / DEFAULT_SRATE), 0.0017, 1.110, 22937.0},
   33:DaisySP-LGPL-FX/reverb.cpp ****        {(3557.0 / DEFAULT_SRATE), 0.0006, 3.973, 9830.0},
@@ -118,1858 +76,1804 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 1
   43:DaisySP-LGPL-FX/reverb.cpp **** static const float kJpScale    = 0.25;
   44:DaisySP-LGPL-FX/reverb.cpp **** 
   45:DaisySP-LGPL-FX/reverb.cpp **** int ReverbSc::Init(float sr)
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 3
-
-
   46:DaisySP-LGPL-FX/reverb.cpp **** {
-  77              		.loc 1 46 1
-  78              		.cfi_startproc
-  79              		@ args = 0, pretend = 0, frame = 16
-  80              		@ frame_needed = 1, uses_anonymous_args = 0
-  81 0000 80B5     		push	{r7, lr}
-  82              		.cfi_def_cfa_offset 8
-  83              		.cfi_offset 7, -8
-  84              		.cfi_offset 14, -4
-  85 0002 84B0     		sub	sp, sp, #16
-  86              		.cfi_def_cfa_offset 24
-  87 0004 00AF     		add	r7, sp, #0
-  88              		.cfi_def_cfa_register 7
-  89 0006 7860     		str	r0, [r7, #4]
-  90 0008 87ED000A 		vstr.32	s0, [r7]
   47:DaisySP-LGPL-FX/reverb.cpp ****     i_sample_rate_ = sr;
-  91              		.loc 1 47 20
-  92 000c 7B68     		ldr	r3, [r7, #4]
-  93 000e 3A68     		ldr	r2, [r7]	@ float
-  94 0010 9A60     		str	r2, [r3, #8]	@ float
   48:DaisySP-LGPL-FX/reverb.cpp ****     sample_rate_   = sr;
-  95              		.loc 1 48 20
-  96 0012 7B68     		ldr	r3, [r7, #4]
-  97 0014 3A68     		ldr	r2, [r7]	@ float
-  98 0016 5A61     		str	r2, [r3, #20]	@ float
   49:DaisySP-LGPL-FX/reverb.cpp ****     feedback_      = 0.97;
-  99              		.loc 1 49 20
- 100 0018 7B68     		ldr	r3, [r7, #4]
- 101 001a 2C4A     		ldr	r2, .L6
- 102 001c 1A60     		str	r2, [r3]	@ float
   50:DaisySP-LGPL-FX/reverb.cpp ****     lpfreq_        = 10000;
- 103              		.loc 1 50 20
- 104 001e 7B68     		ldr	r3, [r7, #4]
- 105 0020 2B4A     		ldr	r2, .L6+4
- 106 0022 5A60     		str	r2, [r3, #4]	@ float
   51:DaisySP-LGPL-FX/reverb.cpp ****     i_pitch_mod_   = 1;
- 107              		.loc 1 51 20
- 108 0024 7B68     		ldr	r3, [r7, #4]
- 109 0026 4FF07E52 		mov	r2, #1065353216
- 110 002a DA60     		str	r2, [r3, #12]	@ float
   52:DaisySP-LGPL-FX/reverb.cpp ****     i_skip_init_   = 0;
- 111              		.loc 1 52 20
- 112 002c 7B68     		ldr	r3, [r7, #4]
- 113 002e 4FF00002 		mov	r2, #0
- 114 0032 1A61     		str	r2, [r3, #16]	@ float
   53:DaisySP-LGPL-FX/reverb.cpp ****     damp_fact_     = 1.0;
- 115              		.loc 1 53 20
- 116 0034 7B68     		ldr	r3, [r7, #4]
- 117 0036 4FF07E52 		mov	r2, #1065353216
- 118 003a 9A61     		str	r2, [r3, #24]	@ float
   54:DaisySP-LGPL-FX/reverb.cpp ****     prv_lpfreq_    = 0.0;
- 119              		.loc 1 54 20
- 120 003c 7B68     		ldr	r3, [r7, #4]
- 121 003e 4FF00002 		mov	r2, #0
- 122 0042 DA61     		str	r2, [r3, #28]	@ float
   55:DaisySP-LGPL-FX/reverb.cpp ****     init_done_     = 1;
- 123              		.loc 1 55 20
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 4
-
-
- 124 0044 7B68     		ldr	r3, [r7, #4]
- 125 0046 0122     		movs	r2, #1
- 126 0048 1A62     		str	r2, [r3, #32]
   56:DaisySP-LGPL-FX/reverb.cpp ****     int i, n_bytes = 0;
- 127              		.loc 1 56 12
- 128 004a 0023     		movs	r3, #0
- 129 004c BB60     		str	r3, [r7, #8]
   57:DaisySP-LGPL-FX/reverb.cpp ****     n_bytes = 0;
- 130              		.loc 1 57 13
- 131 004e 0023     		movs	r3, #0
- 132 0050 BB60     		str	r3, [r7, #8]
   58:DaisySP-LGPL-FX/reverb.cpp ****     for(i = 0; i < 8; i++)
- 133              		.loc 1 58 11
- 134 0052 0023     		movs	r3, #0
- 135 0054 FB60     		str	r3, [r7, #12]
- 136              	.L5:
- 137              		.loc 1 58 18 discriminator 1
- 138 0056 FB68     		ldr	r3, [r7, #12]
- 139 0058 072B     		cmp	r3, #7
- 140 005a 31DC     		bgt	.L2
   59:DaisySP-LGPL-FX/reverb.cpp ****     {
   60:DaisySP-LGPL-FX/reverb.cpp ****         if(n_bytes > DSY_REVERBSC_MAX_SIZE)
- 141              		.loc 1 60 9
- 142 005c BB68     		ldr	r3, [r7, #8]
- 143 005e 1D4A     		ldr	r2, .L6+8
- 144 0060 9342     		cmp	r3, r2
- 145 0062 01DD     		ble	.L3
   61:DaisySP-LGPL-FX/reverb.cpp ****             return 1;
- 146              		.loc 1 61 20
- 147 0064 0123     		movs	r3, #1
- 148 0066 2CE0     		b	.L4
- 149              	.L3:
   62:DaisySP-LGPL-FX/reverb.cpp ****         delay_lines_[i].buf = (aux_) + n_bytes;
- 150              		.loc 1 62 32 discriminator 2
- 151 0068 7B68     		ldr	r3, [r7, #4]
- 152 006a 03F5B272 		add	r2, r3, #356
- 153              		.loc 1 62 40 discriminator 2
- 154 006e BB68     		ldr	r3, [r7, #8]
- 155              		.loc 1 62 38 discriminator 2
- 156 0070 9B00     		lsls	r3, r3, #2
- 157 0072 D118     		adds	r1, r2, r3
- 158              		.loc 1 62 29 discriminator 2
- 159 0074 7868     		ldr	r0, [r7, #4]
- 160 0076 FA68     		ldr	r2, [r7, #12]
- 161 0078 1346     		mov	r3, r2
- 162 007a 9B00     		lsls	r3, r3, #2
- 163 007c 1344     		add	r3, r3, r2
- 164 007e DB00     		lsls	r3, r3, #3
- 165 0080 0344     		add	r3, r3, r0
- 166 0082 4833     		adds	r3, r3, #72
- 167 0084 1960     		str	r1, [r3]
   63:DaisySP-LGPL-FX/reverb.cpp ****         InitDelayLine(&delay_lines_[i], i);
- 168              		.loc 1 63 22 discriminator 2
- 169 0086 FA68     		ldr	r2, [r7, #12]
- 170 0088 1346     		mov	r3, r2
- 171 008a 9B00     		lsls	r3, r3, #2
- 172 008c 1344     		add	r3, r3, r2
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 5
-
-
- 173 008e DB00     		lsls	r3, r3, #3
- 174 0090 2033     		adds	r3, r3, #32
- 175 0092 7A68     		ldr	r2, [r7, #4]
- 176 0094 1344     		add	r3, r3, r2
- 177 0096 0433     		adds	r3, r3, #4
- 178 0098 FA68     		ldr	r2, [r7, #12]
- 179 009a 1946     		mov	r1, r3
- 180 009c 7868     		ldr	r0, [r7, #4]
- 181 009e FFF7FEFF 		bl	_ZN7daisysp8ReverbSc13InitDelayLineEPNS_10ReverbScDlEi
   64:DaisySP-LGPL-FX/reverb.cpp ****         n_bytes += DelayLineBytesAlloc(sr, 1, i);
- 182              		.loc 1 64 39 discriminator 2
- 183 00a2 F868     		ldr	r0, [r7, #12]
- 184 00a4 F7EE000A 		vmov.f32	s1, #1.0e+0
- 185 00a8 97ED000A 		vldr.32	s0, [r7]
- 186 00ac FFF7FEFF 		bl	_ZL19DelayLineBytesAllocffi
- 187 00b0 0246     		mov	r2, r0
- 188              		.loc 1 64 17 discriminator 2
- 189 00b2 BB68     		ldr	r3, [r7, #8]
- 190 00b4 1344     		add	r3, r3, r2
- 191 00b6 BB60     		str	r3, [r7, #8]
-  58:DaisySP-LGPL-FX/reverb.cpp ****     {
- 192              		.loc 1 58 5 discriminator 2
- 193 00b8 FB68     		ldr	r3, [r7, #12]
- 194 00ba 0133     		adds	r3, r3, #1
- 195 00bc FB60     		str	r3, [r7, #12]
- 196 00be CAE7     		b	.L5
- 197              	.L2:
   65:DaisySP-LGPL-FX/reverb.cpp ****     }
   66:DaisySP-LGPL-FX/reverb.cpp ****     return 0;
- 198              		.loc 1 66 12
- 199 00c0 0023     		movs	r3, #0
- 200              	.L4:
   67:DaisySP-LGPL-FX/reverb.cpp **** }
- 201              		.loc 1 67 1
- 202 00c2 1846     		mov	r0, r3
- 203 00c4 1037     		adds	r7, r7, #16
- 204              		.cfi_def_cfa_offset 8
- 205 00c6 BD46     		mov	sp, r7
- 206              		.cfi_def_cfa_register 13
- 207              		@ sp needed
- 208 00c8 80BD     		pop	{r7, pc}
- 209              	.L7:
- 210 00ca 00BF     		.align	2
- 211              	.L6:
- 212 00cc EC51783F 		.word	1064849900
- 213 00d0 00401C46 		.word	1176256512
- 214 00d4 78820100 		.word	98936
- 215              		.cfi_endproc
- 216              	.LFE555:
- 218              		.section	.text._ZL19DelayLineMaxSamplesffi,"ax",%progbits
- 219              		.align	1
- 220              		.syntax unified
- 221              		.thumb
- 222              		.thumb_func
- 224              	_ZL19DelayLineMaxSamplesffi:
- 225              	.LFB556:
   68:DaisySP-LGPL-FX/reverb.cpp **** 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 6
-
-
   69:DaisySP-LGPL-FX/reverb.cpp **** static int DelayLineMaxSamples(float sr, float i_pitch_mod, int n)
   70:DaisySP-LGPL-FX/reverb.cpp **** {
- 226              		.loc 1 70 1
- 227              		.cfi_startproc
- 228              		@ args = 0, pretend = 0, frame = 24
- 229              		@ frame_needed = 1, uses_anonymous_args = 0
- 230              		@ link register save eliminated.
- 231 0000 80B4     		push	{r7}
- 232              		.cfi_def_cfa_offset 4
- 233              		.cfi_offset 7, -4
- 234 0002 87B0     		sub	sp, sp, #28
- 235              		.cfi_def_cfa_offset 32
- 236 0004 00AF     		add	r7, sp, #0
- 237              		.cfi_def_cfa_register 7
- 238 0006 87ED030A 		vstr.32	s0, [r7, #12]
- 239 000a C7ED020A 		vstr.32	s1, [r7, #8]
- 240 000e 7860     		str	r0, [r7, #4]
   71:DaisySP-LGPL-FX/reverb.cpp ****     float max_del;
   72:DaisySP-LGPL-FX/reverb.cpp **** 
   73:DaisySP-LGPL-FX/reverb.cpp ****     max_del = kReverbParams[n][0];
- 241              		.loc 1 73 13
- 242 0010 1D4A     		ldr	r2, .L10+8
- 243 0012 7B68     		ldr	r3, [r7, #4]
- 244 0014 1B01     		lsls	r3, r3, #4
- 245 0016 1344     		add	r3, r3, r2
- 246 0018 1B68     		ldr	r3, [r3]	@ float
- 247 001a 7B61     		str	r3, [r7, #20]	@ float
   74:DaisySP-LGPL-FX/reverb.cpp ****     max_del += (kReverbParams[n][1] * (float)i_pitch_mod * 1.125);
- 248              		.loc 1 74 13
- 249 001c D7ED057A 		vldr.32	s15, [r7, #20]
- 250 0020 B7EEE76A 		vcvt.f64.f32	d6, s15
- 251              		.loc 1 74 35
- 252 0024 184A     		ldr	r2, .L10+8
- 253 0026 7B68     		ldr	r3, [r7, #4]
- 254 0028 1B01     		lsls	r3, r3, #4
- 255 002a 1344     		add	r3, r3, r2
- 256 002c 0433     		adds	r3, r3, #4
- 257 002e 93ED007A 		vldr.32	s14, [r3]
- 258              		.loc 1 74 37
- 259 0032 D7ED027A 		vldr.32	s15, [r7, #8]
- 260 0036 67EE277A 		vmul.f32	s15, s14, s15
- 261 003a B7EEE77A 		vcvt.f64.f32	d7, s15
- 262              		.loc 1 74 58
- 263 003e B7EE025B 		vmov.f64	d5, #1.125e+0
- 264 0042 27EE057B 		vmul.f64	d7, d7, d5
- 265              		.loc 1 74 13
- 266 0046 36EE077B 		vadd.f64	d7, d6, d7
- 267 004a F7EEC77B 		vcvt.f32.f64	s15, d7
- 268 004e C7ED057A 		vstr.32	s15, [r7, #20]
   75:DaisySP-LGPL-FX/reverb.cpp ****     return (int)(max_del * sr + 16.5);
- 269              		.loc 1 75 26
- 270 0052 97ED057A 		vldr.32	s14, [r7, #20]
- 271 0056 D7ED037A 		vldr.32	s15, [r7, #12]
- 272 005a 67EE277A 		vmul.f32	s15, s14, s15
- 273 005e B7EEE77A 		vcvt.f64.f32	d7, s15
- 274              		.loc 1 75 31
- 275 0062 9FED076B 		vldr.64	d6, .L10
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 7
-
-
- 276 0066 37EE067B 		vadd.f64	d7, d7, d6
- 277              		.loc 1 75 37
- 278 006a FDEEC77B 		vcvt.s32.f64	s15, d7
- 279 006e 17EE903A 		vmov	r3, s15	@ int
   76:DaisySP-LGPL-FX/reverb.cpp **** }
- 280              		.loc 1 76 1
- 281 0072 1846     		mov	r0, r3
- 282 0074 1C37     		adds	r7, r7, #28
- 283              		.cfi_def_cfa_offset 4
- 284 0076 BD46     		mov	sp, r7
- 285              		.cfi_def_cfa_register 13
- 286              		@ sp needed
- 287 0078 5DF8047B 		ldr	r7, [sp], #4
- 288              		.cfi_restore 7
- 289              		.cfi_def_cfa_offset 0
- 290 007c 7047     		bx	lr
- 291              	.L11:
- 292 007e 00BF     		.align	3
- 293              	.L10:
- 294 0080 00000000 		.word	0
- 295 0084 00803040 		.word	1076920320
- 296 0088 00000000 		.word	_ZL13kReverbParams
- 297              		.cfi_endproc
- 298              	.LFE556:
- 300              		.section	.text._ZL19DelayLineBytesAllocffi,"ax",%progbits
- 301              		.align	1
- 302              		.syntax unified
- 303              		.thumb
- 304              		.thumb_func
- 306              	_ZL19DelayLineBytesAllocffi:
- 307              	.LFB557:
   77:DaisySP-LGPL-FX/reverb.cpp **** 
   78:DaisySP-LGPL-FX/reverb.cpp **** static int DelayLineBytesAlloc(float sr, float i_pitch_mod, int n)
   79:DaisySP-LGPL-FX/reverb.cpp **** {
- 308              		.loc 1 79 1
- 309              		.cfi_startproc
- 310              		@ args = 0, pretend = 0, frame = 24
- 311              		@ frame_needed = 1, uses_anonymous_args = 0
- 312 0000 80B5     		push	{r7, lr}
- 313              		.cfi_def_cfa_offset 8
- 314              		.cfi_offset 7, -8
- 315              		.cfi_offset 14, -4
- 316 0002 86B0     		sub	sp, sp, #24
- 317              		.cfi_def_cfa_offset 32
- 318 0004 00AF     		add	r7, sp, #0
- 319              		.cfi_def_cfa_register 7
- 320 0006 87ED030A 		vstr.32	s0, [r7, #12]
- 321 000a C7ED020A 		vstr.32	s1, [r7, #8]
- 322 000e 7860     		str	r0, [r7, #4]
   80:DaisySP-LGPL-FX/reverb.cpp ****     int n_bytes = 0;
- 323              		.loc 1 80 9
- 324 0010 0023     		movs	r3, #0
- 325 0012 7B61     		str	r3, [r7, #20]
   81:DaisySP-LGPL-FX/reverb.cpp **** 
   82:DaisySP-LGPL-FX/reverb.cpp ****     n_bytes += (DelayLineMaxSamples(sr, i_pitch_mod, n) * (int)sizeof(float));
- 326              		.loc 1 82 36
- 327 0014 7868     		ldr	r0, [r7, #4]
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 8
-
-
- 328 0016 D7ED020A 		vldr.32	s1, [r7, #8]
- 329 001a 97ED030A 		vldr.32	s0, [r7, #12]
- 330 001e FFF7FEFF 		bl	_ZL19DelayLineMaxSamplesffi
- 331 0022 0346     		mov	r3, r0
- 332              		.loc 1 82 57
- 333 0024 9B00     		lsls	r3, r3, #2
- 334              		.loc 1 82 13
- 335 0026 7A69     		ldr	r2, [r7, #20]
- 336 0028 1344     		add	r3, r3, r2
- 337 002a 7B61     		str	r3, [r7, #20]
   83:DaisySP-LGPL-FX/reverb.cpp ****     return n_bytes;
- 338              		.loc 1 83 12
- 339 002c 7B69     		ldr	r3, [r7, #20]
   84:DaisySP-LGPL-FX/reverb.cpp **** }
- 340              		.loc 1 84 1
- 341 002e 1846     		mov	r0, r3
- 342 0030 1837     		adds	r7, r7, #24
- 343              		.cfi_def_cfa_offset 8
- 344 0032 BD46     		mov	sp, r7
- 345              		.cfi_def_cfa_register 13
- 346              		@ sp needed
- 347 0034 80BD     		pop	{r7, pc}
- 348              		.cfi_endproc
- 349              	.LFE557:
- 351              		.section	.text._ZN7daisysp8ReverbSc17NextRandomLinesegEPNS_10ReverbScDlEi,"ax",%progbits
- 352              		.align	1
- 353              		.global	_ZN7daisysp8ReverbSc17NextRandomLinesegEPNS_10ReverbScDlEi
- 354              		.syntax unified
- 355              		.thumb
- 356              		.thumb_func
- 358              	_ZN7daisysp8ReverbSc17NextRandomLinesegEPNS_10ReverbScDlEi:
- 359              	.LFB558:
   85:DaisySP-LGPL-FX/reverb.cpp **** 
   86:DaisySP-LGPL-FX/reverb.cpp **** void ReverbSc::NextRandomLineseg(ReverbScDl *lp, int n)
   87:DaisySP-LGPL-FX/reverb.cpp **** {
- 360              		.loc 1 87 1
- 361              		.cfi_startproc
- 362              		@ args = 0, pretend = 0, frame = 32
- 363              		@ frame_needed = 1, uses_anonymous_args = 0
- 364              		@ link register save eliminated.
- 365 0000 80B4     		push	{r7}
- 366              		.cfi_def_cfa_offset 4
- 367              		.cfi_offset 7, -4
- 368 0002 89B0     		sub	sp, sp, #36
- 369              		.cfi_def_cfa_offset 40
- 370 0004 00AF     		add	r7, sp, #0
- 371              		.cfi_def_cfa_register 7
- 372 0006 F860     		str	r0, [r7, #12]
- 373 0008 B960     		str	r1, [r7, #8]
- 374 000a 7A60     		str	r2, [r7, #4]
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 3
+
+
+  29              		.loc 1 87 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
   88:DaisySP-LGPL-FX/reverb.cpp ****     float prv_del, nxt_del, phs_inc_val;
+  33              		.loc 1 88 5 view .LVU1
   89:DaisySP-LGPL-FX/reverb.cpp **** 
   90:DaisySP-LGPL-FX/reverb.cpp ****     /* update random seed */
   91:DaisySP-LGPL-FX/reverb.cpp ****     if(lp->seed_val < 0)
- 375              		.loc 1 91 12
- 376 000c BB68     		ldr	r3, [r7, #8]
- 377 000e 9B69     		ldr	r3, [r3, #24]
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 9
-
-
- 378              		.loc 1 91 5
- 379 0010 002B     		cmp	r3, #0
- 380 0012 05DA     		bge	.L15
+  34              		.loc 1 91 5 view .LVU2
+  35              		.loc 1 91 12 is_stmt 0 view .LVU3
+  36 0000 8B69     		ldr	r3, [r1, #24]
   92:DaisySP-LGPL-FX/reverb.cpp ****         lp->seed_val += 0x10000;
- 381              		.loc 1 92 22
- 382 0014 BB68     		ldr	r3, [r7, #8]
- 383 0016 9B69     		ldr	r3, [r3, #24]
- 384 0018 03F58032 		add	r2, r3, #65536
- 385 001c BB68     		ldr	r3, [r7, #8]
- 386 001e 9A61     		str	r2, [r3, #24]
- 387              	.L15:
   93:DaisySP-LGPL-FX/reverb.cpp ****     lp->seed_val = (lp->seed_val * 15625 + 1) & 0xFFFF;
- 388              		.loc 1 93 25
- 389 0020 BB68     		ldr	r3, [r7, #8]
- 390 0022 9B69     		ldr	r3, [r3, #24]
- 391              		.loc 1 93 34
- 392 0024 43F60952 		movw	r2, #15625
- 393 0028 02FB03F3 		mul	r3, r2, r3
- 394              		.loc 1 93 42
- 395 002c 0133     		adds	r3, r3, #1
- 396              		.loc 1 93 47
- 397 002e 9AB2     		uxth	r2, r3
- 398              		.loc 1 93 18
- 399 0030 BB68     		ldr	r3, [r7, #8]
- 400 0032 9A61     		str	r2, [r3, #24]
   94:DaisySP-LGPL-FX/reverb.cpp ****     if(lp->seed_val >= 0x8000)
- 401              		.loc 1 94 12
- 402 0034 BB68     		ldr	r3, [r7, #8]
- 403 0036 9B69     		ldr	r3, [r3, #24]
- 404              		.loc 1 94 5
- 405 0038 B3F5004F 		cmp	r3, #32768
- 406 003c 05DB     		blt	.L16
   95:DaisySP-LGPL-FX/reverb.cpp ****         lp->seed_val -= 0x10000;
- 407              		.loc 1 95 22
- 408 003e BB68     		ldr	r3, [r7, #8]
- 409 0040 9B69     		ldr	r3, [r3, #24]
- 410 0042 A3F58032 		sub	r2, r3, #65536
- 411 0046 BB68     		ldr	r3, [r7, #8]
- 412 0048 9A61     		str	r2, [r3, #24]
- 413              	.L16:
   96:DaisySP-LGPL-FX/reverb.cpp ****     /* length of next segment in samples */
   97:DaisySP-LGPL-FX/reverb.cpp ****     lp->rand_line_cnt = (int)((sample_rate_ / kReverbParams[n][2]) + 0.5);
- 414              		.loc 1 97 32
- 415 004a FB68     		ldr	r3, [r7, #12]
- 416 004c D3ED056A 		vldr.32	s13, [r3, #20]
- 417              		.loc 1 97 65
- 418 0050 564A     		ldr	r2, .L22
- 419 0052 7B68     		ldr	r3, [r7, #4]
- 420 0054 1B01     		lsls	r3, r3, #4
- 421 0056 1344     		add	r3, r3, r2
- 422 0058 0833     		adds	r3, r3, #8
- 423 005a 93ED007A 		vldr.32	s14, [r3]
- 424              		.loc 1 97 45
- 425 005e C6EE877A 		vdiv.f32	s15, s13, s14
- 426 0062 B7EEE77A 		vcvt.f64.f32	d7, s15
- 427              		.loc 1 97 68
- 428 0066 B6EE006B 		vmov.f64	d6, #5.0e-1
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 10
-
-
- 429 006a 37EE067B 		vadd.f64	d7, d7, d6
- 430              		.loc 1 97 25
- 431 006e FDEEC77B 		vcvt.s32.f64	s15, d7
- 432 0072 17EE902A 		vmov	r2, s15	@ int
- 433              		.loc 1 97 23
- 434 0076 BB68     		ldr	r3, [r7, #8]
- 435 0078 DA61     		str	r2, [r3, #28]
+  37              		.loc 1 97 68 view .LVU4
+  38 0002 B6EE005B 		vmov.f64	d5, #5.0e-1
+  39              		.loc 1 97 32 view .LVU5
+  40 0006 D0ED054A 		vldr.32	s9, [r0, #20]
+  91:DaisySP-LGPL-FX/reverb.cpp ****         lp->seed_val += 0x10000;
+  41              		.loc 1 91 5 view .LVU6
+  42 000a 002B     		cmp	r3, #0
+  92:DaisySP-LGPL-FX/reverb.cpp ****         lp->seed_val += 0x10000;
+  43              		.loc 1 92 9 is_stmt 1 view .LVU7
   98:DaisySP-LGPL-FX/reverb.cpp ****     prv_del           = (float)lp->write_pos;
- 436              		.loc 1 98 36
- 437 007a BB68     		ldr	r3, [r7, #8]
- 438 007c 1B68     		ldr	r3, [r3]
- 439              		.loc 1 98 23
- 440 007e 07EE903A 		vmov	s15, r3	@ int
- 441 0082 F8EEE77A 		vcvt.f32.s32	s15, s15
- 442 0086 C7ED077A 		vstr.32	s15, [r7, #28]
   99:DaisySP-LGPL-FX/reverb.cpp ****     prv_del -= ((float)lp->read_pos
- 443              		.loc 1 99 28
- 444 008a BB68     		ldr	r3, [r7, #8]
- 445 008c 9B68     		ldr	r3, [r3, #8]
- 446              		.loc 1 99 17
- 447 008e 07EE903A 		vmov	s15, r3	@ int
- 448 0092 B8EEE77A 		vcvt.f32.s32	s14, s15
  100:DaisySP-LGPL-FX/reverb.cpp ****                 + ((float)lp->read_pos_frac / (float)DELAYPOS_SCALE));
- 449              		.loc 1 100 31
- 450 0096 BB68     		ldr	r3, [r7, #8]
- 451 0098 DB68     		ldr	r3, [r3, #12]
- 452              		.loc 1 100 20
- 453 009a 07EE903A 		vmov	s15, r3	@ int
- 454 009e F8EEE76A 		vcvt.f32.s32	s13, s15
- 455              		.loc 1 100 45
- 456 00a2 9FED436A 		vldr.32	s12, .L22+4
- 457 00a6 C6EE867A 		vdiv.f32	s15, s13, s12
- 458              		.loc 1 100 17
- 459 00aa 77EE277A 		vadd.f32	s15, s14, s15
-  99:DaisySP-LGPL-FX/reverb.cpp ****     prv_del -= ((float)lp->read_pos
- 460              		.loc 1 99 13
- 461 00ae 97ED077A 		vldr.32	s14, [r7, #28]
- 462 00b2 77EE677A 		vsub.f32	s15, s14, s15
- 463 00b6 C7ED077A 		vstr.32	s15, [r7, #28]
- 464              	.L19:
+  44              		.loc 1 100 17 is_stmt 0 view .LVU8
+  45 000c 9FED354A 		vldr.32	s8, .L11
+  92:DaisySP-LGPL-FX/reverb.cpp ****     lp->seed_val = (lp->seed_val * 15625 + 1) & 0xFFFF;
+  46              		.loc 1 92 22 view .LVU9
+  47 0010 B8BF     		it	lt
+  48 0012 03F58033 		addlt	r3, r3, #65536
+  87:DaisySP-LGPL-FX/reverb.cpp ****     float prv_del, nxt_del, phs_inc_val;
+  49              		.loc 1 87 1 view .LVU10
+  50 0016 10B5     		push	{r4, lr}
+  51              		.cfi_def_cfa_offset 8
+  52              		.cfi_offset 4, -8
+  53              		.cfi_offset 14, -4
+  92:DaisySP-LGPL-FX/reverb.cpp ****     lp->seed_val = (lp->seed_val * 15625 + 1) & 0xFFFF;
+  54              		.loc 1 92 22 view .LVU11
+  55 0018 B8BF     		it	lt
+  56 001a 8B61     		strlt	r3, [r1, #24]
+  93:DaisySP-LGPL-FX/reverb.cpp ****     if(lp->seed_val >= 0x8000)
+  57              		.loc 1 93 5 is_stmt 1 view .LVU12
+  93:DaisySP-LGPL-FX/reverb.cpp ****     if(lp->seed_val >= 0x8000)
+  58              		.loc 1 93 34 is_stmt 0 view .LVU13
+  59 001c 43F60954 		movw	r4, #15625
+  60 0020 8B69     		ldr	r3, [r1, #24]
+  61 0022 6343     		muls	r3, r4, r3
+  93:DaisySP-LGPL-FX/reverb.cpp ****     if(lp->seed_val >= 0x8000)
+  62              		.loc 1 93 42 view .LVU14
+  63 0024 0133     		adds	r3, r3, #1
+  93:DaisySP-LGPL-FX/reverb.cpp ****     if(lp->seed_val >= 0x8000)
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 4
+
+
+  64              		.loc 1 93 47 view .LVU15
+  65 0026 9CB2     		uxth	r4, r3
+  94:DaisySP-LGPL-FX/reverb.cpp ****         lp->seed_val -= 0x10000;
+  66              		.loc 1 94 5 is_stmt 1 view .LVU16
+  67 0028 1B04     		lsls	r3, r3, #16
+  95:DaisySP-LGPL-FX/reverb.cpp ****     /* length of next segment in samples */
+  68              		.loc 1 95 9 view .LVU17
+  97:DaisySP-LGPL-FX/reverb.cpp ****     prv_del           = (float)lp->write_pos;
+  69              		.loc 1 97 65 is_stmt 0 view .LVU18
+  70 002a 2F4B     		ldr	r3, .L11+4
+  95:DaisySP-LGPL-FX/reverb.cpp ****     /* length of next segment in samples */
+  71              		.loc 1 95 22 view .LVU19
+  72 002c 48BF     		it	mi
+  73 002e A4F58034 		submi	r4, r4, #65536
+  74 0032 8C61     		str	r4, [r1, #24]
+  97:DaisySP-LGPL-FX/reverb.cpp ****     prv_del           = (float)lp->write_pos;
+  75              		.loc 1 97 5 is_stmt 1 view .LVU20
+  97:DaisySP-LGPL-FX/reverb.cpp ****     prv_del           = (float)lp->write_pos;
+  76              		.loc 1 97 65 is_stmt 0 view .LVU21
+  77 0034 1401     		lsls	r4, r2, #4
+  78 0036 03EB0212 		add	r2, r3, r2, lsl #4
+  79              	.LVL1:
+  97:DaisySP-LGPL-FX/reverb.cpp ****     prv_del           = (float)lp->write_pos;
+  80              		.loc 1 97 45 view .LVU22
+  81 003a D2ED027A 		vldr.32	s15, [r2, #8]
+  82 003e 84EEA76A 		vdiv.f32	s12, s9, s15
+  98:DaisySP-LGPL-FX/reverb.cpp ****     prv_del -= ((float)lp->read_pos
+  83              		.loc 1 98 23 view .LVU23
+  84 0042 D1ED007A 		vldr.32	s15, [r1]	@ int
+  97:DaisySP-LGPL-FX/reverb.cpp ****     prv_del           = (float)lp->write_pos;
+  85              		.loc 1 97 45 view .LVU24
+  86 0046 B7EEC66A 		vcvt.f64.f32	d6, s12
+  97:DaisySP-LGPL-FX/reverb.cpp ****     prv_del           = (float)lp->write_pos;
+  87              		.loc 1 97 68 view .LVU25
+  88 004a 36EE056B 		vadd.f64	d6, d6, d5
+  97:DaisySP-LGPL-FX/reverb.cpp ****     prv_del           = (float)lp->write_pos;
+  89              		.loc 1 97 25 view .LVU26
+  90 004e BDEEC66B 		vcvt.s32.f64	s12, d6
+  98:DaisySP-LGPL-FX/reverb.cpp ****     prv_del -= ((float)lp->read_pos
+  91              		.loc 1 98 23 view .LVU27
+  92 0052 F8EEE76A 		vcvt.f32.s32	s13, s15
+  93              		.loc 1 100 20 view .LVU28
+  94 0056 D1ED037A 		vldr.32	s15, [r1, #12]	@ int
+  95 005a B8EEE77A 		vcvt.f32.s32	s14, s15
+  99:DaisySP-LGPL-FX/reverb.cpp ****                 + ((float)lp->read_pos_frac / (float)DELAYPOS_SCALE));
+  96              		.loc 1 99 17 view .LVU29
+  97 005e D1ED027A 		vldr.32	s15, [r1, #8]	@ int
+  97:DaisySP-LGPL-FX/reverb.cpp ****     prv_del           = (float)lp->write_pos;
+  98              		.loc 1 97 23 view .LVU30
+  99 0062 81ED076A 		vstr.32	s12, [r1, #28]	@ int
+  98:DaisySP-LGPL-FX/reverb.cpp ****     prv_del -= ((float)lp->read_pos
+ 100              		.loc 1 98 5 is_stmt 1 view .LVU31
+ 101              	.LVL2:
+  99:DaisySP-LGPL-FX/reverb.cpp ****                 + ((float)lp->read_pos_frac / (float)DELAYPOS_SCALE));
+ 102              		.loc 1 99 5 view .LVU32
+  99:DaisySP-LGPL-FX/reverb.cpp ****                 + ((float)lp->read_pos_frac / (float)DELAYPOS_SCALE));
+ 103              		.loc 1 99 17 is_stmt 0 view .LVU33
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 5
+
+
+ 104 0066 F8EEE77A 		vcvt.f32.s32	s15, s15
+ 105              		.loc 1 100 17 view .LVU34
+ 106 006a E7EE047A 		vfma.f32	s15, s14, s8
+  99:DaisySP-LGPL-FX/reverb.cpp ****                 + ((float)lp->read_pos_frac / (float)DELAYPOS_SCALE));
+ 107              		.loc 1 99 13 view .LVU35
+ 108 006e 76EEE77A 		vsub.f32	s15, s13, s15
+ 109              	.LVL3:
+ 110              	.L7:
  101:DaisySP-LGPL-FX/reverb.cpp ****     while(prv_del < 0.0)
- 465              		.loc 1 101 19
- 466 00ba D7ED077A 		vldr.32	s15, [r7, #28]
- 467 00be F5EEC07A 		vcmpe.f32	s15, #0
- 468 00c2 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 469 00c6 0CD5     		bpl	.L21
+ 111              		.loc 1 101 5 is_stmt 1 view .LVU36
+ 112              		.loc 1 101 19 view .LVU37
+ 113 0072 F5EEC07A 		vcmpe.f32	s15, #0
+ 114 0076 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 115 007a 06D5     		bpl	.L9
  102:DaisySP-LGPL-FX/reverb.cpp ****         prv_del += lp->buffer_size;
- 470              		.loc 1 102 24
- 471 00c8 BB68     		ldr	r3, [r7, #8]
- 472 00ca 5B68     		ldr	r3, [r3, #4]
- 473              		.loc 1 102 17
- 474 00cc 07EE903A 		vmov	s15, r3	@ int
- 475 00d0 F8EEE77A 		vcvt.f32.s32	s15, s15
- 476 00d4 97ED077A 		vldr.32	s14, [r7, #28]
- 477 00d8 77EE277A 		vadd.f32	s15, s14, s15
- 478 00dc C7ED077A 		vstr.32	s15, [r7, #28]
+ 116              		.loc 1 102 9 view .LVU38
+ 117              		.loc 1 102 17 is_stmt 0 view .LVU39
+ 118 007c 91ED017A 		vldr.32	s14, [r1, #4]	@ int
+ 119 0080 B8EEC77A 		vcvt.f32.s32	s14, s14
+ 120 0084 77EE877A 		vadd.f32	s15, s15, s14
+ 121              	.LVL4:
  101:DaisySP-LGPL-FX/reverb.cpp ****     while(prv_del < 0.0)
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 11
-
-
- 479              		.loc 1 101 5
- 480 00e0 EBE7     		b	.L19
- 481              	.L21:
+ 122              		.loc 1 101 5 view .LVU40
+ 123 0088 F3E7     		b	.L7
+ 124              	.L9:
  103:DaisySP-LGPL-FX/reverb.cpp ****     prv_del = prv_del / sample_rate_; /* previous delay time in seconds */
- 482              		.loc 1 103 25
- 483 00e2 FB68     		ldr	r3, [r7, #12]
- 484 00e4 93ED057A 		vldr.32	s14, [r3, #20]
- 485              		.loc 1 103 13
- 486 00e8 D7ED076A 		vldr.32	s13, [r7, #28]
- 487 00ec C6EE877A 		vdiv.f32	s15, s13, s14
- 488 00f0 C7ED077A 		vstr.32	s15, [r7, #28]
+ 125              		.loc 1 103 5 is_stmt 1 view .LVU41
+ 126              		.loc 1 103 13 is_stmt 0 view .LVU42
+ 127 008a 87EEA47A 		vdiv.f32	s14, s15, s9
+ 128              	.LVL5:
  104:DaisySP-LGPL-FX/reverb.cpp ****     nxt_del = (float)lp->seed_val * kReverbParams[n][1] / 32768.0;
- 489              		.loc 1 104 26
- 490 00f4 BB68     		ldr	r3, [r7, #8]
- 491 00f6 9B69     		ldr	r3, [r3, #24]
- 492              		.loc 1 104 15
- 493 00f8 07EE903A 		vmov	s15, r3	@ int
- 494 00fc B8EEE77A 		vcvt.f32.s32	s14, s15
- 495              		.loc 1 104 55
- 496 0100 2A4A     		ldr	r2, .L22
- 497 0102 7B68     		ldr	r3, [r7, #4]
- 498 0104 1B01     		lsls	r3, r3, #4
- 499 0106 1344     		add	r3, r3, r2
- 500 0108 0433     		adds	r3, r3, #4
- 501 010a D3ED007A 		vldr.32	s15, [r3]
- 502              		.loc 1 104 35
- 503 010e 27EE277A 		vmul.f32	s14, s14, s15
- 504              		.loc 1 104 13
- 505 0112 DFED286A 		vldr.32	s13, .L22+8
- 506 0116 C7EE267A 		vdiv.f32	s15, s14, s13
- 507 011a C7ED067A 		vstr.32	s15, [r7, #24]
+ 129              		.loc 1 104 5 is_stmt 1 view .LVU43
+ 130              		.loc 1 104 15 is_stmt 0 view .LVU44
+ 131 008e D1ED067A 		vldr.32	s15, [r1, #24]	@ int
+ 132              		.loc 1 104 55 view .LVU45
+ 133 0092 2344     		add	r3, r3, r4
  105:DaisySP-LGPL-FX/reverb.cpp ****     /* next delay time in seconds */
  106:DaisySP-LGPL-FX/reverb.cpp ****     nxt_del = kReverbParams[n][0] + (nxt_del * (float)i_pitch_mod_);
- 508              		.loc 1 106 33
- 509 011e 234A     		ldr	r2, .L22
- 510 0120 7B68     		ldr	r3, [r7, #4]
- 511 0122 1B01     		lsls	r3, r3, #4
- 512 0124 1344     		add	r3, r3, r2
- 513 0126 93ED007A 		vldr.32	s14, [r3]
- 514              		.loc 1 106 55
- 515 012a FB68     		ldr	r3, [r7, #12]
- 516 012c D3ED036A 		vldr.32	s13, [r3, #12]
- 517              		.loc 1 106 46
- 518 0130 D7ED067A 		vldr.32	s15, [r7, #24]
- 519 0134 66EEA77A 		vmul.f32	s15, s13, s15
- 520              		.loc 1 106 13
- 521 0138 77EE277A 		vadd.f32	s15, s14, s15
- 522 013c C7ED067A 		vstr.32	s15, [r7, #24]
+ 134              		.loc 1 106 13 view .LVU46
+ 135 0094 90ED034A 		vldr.32	s8, [r0, #12]
+ 104:DaisySP-LGPL-FX/reverb.cpp ****     nxt_del = (float)lp->seed_val * kReverbParams[n][1] / 32768.0;
+ 136              		.loc 1 104 35 view .LVU47
+ 137 0098 D3ED016A 		vldr.32	s13, [r3, #4]
+ 104:DaisySP-LGPL-FX/reverb.cpp ****     nxt_del = (float)lp->seed_val * kReverbParams[n][1] / 32768.0;
+ 138              		.loc 1 104 15 view .LVU48
+ 139 009c F8EEE77A 		vcvt.f32.s32	s15, s15
  107:DaisySP-LGPL-FX/reverb.cpp ****     /* calculate phase increment per sample */
  108:DaisySP-LGPL-FX/reverb.cpp ****     phs_inc_val           = (prv_del - nxt_del) / (float)lp->rand_line_cnt;
- 523              		.loc 1 108 38
- 524 0140 97ED077A 		vldr.32	s14, [r7, #28]
- 525 0144 D7ED067A 		vldr.32	s15, [r7, #24]
- 526 0148 77EE676A 		vsub.f32	s13, s14, s15
- 527              		.loc 1 108 62
- 528 014c BB68     		ldr	r3, [r7, #8]
- 529 014e DB69     		ldr	r3, [r3, #28]
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 12
+ 140              		.loc 1 108 51 view .LVU49
+ 141 00a0 B8EEC66A 		vcvt.f32.s32	s12, s12
+ 104:DaisySP-LGPL-FX/reverb.cpp ****     /* next delay time in seconds */
+ 142              		.loc 1 104 35 view .LVU50
+ 143 00a4 67EEA67A 		vmul.f32	s15, s15, s13
+ 104:DaisySP-LGPL-FX/reverb.cpp ****     /* next delay time in seconds */
+ 144              		.loc 1 104 13 view .LVU51
+ 145 00a8 DFED106A 		vldr.32	s13, .L11+8
+ 146 00ac 67EEA67A 		vmul.f32	s15, s15, s13
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 6
 
 
- 530              		.loc 1 108 51
- 531 0150 07EE903A 		vmov	s15, r3	@ int
- 532 0154 B8EEE77A 		vcvt.f32.s32	s14, s15
- 533              		.loc 1 108 27
- 534 0158 C6EE877A 		vdiv.f32	s15, s13, s14
- 535 015c C7ED057A 		vstr.32	s15, [r7, #20]
+ 147              	.LVL6:
+ 106:DaisySP-LGPL-FX/reverb.cpp ****     /* calculate phase increment per sample */
+ 148              		.loc 1 106 5 is_stmt 1 view .LVU52
+ 106:DaisySP-LGPL-FX/reverb.cpp ****     /* calculate phase increment per sample */
+ 149              		.loc 1 106 13 is_stmt 0 view .LVU53
+ 150 00b0 D3ED006A 		vldr.32	s13, [r3]
+ 151 00b4 E4EE276A 		vfma.f32	s13, s8, s15
+ 152              	.LVL7:
+ 153              		.loc 1 108 5 is_stmt 1 view .LVU54
+ 154              		.loc 1 108 38 is_stmt 0 view .LVU55
+ 155 00b8 77EE667A 		vsub.f32	s15, s14, s13
  109:DaisySP-LGPL-FX/reverb.cpp ****     phs_inc_val           = phs_inc_val * sample_rate_ + 1.0;
- 536              		.loc 1 109 43
- 537 0160 FB68     		ldr	r3, [r7, #12]
- 538 0162 93ED057A 		vldr.32	s14, [r3, #20]
- 539              		.loc 1 109 41
- 540 0166 D7ED057A 		vldr.32	s15, [r7, #20]
- 541 016a 67EE277A 		vmul.f32	s15, s14, s15
- 542              		.loc 1 109 27
- 543 016e B7EE007A 		vmov.f32	s14, #1.0e+0
- 544 0172 77EE877A 		vadd.f32	s15, s15, s14
- 545 0176 C7ED057A 		vstr.32	s15, [r7, #20]
+ 156              		.loc 1 109 27 view .LVU56
+ 157 00bc B7EE007A 		vmov.f32	s14, #1.0e+0
+ 158              	.LVL8:
+ 108:DaisySP-LGPL-FX/reverb.cpp ****     phs_inc_val           = phs_inc_val * sample_rate_ + 1.0;
+ 159              		.loc 1 108 27 view .LVU57
+ 160 00c0 C7EE866A 		vdiv.f32	s13, s15, s12
+ 161              	.LVL9:
+ 162              		.loc 1 109 5 is_stmt 1 view .LVU58
  110:DaisySP-LGPL-FX/reverb.cpp ****     lp->read_pos_frac_inc = (int)(phs_inc_val * DELAYPOS_SCALE + 0.5);
- 546              		.loc 1 110 47
- 547 017a D7ED057A 		vldr.32	s15, [r7, #20]
- 548 017e 9FED0C7A 		vldr.32	s14, .L22+4
- 549 0182 67EE877A 		vmul.f32	s15, s15, s14
- 550 0186 B7EEE77A 		vcvt.f64.f32	d7, s15
- 551              		.loc 1 110 64
- 552 018a B6EE006B 		vmov.f64	d6, #5.0e-1
- 553 018e 37EE067B 		vadd.f64	d7, d7, d6
- 554              		.loc 1 110 29
- 555 0192 FDEEC77B 		vcvt.s32.f64	s15, d7
- 556 0196 17EE902A 		vmov	r2, s15	@ int
- 557              		.loc 1 110 27
- 558 019a BB68     		ldr	r3, [r7, #8]
- 559 019c 1A61     		str	r2, [r3, #16]
+ 163              		.loc 1 110 47 is_stmt 0 view .LVU59
+ 164 00c4 DFED0A7A 		vldr.32	s15, .L11+12
+ 109:DaisySP-LGPL-FX/reverb.cpp ****     phs_inc_val           = phs_inc_val * sample_rate_ + 1.0;
+ 165              		.loc 1 109 27 view .LVU60
+ 166 00c8 A4EEA67A 		vfma.f32	s14, s9, s13
+ 167              	.LVL10:
+ 168              		.loc 1 110 5 is_stmt 1 view .LVU61
+ 169              		.loc 1 110 47 is_stmt 0 view .LVU62
+ 170 00cc 27EE277A 		vmul.f32	s14, s14, s15
+ 171              	.LVL11:
+ 172              		.loc 1 110 47 view .LVU63
+ 173 00d0 B7EEC77A 		vcvt.f64.f32	d7, s14
+ 174              		.loc 1 110 64 view .LVU64
+ 175 00d4 37EE057B 		vadd.f64	d7, d7, d5
+ 176              		.loc 1 110 29 view .LVU65
+ 177 00d8 BDEEC77B 		vcvt.s32.f64	s14, d7
+ 178 00dc 81ED047A 		vstr.32	s14, [r1, #16]	@ int
  111:DaisySP-LGPL-FX/reverb.cpp **** }
- 560              		.loc 1 111 1
- 561 019e 00BF     		nop
- 562 01a0 2437     		adds	r7, r7, #36
- 563              		.cfi_def_cfa_offset 4
- 564 01a2 BD46     		mov	sp, r7
- 565              		.cfi_def_cfa_register 13
- 566              		@ sp needed
- 567 01a4 5DF8047B 		ldr	r7, [sp], #4
- 568              		.cfi_restore 7
- 569              		.cfi_def_cfa_offset 0
- 570 01a8 7047     		bx	lr
- 571              	.L23:
- 572 01aa 00BF     		.align	2
- 573              	.L22:
- 574 01ac 00000000 		.word	_ZL13kReverbParams
- 575 01b0 0000804D 		.word	1300234240
- 576 01b4 00000047 		.word	1191182336
- 577              		.cfi_endproc
- 578              	.LFE558:
- 580              		.section	.text._ZN7daisysp8ReverbSc13InitDelayLineEPNS_10ReverbScDlEi,"ax",%progbits
- 581              		.align	1
- 582              		.global	_ZN7daisysp8ReverbSc13InitDelayLineEPNS_10ReverbScDlEi
- 583              		.syntax unified
- 584              		.thumb
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 13
+ 179              		.loc 1 111 1 view .LVU66
+ 180 00e0 10BD     		pop	{r4, pc}
+ 181              	.L12:
+ 182 00e2 00BF     		.align	2
+ 183              	.L11:
+ 184 00e4 00008031 		.word	830472192
+ 185 00e8 00000000 		.word	.LANCHOR0
+ 186 00ec 00000038 		.word	939524096
+ 187 00f0 0000804D 		.word	1300234240
+ 188              		.cfi_endproc
+ 189              	.LFE558:
+ 191              		.section	.text._ZN7daisysp8ReverbSc13InitDelayLineEPNS_10ReverbScDlEi,"ax",%progbits
+ 192              		.align	1
+ 193              		.global	_ZN7daisysp8ReverbSc13InitDelayLineEPNS_10ReverbScDlEi
+ 194              		.syntax unified
+ 195              		.thumb
+ 196              		.thumb_func
+ 198              	_ZN7daisysp8ReverbSc13InitDelayLineEPNS_10ReverbScDlEi:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 7
 
 
- 585              		.thumb_func
- 587              	_ZN7daisysp8ReverbSc13InitDelayLineEPNS_10ReverbScDlEi:
- 588              	.LFB559:
+ 199              	.LVL12:
+ 200              	.LFB559:
  112:DaisySP-LGPL-FX/reverb.cpp **** 
  113:DaisySP-LGPL-FX/reverb.cpp **** int ReverbSc::InitDelayLine(ReverbScDl *lp, int n)
  114:DaisySP-LGPL-FX/reverb.cpp **** {
- 589              		.loc 1 114 1
- 590              		.cfi_startproc
- 591              		@ args = 0, pretend = 0, frame = 24
- 592              		@ frame_needed = 1, uses_anonymous_args = 0
- 593 0000 80B5     		push	{r7, lr}
- 594              		.cfi_def_cfa_offset 8
- 595              		.cfi_offset 7, -8
- 596              		.cfi_offset 14, -4
- 597 0002 86B0     		sub	sp, sp, #24
- 598              		.cfi_def_cfa_offset 32
- 599 0004 00AF     		add	r7, sp, #0
- 600              		.cfi_def_cfa_register 7
- 601 0006 F860     		str	r0, [r7, #12]
- 602 0008 B960     		str	r1, [r7, #8]
- 603 000a 7A60     		str	r2, [r7, #4]
+ 201              		.loc 1 114 1 is_stmt 1 view -0
+ 202              		.cfi_startproc
+ 203              		@ args = 0, pretend = 0, frame = 0
+ 204              		@ frame_needed = 0, uses_anonymous_args = 0
  115:DaisySP-LGPL-FX/reverb.cpp ****     float read_pos;
+ 205              		.loc 1 115 5 view .LVU68
  116:DaisySP-LGPL-FX/reverb.cpp ****     /* int     i; */
  117:DaisySP-LGPL-FX/reverb.cpp **** 
  118:DaisySP-LGPL-FX/reverb.cpp ****     /* calculate length of delay line */
  119:DaisySP-LGPL-FX/reverb.cpp ****     lp->buffer_size = DelayLineMaxSamples(sample_rate_, 1, n);
- 604              		.loc 1 119 42
- 605 000c FB68     		ldr	r3, [r7, #12]
- 606 000e D3ED057A 		vldr.32	s15, [r3, #20]
- 607 0012 7868     		ldr	r0, [r7, #4]
- 608 0014 F7EE000A 		vmov.f32	s1, #1.0e+0
- 609 0018 B0EE670A 		vmov.f32	s0, s15
- 610 001c FFF7FEFF 		bl	_ZL19DelayLineMaxSamplesffi
- 611 0020 0246     		mov	r2, r0
- 612              		.loc 1 119 21
- 613 0022 BB68     		ldr	r3, [r7, #8]
- 614 0024 5A60     		str	r2, [r3, #4]
+ 206              		.loc 1 119 5 view .LVU69
+ 207              	.LBB5:
+ 208              	.LBB6:
+  73:DaisySP-LGPL-FX/reverb.cpp ****     max_del += (kReverbParams[n][1] * (float)i_pitch_mod * 1.125);
+ 209              		.loc 1 73 13 is_stmt 0 view .LVU70
+ 210 0000 334B     		ldr	r3, .L17+8
+  74:DaisySP-LGPL-FX/reverb.cpp ****     return (int)(max_del * sr + 16.5);
+ 211              		.loc 1 74 13 view .LVU71
+ 212 0002 B7EE026B 		vmov.f64	d6, #1.125e+0
+ 213              	.LBE6:
+ 214              	.LBE5:
+ 215              		.loc 1 119 42 view .LVU72
+ 216 0006 90ED054A 		vldr.32	s8, [r0, #20]
+ 217              	.LVL13:
+ 218              	.LBB11:
+ 219              	.LBI5:
+  69:DaisySP-LGPL-FX/reverb.cpp **** {
+ 220              		.loc 1 69 12 is_stmt 1 view .LVU73
+ 221              	.LBB7:
+  71:DaisySP-LGPL-FX/reverb.cpp **** 
+ 222              		.loc 1 71 5 view .LVU74
+  73:DaisySP-LGPL-FX/reverb.cpp ****     max_del += (kReverbParams[n][1] * (float)i_pitch_mod * 1.125);
+ 223              		.loc 1 73 5 view .LVU75
+  73:DaisySP-LGPL-FX/reverb.cpp ****     max_del += (kReverbParams[n][1] * (float)i_pitch_mod * 1.125);
+ 224              		.loc 1 73 13 is_stmt 0 view .LVU76
+ 225 000a 03EB0213 		add	r3, r3, r2, lsl #4
+ 226 000e D3ED004A 		vldr.32	s9, [r3]
+ 227              	.LVL14:
+  74:DaisySP-LGPL-FX/reverb.cpp ****     return (int)(max_del * sr + 16.5);
+ 228              		.loc 1 74 5 is_stmt 1 view .LVU77
+  74:DaisySP-LGPL-FX/reverb.cpp ****     return (int)(max_del * sr + 16.5);
+ 229              		.loc 1 74 35 is_stmt 0 view .LVU78
+ 230 0012 D3ED013A 		vldr.32	s7, [r3, #4]
+  74:DaisySP-LGPL-FX/reverb.cpp ****     return (int)(max_del * sr + 16.5);
+ 231              		.loc 1 74 13 view .LVU79
+ 232 0016 B7EEE47A 		vcvt.f64.f32	d7, s9
+  74:DaisySP-LGPL-FX/reverb.cpp ****     return (int)(max_del * sr + 16.5);
+ 233              		.loc 1 74 37 view .LVU80
+ 234 001a B7EEE35A 		vcvt.f64.f32	d5, s7
+ 235              	.LBE7:
+ 236              	.LBE11:
+ 114:DaisySP-LGPL-FX/reverb.cpp ****     float read_pos;
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 8
+
+
+ 237              		.loc 1 114 1 view .LVU81
+ 238 001e 70B5     		push	{r4, r5, r6, lr}
+ 239              		.cfi_def_cfa_offset 16
+ 240              		.cfi_offset 4, -16
+ 241              		.cfi_offset 5, -12
+ 242              		.cfi_offset 6, -8
+ 243              		.cfi_offset 14, -4
+ 244              	.LBB12:
+ 245              	.LBB8:
+  74:DaisySP-LGPL-FX/reverb.cpp ****     return (int)(max_del * sr + 16.5);
+ 246              		.loc 1 74 13 view .LVU82
+ 247 0020 A5EE067B 		vfma.f64	d7, d5, d6
+ 248              	.LVL15:
+  75:DaisySP-LGPL-FX/reverb.cpp **** }
+ 249              		.loc 1 75 5 is_stmt 1 view .LVU83
+ 250              	.LBE8:
+ 251              	.LBE12:
  120:DaisySP-LGPL-FX/reverb.cpp ****     lp->dummy       = 0;
- 615              		.loc 1 120 21
- 616 0026 BB68     		ldr	r3, [r7, #8]
- 617 0028 0022     		movs	r2, #0
- 618 002a 5A61     		str	r2, [r3, #20]
+ 252              		.loc 1 120 21 is_stmt 0 view .LVU84
+ 253 0024 0025     		movs	r5, #0
+ 114:DaisySP-LGPL-FX/reverb.cpp ****     float read_pos;
+ 254              		.loc 1 114 1 view .LVU85
+ 255 0026 0C46     		mov	r4, r1
+ 256              		.loc 1 120 21 view .LVU86
+ 257 0028 4D61     		str	r5, [r1, #20]
  121:DaisySP-LGPL-FX/reverb.cpp ****     lp->write_pos   = 0;
- 619              		.loc 1 121 21
- 620 002c BB68     		ldr	r3, [r7, #8]
- 621 002e 0022     		movs	r2, #0
- 622 0030 1A60     		str	r2, [r3]
+ 258              		.loc 1 121 21 view .LVU87
+ 259 002a 0D60     		str	r5, [r1]
  122:DaisySP-LGPL-FX/reverb.cpp ****     /* set random seed */
  123:DaisySP-LGPL-FX/reverb.cpp ****     lp->seed_val = (int)(kReverbParams[n][3] + 0.5);
- 623              		.loc 1 123 44
- 624 0032 484A     		ldr	r2, .L28
- 625 0034 7B68     		ldr	r3, [r7, #4]
- 626 0036 1B01     		lsls	r3, r3, #4
- 627 0038 1344     		add	r3, r3, r2
- 628 003a 0C33     		adds	r3, r3, #12
- 629 003c D3ED007A 		vldr.32	s15, [r3]
- 630 0040 B7EEE77A 		vcvt.f64.f32	d7, s15
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 14
+ 260              		.loc 1 123 46 view .LVU88
+ 261 002c B6EE005B 		vmov.f64	d5, #5.0e-1
+ 262              	.LBB13:
+ 263              	.LBB9:
+  75:DaisySP-LGPL-FX/reverb.cpp **** }
+ 264              		.loc 1 75 31 view .LVU89
+ 265 0030 9FED256B 		vldr.64	d6, .L17
+  74:DaisySP-LGPL-FX/reverb.cpp ****     return (int)(max_del * sr + 16.5);
+ 266              		.loc 1 74 13 view .LVU90
+ 267 0034 B7EEC77B 		vcvt.f32.f64	s14, d7
+ 268              	.LVL16:
+  75:DaisySP-LGPL-FX/reverb.cpp **** }
+ 269              		.loc 1 75 26 view .LVU91
+ 270 0038 27EE047A 		vmul.f32	s14, s14, s8
+ 271              	.LVL17:
+  75:DaisySP-LGPL-FX/reverb.cpp **** }
+ 272              		.loc 1 75 26 view .LVU92
+ 273 003c B7EEC77A 		vcvt.f64.f32	d7, s14
+  75:DaisySP-LGPL-FX/reverb.cpp **** }
+ 274              		.loc 1 75 31 view .LVU93
+ 275 0040 37EE067B 		vadd.f64	d7, d7, d6
+ 276              	.LBE9:
+ 277              	.LBE13:
+ 278              		.loc 1 123 44 view .LVU94
+ 279 0044 93ED036A 		vldr.32	s12, [r3, #12]
+ 280 0048 B7EEC66A 		vcvt.f64.f32	d6, s12
+ 281              	.LBB14:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 9
 
 
- 631              		.loc 1 123 46
- 632 0044 B6EE006B 		vmov.f64	d6, #5.0e-1
- 633 0048 37EE067B 		vadd.f64	d7, d7, d6
- 634              		.loc 1 123 20
- 635 004c FDEEC77B 		vcvt.s32.f64	s15, d7
- 636 0050 17EE902A 		vmov	r2, s15	@ int
- 637              		.loc 1 123 18
- 638 0054 BB68     		ldr	r3, [r7, #8]
- 639 0056 9A61     		str	r2, [r3, #24]
+ 282              	.LBB10:
+  75:DaisySP-LGPL-FX/reverb.cpp **** }
+ 283              		.loc 1 75 37 view .LVU95
+ 284 004c BDEEC77B 		vcvt.s32.f64	s14, d7
+ 285              	.LVL18:
+  75:DaisySP-LGPL-FX/reverb.cpp **** }
+ 286              		.loc 1 75 37 view .LVU96
+ 287              	.LBE10:
+ 288              	.LBE14:
  124:DaisySP-LGPL-FX/reverb.cpp ****     /* set initial delay time */
  125:DaisySP-LGPL-FX/reverb.cpp ****     read_pos     = (float)lp->seed_val * kReverbParams[n][1] / 32768;
- 640              		.loc 1 125 31
- 641 0058 BB68     		ldr	r3, [r7, #8]
- 642 005a 9B69     		ldr	r3, [r3, #24]
- 643              		.loc 1 125 20
- 644 005c 07EE903A 		vmov	s15, r3	@ int
- 645 0060 B8EEE77A 		vcvt.f32.s32	s14, s15
- 646              		.loc 1 125 60
- 647 0064 3B4A     		ldr	r2, .L28
- 648 0066 7B68     		ldr	r3, [r7, #4]
- 649 0068 1B01     		lsls	r3, r3, #4
- 650 006a 1344     		add	r3, r3, r2
- 651 006c 0433     		adds	r3, r3, #4
- 652 006e D3ED007A 		vldr.32	s15, [r3]
- 653              		.loc 1 125 40
- 654 0072 27EE277A 		vmul.f32	s14, s14, s15
- 655              		.loc 1 125 18
- 656 0076 DFED386A 		vldr.32	s13, .L28+4
- 657 007a C7EE267A 		vdiv.f32	s15, s14, s13
- 658 007e C7ED047A 		vstr.32	s15, [r7, #16]
+ 289              		.loc 1 125 18 view .LVU97
+ 290 0050 DFED207A 		vldr.32	s15, .L17+12
+ 123:DaisySP-LGPL-FX/reverb.cpp ****     /* set initial delay time */
+ 291              		.loc 1 123 46 view .LVU98
+ 292 0054 36EE056B 		vadd.f64	d6, d6, d5
+ 119:DaisySP-LGPL-FX/reverb.cpp ****     lp->dummy       = 0;
+ 293              		.loc 1 119 21 view .LVU99
+ 294 0058 81ED017A 		vstr.32	s14, [r1, #4]	@ int
+ 120:DaisySP-LGPL-FX/reverb.cpp ****     lp->write_pos   = 0;
+ 295              		.loc 1 120 5 is_stmt 1 view .LVU100
+ 121:DaisySP-LGPL-FX/reverb.cpp ****     /* set random seed */
+ 296              		.loc 1 121 5 view .LVU101
+ 123:DaisySP-LGPL-FX/reverb.cpp ****     /* set initial delay time */
+ 297              		.loc 1 123 5 view .LVU102
  126:DaisySP-LGPL-FX/reverb.cpp ****     read_pos     = kReverbParams[n][0] + (read_pos * (float)i_pitch_mod_);
- 659              		.loc 1 126 38
- 660 0082 344A     		ldr	r2, .L28
- 661 0084 7B68     		ldr	r3, [r7, #4]
- 662 0086 1B01     		lsls	r3, r3, #4
- 663 0088 1344     		add	r3, r3, r2
- 664 008a 93ED007A 		vldr.32	s14, [r3]
- 665              		.loc 1 126 61
- 666 008e FB68     		ldr	r3, [r7, #12]
- 667 0090 D3ED036A 		vldr.32	s13, [r3, #12]
- 668              		.loc 1 126 52
- 669 0094 D7ED047A 		vldr.32	s15, [r7, #16]
- 670 0098 66EEA77A 		vmul.f32	s15, s13, s15
- 671              		.loc 1 126 18
- 672 009c 77EE277A 		vadd.f32	s15, s14, s15
- 673 00a0 C7ED047A 		vstr.32	s15, [r7, #16]
  127:DaisySP-LGPL-FX/reverb.cpp ****     read_pos     = (float)lp->buffer_size - (read_pos * sample_rate_);
- 674              		.loc 1 127 31
- 675 00a4 BB68     		ldr	r3, [r7, #8]
- 676 00a6 5B68     		ldr	r3, [r3, #4]
- 677              		.loc 1 127 20
- 678 00a8 07EE903A 		vmov	s15, r3	@ int
- 679 00ac B8EEE77A 		vcvt.f32.s32	s14, s15
- 680              		.loc 1 127 57
- 681 00b0 FB68     		ldr	r3, [r7, #12]
- 682 00b2 D3ED056A 		vldr.32	s13, [r3, #20]
- 683              		.loc 1 127 55
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 15
+ 298              		.loc 1 127 20 is_stmt 0 view .LVU103
+ 299 005c B8EEC77A 		vcvt.f32.s32	s14, s14
+ 123:DaisySP-LGPL-FX/reverb.cpp ****     /* set initial delay time */
+ 300              		.loc 1 123 20 view .LVU104
+ 301 0060 BDEEC66B 		vcvt.s32.f64	s12, d6
+ 123:DaisySP-LGPL-FX/reverb.cpp ****     /* set initial delay time */
+ 302              		.loc 1 123 18 view .LVU105
+ 303 0064 81ED066A 		vstr.32	s12, [r1, #24]	@ int
+ 125:DaisySP-LGPL-FX/reverb.cpp ****     read_pos     = kReverbParams[n][0] + (read_pos * (float)i_pitch_mod_);
+ 304              		.loc 1 125 5 is_stmt 1 view .LVU106
+ 125:DaisySP-LGPL-FX/reverb.cpp ****     read_pos     = kReverbParams[n][0] + (read_pos * (float)i_pitch_mod_);
+ 305              		.loc 1 125 20 is_stmt 0 view .LVU107
+ 306 0068 B8EEC66A 		vcvt.f32.s32	s12, s12
+ 125:DaisySP-LGPL-FX/reverb.cpp ****     read_pos     = kReverbParams[n][0] + (read_pos * (float)i_pitch_mod_);
+ 307              		.loc 1 125 40 view .LVU108
+ 308 006c 26EE236A 		vmul.f32	s12, s12, s7
+ 125:DaisySP-LGPL-FX/reverb.cpp ****     read_pos     = kReverbParams[n][0] + (read_pos * (float)i_pitch_mod_);
+ 309              		.loc 1 125 18 view .LVU109
+ 310 0070 26EE276A 		vmul.f32	s12, s12, s15
+ 311              	.LVL19:
+ 126:DaisySP-LGPL-FX/reverb.cpp ****     read_pos     = kReverbParams[n][0] + (read_pos * (float)i_pitch_mod_);
+ 312              		.loc 1 126 5 is_stmt 1 view .LVU110
+ 126:DaisySP-LGPL-FX/reverb.cpp ****     read_pos     = kReverbParams[n][0] + (read_pos * (float)i_pitch_mod_);
+ 313              		.loc 1 126 18 is_stmt 0 view .LVU111
+ 314 0074 D0ED037A 		vldr.32	s15, [r0, #12]
+ 315 0078 E7EE864A 		vfma.f32	s9, s15, s12
+ 316              	.LVL20:
+ 317              		.loc 1 127 5 is_stmt 1 view .LVU112
+ 318              		.loc 1 127 18 is_stmt 0 view .LVU113
+ 319 007c A4EE647A 		vfms.f32	s14, s8, s9
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 10
 
 
- 684 00b6 D7ED047A 		vldr.32	s15, [r7, #16]
- 685 00ba 66EEA77A 		vmul.f32	s15, s13, s15
- 686              		.loc 1 127 18
- 687 00be 77EE677A 		vsub.f32	s15, s14, s15
- 688 00c2 C7ED047A 		vstr.32	s15, [r7, #16]
+ 320              	.LVL21:
  128:DaisySP-LGPL-FX/reverb.cpp ****     lp->read_pos = (int)read_pos;
- 689              		.loc 1 128 20
- 690 00c6 D7ED047A 		vldr.32	s15, [r7, #16]
- 691 00ca FDEEE77A 		vcvt.s32.f32	s15, s15
- 692 00ce 17EE902A 		vmov	r2, s15	@ int
- 693              		.loc 1 128 18
- 694 00d2 BB68     		ldr	r3, [r7, #8]
- 695 00d4 9A60     		str	r2, [r3, #8]
+ 321              		.loc 1 128 5 is_stmt 1 view .LVU114
+ 322              		.loc 1 128 20 is_stmt 0 view .LVU115
+ 323 0080 FDEEC77A 		vcvt.s32.f32	s15, s14
+ 324              		.loc 1 128 18 view .LVU116
+ 325 0084 C1ED027A 		vstr.32	s15, [r1, #8]	@ int
  129:DaisySP-LGPL-FX/reverb.cpp ****     read_pos     = (read_pos - (float)lp->read_pos) * (float)DELAYPOS_SCALE;
- 696              		.loc 1 129 43
- 697 00d6 BB68     		ldr	r3, [r7, #8]
- 698 00d8 9B68     		ldr	r3, [r3, #8]
- 699              		.loc 1 129 32
- 700 00da 07EE903A 		vmov	s15, r3	@ int
- 701 00de F8EEE77A 		vcvt.f32.s32	s15, s15
- 702              		.loc 1 129 30
- 703 00e2 97ED047A 		vldr.32	s14, [r7, #16]
- 704 00e6 77EE677A 		vsub.f32	s15, s14, s15
- 705              		.loc 1 129 18
- 706 00ea 9FED1C7A 		vldr.32	s14, .L28+8
- 707 00ee 67EE877A 		vmul.f32	s15, s15, s14
- 708 00f2 C7ED047A 		vstr.32	s15, [r7, #16]
+ 326              		.loc 1 129 5 is_stmt 1 view .LVU117
+ 327              		.loc 1 129 32 is_stmt 0 view .LVU118
+ 328 0088 F8EEE77A 		vcvt.f32.s32	s15, s15
+ 329              		.loc 1 129 30 view .LVU119
+ 330 008c 37EE677A 		vsub.f32	s14, s14, s15
+ 331              	.LVL22:
  130:DaisySP-LGPL-FX/reverb.cpp ****     lp->read_pos_frac = (int)(read_pos + 0.5);
- 709              		.loc 1 130 31
- 710 00f6 D7ED047A 		vldr.32	s15, [r7, #16]
- 711 00fa B7EEE77A 		vcvt.f64.f32	d7, s15
- 712              		.loc 1 130 40
- 713 00fe B6EE006B 		vmov.f64	d6, #5.0e-1
- 714 0102 37EE067B 		vadd.f64	d7, d7, d6
- 715              		.loc 1 130 25
- 716 0106 FDEEC77B 		vcvt.s32.f64	s15, d7
- 717 010a 17EE902A 		vmov	r2, s15	@ int
- 718              		.loc 1 130 23
- 719 010e BB68     		ldr	r3, [r7, #8]
- 720 0110 DA60     		str	r2, [r3, #12]
+ 332              		.loc 1 130 5 is_stmt 1 view .LVU120
+ 129:DaisySP-LGPL-FX/reverb.cpp ****     read_pos     = (read_pos - (float)lp->read_pos) * (float)DELAYPOS_SCALE;
+ 333              		.loc 1 129 18 is_stmt 0 view .LVU121
+ 334 0090 DFED117A 		vldr.32	s15, .L17+16
+ 335 0094 27EE277A 		vmul.f32	s14, s14, s15
+ 336              	.LVL23:
+ 337              		.loc 1 130 31 view .LVU122
+ 338 0098 B7EEC77A 		vcvt.f64.f32	d7, s14
+ 339              	.LVL24:
+ 340              		.loc 1 130 40 view .LVU123
+ 341 009c 37EE057B 		vadd.f64	d7, d7, d5
+ 342              		.loc 1 130 25 view .LVU124
+ 343 00a0 BDEEC77B 		vcvt.s32.f64	s14, d7
+ 344 00a4 81ED037A 		vstr.32	s14, [r1, #12]	@ int
  131:DaisySP-LGPL-FX/reverb.cpp ****     /* initialise first random line segment */
  132:DaisySP-LGPL-FX/reverb.cpp ****     NextRandomLineseg(lp, n);
- 721              		.loc 1 132 22
- 722 0112 7A68     		ldr	r2, [r7, #4]
- 723 0114 B968     		ldr	r1, [r7, #8]
- 724 0116 F868     		ldr	r0, [r7, #12]
- 725 0118 FFF7FEFF 		bl	_ZN7daisysp8ReverbSc17NextRandomLinesegEPNS_10ReverbScDlEi
+ 345              		.loc 1 132 5 is_stmt 1 view .LVU125
+ 346              		.loc 1 132 22 is_stmt 0 view .LVU126
+ 347 00a8 FFF7FEFF 		bl	_ZN7daisysp8ReverbSc17NextRandomLinesegEPNS_10ReverbScDlEi
+ 348              	.LVL25:
  133:DaisySP-LGPL-FX/reverb.cpp ****     /* clear delay line to zero */
  134:DaisySP-LGPL-FX/reverb.cpp ****     lp->filter_state = 0.0;
- 726              		.loc 1 134 22
- 727 011c BB68     		ldr	r3, [r7, #8]
- 728 011e 4FF00002 		mov	r2, #0
- 729 0122 1A62     		str	r2, [r3, #32]	@ float
- 730              	.LBB2:
+ 349              		.loc 1 134 5 is_stmt 1 view .LVU127
+ 350              		.loc 1 134 22 is_stmt 0 view .LVU128
+ 351 00ac 0021     		movs	r1, #0
+ 352              	.LVL26:
+ 353              	.LBB15:
  135:DaisySP-LGPL-FX/reverb.cpp ****     for(int i = 0; i < lp->buffer_size; i++)
- 731              		.loc 1 135 13
- 732 0124 0023     		movs	r3, #0
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 16
+ 354              		.loc 1 135 28 view .LVU129
+ 355 00ae 6068     		ldr	r0, [r4, #4]
+ 356              	.LVL27:
+ 357              		.loc 1 135 13 view .LVU130
+ 358 00b0 2B46     		mov	r3, r5
+ 359              	.LBE15:
+ 134:DaisySP-LGPL-FX/reverb.cpp ****     for(int i = 0; i < lp->buffer_size; i++)
+ 360              		.loc 1 134 22 view .LVU131
+ 361 00b2 2162     		str	r1, [r4, #32]	@ float
+ 362              		.loc 1 135 5 is_stmt 1 view .LVU132
+ 363              	.LVL28:
+ 364              	.L15:
+ 365              	.LBB16:
+ 366              		.loc 1 135 22 discriminator 3 view .LVU133
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 11
 
 
- 733 0126 7B61     		str	r3, [r7, #20]
- 734              	.L26:
- 735              		.loc 1 135 28 discriminator 3
- 736 0128 BB68     		ldr	r3, [r7, #8]
- 737 012a 5B68     		ldr	r3, [r3, #4]
- 738              		.loc 1 135 22 discriminator 3
- 739 012c 7A69     		ldr	r2, [r7, #20]
- 740 012e 9A42     		cmp	r2, r3
- 741 0130 0BDA     		bge	.L25
+ 367 00b4 9842     		cmp	r0, r3
+ 368 00b6 05DD     		ble	.L14
  136:DaisySP-LGPL-FX/reverb.cpp ****     {
  137:DaisySP-LGPL-FX/reverb.cpp ****         lp->buf[i] = 0;
- 742              		.loc 1 137 13 discriminator 2
- 743 0132 BB68     		ldr	r3, [r7, #8]
- 744 0134 5A6A     		ldr	r2, [r3, #36]
- 745              		.loc 1 137 17 discriminator 2
- 746 0136 7B69     		ldr	r3, [r7, #20]
- 747              		.loc 1 137 18 discriminator 2
- 748 0138 9B00     		lsls	r3, r3, #2
- 749 013a 1344     		add	r3, r3, r2
- 750              		.loc 1 137 20 discriminator 2
- 751 013c 4FF00002 		mov	r2, #0
- 752 0140 1A60     		str	r2, [r3]	@ float
- 135:DaisySP-LGPL-FX/reverb.cpp ****     for(int i = 0; i < lp->buffer_size; i++)
- 753              		.loc 1 135 5 discriminator 2
- 754 0142 7B69     		ldr	r3, [r7, #20]
- 755 0144 0133     		adds	r3, r3, #1
- 756 0146 7B61     		str	r3, [r7, #20]
- 757 0148 EEE7     		b	.L26
- 758              	.L25:
- 759              	.LBE2:
+ 369              		.loc 1 137 9 discriminator 2 view .LVU134
+ 370              		.loc 1 137 20 is_stmt 0 discriminator 2 view .LVU135
+ 371 00b8 626A     		ldr	r2, [r4, #36]
+ 372 00ba 02EB8302 		add	r2, r2, r3, lsl #2
+ 135:DaisySP-LGPL-FX/reverb.cpp ****     {
+ 373              		.loc 1 135 5 discriminator 2 view .LVU136
+ 374 00be 0133     		adds	r3, r3, #1
+ 375              	.LVL29:
+ 376              		.loc 1 137 20 discriminator 2 view .LVU137
+ 377 00c0 1160     		str	r1, [r2]	@ float
+ 135:DaisySP-LGPL-FX/reverb.cpp ****     {
+ 378              		.loc 1 135 5 is_stmt 1 discriminator 2 view .LVU138
+ 379              	.LVL30:
+ 135:DaisySP-LGPL-FX/reverb.cpp ****     {
+ 380              		.loc 1 135 5 is_stmt 0 discriminator 2 view .LVU139
+ 381 00c2 F7E7     		b	.L15
+ 382              	.L14:
+ 135:DaisySP-LGPL-FX/reverb.cpp ****     {
+ 383              		.loc 1 135 5 discriminator 2 view .LVU140
+ 384              	.LBE16:
  138:DaisySP-LGPL-FX/reverb.cpp ****     }
  139:DaisySP-LGPL-FX/reverb.cpp ****     return REVSC_OK;
- 760              		.loc 1 139 12
- 761 014a 0023     		movs	r3, #0
+ 385              		.loc 1 139 5 is_stmt 1 view .LVU141
  140:DaisySP-LGPL-FX/reverb.cpp **** }
- 762              		.loc 1 140 1
- 763 014c 1846     		mov	r0, r3
- 764 014e 1837     		adds	r7, r7, #24
- 765              		.cfi_def_cfa_offset 8
- 766 0150 BD46     		mov	sp, r7
- 767              		.cfi_def_cfa_register 13
- 768              		@ sp needed
- 769 0152 80BD     		pop	{r7, pc}
- 770              	.L29:
- 771              		.align	2
- 772              	.L28:
- 773 0154 00000000 		.word	_ZL13kReverbParams
- 774 0158 00000047 		.word	1191182336
- 775 015c 0000804D 		.word	1300234240
- 776              		.cfi_endproc
- 777              	.LFE559:
- 779              		.section	.text._ZN7daisysp8ReverbSc7ProcessERKfS2_PfS3_,"ax",%progbits
- 780              		.align	1
- 781              		.global	_ZN7daisysp8ReverbSc7ProcessERKfS2_PfS3_
- 782              		.syntax unified
- 783              		.thumb
- 784              		.thumb_func
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 17
+ 386              		.loc 1 140 1 is_stmt 0 view .LVU142
+ 387 00c4 0020     		movs	r0, #0
+ 388 00c6 70BD     		pop	{r4, r5, r6, pc}
+ 389              	.LVL31:
+ 390              	.L18:
+ 391              		.loc 1 140 1 view .LVU143
+ 392              		.align	3
+ 393              	.L17:
+ 394 00c8 00000000 		.word	0
+ 395 00cc 00803040 		.word	1076920320
+ 396 00d0 00000000 		.word	.LANCHOR0
+ 397 00d4 00000038 		.word	939524096
+ 398 00d8 0000804D 		.word	1300234240
+ 399              		.cfi_endproc
+ 400              	.LFE559:
+ 402              		.section	.text._ZN7daisysp8ReverbSc4InitEf,"ax",%progbits
+ 403              		.align	1
+ 404              		.global	_ZN7daisysp8ReverbSc4InitEf
+ 405              		.syntax unified
+ 406              		.thumb
+ 407              		.thumb_func
+ 409              	_ZN7daisysp8ReverbSc4InitEf:
+ 410              	.LVL32:
+ 411              	.LFB555:
+  46:DaisySP-LGPL-FX/reverb.cpp ****     i_sample_rate_ = sr;
+ 412              		.loc 1 46 1 is_stmt 1 view -0
+ 413              		.cfi_startproc
+ 414              		@ args = 0, pretend = 0, frame = 0
+ 415              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 12
 
 
- 786              	_ZN7daisysp8ReverbSc7ProcessERKfS2_PfS3_:
- 787              	.LFB560:
+  47:DaisySP-LGPL-FX/reverb.cpp ****     sample_rate_   = sr;
+ 416              		.loc 1 47 5 view .LVU145
+  49:DaisySP-LGPL-FX/reverb.cpp ****     lpfreq_        = 10000;
+ 417              		.loc 1 49 20 is_stmt 0 view .LVU146
+ 418 0000 294B     		ldr	r3, .L24+8
+  51:DaisySP-LGPL-FX/reverb.cpp ****     i_skip_init_   = 0;
+ 419              		.loc 1 51 20 view .LVU147
+ 420 0002 4FF07E52 		mov	r2, #1065353216
+  46:DaisySP-LGPL-FX/reverb.cpp ****     i_sample_rate_ = sr;
+ 421              		.loc 1 46 1 view .LVU148
+ 422 0006 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 423              		.cfi_def_cfa_offset 24
+ 424              		.cfi_offset 4, -24
+ 425              		.cfi_offset 5, -20
+ 426              		.cfi_offset 6, -16
+ 427              		.cfi_offset 7, -12
+ 428              		.cfi_offset 8, -8
+ 429              		.cfi_offset 14, -4
+  49:DaisySP-LGPL-FX/reverb.cpp ****     lpfreq_        = 10000;
+ 430              		.loc 1 49 20 view .LVU149
+ 431 000a 0360     		str	r3, [r0]	@ float
+  57:DaisySP-LGPL-FX/reverb.cpp ****     for(i = 0; i < 8; i++)
+ 432              		.loc 1 57 13 view .LVU150
+ 433 000c 0025     		movs	r5, #0
+  50:DaisySP-LGPL-FX/reverb.cpp ****     i_pitch_mod_   = 1;
+ 434              		.loc 1 50 20 view .LVU151
+ 435 000e 274B     		ldr	r3, .L24+12
+  46:DaisySP-LGPL-FX/reverb.cpp ****     i_sample_rate_ = sr;
+ 436              		.loc 1 46 1 view .LVU152
+ 437 0010 0446     		mov	r4, r0
+ 438 0012 00F12408 		add	r8, r0, #36
+ 439 0016 264F     		ldr	r7, .L24+16
+  50:DaisySP-LGPL-FX/reverb.cpp ****     i_pitch_mod_   = 1;
+ 440              		.loc 1 50 20 view .LVU153
+ 441 0018 4360     		str	r3, [r0, #4]	@ float
+  52:DaisySP-LGPL-FX/reverb.cpp ****     damp_fact_     = 1.0;
+ 442              		.loc 1 52 20 view .LVU154
+ 443 001a 0023     		movs	r3, #0
+  58:DaisySP-LGPL-FX/reverb.cpp ****     {
+ 444              		.loc 1 58 11 view .LVU155
+ 445 001c 2E46     		mov	r6, r5
+  47:DaisySP-LGPL-FX/reverb.cpp ****     sample_rate_   = sr;
+ 446              		.loc 1 47 20 view .LVU156
+ 447 001e 80ED020A 		vstr.32	s0, [r0, #8]
+  48:DaisySP-LGPL-FX/reverb.cpp ****     feedback_      = 0.97;
+ 448              		.loc 1 48 5 is_stmt 1 view .LVU157
+  52:DaisySP-LGPL-FX/reverb.cpp ****     damp_fact_     = 1.0;
+ 449              		.loc 1 52 20 is_stmt 0 view .LVU158
+ 450 0022 0361     		str	r3, [r0, #16]	@ float
+  54:DaisySP-LGPL-FX/reverb.cpp ****     init_done_     = 1;
+ 451              		.loc 1 54 20 view .LVU159
+ 452 0024 C361     		str	r3, [r0, #28]	@ float
+  55:DaisySP-LGPL-FX/reverb.cpp ****     int i, n_bytes = 0;
+ 453              		.loc 1 55 20 view .LVU160
+ 454 0026 0123     		movs	r3, #1
+  48:DaisySP-LGPL-FX/reverb.cpp ****     feedback_      = 0.97;
+ 455              		.loc 1 48 20 view .LVU161
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 13
+
+
+ 456 0028 80ED050A 		vstr.32	s0, [r0, #20]
+  49:DaisySP-LGPL-FX/reverb.cpp ****     lpfreq_        = 10000;
+ 457              		.loc 1 49 5 is_stmt 1 view .LVU162
+  50:DaisySP-LGPL-FX/reverb.cpp ****     i_pitch_mod_   = 1;
+ 458              		.loc 1 50 5 view .LVU163
+  51:DaisySP-LGPL-FX/reverb.cpp ****     i_skip_init_   = 0;
+ 459              		.loc 1 51 5 view .LVU164
+  51:DaisySP-LGPL-FX/reverb.cpp ****     i_skip_init_   = 0;
+ 460              		.loc 1 51 20 is_stmt 0 view .LVU165
+ 461 002c C260     		str	r2, [r0, #12]	@ float
+  52:DaisySP-LGPL-FX/reverb.cpp ****     damp_fact_     = 1.0;
+ 462              		.loc 1 52 5 is_stmt 1 view .LVU166
+  53:DaisySP-LGPL-FX/reverb.cpp ****     prv_lpfreq_    = 0.0;
+ 463              		.loc 1 53 5 view .LVU167
+  53:DaisySP-LGPL-FX/reverb.cpp ****     prv_lpfreq_    = 0.0;
+ 464              		.loc 1 53 20 is_stmt 0 view .LVU168
+ 465 002e 8261     		str	r2, [r0, #24]	@ float
+  54:DaisySP-LGPL-FX/reverb.cpp ****     init_done_     = 1;
+ 466              		.loc 1 54 5 is_stmt 1 view .LVU169
+  55:DaisySP-LGPL-FX/reverb.cpp ****     int i, n_bytes = 0;
+ 467              		.loc 1 55 5 view .LVU170
+  55:DaisySP-LGPL-FX/reverb.cpp ****     int i, n_bytes = 0;
+ 468              		.loc 1 55 20 is_stmt 0 view .LVU171
+ 469 0030 0362     		str	r3, [r0, #32]
+  56:DaisySP-LGPL-FX/reverb.cpp ****     n_bytes = 0;
+ 470              		.loc 1 56 5 is_stmt 1 view .LVU172
+ 471              	.LVL33:
+  57:DaisySP-LGPL-FX/reverb.cpp ****     for(i = 0; i < 8; i++)
+ 472              		.loc 1 57 5 view .LVU173
+  58:DaisySP-LGPL-FX/reverb.cpp ****     {
+ 473              		.loc 1 58 5 view .LVU174
+  58:DaisySP-LGPL-FX/reverb.cpp ****     {
+ 474              		.loc 1 58 18 view .LVU175
+  60:DaisySP-LGPL-FX/reverb.cpp ****             return 1;
+ 475              		.loc 1 60 9 view .LVU176
+ 476              	.L20:
+  62:DaisySP-LGPL-FX/reverb.cpp ****         InitDelayLine(&delay_lines_[i], i);
+ 477              		.loc 1 62 9 discriminator 2 view .LVU177
+  62:DaisySP-LGPL-FX/reverb.cpp ****         InitDelayLine(&delay_lines_[i], i);
+ 478              		.loc 1 62 32 is_stmt 0 discriminator 2 view .LVU178
+ 479 0032 04F5B273 		add	r3, r4, #356
+  63:DaisySP-LGPL-FX/reverb.cpp ****         n_bytes += DelayLineBytesAlloc(sr, 1, i);
+ 480              		.loc 1 63 22 discriminator 2 view .LVU179
+ 481 0036 3246     		mov	r2, r6
+ 482 0038 4146     		mov	r1, r8
+ 483 003a 2046     		mov	r0, r4
+  62:DaisySP-LGPL-FX/reverb.cpp ****         InitDelayLine(&delay_lines_[i], i);
+ 484              		.loc 1 62 38 discriminator 2 view .LVU180
+ 485 003c 03EB8503 		add	r3, r3, r5, lsl #2
+  58:DaisySP-LGPL-FX/reverb.cpp ****     {
+ 486              		.loc 1 58 5 discriminator 2 view .LVU181
+ 487 0040 0136     		adds	r6, r6, #1
+ 488              	.LVL34:
+  62:DaisySP-LGPL-FX/reverb.cpp ****         InitDelayLine(&delay_lines_[i], i);
+ 489              		.loc 1 62 29 discriminator 2 view .LVU182
+ 490 0042 C8F82430 		str	r3, [r8, #36]
+  63:DaisySP-LGPL-FX/reverb.cpp ****         n_bytes += DelayLineBytesAlloc(sr, 1, i);
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 14
+
+
+ 491              		.loc 1 63 9 is_stmt 1 discriminator 2 view .LVU183
+  63:DaisySP-LGPL-FX/reverb.cpp ****         n_bytes += DelayLineBytesAlloc(sr, 1, i);
+ 492              		.loc 1 63 22 is_stmt 0 discriminator 2 view .LVU184
+ 493 0046 FFF7FEFF 		bl	_ZN7daisysp8ReverbSc13InitDelayLineEPNS_10ReverbScDlEi
+ 494              	.LVL35:
+  64:DaisySP-LGPL-FX/reverb.cpp ****     }
+ 495              		.loc 1 64 9 is_stmt 1 discriminator 2 view .LVU185
+ 496              	.LBB21:
+ 497              	.LBI21:
+  78:DaisySP-LGPL-FX/reverb.cpp **** {
+ 498              		.loc 1 78 12 discriminator 2 view .LVU186
+ 499              	.LBB22:
+  80:DaisySP-LGPL-FX/reverb.cpp **** 
+ 500              		.loc 1 80 5 discriminator 2 view .LVU187
+  82:DaisySP-LGPL-FX/reverb.cpp ****     return n_bytes;
+ 501              		.loc 1 82 5 discriminator 2 view .LVU188
+ 502              	.LBB23:
+ 503              	.LBI23:
+  69:DaisySP-LGPL-FX/reverb.cpp **** {
+ 504              		.loc 1 69 12 discriminator 2 view .LVU189
+ 505              	.LBB24:
+  71:DaisySP-LGPL-FX/reverb.cpp **** 
+ 506              		.loc 1 71 5 discriminator 2 view .LVU190
+  73:DaisySP-LGPL-FX/reverb.cpp ****     max_del += (kReverbParams[n][1] * (float)i_pitch_mod * 1.125);
+ 507              		.loc 1 73 5 discriminator 2 view .LVU191
+  74:DaisySP-LGPL-FX/reverb.cpp ****     return (int)(max_del * sr + 16.5);
+ 508              		.loc 1 74 5 discriminator 2 view .LVU192
+  74:DaisySP-LGPL-FX/reverb.cpp ****     return (int)(max_del * sr + 16.5);
+ 509              		.loc 1 74 37 is_stmt 0 discriminator 2 view .LVU193
+ 510 004a 97ED016A 		vldr.32	s12, [r7, #4]
+  74:DaisySP-LGPL-FX/reverb.cpp ****     return (int)(max_del * sr + 16.5);
+ 511              		.loc 1 74 13 discriminator 2 view .LVU194
+ 512 004e 97ED007A 		vldr.32	s14, [r7]
+ 513 0052 B7EE025B 		vmov.f64	d5, #1.125e+0
+  74:DaisySP-LGPL-FX/reverb.cpp ****     return (int)(max_del * sr + 16.5);
+ 514              		.loc 1 74 37 discriminator 2 view .LVU195
+ 515 0056 B7EEC66A 		vcvt.f64.f32	d6, s12
+ 516              	.LBE24:
+ 517              	.LBE23:
+ 518              	.LBE22:
+ 519              	.LBE21:
+  58:DaisySP-LGPL-FX/reverb.cpp ****     {
+ 520              		.loc 1 58 18 discriminator 2 view .LVU196
+ 521 005a 082E     		cmp	r6, #8
+ 522              	.LBB30:
+ 523              	.LBB29:
+ 524              	.LBB27:
+ 525              	.LBB25:
+  74:DaisySP-LGPL-FX/reverb.cpp ****     return (int)(max_del * sr + 16.5);
+ 526              		.loc 1 74 13 discriminator 2 view .LVU197
+ 527 005c B7EEC77A 		vcvt.f64.f32	d7, s14
+ 528 0060 A6EE057B 		vfma.f64	d7, d6, d5
+ 529              	.LVL36:
+  75:DaisySP-LGPL-FX/reverb.cpp **** }
+ 530              		.loc 1 75 5 is_stmt 1 discriminator 2 view .LVU198
+  75:DaisySP-LGPL-FX/reverb.cpp **** }
+ 531              		.loc 1 75 5 is_stmt 0 discriminator 2 view .LVU199
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 15
+
+
+ 532              	.LBE25:
+ 533              	.LBE27:
+  83:DaisySP-LGPL-FX/reverb.cpp **** }
+ 534              		.loc 1 83 5 is_stmt 1 discriminator 2 view .LVU200
+ 535              	.LBB28:
+ 536              	.LBB26:
+  75:DaisySP-LGPL-FX/reverb.cpp **** }
+ 537              		.loc 1 75 31 is_stmt 0 discriminator 2 view .LVU201
+ 538 0064 9FED0E6B 		vldr.64	d6, .L24
+  74:DaisySP-LGPL-FX/reverb.cpp ****     return (int)(max_del * sr + 16.5);
+ 539              		.loc 1 74 13 discriminator 2 view .LVU202
+ 540 0068 B7EEC77B 		vcvt.f32.f64	s14, d7
+ 541              	.LVL37:
+  75:DaisySP-LGPL-FX/reverb.cpp **** }
+ 542              		.loc 1 75 26 discriminator 2 view .LVU203
+ 543 006c 27EE007A 		vmul.f32	s14, s14, s0
+ 544              	.LVL38:
+  75:DaisySP-LGPL-FX/reverb.cpp **** }
+ 545              		.loc 1 75 26 discriminator 2 view .LVU204
+ 546 0070 B7EEC77A 		vcvt.f64.f32	d7, s14
+ 547              	.LVL39:
+  75:DaisySP-LGPL-FX/reverb.cpp **** }
+ 548              		.loc 1 75 31 discriminator 2 view .LVU205
+ 549 0074 37EE067B 		vadd.f64	d7, d7, d6
+  75:DaisySP-LGPL-FX/reverb.cpp **** }
+ 550              		.loc 1 75 37 discriminator 2 view .LVU206
+ 551 0078 BDEEC77B 		vcvt.s32.f64	s14, d7
+ 552              	.LBE26:
+ 553              	.LBE28:
+ 554              	.LBE29:
+ 555              	.LBE30:
+  64:DaisySP-LGPL-FX/reverb.cpp ****     }
+ 556              		.loc 1 64 17 discriminator 2 view .LVU207
+ 557 007c 17EE103A 		vmov	r3, s14	@ int
+ 558 0080 05EB8305 		add	r5, r5, r3, lsl #2
+ 559              	.LVL40:
+  58:DaisySP-LGPL-FX/reverb.cpp ****     {
+ 560              		.loc 1 58 5 is_stmt 1 discriminator 2 view .LVU208
+  58:DaisySP-LGPL-FX/reverb.cpp ****     {
+ 561              		.loc 1 58 18 discriminator 2 view .LVU209
+ 562 0084 02D1     		bne	.L22
+  66:DaisySP-LGPL-FX/reverb.cpp **** }
+ 563              		.loc 1 66 12 is_stmt 0 view .LVU210
+ 564 0086 0020     		movs	r0, #0
+ 565              	.LVL41:
+ 566              	.L19:
+  67:DaisySP-LGPL-FX/reverb.cpp **** 
+ 567              		.loc 1 67 1 view .LVU211
+ 568 0088 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 569              	.LVL42:
+ 570              	.L22:
+  60:DaisySP-LGPL-FX/reverb.cpp ****             return 1;
+ 571              		.loc 1 60 9 is_stmt 1 view .LVU212
+ 572 008c 094B     		ldr	r3, .L24+20
+ 573 008e 08F12808 		add	r8, r8, #40
+ 574 0092 1037     		adds	r7, r7, #16
+ 575              	.LVL43:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 16
+
+
+  60:DaisySP-LGPL-FX/reverb.cpp ****             return 1;
+ 576              		.loc 1 60 9 is_stmt 0 view .LVU213
+ 577 0094 9D42     		cmp	r5, r3
+ 578 0096 CCDD     		ble	.L20
+  61:DaisySP-LGPL-FX/reverb.cpp ****         delay_lines_[i].buf = (aux_) + n_bytes;
+ 579              		.loc 1 61 20 view .LVU214
+ 580 0098 0120     		movs	r0, #1
+ 581 009a F5E7     		b	.L19
+ 582              	.L25:
+ 583 009c AFF30080 		.align	3
+ 584              	.L24:
+ 585 00a0 00000000 		.word	0
+ 586 00a4 00803040 		.word	1076920320
+ 587 00a8 EC51783F 		.word	1064849900
+ 588 00ac 00401C46 		.word	1176256512
+ 589 00b0 00000000 		.word	.LANCHOR0
+ 590 00b4 78820100 		.word	98936
+ 591              		.cfi_endproc
+ 592              	.LFE555:
+ 594              		.section	.text._ZN7daisysp8ReverbSc7ProcessERKfS2_PfS3_,"ax",%progbits
+ 595              		.align	1
+ 596              		.global	_ZN7daisysp8ReverbSc7ProcessERKfS2_PfS3_
+ 597              		.syntax unified
+ 598              		.thumb
+ 599              		.thumb_func
+ 601              	_ZN7daisysp8ReverbSc7ProcessERKfS2_PfS3_:
+ 602              	.LVL44:
+ 603              	.LFB560:
  141:DaisySP-LGPL-FX/reverb.cpp **** 
  142:DaisySP-LGPL-FX/reverb.cpp **** int ReverbSc::Process(const float &in1,
  143:DaisySP-LGPL-FX/reverb.cpp ****                       const float &in2,
  144:DaisySP-LGPL-FX/reverb.cpp ****                       float *      out1,
  145:DaisySP-LGPL-FX/reverb.cpp ****                       float *      out2)
  146:DaisySP-LGPL-FX/reverb.cpp **** {
- 788              		.loc 1 146 1
- 789              		.cfi_startproc
- 790              		@ args = 4, pretend = 0, frame = 88
- 791              		@ frame_needed = 1, uses_anonymous_args = 0
- 792 0000 80B5     		push	{r7, lr}
- 793              		.cfi_def_cfa_offset 8
- 794              		.cfi_offset 7, -8
- 795              		.cfi_offset 14, -4
- 796 0002 96B0     		sub	sp, sp, #88
- 797              		.cfi_def_cfa_offset 96
- 798 0004 00AF     		add	r7, sp, #0
- 799              		.cfi_def_cfa_register 7
- 800 0006 F860     		str	r0, [r7, #12]
- 801 0008 B960     		str	r1, [r7, #8]
- 802 000a 7A60     		str	r2, [r7, #4]
- 803 000c 3B60     		str	r3, [r7]
+ 604              		.loc 1 146 1 is_stmt 1 view -0
+ 605              		.cfi_startproc
+ 606              		@ args = 4, pretend = 0, frame = 0
+ 607              		@ frame_needed = 0, uses_anonymous_args = 0
  147:DaisySP-LGPL-FX/reverb.cpp ****     float       a_in_l, a_in_r, a_out_l, a_out_r;
+ 608              		.loc 1 147 5 view .LVU216
  148:DaisySP-LGPL-FX/reverb.cpp ****     float       vm1, v0, v1, v2, am1, a0, a1, a2, frac;
+ 609              		.loc 1 148 5 view .LVU217
  149:DaisySP-LGPL-FX/reverb.cpp ****     ReverbScDl *lp;
+ 610              		.loc 1 149 5 view .LVU218
  150:DaisySP-LGPL-FX/reverb.cpp ****     int         read_pos;
+ 611              		.loc 1 150 5 view .LVU219
  151:DaisySP-LGPL-FX/reverb.cpp ****     uint32_t    n;
+ 612              		.loc 1 151 5 view .LVU220
  152:DaisySP-LGPL-FX/reverb.cpp ****     int         buffer_size; /* Local copy */
+ 613              		.loc 1 152 5 view .LVU221
  153:DaisySP-LGPL-FX/reverb.cpp ****     float       damp_fact = damp_fact_;
- 804              		.loc 1 153 17
- 805 000e FB68     		ldr	r3, [r7, #12]
- 806 0010 9B69     		ldr	r3, [r3, #24]	@ float
- 807 0012 3B63     		str	r3, [r7, #48]	@ float
+ 614              		.loc 1 153 5 view .LVU222
  154:DaisySP-LGPL-FX/reverb.cpp **** 
  155:DaisySP-LGPL-FX/reverb.cpp ****     //if (init_done_ <= 0) return REVSC_NOT_OK;
  156:DaisySP-LGPL-FX/reverb.cpp ****     if(init_done_ <= 0)
- 808              		.loc 1 156 8
- 809 0014 FB68     		ldr	r3, [r7, #12]
- 810 0016 1B6A     		ldr	r3, [r3, #32]
- 811              		.loc 1 156 5
- 812 0018 002B     		cmp	r3, #0
- 813 001a 01DC     		bgt	.L31
+ 615              		.loc 1 156 5 view .LVU223
+ 146:DaisySP-LGPL-FX/reverb.cpp ****     float       a_in_l, a_in_r, a_out_l, a_out_r;
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 17
+
+
+ 616              		.loc 1 146 1 is_stmt 0 view .LVU224
+ 617 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 618              		.cfi_def_cfa_offset 24
+ 619              		.cfi_offset 4, -24
+ 620              		.cfi_offset 5, -20
+ 621              		.cfi_offset 6, -16
+ 622              		.cfi_offset 7, -12
+ 623              		.cfi_offset 8, -8
+ 624              		.cfi_offset 14, -4
+ 625 0004 1D46     		mov	r5, r3
+ 626              		.loc 1 156 5 view .LVU225
+ 627 0006 036A     		ldr	r3, [r0, #32]
+ 628              	.LVL45:
+ 146:DaisySP-LGPL-FX/reverb.cpp ****     float       a_in_l, a_in_r, a_out_l, a_out_r;
+ 629              		.loc 1 146 1 view .LVU226
+ 630 0008 0646     		mov	r6, r0
+ 631 000a 0F46     		mov	r7, r1
+ 632              		.loc 1 156 5 view .LVU227
+ 633 000c 002B     		cmp	r3, #0
+ 146:DaisySP-LGPL-FX/reverb.cpp ****     float       a_in_l, a_in_r, a_out_l, a_out_r;
+ 634              		.loc 1 146 1 view .LVU228
+ 635 000e 9046     		mov	r8, r2
+ 636 0010 2DED028B 		vpush.64	{d8}
+ 637              		.cfi_def_cfa_offset 32
+ 638              		.cfi_offset 80, -32
+ 639              		.cfi_offset 81, -28
+ 640              		.loc 1 156 5 view .LVU229
+ 641 0014 40F30481 		ble	.L46
  157:DaisySP-LGPL-FX/reverb.cpp ****         return REVSC_NOT_OK;
- 814              		.loc 1 157 16
- 815 001c 0123     		movs	r3, #1
- 816 001e 52E2     		b	.L32
- 817              	.L31:
  158:DaisySP-LGPL-FX/reverb.cpp **** 
  159:DaisySP-LGPL-FX/reverb.cpp ****     /* calculate tone filter coefficient if frequency changed */
  160:DaisySP-LGPL-FX/reverb.cpp ****     if(lpfreq_ != prv_lpfreq_)
- 818              		.loc 1 160 8
- 819 0020 FB68     		ldr	r3, [r7, #12]
- 820 0022 93ED017A 		vldr.32	s14, [r3, #4]
- 821              		.loc 1 160 19
- 822 0026 FB68     		ldr	r3, [r7, #12]
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 18
-
-
- 823 0028 D3ED077A 		vldr.32	s15, [r3, #28]
- 824              		.loc 1 160 5
- 825 002c B4EE677A 		vcmp.f32	s14, s15
- 826 0030 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 827 0034 33D0     		beq	.L33
+ 642              		.loc 1 160 5 is_stmt 1 view .LVU230
+ 643              		.loc 1 160 8 is_stmt 0 view .LVU231
+ 644 0018 90ED010A 		vldr.32	s0, [r0, #4]
+ 645              		.loc 1 160 5 view .LVU232
+ 646 001c D0ED077A 		vldr.32	s15, [r0, #28]
+ 647 0020 B4EE670A 		vcmp.f32	s0, s15
+ 648 0024 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 649 0028 40F0BC80 		bne	.L28
+ 153:DaisySP-LGPL-FX/reverb.cpp **** 
+ 650              		.loc 1 153 17 view .LVU233
+ 651 002c 90ED060A 		vldr.32	s0, [r0, #24]
+ 652              	.LVL46:
+ 653              	.L29:
  161:DaisySP-LGPL-FX/reverb.cpp ****     {
  162:DaisySP-LGPL-FX/reverb.cpp ****         prv_lpfreq_ = lpfreq_;
- 828              		.loc 1 162 23
- 829 0036 FB68     		ldr	r3, [r7, #12]
- 830 0038 5A68     		ldr	r2, [r3, #4]	@ float
- 831              		.loc 1 162 21
- 832 003a FB68     		ldr	r3, [r7, #12]
- 833 003c DA61     		str	r2, [r3, #28]	@ float
  163:DaisySP-LGPL-FX/reverb.cpp ****         damp_fact
  164:DaisySP-LGPL-FX/reverb.cpp ****             = 2.0f - cosf(prv_lpfreq_ * (2.0f * (float)M_PI) / sample_rate_);
- 834              		.loc 1 164 27
- 835 003e FB68     		ldr	r3, [r7, #12]
- 836 0040 D3ED077A 		vldr.32	s15, [r3, #28]
- 837              		.loc 1 164 39
- 838 0044 9FEDAA7A 		vldr.32	s14, .L52+8
- 839 0048 27EE877A 		vmul.f32	s14, s15, s14
- 840              		.loc 1 164 64
- 841 004c FB68     		ldr	r3, [r7, #12]
- 842 004e D3ED057A 		vldr.32	s15, [r3, #20]
- 843              		.loc 1 164 26
- 844 0052 C7EE276A 		vdiv.f32	s13, s14, s15
- 845 0056 B0EE660A 		vmov.f32	s0, s13
- 846 005a FFF7FEFF 		bl	cosf
- 847 005e F0EE407A 		vmov.f32	s15, s0
- 848              		.loc 1 164 13
- 849 0062 B0EE007A 		vmov.f32	s14, #2.0e+0
- 850 0066 77EE677A 		vsub.f32	s15, s14, s15
- 851 006a C7ED0C7A 		vstr.32	s15, [r7, #48]
  165:DaisySP-LGPL-FX/reverb.cpp ****         damp_fact = damp_fact_
  166:DaisySP-LGPL-FX/reverb.cpp ****             = damp_fact - sqrtf(damp_fact * damp_fact - 1.0f);
- 852              		.loc 1 166 43
- 853 006e D7ED0C7A 		vldr.32	s15, [r7, #48]
- 854 0072 67EEA77A 		vmul.f32	s15, s15, s15
- 855              		.loc 1 166 32
- 856 0076 B7EE007A 		vmov.f32	s14, #1.0e+0
- 857 007a 77EEC77A 		vsub.f32	s15, s15, s14
- 858 007e B0EE670A 		vmov.f32	s0, s15
- 859 0082 FFF7FEFF 		bl	sqrtf
- 860 0086 B0EE407A 		vmov.f32	s14, s0
- 861              		.loc 1 166 25
- 862 008a D7ED0C7A 		vldr.32	s15, [r7, #48]
- 863 008e 77EEC77A 		vsub.f32	s15, s15, s14
- 864              		.loc 1 166 13
- 865 0092 FB68     		ldr	r3, [r7, #12]
- 866 0094 C3ED067A 		vstr.32	s15, [r3, #24]
- 165:DaisySP-LGPL-FX/reverb.cpp ****         damp_fact = damp_fact_
- 867              		.loc 1 165 19
- 868 0098 FB68     		ldr	r3, [r7, #12]
- 869 009a 9B69     		ldr	r3, [r3, #24]	@ float
- 870 009c 3B63     		str	r3, [r7, #48]	@ float
- 871              	.L33:
  167:DaisySP-LGPL-FX/reverb.cpp ****     }
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 19
-
-
  168:DaisySP-LGPL-FX/reverb.cpp **** 
  169:DaisySP-LGPL-FX/reverb.cpp ****     /* calculate "resultant junction pressure" and mix to input signals */
  170:DaisySP-LGPL-FX/reverb.cpp **** 
  171:DaisySP-LGPL-FX/reverb.cpp ****     a_in_l = a_out_l = a_out_r = 0.0;
- 872              		.loc 1 171 32
- 873 009e 4FF00003 		mov	r3, #0
- 874 00a2 FB64     		str	r3, [r7, #76]	@ float
- 875              		.loc 1 171 22
- 876 00a4 FB6C     		ldr	r3, [r7, #76]	@ float
- 877 00a6 3B65     		str	r3, [r7, #80]	@ float
- 878              		.loc 1 171 12
- 879 00a8 3B6D     		ldr	r3, [r7, #80]	@ float
- 880 00aa 7B65     		str	r3, [r7, #84]	@ float
+ 654              		.loc 1 171 5 is_stmt 1 view .LVU234
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 18
+
+
  172:DaisySP-LGPL-FX/reverb.cpp ****     for(n = 0; n < 8; n++)
- 881              		.loc 1 172 11
- 882 00ac 0023     		movs	r3, #0
- 883 00ae 7B63     		str	r3, [r7, #52]
- 884              	.L35:
- 885              		.loc 1 172 18 discriminator 3
- 886 00b0 7B6B     		ldr	r3, [r7, #52]
- 887 00b2 072B     		cmp	r3, #7
- 888 00b4 13D8     		bhi	.L34
+ 655              		.loc 1 172 5 view .LVU235
+ 656              		.loc 1 172 18 view .LVU236
+ 657 0030 3446     		mov	r4, r6
+ 658 0032 06F5A072 		add	r2, r6, #320
+ 146:DaisySP-LGPL-FX/reverb.cpp ****     float       a_in_l, a_in_r, a_out_l, a_out_r;
+ 659              		.loc 1 146 1 is_stmt 0 view .LVU237
+ 660 0036 3346     		mov	r3, r6
+ 171:DaisySP-LGPL-FX/reverb.cpp ****     for(n = 0; n < 8; n++)
+ 661              		.loc 1 171 12 view .LVU238
+ 662 0038 DFED7D7A 		vldr.32	s15, .L51+8
+ 663              	.LVL47:
+ 664              	.L30:
  173:DaisySP-LGPL-FX/reverb.cpp ****     {
  174:DaisySP-LGPL-FX/reverb.cpp ****         a_in_l += delay_lines_[n].filter_state;
- 889              		.loc 1 174 35 discriminator 2
- 890 00b6 F968     		ldr	r1, [r7, #12]
- 891 00b8 7A6B     		ldr	r2, [r7, #52]
- 892 00ba 1346     		mov	r3, r2
- 893 00bc 9B00     		lsls	r3, r3, #2
- 894 00be 1344     		add	r3, r3, r2
- 895 00c0 DB00     		lsls	r3, r3, #3
- 896 00c2 0B44     		add	r3, r3, r1
- 897 00c4 4433     		adds	r3, r3, #68
- 898 00c6 D3ED007A 		vldr.32	s15, [r3]
- 899              		.loc 1 174 16 discriminator 2
- 900 00ca 97ED157A 		vldr.32	s14, [r7, #84]
- 901 00ce 77EE277A 		vadd.f32	s15, s14, s15
- 902 00d2 C7ED157A 		vstr.32	s15, [r7, #84]
- 172:DaisySP-LGPL-FX/reverb.cpp ****     for(n = 0; n < 8; n++)
- 903              		.loc 1 172 5 discriminator 2
- 904 00d6 7B6B     		ldr	r3, [r7, #52]
- 905 00d8 0133     		adds	r3, r3, #1
- 906 00da 7B63     		str	r3, [r7, #52]
- 907 00dc E8E7     		b	.L35
- 908              	.L34:
+ 665              		.loc 1 174 9 is_stmt 1 discriminator 2 view .LVU239
+ 666              		.loc 1 174 16 is_stmt 0 discriminator 2 view .LVU240
+ 667 003c 93ED117A 		vldr.32	s14, [r3, #68]
+ 172:DaisySP-LGPL-FX/reverb.cpp ****     {
+ 668              		.loc 1 172 18 discriminator 2 view .LVU241
+ 669 0040 2833     		adds	r3, r3, #40
+ 670 0042 9A42     		cmp	r2, r3
+ 671              		.loc 1 174 16 discriminator 2 view .LVU242
+ 672 0044 77EE877A 		vadd.f32	s15, s15, s14
+ 673              	.LVL48:
+ 172:DaisySP-LGPL-FX/reverb.cpp ****     {
+ 674              		.loc 1 172 5 is_stmt 1 discriminator 2 view .LVU243
+ 172:DaisySP-LGPL-FX/reverb.cpp ****     {
+ 675              		.loc 1 172 18 discriminator 2 view .LVU244
+ 676 0048 F8D1     		bne	.L30
  175:DaisySP-LGPL-FX/reverb.cpp ****     }
  176:DaisySP-LGPL-FX/reverb.cpp ****     a_in_l *= kJpScale;
- 909              		.loc 1 176 12
- 910 00de D7ED157A 		vldr.32	s15, [r7, #84]
- 911 00e2 B5EE007A 		vmov.f32	s14, #2.5e-1
- 912 00e6 67EE877A 		vmul.f32	s15, s15, s14
- 913 00ea C7ED157A 		vstr.32	s15, [r7, #84]
+ 677              		.loc 1 176 5 view .LVU245
+ 678              	.LVL49:
  177:DaisySP-LGPL-FX/reverb.cpp ****     a_in_r = a_in_l + in2;
- 914              		.loc 1 177 23
- 915 00ee 7B68     		ldr	r3, [r7, #4]
- 916 00f0 D3ED007A 		vldr.32	s15, [r3]
- 917              		.loc 1 177 12
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 20
-
-
- 918 00f4 97ED157A 		vldr.32	s14, [r7, #84]
- 919 00f8 77EE277A 		vadd.f32	s15, s14, s15
- 920 00fc C7ED0B7A 		vstr.32	s15, [r7, #44]
+ 679              		.loc 1 177 5 view .LVU246
+ 680              		.loc 1 177 12 is_stmt 0 view .LVU247
+ 681 004a B5EE007A 		vmov.f32	s14, #2.5e-1
  178:DaisySP-LGPL-FX/reverb.cpp ****     a_in_l = a_in_l + in1;
- 921              		.loc 1 178 23
- 922 0100 BB68     		ldr	r3, [r7, #8]
- 923 0102 D3ED007A 		vldr.32	s15, [r3]
- 924              		.loc 1 178 12
- 925 0106 97ED157A 		vldr.32	s14, [r7, #84]
- 926 010a 77EE277A 		vadd.f32	s15, s14, s15
- 927 010e C7ED157A 		vstr.32	s15, [r7, #84]
+ 682              		.loc 1 178 12 view .LVU248
+ 683 004e 97ED002A 		vldr.32	s4, [r7]
+ 177:DaisySP-LGPL-FX/reverb.cpp ****     a_in_r = a_in_l + in2;
+ 684              		.loc 1 177 12 view .LVU249
+ 685 0052 D8ED002A 		vldr.32	s5, [r8]
  179:DaisySP-LGPL-FX/reverb.cpp **** 
  180:DaisySP-LGPL-FX/reverb.cpp ****     /* loop through all delay lines */
  181:DaisySP-LGPL-FX/reverb.cpp **** 
  182:DaisySP-LGPL-FX/reverb.cpp ****     for(n = 0; n < 8; n++)
- 928              		.loc 1 182 11
- 929 0112 0023     		movs	r3, #0
- 930 0114 7B63     		str	r3, [r7, #52]
- 931              	.L51:
- 932              		.loc 1 182 18 discriminator 1
- 933 0116 7B6B     		ldr	r3, [r7, #52]
- 934 0118 072B     		cmp	r3, #7
- 935 011a 00F2C181 		bhi	.L36
+ 686              		.loc 1 182 11 view .LVU250
+ 687 0056 0027     		movs	r7, #0
+ 688              	.LVL50:
+ 171:DaisySP-LGPL-FX/reverb.cpp ****     for(n = 0; n < 8; n++)
+ 689              		.loc 1 171 32 view .LVU251
+ 690 0058 DFED753A 		vldr.32	s7, .L51+8
+ 177:DaisySP-LGPL-FX/reverb.cpp ****     a_in_l = a_in_l + in1;
+ 691              		.loc 1 177 12 view .LVU252
+ 692 005c E7EE872A 		vfma.f32	s5, s15, s14
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 19
+
+
+ 693              	.LVL51:
+ 178:DaisySP-LGPL-FX/reverb.cpp **** 
+ 694              		.loc 1 178 5 is_stmt 1 view .LVU253
+ 178:DaisySP-LGPL-FX/reverb.cpp **** 
+ 695              		.loc 1 178 12 is_stmt 0 view .LVU254
+ 696 0060 A7EE872A 		vfma.f32	s4, s15, s14
+ 697              	.LVL52:
+ 698              		.loc 1 182 5 is_stmt 1 view .LVU255
+ 699              		.loc 1 182 18 view .LVU256
+ 171:DaisySP-LGPL-FX/reverb.cpp ****     for(n = 0; n < 8; n++)
+ 700              		.loc 1 171 22 is_stmt 0 view .LVU257
+ 701 0064 B0EE633A 		vmov.f32	s6, s7
+ 702              	.LVL53:
+ 703              	.L45:
  183:DaisySP-LGPL-FX/reverb.cpp ****     {
  184:DaisySP-LGPL-FX/reverb.cpp ****         lp          = &delay_lines_[n];
- 936              		.loc 1 184 21
- 937 011e 7A6B     		ldr	r2, [r7, #52]
- 938 0120 1346     		mov	r3, r2
- 939 0122 9B00     		lsls	r3, r3, #2
- 940 0124 1344     		add	r3, r3, r2
- 941 0126 DB00     		lsls	r3, r3, #3
- 942 0128 2033     		adds	r3, r3, #32
- 943 012a FA68     		ldr	r2, [r7, #12]
- 944 012c 1344     		add	r3, r3, r2
- 945 012e 0433     		adds	r3, r3, #4
- 946 0130 BB62     		str	r3, [r7, #40]
+ 704              		.loc 1 184 9 is_stmt 1 view .LVU258
  185:DaisySP-LGPL-FX/reverb.cpp ****         buffer_size = lp->buffer_size;
- 947              		.loc 1 185 21
- 948 0132 BB6A     		ldr	r3, [r7, #40]
- 949 0134 5B68     		ldr	r3, [r3, #4]
- 950 0136 7B62     		str	r3, [r7, #36]
+ 705              		.loc 1 185 9 view .LVU259
  186:DaisySP-LGPL-FX/reverb.cpp **** 
  187:DaisySP-LGPL-FX/reverb.cpp ****         /* send input signal and feedback to delay line */
  188:DaisySP-LGPL-FX/reverb.cpp **** 
  189:DaisySP-LGPL-FX/reverb.cpp ****         lp->buf[lp->write_pos]
  190:DaisySP-LGPL-FX/reverb.cpp ****             = (float)((n & 1 ? a_in_r : a_in_l) - lp->filter_state);
- 951              		.loc 1 190 26
- 952 0138 7B6B     		ldr	r3, [r7, #52]
- 953 013a 03F00103 		and	r3, r3, #1
- 954              		.loc 1 190 30
- 955 013e 002B     		cmp	r3, #0
- 956 0140 02D0     		beq	.L37
- 957              		.loc 1 190 30 is_stmt 0 discriminator 1
- 958 0142 D7ED0B7A 		vldr.32	s15, [r7, #44]
- 959 0146 01E0     		b	.L38
- 960              	.L37:
- 961              		.loc 1 190 30 discriminator 2
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 21
-
-
- 962 0148 D7ED157A 		vldr.32	s15, [r7, #84]
- 963              	.L38:
- 964              		.loc 1 190 55 is_stmt 1 discriminator 4
- 965 014c BB6A     		ldr	r3, [r7, #40]
- 966 014e 93ED087A 		vldr.32	s14, [r3, #32]
+ 706              		.loc 1 190 30 is_stmt 0 view .LVU260
+ 707 0068 17F00100 		ands	r0, r7, #1
+ 708              		.loc 1 190 49 view .LVU261
+ 709 006c 94ED117A 		vldr.32	s14, [r4, #68]
  189:DaisySP-LGPL-FX/reverb.cpp ****             = (float)((n & 1 ? a_in_r : a_in_l) - lp->filter_state);
- 967              		.loc 1 189 13 discriminator 4
- 968 0152 BB6A     		ldr	r3, [r7, #40]
- 969 0154 5A6A     		ldr	r2, [r3, #36]
+ 710              		.loc 1 189 30 view .LVU262
+ 711 0070 616A     		ldr	r1, [r4, #36]
+ 712              		.loc 1 190 13 view .LVU263
+ 713 0072 A26C     		ldr	r2, [r4, #72]
+ 714              		.loc 1 190 30 view .LVU264
+ 715 0074 42FE227A 		vseleq.f32	s15, s4, s5
+ 716              		.loc 1 190 49 view .LVU265
+ 717 0078 77EEC77A 		vsub.f32	s15, s15, s14
+ 185:DaisySP-LGPL-FX/reverb.cpp ****         buffer_size = lp->buffer_size;
+ 718              		.loc 1 185 21 view .LVU266
+ 719 007c A36A     		ldr	r3, [r4, #40]
+ 720              	.LVL54:
  189:DaisySP-LGPL-FX/reverb.cpp ****             = (float)((n & 1 ? a_in_r : a_in_l) - lp->filter_state);
- 970              		.loc 1 189 21 discriminator 4
- 971 0156 BB6A     		ldr	r3, [r7, #40]
- 972 0158 1B68     		ldr	r3, [r3]
- 189:DaisySP-LGPL-FX/reverb.cpp ****             = (float)((n & 1 ? a_in_r : a_in_l) - lp->filter_state);
- 973              		.loc 1 189 30 discriminator 4
- 974 015a 9B00     		lsls	r3, r3, #2
- 975 015c 1344     		add	r3, r3, r2
- 976              		.loc 1 190 49 discriminator 4
- 977 015e 77EEC77A 		vsub.f32	s15, s15, s14
- 978              		.loc 1 190 13 discriminator 4
- 979 0162 C3ED007A 		vstr.32	s15, [r3]
+ 721              		.loc 1 189 9 is_stmt 1 view .LVU267
+ 722              		.loc 1 190 13 is_stmt 0 view .LVU268
+ 723 007e 02EB8102 		add	r2, r2, r1, lsl #2
+ 724 0082 C2ED007A 		vstr.32	s15, [r2]
  191:DaisySP-LGPL-FX/reverb.cpp ****         if(++lp->write_pos >= buffer_size)
- 980              		.loc 1 191 18 discriminator 4
- 981 0166 BB6A     		ldr	r3, [r7, #40]
- 982 0168 1B68     		ldr	r3, [r3]
- 983              		.loc 1 191 12 discriminator 4
- 984 016a 5A1C     		adds	r2, r3, #1
- 985              		.loc 1 191 28 discriminator 4
- 986 016c BB6A     		ldr	r3, [r7, #40]
- 987 016e 1A60     		str	r2, [r3]
- 988              		.loc 1 191 18 discriminator 4
- 989 0170 BB6A     		ldr	r3, [r7, #40]
- 990 0172 1B68     		ldr	r3, [r3]
- 991              		.loc 1 191 28 discriminator 4
- 992 0174 7A6A     		ldr	r2, [r7, #36]
- 993 0176 9A42     		cmp	r2, r3
- 994 0178 D4BF     		ite	le
- 995 017a 0123     		movle	r3, #1
- 996 017c 0023     		movgt	r3, #0
- 997 017e DBB2     		uxtb	r3, r3
- 998              		.loc 1 191 9 discriminator 4
- 999 0180 002B     		cmp	r3, #0
- 1000 0182 05D0     		beq	.L39
+ 725              		.loc 1 191 9 is_stmt 1 view .LVU269
+ 726              		.loc 1 191 12 is_stmt 0 view .LVU270
+ 727 0086 626A     		ldr	r2, [r4, #36]
+ 728 0088 0132     		adds	r2, r2, #1
+ 729              		.loc 1 191 9 view .LVU271
+ 730 008a 9A42     		cmp	r2, r3
  192:DaisySP-LGPL-FX/reverb.cpp ****         {
  193:DaisySP-LGPL-FX/reverb.cpp ****             lp->write_pos -= buffer_size;
- 1001              		.loc 1 193 27
- 1002 0184 BB6A     		ldr	r3, [r7, #40]
- 1003 0186 1A68     		ldr	r2, [r3]
- 1004 0188 7B6A     		ldr	r3, [r7, #36]
- 1005 018a D21A     		subs	r2, r2, r3
- 1006 018c BB6A     		ldr	r3, [r7, #40]
- 1007 018e 1A60     		str	r2, [r3]
- 1008              	.L39:
+ 731              		.loc 1 193 13 is_stmt 1 view .LVU272
+ 732              		.loc 1 193 27 is_stmt 0 view .LVU273
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 20
+
+
+ 733 008c A8BF     		it	ge
+ 734 008e D21A     		subge	r2, r2, r3
+ 735 0090 6262     		str	r2, [r4, #36]
  194:DaisySP-LGPL-FX/reverb.cpp ****         }
  195:DaisySP-LGPL-FX/reverb.cpp **** 
  196:DaisySP-LGPL-FX/reverb.cpp ****         /* read from delay line with cubic interpolation */
  197:DaisySP-LGPL-FX/reverb.cpp **** 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 22
-
-
  198:DaisySP-LGPL-FX/reverb.cpp ****         if(lp->read_pos_frac >= DELAYPOS_SCALE)
- 1009              		.loc 1 198 16
- 1010 0190 BB6A     		ldr	r3, [r7, #40]
- 1011 0192 DB68     		ldr	r3, [r3, #12]
- 1012              		.loc 1 198 9
- 1013 0194 B3F1805F 		cmp	r3, #268435456
- 1014 0198 0DDB     		blt	.L40
+ 736              		.loc 1 198 9 is_stmt 1 view .LVU274
+ 737              		.loc 1 198 16 is_stmt 0 view .LVU275
+ 738 0092 226B     		ldr	r2, [r4, #48]
+ 739              		.loc 1 198 9 view .LVU276
+ 740 0094 B2F1805F 		cmp	r2, #268435456
+ 741 0098 06DB     		blt	.L34
  199:DaisySP-LGPL-FX/reverb.cpp ****         {
  200:DaisySP-LGPL-FX/reverb.cpp ****             lp->read_pos += (lp->read_pos_frac >> DELAYPOS_SHIFT);
- 1015              		.loc 1 200 26
- 1016 019a BB6A     		ldr	r3, [r7, #40]
- 1017 019c 9A68     		ldr	r2, [r3, #8]
- 1018              		.loc 1 200 34
- 1019 019e BB6A     		ldr	r3, [r7, #40]
- 1020 01a0 DB68     		ldr	r3, [r3, #12]
- 1021              		.loc 1 200 48
- 1022 01a2 1B17     		asrs	r3, r3, #28
- 1023              		.loc 1 200 26
- 1024 01a4 1A44     		add	r2, r2, r3
- 1025 01a6 BB6A     		ldr	r3, [r7, #40]
- 1026 01a8 9A60     		str	r2, [r3, #8]
+ 742              		.loc 1 200 13 is_stmt 1 view .LVU277
+ 743              		.loc 1 200 26 is_stmt 0 view .LVU278
+ 744 009a E16A     		ldr	r1, [r4, #44]
+ 745 009c 01EB2271 		add	r1, r1, r2, asr #28
  201:DaisySP-LGPL-FX/reverb.cpp ****             lp->read_pos_frac &= DELAYPOS_MASK;
- 1027              		.loc 1 201 31
- 1028 01aa BB6A     		ldr	r3, [r7, #40]
- 1029 01ac DB68     		ldr	r3, [r3, #12]
- 1030 01ae 23F07042 		bic	r2, r3, #-268435456
- 1031 01b2 BB6A     		ldr	r3, [r7, #40]
- 1032 01b4 DA60     		str	r2, [r3, #12]
- 1033              	.L40:
+ 746              		.loc 1 201 31 view .LVU279
+ 747 00a0 22F07042 		bic	r2, r2, #-268435456
+ 200:DaisySP-LGPL-FX/reverb.cpp ****             lp->read_pos_frac &= DELAYPOS_MASK;
+ 748              		.loc 1 200 26 view .LVU280
+ 749 00a4 E162     		str	r1, [r4, #44]
+ 750              		.loc 1 201 13 is_stmt 1 view .LVU281
+ 751              		.loc 1 201 31 is_stmt 0 view .LVU282
+ 752 00a6 2263     		str	r2, [r4, #48]
+ 753              	.L34:
  202:DaisySP-LGPL-FX/reverb.cpp ****         }
  203:DaisySP-LGPL-FX/reverb.cpp ****         if(lp->read_pos >= buffer_size)
- 1034              		.loc 1 203 16
- 1035 01b6 BB6A     		ldr	r3, [r7, #40]
- 1036 01b8 9B68     		ldr	r3, [r3, #8]
- 1037              		.loc 1 203 9
- 1038 01ba 7A6A     		ldr	r2, [r7, #36]
- 1039 01bc 9A42     		cmp	r2, r3
- 1040 01be 05DC     		bgt	.L41
+ 754              		.loc 1 203 9 is_stmt 1 view .LVU283
+ 755              		.loc 1 203 16 is_stmt 0 view .LVU284
+ 756 00a8 E26A     		ldr	r2, [r4, #44]
  204:DaisySP-LGPL-FX/reverb.cpp ****             lp->read_pos -= buffer_size;
- 1041              		.loc 1 204 26
- 1042 01c0 BB6A     		ldr	r3, [r7, #40]
- 1043 01c2 9A68     		ldr	r2, [r3, #8]
- 1044 01c4 7B6A     		ldr	r3, [r7, #36]
- 1045 01c6 D21A     		subs	r2, r2, r3
- 1046 01c8 BB6A     		ldr	r3, [r7, #40]
- 1047 01ca 9A60     		str	r2, [r3, #8]
- 1048              	.L41:
  205:DaisySP-LGPL-FX/reverb.cpp ****         read_pos = lp->read_pos;
- 1049              		.loc 1 205 18
- 1050 01cc BB6A     		ldr	r3, [r7, #40]
- 1051 01ce 9B68     		ldr	r3, [r3, #8]
- 1052 01d0 BB63     		str	r3, [r7, #56]
  206:DaisySP-LGPL-FX/reverb.cpp ****         frac     = (float)lp->read_pos_frac * (1.0 / (float)DELAYPOS_SCALE);
- 1053              		.loc 1 206 31
- 1054 01d2 BB6A     		ldr	r3, [r7, #40]
- 1055 01d4 DB68     		ldr	r3, [r3, #12]
- 1056              		.loc 1 206 20
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 23
-
-
- 1057 01d6 07EE903A 		vmov	s15, r3	@ int
- 1058 01da F8EEE77A 		vcvt.f32.s32	s15, s15
- 1059              		.loc 1 206 18
- 1060 01de 9FED457A 		vldr.32	s14, .L52+12
- 1061 01e2 67EE877A 		vmul.f32	s15, s15, s14
- 1062 01e6 C7ED087A 		vstr.32	s15, [r7, #32]
  207:DaisySP-LGPL-FX/reverb.cpp **** 
  208:DaisySP-LGPL-FX/reverb.cpp ****         /* calculate interpolation coefficients */
  209:DaisySP-LGPL-FX/reverb.cpp **** 
  210:DaisySP-LGPL-FX/reverb.cpp ****         a2 = frac * frac;
- 1063              		.loc 1 210 12
- 1064 01ea D7ED087A 		vldr.32	s15, [r7, #32]
- 1065 01ee 67EEA77A 		vmul.f32	s15, s15, s15
- 1066 01f2 C7ED077A 		vstr.32	s15, [r7, #28]
  211:DaisySP-LGPL-FX/reverb.cpp ****         a2 -= 1.0;
- 1067              		.loc 1 211 12
- 1068 01f6 D7ED077A 		vldr.32	s15, [r7, #28]
- 1069 01fa B7EE007A 		vmov.f32	s14, #1.0e+0
- 1070 01fe 77EEC77A 		vsub.f32	s15, s15, s14
- 1071 0202 C7ED077A 		vstr.32	s15, [r7, #28]
+ 757              		.loc 1 211 12 view .LVU285
+ 758 00aa FFEE006A 		vmov.f32	s13, #-1.0e+0
  212:DaisySP-LGPL-FX/reverb.cpp ****         a2 *= (1.0 / 6.0);
- 1072              		.loc 1 212 12
- 1073 0206 D7ED077A 		vldr.32	s15, [r7, #28]
- 1074 020a B7EEE77A 		vcvt.f64.f32	d7, s15
- 1075 020e 9FED366B 		vldr.64	d6, .L52
- 1076 0212 27EE067B 		vmul.f64	d7, d7, d6
- 1077 0216 F7EEC77B 		vcvt.f32.f64	s15, d7
- 1078 021a C7ED077A 		vstr.32	s15, [r7, #28]
  213:DaisySP-LGPL-FX/reverb.cpp ****         a1 = frac;
- 1079              		.loc 1 213 12
- 1080 021e 3B6A     		ldr	r3, [r7, #32]	@ float
- 1081 0220 BB61     		str	r3, [r7, #24]	@ float
  214:DaisySP-LGPL-FX/reverb.cpp ****         a1 += 1.0;
- 1082              		.loc 1 214 12
- 1083 0222 D7ED067A 		vldr.32	s15, [r7, #24]
- 1084 0226 B7EE007A 		vmov.f32	s14, #1.0e+0
- 1085 022a 77EE877A 		vadd.f32	s15, s15, s14
- 1086 022e C7ED067A 		vstr.32	s15, [r7, #24]
+ 759              		.loc 1 214 12 view .LVU286
+ 760 00ae B7EE006A 		vmov.f32	s12, #1.0e+0
+ 203:DaisySP-LGPL-FX/reverb.cpp ****             lp->read_pos -= buffer_size;
+ 761              		.loc 1 203 9 view .LVU287
+ 762 00b2 9A42     		cmp	r2, r3
+ 204:DaisySP-LGPL-FX/reverb.cpp ****             lp->read_pos -= buffer_size;
+ 763              		.loc 1 204 13 is_stmt 1 view .LVU288
  215:DaisySP-LGPL-FX/reverb.cpp ****         a1 *= 0.5;
- 1087              		.loc 1 215 12
- 1088 0232 D7ED067A 		vldr.32	s15, [r7, #24]
- 1089 0236 B6EE007A 		vmov.f32	s14, #5.0e-1
- 1090 023a 67EE877A 		vmul.f32	s15, s15, s14
- 1091 023e C7ED067A 		vstr.32	s15, [r7, #24]
  216:DaisySP-LGPL-FX/reverb.cpp ****         am1 = a1 - 1.0;
- 1092              		.loc 1 216 13
- 1093 0242 D7ED067A 		vldr.32	s15, [r7, #24]
- 1094 0246 B7EE007A 		vmov.f32	s14, #1.0e+0
- 1095 024a 77EEC77A 		vsub.f32	s15, s15, s14
- 1096 024e C7ED057A 		vstr.32	s15, [r7, #20]
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 21
+
+
+ 764              		.loc 1 216 13 is_stmt 0 view .LVU289
+ 765 00b4 B6EE005A 		vmov.f32	s10, #5.0e-1
+ 211:DaisySP-LGPL-FX/reverb.cpp ****         a2 *= (1.0 / 6.0);
+ 766              		.loc 1 211 12 view .LVU290
+ 767 00b8 B0EE667A 		vmov.f32	s14, s13
+ 204:DaisySP-LGPL-FX/reverb.cpp ****         read_pos = lp->read_pos;
+ 768              		.loc 1 204 26 view .LVU291
+ 769 00bc A4BF     		itt	ge
+ 770 00be D21A     		subge	r2, r2, r3
+ 771 00c0 E262     		strge	r2, [r4, #44]
+ 205:DaisySP-LGPL-FX/reverb.cpp ****         frac     = (float)lp->read_pos_frac * (1.0 / (float)DELAYPOS_SCALE);
+ 772              		.loc 1 205 9 is_stmt 1 view .LVU292
+ 773 00c2 A26C     		ldr	r2, [r4, #72]
+ 206:DaisySP-LGPL-FX/reverb.cpp **** 
+ 774              		.loc 1 206 31 is_stmt 0 view .LVU293
+ 775 00c4 D4E90B1C 		ldrd	r1, ip, [r4, #44]
+ 212:DaisySP-LGPL-FX/reverb.cpp ****         a1 = frac;
+ 776              		.loc 1 212 12 view .LVU294
+ 777 00c8 9FED574B 		vldr.64	d4, .L51
+ 206:DaisySP-LGPL-FX/reverb.cpp **** 
+ 778              		.loc 1 206 18 view .LVU295
+ 779 00cc 05EE90CA 		vmov	s11, ip	@ int
  217:DaisySP-LGPL-FX/reverb.cpp ****         a0  = 3.0 * a2;
- 1097              		.loc 1 217 13
- 1098 0252 D7ED077A 		vldr.32	s15, [r7, #28]
- 1099 0256 B0EE087A 		vmov.f32	s14, #3.0e+0
- 1100 025a 67EE877A 		vmul.f32	s15, s15, s14
- 1101 025e C7ED047A 		vstr.32	s15, [r7, #16]
  218:DaisySP-LGPL-FX/reverb.cpp ****         a1 -= a0;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 24
-
-
- 1102              		.loc 1 218 12
- 1103 0262 97ED067A 		vldr.32	s14, [r7, #24]
- 1104 0266 D7ED047A 		vldr.32	s15, [r7, #16]
- 1105 026a 77EE677A 		vsub.f32	s15, s14, s15
- 1106 026e C7ED067A 		vstr.32	s15, [r7, #24]
  219:DaisySP-LGPL-FX/reverb.cpp ****         am1 -= a2;
- 1107              		.loc 1 219 13
- 1108 0272 97ED057A 		vldr.32	s14, [r7, #20]
- 1109 0276 D7ED077A 		vldr.32	s15, [r7, #28]
- 1110 027a 77EE677A 		vsub.f32	s15, s14, s15
- 1111 027e C7ED057A 		vstr.32	s15, [r7, #20]
  220:DaisySP-LGPL-FX/reverb.cpp ****         a0 -= frac;
- 1112              		.loc 1 220 12
- 1113 0282 97ED047A 		vldr.32	s14, [r7, #16]
- 1114 0286 D7ED087A 		vldr.32	s15, [r7, #32]
- 1115 028a 77EE677A 		vsub.f32	s15, s14, s15
- 1116 028e C7ED047A 		vstr.32	s15, [r7, #16]
  221:DaisySP-LGPL-FX/reverb.cpp **** 
  222:DaisySP-LGPL-FX/reverb.cpp ****         /* read four samples for interpolation */
  223:DaisySP-LGPL-FX/reverb.cpp **** 
  224:DaisySP-LGPL-FX/reverb.cpp ****         if(read_pos > 0 && read_pos < (buffer_size - 2))
- 1117              		.loc 1 224 9
- 1118 0292 BB6B     		ldr	r3, [r7, #56]
- 1119 0294 002B     		cmp	r3, #0
- 1120 0296 31DD     		ble	.L42
- 1121              		.loc 1 224 52 discriminator 1
- 1122 0298 7B6A     		ldr	r3, [r7, #36]
- 1123 029a 023B     		subs	r3, r3, #2
- 1124              		.loc 1 224 25 discriminator 1
- 1125 029c BA6B     		ldr	r2, [r7, #56]
- 1126 029e 9A42     		cmp	r2, r3
- 1127 02a0 2CDA     		bge	.L42
+ 780              		.loc 1 224 9 view .LVU296
+ 781 00d0 0029     		cmp	r1, #0
+ 206:DaisySP-LGPL-FX/reverb.cpp **** 
+ 782              		.loc 1 206 18 view .LVU297
+ 783 00d2 FAEEC25A 		vcvt.f32.s32	s11, s11, #28
+ 784              	.LVL55:
+ 210:DaisySP-LGPL-FX/reverb.cpp ****         a2 -= 1.0;
+ 785              		.loc 1 210 9 is_stmt 1 view .LVU298
+ 211:DaisySP-LGPL-FX/reverb.cpp ****         a2 *= (1.0 / 6.0);
+ 786              		.loc 1 211 9 view .LVU299
+ 211:DaisySP-LGPL-FX/reverb.cpp ****         a2 *= (1.0 / 6.0);
+ 787              		.loc 1 211 12 is_stmt 0 view .LVU300
+ 788 00d6 A5EEA57A 		vfma.f32	s14, s11, s11
+ 789              	.LVL56:
+ 212:DaisySP-LGPL-FX/reverb.cpp ****         a1 = frac;
+ 790              		.loc 1 212 9 is_stmt 1 view .LVU301
+ 214:DaisySP-LGPL-FX/reverb.cpp ****         a1 *= 0.5;
+ 791              		.loc 1 214 12 is_stmt 0 view .LVU302
+ 792 00da 35EE866A 		vadd.f32	s12, s11, s12
+ 216:DaisySP-LGPL-FX/reverb.cpp ****         a0  = 3.0 * a2;
+ 793              		.loc 1 216 13 view .LVU303
+ 794 00de E6EE056A 		vfma.f32	s13, s12, s10
+ 212:DaisySP-LGPL-FX/reverb.cpp ****         a1 = frac;
+ 795              		.loc 1 212 12 view .LVU304
+ 796 00e2 B7EEC77A 		vcvt.f64.f32	d7, s14
+ 797              	.LVL57:
+ 212:DaisySP-LGPL-FX/reverb.cpp ****         a1 = frac;
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 22
+
+
+ 798              		.loc 1 212 12 view .LVU305
+ 799 00e6 27EE047B 		vmul.f64	d7, d7, d4
+ 800 00ea B7EEC77B 		vcvt.f32.f64	s14, d7
+ 801              	.LVL58:
+ 213:DaisySP-LGPL-FX/reverb.cpp ****         a1 += 1.0;
+ 802              		.loc 1 213 9 is_stmt 1 view .LVU306
+ 214:DaisySP-LGPL-FX/reverb.cpp ****         a1 *= 0.5;
+ 803              		.loc 1 214 9 view .LVU307
+ 215:DaisySP-LGPL-FX/reverb.cpp ****         am1 = a1 - 1.0;
+ 804              		.loc 1 215 9 view .LVU308
+ 216:DaisySP-LGPL-FX/reverb.cpp ****         a0  = 3.0 * a2;
+ 805              		.loc 1 216 9 view .LVU309
+ 217:DaisySP-LGPL-FX/reverb.cpp ****         a1 -= a0;
+ 806              		.loc 1 217 9 view .LVU310
+ 217:DaisySP-LGPL-FX/reverb.cpp ****         a1 -= a0;
+ 807              		.loc 1 217 13 is_stmt 0 view .LVU311
+ 808 00ee F0EE087A 		vmov.f32	s15, #3.0e+0
+ 809 00f2 67EE277A 		vmul.f32	s15, s14, s15
+ 810              	.LVL59:
+ 218:DaisySP-LGPL-FX/reverb.cpp ****         am1 -= a2;
+ 811              		.loc 1 218 9 is_stmt 1 view .LVU312
+ 218:DaisySP-LGPL-FX/reverb.cpp ****         am1 -= a2;
+ 812              		.loc 1 218 12 is_stmt 0 view .LVU313
+ 813 00f6 F0EE671A 		vmov.f32	s3, s15
+ 220:DaisySP-LGPL-FX/reverb.cpp **** 
+ 814              		.loc 1 220 12 view .LVU314
+ 815 00fa 77EEE57A 		vsub.f32	s15, s15, s11
+ 816              	.LVL60:
+ 218:DaisySP-LGPL-FX/reverb.cpp ****         am1 -= a2;
+ 817              		.loc 1 218 12 view .LVU315
+ 818 00fe D6EE051A 		vfnms.f32	s3, s12, s10
+ 819              	.LVL61:
+ 219:DaisySP-LGPL-FX/reverb.cpp ****         a0 -= frac;
+ 820              		.loc 1 219 9 is_stmt 1 view .LVU316
+ 219:DaisySP-LGPL-FX/reverb.cpp ****         a0 -= frac;
+ 821              		.loc 1 219 13 is_stmt 0 view .LVU317
+ 822 0102 36EEC76A 		vsub.f32	s12, s13, s14
+ 823              	.LVL62:
+ 220:DaisySP-LGPL-FX/reverb.cpp **** 
+ 824              		.loc 1 220 9 is_stmt 1 view .LVU318
+ 825              		.loc 1 224 9 view .LVU319
+ 826 0106 68DD     		ble	.L36
+ 827              		.loc 1 224 52 is_stmt 0 discriminator 1 view .LVU320
+ 828 0108 A3F1020E 		sub	lr, r3, #2
+ 829              		.loc 1 224 25 discriminator 1 view .LVU321
+ 830 010c 8E45     		cmp	lr, r1
+ 831 010e 64DD     		ble	.L36
  225:DaisySP-LGPL-FX/reverb.cpp ****         {
  226:DaisySP-LGPL-FX/reverb.cpp ****             vm1 = (float)(lp->buf[read_pos - 1]);
- 1128              		.loc 1 226 31
- 1129 02a2 BB6A     		ldr	r3, [r7, #40]
- 1130 02a4 5A6A     		ldr	r2, [r3, #36]
- 1131              		.loc 1 226 47
- 1132 02a6 B96B     		ldr	r1, [r7, #56]
- 1133 02a8 6FF04043 		mvn	r3, #-1073741824
- 1134 02ac 0B44     		add	r3, r3, r1
- 1135 02ae 9B00     		lsls	r3, r3, #2
- 1136 02b0 1344     		add	r3, r3, r2
- 1137              		.loc 1 226 17
- 1138 02b2 1B68     		ldr	r3, [r3]	@ float
- 1139 02b4 BB64     		str	r3, [r7, #72]	@ float
+ 832              		.loc 1 226 13 is_stmt 1 view .LVU322
+ 833              		.loc 1 226 47 is_stmt 0 view .LVU323
+ 834 0110 01F18041 		add	r1, r1, #1073741824
+ 835 0114 0139     		subs	r1, r1, #1
+ 836              		.loc 1 226 17 view .LVU324
+ 837 0116 02EB8101 		add	r1, r2, r1, lsl #2
+ 838 011a 91ED004A 		vldr.32	s8, [r1]
+ 839              	.LVL63:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 23
+
+
  227:DaisySP-LGPL-FX/reverb.cpp ****             v0  = (float)(lp->buf[read_pos]);
- 1140              		.loc 1 227 31
- 1141 02b6 BB6A     		ldr	r3, [r7, #40]
- 1142 02b8 5A6A     		ldr	r2, [r3, #36]
- 1143              		.loc 1 227 35
- 1144 02ba BB6B     		ldr	r3, [r7, #56]
- 1145              		.loc 1 227 43
- 1146 02bc 9B00     		lsls	r3, r3, #2
- 1147 02be 1344     		add	r3, r3, r2
- 1148              		.loc 1 227 17
- 1149 02c0 1B68     		ldr	r3, [r3]	@ float
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 25
-
-
- 1150 02c2 7B64     		str	r3, [r7, #68]	@ float
+ 840              		.loc 1 227 13 is_stmt 1 view .LVU325
+ 841              		.loc 1 227 17 is_stmt 0 view .LVU326
+ 842 011e D1ED016A 		vldr.32	s13, [r1, #4]
+ 843              	.LVL64:
  228:DaisySP-LGPL-FX/reverb.cpp ****             v1  = (float)(lp->buf[read_pos + 1]);
- 1151              		.loc 1 228 31
- 1152 02c4 BB6A     		ldr	r3, [r7, #40]
- 1153 02c6 5A6A     		ldr	r2, [r3, #36]
- 1154              		.loc 1 228 47
- 1155 02c8 BB6B     		ldr	r3, [r7, #56]
- 1156 02ca 0133     		adds	r3, r3, #1
- 1157 02cc 9B00     		lsls	r3, r3, #2
- 1158 02ce 1344     		add	r3, r3, r2
- 1159              		.loc 1 228 17
- 1160 02d0 1B68     		ldr	r3, [r3]	@ float
- 1161 02d2 3B64     		str	r3, [r7, #64]	@ float
+ 844              		.loc 1 228 13 is_stmt 1 view .LVU327
+ 845              		.loc 1 228 17 is_stmt 0 view .LVU328
+ 846 0122 D1ED024A 		vldr.32	s9, [r1, #8]
+ 847              	.LVL65:
  229:DaisySP-LGPL-FX/reverb.cpp ****             v2  = (float)(lp->buf[read_pos + 2]);
- 1162              		.loc 1 229 31
- 1163 02d4 BB6A     		ldr	r3, [r7, #40]
- 1164 02d6 5A6A     		ldr	r2, [r3, #36]
- 1165              		.loc 1 229 47
- 1166 02d8 BB6B     		ldr	r3, [r7, #56]
- 1167 02da 0233     		adds	r3, r3, #2
- 1168 02dc 9B00     		lsls	r3, r3, #2
- 1169 02de 1344     		add	r3, r3, r2
- 1170              		.loc 1 229 17
- 1171 02e0 1B68     		ldr	r3, [r3]	@ float
- 1172 02e2 FB63     		str	r3, [r7, #60]	@ float
- 1173 02e4 62E0     		b	.L43
- 1174              	.L53:
- 1175 02e6 00BF     		.align	3
- 1176              	.L52:
- 1177 02e8 55555555 		.word	1431655765
- 1178 02ec 5555C53F 		.word	1069897045
- 1179 02f0 DB0FC940 		.word	1086918619
- 1180 02f4 00008031 		.word	830472192
- 1181 02f8 3333B33E 		.word	1051931443
- 1182              	.L42:
+ 848              		.loc 1 229 13 is_stmt 1 view .LVU329
+ 849              		.loc 1 229 17 is_stmt 0 view .LVU330
+ 850 0126 91ED035A 		vldr.32	s10, [r1, #12]
+ 851              	.LVL66:
+ 852              	.L37:
  230:DaisySP-LGPL-FX/reverb.cpp ****         }
  231:DaisySP-LGPL-FX/reverb.cpp ****         else
  232:DaisySP-LGPL-FX/reverb.cpp ****         {
  233:DaisySP-LGPL-FX/reverb.cpp ****             /* at buffer wrap-around, need to check index */
  234:DaisySP-LGPL-FX/reverb.cpp **** 
  235:DaisySP-LGPL-FX/reverb.cpp ****             if(--read_pos < 0)
- 1183              		.loc 1 235 27
- 1184 02fc BB6B     		ldr	r3, [r7, #56]
- 1185 02fe 013B     		subs	r3, r3, #1
- 1186 0300 BB63     		str	r3, [r7, #56]
- 1187 0302 BB6B     		ldr	r3, [r7, #56]
- 1188 0304 DB0F     		lsrs	r3, r3, #31
- 1189 0306 DBB2     		uxtb	r3, r3
- 1190              		.loc 1 235 13
- 1191 0308 002B     		cmp	r3, #0
- 1192 030a 03D0     		beq	.L44
  236:DaisySP-LGPL-FX/reverb.cpp ****                 read_pos += buffer_size;
- 1193              		.loc 1 236 26
- 1194 030c BA6B     		ldr	r2, [r7, #56]
- 1195 030e 7B6A     		ldr	r3, [r7, #36]
- 1196 0310 1344     		add	r3, r3, r2
- 1197 0312 BB63     		str	r3, [r7, #56]
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 26
-
-
- 1198              	.L44:
  237:DaisySP-LGPL-FX/reverb.cpp ****             vm1 = (float)lp->buf[read_pos];
- 1199              		.loc 1 237 30
- 1200 0314 BB6A     		ldr	r3, [r7, #40]
- 1201 0316 5A6A     		ldr	r2, [r3, #36]
- 1202              		.loc 1 237 34
- 1203 0318 BB6B     		ldr	r3, [r7, #56]
- 1204              		.loc 1 237 42
- 1205 031a 9B00     		lsls	r3, r3, #2
- 1206 031c 1344     		add	r3, r3, r2
- 1207              		.loc 1 237 17
- 1208 031e 1B68     		ldr	r3, [r3]	@ float
- 1209 0320 BB64     		str	r3, [r7, #72]	@ float
  238:DaisySP-LGPL-FX/reverb.cpp ****             if(++read_pos >= buffer_size)
- 1210              		.loc 1 238 27
- 1211 0322 BB6B     		ldr	r3, [r7, #56]
- 1212 0324 0133     		adds	r3, r3, #1
- 1213 0326 BB63     		str	r3, [r7, #56]
- 1214 0328 BA6B     		ldr	r2, [r7, #56]
- 1215 032a 7B6A     		ldr	r3, [r7, #36]
- 1216 032c 9A42     		cmp	r2, r3
- 1217 032e ACBF     		ite	ge
- 1218 0330 0123     		movge	r3, #1
- 1219 0332 0023     		movlt	r3, #0
- 1220 0334 DBB2     		uxtb	r3, r3
- 1221              		.loc 1 238 13
- 1222 0336 002B     		cmp	r3, #0
- 1223 0338 03D0     		beq	.L45
  239:DaisySP-LGPL-FX/reverb.cpp ****                 read_pos -= buffer_size;
- 1224              		.loc 1 239 26
- 1225 033a BA6B     		ldr	r2, [r7, #56]
- 1226 033c 7B6A     		ldr	r3, [r7, #36]
- 1227 033e D31A     		subs	r3, r2, r3
- 1228 0340 BB63     		str	r3, [r7, #56]
- 1229              	.L45:
  240:DaisySP-LGPL-FX/reverb.cpp ****             v0 = (float)lp->buf[read_pos];
- 1230              		.loc 1 240 29
- 1231 0342 BB6A     		ldr	r3, [r7, #40]
- 1232 0344 5A6A     		ldr	r2, [r3, #36]
- 1233              		.loc 1 240 33
- 1234 0346 BB6B     		ldr	r3, [r7, #56]
- 1235              		.loc 1 240 41
- 1236 0348 9B00     		lsls	r3, r3, #2
- 1237 034a 1344     		add	r3, r3, r2
- 1238              		.loc 1 240 16
- 1239 034c 1B68     		ldr	r3, [r3]	@ float
- 1240 034e 7B64     		str	r3, [r7, #68]	@ float
  241:DaisySP-LGPL-FX/reverb.cpp ****             if(++read_pos >= buffer_size)
- 1241              		.loc 1 241 27
- 1242 0350 BB6B     		ldr	r3, [r7, #56]
- 1243 0352 0133     		adds	r3, r3, #1
- 1244 0354 BB63     		str	r3, [r7, #56]
- 1245 0356 BA6B     		ldr	r2, [r7, #56]
- 1246 0358 7B6A     		ldr	r3, [r7, #36]
- 1247 035a 9A42     		cmp	r2, r3
- 1248 035c ACBF     		ite	ge
- 1249 035e 0123     		movge	r3, #1
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 27
-
-
- 1250 0360 0023     		movlt	r3, #0
- 1251 0362 DBB2     		uxtb	r3, r3
- 1252              		.loc 1 241 13
- 1253 0364 002B     		cmp	r3, #0
- 1254 0366 03D0     		beq	.L46
  242:DaisySP-LGPL-FX/reverb.cpp ****                 read_pos -= buffer_size;
- 1255              		.loc 1 242 26
- 1256 0368 BA6B     		ldr	r2, [r7, #56]
- 1257 036a 7B6A     		ldr	r3, [r7, #36]
- 1258 036c D31A     		subs	r3, r2, r3
- 1259 036e BB63     		str	r3, [r7, #56]
- 1260              	.L46:
  243:DaisySP-LGPL-FX/reverb.cpp ****             v1 = (float)lp->buf[read_pos];
- 1261              		.loc 1 243 29
- 1262 0370 BB6A     		ldr	r3, [r7, #40]
- 1263 0372 5A6A     		ldr	r2, [r3, #36]
- 1264              		.loc 1 243 33
- 1265 0374 BB6B     		ldr	r3, [r7, #56]
- 1266              		.loc 1 243 41
- 1267 0376 9B00     		lsls	r3, r3, #2
- 1268 0378 1344     		add	r3, r3, r2
- 1269              		.loc 1 243 16
- 1270 037a 1B68     		ldr	r3, [r3]	@ float
- 1271 037c 3B64     		str	r3, [r7, #64]	@ float
  244:DaisySP-LGPL-FX/reverb.cpp ****             if(++read_pos >= buffer_size)
- 1272              		.loc 1 244 27
- 1273 037e BB6B     		ldr	r3, [r7, #56]
- 1274 0380 0133     		adds	r3, r3, #1
- 1275 0382 BB63     		str	r3, [r7, #56]
- 1276 0384 BA6B     		ldr	r2, [r7, #56]
- 1277 0386 7B6A     		ldr	r3, [r7, #36]
- 1278 0388 9A42     		cmp	r2, r3
- 1279 038a ACBF     		ite	ge
- 1280 038c 0123     		movge	r3, #1
- 1281 038e 0023     		movlt	r3, #0
- 1282 0390 DBB2     		uxtb	r3, r3
- 1283              		.loc 1 244 13
- 1284 0392 002B     		cmp	r3, #0
- 1285 0394 03D0     		beq	.L47
  245:DaisySP-LGPL-FX/reverb.cpp ****                 read_pos -= buffer_size;
- 1286              		.loc 1 245 26
- 1287 0396 BA6B     		ldr	r2, [r7, #56]
- 1288 0398 7B6A     		ldr	r3, [r7, #36]
- 1289 039a D31A     		subs	r3, r2, r3
- 1290 039c BB63     		str	r3, [r7, #56]
- 1291              	.L47:
  246:DaisySP-LGPL-FX/reverb.cpp ****             v2 = (float)lp->buf[read_pos];
- 1292              		.loc 1 246 29
- 1293 039e BB6A     		ldr	r3, [r7, #40]
- 1294 03a0 5A6A     		ldr	r2, [r3, #36]
- 1295              		.loc 1 246 33
- 1296 03a2 BB6B     		ldr	r3, [r7, #56]
- 1297              		.loc 1 246 41
- 1298 03a4 9B00     		lsls	r3, r3, #2
- 1299 03a6 1344     		add	r3, r3, r2
- 1300              		.loc 1 246 16
- 1301 03a8 1B68     		ldr	r3, [r3]	@ float
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 28
-
-
- 1302 03aa FB63     		str	r3, [r7, #60]	@ float
- 1303              	.L43:
  247:DaisySP-LGPL-FX/reverb.cpp ****         }
  248:DaisySP-LGPL-FX/reverb.cpp ****         v0 = (am1 * vm1 + a0 * v0 + a1 * v1 + a2 * v2) * frac + v0;
- 1304              		.loc 1 248 19
- 1305 03ac 97ED057A 		vldr.32	s14, [r7, #20]
- 1306 03b0 D7ED127A 		vldr.32	s15, [r7, #72]
- 1307 03b4 27EE277A 		vmul.f32	s14, s14, s15
- 1308              		.loc 1 248 30
- 1309 03b8 D7ED046A 		vldr.32	s13, [r7, #16]
- 1310 03bc D7ED117A 		vldr.32	s15, [r7, #68]
- 1311 03c0 66EEA77A 		vmul.f32	s15, s13, s15
- 1312              		.loc 1 248 25
- 1313 03c4 37EE277A 		vadd.f32	s14, s14, s15
- 1314              		.loc 1 248 40
- 1315 03c8 D7ED066A 		vldr.32	s13, [r7, #24]
- 1316 03cc D7ED107A 		vldr.32	s15, [r7, #64]
- 1317 03d0 66EEA77A 		vmul.f32	s15, s13, s15
- 1318              		.loc 1 248 35
- 1319 03d4 37EE277A 		vadd.f32	s14, s14, s15
- 1320              		.loc 1 248 50
- 1321 03d8 D7ED076A 		vldr.32	s13, [r7, #28]
- 1322 03dc D7ED0F7A 		vldr.32	s15, [r7, #60]
- 1323 03e0 66EEA77A 		vmul.f32	s15, s13, s15
- 1324              		.loc 1 248 45
- 1325 03e4 37EE277A 		vadd.f32	s14, s14, s15
- 1326              		.loc 1 248 56
- 1327 03e8 D7ED087A 		vldr.32	s15, [r7, #32]
- 1328 03ec 67EE277A 		vmul.f32	s15, s14, s15
- 1329              		.loc 1 248 12
- 1330 03f0 97ED117A 		vldr.32	s14, [r7, #68]
- 1331 03f4 77EE277A 		vadd.f32	s15, s14, s15
- 1332 03f8 C7ED117A 		vstr.32	s15, [r7, #68]
+ 853              		.loc 1 248 9 is_stmt 1 view .LVU331
+ 854              		.loc 1 248 30 is_stmt 0 view .LVU332
+ 855 012a 66EEA77A 		vmul.f32	s15, s13, s15
+ 856              	.LVL67:
  249:DaisySP-LGPL-FX/reverb.cpp **** 
  250:DaisySP-LGPL-FX/reverb.cpp ****         /* update buffer read position */
  251:DaisySP-LGPL-FX/reverb.cpp **** 
  252:DaisySP-LGPL-FX/reverb.cpp ****         lp->read_pos_frac += lp->read_pos_frac_inc;
- 1333              		.loc 1 252 27
- 1334 03fc BB6A     		ldr	r3, [r7, #40]
- 1335 03fe DA68     		ldr	r2, [r3, #12]
- 1336              		.loc 1 252 34
- 1337 0400 BB6A     		ldr	r3, [r7, #40]
- 1338 0402 1B69     		ldr	r3, [r3, #16]
- 1339              		.loc 1 252 27
- 1340 0404 1A44     		add	r2, r2, r3
- 1341 0406 BB6A     		ldr	r3, [r7, #40]
- 1342 0408 DA60     		str	r2, [r3, #12]
+ 857              		.loc 1 252 27 view .LVU333
+ 858 012e 636B     		ldr	r3, [r4, #52]
+ 859 0130 6344     		add	r3, r3, ip
+ 248:DaisySP-LGPL-FX/reverb.cpp **** 
+ 860              		.loc 1 248 25 view .LVU334
+ 861 0132 E4EE067A 		vfma.f32	s15, s8, s12
+ 862              		.loc 1 252 27 view .LVU335
+ 863 0136 2363     		str	r3, [r4, #48]
+ 248:DaisySP-LGPL-FX/reverb.cpp **** 
+ 864              		.loc 1 248 35 view .LVU336
+ 865 0138 E4EEA17A 		vfma.f32	s15, s9, s3
+ 248:DaisySP-LGPL-FX/reverb.cpp **** 
+ 866              		.loc 1 248 45 view .LVU337
+ 867 013c E5EE077A 		vfma.f32	s15, s10, s14
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 24
+
+
  253:DaisySP-LGPL-FX/reverb.cpp **** 
  254:DaisySP-LGPL-FX/reverb.cpp ****         /* apply feedback gain and lowpass filter */
  255:DaisySP-LGPL-FX/reverb.cpp **** 
  256:DaisySP-LGPL-FX/reverb.cpp ****         v0 *= (float)feedback_;
- 1343              		.loc 1 256 22
- 1344 040a FB68     		ldr	r3, [r7, #12]
- 1345 040c D3ED007A 		vldr.32	s15, [r3]
- 1346              		.loc 1 256 12
- 1347 0410 97ED117A 		vldr.32	s14, [r7, #68]
- 1348 0414 67EE277A 		vmul.f32	s15, s14, s15
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 29
-
-
- 1349 0418 C7ED117A 		vstr.32	s15, [r7, #68]
+ 868              		.loc 1 256 22 view .LVU338
+ 869 0140 96ED007A 		vldr.32	s14, [r6]
+ 870              	.LVL68:
+ 248:DaisySP-LGPL-FX/reverb.cpp **** 
+ 871              		.loc 1 248 12 view .LVU339
+ 872 0144 E7EEA56A 		vfma.f32	s13, s15, s11
+ 873              	.LVL69:
+ 252:DaisySP-LGPL-FX/reverb.cpp **** 
+ 874              		.loc 1 252 9 is_stmt 1 view .LVU340
+ 875              		.loc 1 256 9 view .LVU341
  257:DaisySP-LGPL-FX/reverb.cpp ****         v0               = (lp->filter_state - v0) * damp_fact + v0;
- 1350              		.loc 1 257 33
- 1351 041c BB6A     		ldr	r3, [r7, #40]
- 1352 041e 93ED087A 		vldr.32	s14, [r3, #32]
- 1353              		.loc 1 257 46
- 1354 0422 D7ED117A 		vldr.32	s15, [r7, #68]
- 1355 0426 37EE677A 		vsub.f32	s14, s14, s15
- 1356              		.loc 1 257 52
- 1357 042a D7ED0C7A 		vldr.32	s15, [r7, #48]
- 1358 042e 67EE277A 		vmul.f32	s15, s14, s15
- 1359              		.loc 1 257 26
- 1360 0432 97ED117A 		vldr.32	s14, [r7, #68]
- 1361 0436 77EE277A 		vadd.f32	s15, s14, s15
- 1362 043a C7ED117A 		vstr.32	s15, [r7, #68]
+ 876              		.loc 1 257 9 view .LVU342
+ 877              		.loc 1 257 46 is_stmt 0 view .LVU343
+ 878 0148 D4ED117A 		vldr.32	s15, [r4, #68]
+ 879 014c E7EE667A 		vfms.f32	s15, s14, s13
+ 880              		.loc 1 257 52 view .LVU344
+ 881 0150 67EE807A 		vmul.f32	s15, s15, s0
+ 882              		.loc 1 257 26 view .LVU345
+ 883 0154 E7EE267A 		vfma.f32	s15, s14, s13
+ 884              	.LVL70:
  258:DaisySP-LGPL-FX/reverb.cpp ****         lp->filter_state = v0;
- 1363              		.loc 1 258 26
- 1364 043e BB6A     		ldr	r3, [r7, #40]
- 1365 0440 7A6C     		ldr	r2, [r7, #68]	@ float
- 1366 0442 1A62     		str	r2, [r3, #32]	@ float
+ 885              		.loc 1 258 9 is_stmt 1 view .LVU346
+ 886              		.loc 1 258 26 is_stmt 0 view .LVU347
+ 887 0158 C4ED117A 		vstr.32	s15, [r4, #68]
  259:DaisySP-LGPL-FX/reverb.cpp **** 
  260:DaisySP-LGPL-FX/reverb.cpp ****         /* mix to output */
  261:DaisySP-LGPL-FX/reverb.cpp **** 
  262:DaisySP-LGPL-FX/reverb.cpp ****         if(n & 1)
- 1367              		.loc 1 262 14
- 1368 0444 7B6B     		ldr	r3, [r7, #52]
- 1369 0446 03F00103 		and	r3, r3, #1
- 1370              		.loc 1 262 9
- 1371 044a 002B     		cmp	r3, #0
- 1372 044c 08D0     		beq	.L48
+ 888              		.loc 1 262 9 is_stmt 1 view .LVU348
+ 889 015c 0028     		cmp	r0, #0
+ 890 015e 5CD0     		beq	.L42
  263:DaisySP-LGPL-FX/reverb.cpp ****         {
  264:DaisySP-LGPL-FX/reverb.cpp ****             a_out_r += v0;
- 1373              		.loc 1 264 21
- 1374 044e 97ED137A 		vldr.32	s14, [r7, #76]
- 1375 0452 D7ED117A 		vldr.32	s15, [r7, #68]
- 1376 0456 77EE277A 		vadd.f32	s15, s14, s15
- 1377 045a C7ED137A 		vstr.32	s15, [r7, #76]
- 1378 045e 07E0     		b	.L49
- 1379              	.L48:
+ 891              		.loc 1 264 13 view .LVU349
+ 892              		.loc 1 264 21 is_stmt 0 view .LVU350
+ 893 0160 73EEA73A 		vadd.f32	s7, s7, s15
+ 894              	.LVL71:
+ 895              	.L43:
  265:DaisySP-LGPL-FX/reverb.cpp ****         }
  266:DaisySP-LGPL-FX/reverb.cpp ****         else
  267:DaisySP-LGPL-FX/reverb.cpp ****         {
  268:DaisySP-LGPL-FX/reverb.cpp ****             a_out_l += v0;
- 1380              		.loc 1 268 21
- 1381 0460 97ED147A 		vldr.32	s14, [r7, #80]
- 1382 0464 D7ED117A 		vldr.32	s15, [r7, #68]
- 1383 0468 77EE277A 		vadd.f32	s15, s14, s15
- 1384 046c C7ED147A 		vstr.32	s15, [r7, #80]
- 1385              	.L49:
  269:DaisySP-LGPL-FX/reverb.cpp ****         }
  270:DaisySP-LGPL-FX/reverb.cpp **** 
  271:DaisySP-LGPL-FX/reverb.cpp ****         /* start next random line segment if current one has reached endpoint */
  272:DaisySP-LGPL-FX/reverb.cpp **** 
  273:DaisySP-LGPL-FX/reverb.cpp ****         if(--(lp->rand_line_cnt) <= 0)
- 1386              		.loc 1 273 19
- 1387 0470 BB6A     		ldr	r3, [r7, #40]
- 1388 0472 DB69     		ldr	r3, [r3, #28]
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 30
+ 896              		.loc 1 273 9 is_stmt 1 view .LVU351
+ 897              		.loc 1 273 12 is_stmt 0 view .LVU352
+ 898 0164 236C     		ldr	r3, [r4, #64]
+ 899 0166 013B     		subs	r3, r3, #1
+ 900              		.loc 1 273 9 view .LVU353
+ 901 0168 002B     		cmp	r3, #0
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 25
 
 
- 1389              		.loc 1 273 12
- 1390 0474 5A1E     		subs	r2, r3, #1
- 1391              		.loc 1 273 34
- 1392 0476 BB6A     		ldr	r3, [r7, #40]
- 1393 0478 DA61     		str	r2, [r3, #28]
- 1394              		.loc 1 273 19
- 1395 047a BB6A     		ldr	r3, [r7, #40]
- 1396 047c DB69     		ldr	r3, [r3, #28]
- 1397              		.loc 1 273 34
- 1398 047e 002B     		cmp	r3, #0
- 1399 0480 D4BF     		ite	le
- 1400 0482 0123     		movle	r3, #1
- 1401 0484 0023     		movgt	r3, #0
- 1402 0486 DBB2     		uxtb	r3, r3
- 1403              		.loc 1 273 9
- 1404 0488 002B     		cmp	r3, #0
- 1405 048a 05D0     		beq	.L50
+ 902              		.loc 1 273 34 view .LVU354
+ 903 016a 2364     		str	r3, [r4, #64]
+ 904              		.loc 1 273 9 view .LVU355
+ 905 016c 05DC     		bgt	.L44
  274:DaisySP-LGPL-FX/reverb.cpp ****         {
  275:DaisySP-LGPL-FX/reverb.cpp ****             NextRandomLineseg(lp, n);
- 1406              		.loc 1 275 30
- 1407 048c 7B6B     		ldr	r3, [r7, #52]
- 1408 048e 1A46     		mov	r2, r3
- 1409 0490 B96A     		ldr	r1, [r7, #40]
- 1410 0492 F868     		ldr	r0, [r7, #12]
- 1411 0494 FFF7FEFF 		bl	_ZN7daisysp8ReverbSc17NextRandomLinesegEPNS_10ReverbScDlEi
- 1412              	.L50:
+ 906              		.loc 1 275 13 is_stmt 1 view .LVU356
+ 907              		.loc 1 275 30 is_stmt 0 view .LVU357
+ 908 016e 3A46     		mov	r2, r7
+ 909 0170 04F12401 		add	r1, r4, #36
+ 910 0174 3046     		mov	r0, r6
+ 911 0176 FFF7FEFF 		bl	_ZN7daisysp8ReverbSc17NextRandomLinesegEPNS_10ReverbScDlEi
+ 912              	.LVL72:
+ 913              	.L44:
  182:DaisySP-LGPL-FX/reverb.cpp ****     {
- 1413              		.loc 1 182 5 discriminator 2
- 1414 0498 7B6B     		ldr	r3, [r7, #52]
- 1415 049a 0133     		adds	r3, r3, #1
- 1416 049c 7B63     		str	r3, [r7, #52]
- 1417 049e 3AE6     		b	.L51
- 1418              	.L36:
+ 914              		.loc 1 182 5 is_stmt 1 discriminator 2 view .LVU358
+ 915 017a 0137     		adds	r7, r7, #1
+ 916              	.LVL73:
+ 182:DaisySP-LGPL-FX/reverb.cpp ****     {
+ 917              		.loc 1 182 18 discriminator 2 view .LVU359
+ 918 017c 2834     		adds	r4, r4, #40
+ 919 017e 082F     		cmp	r7, #8
+ 920 0180 7FF472AF 		bne	.L45
  276:DaisySP-LGPL-FX/reverb.cpp ****         }
  277:DaisySP-LGPL-FX/reverb.cpp ****     }
  278:DaisySP-LGPL-FX/reverb.cpp ****     /* someday, use a_out_r for multimono out */
  279:DaisySP-LGPL-FX/reverb.cpp **** 
  280:DaisySP-LGPL-FX/reverb.cpp ****     *out1 = a_out_l * kOutputGain;
- 1419              		.loc 1 280 21
- 1420 04a0 D7ED147A 		vldr.32	s15, [r7, #80]
- 1421 04a4 1FED6C7A 		vldr.32	s14, .L52+16
- 1422 04a8 67EE877A 		vmul.f32	s15, s15, s14
- 1423              		.loc 1 280 11
- 1424 04ac 3B68     		ldr	r3, [r7]
- 1425 04ae C3ED007A 		vstr.32	s15, [r3]
+ 921              		.loc 1 280 5 view .LVU360
+ 922              		.loc 1 280 21 is_stmt 0 view .LVU361
+ 923 0184 DFED2B7A 		vldr.32	s15, .L51+12
  281:DaisySP-LGPL-FX/reverb.cpp ****     *out2 = a_out_r * kOutputGain;
- 1426              		.loc 1 281 21
- 1427 04b2 D7ED137A 		vldr.32	s15, [r7, #76]
- 1428 04b6 1FED707A 		vldr.32	s14, .L52+16
- 1429 04ba 67EE877A 		vmul.f32	s15, s15, s14
- 1430              		.loc 1 281 11
- 1431 04be 3B6E     		ldr	r3, [r7, #96]
- 1432 04c0 C3ED007A 		vstr.32	s15, [r3]
  282:DaisySP-LGPL-FX/reverb.cpp ****     return REVSC_OK;
- 1433              		.loc 1 282 12
- 1434 04c4 0023     		movs	r3, #0
- 1435              	.L32:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 31
+ 924              		.loc 1 282 12 view .LVU362
+ 925 0188 0020     		movs	r0, #0
+ 281:DaisySP-LGPL-FX/reverb.cpp ****     *out2 = a_out_r * kOutputGain;
+ 926              		.loc 1 281 11 view .LVU363
+ 927 018a 089B     		ldr	r3, [sp, #32]
+ 280:DaisySP-LGPL-FX/reverb.cpp ****     *out2 = a_out_r * kOutputGain;
+ 928              		.loc 1 280 21 view .LVU364
+ 929 018c 23EE273A 		vmul.f32	s6, s6, s15
+ 930              	.LVL74:
+ 281:DaisySP-LGPL-FX/reverb.cpp ****     *out2 = a_out_r * kOutputGain;
+ 931              		.loc 1 281 21 view .LVU365
+ 932 0190 63EEA73A 		vmul.f32	s7, s7, s15
+ 933              	.LVL75:
+ 280:DaisySP-LGPL-FX/reverb.cpp ****     *out2 = a_out_r * kOutputGain;
+ 934              		.loc 1 280 11 view .LVU366
+ 935 0194 85ED003A 		vstr.32	s6, [r5]
+ 281:DaisySP-LGPL-FX/reverb.cpp ****     *out2 = a_out_r * kOutputGain;
+ 936              		.loc 1 281 5 is_stmt 1 view .LVU367
+ 281:DaisySP-LGPL-FX/reverb.cpp ****     *out2 = a_out_r * kOutputGain;
+ 937              		.loc 1 281 11 is_stmt 0 view .LVU368
+ 938 0198 C3ED003A 		vstr.32	s7, [r3]
+ 939              		.loc 1 282 5 is_stmt 1 view .LVU369
+ 940              	.LVL76:
+ 941              	.L26:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 26
 
 
  283:DaisySP-LGPL-FX/reverb.cpp **** }
- 1436              		.loc 1 283 1
- 1437 04c6 1846     		mov	r0, r3
- 1438 04c8 5837     		adds	r7, r7, #88
- 1439              		.cfi_def_cfa_offset 8
- 1440 04ca BD46     		mov	sp, r7
- 1441              		.cfi_def_cfa_register 13
- 1442              		@ sp needed
- 1443 04cc 80BD     		pop	{r7, pc}
- 1444              		.cfi_endproc
- 1445              	.LFE560:
- 1447 04ce 00BF     		.section	.text._ZN7daisysp8ReverbSc10ProcessMixERKfS2_PfS3_,"ax",%progbits
- 1448              		.align	1
- 1449              		.global	_ZN7daisysp8ReverbSc10ProcessMixERKfS2_PfS3_
- 1450              		.syntax unified
- 1451              		.thumb
- 1452              		.thumb_func
- 1454              	_ZN7daisysp8ReverbSc10ProcessMixERKfS2_PfS3_:
- 1455              	.LFB561:
+ 942              		.loc 1 283 1 is_stmt 0 view .LVU370
+ 943 019c BDEC028B 		vldm	sp!, {d8}
+ 944              		.cfi_remember_state
+ 945              		.cfi_restore 80
+ 946              		.cfi_restore 81
+ 947              		.cfi_def_cfa_offset 24
+ 948 01a0 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 949              	.LVL77:
+ 950              	.L28:
+ 951              		.cfi_restore_state
+ 162:DaisySP-LGPL-FX/reverb.cpp ****         damp_fact
+ 952              		.loc 1 162 9 is_stmt 1 view .LVU371
+ 164:DaisySP-LGPL-FX/reverb.cpp ****         damp_fact = damp_fact_
+ 953              		.loc 1 164 39 is_stmt 0 view .LVU372
+ 954 01a4 DFED247A 		vldr.32	s15, .L51+16
+ 162:DaisySP-LGPL-FX/reverb.cpp ****         damp_fact
+ 955              		.loc 1 162 21 view .LVU373
+ 956 01a8 80ED070A 		vstr.32	s0, [r0, #28]
+ 163:DaisySP-LGPL-FX/reverb.cpp ****             = 2.0f - cosf(prv_lpfreq_ * (2.0f * (float)M_PI) / sample_rate_);
+ 957              		.loc 1 163 9 is_stmt 1 view .LVU374
+ 164:DaisySP-LGPL-FX/reverb.cpp ****         damp_fact = damp_fact_
+ 958              		.loc 1 164 39 is_stmt 0 view .LVU375
+ 959 01ac 20EE270A 		vmul.f32	s0, s0, s15
+ 164:DaisySP-LGPL-FX/reverb.cpp ****         damp_fact = damp_fact_
+ 960              		.loc 1 164 26 view .LVU376
+ 961 01b0 D0ED057A 		vldr.32	s15, [r0, #20]
+ 962 01b4 80EE270A 		vdiv.f32	s0, s0, s15
+ 963 01b8 FFF7FEFF 		bl	cosf
+ 964              	.LVL78:
+ 164:DaisySP-LGPL-FX/reverb.cpp ****         damp_fact = damp_fact_
+ 965              		.loc 1 164 13 view .LVU377
+ 966 01bc F0EE007A 		vmov.f32	s15, #2.0e+0
+ 967 01c0 37EEC08A 		vsub.f32	s16, s15, s0
+ 968              	.LVL79:
+ 165:DaisySP-LGPL-FX/reverb.cpp ****             = damp_fact - sqrtf(damp_fact * damp_fact - 1.0f);
+ 969              		.loc 1 165 9 is_stmt 1 view .LVU378
+ 166:DaisySP-LGPL-FX/reverb.cpp ****     }
+ 970              		.loc 1 166 32 is_stmt 0 view .LVU379
+ 971 01c4 BFEE000A 		vmov.f32	s0, #-1.0e+0
+ 972 01c8 A8EE080A 		vfma.f32	s0, s16, s16
+ 973 01cc FFF7FEFF 		bl	sqrtf
+ 974              	.LVL80:
+ 166:DaisySP-LGPL-FX/reverb.cpp ****     }
+ 975              		.loc 1 166 25 view .LVU380
+ 976 01d0 38EE400A 		vsub.f32	s0, s16, s0
+ 166:DaisySP-LGPL-FX/reverb.cpp ****     }
+ 977              		.loc 1 166 13 view .LVU381
+ 978 01d4 86ED060A 		vstr.32	s0, [r6, #24]
+ 979              	.LVL81:
+ 166:DaisySP-LGPL-FX/reverb.cpp ****     }
+ 980              		.loc 1 166 13 view .LVU382
+ 981 01d8 2AE7     		b	.L29
+ 982              	.LVL82:
+ 983              	.L36:
+ 235:DaisySP-LGPL-FX/reverb.cpp ****                 read_pos += buffer_size;
+ 984              		.loc 1 235 13 is_stmt 1 view .LVU383
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 27
+
+
+ 235:DaisySP-LGPL-FX/reverb.cpp ****                 read_pos += buffer_size;
+ 985              		.loc 1 235 13 is_stmt 0 view .LVU384
+ 986 01da 0139     		subs	r1, r1, #1
+ 987              	.LVL83:
+ 236:DaisySP-LGPL-FX/reverb.cpp ****             vm1 = (float)lp->buf[read_pos];
+ 988              		.loc 1 236 17 is_stmt 1 view .LVU385
+ 236:DaisySP-LGPL-FX/reverb.cpp ****             vm1 = (float)lp->buf[read_pos];
+ 989              		.loc 1 236 26 is_stmt 0 view .LVU386
+ 990 01dc 48BF     		it	mi
+ 991 01de C918     		addmi	r1, r1, r3
+ 992              	.LVL84:
+ 237:DaisySP-LGPL-FX/reverb.cpp ****             if(++read_pos >= buffer_size)
+ 993              		.loc 1 237 13 is_stmt 1 view .LVU387
+ 237:DaisySP-LGPL-FX/reverb.cpp ****             if(++read_pos >= buffer_size)
+ 994              		.loc 1 237 17 is_stmt 0 view .LVU388
+ 995 01e0 02EB810E 		add	lr, r2, r1, lsl #2
+ 238:DaisySP-LGPL-FX/reverb.cpp ****                 read_pos -= buffer_size;
+ 996              		.loc 1 238 27 view .LVU389
+ 997 01e4 0131     		adds	r1, r1, #1
+ 998              	.LVL85:
+ 238:DaisySP-LGPL-FX/reverb.cpp ****                 read_pos -= buffer_size;
+ 999              		.loc 1 238 13 view .LVU390
+ 1000 01e6 8B42     		cmp	r3, r1
+ 237:DaisySP-LGPL-FX/reverb.cpp ****             if(++read_pos >= buffer_size)
+ 1001              		.loc 1 237 17 view .LVU391
+ 1002 01e8 9EED004A 		vldr.32	s8, [lr]
+ 1003              	.LVL86:
+ 238:DaisySP-LGPL-FX/reverb.cpp ****                 read_pos -= buffer_size;
+ 1004              		.loc 1 238 13 is_stmt 1 view .LVU392
+ 239:DaisySP-LGPL-FX/reverb.cpp ****             v0 = (float)lp->buf[read_pos];
+ 1005              		.loc 1 239 17 view .LVU393
+ 239:DaisySP-LGPL-FX/reverb.cpp ****             v0 = (float)lp->buf[read_pos];
+ 1006              		.loc 1 239 26 is_stmt 0 view .LVU394
+ 1007 01ec D8BF     		it	le
+ 1008 01ee C91A     		suble	r1, r1, r3
+ 1009              	.LVL87:
+ 240:DaisySP-LGPL-FX/reverb.cpp ****             if(++read_pos >= buffer_size)
+ 1010              		.loc 1 240 13 is_stmt 1 view .LVU395
+ 240:DaisySP-LGPL-FX/reverb.cpp ****             if(++read_pos >= buffer_size)
+ 1011              		.loc 1 240 16 is_stmt 0 view .LVU396
+ 1012 01f0 02EB810E 		add	lr, r2, r1, lsl #2
+ 241:DaisySP-LGPL-FX/reverb.cpp ****                 read_pos -= buffer_size;
+ 1013              		.loc 1 241 27 view .LVU397
+ 1014 01f4 0131     		adds	r1, r1, #1
+ 1015              	.LVL88:
+ 241:DaisySP-LGPL-FX/reverb.cpp ****                 read_pos -= buffer_size;
+ 1016              		.loc 1 241 13 view .LVU398
+ 1017 01f6 8B42     		cmp	r3, r1
+ 240:DaisySP-LGPL-FX/reverb.cpp ****             if(++read_pos >= buffer_size)
+ 1018              		.loc 1 240 16 view .LVU399
+ 1019 01f8 DEED006A 		vldr.32	s13, [lr]
+ 1020              	.LVL89:
+ 241:DaisySP-LGPL-FX/reverb.cpp ****                 read_pos -= buffer_size;
+ 1021              		.loc 1 241 13 is_stmt 1 view .LVU400
+ 242:DaisySP-LGPL-FX/reverb.cpp ****             v1 = (float)lp->buf[read_pos];
+ 1022              		.loc 1 242 17 view .LVU401
+ 242:DaisySP-LGPL-FX/reverb.cpp ****             v1 = (float)lp->buf[read_pos];
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 28
+
+
+ 1023              		.loc 1 242 26 is_stmt 0 view .LVU402
+ 1024 01fc D8BF     		it	le
+ 1025 01fe C91A     		suble	r1, r1, r3
+ 1026              	.LVL90:
+ 243:DaisySP-LGPL-FX/reverb.cpp ****             if(++read_pos >= buffer_size)
+ 1027              		.loc 1 243 13 is_stmt 1 view .LVU403
+ 243:DaisySP-LGPL-FX/reverb.cpp ****             if(++read_pos >= buffer_size)
+ 1028              		.loc 1 243 16 is_stmt 0 view .LVU404
+ 1029 0200 02EB810E 		add	lr, r2, r1, lsl #2
+ 244:DaisySP-LGPL-FX/reverb.cpp ****                 read_pos -= buffer_size;
+ 1030              		.loc 1 244 27 view .LVU405
+ 1031 0204 0131     		adds	r1, r1, #1
+ 1032              	.LVL91:
+ 244:DaisySP-LGPL-FX/reverb.cpp ****                 read_pos -= buffer_size;
+ 1033              		.loc 1 244 13 view .LVU406
+ 1034 0206 8B42     		cmp	r3, r1
+ 243:DaisySP-LGPL-FX/reverb.cpp ****             if(++read_pos >= buffer_size)
+ 1035              		.loc 1 243 16 view .LVU407
+ 1036 0208 DEED004A 		vldr.32	s9, [lr]
+ 1037              	.LVL92:
+ 244:DaisySP-LGPL-FX/reverb.cpp ****                 read_pos -= buffer_size;
+ 1038              		.loc 1 244 13 is_stmt 1 view .LVU408
+ 245:DaisySP-LGPL-FX/reverb.cpp ****             v2 = (float)lp->buf[read_pos];
+ 1039              		.loc 1 245 17 view .LVU409
+ 245:DaisySP-LGPL-FX/reverb.cpp ****             v2 = (float)lp->buf[read_pos];
+ 1040              		.loc 1 245 26 is_stmt 0 view .LVU410
+ 1041 020c D8BF     		it	le
+ 1042 020e C91A     		suble	r1, r1, r3
+ 1043              	.LVL93:
+ 246:DaisySP-LGPL-FX/reverb.cpp ****         }
+ 1044              		.loc 1 246 13 is_stmt 1 view .LVU411
+ 246:DaisySP-LGPL-FX/reverb.cpp ****         }
+ 1045              		.loc 1 246 16 is_stmt 0 view .LVU412
+ 1046 0210 02EB8101 		add	r1, r2, r1, lsl #2
+ 1047              	.LVL94:
+ 246:DaisySP-LGPL-FX/reverb.cpp ****         }
+ 1048              		.loc 1 246 16 view .LVU413
+ 1049 0214 91ED005A 		vldr.32	s10, [r1]
+ 1050              	.LVL95:
+ 246:DaisySP-LGPL-FX/reverb.cpp ****         }
+ 1051              		.loc 1 246 16 view .LVU414
+ 1052 0218 87E7     		b	.L37
+ 1053              	.LVL96:
+ 1054              	.L42:
+ 268:DaisySP-LGPL-FX/reverb.cpp ****         }
+ 1055              		.loc 1 268 13 is_stmt 1 view .LVU415
+ 268:DaisySP-LGPL-FX/reverb.cpp ****         }
+ 1056              		.loc 1 268 21 is_stmt 0 view .LVU416
+ 1057 021a 33EE273A 		vadd.f32	s6, s6, s15
+ 1058              	.LVL97:
+ 268:DaisySP-LGPL-FX/reverb.cpp ****         }
+ 1059              		.loc 1 268 21 view .LVU417
+ 1060 021e A1E7     		b	.L43
+ 1061              	.LVL98:
+ 1062              	.L46:
+ 157:DaisySP-LGPL-FX/reverb.cpp **** 
+ 1063              		.loc 1 157 16 view .LVU418
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 29
+
+
+ 1064 0220 0120     		movs	r0, #1
+ 1065              	.LVL99:
+ 157:DaisySP-LGPL-FX/reverb.cpp **** 
+ 1066              		.loc 1 157 16 view .LVU419
+ 1067 0222 BBE7     		b	.L26
+ 1068              	.L52:
+ 1069 0224 AFF30080 		.align	3
+ 1070              	.L51:
+ 1071 0228 55555555 		.word	1431655765
+ 1072 022c 5555C53F 		.word	1069897045
+ 1073 0230 00000000 		.word	0
+ 1074 0234 3333B33E 		.word	1051931443
+ 1075 0238 DB0FC940 		.word	1086918619
+ 1076              		.cfi_endproc
+ 1077              	.LFE560:
+ 1079              		.section	.text._ZN7daisysp8ReverbSc10ProcessMixERKfS2_PfS3_,"ax",%progbits
+ 1080              		.align	1
+ 1081              		.global	_ZN7daisysp8ReverbSc10ProcessMixERKfS2_PfS3_
+ 1082              		.syntax unified
+ 1083              		.thumb
+ 1084              		.thumb_func
+ 1086              	_ZN7daisysp8ReverbSc10ProcessMixERKfS2_PfS3_:
+ 1087              	.LVL100:
+ 1088              	.LFB561:
  284:DaisySP-LGPL-FX/reverb.cpp **** 
- 285:DaisySP-LGPL-FX/reverb.cpp **** void ReverbSc::ProcessMix(const float &in1, const float &in2, float *out1, float *out2){
- 1456              		.loc 1 285 88
- 1457              		.cfi_startproc
- 1458              		@ args = 4, pretend = 0, frame = 24
- 1459              		@ frame_needed = 1, uses_anonymous_args = 0
- 1460 0000 80B5     		push	{r7, lr}
- 1461              		.cfi_def_cfa_offset 8
- 1462              		.cfi_offset 7, -8
- 1463              		.cfi_offset 14, -4
- 1464 0002 88B0     		sub	sp, sp, #32
- 1465              		.cfi_def_cfa_offset 40
- 1466 0004 02AF     		add	r7, sp, #8
- 1467              		.cfi_def_cfa 7, 32
- 1468 0006 F860     		str	r0, [r7, #12]
- 1469 0008 B960     		str	r1, [r7, #8]
- 1470 000a 7A60     		str	r2, [r7, #4]
- 1471 000c 3B60     		str	r3, [r7]
+ 285:DaisySP-LGPL-FX/reverb.cpp **** 
+ 286:DaisySP-LGPL-FX/reverb.cpp **** void ReverbSc::ProcessMix(const float &in1, const float &in2, float *out1, float *out2){
+ 1089              		.loc 1 286 88 is_stmt 1 view -0
+ 1090              		.cfi_startproc
+ 1091              		@ args = 4, pretend = 0, frame = 8
+ 1092              		@ frame_needed = 0, uses_anonymous_args = 0
+ 287:DaisySP-LGPL-FX/reverb.cpp ****   float wet_out1, wet_out2;
+ 1093              		.loc 1 287 3 view .LVU421
+ 288:DaisySP-LGPL-FX/reverb.cpp ****   Process(in1, in2, &wet_out1, &wet_out2);
+ 1094              		.loc 1 288 3 view .LVU422
  286:DaisySP-LGPL-FX/reverb.cpp ****   float wet_out1, wet_out2;
- 287:DaisySP-LGPL-FX/reverb.cpp ****   Process(in1, in2, &wet_out1, &wet_out2);
- 1472              		.loc 1 287 10
- 1473 000e 07F11402 		add	r2, r7, #20
- 1474 0012 07F11003 		add	r3, r7, #16
- 1475 0016 0093     		str	r3, [sp]
- 1476 0018 1346     		mov	r3, r2
- 1477 001a 7A68     		ldr	r2, [r7, #4]
- 1478 001c B968     		ldr	r1, [r7, #8]
- 1479 001e F868     		ldr	r0, [r7, #12]
- 1480 0020 FFF7FEFF 		bl	_ZN7daisysp8ReverbSc7ProcessERKfS2_PfS3_
- 288:DaisySP-LGPL-FX/reverb.cpp ****   *out1 = wet_mix_*wet_out1 + ((1.0f-wet_mix_)*in1);
- 1481              		.loc 1 288 11
- 1482 0024 FB68     		ldr	r3, [r7, #12]
- 1483 0026 03F5C023 		add	r3, r3, #393216
- 1484 002a 03F64433 		addw	r3, r3, #2884
- 1485 002e 93ED007A 		vldr.32	s14, [r3]
- 1486              		.loc 1 288 19
- 1487 0032 D7ED057A 		vldr.32	s15, [r7, #20]
- 1488 0036 27EE277A 		vmul.f32	s14, s14, s15
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 32
+ 1095              		.loc 1 286 88 is_stmt 0 view .LVU423
+ 1096 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 1097              		.cfi_def_cfa_offset 20
+ 1098              		.cfi_offset 4, -20
+ 1099              		.cfi_offset 5, -16
+ 1100              		.cfi_offset 6, -12
+ 1101              		.cfi_offset 7, -8
+ 1102              		.cfi_offset 14, -4
+ 1103 0002 85B0     		sub	sp, sp, #20
+ 1104              		.cfi_def_cfa_offset 40
+ 286:DaisySP-LGPL-FX/reverb.cpp ****   float wet_out1, wet_out2;
+ 1105              		.loc 1 286 88 view .LVU424
+ 1106 0004 1E46     		mov	r6, r3
+ 1107 0006 0446     		mov	r4, r0
+ 1108 0008 0F46     		mov	r7, r1
+ 1109              		.loc 1 288 10 view .LVU425
+ 1110 000a 03AB     		add	r3, sp, #12
+ 1111              	.LVL101:
+ 286:DaisySP-LGPL-FX/reverb.cpp ****   float wet_out1, wet_out2;
+ 1112              		.loc 1 286 88 view .LVU426
+ 1113 000c 1546     		mov	r5, r2
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 30
 
 
- 1489              		.loc 1 288 38
- 1490 003a FB68     		ldr	r3, [r7, #12]
- 1491 003c 03F5C023 		add	r3, r3, #393216
- 1492 0040 03F64433 		addw	r3, r3, #2884
- 1493 0044 D3ED007A 		vldr.32	s15, [r3]
- 1494              		.loc 1 288 37
- 1495 0048 F7EE006A 		vmov.f32	s13, #1.0e+0
- 1496 004c 76EEE76A 		vsub.f32	s13, s13, s15
- 1497              		.loc 1 288 48
- 1498 0050 BB68     		ldr	r3, [r7, #8]
- 1499 0052 D3ED007A 		vldr.32	s15, [r3]
- 1500              		.loc 1 288 47
- 1501 0056 66EEA77A 		vmul.f32	s15, s13, s15
- 1502              		.loc 1 288 29
- 1503 005a 77EE277A 		vadd.f32	s15, s14, s15
- 1504              		.loc 1 288 9
- 1505 005e 3B68     		ldr	r3, [r7]
- 1506 0060 C3ED007A 		vstr.32	s15, [r3]
- 289:DaisySP-LGPL-FX/reverb.cpp ****   *out2 = wet_mix_*wet_out2 + ((1.0f-wet_mix_)*in2);
- 1507              		.loc 1 289 11
- 1508 0064 FB68     		ldr	r3, [r7, #12]
- 1509 0066 03F5C023 		add	r3, r3, #393216
- 1510 006a 03F64433 		addw	r3, r3, #2884
- 1511 006e 93ED007A 		vldr.32	s14, [r3]
- 1512              		.loc 1 289 19
- 1513 0072 D7ED047A 		vldr.32	s15, [r7, #16]
- 1514 0076 27EE277A 		vmul.f32	s14, s14, s15
- 1515              		.loc 1 289 38
- 1516 007a FB68     		ldr	r3, [r7, #12]
- 1517 007c 03F5C023 		add	r3, r3, #393216
- 1518 0080 03F64433 		addw	r3, r3, #2884
- 1519 0084 D3ED007A 		vldr.32	s15, [r3]
- 1520              		.loc 1 289 37
- 1521 0088 F7EE006A 		vmov.f32	s13, #1.0e+0
- 1522 008c 76EEE76A 		vsub.f32	s13, s13, s15
- 1523              		.loc 1 289 48
- 1524 0090 7B68     		ldr	r3, [r7, #4]
- 1525 0092 D3ED007A 		vldr.32	s15, [r3]
- 1526              		.loc 1 289 47
- 1527 0096 66EEA77A 		vmul.f32	s15, s13, s15
- 1528              		.loc 1 289 29
- 1529 009a 77EE277A 		vadd.f32	s15, s14, s15
- 1530              		.loc 1 289 9
- 1531 009e 3B6A     		ldr	r3, [r7, #32]
- 1532 00a0 C3ED007A 		vstr.32	s15, [r3]
- 290:DaisySP-LGPL-FX/reverb.cpp **** }
- 1533              		.loc 1 290 1
- 1534 00a4 00BF     		nop
- 1535 00a6 1837     		adds	r7, r7, #24
- 1536              		.cfi_def_cfa_offset 8
- 1537 00a8 BD46     		mov	sp, r7
- 1538              		.cfi_def_cfa_register 13
- 1539              		@ sp needed
- 1540 00aa 80BD     		pop	{r7, pc}
- 1541              		.cfi_endproc
- 1542              	.LFE561:
- 1544              		.text
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 33
+ 1114              		.loc 1 288 10 view .LVU427
+ 1115 000e 0093     		str	r3, [sp]
+ 1116 0010 02AB     		add	r3, sp, #8
+ 1117 0012 FFF7FEFF 		bl	_ZN7daisysp8ReverbSc7ProcessERKfS2_PfS3_
+ 1118              	.LVL102:
+ 289:DaisySP-LGPL-FX/reverb.cpp ****   *out1 = wet_mix_*wet_out1 + ((1.0f-wet_mix_)*in1);
+ 1119              		.loc 1 289 3 is_stmt 1 view .LVU428
+ 1120              		.loc 1 289 11 is_stmt 0 view .LVU429
+ 1121 0016 04F5C120 		add	r0, r4, #395264
+ 1122              		.loc 1 289 37 view .LVU430
+ 1123 001a F7EE007A 		vmov.f32	s15, #1.0e+0
+ 1124              		.loc 1 289 47 view .LVU431
+ 1125 001e 97ED006A 		vldr.32	s12, [r7]
+ 1126              		.loc 1 289 11 view .LVU432
+ 1127 0022 D0EDD16A 		vldr.32	s13, [r0, #836]
+ 290:DaisySP-LGPL-FX/reverb.cpp ****   *out2 = wet_mix_*wet_out2 + ((1.0f-wet_mix_)*in2);
+ 1128              		.loc 1 290 9 view .LVU433
+ 1129 0026 0A9B     		ldr	r3, [sp, #40]
+ 289:DaisySP-LGPL-FX/reverb.cpp ****   *out1 = wet_mix_*wet_out1 + ((1.0f-wet_mix_)*in1);
+ 1130              		.loc 1 289 37 view .LVU434
+ 1131 0028 37EEE67A 		vsub.f32	s14, s15, s13
+ 289:DaisySP-LGPL-FX/reverb.cpp ****   *out1 = wet_mix_*wet_out1 + ((1.0f-wet_mix_)*in1);
+ 1132              		.loc 1 289 47 view .LVU435
+ 1133 002c 27EE067A 		vmul.f32	s14, s14, s12
+ 289:DaisySP-LGPL-FX/reverb.cpp ****   *out1 = wet_mix_*wet_out1 + ((1.0f-wet_mix_)*in1);
+ 1134              		.loc 1 289 29 view .LVU436
+ 1135 0030 9DED026A 		vldr.32	s12, [sp, #8]
+ 1136 0034 A6EE867A 		vfma.f32	s14, s13, s12
+ 289:DaisySP-LGPL-FX/reverb.cpp ****   *out1 = wet_mix_*wet_out1 + ((1.0f-wet_mix_)*in1);
+ 1137              		.loc 1 289 9 view .LVU437
+ 1138 0038 86ED007A 		vstr.32	s14, [r6]
+ 1139              		.loc 1 290 3 is_stmt 1 view .LVU438
+ 1140              		.loc 1 290 11 is_stmt 0 view .LVU439
+ 1141 003c 90EDD17A 		vldr.32	s14, [r0, #836]
+ 1142              		.loc 1 290 47 view .LVU440
+ 1143 0040 D5ED006A 		vldr.32	s13, [r5]
+ 1144              		.loc 1 290 37 view .LVU441
+ 1145 0044 77EEC77A 		vsub.f32	s15, s15, s14
+ 1146              		.loc 1 290 47 view .LVU442
+ 1147 0048 67EEA67A 		vmul.f32	s15, s15, s13
+ 1148              		.loc 1 290 29 view .LVU443
+ 1149 004c DDED036A 		vldr.32	s13, [sp, #12]
+ 1150 0050 E7EE267A 		vfma.f32	s15, s14, s13
+ 1151              		.loc 1 290 9 view .LVU444
+ 1152 0054 C3ED007A 		vstr.32	s15, [r3]
+ 291:DaisySP-LGPL-FX/reverb.cpp **** }...
+ 1153              		.loc 1 291 1 view .LVU445
+ 1154 0058 05B0     		add	sp, sp, #20
+ 1155              		.cfi_def_cfa_offset 20
+ 1156              		@ sp needed
+ 1157 005a F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1158              		.loc 1 291 1 view .LVU446
+ 1159              		.cfi_endproc
+ 1160              	.LFE561:
+ 1162              		.section	.rodata._ZL13kReverbParams,"a"
+ 1163              		.align	2
+ 1164              		.set	.LANCHOR0,. + 0
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 31
 
 
- 1545              	.Letext0:
- 1546              		.file 2 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/machine/_default_types.h"
- 1547              		.file 3 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/_stdint.h"
- 1548              		.file 4 "../libDaisy/Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h"
- 1549              		.file 5 "/Library/DaisyToolchain/0.2.0/arm/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h"
- 1550              		.file 6 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/cpp_type_traits.h
- 1551              		.file 7 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath"
- 1552              		.file 8 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h"
- 1553              		.file 9 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdlib"
- 1554              		.file 10 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v
- 1555              		.file 11 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/math.h"
- 1556              		.file 12 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdlib.h"
- 1557              		.file 13 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/math.h"
- 1558              		.file 14 "../libDaisy/Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_comp.h"
- 1559              		.file 15 "../libDaisy/Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
- 1560              		.file 16 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/stdlib.h"
- 1561              		.file 17 "DaisySP-LGPL-FX/reverb.h"
- 1562              		.file 18 "<built-in>"
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s 			page 34
+ 1167              	_ZL13kReverbParams:
+ 1168 0000 8207533D 		.word	1028851586
+ 1169 0004 6F12833A 		.word	981668463
+ 1170 0008 66664640 		.word	1078355558
+ 1171 000c 00C0F544 		.word	1156956160
+ 1172 0010 0A1E6C3D 		.word	1030495754
+ 1173 0014 E02D903A 		.word	982527456
+ 1174 0018 00006040 		.word	1080033280
+ 1175 001c 0066E646 		.word	1189504512
+ 1176 0020 3842893D 		.word	1032405560
+ 1177 0024 89D2DE3A 		.word	987681417
+ 1178 0028 7B148E3F 		.word	1066275963
+ 1179 002c 0032B346 		.word	1186148864
+ 1180 0030 EDC3973D 		.word	1033356269
+ 1181 0034 52491D3A 		.word	974997842
+ 1182 0038 A2457E40 		.word	1082017186
+ 1183 003c 00981946 		.word	1176082432
+ 1184 0040 DCB2A63D 		.word	1034334940
+ 1185 0044 6F12833A 		.word	981668463
+ 1186 0048 F2D21540 		.word	1075172082
+ 1187 004c 0046A146 		.word	1184974336
+ 1188 0050 D815B03D 		.word	1034950104
+ 1189 0054 E02D903A 		.word	982527456
+ 1190 0058 E5D0F23F 		.word	1072877797
+ 1191 005c 0032B346 		.word	1186148864
+ 1192 0060 8DDE363D 		.word	1027006093
+ 1193 0064 89D2DE3A 		.word	987681417
+ 1194 0068 9318643F 		.word	1063524499
+ 1195 006c 0066E646 		.word	1189504512
+ 1196 0070 08F3243D 		.word	1025831688
+ 1197 0074 52491D3A 		.word	974997842
+ 1198 0078 DD244E40 		.word	1078863069
+ 1199 007c 00446146 		.word	1180779520
+ 1200              		.text
+ 1201              	.Letext0:
+ 1202              		.file 2 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/machine/_default_types.h"
+ 1203              		.file 3 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/_stdint.h"
+ 1204              		.file 4 "../libDaisy/Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h"
+ 1205              		.file 5 "/Library/DaisyToolchain/0.2.0/arm/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h"
+ 1206              		.file 6 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/cpp_type_traits.h
+ 1207              		.file 7 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath"
+ 1208              		.file 8 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h"
+ 1209              		.file 9 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdlib"
+ 1210              		.file 10 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v
+ 1211              		.file 11 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/math.h"
+ 1212              		.file 12 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdlib.h"
+ 1213              		.file 13 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/math.h"
+ 1214              		.file 14 "../libDaisy/Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_comp.h"
+ 1215              		.file 15 "../libDaisy/Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
+ 1216              		.file 16 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/stdlib.h"
+ 1217              		.file 17 "DaisySP-LGPL-FX/reverb.h"
+ 1218              		.file 18 "<built-in>"
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s 			page 32
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 reverb.cpp
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s:19     .rodata._ZL13kReverbParams:0000000000000000 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s:22     .rodata._ZL13kReverbParams:0000000000000000 _ZL13kReverbParams
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s:56     .rodata._ZL11kOutputGain:0000000000000000 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s:59     .rodata._ZL11kOutputGain:0000000000000000 _ZL11kOutputGain
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s:62     .rodata._ZL8kJpScale:0000000000000000 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s:65     .rodata._ZL8kJpScale:0000000000000000 _ZL8kJpScale
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s:68     .text._ZN7daisysp8ReverbSc4InitEf:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s:74     .text._ZN7daisysp8ReverbSc4InitEf:0000000000000000 _ZN7daisysp8ReverbSc4InitEf
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s:587    .text._ZN7daisysp8ReverbSc13InitDelayLineEPNS_10ReverbScDlEi:0000000000000000 _ZN7daisysp8ReverbSc13InitDelayLineEPNS_10ReverbScDlEi
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s:306    .text._ZL19DelayLineBytesAllocffi:0000000000000000 _ZL19DelayLineBytesAllocffi
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s:212    .text._ZN7daisysp8ReverbSc4InitEf:00000000000000cc $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s:219    .text._ZL19DelayLineMaxSamplesffi:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s:224    .text._ZL19DelayLineMaxSamplesffi:0000000000000000 _ZL19DelayLineMaxSamplesffi
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s:294    .text._ZL19DelayLineMaxSamplesffi:0000000000000080 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s:301    .text._ZL19DelayLineBytesAllocffi:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s:352    .text._ZN7daisysp8ReverbSc17NextRandomLinesegEPNS_10ReverbScDlEi:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s:358    .text._ZN7daisysp8ReverbSc17NextRandomLinesegEPNS_10ReverbScDlEi:0000000000000000 _ZN7daisysp8ReverbSc17NextRandomLinesegEPNS_10ReverbScDlEi
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s:574    .text._ZN7daisysp8ReverbSc17NextRandomLinesegEPNS_10ReverbScDlEi:00000000000001ac $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s:581    .text._ZN7daisysp8ReverbSc13InitDelayLineEPNS_10ReverbScDlEi:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s:773    .text._ZN7daisysp8ReverbSc13InitDelayLineEPNS_10ReverbScDlEi:0000000000000154 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s:780    .text._ZN7daisysp8ReverbSc7ProcessERKfS2_PfS3_:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s:786    .text._ZN7daisysp8ReverbSc7ProcessERKfS2_PfS3_:0000000000000000 _ZN7daisysp8ReverbSc7ProcessERKfS2_PfS3_
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s:1177   .text._ZN7daisysp8ReverbSc7ProcessERKfS2_PfS3_:00000000000002e8 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s:1184   .text._ZN7daisysp8ReverbSc7ProcessERKfS2_PfS3_:00000000000002fc $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s:1448   .text._ZN7daisysp8ReverbSc10ProcessMixERKfS2_PfS3_:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cck1TK5p.s:1454   .text._ZN7daisysp8ReverbSc10ProcessMixERKfS2_PfS3_:0000000000000000 _ZN7daisysp8ReverbSc10ProcessMixERKfS2_PfS3_
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s:19     .text._ZN7daisysp8ReverbSc17NextRandomLinesegEPNS_10ReverbScDlEi:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s:25     .text._ZN7daisysp8ReverbSc17NextRandomLinesegEPNS_10ReverbScDlEi:0000000000000000 _ZN7daisysp8ReverbSc17NextRandomLinesegEPNS_10ReverbScDlEi
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s:184    .text._ZN7daisysp8ReverbSc17NextRandomLinesegEPNS_10ReverbScDlEi:00000000000000e4 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s:192    .text._ZN7daisysp8ReverbSc13InitDelayLineEPNS_10ReverbScDlEi:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s:198    .text._ZN7daisysp8ReverbSc13InitDelayLineEPNS_10ReverbScDlEi:0000000000000000 _ZN7daisysp8ReverbSc13InitDelayLineEPNS_10ReverbScDlEi
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s:394    .text._ZN7daisysp8ReverbSc13InitDelayLineEPNS_10ReverbScDlEi:00000000000000c8 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s:403    .text._ZN7daisysp8ReverbSc4InitEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s:409    .text._ZN7daisysp8ReverbSc4InitEf:0000000000000000 _ZN7daisysp8ReverbSc4InitEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s:585    .text._ZN7daisysp8ReverbSc4InitEf:00000000000000a0 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s:595    .text._ZN7daisysp8ReverbSc7ProcessERKfS2_PfS3_:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s:601    .text._ZN7daisysp8ReverbSc7ProcessERKfS2_PfS3_:0000000000000000 _ZN7daisysp8ReverbSc7ProcessERKfS2_PfS3_
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s:1071   .text._ZN7daisysp8ReverbSc7ProcessERKfS2_PfS3_:0000000000000228 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s:1080   .text._ZN7daisysp8ReverbSc10ProcessMixERKfS2_PfS3_:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s:1086   .text._ZN7daisysp8ReverbSc10ProcessMixERKfS2_PfS3_:0000000000000000 _ZN7daisysp8ReverbSc10ProcessMixERKfS2_PfS3_
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s:1163   .rodata._ZL13kReverbParams:0000000000000000 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccQ83AQy.s:1167   .rodata._ZL13kReverbParams:0000000000000000 _ZL13kReverbParams
 
 UNDEFINED SYMBOLS
 cosf

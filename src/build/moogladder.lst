@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 1
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -11,22 +11,120 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 1
    8              		.eabi_attribute 24, 1
    9              		.eabi_attribute 25, 1
   10              		.eabi_attribute 26, 1
-  11              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 30, 4
   12              		.eabi_attribute 34, 1
   13              		.eabi_attribute 18, 4
   14              		.file	"moogladder.cpp"
   15              		.text
   16              	.Ltext0:
   17              		.cfi_sections	.debug_frame
-  18              		.section	.text._ZSt4tanhf,"axG",%progbits,_ZSt4tanhf,comdat
+  18              		.section	.text._ZN7daisysp10MoogLadder7my_tanhEf,"ax",%progbits
   19              		.align	1
-  20              		.weak	_ZSt4tanhf
+  20              		.global	_ZN7daisysp10MoogLadder7my_tanhEf
   21              		.syntax unified
   22              		.thumb
   23              		.thumb_func
-  25              	_ZSt4tanhf:
-  26              	.LFB205:
-  27              		.file 1 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath"
+  25              	_ZN7daisysp10MoogLadder7my_tanhEf:
+  26              	.LVL0:
+  27              	.LFB2797:
+  28              		.file 1 "DaisySP-LGPL-FX/moogladder.cpp"
+   1:DaisySP-LGPL-FX/moogladder.cpp **** #include "moogladder.h"
+   2:DaisySP-LGPL-FX/moogladder.cpp **** #include "Utility/dsp.h"
+   3:DaisySP-LGPL-FX/moogladder.cpp **** 
+   4:DaisySP-LGPL-FX/moogladder.cpp **** using namespace daisysp;
+   5:DaisySP-LGPL-FX/moogladder.cpp **** 
+   6:DaisySP-LGPL-FX/moogladder.cpp **** float MoogLadder::my_tanh(float x)
+   7:DaisySP-LGPL-FX/moogladder.cpp **** {
+  29              		.loc 1 7 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+   8:DaisySP-LGPL-FX/moogladder.cpp ****     int sign = 1;
+  33              		.loc 1 8 5 view .LVU1
+   9:DaisySP-LGPL-FX/moogladder.cpp ****     if(x < 0)
+  34              		.loc 1 9 5 view .LVU2
+  35 0000 B5EEC00A 		vcmpe.f32	s0, #0
+   7:DaisySP-LGPL-FX/moogladder.cpp ****     int sign = 1;
+  36              		.loc 1 7 1 is_stmt 0 view .LVU3
+  37 0004 08B5     		push	{r3, lr}
+  38              		.cfi_def_cfa_offset 8
+  39              		.cfi_offset 3, -8
+  40              		.cfi_offset 14, -4
+  41              		.loc 1 9 5 view .LVU4
+  42 0006 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+  10:DaisySP-LGPL-FX/moogladder.cpp ****     {
+  11:DaisySP-LGPL-FX/moogladder.cpp ****         sign = -1;
+  43              		.loc 1 11 9 is_stmt 1 view .LVU5
+  44              	.LVL1:
+  12:DaisySP-LGPL-FX/moogladder.cpp ****         x    = -x;
+  45              		.loc 1 12 9 view .LVU6
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s 			page 2
+
+
+   7:DaisySP-LGPL-FX/moogladder.cpp ****     int sign = 1;
+  46              		.loc 1 7 1 is_stmt 0 view .LVU7
+  47 000a 2DED028B 		vpush.64	{d8}
+  48              		.cfi_def_cfa_offset 16
+  49              		.cfi_offset 80, -16
+  50              		.cfi_offset 81, -12
+  11:DaisySP-LGPL-FX/moogladder.cpp ****         x    = -x;
+  51              		.loc 1 11 14 view .LVU8
+  52 000e 4ABF     		itet	mi
+  53 0010 4FF0FF33 		movmi	r3, #-1
+   8:DaisySP-LGPL-FX/moogladder.cpp ****     if(x < 0)
+  54              		.loc 1 8 9 view .LVU9
+  55 0014 0123     		movpl	r3, #1
+  56              		.loc 1 12 14 view .LVU10
+  57 0016 B1EE400A 		vnegmi.f32	s0, s0
+  58              	.LVL2:
+  13:DaisySP-LGPL-FX/moogladder.cpp ****     }
+  14:DaisySP-LGPL-FX/moogladder.cpp ****     if(x >= 4.0)
+  59              		.loc 1 14 5 is_stmt 1 view .LVU11
+  15:DaisySP-LGPL-FX/moogladder.cpp ****     {
+  16:DaisySP-LGPL-FX/moogladder.cpp ****         return sign;
+  60              		.loc 1 16 16 is_stmt 0 view .LVU12
+  61 001a 07EE903A 		vmov	s15, r3	@ int
+  62 001e B8EEE78A 		vcvt.f32.s32	s16, s15
+  14:DaisySP-LGPL-FX/moogladder.cpp ****     {
+  63              		.loc 1 14 5 view .LVU13
+  64 0022 F1EE007A 		vmov.f32	s15, #4.0e+0
+  65 0026 B4EEE70A 		vcmpe.f32	s0, s15
+  66 002a F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+  67 002e 08DA     		bge	.L1
+  17:DaisySP-LGPL-FX/moogladder.cpp ****     }
+  18:DaisySP-LGPL-FX/moogladder.cpp ****     if(x < 0.5)
+  68              		.loc 1 18 5 is_stmt 1 view .LVU14
+  69 0030 F6EE007A 		vmov.f32	s15, #5.0e-1
+  70 0034 B4EEE70A 		vcmpe.f32	s0, s15
+  71 0038 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+  72 003c 06D5     		bpl	.L11
+  73              	.LVL3:
+  74              	.L12:
+  19:DaisySP-LGPL-FX/moogladder.cpp ****         return x * sign;
+  20:DaisySP-LGPL-FX/moogladder.cpp ****     return sign * tanh(x);
+  75              		.loc 1 20 25 is_stmt 0 view .LVU15
+  76 003e 28EE008A 		vmul.f32	s16, s16, s0
+  77              	.L1:
+  21:DaisySP-LGPL-FX/moogladder.cpp **** }
+  78              		.loc 1 21 1 view .LVU16
+  79 0042 B0EE480A 		vmov.f32	s0, s16
+  80 0046 BDEC028B 		vldm	sp!, {d8}
+  81              		.cfi_remember_state
+  82              		.cfi_restore 80
+  83              		.cfi_restore 81
+  84              		.cfi_def_cfa_offset 8
+  85 004a 08BD     		pop	{r3, pc}
+  86              	.LVL4:
+  87              	.L11:
+  88              		.cfi_restore_state
+  20:DaisySP-LGPL-FX/moogladder.cpp **** }
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s 			page 3
+
+
+  89              		.loc 1 20 5 is_stmt 1 view .LVU17
+  90              	.LBB4:
+  91              	.LBI4:
+  92              		.file 2 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath"
    1:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // -*- C++ -*- C forwarding header.
    2:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
    3:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // Copyright (C) 1997-2020 Free Software Foundation, Inc.
@@ -58,9 +156,6 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 1
   29:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****  *  This is the C++ version of the Standard C Library header @c math.h,
   30:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****  *  and its contents are (mostly) the same as that header, but are all
   31:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****  *  contained in the namespace @c std (except for names which are defined
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 2
-
-
   32:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****  *  as macros in C).
   33:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****  */
   34:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
@@ -83,6 +178,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 1
   51:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
   52:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** // Get rid of those macros defined in <math.h> in lieu of real functions.
   53:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef div
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s 			page 4
+
+
   54:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef acos
   55:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef asin
   56:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #undef atan
@@ -118,9 +216,6 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 1
   86:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
   87:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   acos(float __x)
   88:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_acosf(__x); }
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 3
-
-
   89:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
   90:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
   91:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   acos(long double __x)
@@ -143,6 +238,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 1
  108:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  109:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
  110:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   asin(long double __x)
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s 			page 5
+
+
  111:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_asinl(__x); }
  112:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
  113:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
@@ -178,9 +276,6 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 1
  143:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
  144:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   atan2(float __y, float __x)
  145:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_atan2f(__y, __x); }
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 4
-
-
  146:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  147:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
  148:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   atan2(long double __y, long double __x)
@@ -203,6 +298,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 1
  165:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   ceil(float __x)
  166:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_ceilf(__x); }
  167:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s 			page 6
+
+
  168:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
  169:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   ceil(long double __x)
  170:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_ceill(__x); }
@@ -238,9 +336,6 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 1
  200:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  201:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
  202:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 5
-
-
  203:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   cosh(float __x)
  204:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_coshf(__x); }
  205:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
@@ -263,6 +358,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 1
  222:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   exp(float __x)
  223:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_expf(__x); }
  224:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s 			page 7
+
+
  225:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
  226:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   exp(long double __x)
  227:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_expl(__x); }
@@ -298,9 +396,6 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 1
  257:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  258:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
  259:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 6
-
-
  260:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   floor(float __x)
  261:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_floorf(__x); }
  262:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
@@ -323,6 +418,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 1
  279:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   fmod(float __x, float __y)
  280:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_fmodf(__x, __y); }
  281:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s 			page 8
+
+
  282:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
  283:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   fmod(long double __x, long double __y)
  284:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_fmodl(__x, __y); }
@@ -358,9 +456,6 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 1
  314:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  315:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::ldexp;
  316:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 7
-
-
  317:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
  318:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
  319:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   ldexp(float __x, int __exp)
@@ -383,6 +478,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 1
  336:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
  337:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
  338:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   log(float __x)
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s 			page 9
+
+
  339:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_logf(__x); }
  340:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  341:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
@@ -418,9 +516,6 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 1
  371:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  372:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   using ::modf;
  373:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 8
-
-
  374:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
  375:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline float
  376:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   modf(float __x, float* __iptr)
@@ -443,6 +538,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 1
  393:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_powl(__x, __y); }
  394:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  395:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #if __cplusplus < 201103L
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s 			page 10
+
+
  396:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   // _GLIBCXX_RESOLVE_LIB_DEFECTS
  397:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   // DR 550. What should the return type of pow(float,int) be?
  398:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline double
@@ -478,9 +576,6 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 1
  428:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
  429:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   sin(long double __x)
  430:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_sinl(__x); }
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 9
-
-
  431:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
  432:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  433:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
@@ -503,6 +598,9 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 1
  450:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
  451:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  452:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s 			page 11
+
+
  453:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     inline _GLIBCXX_CONSTEXPR
  454:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****     typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
  455:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****                                     double>::__type
@@ -538,9 +636,6 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 1
  485:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR long double
  486:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   tan(long double __x)
  487:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_tanl(__x); }
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 10
-
-
  488:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #endif
  489:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** 
  490:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   template<typename _Tp>
@@ -555,1150 +650,741 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 1
  499:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath **** #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
  500:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   inline _GLIBCXX_CONSTEXPR float
  501:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   tanh(float __x)
+  93              		.loc 2 501 3 view .LVU18
+  94              	.LBB5:
  502:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cmath ****   { return __builtin_tanhf(__x); }
-  28              		.loc 1 502 3
-  29              		.cfi_startproc
-  30              		@ args = 0, pretend = 0, frame = 8
-  31              		@ frame_needed = 1, uses_anonymous_args = 0
-  32 0000 80B5     		push	{r7, lr}
-  33              		.cfi_def_cfa_offset 8
-  34              		.cfi_offset 7, -8
-  35              		.cfi_offset 14, -4
-  36 0002 82B0     		sub	sp, sp, #8
-  37              		.cfi_def_cfa_offset 16
-  38 0004 00AF     		add	r7, sp, #0
-  39              		.cfi_def_cfa_register 7
-  40 0006 87ED010A 		vstr.32	s0, [r7, #4]
-  41              		.loc 1 502 27
-  42 000a 97ED010A 		vldr.32	s0, [r7, #4]
-  43 000e FFF7FEFF 		bl	tanhf
-  44 0012 F0EE407A 		vmov.f32	s15, s0
-  45              		.loc 1 502 34
-  46 0016 B0EE670A 		vmov.f32	s0, s15
-  47 001a 0837     		adds	r7, r7, #8
-  48              		.cfi_def_cfa_offset 8
-  49 001c BD46     		mov	sp, r7
-  50              		.cfi_def_cfa_register 13
-  51              		@ sp needed
-  52 001e 80BD     		pop	{r7, pc}
-  53              		.cfi_endproc
-  54              	.LFE205:
-  56              		.section	.rodata._ZStL19piecewise_construct,"a"
-  57              		.align	2
-  60              	_ZStL19piecewise_construct:
-  61 0000 00       		.space	1
-  62              		.section	.text._ZL20__gthread_key_deletei,"ax",%progbits
-  63              		.align	1
-  64              		.syntax unified
-  65              		.thumb
-  66              		.thumb_func
-  68              	_ZL20__gthread_key_deletei:
-  69              	.LFB1202:
-  70              		.file 2 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7
-   1:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** /* Threads compatibility routines for libgcc2 and libobjc.  */
-   2:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** /* Compile this one with gcc.  */
-   3:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** /* Copyright (C) 1997-2020 Free Software Foundation, Inc.
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 11
+  95              		.loc 2 502 5 view .LVU19
+  96              		.loc 2 502 27 is_stmt 0 view .LVU20
+  97 004c FFF7FEFF 		bl	tanhf
+  98              	.LVL5:
+  99              		.loc 2 502 27 view .LVU21
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s 			page 12
 
 
-   4:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
-   5:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** This file is part of GCC.
-   6:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
-   7:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** GCC is free software; you can redistribute it and/or modify it under
-   8:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** the terms of the GNU General Public License as published by the Free
-   9:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** Software Foundation; either version 3, or (at your option) any later
-  10:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** version.
-  11:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
-  12:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** GCC is distributed in the hope that it will be useful, but WITHOUT ANY
-  13:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** WARRANTY; without even the implied warranty of MERCHANTABILITY or
-  14:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
-  15:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** for more details.
-  16:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
-  17:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** Under Section 7 of GPL version 3, you are granted additional
-  18:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** permissions described in the GCC Runtime Library Exception, version
-  19:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 3.1, as published by the Free Software Foundation.
-  20:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
-  21:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** You should have received a copy of the GNU General Public License and
-  22:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** a copy of the GCC Runtime Library Exception along with this program;
-  23:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
-  24:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** <http://www.gnu.org/licenses/>.  */
-  25:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
-  26:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** #ifndef _GLIBCXX_GCC_GTHR_SINGLE_H
-  27:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** #define _GLIBCXX_GCC_GTHR_SINGLE_H
-  28:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
-  29:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** /* Just provide compatibility for mutex handling.  */
-  30:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
-  31:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** typedef int __gthread_key_t;
-  32:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** typedef int __gthread_once_t;
-  33:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** typedef int __gthread_mutex_t;
-  34:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** typedef int __gthread_recursive_mutex_t;
-  35:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
-  36:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** #define __GTHREAD_ONCE_INIT 0
-  37:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** #define __GTHREAD_MUTEX_INIT 0
-  38:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** #define __GTHREAD_MUTEX_INIT_FUNCTION(mx) do {} while (0)
-  39:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** #define __GTHREAD_RECURSIVE_MUTEX_INIT 0
-  40:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
-  41:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** #define _GLIBCXX_UNUSED __attribute__((__unused__))
-  42:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
-  43:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** #ifdef _LIBOBJC
-  44:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
-  45:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** /* Thread local storage for a single thread */
-  46:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** static void *thread_local_storage = NULL;
-  47:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
-  48:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** /* Backend initialization functions */
-  49:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
-  50:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** /* Initialize the threads subsystem.  */
-  51:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** static inline int
-  52:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** __gthread_objc_init_thread_system (void)
-  53:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** {
-  54:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   /* No thread support available */
-  55:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   return -1;
-  56:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** }
-  57:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
-  58:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** /* Close the threads subsystem.  */
-  59:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** static inline int
-  60:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** __gthread_objc_close_thread_system (void)
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 12
-
-
-  61:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** {
-  62:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   /* No thread support available */
-  63:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   return -1;
-  64:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** }
-  65:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
-  66:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** /* Backend thread functions */
-  67:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
-  68:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** /* Create a new thread of execution.  */
-  69:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** static inline objc_thread_t
-  70:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** __gthread_objc_thread_detach (void (* func)(void *), void * arg _GLIBCXX_UNUSED)
-  71:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** {
-  72:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   /* No thread support available */
-  73:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   return NULL;
-  74:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** }
-  75:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
-  76:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** /* Set the current thread's priority.  */
-  77:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** static inline int
-  78:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** __gthread_objc_thread_set_priority (int priority _GLIBCXX_UNUSED)
-  79:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** {
-  80:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   /* No thread support available */
-  81:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   return -1;
-  82:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** }
-  83:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
-  84:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** /* Return the current thread's priority.  */
-  85:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** static inline int
-  86:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** __gthread_objc_thread_get_priority (void)
-  87:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** {
-  88:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   return OBJC_THREAD_INTERACTIVE_PRIORITY;
-  89:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** }
-  90:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
-  91:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** /* Yield our process time to another thread.  */
-  92:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** static inline void
-  93:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** __gthread_objc_thread_yield (void)
-  94:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** {
-  95:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   return;
-  96:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** }
-  97:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
-  98:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** /* Terminate the current thread.  */
-  99:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** static inline int
- 100:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** __gthread_objc_thread_exit (void)
- 101:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** {
- 102:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   /* No thread support available */
- 103:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   /* Should we really exit the program */
- 104:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   /* exit (&__objc_thread_exit_status); */
- 105:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   return -1;
- 106:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** }
- 107:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
- 108:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** /* Returns an integer value which uniquely describes a thread.  */
- 109:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** static inline objc_thread_t
- 110:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** __gthread_objc_thread_id (void)
- 111:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** {
- 112:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   /* No thread support, use 1.  */
- 113:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   return (objc_thread_t) 1;
- 114:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** }
- 115:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
- 116:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** /* Sets the thread's local storage pointer.  */
- 117:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** static inline int
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 13
-
-
- 118:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** __gthread_objc_thread_set_data (void *value)
- 119:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** {
- 120:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   thread_local_storage = value;
- 121:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   return 0;
- 122:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** }
- 123:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
- 124:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** /* Returns the thread's local storage pointer.  */
- 125:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** static inline void *
- 126:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** __gthread_objc_thread_get_data (void)
- 127:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** {
- 128:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   return thread_local_storage;
- 129:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** }
- 130:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
- 131:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** /* Backend mutex functions */
- 132:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
- 133:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** /* Allocate a mutex.  */
- 134:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** static inline int
- 135:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** __gthread_objc_mutex_allocate (objc_mutex_t mutex _GLIBCXX_UNUSED)
- 136:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** {
- 137:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   return 0;
- 138:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** }
- 139:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
- 140:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** /* Deallocate a mutex.  */
- 141:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** static inline int
- 142:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** __gthread_objc_mutex_deallocate (objc_mutex_t mutex _GLIBCXX_UNUSED)
- 143:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** {
- 144:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   return 0;
- 145:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** }
- 146:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
- 147:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** /* Grab a lock on a mutex.  */
- 148:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** static inline int
- 149:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** __gthread_objc_mutex_lock (objc_mutex_t mutex _GLIBCXX_UNUSED)
- 150:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** {
- 151:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   /* There can only be one thread, so we always get the lock */
- 152:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   return 0;
- 153:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** }
- 154:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
- 155:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** /* Try to grab a lock on a mutex.  */
- 156:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** static inline int
- 157:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** __gthread_objc_mutex_trylock (objc_mutex_t mutex _GLIBCXX_UNUSED)
- 158:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** {
- 159:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   /* There can only be one thread, so we always get the lock */
- 160:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   return 0;
- 161:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** }
- 162:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
- 163:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** /* Unlock the mutex */
- 164:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** static inline int
- 165:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** __gthread_objc_mutex_unlock (objc_mutex_t mutex _GLIBCXX_UNUSED)
- 166:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** {
- 167:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   return 0;
- 168:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** }
- 169:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
- 170:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** /* Backend condition mutex functions */
- 171:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
- 172:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** /* Allocate a condition.  */
- 173:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** static inline int
- 174:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** __gthread_objc_condition_allocate (objc_condition_t condition _GLIBCXX_UNUSED)
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 14
-
-
- 175:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** {
- 176:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   return 0;
- 177:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** }
- 178:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
- 179:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** /* Deallocate a condition.  */
- 180:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** static inline int
- 181:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** __gthread_objc_condition_deallocate (objc_condition_t condition _GLIBCXX_UNUSED)
- 182:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** {
- 183:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   return 0;
- 184:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** }
- 185:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
- 186:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** /* Wait on the condition */
- 187:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** static inline int
- 188:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** __gthread_objc_condition_wait (objc_condition_t condition _GLIBCXX_UNUSED,
- 189:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 			       objc_mutex_t mutex _GLIBCXX_UNUSED)
- 190:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** {
- 191:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   return 0;
- 192:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** }
- 193:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
- 194:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** /* Wake up all threads waiting on this condition.  */
- 195:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** static inline int
- 196:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** __gthread_objc_condition_broadcast (objc_condition_t condition _GLIBCXX_UNUSED)
- 197:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** {
- 198:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   return 0;
- 199:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** }
- 200:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
- 201:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** /* Wake up one thread waiting on this condition.  */
- 202:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** static inline int
- 203:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** __gthread_objc_condition_signal (objc_condition_t condition _GLIBCXX_UNUSED)
- 204:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** {
- 205:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   return 0;
- 206:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** }
- 207:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
- 208:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** #else /* _LIBOBJC */
- 209:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
- 210:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** static inline int
- 211:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** __gthread_active_p (void)
- 212:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** {
- 213:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   return 0;
- 214:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** }
- 215:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
- 216:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** static inline int
- 217:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** __gthread_once (__gthread_once_t *__once _GLIBCXX_UNUSED, void (*__func) (void) _GLIBCXX_UNUSED)
- 218:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** {
- 219:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   return 0;
- 220:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** }
- 221:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
- 222:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** static inline int _GLIBCXX_UNUSED
- 223:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** __gthread_key_create (__gthread_key_t *__key _GLIBCXX_UNUSED, void (*__func) (void *) _GLIBCXX_UNUS
- 224:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** {
- 225:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   return 0;
- 226:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** }
- 227:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** 
- 228:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** static int _GLIBCXX_UNUSED
- 229:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** __gthread_key_delete (__gthread_key_t __key _GLIBCXX_UNUSED)
- 230:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** {
-  71              		.loc 2 230 1
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 15
-
-
-  72              		.cfi_startproc
-  73              		@ args = 0, pretend = 0, frame = 8
-  74              		@ frame_needed = 1, uses_anonymous_args = 0
-  75              		@ link register save eliminated.
-  76 0000 80B4     		push	{r7}
-  77              		.cfi_def_cfa_offset 4
-  78              		.cfi_offset 7, -4
-  79 0002 83B0     		sub	sp, sp, #12
-  80              		.cfi_def_cfa_offset 16
-  81 0004 00AF     		add	r7, sp, #0
-  82              		.cfi_def_cfa_register 7
-  83 0006 7860     		str	r0, [r7, #4]
- 231:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h ****   return 0;
-  84              		.loc 2 231 10
-  85 0008 0023     		movs	r3, #0
- 232:/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+dp/hard/bits/gthr-default.h **** }
-  86              		.loc 2 232 1
-  87 000a 1846     		mov	r0, r3
-  88 000c 0C37     		adds	r7, r7, #12
-  89              		.cfi_def_cfa_offset 4
-  90 000e BD46     		mov	sp, r7
-  91              		.cfi_def_cfa_register 13
-  92              		@ sp needed
-  93 0010 5DF8047B 		ldr	r7, [sp], #4
-  94              		.cfi_restore 7
-  95              		.cfi_def_cfa_offset 0
-  96 0014 7047     		bx	lr
-  97              		.cfi_endproc
-  98              	.LFE1202:
- 100              		.section	.rodata._ZN7daisyspL9kRandFracE,"a"
- 101              		.align	2
- 104              	_ZN7daisyspL9kRandFracE:
- 105 0000 00000030 		.word	805306368
- 106              		.section	.rodata._ZN7daisyspL11kOneTwelfthE,"a"
- 107              		.align	2
- 110              	_ZN7daisyspL11kOneTwelfthE:
- 111 0000 ABAAAA3D 		.word	1034594987
- 112              		.section	.text._ZN7daisysp10MoogLadder7my_tanhEf,"ax",%progbits
- 113              		.align	1
- 114              		.global	_ZN7daisysp10MoogLadder7my_tanhEf
- 115              		.syntax unified
- 116              		.thumb
- 117              		.thumb_func
- 119              	_ZN7daisysp10MoogLadder7my_tanhEf:
- 120              	.LFB2794:
- 121              		.file 3 "DaisySP-LGPL-FX/moogladder.cpp"
-   1:DaisySP-LGPL-FX/moogladder.cpp **** #include "moogladder.h"
-   2:DaisySP-LGPL-FX/moogladder.cpp **** #include "Utility/dsp.h"
-   3:DaisySP-LGPL-FX/moogladder.cpp **** 
-   4:DaisySP-LGPL-FX/moogladder.cpp **** using namespace daisysp;
-   5:DaisySP-LGPL-FX/moogladder.cpp **** 
-   6:DaisySP-LGPL-FX/moogladder.cpp **** float MoogLadder::my_tanh(float x)
-   7:DaisySP-LGPL-FX/moogladder.cpp **** {
- 122              		.loc 3 7 1
- 123              		.cfi_startproc
- 124              		@ args = 0, pretend = 0, frame = 16
- 125              		@ frame_needed = 1, uses_anonymous_args = 0
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 16
-
-
- 126 0000 80B5     		push	{r7, lr}
- 127              		.cfi_def_cfa_offset 8
- 128              		.cfi_offset 7, -8
- 129              		.cfi_offset 14, -4
- 130 0002 2DED028B 		vpush.64	{d8}
- 131              		.cfi_def_cfa_offset 16
- 132              		.cfi_offset 80, -16
- 133              		.cfi_offset 81, -12
- 134 0006 84B0     		sub	sp, sp, #16
- 135              		.cfi_def_cfa_offset 32
- 136 0008 00AF     		add	r7, sp, #0
- 137              		.cfi_def_cfa_register 7
- 138 000a 7860     		str	r0, [r7, #4]
- 139 000c 87ED000A 		vstr.32	s0, [r7]
-   8:DaisySP-LGPL-FX/moogladder.cpp ****     int sign = 1;
- 140              		.loc 3 8 9
- 141 0010 0123     		movs	r3, #1
- 142 0012 FB60     		str	r3, [r7, #12]
-   9:DaisySP-LGPL-FX/moogladder.cpp ****     if(x < 0)
- 143              		.loc 3 9 5
- 144 0014 D7ED007A 		vldr.32	s15, [r7]
- 145 0018 F5EEC07A 		vcmpe.f32	s15, #0
- 146 001c F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 147 0020 08D5     		bpl	.L6
-  10:DaisySP-LGPL-FX/moogladder.cpp ****     {
-  11:DaisySP-LGPL-FX/moogladder.cpp ****         sign = -1;
- 148              		.loc 3 11 14
- 149 0022 4FF0FF33 		mov	r3, #-1
- 150 0026 FB60     		str	r3, [r7, #12]
-  12:DaisySP-LGPL-FX/moogladder.cpp ****         x    = -x;
- 151              		.loc 3 12 14
- 152 0028 D7ED007A 		vldr.32	s15, [r7]
- 153 002c F1EE677A 		vneg.f32	s15, s15
- 154 0030 C7ED007A 		vstr.32	s15, [r7]
- 155              	.L6:
-  13:DaisySP-LGPL-FX/moogladder.cpp ****     }
-  14:DaisySP-LGPL-FX/moogladder.cpp ****     if(x >= 4.0)
- 156              		.loc 3 14 5
- 157 0034 D7ED007A 		vldr.32	s15, [r7]
- 158 0038 B1EE007A 		vmov.f32	s14, #4.0e+0
- 159 003c F4EEC77A 		vcmpe.f32	s15, s14
- 160 0040 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 161 0044 05DB     		blt	.L16
-  15:DaisySP-LGPL-FX/moogladder.cpp ****     {
-  16:DaisySP-LGPL-FX/moogladder.cpp ****         return sign;
- 162              		.loc 3 16 16
- 163 0046 FB68     		ldr	r3, [r7, #12]
- 164 0048 07EE903A 		vmov	s15, r3	@ int
- 165 004c F8EEE77A 		vcvt.f32.s32	s15, s15
- 166 0050 1FE0     		b	.L10
- 167              	.L16:
-  17:DaisySP-LGPL-FX/moogladder.cpp ****     }
-  18:DaisySP-LGPL-FX/moogladder.cpp ****     if(x < 0.5)
- 168              		.loc 3 18 5
- 169 0052 D7ED007A 		vldr.32	s15, [r7]
- 170 0056 B6EE007A 		vmov.f32	s14, #5.0e-1
- 171 005a F4EEC77A 		vcmpe.f32	s15, s14
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 17
-
-
- 172 005e F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 173 0062 09D5     		bpl	.L17
-  19:DaisySP-LGPL-FX/moogladder.cpp ****         return x * sign;
- 174              		.loc 3 19 18
- 175 0064 FB68     		ldr	r3, [r7, #12]
- 176 0066 07EE903A 		vmov	s15, r3	@ int
- 177 006a B8EEE77A 		vcvt.f32.s32	s14, s15
- 178              		.loc 3 19 20
- 179 006e D7ED007A 		vldr.32	s15, [r7]
- 180 0072 67EE277A 		vmul.f32	s15, s14, s15
- 181 0076 0CE0     		b	.L10
- 182              	.L17:
-  20:DaisySP-LGPL-FX/moogladder.cpp ****     return sign * tanh(x);
- 183              		.loc 3 20 17
- 184 0078 FB68     		ldr	r3, [r7, #12]
- 185 007a 07EE903A 		vmov	s15, r3	@ int
- 186 007e B8EEE78A 		vcvt.f32.s32	s16, s15
- 187              		.loc 3 20 23
- 188 0082 97ED000A 		vldr.32	s0, [r7]
- 189 0086 FFF7FEFF 		bl	_ZSt4tanhf
- 190 008a F0EE407A 		vmov.f32	s15, s0
- 191              		.loc 3 20 25
- 192 008e 68EE277A 		vmul.f32	s15, s16, s15
- 193              	.L10:
-  21:DaisySP-LGPL-FX/moogladder.cpp **** }
- 194              		.loc 3 21 1
- 195 0092 B0EE670A 		vmov.f32	s0, s15
- 196 0096 1037     		adds	r7, r7, #16
- 197              		.cfi_def_cfa_offset 16
- 198 0098 BD46     		mov	sp, r7
- 199              		.cfi_def_cfa_register 13
- 200              		@ sp needed
- 201 009a BDEC028B 		vldm	sp!, {d8}
- 202              		.cfi_restore 80
- 203              		.cfi_restore 81
- 204              		.cfi_def_cfa_offset 8
- 205 009e 80BD     		pop	{r7, pc}
- 206              		.cfi_endproc
- 207              	.LFE2794:
- 209              		.section	.text._ZN7daisysp10MoogLadder4InitEf,"ax",%progbits
- 210              		.align	1
- 211              		.global	_ZN7daisysp10MoogLadder4InitEf
- 212              		.syntax unified
- 213              		.thumb
- 214              		.thumb_func
- 216              	_ZN7daisysp10MoogLadder4InitEf:
- 217              	.LFB2795:
+ 100 0050 F5E7     		b	.L12
+ 101              	.LBE5:
+ 102              	.LBE4:
+ 103              		.cfi_endproc
+ 104              	.LFE2797:
+ 106              		.section	.text._ZN7daisysp10MoogLadder4InitEf,"ax",%progbits
+ 107              		.align	1
+ 108              		.global	_ZN7daisysp10MoogLadder4InitEf
+ 109              		.syntax unified
+ 110              		.thumb
+ 111              		.thumb_func
+ 113              	_ZN7daisysp10MoogLadder4InitEf:
+ 114              	.LVL6:
+ 115              	.LFB2798:
   22:DaisySP-LGPL-FX/moogladder.cpp **** 
   23:DaisySP-LGPL-FX/moogladder.cpp **** void MoogLadder::Init(float sample_rate)
   24:DaisySP-LGPL-FX/moogladder.cpp **** {
- 218              		.loc 3 24 1
- 219              		.cfi_startproc
- 220              		@ args = 0, pretend = 0, frame = 16
- 221              		@ frame_needed = 1, uses_anonymous_args = 0
- 222              		@ link register save eliminated.
- 223 0000 80B4     		push	{r7}
- 224              		.cfi_def_cfa_offset 4
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 18
-
-
- 225              		.cfi_offset 7, -4
- 226 0002 85B0     		sub	sp, sp, #20
- 227              		.cfi_def_cfa_offset 24
- 228 0004 00AF     		add	r7, sp, #0
- 229              		.cfi_def_cfa_register 7
- 230 0006 7860     		str	r0, [r7, #4]
- 231 0008 87ED000A 		vstr.32	s0, [r7]
+ 116              		.loc 1 24 1 is_stmt 1 view -0
+ 117              		.cfi_startproc
+ 118              		@ args = 0, pretend = 0, frame = 0
+ 119              		@ frame_needed = 0, uses_anonymous_args = 0
+ 120              		@ link register save eliminated.
   25:DaisySP-LGPL-FX/moogladder.cpp ****     sample_rate_ = sample_rate;
- 232              		.loc 3 25 18
- 233 000c 7B68     		ldr	r3, [r7, #4]
- 234 000e 3A68     		ldr	r2, [r7]	@ float
- 235 0010 9A63     		str	r2, [r3, #56]	@ float
+ 121              		.loc 1 25 5 view .LVU23
   26:DaisySP-LGPL-FX/moogladder.cpp ****     istor_       = 0.0f;
- 236              		.loc 3 26 18
- 237 0012 7B68     		ldr	r3, [r7, #4]
- 238 0014 4FF00002 		mov	r2, #0
- 239 0018 1A60     		str	r2, [r3]	@ float
+ 122              		.loc 1 26 18 is_stmt 0 view .LVU24
+ 123 0000 0023     		movs	r3, #0
   27:DaisySP-LGPL-FX/moogladder.cpp ****     res_         = 0.4f;
- 240              		.loc 3 27 18
- 241 001a 7B68     		ldr	r3, [r7, #4]
- 242 001c 1B4A     		ldr	r2, .L21
- 243 001e 5A60     		str	r2, [r3, #4]	@ float
+ 124              		.loc 1 27 18 view .LVU25
+ 125 0002 0A4A     		ldr	r2, .L14
+  25:DaisySP-LGPL-FX/moogladder.cpp ****     sample_rate_ = sample_rate;
+ 126              		.loc 1 25 18 view .LVU26
+ 127 0004 80ED0E0A 		vstr.32	s0, [r0, #56]
+  26:DaisySP-LGPL-FX/moogladder.cpp ****     istor_       = 0.0f;
+ 128              		.loc 1 26 5 is_stmt 1 view .LVU27
+  26:DaisySP-LGPL-FX/moogladder.cpp ****     istor_       = 0.0f;
+ 129              		.loc 1 26 18 is_stmt 0 view .LVU28
+ 130 0008 0360     		str	r3, [r0]	@ float
+ 131              		.loc 1 27 5 is_stmt 1 view .LVU29
+ 132              		.loc 1 27 18 is_stmt 0 view .LVU30
+ 133 000a 4260     		str	r2, [r0, #4]	@ float
   28:DaisySP-LGPL-FX/moogladder.cpp ****     freq_        = 1000.0f;
- 244              		.loc 3 28 18
- 245 0020 7B68     		ldr	r3, [r7, #4]
- 246 0022 1B4A     		ldr	r2, .L21+4
- 247 0024 9A60     		str	r2, [r3, #8]	@ float
- 248              	.LBB2:
+ 134              		.loc 1 28 5 is_stmt 1 view .LVU31
+ 135              	.LBB6:
   29:DaisySP-LGPL-FX/moogladder.cpp **** 
   30:DaisySP-LGPL-FX/moogladder.cpp ****     for(int i = 0; i < 6; i++)
- 249              		.loc 3 30 13
- 250 0026 0023     		movs	r3, #0
- 251 0028 FB60     		str	r3, [r7, #12]
- 252              	.L20:
- 253              		.loc 3 30 22 discriminator 3
- 254 002a FB68     		ldr	r3, [r7, #12]
- 255 002c 052B     		cmp	r3, #5
- 256 002e 1FDC     		bgt	.L19
   31:DaisySP-LGPL-FX/moogladder.cpp ****     {
   32:DaisySP-LGPL-FX/moogladder.cpp ****         delay_[i]       = 0.0;
- 257              		.loc 3 32 25 discriminator 2
- 258 0030 7A68     		ldr	r2, [r7, #4]
- 259 0032 FB68     		ldr	r3, [r7, #12]
- 260 0034 0233     		adds	r3, r3, #2
- 261 0036 9B00     		lsls	r3, r3, #2
- 262 0038 1344     		add	r3, r3, r2
- 263 003a 0433     		adds	r3, r3, #4
- 264 003c 4FF00002 		mov	r2, #0
- 265 0040 1A60     		str	r2, [r3]	@ float
+ 136              		.loc 1 32 25 is_stmt 0 view .LVU32
+ 137 000c C360     		str	r3, [r0, #12]	@ float
+ 138              	.LBE6:
+  28:DaisySP-LGPL-FX/moogladder.cpp ****     freq_        = 1000.0f;
+ 139              		.loc 1 28 18 view .LVU33
+ 140 000e 084A     		ldr	r2, .L14+4
+ 141              	.LBB7:
   33:DaisySP-LGPL-FX/moogladder.cpp ****         tanhstg_[i % 3] = 0.0;
- 266              		.loc 3 33 20 discriminator 2
- 267 0042 F968     		ldr	r1, [r7, #12]
- 268 0044 134B     		ldr	r3, .L21+8
- 269 0046 83FB0132 		smull	r3, r2, r3, r1
- 270 004a CB17     		asrs	r3, r1, #31
- 271 004c D21A     		subs	r2, r2, r3
- 272 004e 1346     		mov	r3, r2
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 19
+ 142              		.loc 1 33 25 view .LVU34
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s 			page 13
 
 
- 273 0050 5B00     		lsls	r3, r3, #1
- 274 0052 1344     		add	r3, r3, r2
- 275 0054 CA1A     		subs	r2, r1, r3
- 276              		.loc 3 33 25 discriminator 2
- 277 0056 7968     		ldr	r1, [r7, #4]
- 278 0058 02F10803 		add	r3, r2, #8
- 279 005c 9B00     		lsls	r3, r3, #2
- 280 005e 0B44     		add	r3, r3, r1
- 281 0060 0433     		adds	r3, r3, #4
- 282 0062 4FF00002 		mov	r2, #0
- 283 0066 1A60     		str	r2, [r3]	@ float
-  30:DaisySP-LGPL-FX/moogladder.cpp ****     {
- 284              		.loc 3 30 5 discriminator 2
- 285 0068 FB68     		ldr	r3, [r7, #12]
- 286 006a 0133     		adds	r3, r3, #1
- 287 006c FB60     		str	r3, [r7, #12]
- 288 006e DCE7     		b	.L20
- 289              	.L19:
- 290              	.LBE2:
+ 143 0010 4362     		str	r3, [r0, #36]	@ float
+  32:DaisySP-LGPL-FX/moogladder.cpp ****         tanhstg_[i % 3] = 0.0;
+ 144              		.loc 1 32 25 view .LVU35
+ 145 0012 0361     		str	r3, [r0, #16]	@ float
+ 146              		.loc 1 33 25 view .LVU36
+ 147 0014 8362     		str	r3, [r0, #40]	@ float
+  32:DaisySP-LGPL-FX/moogladder.cpp ****         tanhstg_[i % 3] = 0.0;
+ 148              		.loc 1 32 25 view .LVU37
+ 149 0016 4361     		str	r3, [r0, #20]	@ float
+ 150              		.loc 1 33 25 view .LVU38
+ 151 0018 C362     		str	r3, [r0, #44]	@ float
+  32:DaisySP-LGPL-FX/moogladder.cpp ****         tanhstg_[i % 3] = 0.0;
+ 152              		.loc 1 32 25 view .LVU39
+ 153 001a 8361     		str	r3, [r0, #24]	@ float
+ 154 001c C361     		str	r3, [r0, #28]	@ float
+ 155 001e 0362     		str	r3, [r0, #32]	@ float
+ 156              	.LBE7:
   34:DaisySP-LGPL-FX/moogladder.cpp ****     }
   35:DaisySP-LGPL-FX/moogladder.cpp **** 
   36:DaisySP-LGPL-FX/moogladder.cpp ****     old_freq_ = 0.0f;
- 291              		.loc 3 36 15
- 292 0070 7B68     		ldr	r3, [r7, #4]
- 293 0072 4FF00002 		mov	r2, #0
- 294 0076 1A63     		str	r2, [r3, #48]	@ float
+ 157              		.loc 1 36 15 view .LVU40
+ 158 0020 0363     		str	r3, [r0, #48]	@ float
   37:DaisySP-LGPL-FX/moogladder.cpp ****     old_res_  = -1.0f;
- 295              		.loc 3 37 15
- 296 0078 7B68     		ldr	r3, [r7, #4]
- 297 007a 074A     		ldr	r2, .L21+12
- 298 007c 5A63     		str	r2, [r3, #52]	@ float
+ 159              		.loc 1 37 15 view .LVU41
+ 160 0022 044B     		ldr	r3, .L14+8
+  28:DaisySP-LGPL-FX/moogladder.cpp **** 
+ 161              		.loc 1 28 18 view .LVU42
+ 162 0024 8260     		str	r2, [r0, #8]	@ float
+  30:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 163              		.loc 1 30 5 is_stmt 1 view .LVU43
+ 164              	.LVL7:
+ 165              	.LBB8:
+  30:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 166              		.loc 1 30 22 view .LVU44
+  32:DaisySP-LGPL-FX/moogladder.cpp ****         tanhstg_[i % 3] = 0.0;
+ 167              		.loc 1 32 9 view .LVU45
+  33:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 168              		.loc 1 33 9 view .LVU46
+  30:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 169              		.loc 1 30 5 view .LVU47
+  30:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 170              		.loc 1 30 22 view .LVU48
+  32:DaisySP-LGPL-FX/moogladder.cpp ****         tanhstg_[i % 3] = 0.0;
+ 171              		.loc 1 32 9 view .LVU49
+  33:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 172              		.loc 1 33 9 view .LVU50
+  30:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 173              		.loc 1 30 5 view .LVU51
+  30:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 174              		.loc 1 30 22 view .LVU52
+  32:DaisySP-LGPL-FX/moogladder.cpp ****         tanhstg_[i % 3] = 0.0;
+ 175              		.loc 1 32 9 view .LVU53
+  33:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 176              		.loc 1 33 9 view .LVU54
+  30:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 177              		.loc 1 30 5 view .LVU55
+  30:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s 			page 14
+
+
+ 178              		.loc 1 30 22 view .LVU56
+  32:DaisySP-LGPL-FX/moogladder.cpp ****         tanhstg_[i % 3] = 0.0;
+ 179              		.loc 1 32 9 view .LVU57
+  33:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 180              		.loc 1 33 9 view .LVU58
+  30:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 181              		.loc 1 30 5 view .LVU59
+  30:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 182              		.loc 1 30 22 view .LVU60
+  32:DaisySP-LGPL-FX/moogladder.cpp ****         tanhstg_[i % 3] = 0.0;
+ 183              		.loc 1 32 9 view .LVU61
+  33:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 184              		.loc 1 33 9 view .LVU62
+  30:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 185              		.loc 1 30 5 view .LVU63
+  30:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 186              		.loc 1 30 22 view .LVU64
+  32:DaisySP-LGPL-FX/moogladder.cpp ****         tanhstg_[i % 3] = 0.0;
+ 187              		.loc 1 32 9 view .LVU65
+  33:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 188              		.loc 1 33 9 view .LVU66
+  30:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 189              		.loc 1 30 5 view .LVU67
+  30:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 190              		.loc 1 30 22 view .LVU68
+ 191              	.LBE8:
+  36:DaisySP-LGPL-FX/moogladder.cpp ****     old_res_  = -1.0f;
+ 192              		.loc 1 36 5 view .LVU69
+ 193              		.loc 1 37 5 view .LVU70
+ 194              		.loc 1 37 15 is_stmt 0 view .LVU71
+ 195 0026 4363     		str	r3, [r0, #52]	@ float
   38:DaisySP-LGPL-FX/moogladder.cpp **** }
- 299              		.loc 3 38 1
- 300 007e 00BF     		nop
- 301 0080 1437     		adds	r7, r7, #20
- 302              		.cfi_def_cfa_offset 4
- 303 0082 BD46     		mov	sp, r7
- 304              		.cfi_def_cfa_register 13
- 305              		@ sp needed
- 306 0084 5DF8047B 		ldr	r7, [sp], #4
- 307              		.cfi_restore 7
- 308              		.cfi_def_cfa_offset 0
- 309 0088 7047     		bx	lr
- 310              	.L22:
- 311 008a 00BF     		.align	2
- 312              	.L21:
- 313 008c CDCCCC3E 		.word	1053609165
- 314 0090 00007A44 		.word	1148846080
- 315 0094 56555555 		.word	1431655766
- 316 0098 000080BF 		.word	-1082130432
- 317              		.cfi_endproc
- 318              	.LFE2795:
- 320              		.section	.text._ZN7daisysp10MoogLadder7ProcessEf,"ax",%progbits
- 321              		.align	1
- 322              		.global	_ZN7daisysp10MoogLadder7ProcessEf
- 323              		.syntax unified
- 324              		.thumb
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 20
-
-
- 325              		.thumb_func
- 327              	_ZN7daisysp10MoogLadder7ProcessEf:
- 328              	.LFB2796:
+ 196              		.loc 1 38 1 view .LVU72
+ 197 0028 7047     		bx	lr
+ 198              	.L15:
+ 199 002a 00BF     		.align	2
+ 200              	.L14:
+ 201 002c CDCCCC3E 		.word	1053609165
+ 202 0030 00007A44 		.word	1148846080
+ 203 0034 000080BF 		.word	-1082130432
+ 204              		.cfi_endproc
+ 205              	.LFE2798:
+ 207              		.section	.text._ZN7daisysp10MoogLadder7ProcessEf,"ax",%progbits
+ 208              		.align	1
+ 209              		.global	_ZN7daisysp10MoogLadder7ProcessEf
+ 210              		.syntax unified
+ 211              		.thumb
+ 212              		.thumb_func
+ 214              	_ZN7daisysp10MoogLadder7ProcessEf:
+ 215              	.LVL8:
+ 216              	.LFB2799:
   39:DaisySP-LGPL-FX/moogladder.cpp **** 
   40:DaisySP-LGPL-FX/moogladder.cpp **** float MoogLadder::Process(float in)
   41:DaisySP-LGPL-FX/moogladder.cpp **** {
- 329              		.loc 3 41 1
- 330              		.cfi_startproc
- 331              		@ args = 0, pretend = 0, frame = 88
- 332              		@ frame_needed = 1, uses_anonymous_args = 0
- 333 0000 90B5     		push	{r4, r7, lr}
- 334              		.cfi_def_cfa_offset 12
- 335              		.cfi_offset 4, -12
- 336              		.cfi_offset 7, -8
- 337              		.cfi_offset 14, -4
- 338 0002 2DED028B 		vpush.64	{d8}
- 339              		.cfi_def_cfa_offset 20
- 340              		.cfi_offset 80, -20
- 341              		.cfi_offset 81, -16
- 342 0006 97B0     		sub	sp, sp, #92
- 343              		.cfi_def_cfa_offset 112
- 344 0008 00AF     		add	r7, sp, #0
- 345              		.cfi_def_cfa_register 7
- 346 000a 7860     		str	r0, [r7, #4]
- 347 000c 87ED000A 		vstr.32	s0, [r7]
+ 217              		.loc 1 41 1 is_stmt 1 view -0
+ 218              		.cfi_startproc
+ 219              		@ args = 0, pretend = 0, frame = 16
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s 			page 15
+
+
+ 220              		@ frame_needed = 0, uses_anonymous_args = 0
   42:DaisySP-LGPL-FX/moogladder.cpp ****     float  freq = freq_;
- 348              		.loc 3 42 12
- 349 0010 7B68     		ldr	r3, [r7, #4]
- 350 0012 9B68     		ldr	r3, [r3, #8]	@ float
- 351 0014 3B64     		str	r3, [r7, #64]	@ float
+ 221              		.loc 1 42 5 view .LVU74
+  41:DaisySP-LGPL-FX/moogladder.cpp ****     float  freq = freq_;
+ 222              		.loc 1 41 1 is_stmt 0 view .LVU75
+ 223 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 224              		.cfi_def_cfa_offset 24
+ 225              		.cfi_offset 4, -24
+ 226              		.cfi_offset 5, -20
+ 227              		.cfi_offset 6, -16
+ 228              		.cfi_offset 7, -12
+ 229              		.cfi_offset 8, -8
+ 230              		.cfi_offset 14, -4
+ 231 0004 2DED068B 		vpush.64	{d8, d9, d10}
+ 232              		.cfi_def_cfa_offset 48
+ 233              		.cfi_offset 80, -48
+ 234              		.cfi_offset 81, -44
+ 235              		.cfi_offset 82, -40
+ 236              		.cfi_offset 83, -36
+ 237              		.cfi_offset 84, -32
+ 238              		.cfi_offset 85, -28
   43:DaisySP-LGPL-FX/moogladder.cpp ****     float  res  = res_;
- 352              		.loc 3 43 12
- 353 0016 7B68     		ldr	r3, [r7, #4]
- 354 0018 5B68     		ldr	r3, [r3, #4]	@ float
- 355 001a 7B65     		str	r3, [r7, #84]	@ float
+ 239              		.loc 1 43 12 view .LVU76
+ 240 0008 D0ED018A 		vldr.32	s17, [r0, #4]
+  41:DaisySP-LGPL-FX/moogladder.cpp ****     float  freq = freq_;
+ 241              		.loc 1 41 1 view .LVU77
+ 242 000c B0EE409A 		vmov.f32	s18, s0
+  42:DaisySP-LGPL-FX/moogladder.cpp ****     float  freq = freq_;
+ 243              		.loc 1 42 12 view .LVU78
+ 244 0010 90ED027A 		vldr.32	s14, [r0, #8]
+ 245              	.LVL9:
+ 246              		.loc 1 43 5 is_stmt 1 view .LVU79
   44:DaisySP-LGPL-FX/moogladder.cpp ****     float  res4;
+ 247              		.loc 1 44 5 view .LVU80
   45:DaisySP-LGPL-FX/moogladder.cpp ****     float* delay   = delay_;
- 356              		.loc 3 45 12
- 357 001c 7B68     		ldr	r3, [r7, #4]
- 358 001e 0C33     		adds	r3, r3, #12
- 359 0020 FB63     		str	r3, [r7, #60]
+ 248              		.loc 1 45 5 view .LVU81
   46:DaisySP-LGPL-FX/moogladder.cpp ****     float* tanhstg = tanhstg_;
- 360              		.loc 3 46 12
- 361 0022 7B68     		ldr	r3, [r7, #4]
- 362 0024 2433     		adds	r3, r3, #36
- 363 0026 BB63     		str	r3, [r7, #56]
+ 249              		.loc 1 46 5 view .LVU82
   47:DaisySP-LGPL-FX/moogladder.cpp ****     float  stg[4];
+ 250              		.loc 1 47 5 view .LVU83
   48:DaisySP-LGPL-FX/moogladder.cpp ****     float  acr, tune;
+ 251              		.loc 1 48 5 view .LVU84
   49:DaisySP-LGPL-FX/moogladder.cpp **** 
   50:DaisySP-LGPL-FX/moogladder.cpp ****     float THERMAL = 0.000025;
- 364              		.loc 3 50 11
- 365 0028 B24B     		ldr	r3, .L37
- 366 002a 7B63     		str	r3, [r7, #52]	@ float
+ 252              		.loc 1 50 5 view .LVU85
   51:DaisySP-LGPL-FX/moogladder.cpp **** 
   52:DaisySP-LGPL-FX/moogladder.cpp ****     if(res < 0)
- 367              		.loc 3 52 5
- 368 002c D7ED157A 		vldr.32	s15, [r7, #84]
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 21
-
-
- 369 0030 F5EEC07A 		vcmpe.f32	s15, #0
- 370 0034 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 371 0038 02D5     		bpl	.L24
+ 253              		.loc 1 52 5 view .LVU86
+  41:DaisySP-LGPL-FX/moogladder.cpp ****     float  freq = freq_;
+ 254              		.loc 1 41 1 is_stmt 0 view .LVU87
+ 255 0014 84B0     		sub	sp, sp, #16
+ 256              		.cfi_def_cfa_offset 64
+ 257              		.loc 1 52 5 view .LVU88
+ 258 0016 F5EEC08A 		vcmpe.f32	s17, #0
+ 259              	.LBB9:
   53:DaisySP-LGPL-FX/moogladder.cpp ****     {
   54:DaisySP-LGPL-FX/moogladder.cpp ****         res = 0;
- 372              		.loc 3 54 13
- 373 003a 4FF00003 		mov	r3, #0
- 374 003e 7B65     		str	r3, [r7, #84]	@ float
- 375              	.L24:
- 376              	.LBB3:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s 			page 16
+
+
   55:DaisySP-LGPL-FX/moogladder.cpp ****     }
   56:DaisySP-LGPL-FX/moogladder.cpp **** 
   57:DaisySP-LGPL-FX/moogladder.cpp ****     if(old_freq_ != freq || old_res_ != res)
- 377              		.loc 3 57 8
- 378 0040 7B68     		ldr	r3, [r7, #4]
- 379 0042 D3ED0C7A 		vldr.32	s15, [r3, #48]
- 380              		.loc 3 57 5
- 381 0046 97ED107A 		vldr.32	s14, [r7, #64]
- 382 004a B4EE677A 		vcmp.f32	s14, s15
- 383 004e F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 384 0052 09D1     		bne	.L26
- 385              		.loc 3 57 29 discriminator 1
- 386 0054 7B68     		ldr	r3, [r7, #4]
- 387 0056 D3ED0D7A 		vldr.32	s15, [r3, #52]
- 388              		.loc 3 57 26 discriminator 1
- 389 005a 97ED157A 		vldr.32	s14, [r7, #84]
- 390 005e B4EE677A 		vcmp.f32	s14, s15
- 391 0062 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 392 0066 75D0     		beq	.L27
- 393              	.L26:
- 394              	.LBB4:
+ 260              		.loc 1 57 5 view .LVU89
+ 261 001a D0ED0C7A 		vldr.32	s15, [r0, #48]
+ 262              	.LBE9:
+  41:DaisySP-LGPL-FX/moogladder.cpp ****     float  freq = freq_;
+ 263              		.loc 1 41 1 view .LVU90
+ 264 001e 0446     		mov	r4, r0
+ 265 0020 DFED5C9A 		vldr.32	s19, .L29
+  52:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 266              		.loc 1 52 5 view .LVU91
+ 267 0024 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 268              	.LBB11:
+ 269              		.loc 1 57 5 view .LVU92
+ 270 0028 F4EE477A 		vcmp.f32	s15, s14
+ 271              	.LBE11:
+  54:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 272              		.loc 1 54 13 view .LVU93
+ 273 002c 48BF     		it	mi
+ 274 002e DFED5A8A 		vldrmi.32	s17, .L29+4
+ 275              	.LVL10:
+ 276              		.loc 1 57 5 is_stmt 1 view .LVU94
+ 277              	.LBB12:
+ 278 0032 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 279 0036 07D1     		bne	.L19
+ 280              		.loc 1 57 29 is_stmt 0 discriminator 1 view .LVU95
+ 281 0038 D0ED0D7A 		vldr.32	s15, [r0, #52]
+ 282              		.loc 1 57 26 discriminator 1 view .LVU96
+ 283 003c F4EE687A 		vcmp.f32	s15, s17
+ 284 0040 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 285 0044 00F09380 		beq	.L20
+ 286              	.L19:
+ 287              	.LBB10:
   58:DaisySP-LGPL-FX/moogladder.cpp ****     {
   59:DaisySP-LGPL-FX/moogladder.cpp ****         float f, fc, fc2, fc3, fcr;
+ 288              		.loc 1 59 9 is_stmt 1 view .LVU97
   60:DaisySP-LGPL-FX/moogladder.cpp ****         old_freq_ = freq;
- 395              		.loc 3 60 19
- 396 0068 7B68     		ldr	r3, [r7, #4]
- 397 006a 3A6C     		ldr	r2, [r7, #64]	@ float
- 398 006c 1A63     		str	r2, [r3, #48]	@ float
+ 289              		.loc 1 60 9 view .LVU98
   61:DaisySP-LGPL-FX/moogladder.cpp ****         fc        = (freq / sample_rate_);
- 399              		.loc 3 61 29
- 400 006e 7B68     		ldr	r3, [r7, #4]
- 401 0070 93ED0E7A 		vldr.32	s14, [r3, #56]
- 402              		.loc 3 61 19
- 403 0074 D7ED106A 		vldr.32	s13, [r7, #64]
- 404 0078 C6EE877A 		vdiv.f32	s15, s13, s14
- 405 007c C7ED0C7A 		vstr.32	s15, [r7, #48]
+ 290              		.loc 1 61 19 is_stmt 0 view .LVU99
+ 291 0048 D4ED0E6A 		vldr.32	s13, [r4, #56]
   62:DaisySP-LGPL-FX/moogladder.cpp ****         f         = 0.5f * fc;
- 406              		.loc 3 62 19
- 407 0080 D7ED0C7A 		vldr.32	s15, [r7, #48]
- 408 0084 B6EE007A 		vmov.f32	s14, #5.0e-1
- 409 0088 67EE877A 		vmul.f32	s15, s15, s14
- 410 008c C7ED0B7A 		vstr.32	s15, [r7, #44]
+ 292              		.loc 1 62 19 view .LVU100
+ 293 004c B6EE000A 		vmov.f32	s0, #5.0e-1
+ 294              	.LVL11:
+  60:DaisySP-LGPL-FX/moogladder.cpp ****         old_freq_ = freq;
+ 295              		.loc 1 60 19 view .LVU101
+ 296 0050 84ED0C7A 		vstr.32	s14, [r4, #48]
+  61:DaisySP-LGPL-FX/moogladder.cpp ****         fc        = (freq / sample_rate_);
+ 297              		.loc 1 61 9 is_stmt 1 view .LVU102
+  61:DaisySP-LGPL-FX/moogladder.cpp ****         fc        = (freq / sample_rate_);
+ 298              		.loc 1 61 19 is_stmt 0 view .LVU103
+ 299 0054 C7EE267A 		vdiv.f32	s15, s14, s13
+ 300              	.LVL12:
+ 301              		.loc 1 62 9 is_stmt 1 view .LVU104
   63:DaisySP-LGPL-FX/moogladder.cpp ****         fc2       = fc * fc;
- 411              		.loc 3 63 19
- 412 0090 D7ED0C7A 		vldr.32	s15, [r7, #48]
- 413 0094 67EEA77A 		vmul.f32	s15, s15, s15
- 414 0098 C7ED0A7A 		vstr.32	s15, [r7, #40]
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 22
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s 			page 17
 
 
+ 302              		.loc 1 63 9 view .LVU105
   64:DaisySP-LGPL-FX/moogladder.cpp ****         fc3       = fc2 * fc2;
- 415              		.loc 3 64 19
- 416 009c D7ED0A7A 		vldr.32	s15, [r7, #40]
- 417 00a0 67EEA77A 		vmul.f32	s15, s15, s15
- 418 00a4 C7ED097A 		vstr.32	s15, [r7, #36]
   65:DaisySP-LGPL-FX/moogladder.cpp **** 
   66:DaisySP-LGPL-FX/moogladder.cpp ****         fcr  = 1.8730f * fc3 + 0.4955f * fc2 - 0.6490f * fc + 0.9988f;
- 419              		.loc 3 66 24
- 420 00a8 D7ED097A 		vldr.32	s15, [r7, #36]
- 421 00ac 9FED927A 		vldr.32	s14, .L37+4
- 422 00b0 27EE877A 		vmul.f32	s14, s15, s14
- 423              		.loc 3 66 40
- 424 00b4 D7ED0A7A 		vldr.32	s15, [r7, #40]
- 425 00b8 DFED906A 		vldr.32	s13, .L37+8
- 426 00bc 67EEA67A 		vmul.f32	s15, s15, s13
- 427              		.loc 3 66 30
- 428 00c0 37EE277A 		vadd.f32	s14, s14, s15
- 429              		.loc 3 66 56
- 430 00c4 D7ED0C7A 		vldr.32	s15, [r7, #48]
- 431 00c8 DFED8D6A 		vldr.32	s13, .L37+12
- 432 00cc 67EEA67A 		vmul.f32	s15, s15, s13
- 433              		.loc 3 66 46
- 434 00d0 77EE677A 		vsub.f32	s15, s14, s15
- 435              		.loc 3 66 14
- 436 00d4 9FED8B7A 		vldr.32	s14, .L37+16
- 437 00d8 77EE877A 		vadd.f32	s15, s15, s14
- 438 00dc C7ED087A 		vstr.32	s15, [r7, #32]
+ 303              		.loc 1 66 40 is_stmt 0 view .LVU106
+ 304 0058 9FED507A 		vldr.32	s14, .L29+8
+ 305              	.LVL13:
+ 306              		.loc 1 66 30 view .LVU107
+ 307 005c 9FED506A 		vldr.32	s12, .L29+12
   67:DaisySP-LGPL-FX/moogladder.cpp ****         acr  = -3.9364f * fc2 + 1.8409f * fc + 0.9968f;
- 439              		.loc 3 67 25
- 440 00e0 D7ED0A7A 		vldr.32	s15, [r7, #40]
- 441 00e4 9FED887A 		vldr.32	s14, .L37+20
- 442 00e8 27EE877A 		vmul.f32	s14, s15, s14
- 443              		.loc 3 67 41
- 444 00ec D7ED0C7A 		vldr.32	s15, [r7, #48]
- 445 00f0 DFED866A 		vldr.32	s13, .L37+24
- 446 00f4 67EEA67A 		vmul.f32	s15, s15, s13
- 447              		.loc 3 67 31
- 448 00f8 77EE277A 		vadd.f32	s15, s14, s15
- 449              		.loc 3 67 14
- 450 00fc 9FED847A 		vldr.32	s14, .L37+28
- 451 0100 77EE877A 		vadd.f32	s15, s15, s14
- 452 0104 C7ED147A 		vstr.32	s15, [r7, #80]
+ 308              		.loc 1 67 41 view .LVU108
+ 309 0060 9FED508A 		vldr.32	s16, .L29+16
+  63:DaisySP-LGPL-FX/moogladder.cpp ****         fc2       = fc * fc;
+ 310              		.loc 1 63 19 view .LVU109
+ 311 0064 67EEA76A 		vmul.f32	s13, s15, s15
+ 312              	.LVL14:
+  64:DaisySP-LGPL-FX/moogladder.cpp ****         fc3       = fc2 * fc2;
+ 313              		.loc 1 64 9 is_stmt 1 view .LVU110
+  66:DaisySP-LGPL-FX/moogladder.cpp ****         acr  = -3.9364f * fc2 + 1.8409f * fc + 0.9968f;
+ 314              		.loc 1 66 9 view .LVU111
+ 315              		.loc 1 67 41 is_stmt 0 view .LVU112
+ 316 0068 27EE888A 		vmul.f32	s16, s15, s16
+  64:DaisySP-LGPL-FX/moogladder.cpp ****         fc3       = fc2 * fc2;
+ 317              		.loc 1 64 19 view .LVU113
+ 318 006c 66EEA65A 		vmul.f32	s11, s13, s13
+ 319              	.LVL15:
+  66:DaisySP-LGPL-FX/moogladder.cpp ****         acr  = -3.9364f * fc2 + 1.8409f * fc + 0.9968f;
+ 320              		.loc 1 66 40 view .LVU114
+ 321 0070 26EE877A 		vmul.f32	s14, s13, s14
+  66:DaisySP-LGPL-FX/moogladder.cpp ****         acr  = -3.9364f * fc2 + 1.8409f * fc + 0.9968f;
+ 322              		.loc 1 66 30 view .LVU115
+ 323 0074 A5EE867A 		vfma.f32	s14, s11, s12
+  66:DaisySP-LGPL-FX/moogladder.cpp ****         acr  = -3.9364f * fc2 + 1.8409f * fc + 0.9968f;
+ 324              		.loc 1 66 46 view .LVU116
+ 325 0078 9FED4B6A 		vldr.32	s12, .L29+20
+ 326 007c A7EEC67A 		vfms.f32	s14, s15, s12
+ 327              	.LVL16:
+ 328              		.loc 1 67 9 is_stmt 1 view .LVU117
+ 329              		.loc 1 67 31 is_stmt 0 view .LVU118
+ 330 0080 9FED4A6A 		vldr.32	s12, .L29+24
+  62:DaisySP-LGPL-FX/moogladder.cpp ****         fc2       = fc * fc;
+ 331              		.loc 1 62 19 view .LVU119
+ 332 0084 67EE807A 		vmul.f32	s15, s15, s0
+ 333              	.LVL17:
   68:DaisySP-LGPL-FX/moogladder.cpp ****         tune = (1.0f - expf(-((2 * PI_F) * f * fcr))) / THERMAL;
- 453              		.loc 3 68 42
- 454 0108 D7ED0B7A 		vldr.32	s15, [r7, #44]
- 455 010c 9FED817A 		vldr.32	s14, .L37+32
- 456 0110 27EE877A 		vmul.f32	s14, s15, s14
- 457              		.loc 3 68 46
- 458 0114 D7ED087A 		vldr.32	s15, [r7, #32]
- 459 0118 67EE277A 		vmul.f32	s15, s14, s15
- 460              		.loc 3 68 28
- 461 011c F1EE677A 		vneg.f32	s15, s15
- 462 0120 B0EE670A 		vmov.f32	s0, s15
- 463 0124 FFF7FEFF 		bl	expf
- 464 0128 F0EE407A 		vmov.f32	s15, s0
- 465              		.loc 3 68 22
- 466 012c B7EE007A 		vmov.f32	s14, #1.0e+0
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 23
+ 334              		.loc 1 68 42 view .LVU120
+ 335 0088 9FED490A 		vldr.32	s0, .L29+28
+  67:DaisySP-LGPL-FX/moogladder.cpp ****         tune = (1.0f - expf(-((2 * PI_F) * f * fcr))) / THERMAL;
+ 336              		.loc 1 67 31 view .LVU121
+ 337 008c A6EE868A 		vfma.f32	s16, s13, s12
+  67:DaisySP-LGPL-FX/moogladder.cpp ****         tune = (1.0f - expf(-((2 * PI_F) * f * fcr))) / THERMAL;
+ 338              		.loc 1 67 14 view .LVU122
+ 339 0090 DFED486A 		vldr.32	s13, .L29+32
+ 340              	.LVL18:
+ 341              		.loc 1 68 42 view .LVU123
+ 342 0094 67EE807A 		vmul.f32	s15, s15, s0
+ 343              	.LVL19:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s 			page 18
 
 
- 467 0130 77EE676A 		vsub.f32	s13, s14, s15
- 468              		.loc 3 68 14
- 469 0134 97ED0D7A 		vldr.32	s14, [r7, #52]
- 470 0138 C6EE877A 		vdiv.f32	s15, s13, s14
- 471 013c C7ED137A 		vstr.32	s15, [r7, #76]
+  66:DaisySP-LGPL-FX/moogladder.cpp ****         acr  = -3.9364f * fc2 + 1.8409f * fc + 0.9968f;
+ 344              		.loc 1 66 14 view .LVU124
+ 345 0098 9FED470A 		vldr.32	s0, .L29+36
+ 346 009c 37EE000A 		vadd.f32	s0, s14, s0
+ 347              	.LVL20:
+  67:DaisySP-LGPL-FX/moogladder.cpp ****         tune = (1.0f - expf(-((2 * PI_F) * f * fcr))) / THERMAL;
+ 348              		.loc 1 67 14 view .LVU125
+ 349 00a0 38EE268A 		vadd.f32	s16, s16, s13
+ 350              	.LVL21:
+ 351              		.loc 1 68 9 is_stmt 1 view .LVU126
+ 352              		.loc 1 68 28 is_stmt 0 view .LVU127
+ 353 00a4 20EE670A 		vnmul.f32	s0, s0, s15
+ 354              	.LVL22:
+ 355              		.loc 1 68 28 view .LVU128
+ 356 00a8 FFF7FEFF 		bl	expf
+ 357              	.LVL23:
+ 358              		.loc 1 68 22 view .LVU129
+ 359 00ac F7EE007A 		vmov.f32	s15, #1.0e+0
   69:DaisySP-LGPL-FX/moogladder.cpp **** 
   70:DaisySP-LGPL-FX/moogladder.cpp ****         old_res_  = res;
- 472              		.loc 3 70 19
- 473 0140 7B68     		ldr	r3, [r7, #4]
- 474 0142 7A6D     		ldr	r2, [r7, #84]	@ float
- 475 0144 5A63     		str	r2, [r3, #52]	@ float
+ 360              		.loc 1 70 19 view .LVU130
+ 361 00b0 C4ED0D8A 		vstr.32	s17, [r4, #52]
   71:DaisySP-LGPL-FX/moogladder.cpp ****         old_acr_  = acr;
- 476              		.loc 3 71 19
- 477 0146 7B68     		ldr	r3, [r7, #4]
- 478 0148 3A6D     		ldr	r2, [r7, #80]	@ float
- 479 014a DA63     		str	r2, [r3, #60]	@ float
+ 362              		.loc 1 71 19 view .LVU131
+ 363 00b4 84ED0F8A 		vstr.32	s16, [r4, #60]
+  68:DaisySP-LGPL-FX/moogladder.cpp **** 
+ 364              		.loc 1 68 22 view .LVU132
+ 365 00b8 37EEC00A 		vsub.f32	s0, s15, s0
+  68:DaisySP-LGPL-FX/moogladder.cpp **** 
+ 366              		.loc 1 68 14 view .LVU133
+ 367 00bc 80EE29AA 		vdiv.f32	s20, s0, s19
+ 368              	.LVL24:
+  70:DaisySP-LGPL-FX/moogladder.cpp ****         old_acr_  = acr;
+ 369              		.loc 1 70 9 is_stmt 1 view .LVU134
+ 370              		.loc 1 71 9 view .LVU135
   72:DaisySP-LGPL-FX/moogladder.cpp ****         old_tune_ = tune;
- 480              		.loc 3 72 19
- 481 014c 7B68     		ldr	r3, [r7, #4]
- 482 014e FA6C     		ldr	r2, [r7, #76]	@ float
- 483 0150 1A64     		str	r2, [r3, #64]	@ float
- 484              	.LBE4:
- 485              		.loc 3 72 25
- 486 0152 08E0     		b	.L28
- 487              	.L27:
+ 371              		.loc 1 72 9 view .LVU136
+ 372              		.loc 1 72 19 is_stmt 0 view .LVU137
+ 373 00c0 84ED10AA 		vstr.32	s20, [r4, #64]
+ 374              	.L21:
+ 375              		.loc 1 72 19 view .LVU138
+ 376              	.LBE10:
+ 377              	.LBE12:
   73:DaisySP-LGPL-FX/moogladder.cpp ****     }
   74:DaisySP-LGPL-FX/moogladder.cpp ****     else
   75:DaisySP-LGPL-FX/moogladder.cpp ****     {
   76:DaisySP-LGPL-FX/moogladder.cpp ****         res  = old_res_;
- 488              		.loc 3 76 14
- 489 0154 7B68     		ldr	r3, [r7, #4]
- 490 0156 5B6B     		ldr	r3, [r3, #52]	@ float
- 491 0158 7B65     		str	r3, [r7, #84]	@ float
   77:DaisySP-LGPL-FX/moogladder.cpp ****         acr  = old_acr_;
- 492              		.loc 3 77 14
- 493 015a 7B68     		ldr	r3, [r7, #4]
- 494 015c DB6B     		ldr	r3, [r3, #60]	@ float
- 495 015e 3B65     		str	r3, [r7, #80]	@ float
   78:DaisySP-LGPL-FX/moogladder.cpp ****         tune = old_tune_;
- 496              		.loc 3 78 14
- 497 0160 7B68     		ldr	r3, [r7, #4]
- 498 0162 1B6C     		ldr	r3, [r3, #64]	@ float
- 499 0164 FB64     		str	r3, [r7, #76]	@ float
- 500              	.L28:
- 501              	.LBE3:
   79:DaisySP-LGPL-FX/moogladder.cpp ****     }
   80:DaisySP-LGPL-FX/moogladder.cpp **** 
   81:DaisySP-LGPL-FX/moogladder.cpp ****     res4 = 4.0f * res * acr;
- 502              		.loc 3 81 17
- 503 0166 D7ED157A 		vldr.32	s15, [r7, #84]
- 504 016a B1EE007A 		vmov.f32	s14, #4.0e+0
- 505 016e 67EE877A 		vmul.f32	s15, s15, s14
- 506              		.loc 3 81 10
- 507 0172 97ED147A 		vldr.32	s14, [r7, #80]
- 508 0176 67EE277A 		vmul.f32	s15, s14, s15
- 509 017a C7ED077A 		vstr.32	s15, [r7, #28]
- 510              	.LBB5:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 24
+ 378              		.loc 1 81 5 is_stmt 1 view .LVU139
+ 379              		.loc 1 81 17 is_stmt 0 view .LVU140
+ 380 00c4 F1EE007A 		vmov.f32	s15, #4.0e+0
+ 381              		.loc 1 81 10 view .LVU141
+ 382 00c8 4FF00208 		mov	r8, #2
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s 			page 19
 
 
+ 383              		.loc 1 81 17 view .LVU142
+ 384 00cc 68EEA78A 		vmul.f32	s17, s17, s15
+ 385              	.LVL25:
+ 386              		.loc 1 81 10 view .LVU143
+ 387 00d0 28EE888A 		vmul.f32	s16, s17, s16
+ 388              	.LVL26:
   82:DaisySP-LGPL-FX/moogladder.cpp **** 
   83:DaisySP-LGPL-FX/moogladder.cpp ****     for(int j = 0; j < 2; j++)
- 511              		.loc 3 83 13
- 512 017e 0023     		movs	r3, #0
- 513 0180 BB64     		str	r3, [r7, #72]
- 514              	.L34:
- 515              		.loc 3 83 22 discriminator 1
- 516 0182 BB6C     		ldr	r3, [r7, #72]
- 517 0184 012B     		cmp	r3, #1
- 518 0186 00F3AA80 		bgt	.L29
- 519              	.LBB6:
+ 389              		.loc 1 83 5 is_stmt 1 view .LVU144
+ 390              	.LBB13:
+ 391              		.loc 1 83 22 view .LVU145
+ 392              	.L25:
+ 393              	.LBB14:
   84:DaisySP-LGPL-FX/moogladder.cpp ****     {
   85:DaisySP-LGPL-FX/moogladder.cpp ****         in -= res4 * delay[5];
- 520              		.loc 3 85 29
- 521 018a FB6B     		ldr	r3, [r7, #60]
- 522 018c 1433     		adds	r3, r3, #20
- 523 018e 93ED007A 		vldr.32	s14, [r3]
- 524              		.loc 3 85 20
- 525 0192 D7ED077A 		vldr.32	s15, [r7, #28]
- 526 0196 67EE277A 		vmul.f32	s15, s14, s15
- 527              		.loc 3 85 12
- 528 019a 97ED007A 		vldr.32	s14, [r7]
- 529 019e 77EE677A 		vsub.f32	s15, s14, s15
- 530 01a2 C7ED007A 		vstr.32	s15, [r7]
+ 394              		.loc 1 85 9 view .LVU146
+ 395              		.loc 1 85 12 is_stmt 0 view .LVU147
+ 396 00d4 D4ED087A 		vldr.32	s15, [r4, #32]
   86:DaisySP-LGPL-FX/moogladder.cpp ****         delay[0] = stg[0]
   87:DaisySP-LGPL-FX/moogladder.cpp ****             = delay[0] + tune * (my_tanh(in * THERMAL) - tanhstg[0]);
- 531              		.loc 3 87 22
- 532 01a6 FB6B     		ldr	r3, [r7, #60]
- 533 01a8 93ED008A 		vldr.32	s16, [r3]
- 534              		.loc 3 87 41
- 535 01ac 97ED007A 		vldr.32	s14, [r7]
- 536 01b0 D7ED0D7A 		vldr.32	s15, [r7, #52]
- 537 01b4 67EE277A 		vmul.f32	s15, s14, s15
- 538 01b8 B0EE670A 		vmov.f32	s0, s15
- 539 01bc 7868     		ldr	r0, [r7, #4]
- 540 01be FFF7FEFF 		bl	_ZN7daisysp10MoogLadder7my_tanhEf
- 541 01c2 B0EE407A 		vmov.f32	s14, s0
- 542              		.loc 3 87 67
- 543 01c6 BB6B     		ldr	r3, [r7, #56]
- 544 01c8 D3ED007A 		vldr.32	s15, [r3]
- 545              		.loc 3 87 56
- 546 01cc 37EE677A 		vsub.f32	s14, s14, s15
- 547              		.loc 3 87 31
- 548 01d0 D7ED137A 		vldr.32	s15, [r7, #76]
- 549 01d4 67EE277A 		vmul.f32	s15, s14, s15
- 550              		.loc 3 87 24
- 551 01d8 78EE277A 		vadd.f32	s15, s16, s15
- 552              		.loc 3 87 13
- 553 01dc C7ED037A 		vstr.32	s15, [r7, #12]
+ 397              		.loc 1 87 41 view .LVU148
+ 398 00d8 2046     		mov	r0, r4
+ 399 00da 6F46     		mov	r7, sp
+ 400 00dc 04F11005 		add	r5, r4, #16
+  85:DaisySP-LGPL-FX/moogladder.cpp ****         delay[0] = stg[0]
+ 401              		.loc 1 85 12 view .LVU149
+ 402 00e0 A7EEC89A 		vfms.f32	s18, s15, s16
+ 403              	.LVL27:
   86:DaisySP-LGPL-FX/moogladder.cpp ****         delay[0] = stg[0]
- 554              		.loc 3 86 25
- 555 01e0 FA68     		ldr	r2, [r7, #12]	@ float
-  86:DaisySP-LGPL-FX/moogladder.cpp ****         delay[0] = stg[0]
- 556              		.loc 3 86 18
- 557 01e2 FB6B     		ldr	r3, [r7, #60]
- 558 01e4 1A60     		str	r2, [r3]	@ float
- 559              	.LBB7:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 25
-
-
+ 404              		.loc 1 86 9 is_stmt 1 view .LVU150
+ 405              	.LBB15:
   88:DaisySP-LGPL-FX/moogladder.cpp ****         for(int k = 1; k < 4; k++)
- 560              		.loc 3 88 17
- 561 01e6 0123     		movs	r3, #1
- 562 01e8 7B64     		str	r3, [r7, #68]
- 563              	.L33:
- 564              		.loc 3 88 26 discriminator 2
- 565 01ea 7B6C     		ldr	r3, [r7, #68]
- 566 01ec 032B     		cmp	r3, #3
- 567 01ee 5EDC     		bgt	.L30
+ 406              		.loc 1 88 17 is_stmt 0 view .LVU151
+ 407 00e4 0126     		movs	r6, #1
+ 408              	.LBE15:
+  87:DaisySP-LGPL-FX/moogladder.cpp ****         for(int k = 1; k < 4; k++)
+ 409              		.loc 1 87 41 view .LVU152
+ 410 00e6 29EE290A 		vmul.f32	s0, s18, s19
+ 411 00ea FFF7FEFF 		bl	_ZN7daisysp10MoogLadder7my_tanhEf
+ 412              	.LVL28:
+  87:DaisySP-LGPL-FX/moogladder.cpp ****         for(int k = 1; k < 4; k++)
+ 413              		.loc 1 87 56 view .LVU153
+ 414 00ee D4ED097A 		vldr.32	s15, [r4, #36]
+ 415 00f2 30EE670A 		vsub.f32	s0, s0, s15
+  87:DaisySP-LGPL-FX/moogladder.cpp ****         for(int k = 1; k < 4; k++)
+ 416              		.loc 1 87 24 view .LVU154
+ 417 00f6 D4ED037A 		vldr.32	s15, [r4, #12]
+ 418 00fa E0EE0A7A 		vfma.f32	s15, s0, s20
+  87:DaisySP-LGPL-FX/moogladder.cpp ****         for(int k = 1; k < 4; k++)
+ 419              		.loc 1 87 13 view .LVU155
+ 420 00fe CDED007A 		vstr.32	s15, [sp]
+  86:DaisySP-LGPL-FX/moogladder.cpp ****             = delay[0] + tune * (my_tanh(in * THERMAL) - tanhstg[0]);
+ 421              		.loc 1 86 18 view .LVU156
+ 422 0102 C4ED037A 		vstr.32	s15, [r4, #12]
+ 423              		.loc 1 88 9 is_stmt 1 view .LVU157
+ 424              	.LVL29:
+ 425              	.LBB16:
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s 			page 20
+
+
+ 426              		.loc 1 88 26 view .LVU158
+ 427              	.L24:
   89:DaisySP-LGPL-FX/moogladder.cpp ****         {
   90:DaisySP-LGPL-FX/moogladder.cpp ****             in     = stg[k - 1];
- 568              		.loc 3 90 28
- 569 01f0 7B6C     		ldr	r3, [r7, #68]
- 570 01f2 013B     		subs	r3, r3, #1
- 571              		.loc 3 90 20
- 572 01f4 9B00     		lsls	r3, r3, #2
- 573 01f6 5833     		adds	r3, r3, #88
- 574 01f8 3B44     		add	r3, r3, r7
- 575 01fa 4C3B     		subs	r3, r3, #76
- 576 01fc 1B68     		ldr	r3, [r3]	@ float
- 577 01fe 3B60     		str	r3, [r7]	@ float
+ 428              		.loc 1 90 13 view .LVU159
+ 429              		.loc 1 90 20 is_stmt 0 view .LVU160
+ 430 0106 B7EC019A 		vldmia.32	r7!, {s18}
+ 431              	.LVL30:
   91:DaisySP-LGPL-FX/moogladder.cpp ****             stg[k] = delay[k]
- 578              		.loc 3 91 28
- 579 0200 7B6C     		ldr	r3, [r7, #68]
- 580              		.loc 3 91 29
- 581 0202 9B00     		lsls	r3, r3, #2
- 582 0204 FA6B     		ldr	r2, [r7, #60]
- 583 0206 1344     		add	r3, r3, r2
- 584 0208 93ED008A 		vldr.32	s16, [r3]
+ 432              		.loc 1 91 13 is_stmt 1 view .LVU161
   92:DaisySP-LGPL-FX/moogladder.cpp ****                      + tune
   93:DaisySP-LGPL-FX/moogladder.cpp ****                            * ((tanhstg[k - 1] = my_tanh(in * THERMAL))
- 585              		.loc 3 93 56
- 586 020c 97ED007A 		vldr.32	s14, [r7]
- 587 0210 D7ED0D7A 		vldr.32	s15, [r7, #52]
- 588 0214 67EE277A 		vmul.f32	s15, s14, s15
- 589              		.loc 3 93 45
- 590 0218 7A6C     		ldr	r2, [r7, #68]
- 591 021a 6FF04043 		mvn	r3, #-1073741824
- 592 021e 1344     		add	r3, r3, r2
- 593 0220 9B00     		lsls	r3, r3, #2
- 594 0222 BA6B     		ldr	r2, [r7, #56]
- 595 0224 D418     		adds	r4, r2, r3
- 596              		.loc 3 93 56
- 597 0226 B0EE670A 		vmov.f32	s0, s15
- 598 022a 7868     		ldr	r0, [r7, #4]
- 599 022c FFF7FEFF 		bl	_ZN7daisysp10MoogLadder7my_tanhEf
- 600 0230 F0EE407A 		vmov.f32	s15, s0
- 601              		.loc 3 93 47
- 602 0234 C4ED007A 		vstr.32	s15, [r4]
- 603              		.loc 3 93 45
- 604 0238 D4ED008A 		vldr.32	s17, [r4]
+ 433              		.loc 1 93 56 is_stmt 0 view .LVU162
+ 434 010a 2046     		mov	r0, r4
+  91:DaisySP-LGPL-FX/moogladder.cpp ****             stg[k] = delay[k]
+ 435              		.loc 1 91 29 view .LVU163
+ 436 010c F5EC01AA 		vldmia.32	r5!, {s21}
+ 437              		.loc 1 93 56 view .LVU164
+ 438 0110 29EE290A 		vmul.f32	s0, s18, s19
+ 439 0114 FFF7FEFF 		bl	_ZN7daisysp10MoogLadder7my_tanhEf
+ 440              	.LVL31:
   94:DaisySP-LGPL-FX/moogladder.cpp ****                               - (k != 3 ? tanhstg[k]
- 605              		.loc 3 94 41
- 606 023c 7B6C     		ldr	r3, [r7, #68]
- 607 023e 032B     		cmp	r3, #3
- 608 0240 06D0     		beq	.L31
- 609              		.loc 3 94 51 discriminator 1
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 26
-
-
- 610 0242 7B6C     		ldr	r3, [r7, #68]
- 611              		.loc 3 94 52 discriminator 1
- 612 0244 9B00     		lsls	r3, r3, #2
- 613 0246 BA6B     		ldr	r2, [r7, #56]
- 614 0248 1344     		add	r3, r3, r2
- 615              		.loc 3 94 41 discriminator 1
- 616 024a D3ED007A 		vldr.32	s15, [r3]
- 617 024e 10E0     		b	.L32
- 618              	.L31:
-  95:DaisySP-LGPL-FX/moogladder.cpp ****                                         : my_tanh(delay[k] * THERMAL)));
- 619              		.loc 3 95 57
- 620 0250 7B6C     		ldr	r3, [r7, #68]
- 621              		.loc 3 95 58
- 622 0252 9B00     		lsls	r3, r3, #2
- 623 0254 FA6B     		ldr	r2, [r7, #60]
- 624 0256 1344     		add	r3, r3, r2
- 625 0258 93ED007A 		vldr.32	s14, [r3]
- 626              		.loc 3 95 50
- 627 025c D7ED0D7A 		vldr.32	s15, [r7, #52]
- 628 0260 67EE277A 		vmul.f32	s15, s14, s15
- 629 0264 B0EE670A 		vmov.f32	s0, s15
- 630 0268 7868     		ldr	r0, [r7, #4]
- 631 026a FFF7FEFF 		bl	_ZN7daisysp10MoogLadder7my_tanhEf
- 632 026e F0EE407A 		vmov.f32	s15, s0
- 633              	.L32:
-  94:DaisySP-LGPL-FX/moogladder.cpp ****                               - (k != 3 ? tanhstg[k]
- 634              		.loc 3 94 31 discriminator 2
- 635 0272 38EEE77A 		vsub.f32	s14, s17, s15
+ 441              		.loc 1 94 41 view .LVU165
+ 442 0118 032E     		cmp	r6, #3
   93:DaisySP-LGPL-FX/moogladder.cpp ****                               - (k != 3 ? tanhstg[k]
- 636              		.loc 3 93 28 discriminator 2
- 637 0276 D7ED137A 		vldr.32	s15, [r7, #76]
- 638 027a 67EE277A 		vmul.f32	s15, s14, s15
-  92:DaisySP-LGPL-FX/moogladder.cpp ****                            * ((tanhstg[k - 1] = my_tanh(in * THERMAL))
- 639              		.loc 3 92 22 discriminator 2
- 640 027e 78EE277A 		vadd.f32	s15, s16, s15
-  91:DaisySP-LGPL-FX/moogladder.cpp ****                      + tune
- 641              		.loc 3 91 20 discriminator 2
- 642 0282 7B6C     		ldr	r3, [r7, #68]
- 643 0284 9B00     		lsls	r3, r3, #2
- 644 0286 5833     		adds	r3, r3, #88
- 645 0288 3B44     		add	r3, r3, r7
- 646 028a 4C3B     		subs	r3, r3, #76
- 647 028c C3ED007A 		vstr.32	s15, [r3]
-  96:DaisySP-LGPL-FX/moogladder.cpp ****             delay[k] = stg[k];
- 648              		.loc 3 96 19 discriminator 2
- 649 0290 7B6C     		ldr	r3, [r7, #68]
- 650              		.loc 3 96 20 discriminator 2
- 651 0292 9B00     		lsls	r3, r3, #2
- 652 0294 FA6B     		ldr	r2, [r7, #60]
- 653 0296 1344     		add	r3, r3, r2
- 654              		.loc 3 96 29 discriminator 2
- 655 0298 7A6C     		ldr	r2, [r7, #68]
- 656 029a 9200     		lsls	r2, r2, #2
- 657 029c 5832     		adds	r2, r2, #88
- 658 029e 3A44     		add	r2, r2, r7
- 659 02a0 4C3A     		subs	r2, r2, #76
- 660 02a2 1268     		ldr	r2, [r2]	@ float
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 27
-
-
- 661              		.loc 3 96 22 discriminator 2
- 662 02a4 1A60     		str	r2, [r3]	@ float
+ 443              		.loc 1 93 56 view .LVU166
+ 444 011a F0EE408A 		vmov.f32	s17, s0
+  93:DaisySP-LGPL-FX/moogladder.cpp ****                               - (k != 3 ? tanhstg[k]
+ 445              		.loc 1 93 47 view .LVU167
+ 446 011e 85ED040A 		vstr.32	s0, [r5, #16]
+ 447              		.loc 1 94 41 view .LVU168
+ 448 0122 2ED0     		beq	.L22
+ 449              	.LVL32:
+ 450              		.loc 1 94 41 discriminator 1 view .LVU169
+ 451 0124 95ED050A 		vldr.32	s0, [r5, #20]
+ 452              	.L23:
+ 453              		.loc 1 94 31 discriminator 2 view .LVU170
+ 454 0128 78EEC08A 		vsub.f32	s17, s17, s0
   88:DaisySP-LGPL-FX/moogladder.cpp ****         {
- 663              		.loc 3 88 9 discriminator 2
- 664 02a6 7B6C     		ldr	r3, [r7, #68]
- 665 02a8 0133     		adds	r3, r3, #1
- 666 02aa 7B64     		str	r3, [r7, #68]
- 667 02ac 9DE7     		b	.L33
- 668              	.L30:
- 669              	.LBE7:
+ 455              		.loc 1 88 9 discriminator 2 view .LVU171
+ 456 012c 0136     		adds	r6, r6, #1
+ 457              	.LVL33:
+  92:DaisySP-LGPL-FX/moogladder.cpp ****                            * ((tanhstg[k - 1] = my_tanh(in * THERMAL))
+ 458              		.loc 1 92 22 discriminator 2 view .LVU172
+ 459 012e F0EE6A7A 		vmov.f32	s15, s21
+  88:DaisySP-LGPL-FX/moogladder.cpp ****         {
+ 460              		.loc 1 88 26 discriminator 2 view .LVU173
+ 461 0132 042E     		cmp	r6, #4
+  92:DaisySP-LGPL-FX/moogladder.cpp ****                            * ((tanhstg[k - 1] = my_tanh(in * THERMAL))
+ 462              		.loc 1 92 22 discriminator 2 view .LVU174
+ 463 0134 E8EE8A7A 		vfma.f32	s15, s17, s20
+  91:DaisySP-LGPL-FX/moogladder.cpp ****                      + tune
+ 464              		.loc 1 91 20 discriminator 2 view .LVU175
+ 465 0138 C7ED007A 		vstr.32	s15, [r7]
+  95:DaisySP-LGPL-FX/moogladder.cpp ****                                         : my_tanh(delay[k] * THERMAL)));
+  96:DaisySP-LGPL-FX/moogladder.cpp ****             delay[k] = stg[k];
+ 466              		.loc 1 96 13 is_stmt 1 discriminator 2 view .LVU176
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s 			page 21
+
+
+ 467              		.loc 1 96 22 is_stmt 0 discriminator 2 view .LVU177
+ 468 013c 45ED017A 		vstr.32	s15, [r5, #-4]
+  88:DaisySP-LGPL-FX/moogladder.cpp ****         {
+ 469              		.loc 1 88 9 is_stmt 1 discriminator 2 view .LVU178
+ 470              	.LVL34:
+  88:DaisySP-LGPL-FX/moogladder.cpp ****         {
+ 471              		.loc 1 88 26 discriminator 2 view .LVU179
+ 472 0140 E1D1     		bne	.L24
+ 473              	.LVL35:
+  88:DaisySP-LGPL-FX/moogladder.cpp ****         {
+ 474              		.loc 1 88 26 is_stmt 0 discriminator 2 view .LVU180
+ 475              	.LBE16:
   97:DaisySP-LGPL-FX/moogladder.cpp ****         }
   98:DaisySP-LGPL-FX/moogladder.cpp ****         delay[5] = (stg[3] + delay[4]) * 0.5f;
- 670              		.loc 3 98 26 discriminator 2
- 671 02ae 97ED067A 		vldr.32	s14, [r7, #24]
- 672              		.loc 3 98 37 discriminator 2
- 673 02b2 FB6B     		ldr	r3, [r7, #60]
- 674 02b4 1033     		adds	r3, r3, #16
- 675 02b6 D3ED007A 		vldr.32	s15, [r3]
- 676              		.loc 3 98 28 discriminator 2
- 677 02ba 77EE277A 		vadd.f32	s15, s14, s15
- 678              		.loc 3 98 16 discriminator 2
- 679 02be FB6B     		ldr	r3, [r7, #60]
- 680 02c0 1433     		adds	r3, r3, #20
- 681              		.loc 3 98 40 discriminator 2
- 682 02c2 B6EE007A 		vmov.f32	s14, #5.0e-1
- 683 02c6 67EE877A 		vmul.f32	s15, s15, s14
- 684              		.loc 3 98 18 discriminator 2
- 685 02ca C3ED007A 		vstr.32	s15, [r3]
-  99:DaisySP-LGPL-FX/moogladder.cpp ****         delay[4] = stg[3];
- 686              		.loc 3 99 16 discriminator 2
- 687 02ce FB6B     		ldr	r3, [r7, #60]
- 688 02d0 1033     		adds	r3, r3, #16
- 689              		.loc 3 99 25 discriminator 2
- 690 02d2 BA69     		ldr	r2, [r7, #24]	@ float
- 691              		.loc 3 99 18 discriminator 2
- 692 02d4 1A60     		str	r2, [r3]	@ float
- 693              	.LBE6:
+ 476              		.loc 1 98 9 is_stmt 1 discriminator 2 view .LVU181
+ 477              		.loc 1 98 26 is_stmt 0 discriminator 2 view .LVU182
+ 478 0142 DDED037A 		vldr.32	s15, [sp, #12]
+ 479              		.loc 1 98 40 discriminator 2 view .LVU183
+ 480 0146 B6EE007A 		vmov.f32	s14, #5.0e-1
+ 481              		.loc 1 98 28 discriminator 2 view .LVU184
+ 482 014a 94ED070A 		vldr.32	s0, [r4, #28]
+ 483              	.LBE14:
   83:DaisySP-LGPL-FX/moogladder.cpp ****     {
- 694              		.loc 3 83 5 discriminator 2
- 695 02d6 BB6C     		ldr	r3, [r7, #72]
- 696 02d8 0133     		adds	r3, r3, #1
- 697 02da BB64     		str	r3, [r7, #72]
- 698 02dc 51E7     		b	.L34
- 699              	.L29:
- 700              	.LBE5:
+ 484              		.loc 1 83 22 discriminator 2 view .LVU185
+ 485 014e B8F1010F 		cmp	r8, #1
+ 486              	.LBB18:
+  99:DaisySP-LGPL-FX/moogladder.cpp ****         delay[4] = stg[3];
+ 487              		.loc 1 99 18 discriminator 2 view .LVU186
+ 488 0152 C4ED077A 		vstr.32	s15, [r4, #28]
+  98:DaisySP-LGPL-FX/moogladder.cpp ****         delay[4] = stg[3];
+ 489              		.loc 1 98 28 discriminator 2 view .LVU187
+ 490 0156 37EE800A 		vadd.f32	s0, s15, s0
+  98:DaisySP-LGPL-FX/moogladder.cpp ****         delay[4] = stg[3];
+ 491              		.loc 1 98 40 discriminator 2 view .LVU188
+ 492 015a 20EE070A 		vmul.f32	s0, s0, s14
+  98:DaisySP-LGPL-FX/moogladder.cpp ****         delay[4] = stg[3];
+ 493              		.loc 1 98 18 discriminator 2 view .LVU189
+ 494 015e 84ED080A 		vstr.32	s0, [r4, #32]
+ 495              		.loc 1 99 9 is_stmt 1 discriminator 2 view .LVU190
+ 496              	.LBE18:
+  83:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 497              		.loc 1 83 5 discriminator 2 view .LVU191
+ 498              	.LVL36:
+  83:DaisySP-LGPL-FX/moogladder.cpp ****     {
+ 499              		.loc 1 83 22 discriminator 2 view .LVU192
+ 500 0162 0BD1     		bne	.L26
+ 501              	.LBE13:
  100:DaisySP-LGPL-FX/moogladder.cpp ****     }
  101:DaisySP-LGPL-FX/moogladder.cpp ****     return delay[5];
- 701              		.loc 3 101 19
- 702 02de FB6B     		ldr	r3, [r7, #60]
- 703 02e0 5B69     		ldr	r3, [r3, #20]	@ float
- 704 02e2 07EE903A 		vmov	s15, r3
+ 502              		.loc 1 101 5 view .LVU193
  102:DaisySP-LGPL-FX/moogladder.cpp **** }
- 705              		.loc 3 102 1
- 706 02e6 B0EE670A 		vmov.f32	s0, s15
- 707 02ea 5C37     		adds	r7, r7, #92
- 708              		.cfi_def_cfa_offset 20
- 709 02ec BD46     		mov	sp, r7
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 28
+ 503              		.loc 1 102 1 is_stmt 0 view .LVU194
+ 504 0164 04B0     		add	sp, sp, #16
+ 505              		.cfi_remember_state
+ 506              		.cfi_def_cfa_offset 48
+ 507              		@ sp needed
+ 508 0166 BDEC068B 		vldm	sp!, {d8-d10}
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s 			page 22
 
 
- 710              		.cfi_def_cfa_register 13
- 711              		@ sp needed
- 712 02ee BDEC028B 		vldm	sp!, {d8}
- 713              		.cfi_restore 80
- 714              		.cfi_restore 81
- 715              		.cfi_def_cfa_offset 12
- 716 02f2 90BD     		pop	{r4, r7, pc}
- 717              	.L38:
- 718              		.align	2
- 719              	.L37:
- 720 02f4 17B7D137 		.word	936490775
- 721 02f8 77BEEF3F 		.word	1072676471
- 722 02fc 2DB2FD3E 		.word	1056813613
- 723 0300 DD24263F 		.word	1059464413
- 724 0304 5BB17F3F 		.word	1065333083
- 725 0308 FAED7BC0 		.word	-1065619974
- 726 030c 9CA2EB3F 		.word	1072407196
- 727 0310 492E7F3F 		.word	1065299529
- 728 0314 DB0FC940 		.word	1086918619
- 729              		.cfi_endproc
- 730              	.LFE2796:
- 732              		.text
- 733              	.Letext0:
- 734              		.file 4 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/machine/_default_types.h"
- 735              		.file 5 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/_stdint.h"
- 736              		.file 6 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdint.h"
- 737              		.file 7 "/Library/DaisyToolchain/0.2.0/arm/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h"
- 738              		.file 8 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/cpp_type_traits.h
- 739              		.file 9 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h"
- 740              		.file 10 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdint"
- 741              		.file 11 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdlib"
- 742              		.file 12 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/type_traits"
- 743              		.file 13 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_pair.h"
- 744              		.file 14 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/debug/debug.h"
- 745              		.file 15 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cwchar"
- 746              		.file 16 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/exception_ptr.h"
- 747              		.file 17 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v
- 748              		.file 18 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/clocale"
- 749              		.file 19 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdio"
- 750              		.file 20 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/basic_string.h"
- 751              		.file 21 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_iterator.h"
- 752              		.file 22 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/predefined_ops.h
- 753              		.file 23 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/_types.h"
- 754              		.file 24 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/reent.h"
- 755              		.file 25 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/lock.h"
- 756              		.file 26 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/math.h"
- 757              		.file 27 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdlib.h"
- 758              		.file 28 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/math.h"
- 759              		.file 29 "DaisySP-LGPL-FX/moogladder.h"
- 760              		.file 30 "../DaisySP/Source/Utility/dsp.h"
- 761              		.file 31 "/Library/DaisyToolchain/0.2.0/arm/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h"
- 762              		.file 32 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/wchar.h"
- 763              		.file 33 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/locale.h"
- 764              		.file 34 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdio.h"
- 765              		.file 35 "<built-in>"
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s 			page 29
+ 509              		.cfi_restore 84
+ 510              		.cfi_restore 85
+ 511              		.cfi_restore 82
+ 512              		.cfi_restore 83
+ 513              		.cfi_restore 80
+ 514              		.cfi_restore 81
+ 515              		.cfi_def_cfa_offset 24
+ 516              	.LVL37:
+ 517              		.loc 1 102 1 view .LVU195
+ 518 016a BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 519              	.LVL38:
+ 520              	.L20:
+ 521              		.cfi_restore_state
+ 522              	.LBB20:
+  76:DaisySP-LGPL-FX/moogladder.cpp ****         acr  = old_acr_;
+ 523              		.loc 1 76 9 is_stmt 1 view .LVU196
+  77:DaisySP-LGPL-FX/moogladder.cpp ****         tune = old_tune_;
+ 524              		.loc 1 77 9 view .LVU197
+  76:DaisySP-LGPL-FX/moogladder.cpp ****         acr  = old_acr_;
+ 525              		.loc 1 76 14 is_stmt 0 view .LVU198
+ 526 016e F0EE678A 		vmov.f32	s17, s15
+  77:DaisySP-LGPL-FX/moogladder.cpp ****         tune = old_tune_;
+ 527              		.loc 1 77 14 view .LVU199
+ 528 0172 90ED0F8A 		vldr.32	s16, [r0, #60]
+ 529              	.LVL39:
+  78:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 530              		.loc 1 78 9 is_stmt 1 view .LVU200
+  78:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 531              		.loc 1 78 14 is_stmt 0 view .LVU201
+ 532 0176 90ED10AA 		vldr.32	s20, [r0, #64]
+ 533              	.LVL40:
+  78:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 534              		.loc 1 78 14 view .LVU202
+ 535 017a A3E7     		b	.L21
+ 536              	.LVL41:
+ 537              	.L26:
+  78:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 538              		.loc 1 78 14 view .LVU203
+ 539              	.LBE20:
+ 540              	.LBB21:
+ 541 017c 4FF00108 		mov	r8, #1
+ 542              	.LVL42:
+  78:DaisySP-LGPL-FX/moogladder.cpp ****     }
+ 543              		.loc 1 78 14 view .LVU204
+ 544 0180 A8E7     		b	.L25
+ 545              	.LVL43:
+ 546              	.L22:
+ 547              	.LBB19:
+ 548              	.LBB17:
+  95:DaisySP-LGPL-FX/moogladder.cpp ****             delay[k] = stg[k];
+ 549              		.loc 1 95 50 view .LVU205
+ 550 0182 15ED010A 		vldr.32	s0, [r5, #-4]
+ 551 0186 2046     		mov	r0, r4
+ 552 0188 20EE290A 		vmul.f32	s0, s0, s19
+ 553 018c FFF7FEFF 		bl	_ZN7daisysp10MoogLadder7my_tanhEf
+ 554              	.LVL44:
+ 555 0190 CAE7     		b	.L23
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s 			page 23
+
+
+ 556              	.L30:
+ 557 0192 00BF     		.align	2
+ 558              	.L29:
+ 559 0194 17B7D137 		.word	936490775
+ 560 0198 00000000 		.word	0
+ 561 019c 2DB2FD3E 		.word	1056813613
+ 562 01a0 77BEEF3F 		.word	1072676471
+ 563 01a4 9CA2EB3F 		.word	1072407196
+ 564 01a8 DD24263F 		.word	1059464413
+ 565 01ac FAED7BC0 		.word	-1065619974
+ 566 01b0 DB0FC940 		.word	1086918619
+ 567 01b4 492E7F3F 		.word	1065299529
+ 568 01b8 5BB17F3F 		.word	1065333083
+ 569              	.LBE17:
+ 570              	.LBE19:
+ 571              	.LBE21:
+ 572              		.cfi_endproc
+ 573              	.LFE2799:
+ 575              		.text
+ 576              	.Letext0:
+ 577              		.file 3 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/machine/_default_types.h"
+ 578              		.file 4 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/_stdint.h"
+ 579              		.file 5 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdint.h"
+ 580              		.file 6 "/Library/DaisyToolchain/0.2.0/arm/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h"
+ 581              		.file 7 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h"
+ 582              		.file 8 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdint"
+ 583              		.file 9 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdlib"
+ 584              		.file 10 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/type_traits"
+ 585              		.file 11 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/debug/debug.h"
+ 586              		.file 12 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cwchar"
+ 587              		.file 13 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_pair.h"
+ 588              		.file 14 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/exception_ptr.h"
+ 589              		.file 15 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v
+ 590              		.file 16 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/clocale"
+ 591              		.file 17 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/cstdio"
+ 592              		.file 18 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/basic_string.h"
+ 593              		.file 19 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/stl_iterator.h"
+ 594              		.file 20 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/bits/predefined_ops.h
+ 595              		.file 21 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/_types.h"
+ 596              		.file 22 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/reent.h"
+ 597              		.file 23 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/sys/lock.h"
+ 598              		.file 24 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/math.h"
+ 599              		.file 25 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdlib.h"
+ 600              		.file 26 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/c++/10.3.1/math.h"
+ 601              		.file 27 "DaisySP-LGPL-FX/moogladder.h"
+ 602              		.file 28 "../DaisySP/Source/Utility/dsp.h"
+ 603              		.file 29 "/Library/DaisyToolchain/0.2.0/arm/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h"
+ 604              		.file 30 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/wchar.h"
+ 605              		.file 31 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/locale.h"
+ 606              		.file 32 "/Library/DaisyToolchain/0.2.0/arm/arm-none-eabi/include/stdio.h"
+ 607              		.file 33 "<built-in>"
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s 			page 24
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 moogladder.cpp
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s:19     .text._ZSt4tanhf:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s:25     .text._ZSt4tanhf:0000000000000000 _ZSt4tanhf
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s:57     .rodata._ZStL19piecewise_construct:0000000000000000 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s:60     .rodata._ZStL19piecewise_construct:0000000000000000 _ZStL19piecewise_construct
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s:63     .text._ZL20__gthread_key_deletei:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s:68     .text._ZL20__gthread_key_deletei:0000000000000000 _ZL20__gthread_key_deletei
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s:101    .rodata._ZN7daisyspL9kRandFracE:0000000000000000 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s:104    .rodata._ZN7daisyspL9kRandFracE:0000000000000000 _ZN7daisyspL9kRandFracE
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s:107    .rodata._ZN7daisyspL11kOneTwelfthE:0000000000000000 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s:110    .rodata._ZN7daisyspL11kOneTwelfthE:0000000000000000 _ZN7daisyspL11kOneTwelfthE
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s:113    .text._ZN7daisysp10MoogLadder7my_tanhEf:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s:119    .text._ZN7daisysp10MoogLadder7my_tanhEf:0000000000000000 _ZN7daisysp10MoogLadder7my_tanhEf
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s:210    .text._ZN7daisysp10MoogLadder4InitEf:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s:216    .text._ZN7daisysp10MoogLadder4InitEf:0000000000000000 _ZN7daisysp10MoogLadder4InitEf
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s:313    .text._ZN7daisysp10MoogLadder4InitEf:000000000000008c $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s:321    .text._ZN7daisysp10MoogLadder7ProcessEf:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s:327    .text._ZN7daisysp10MoogLadder7ProcessEf:0000000000000000 _ZN7daisysp10MoogLadder7ProcessEf
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//cc2Hab7I.s:720    .text._ZN7daisysp10MoogLadder7ProcessEf:00000000000002f4 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s:19     .text._ZN7daisysp10MoogLadder7my_tanhEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s:25     .text._ZN7daisysp10MoogLadder7my_tanhEf:0000000000000000 _ZN7daisysp10MoogLadder7my_tanhEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s:107    .text._ZN7daisysp10MoogLadder4InitEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s:113    .text._ZN7daisysp10MoogLadder4InitEf:0000000000000000 _ZN7daisysp10MoogLadder4InitEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s:201    .text._ZN7daisysp10MoogLadder4InitEf:000000000000002c $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s:208    .text._ZN7daisysp10MoogLadder7ProcessEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s:214    .text._ZN7daisysp10MoogLadder7ProcessEf:0000000000000000 _ZN7daisysp10MoogLadder7ProcessEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccDkJQlI.s:559    .text._ZN7daisysp10MoogLadder7ProcessEf:0000000000000194 $d
 
 UNDEFINED SYMBOLS
 tanhf

@@ -5,7 +5,6 @@
 #include "AudioFileManager.h"
 #include "constants_utils.h"
 #include "debug_print.h"
-#include "DaisySP-LGPL-FX/reverb.h"
 #include "DaisySP-LGPL-FX/compressor.h"
 #include "DaisySP-LGPL-FX/moogladder.h"
 #include "StereoRotator.h"
@@ -67,11 +66,11 @@ class GrannyChordApp {
     char fname_[MAX_FNAME_LEN];
 
     /* previous values for parameters controlled by knob 1*/
-    float prev_param_k1[NUM_SYNTH_MODES] = {0};
-    float prev_param_k2[NUM_SYNTH_MODES] = {0};
+    float prev_param_k1[NUM_SYNTH_MODES];
+    float prev_param_k2[NUM_SYNTH_MODES];
 
-    float prev_k1_pos[NUM_SYNTH_MODES] = {0.5};
-    float prev_k2_pos[NUM_SYNTH_MODES] = {0.5};
+    float prev_k1_pos[NUM_SYNTH_MODES];
+    float prev_k2_pos[NUM_SYNTH_MODES];
 
     /* objects/variables for recording in and out */
     WavWriter<16384> sd_writer_;
@@ -146,9 +145,9 @@ class GrannyChordApp {
 
     void DebugPrintState(AppState state);
     void DebugPrintMode(SynthMode mode);
-    #ifdef DEBUG_MODE
+    // #ifdef DEBUG_MODE
     void PrintCPULoad();
-    #endif
+    // #endif
 
 
     size_t counter=0;

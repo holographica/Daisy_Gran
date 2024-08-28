@@ -11,6 +11,7 @@
 #include "GranularSynth.h"
 #include "GrannyChordApp.h"
 #include "constants_utils.h"
+#include "DaisySP-LGPL-FX/reverb.h"
 #include "debug_print.h"
 
 using namespace daisy;
@@ -27,12 +28,10 @@ FatFSInterface fsi;
 DaisyPod pod;
 FIL file;
 
-// ReverbSc reverb;
 DSY_SDRAM_BSS ReverbSc reverb;
-DSY_SDRAM_BSS SmoothRandomGenerator rng;
 /* software classes to run app */
 AudioFileManager filemgr(sd, fsi, pod, &file);
-static GranularSynth synth(pod, &rng);
+static GranularSynth synth(pod);
 GrannyChordApp app(pod, synth, filemgr, reverb);
 
 /* we set rng state here so we can use RNG fns across classes */
@@ -41,7 +40,8 @@ uint32_t rng_state;
 int main (void){
   pod.Init();
   pod.seed.StartLog(true);
-  DebugPrint(pod,"started log");
+  // DebugPrint(pod,"started log");
+  pod.seed.PrintLine("started log");
   // rng.Init(SAMPLE_RATE_FLOAT);
   // rng.SetFreq(1.f);
   // float x;

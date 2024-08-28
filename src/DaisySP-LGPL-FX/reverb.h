@@ -11,7 +11,6 @@ https://opensource.org/license/lgpl-2-1/
 #define DSYSP_REVERBSC_H
 
 #define DSY_REVERBSC_MAX_SIZE 98936
-// #define DSY_REVERBSC_MAX_SIZE 49468
 
 namespace daisysp
 {
@@ -46,9 +45,8 @@ class ReverbSc
     */
     int Process(const float &in1, const float &in2, float *out1, float *out2);
 
-    /* process using a simple wet/dry mix */
     void ProcessMix(const float &in1, const float &in2, float *out1, float *out2);
-    void SetMix(float mix) { wet_mix_ = mix; }
+
     /** controls the reverb time. reverb tail becomes infinite when set to 1.0
         \param fb - sets reverb time. range: 0.0 to 1.0
     */
@@ -57,6 +55,8 @@ class ReverbSc
         \param freq - low pass frequency. range: 0.0 to sample_rate / 2
     */
     inline void SetLpFreq(const float &freq) { lpfreq_ = freq; }
+
+    inline void SetMix(const float mix){ wet_mix_ = mix; }
 
   private:
     void       NextRandomLineseg(ReverbScDl *lp, int n);

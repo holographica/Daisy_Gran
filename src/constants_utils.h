@@ -27,12 +27,9 @@ static const uint16_t MAX_FNAME_LEN = 128;
 
 /* granular synth parameter constants */
 constexpr int MIN_GRAINS = 1;
-constexpr int MAX_GRAINS = 10;
-/* grain count moves towards target by 0.1% every update 
-  to avoid CPU overload due to rapid grain count increase
-  as well as smoother sound */
-constexpr float GRAIN_INCREASE_SMOOTHNESS = 0.99f;
-static constexpr int NUM_SYNTH_MODES = 7;
+constexpr int MAX_GRAINS = 5;
+
+static constexpr int NUM_SYNTH_MODES = 4;
 constexpr float PARAM_CHANGE_THRESHOLD = 0.01f;
 constexpr float MIN_GRAIN_SIZE_MS = 100.0f;
 constexpr float MAX_GRAIN_SIZE_MS = 3000.0f;
