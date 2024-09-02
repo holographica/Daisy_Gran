@@ -207,7 +207,7 @@ build/GrannyChordApp.o: GrannyChordApp.cpp \
  ../DaisySP/Source/../DaisySP-LGPL/Source/Utility/jitter.h \
  ../DaisySP/Source/../DaisySP-LGPL/Source/Utility/port.h GranularSynth.h \
  Grain.h GrainPhasor.h constants_utils.h debug_print.h AudioFileManager.h \
- DaisySP-LGPL-FX/compressor.h DaisySP-LGPL-FX/moogladder.h \
+ ChordMode.h DaisySP-LGPL-FX/compressor.h DaisySP-LGPL-FX/moogladder.h \
  StereoRotator.h AppState.h
 ../libDaisy/Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:
 ../libDaisy/Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h750xx.h:
@@ -472,6 +472,7 @@ GrainPhasor.h:
 constants_utils.h:
 debug_print.h:
 AudioFileManager.h:
+ChordMode.h:
 DaisySP-LGPL-FX/compressor.h:
 DaisySP-LGPL-FX/moogladder.h:
 StereoRotator.h:

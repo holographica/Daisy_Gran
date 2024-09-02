@@ -36,7 +36,7 @@ void GrannyChordApp::Init(int16_t *left, int16_t *right){
   pod_.StartAdc();
 }
 
-// #ifdef DEBUG_MODE
+#ifdef DEBUG_MODE
 void GrannyChordApp::PrintCPULoad(){
   const float avgLoad = loadmeter.GetAvgCpuLoad();
   const float maxLoad = loadmeter.GetMaxCpuLoad();
@@ -47,7 +47,7 @@ void GrannyChordApp::PrintCPULoad(){
   pod_.seed.PrintLine("Min: " FLT_FMT3, FLT_VAR3(minLoad * 100.0f));
   pod_.seed.PrintLine("account: %d",synth_.GetActiveGrains());
 }
-// #endif
+#endif
 
 /// @brief Loops whilst app is running, updating state and UI, handling 
 ///        state transitions, updating parameters and managing audio recordings
@@ -56,12 +56,12 @@ void GrannyChordApp::Run(){
   // timer_.Start();
   while(true){
     // #ifdef DEBUG_MODE
-    loop_count++;
-    if (loop_count%10000==0){
-      PrintCPULoad();
-      loop_count=0;
-      // System::Delay(500);
-    }
+    // loop_count++;
+    // if (loop_count%10000==0){
+    //   PrintCPULoad();
+    //   loop_count=0;
+    //   // System::Delay(500);
+    // }
     // #endif
 
     if (recording_out_) {
@@ -72,7 +72,7 @@ void GrannyChordApp::Run(){
       }
     }
     UpdateUI();
-    UpdateSynthParams();
+    UpdateParams();
     System::Delay(1);
   }
 }
@@ -84,13 +84,8 @@ void GrannyChordApp::UpdateUI(){
   if (pod_.encoder.TimeHeldMs() > 1000.0f) HandleEncoderLongPress();
   else if (pod_.encoder.FallingEdge()) HandleEncoderPressed();
 
-  if (curr_state_==AppState::Synthesis){
-    // if (pod_.button1.TimeHeldMs()>500.0f || pod_.button2.TimeHeldMs()>500.0f){
-      // ButtonLongPressHandler();
-    // }
-    // else if (pod_.button1.FallingEdge() || pod_.button2.FallingEdge()){
-      ButtonHandler();
-    // }
+  if (curr_state_==AppState::Synthesis || curr_state_==AppState::ChordMode){
+    ButtonHandler();
   }
 
   int32_t encoder_inc = pod_.encoder.Increment();
@@ -102,10 +97,10 @@ void GrannyChordApp::UpdateUI(){
     DebugPrintState(curr_state_);
     DebugPrint(pod_, "switching states");
     DebugPrintState(next_state_);
+    DebugPrint(pod_,"switched state\n");
     #endif
     SetLedAppState();
     HandleStateChange();
-    // DebugPrint(pod_, "handled state change");
   }
 }
 
@@ -128,17 +123,36 @@ void GrannyChordApp::HandleStateChange(){
       curr_state_ = AppState::PlayWAV;
       break;
     case AppState::Synthesis:
-      InitSynth();
+      if (curr_state_ != AppState::ChordMode){
+        InitSynth();
+      }
       curr_state_ = AppState::Synthesis;
       // SetLedSynthMode();
       // DebugPrint(pod_, "started audiocallback");
       break;
+    case AppState::ChordMode:
+      // freeze synth parameters
+      // start monitoring chord parameters 
+      curr_state_ = AppState::ChordMode;
+      pod_.seed.PrintLine("Mode: %s",chord_gen_.GetModeName());
+      pod_.seed.PrintLine("Chord: %s",chord_gen_.GetChordName());
+      pod_.seed.PrintLine("Scale: %s",chord_gen_.GetScaleName());
+      break;
     case AppState::Error: 
       curr_state_ = AppState::Error;
       break;
-    default: 
-      break;
   }
+}
+
+void GrannyChordApp::UpdateParams(){
+  if (curr_state_==AppState::Synthesis){
+    UpdateSynthParams();
+  }
+  else if (curr_state_==AppState::ChordMode){
+    ChangeChordKey();
+    ChangeChordSpawnPos();
+  }
+  else return;
 }
 
 /// @brief Handles when encoder is scrolled to select a file 
@@ -151,6 +165,17 @@ void GrannyChordApp::HandleEncoderIncrement(int encoder_inc){
   if (next_state_== AppState::SelectFile){
     recorded_in_ = false;
     HandleFileSelection(encoder_inc);
+  }
+
+  if (curr_state_ == AppState::ChordMode){
+    std::vector<float> ratios = chord_gen_.GetRatios(encoder_inc);
+    synth_.TriggerChord(ratios);
+    DebugPrint(pod_, "triggered chord ");
+    System::Delay(5);
+    for (size_t i =0; i<ratios.size(); i++){
+      pod_.seed.Print("%f  ", ratios[i]);
+    }
+    pod_.seed.Print("\n");
   }
 }
 
@@ -166,6 +191,12 @@ void GrannyChordApp::HandleEncoderPressed(){
       return;
     case AppState::PlayWAV:
       next_state_ = AppState::Synthesis;
+      return;
+    case AppState::Synthesis:
+      next_state_ = AppState::ChordMode;
+      return;
+    case AppState::ChordMode:
+      next_state_= AppState::Synthesis;
       return;
     default:
       return;
@@ -191,24 +222,15 @@ void GrannyChordApp::HandleEncoderLongPress(){
   }
 }
 
-// void GrannyChordApp::ButtonLongPressHandler(){
-//   if (pod_.button1.TimeHeldMs()>1000.0f){
-//     while (!pod_.button1.FallingEdge()){
-//       pod_.button1.Debounce();
-//     }
-//     // HandleButton1LongPress();
-//   }
-//   if (pod_.button2.TimeHeldMs()>1000.0f){
-//     while(!pod_.button2.FallingEdge()){
-//       pod_.button2.Debounce();
-//     }
-//     DebugPrint(pod_,"held button 2 and released");
-//   }
-// }
-
-
 void GrannyChordApp::ButtonHandler(){
-  if (pod_.button1.FallingEdge()){
+  if (pod_.button1.TimeHeldMs()>500.0f){
+    while (!pod_.button1.FallingEdge()){
+      pod_.button1.Debounce();
+    }
+    HandleButton1LongPress();
+  }
+
+  else if (pod_.button1.FallingEdge()){
     HandleButton1();
   }
 
@@ -216,153 +238,62 @@ void GrannyChordApp::ButtonHandler(){
     HandleButton2();
   }
 
-  /* handle case when both buttons are held down */
-  // if (pod_.button1.Pressed() && pod_.button2.Pressed()){
-  //   float heldTime1 = pod_.button1.TimeHeldMs();
-  //   float heldTime2 = pod_.button2.TimeHeldMs();
-  //   if (heldTime1 > LONG_PRESS_TIME &&
-  //       heldTime2 > LONG_PRESS_TIME &&
-  //       !both_btns_long_press_fired_) 
-  //   {
-  //     if (!recording_out_){
-  //       pod_.seed.SetLed(1);
-  //       recording_out_ = true;
-  //       DebugPrint(pod_,"now recording out!");
-  //       RecordOutToSD();
-  //     } 
-  //     else{
-  //       pod_.seed.SetLed(0);
-  //       DebugPrint(pod_, "finished recording out: %.2fs",sd_writer_.GetLengthSeconds());
-  //       FinishRecording();
-  //     }
-  //     both_btns_long_press_fired_ = true;
-  //     last_action_time_ = time_now;
-  //   }
-  // } 
-  // else{
-  //   both_btns_long_press_fired_ = false;
-  // }
 }
 
 /// @brief Switch between synth parameter control modes
 void GrannyChordApp::HandleButton1(){
-  NextSynthMode();
+  if (curr_state_==AppState::Synthesis){
+    NextSynthMode();
+  }
+  else if (curr_state_==AppState::ChordMode){
+    CycleChordPlaybackMode();
+  }
 }
 
 /// @brief Toggles on/off synth parameter randomness controls
 void GrannyChordApp::HandleButton2(){
+  if (curr_state_==AppState::Synthesis){
     PrevSynthMode();
+  }
+  else if (curr_state_==AppState::ChordMode){
+    CycleChordScale();
+  }
 }
 
-// /// @brief Switches between controlling regular parameter modes and FX parameter modes
-// void GrannyChordApp::HandleButton1LongPress(){
-//   int mode_idx = static_cast<int>(curr_synth_mode_);
-//   if (mode_idx<4) mode_idx = 4;
-//   else mode_idx = 0;
-//   curr_synth_mode_ = static_cast<SynthMode>(mode_idx);
-//   SetLedSynthMode();
-// }
-
-/// @brief Switches to Chord Mode
-void GrannyChordApp::HandleButton2LongPress(){
-  // TODO: RECORD OUT? 
+// /// @brief Toggles recording out to SD card
+void GrannyChordApp::HandleButton1LongPress(){
+  if (curr_state_==AppState::Synthesis || curr_state_==AppState::ChordMode){
+    if (!recording_out_){
+      /* set seed led whilst recording out */
+      pod_.seed.SetLed(1);
+      recording_out_ = true;
+      DebugPrint(pod_,"now recording out!");
+      RecordOutToSD();
+    } 
+    else{
+      pod_.seed.SetLed(0);
+      DebugPrint(pod_, "finished recording out: %.2fs",sd_writer_.GetLengthSeconds());
+      FinishRecording();
+    }
+  }
+  else return;
 }
 
 /// @brief Scrolls through list of files for user selection
 void GrannyChordApp::HandleFileSelection(int32_t encoder_inc){
+  file_led_state_ = !file_led_state_;
+  if (file_led_state_){
+    pod_.led1.SetColor(colours.GREEN);
+  }
+  else {
+    pod_.led1.SetColor(colours.OFF);
+  }
+  pod_.UpdateLeds();
   int file_count = filemgr_.GetFileCount();
   file_idx_ = (file_idx_ + encoder_inc + file_count) % file_count;
   filemgr_.GetName(file_idx_,fname_);
   DebugPrint(pod_, "selected file %d %s",file_idx_,fname_);
-}
-
-/// @brief iterates to next synth mode within regular or FX group
-void GrannyChordApp::NextSynthMode(){
-  DebugPrint(pod_, "going to synth mode");
-  int mode_idx = static_cast<int>(curr_synth_mode_);
-  prev_k1_pos[mode_idx] = MapKnobDeadzone(pod_.knob1.Process());
-  prev_k2_pos[mode_idx] = MapKnobDeadzone(pod_.knob2.Process());
-  knob1_latched = false;
-  knob2_latched = false;
-  mode_idx++;
-  if (mode_idx>3) mode_idx =0;
-  curr_synth_mode_ = static_cast<SynthMode>(mode_idx);
-  DebugPrintMode(curr_synth_mode_);
-  SetLedSynthMode();
-}
-
-/// @brief iterates to previous synth mode within regular or FX group
-void GrannyChordApp::PrevSynthMode(){
-  DebugPrint(pod_, "going to prev synth mode");
-  int mode_idx = static_cast<int>(curr_synth_mode_);
-  prev_k1_pos[mode_idx] = MapKnobDeadzone(pod_.knob1.Process());
-  prev_k2_pos[mode_idx] = MapKnobDeadzone(pod_.knob2.Process());
-  knob1_latched = false;
-  knob2_latched = false;  
-  mode_idx --;
-  if (mode_idx<0) mode_idx=3;
-  curr_synth_mode_ = static_cast<SynthMode>(mode_idx);
-  DebugPrintMode(curr_synth_mode_);
-  SetLedSynthMode();
-}
-
-/// @brief Updates synth parameters based on current synth mode and adjusts
-///        knob input values to account for knob jitter and deadzones around 0/1
-void GrannyChordApp::UpdateSynthParams(){
-  if (curr_state_!=AppState::Synthesis) return;
-  int mode_idx = static_cast<int>(curr_synth_mode_);
-
-  /* set to 0 or 1 if very close to these bounds */
-  float knob1_val = MapKnobDeadzone(pod_.knob1.Process());
-  float knob2_val = MapKnobDeadzone(pod_.knob2.Process());
-
-  // UpdateKnob1Params(knob1_val, curr_synth_mode_);
-  // UpdateKnob2Params(knob2_val, curr_synth_mode_);
-
-  // if (UpdateKnobPassThru(&knob1_latched, knob1_val,prev_param_k1[mode_idx])){
-  //   UpdateKnob1Params(knob1_val,curr_synth_mode_);
-  //   prev_param_k1[mode_idx] = knob1_val;
-  //   System::Delay(5);
-  // }
-
-  // if (UpdateKnobPassThru(&knob2_latched, knob2_val,prev_param_k2[mode_idx])){
-  //   UpdateKnob2Params(knob2_val, curr_synth_mode_);
-  //   prev_param_k2[mode_idx] = knob2_val;
-  //   System::Delay(5);
-  // }
-
-
-
-  if (!knob1_latched){
-    if ((fabs(knob1_val - prev_k1_pos[mode_idx])<=0.05f) &&
-        (fabs(prev_k1_pos[mode_idx] - prev_param_k1[mode_idx])<=0.05f)){
-          knob1_latched = true;
-          DebugPrint(pod_, "latched 1");
-    }
-  }
-
-  if (!knob2_latched){
-    if ((fabs(knob2_val-prev_k2_pos[mode_idx])<=0.05f) &&
-        (fabs(prev_k2_pos[mode_idx]-prev_param_k2[mode_idx])<=0.05f)){
-          knob2_latched = true;
-          DebugPrint(pod_, "latched 2");
-    }
-  }
-
-  if (knob1_latched){
-    UpdateKnob1Params(knob1_val, curr_synth_mode_);
-    prev_param_k1[mode_idx] = knob1_val;
-    prev_k1_pos[mode_idx] = knob1_val;
-    // System::Delay(5);
-  }
-
-  if (knob2_latched){
-    UpdateKnob2Params(knob2_val, curr_synth_mode_);
-    prev_param_k2[mode_idx] = knob2_val;
-    prev_k2_pos[mode_idx] = knob2_val;
-    // System::Delay(5);
-  }
-  System::Delay(1);
+  System::Delay(5);
 }
 
 /// @brief Initialises file manager, sets audio data buffers and scans SD card for WAV files
@@ -415,9 +346,9 @@ void GrannyChordApp::InitWavWriter(){
 /// @brief initialise reverb, compressor, filter configs for FX section 
 void GrannyChordApp::InitFX(){
   limiter_.Init();
-  comp_.Init(SAMPLE_RATE_FLOAT);
   reverb_.Init(SAMPLE_RATE_FLOAT);
-  
+  reverb_.SetMix(0.0f);
+  reverb_.SetFeedback(0.0f);
   lowpass_moog_.Init(SAMPLE_RATE_FLOAT);
   lowpass_moog_.SetFreq(LOPASS_UPPER_BOUND);
   lowpass_moog_.SetRes(0.7f);
@@ -470,13 +401,14 @@ void GrannyChordApp::ProcessAudio(AudioHandle::InputBuffer in, AudioHandle::Outp
       ProcessWAVPlayback(out,size);
       return;  
     case AppState::RecordIn:
-      // ProcessRecordIn(in, out, size);
+      ProcessRecordIn(in, out, size);
       return;
     case AppState::Synthesis:
-      ProcessSynthesis(out,size);
+      ProcessSynthesis(out,size, false);
       return;
-    // case AppState::ChordMode:
-    // return;
+    case AppState::ChordMode:
+      ProcessSynthesis(out,size, true);
+    return;
     default:
       return;
   }
@@ -488,8 +420,8 @@ void GrannyChordApp::ProcessAudio(AudioHandle::InputBuffer in, AudioHandle::Outp
 void GrannyChordApp::ProcessWAVPlayback(AudioHandle::OutputBuffer out, size_t size){
   for (size_t i=0; i<size; i++){
     if (wav_playhead_ < filemgr_.GetSamplesPerChannel()){
-      out[0][i] = s162f(left_buf_[wav_playhead_]) * 0.5f;
-      out[1][i] = s162f(right_buf_[wav_playhead_]) * 0.5f;
+      out[0][i] = s162f(left_buf_[wav_playhead_]);
+      out[1][i] = s162f(right_buf_[wav_playhead_]);
       wav_playhead_++;
     }
   }
@@ -517,34 +449,28 @@ void GrannyChordApp::ProcessRecordIn(AudioHandle::InputBuffer in, AudioHandle::O
 /// @brief Process audio through granular synth and mix to output buffer
 /// @param out Output audio buffer
 /// @param size Number of samples to process in this call
-void GrannyChordApp::ProcessSynthesis(AudioHandle::OutputBuffer out, size_t size){
-  // Sample samp;
-  loadmeter.OnBlockStart();
+void GrannyChordApp::ProcessSynthesis(AudioHandle::OutputBuffer out, size_t size, bool process_chord){
+  Sample samp;
   for (size_t i=0; i<size; i++){ 
-    Sample samp = synth_.ProcessGrains();
-    counter++;
+    if (process_chord){
+      samp = synth_.ProcessChord();
+    }
+    else {
+      samp = synth_.ProcessGrains();
+    }
 
     Sample processed = ProcessFX(samp);
-    limiter_.ProcessBlock(&processed.left, 1, 0.5f);
-    limiter_.ProcessBlock(&processed.right, 1, 0.5f);
-    // limiter_.ProcessBlock(&samp.left, 1, 0.0f);
-    // limiter_.ProcessBlock(&samp.right, 1, 0.0f);
-  //   // if (counter%128000==0){
-  //   //   counter=0;
-  //   //   DebugPrint(pod_, "l: %f, r: %f", samp.left, samp.right);
-  //   // }
-    // out[0][i] = samp.left;
-    // out[1][i] = samp.right;
+    // limiter_.ProcessBlock(&processed.left, 1, 0.5f);
+    // limiter_.ProcessBlock(&processed.right, 1, 0.5f);
     out[0][i] = processed.left;
     out[1][i] = processed.right;
 
-    // if (recording_out_ && sd_writer_.GetLengthSeconds()<MAX_REC_OUT_LEN){
-    //   temp_interleaved_buf_[0]=out[0][i];
-    //   temp_interleaved_buf_[1]=out[1][i];
-    //   sd_writer_.Sample(temp_interleaved_buf_);
-    // }
+    if (recording_out_ && sd_writer_.GetLengthSeconds()<MAX_REC_OUT_LEN){
+      temp_interleaved_buf_[0]=out[0][i];
+      temp_interleaved_buf_[1]=out[1][i];
+      sd_writer_.Sample(temp_interleaved_buf_);
+    }
   }
-  loadmeter.OnBlockEnd();
 }
 
 Sample GrannyChordApp::ProcessFX(Sample in){
@@ -559,22 +485,35 @@ Sample GrannyChordApp::ProcessFX(Sample in){
   out.left = lowpass_moog_.Process(out.left);
   out.right = lowpass_moog_.Process(out.right);
 
-
   /* apply reverb */
   reverb_.ProcessMix(out.left, out.right, &out.left, &out.right);
+  out.left = hicut_.Process(out.left);
+  out.right = hicut_.Process(out.right);
+
+  limiter_.ProcessBlock(&out.left, 1, 0.5f);
+  limiter_.ProcessBlock(&out.right, 1, 0.5f);
+
   return out;
 }
 
-/// @brief Process audio from chord mode and mix to output buffer
-/// @param out Output audio buffer
-/// @param size Number of samples to process in this call
+// /// @brief Process audio from chord mode and mix to output buffer
+// /// @param out Output audio buffer
+// /// @param size Number of samples to process in this call
 // void GrannyChordApp::ProcessChordMode(AudioHandle::OutputBuffer out, size_t size){
-//   // if (UserTriggeredChord()) {
-//   //   synth_.TriggerChord(out[0], out[1], size);
-//   // } else {
-//   //     std::memset(out[0], 0, size * sizeof(float));
-//   //     std::memset(out[1], 0, size * sizeof(float));
-//   // }
+//   for (size_t i =0; i<size; i++){
+//     Sample samp = synth_.ProcessChord();
+//     Sample processed = ProcessFX(samp);
+//     // limiter_.ProcessBlock(&processed.left, 1, 0.5f);
+//     // limiter_.ProcessBlock(&processed.right, 1, 0.5f);
+//     out[0][i] = processed.left;
+//     out[1][i] = processed.right;
+
+//     if (recording_out_ && sd_writer_.GetLengthSeconds()<MAX_REC_OUT_LEN){
+//       temp_interleaved_buf_[0]=out[0][i];
+//       temp_interleaved_buf_[1]=out[1][i];
+//       sd_writer_.Sample(temp_interleaved_buf_);
+//     }
+//   }
 // }
 
 /// @brief Record granular synth or chord output audio to SD card
@@ -595,10 +534,118 @@ void GrannyChordApp::FinishRecording(){
   recording_out_=false;
 }
 
+/// @brief iterates to next synth mode within regular or FX group
+void GrannyChordApp::NextSynthMode(){
+  DebugPrint(pod_, "going to synth mode");
+  int mode_idx = static_cast<int>(curr_synth_mode_);
+  prev_k1_pos[mode_idx] = MapKnobDeadzone(pod_.knob1.Process());
+  prev_k2_pos[mode_idx] = MapKnobDeadzone(pod_.knob2.Process());
+  mode_idx++;
+  if (mode_idx>3) mode_idx =0;
+  curr_synth_mode_ = static_cast<SynthMode>(mode_idx);
+  DebugPrintMode(curr_synth_mode_);
+  SetLedSynthMode();
+  prev_k1_pos[mode_idx] = MapKnobDeadzone(pod_.knob1.Process());
+  prev_k2_pos[mode_idx] = MapKnobDeadzone(pod_.knob2.Process());
+  knob1_latched = false;
+  knob2_latched = false;
+}
+
+/// @brief iterates to previous synth mode within regular or FX group
+void GrannyChordApp::PrevSynthMode(){
+  DebugPrint(pod_, "going to prev synth mode");
+  int mode_idx = static_cast<int>(curr_synth_mode_);
+  prev_k1_pos[mode_idx] = MapKnobDeadzone(pod_.knob1.Process());
+  prev_k2_pos[mode_idx] = MapKnobDeadzone(pod_.knob2.Process());
+  // knob1_latched = false;
+  // knob2_latched = false;  
+  mode_idx --;
+  if (mode_idx<0) mode_idx=3;
+  curr_synth_mode_ = static_cast<SynthMode>(mode_idx);
+  prev_k1_pos[mode_idx] = MapKnobDeadzone(pod_.knob1.Process());
+  prev_k2_pos[mode_idx] = MapKnobDeadzone(pod_.knob2.Process());
+  knob1_latched = false;
+  knob2_latched = false;  
+  DebugPrintMode(curr_synth_mode_);
+  SetLedSynthMode();
+}
+
+/// @brief Updates synth parameters based on current synth mode and adjusts
+///        knob input values to account for knob jitter and deadzones around 0/1
+void GrannyChordApp::UpdateSynthParams(){
+  int mode_idx = static_cast<int>(curr_synth_mode_);
+
+  /* set to 0 or 1 if very close to these bounds */
+  float knob1_val = MapKnobDeadzone(pod_.knob1.Process());
+  float knob2_val = MapKnobDeadzone(pod_.knob2.Process());
+
+  // UpdateKnob1SynthParams(knob1_val, curr_synth_mode_);
+  // UpdateKnob2SynthParams(knob2_val, curr_synth_mode_);
+
+  // if (UpdateKnobPassThru(&knob1_latched, knob1_val,prev_param_k1[mode_idx])){
+  //   UpdateKnob1SynthParams(knob1_val,curr_synth_mode_);
+  //   prev_param_k1[mode_idx] = knob1_val;
+  //   System::Delay(5);
+  // }
+
+  // if (UpdateKnobPassThru(&knob2_latched, knob2_val,prev_param_k2[mode_idx])){
+  //   UpdateKnob2SynthParams(knob2_val, curr_synth_mode_);
+  //   prev_param_k2[mode_idx] = knob2_val;
+  //   System::Delay(5);
+  // }
+
+
+
+  // if (!knob1_latched){
+  //   if ((fabs(knob1_val - prev_k1_pos[mode_idx])<=0.05f) &&
+  //       (fabs(prev_k1_pos[mode_idx] - prev_param_k1[mode_idx])<=0.05f)){
+  //         knob1_latched = true;
+  //         DebugPrint(pod_, "latched 1");
+  //   }
+  // }
+
+  // if (!knob2_latched){
+  //   if ((fabs(knob2_val-prev_k2_pos[mode_idx]) <= 0.05f) &&
+  //       (fabs(prev_k2_pos[mode_idx]-prev_param_k2[mode_idx]) <=0.05f)){
+  //         knob2_latched = true;
+  //         DebugPrint(pod_, "latched 2");
+  //   }
+  // }
+
+  if (!knob1_latched) {
+    if ((knob1_val >= prev_param_k1[mode_idx] && prev_k1_pos[mode_idx] <= prev_param_k1[mode_idx]) ||
+        (knob1_val <= prev_param_k1[mode_idx] && prev_k1_pos[mode_idx] >= prev_param_k1[mode_idx])) {
+      knob1_latched = true;
+      DebugPrint(pod_,"latched 1");
+    }
+  }
+
+  if (!knob2_latched) {
+    if ((knob2_val >= prev_param_k2[mode_idx] && prev_k2_pos[mode_idx] <= prev_param_k2[mode_idx]) ||
+        (knob2_val <= prev_param_k2[mode_idx] && prev_k2_pos[mode_idx] >= prev_param_k2[mode_idx])) {
+      knob2_latched = true;
+      DebugPrint(pod_,"latched 2");
+    }
+  }
+
+  if (knob1_latched){
+    UpdateKnob1SynthParams(knob1_val, curr_synth_mode_);
+    prev_param_k1[mode_idx] = knob1_val;
+    prev_k1_pos[mode_idx] = knob1_val;
+  }
+
+  if (knob2_latched){
+    UpdateKnob2SynthParams(knob2_val, curr_synth_mode_);
+    prev_param_k2[mode_idx] = knob2_val;
+    prev_k2_pos[mode_idx] = knob2_val;
+  }
+  System::Delay(5);
+}
+
 /// @brief Updates synth parameters from hardware knob 1 input
 /// @param knob1_val float between 0-1 from knob input
 /// @param mode current synth mode that determines which parameters to update
-void GrannyChordApp::UpdateKnob1Params(float knob1_val, SynthMode mode){
+void GrannyChordApp::UpdateKnob1SynthParams(float knob1_val, SynthMode mode){
   switch (mode){
     case SynthMode::Size_Position:
       synth_.SetGrainSize(knob1_val);
@@ -622,7 +669,7 @@ void GrannyChordApp::UpdateKnob1Params(float knob1_val, SynthMode mode){
 /// @brief Updates synth parameters from hardware knob 2 input
 /// @param knob1_val float between 0-1 from knob input
 /// @param mode current synth mode that determines which parameters to update
-void GrannyChordApp::UpdateKnob2Params(float knob2_val, SynthMode mode){
+void GrannyChordApp::UpdateKnob2SynthParams(float knob2_val, SynthMode mode){
   switch (mode){
     case SynthMode::Size_Position:
       synth_.SetSpawnPos(knob2_val);
@@ -642,17 +689,33 @@ void GrannyChordApp::UpdateKnob2Params(float knob2_val, SynthMode mode){
   }
 }
 
+void GrannyChordApp::CycleChordPlaybackMode(){
+  chord_gen_.CyclePlaybackMode();
+}
 
+void GrannyChordApp::CycleChordScale(){
+  if (chord_gen_.GetMode()==ChordPlaybackMode::Chord){
+    chord_gen_.CycleChord();
+  }
+  else{
+    chord_gen_.CycleScale();
+  }
+}
 
-/*
+void GrannyChordApp::ChangeChordKey(){
+  float knob_val = MapKnobDeadzone(pod_.knob1.Process());
+  knob_val = round(fmap(knob_val, 0.0f, 12.0f));
+  int key = static_cast<int>(knob_val);
+  chord_gen_.SetKey(key);
+}
 
-encoder for strum??? nice clicks 
-knob1 pitch? 
-knob2 position?
-buttons chords? 
-click encoder for granular stuff
-
-*/
+void GrannyChordApp::ChangeChordSpawnPos(){
+  float knob_val = MapKnobDeadzone(pod_.knob2.Process());
+  synth_.SetSpawnPos(knob_val);
+  /* set synth parameter tracking arrays with new value */
+  prev_param_k2[0] = knob_val;
+  prev_k2_pos[0] = knob_val;
+}
 
 /* knobs on the Pod have deadzones around 0 and 1 so we adjust for this */
 inline float GrannyChordApp::MapKnobDeadzone(float knob_val ){
@@ -661,17 +724,17 @@ inline float GrannyChordApp::MapKnobDeadzone(float knob_val ){
   return knob_val;
 }
 
-inline bool GrannyChordApp::UpdateKnobPassThru(bool *knob_latched, float curr_knob_val, float prev_param){
-  if ((*knob_latched)){
-    if (fabs(curr_knob_val - prev_param)<0.001){
-      (*knob_latched) = false;
-      DebugPrint(pod_, "unlatched knob");
-      return true;
-    }
-    else return false;
-  }
-  else return true;
-}
+// inline bool GrannyChordApp::UpdateKnobPassThru(bool *knob_latched, float curr_knob_val, float prev_param){
+//   if ((*knob_latched)){
+//     if (fabs(curr_knob_val - prev_param)<0.001f){
+//       (*knob_latched) = false;
+//       DebugPrint(pod_, "unlatched knob");
+//       return true;
+//     }
+//     else return false;
+//   }
+//   else return true;
+// }
 
 
 
@@ -689,10 +752,10 @@ void GrannyChordApp::DebugPrintState(AppState state){
     case AppState::Synthesis:
       DebugPrint(pod_, "State now in: Synthesis");
       return;
-    // case AppState::ChordMode:
+    case AppState::ChordMode:
       DebugPrint(pod_, "State now in: ChordMode");
+      return;
     case AppState::Error:
-    default:
       DebugPrint(pod_, "State now in: Error");
       return;
   }
@@ -720,10 +783,10 @@ void GrannyChordApp::InitColours(){
   colours.GREEN.Init(Color::PresetColor::GREEN);
   colours.RED.Init(Color::PresetColor::RED);
   colours.CYAN.Init(0,255,255);
-  colours.PURPLE.Init(Color::PresetColor::PURPLE);
   colours.ORANGE.Init(Color::PresetColor::GOLD);
   colours.YELLOW.Init(255,255,0);
   colours.PINK.Init(255,0,255);
+  colours.OFF.Init(0,0,0);
 }
 
 /// @brief sets led colours based on app state
@@ -742,7 +805,7 @@ void GrannyChordApp::SetLedAppState(){
       pod_.led1.SetColor(colours.YELLOW);
       break;
     case AppState::ChordMode:
-      pod_.led1.SetColor(colours.PURPLE);
+      pod_.led1.SetColor(colours.PINK);
       break;
     case AppState::Error:
       pod_.led1.SetColor(colours.RED);
@@ -751,7 +814,7 @@ void GrannyChordApp::SetLedAppState(){
     default:
       break;
   }
-  if (next_state_ != AppState::Synthesis) pod_.led2.Set(0,0,0); /* turn off led2 */
+  if (next_state_ != AppState::Synthesis) pod_.led2.SetColor(colours.OFF); /* turn off led2 */
   pod_.UpdateLeds();
 }
 
@@ -766,15 +829,34 @@ void GrannyChordApp::SetLedSynthMode(){
         pod_.led2.SetColor(colours.CYAN);
         break;
       case SynthMode::Reverb:
-      pod_.led2.SetColor(colours.ORANGE);
+      pod_.led2.SetColor(colours.YELLOW);
         break;
       case SynthMode::Filter:
-        pod_.led2.SetColor(colours.YELLOW);
+        pod_.led2.SetColor(colours.GREEN);
         break;
       default:
         break;
     }
   }
-  else pod_.led2.Set(0,0,0);
+  else pod_.led2.SetColor(colours.OFF);
+  pod_.UpdateLeds();
+}
+
+void GrannyChordApp::SetLedChordMode(){
+  if (curr_state_==AppState::ChordMode){
+    ChordPlaybackMode mode = chord_gen_.GetMode();
+    switch(mode){
+      case ChordPlaybackMode::Chord:
+        pod_.led2.SetColor(colours.BLUE);
+        break;
+      case ChordPlaybackMode::Scale:
+        pod_.led2.SetColor(colours.CYAN);
+        break;
+      case ChordPlaybackMode::Arpeggio:
+        pod_.led2.SetColor(colours.YELLOW);
+        break;
+    }
+  }
+  else pod_.led2.SetColor(colours.OFF);
   pod_.UpdateLeds();
 }

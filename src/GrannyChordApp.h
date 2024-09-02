@@ -3,6 +3,7 @@
 #include "daisysp.h"
 #include "GranularSynth.h"
 #include "AudioFileManager.h"
+#include "ChordMode.h"
 #include "constants_utils.h"
 #include "debug_print.h"
 #include "DaisySP-LGPL-FX/compressor.h"
@@ -36,6 +37,7 @@ class GrannyChordApp {
     GranularSynth synth_;
     AudioFileManager &filemgr_;
     FIL *file_;
+    ChordMode chord_gen_;
 
     /* UI and state objects */
     AppState curr_state_;
@@ -47,7 +49,6 @@ class GrannyChordApp {
 
 
     /* audio FX and filters */
-    Compressor comp_;
     Limiter limiter_;
     ReverbSc& reverb_;
     MoogLadder lowpass_moog_;
@@ -90,9 +91,11 @@ class GrannyChordApp {
       Color ORANGE;
       Color YELLOW;
       Color PINK;
+      Color OFF;
     };
     Colours colours;
-    bool seed_led_state_=false;
+    bool seed_led_state_ = false;
+    bool file_led_state_ = true;
 
     /* methods to init / prepare for state change */
     bool InitFileMgr();
@@ -111,36 +114,46 @@ class GrannyChordApp {
     void HandleStateChange();
     void HandleFileSelection(int32_t encoder_inc);
 
+    bool UserTriggeredChord();
+
     /* audio input/output/recording methods based on state */
     void ProcessWAVPlayback(AudioHandle::OutputBuffer out, size_t size);
     void ProcessRecordIn(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, size_t size);
-    void ProcessSynthesis(AudioHandle::OutputBuffer out, size_t size);
+    void ProcessSynthesis(AudioHandle::OutputBuffer out, size_t size, bool process_chord);
     Sample ProcessFX(Sample in);
-    void ProcessChordMode(AudioHandle::OutputBuffer out, size_t size);
+    // void ProcessChordMode(AudioHandle::OutputBuffer out, size_t size);
     void RecordOutToSD();
     void FinishRecording();
 
     /* hardware input handler methods */
     void ButtonHandler();
-    void ButtonLongPressHandler();
     void HandleEncoderIncrement(int encoder_inc);
     void HandleEncoderPressed();
     void HandleEncoderLongPress();
     void HandleButton1();
     void HandleButton2();
     void HandleButton1LongPress();
-    void HandleButton2LongPress();
-
-    /* methods to update/init synth parameters */
+    // void HandleButton2LongPress();
+    void UpdateParams();
+    
+    /* methods to update synth parameters */
     void UpdateSynthParams();
-    void UpdateKnob1Params(float knob1_val, SynthMode mode);
-    void UpdateKnob2Params(float knob2_val, SynthMode mode);
+    void UpdateKnob1SynthParams(float knob1_val, SynthMode mode);
+    void UpdateKnob2SynthParams(float knob2_val, SynthMode mode);
+
+    /* methods to update chord parameters */
+    void CycleChordPlaybackMode();
+    void CycleChordScale();
+    void ChangeChordKey();
+    void ChangeChordSpawnPos();
+
     // void UpdateChordParams();
     inline float MapKnobDeadzone(float knob_val);
-    inline bool UpdateKnobPassThru(bool *knob_latched, float curr_knob_val, float prev_param);
+    // inline bool UpdateKnobPassThru(bool *knob_latched, float curr_knob_val, float prev_param);
 
     void SetLedAppState();
     void SetLedSynthMode();
+    void SetLedChordMode();
     void InitColours();
 
     void DebugPrintState(AppState state);

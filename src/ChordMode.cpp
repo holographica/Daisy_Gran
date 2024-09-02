@@ -1,111 +1,132 @@
 #include "ChordMode.h"
 
-void ChordMode::Init(){
-  AddScalePitchSet(ScaleType::Major, "Major", {0,2,4,5,7,9,11,12});
-  AddScalePitchSet(ScaleType::NaturalMinor, "Natural Minor", {0,2,3,5,7,8,10});
+
+
+void ChordMode::CycleChord(){
+  int mode_idx = static_cast<int>(chord_state_.curr_chord_);
+  mode_idx++;
+  if (mode_idx>3) mode_idx = 0;
+  chord_state_.curr_chord_= static_cast<ChordType>(mode_idx);
 }
 
-/* convert pitch class (0[C]:11[B]) to freq ratio rel to base note */
-float ChordMode::PitchClassToRatio(int pitch_class){
-  return pow(2.0f, static_cast<float>(pitch_class)/12.0f);
+void ChordMode::CycleScale(){
+  int mode_idx = static_cast<int>(chord_state_.curr_scale_);
+  mode_idx++;
+  if (mode_idx>3) mode_idx = 0;
+  chord_state_.curr_scale_= static_cast<ScaleType>(mode_idx);
 }
 
-/* transpose freq ratio of note to current key */
-float ChordMode::MapKeyToRatio(float ratio){
-  float key_ratio = static_cast<float>(curr_key_) / 12.0f;
-  return ratio * std::pow(2.0f, key_ratio);
-}
-
-/* assumes scales added by this method are all of 12-tone equal temperament */
-void ChordMode::AddScalePitchSet(ScaleType type, const string &name, const vector<int> &pitch_class_set){
-  Scale scale;
-  scale.equal_temperament_ = true;
-  scale.name_ = name;
-  for (uint16_t i=0; i<pitch_class_set.size();i++){
-    scale.ratios_.emplace_back(PitchClassToRatio(pitch_class_set[i]));
-  }
-  int scale_type = static_cast<int>(type);
-  scales_[scale_type] = scale;
-}
-
-/* assumes scales added by ratios are not 12-tone equal temperament */
-void ChordMode::AddScaleRatios(ScaleType type, const string &name, const vector<float> &ratios){
-  Scale scale;
-  scale.equal_temperament_ = false;
-  scale.name_ = name;
-  scale.ratios_ = ratios;
-  int scale_type = static_cast<int>(type);
-  scales_[scale_type] = scale;
-}
-
-/* degree == note pos in scale. degree 1 = root note, 2 = second note etc 
-  ensures we can use diff types of chord eg chord containing more notes than the scale */
-float ChordMode::GetNotePitch(int degree){
-  degree %= curr_scale_.ratios_.size();
-  float ratio = curr_scale_.ratios_[degree];
-  if (curr_scale_.equal_temperament_) return MapKeyToRatio(ratio);
-  else return ratio;
-}
-
-/* atm this just creates a chord of thirds */
-vector<float> ChordMode::GenerateChord(){
-  vector<float> chord;
-  vector<int> degrees;
-  for (int i=0; i<curr_chord_size_; i++){
-    int third = (i*2) % curr_scale_.ratios_.size();
-    degrees.emplace_back(third);
-  }
-
-  /* convert degrees of chord to pitch ratios */
-  for (size_t i=0; i<degrees.size();i++){
-    chord.emplace_back(GetNotePitch(degrees[i]));
-  }
-
-  // randomise note order of chord here??
-  
-  return chord; 
-}
-
+/* sets the root note / key */
 void ChordMode::SetKey(int key){
-  curr_key_ = key % 12;
+  chord_state_.key_ = key;
+  // chord_state_.key_ = key%12;
 }
 
-void ChordMode::SetScale(int scale){
-  // curr_scale_ = static_cast<Scale>(scale % NUM_SCALES);
+void ChordMode::CyclePlaybackMode(){
+  int mode_idx = static_cast<int>(chord_state_.playback_mode_);
+  mode_idx++;
+  if (mode_idx>2) mode_idx = 0;
+  chord_state_.playback_mode_ = static_cast<ChordPlaybackMode>(mode_idx);
+  chord_state_.curr_step_ = 0;
 }
 
-void ChordMode::SetChordSize(int size){
-  if (size < 2) { size = 2; }
-  if (size > 12) { size = 12; }
-  curr_chord_size_ = size;
+float ChordMode::SemitoneToRatio(int semitones){
+  return pow(2.0f, ((chord_state_.key_ + semitones)/12.0f));
 }
 
-void ChordMode::SetKeyRnd(float key_randomness){
-  key_rnd_ = key_randomness;
+std::vector<float> ChordMode::GetRatios(int direction){
+  switch(chord_state_.playback_mode_){
+    case ChordPlaybackMode::Chord:
+      GenerateChord();
+      break;
+    case ChordPlaybackMode::Scale:
+      GenerateScale(direction);
+      break;
+    case ChordPlaybackMode::Arpeggio:
+      GenerateArp(direction);
+      break;
+  }
+  return ratios_;
 }
 
-void ChordMode::SetScaleRnd(float scale_randomness){
-  scale_rnd_ = scale_randomness;
+ChordPlaybackMode ChordMode::GetMode(){
+  return chord_state_.playback_mode_;
 }
 
-void ChordMode::SetChordSizeRnd(float sz_randomness){
-  chord_size_rnd_ = sz_randomness;
+std::string ChordMode::GetModeName(){
+  switch (chord_state_.playback_mode_){
+    case ChordPlaybackMode::Arpeggio:
+      return "Arpeggio";
+    case ChordPlaybackMode::Chord:
+      return "Chord";
+    case ChordPlaybackMode::Scale:
+      return "Scale";
+  }
+  return "";
 }
 
-// std::vector<float> chord;
+std::string ChordMode::GetScaleName(){
+  switch(chord_state_.curr_scale_){
+    case ScaleType::Major:
+      return "Major";
+    case ScaleType::NaturalMinor:
+      return "NaturalMinor";
+    case ScaleType::HarmonicMinor:
+      return "HarmonicMinor";
+    case ScaleType::MelodicMinor:
+      return "MelodicMinor";
+  }
+  return "";
+}
 
-  // calculate ratios / degrees of chord
+std::string ChordMode::GetChordName(){
+  switch (chord_state_.curr_chord_){
+    case ChordType::Major:
+      return "maj";
+    case ChordType::Major7th:
+      return "maj7th";
+    case ChordType::Minor:
+      return "min";
+    case ChordType::Minor7th:
+      return "min7th";
+  }
+  return "";
+}
 
-  // apply randomness??
+/* returns ratios of all notes in chord */
+void ChordMode::GenerateChord(){
+  ratios_.clear();
+  /* get semitone positions for current chord */
+  std::vector<int> curr_chord = chord_intervals_[static_cast<int>(chord_state_.curr_chord_)];
+  for (size_t i=0; i<curr_chord.size();i++){
+    /* get the semitone position for this note in chord, eg 0 / 4 /7 etc
+      and find transposition by adding this to root note of key */
+    int semitones = curr_chord[i] + chord_state_.key_;
+    /* we do 2 ^ (note/12) to get correct pitch ratio for note
+      since 1 semitone increases freq by [freq * 2^(1/12)]  */
+    float pitch_ratio = SemitoneToRatio(semitones);
+    ratios_.push_back(pitch_ratio);
+  }
+}
 
-  // convert to ratio
+/* returns ratio of next note in scale */
+void ChordMode::GenerateScale(int direction){
+  ratios_.clear();
+  std::vector<int> curr_scale = scale_intervals_[static_cast<int>(chord_state_.curr_scale_)];
+  /* increment by direction, make sure it stays within scale bounds */
+  chord_state_.curr_step_ = (chord_state_.curr_step_+direction+curr_scale.size()) % curr_scale.size();
+  /* get semitone position of next note in scale */
+  int next_ratio = SemitoneToRatio(chord_state_.curr_step_);
+  ratios_.push_back(next_ratio);
+}
 
-  // convert to key? 
-
-
-/*
-
-
-*/
-
-
+/* returns ratio of next note in chord */
+void ChordMode::GenerateArp(int direction){
+  ratios_.clear();
+  std::vector<int> curr_chord = scale_intervals_[static_cast<int>(chord_state_.curr_chord_)];
+  /* ensure it stays within chord bounds  */
+  chord_state_.curr_step_ = (chord_state_.curr_step_+direction+curr_chord.size()) % curr_chord.size();
+  /* get semitone position of next note in chord */
+  int next_ratio = SemitoneToRatio(chord_state_.curr_step_);
+  ratios_.push_back(next_ratio);
+}

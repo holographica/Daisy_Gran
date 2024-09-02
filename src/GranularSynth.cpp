@@ -42,7 +42,7 @@ void GranularSynth::SetGrainSize(float knob_val){
   float rnd = (RngFloat() * 0.03f) + knob_val;
   knob_val = fclamp(rnd, 0.0f, 1.0f);
   // knob_val = fclamp(knob_val, 0.0f, 1.0f);
-  float size_ms = fmap(knob_val, MIN_GRAIN_SIZE_MS, MAX_GRAIN_SIZE_MS);
+  float size_ms = fmap(knob_val, MIN_GRAIN_SIZE_MS, MAX_GRAIN_SIZE_MS, daisysp::Mapping::EXP);
   grain_size_ = MsToSamples(size_ms);
 }
 
@@ -93,7 +93,7 @@ void GranularSynth::TriggerGrain(){
       pos = intclamp(pos, 0.0f, audio_len_);
       size_t sz = grain_size_ + static_cast<size_t>((static_cast<float>(grain_size_)*RngFloat())*0.05f);
       sz = intclamp(sz, MIN_GRAIN_SIZE_SAMPLES, MAX_GRAIN_SIZE_SAMPLES);
-      float pitch = fclamp(pitch_ratio_ + (pitch_ratio_*RngFloat()*0.05f), 0.0f, 1.0f);
+      float pitch = fclamp(pitch_ratio_ + (pitch_ratio_*RngFloat()*0.05f), 0.5f, 2.0f);
       // grain.Trigger(spawn_pos_,grain_size_,pitch_ratio_);
       grain.Trigger(pos,sz,pitch);
       count++;
@@ -141,3 +141,36 @@ Sample GranularSynth::ProcessGrains(){
   // }
   return sample_;
 }
+
+void GranularSynth::TriggerChord(std::vector<float> chord_ratios){
+  chord_ratios_ = chord_ratios;
+  chord_active_ = true;
+  chord_grain_lengths_.clear();
+  max_chord_length_ = 0;
+  chord_sample_count_ = 0;
+  for (size_t i=0; i<chord_ratios_.size(); i++){
+    size_t grain_len = static_cast<size_t>(grain_size_/chord_ratios_[i]);
+    chord_grain_lengths_.push_back(grain_len);
+    max_chord_length_ = std::max(max_chord_length_, grain_len);
+    grains_[i].Trigger(spawn_pos_, grain_size_, chord_ratios_[i]);
+  }
+}
+
+Sample GranularSynth::ProcessChord(){
+  sample_.left =0.0f, sample_.right = 0.0f;
+  if (chord_active_){
+    bool grains_finished = true;
+    for (size_t i =0; i<chord_ratios_.size();i++){
+      if (chord_sample_count_ < chord_grain_lengths_[i]){
+        sample_ = grains_[i].Process(sample_);
+        grains_finished = false;
+      }
+    }
+    chord_sample_count_++;
+    if (grains_finished || (chord_sample_count_ >= max_chord_length_)){
+      chord_active_ = false;
+    }
+  }
+  return sample_;
+}
+

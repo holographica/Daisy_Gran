@@ -1,10 +1,9 @@
 #pragma once
 
 #include "daisysp.h"
-#include <map>
+#include <array>
 
 using namespace daisysp;
-using namespace std;
 
 // https://www.sacred-geometry.es/?q=en/content/proportion-musical-scales
 /* https://ianring.com/musictheory/scales/finder/ */
@@ -13,63 +12,76 @@ enum class ScaleType{
   Major,
   NaturalMinor,
   HarmonicMinor,
-  MinorPentatonic,
-  // Hirajoshi (which mode)
-  NUM_SCALES_ //NOTE don't need to change, just add scales above this
+  MelodicMinor
+};
+
+enum class ChordType{
+  Major,
+  Major7th,
+  Minor,
+  Minor7th
+};
+
+enum class ChordPlaybackMode{
+  Chord,
+  Arpeggio,
+  Scale
 };
 
 class ChordMode{
   public:
     ChordMode(){}
 
-    void Init();  
-
     void SetKey(int key);
-    void SetScale(int scale);
-    void SetChordSize(int size);
-    void SetKeyRnd(float randomness);
-    void SetScaleRnd(float randomness);
-    void SetChordSizeRnd(float randomness);
+    void CycleScale();
+    void CycleChord();
+    // void SetChordSize(int size);
+    void CyclePlaybackMode();
+    // void SetKeyRnd(float randomness);
+    // void SetScaleRnd(float randomness);
+    // void SetChordSizeRnd(float randomness);
     // randomise position of notes in chord ? ie in output grains
+    float SemitoneToRatio(int semitones);
 
+    void GenerateChord();
+    void GenerateScale(int direction);
+    void GenerateArp(int direction);
 
-    vector<float> GenerateChord();
+    std::vector<float> GetRatios(int direction);
+    ChordPlaybackMode GetMode();
+    std::string GetModeName();
+    std::string GetScaleName();
+    std::string GetChordName();
 
   private:
-    float MapKeyToRatio(float ratio);
-    float PitchClassToRatio(int pitch_class);
-    void AddScalePitchSet(ScaleType type, const string& name, const vector<int> &pitch_class_set);
-    void AddScaleRatios(ScaleType type, const string &name, const vector<float> &ratios);
-    float GetNotePitch(int degree);
-
-    // static const int NUM_SCALES = 3; //NOTE change obviously
-    static const int NUM_SCALES = static_cast<int>(ScaleType::NUM_SCALES_);
     static const int MAX_CHORD_NOTES = 8; 
     static const int MAX_SCALE_NOTES = 8;
 
-    struct Scale{
-      bool equal_temperament_;
-      vector<float> ratios_;
-      string name_;
+    struct ChordState{
+      ScaleType curr_scale_ = ScaleType::Major;
+      ChordType curr_chord_ = ChordType::Major;
+      ChordPlaybackMode playback_mode_ =  ChordPlaybackMode::Chord;
+      int key_ = 0;
+      /* current step in arpeggio / scale */
+      int curr_step_ = 0; 
     };
 
+    ChordState chord_state_;
+    std::vector<float> ratios_;
 
-    array<Scale, NUM_SCALES> scales_;
+    const std::array<std::vector<int>, 4> chord_intervals_ = 
+    {{
+      {0,4,7}, /* Major triad */
+      {0,3,7}, /* minor triad */
+      {0,4,7,11}, /* Major 7th */
+      {0,3,7,10} /* Minor 7th */
+    }};
 
-
-    int curr_key_;
-    Scale curr_scale_;
-    int curr_chord_size_;
-
-    // float chord_[MAX_CHORD_NOTES];
-    vector<float> chord;
-    // float scales_[NUM_SCALES][MAX_SCALE_NOTES] = {};
-
-    float key_rnd_;
-    float scale_rnd_;
-    float chord_size_rnd_;
-
-    
-    
-
+    const std::array<std::vector<int>,4> scale_intervals_ = 
+    {{
+      {0,2,4,5,7,9,11}, /* Major scale */
+      {0,2,3,5,7,8,10}, /* Natural Minor scale */
+      {0,2,3,5,7,8,11}, /* Harmonic Minor scale */
+      {0,2,3,5,7,9,11} /* Melodic Minor scale */
+    }};
 };

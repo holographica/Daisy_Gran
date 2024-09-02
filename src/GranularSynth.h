@@ -17,6 +17,8 @@ class GranularSynth{
     void InitParams();
     void TriggerGrain();
     Sample ProcessGrains();
+    Sample ProcessChord();
+    void TriggerChord(std::vector<float> chord_ratios);
   
     void SetGrainSize(float knob_val);
     void SetSpawnPos(float knob_val);
@@ -47,6 +49,12 @@ class GranularSynth{
     size_t curr_active_count_;
     size_t target_active_count_;
     float pitch_ratio_;
+
+    bool chord_active_;
+    std::vector<float> chord_ratios_;
+    std::vector<size_t>chord_grain_lengths_;
+    size_t max_chord_length_;
+    size_t chord_sample_count_;
 
     int smooth_count = 0;
 

@@ -27,7 +27,7 @@ static const uint16_t MAX_FNAME_LEN = 128;
 
 /* granular synth parameter constants */
 constexpr int MIN_GRAINS = 1;
-constexpr int MAX_GRAINS = 5;
+constexpr int MAX_GRAINS = 15;
 
 static constexpr int NUM_SYNTH_MODES = 4;
 constexpr float PARAM_CHANGE_THRESHOLD = 0.01f;
@@ -36,7 +36,7 @@ constexpr float MAX_GRAIN_SIZE_MS = 3000.0f;
 constexpr size_t MIN_GRAIN_SIZE_SAMPLES = 4800; /* 100ms at 48kHz */
 constexpr size_t MAX_GRAIN_SIZE_SAMPLES = 144000; /* 3s at 48kHz */
 constexpr float MIN_PITCH = 0.5f;
-constexpr float MAX_PITCH = 3.0f;
+constexpr float MAX_PITCH = 2.0f;
 
 
 /* button event constants */
