@@ -242,11 +242,15 @@ void GrannyChordApp::ButtonHandler(){
 
 /// @brief Switch between synth parameter control modes
 void GrannyChordApp::HandleButton1(){
-  if (curr_state_==AppState::Synthesis){
-    NextSynthMode();
-  }
-  else if (curr_state_==AppState::ChordMode){
-    CycleChordPlaybackMode();
+  switch (curr_state_){
+    case AppState::Synthesis:
+      NextSynthMode();
+      return;
+    case AppState::ChordMode:
+      CycleChordPlaybackMode();
+      return;
+    default:
+      return;
   }
 }
 
@@ -694,11 +698,14 @@ void GrannyChordApp::CycleChordPlaybackMode(){
 }
 
 void GrannyChordApp::CycleChordScale(){
-  if (chord_gen_.GetMode()==ChordPlaybackMode::Chord){
-    chord_gen_.CycleChord();
-  }
-  else{
-    chord_gen_.CycleScale();
+  switch (chord_gen_.GetMode()){
+    case ChordPlaybackMode::Chord:
+      chord_gen_.CycleChord();
+      return;
+    case ChordPlaybackMode::Arpeggio:
+    case ChordPlaybackMode::Scale:
+      chord_gen_.CycleScale();
+      return;
   }
 }
 
