@@ -3,8 +3,9 @@
 #include "Grain.h"
 #include "daisy_pod.h"
 #include "debug_print.h"
-// #include "constants_utils.h"
+#include "ChordMode.h"
 #include <vector>
+#include <queue>
 
 class GranularSynth{
   public:
@@ -17,8 +18,13 @@ class GranularSynth{
     void InitParams();
     void TriggerGrain();
     Sample ProcessGrains();
+
+    void EnqueueChord(std::vector<float> ratios);
+    bool ChordActive();
+    bool ChordQueueEmpty();
+    
     Sample ProcessChord();
-    void TriggerChord(std::vector<float> chord_ratios);
+    void TriggerChord();
   
     void SetGrainSize(float knob_val);
     void SetSpawnPos(float knob_val);
@@ -26,7 +32,6 @@ class GranularSynth{
     void UpdateActiveGrains();
     size_t GetActiveGrains();
     void SetPitchRatio(float ratio);
-    void ApplyRandomness();
 
     size_t GetSize(){ return grain_size_; }
     float GetPitch(){ return pitch_ratio_; }
@@ -50,8 +55,9 @@ class GranularSynth{
     size_t target_active_count_;
     float pitch_ratio_;
 
-    bool chord_active_;
     std::vector<float> chord_ratios_;
+    bool chord_active_ = false;
+    std::queue<std::vector<float>> chord_queue_;
     std::vector<size_t>chord_grain_lengths_;
     size_t max_chord_length_;
     size_t chord_sample_count_;

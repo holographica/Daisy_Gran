@@ -3,8 +3,6 @@
 #include "daisysp.h"
 #include "GranularSynth.h"
 #include "AudioFileManager.h"
-#include "ChordMode.h"
-#include "constants_utils.h"
 #include "debug_print.h"
 #include "DaisySP-LGPL-FX/compressor.h"
 #include "DaisySP-LGPL-FX/moogladder.h"
@@ -133,23 +131,21 @@ class GrannyChordApp {
     void HandleButton1();
     void HandleButton2();
     void HandleButton1LongPress();
-    // void HandleButton2LongPress();
     void UpdateParams();
-    
+
     /* methods to update synth parameters */
     void UpdateSynthParams();
     void UpdateKnob1SynthParams(float knob1_val, SynthMode mode);
     void UpdateKnob2SynthParams(float knob2_val, SynthMode mode);
 
     /* methods to update chord parameters */
+
     void CycleChordPlaybackMode();
     void CycleChordScale();
     void ChangeChordKey();
     void ChangeChordSpawnPos();
 
-    // void UpdateChordParams();
     inline float MapKnobDeadzone(float knob_val);
-    // inline bool UpdateKnobPassThru(bool *knob_latched, float curr_knob_val, float prev_param);
 
     void SetLedAppState();
     void SetLedSynthMode();
