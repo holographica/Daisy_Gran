@@ -1,4 +1,4 @@
-#ifdef DEBUG_MODE // TODO: remove
+#ifdef DEBUG_MODE
 #pragma message("Debug mode is ON")
 #else
 #pragma message("Debug mode is OFF")
@@ -39,33 +39,10 @@ uint32_t rng_state;
 
 int main (void){
   pod.Init();
+  #ifdef DEBUG_MODE
   pod.seed.StartLog(true);
-  // DebugPrint(pod,"started log");
-  pod.seed.PrintLine("started log");
-  // rng.Init(SAMPLE_RATE_FLOAT);
-  // rng.SetFreq(1.f);
-  // float x;
-  // float y;
-
-  // while (1){
-  //   pod.ProcessDigitalControls();
-  //   if (pod.button1.FallingEdge()){
-  //     x = rng.Process();
-  //     pod.seed.PrintLine("smooth rng %.9f", x);
-  //   }
-  // }
-
+  #endif
 
   app.Init(left_buf, right_buf);
   app.Run();
 }
-
-// let grains through gate when button pressed 
-// use button to trigger grain instead of automatically generating it 
-
-// have a rng that chooses which order the notes of the chord are triggered
-// could have smal chance of playing random note
-// press button to choose random scale
-
-// have prompts for each day 
-// 

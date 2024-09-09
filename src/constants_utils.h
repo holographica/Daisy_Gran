@@ -108,9 +108,3 @@ static inline constexpr float FastSin(float x){
 	return FastCos(halfpi-x);
 }
 
-/* keep angle of rotation within bounds +-pi */
-static inline constexpr float NormaliseRotationAngle(float rotation){
-  while (rotation > M_PI) rotation -= 2*M_PI;
-  while (rotation < -M_PI) rotation += 2*M_PI;
-  return rotation;
-}

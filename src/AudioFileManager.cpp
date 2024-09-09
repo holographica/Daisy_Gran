@@ -41,8 +41,6 @@ bool AudioFileManager::ScanWavFiles(){
     if (!(fno.fattrib & (AM_HID|AM_DIR))){
       /* ignore AppleDouble metadata files starting with '._'  */
       if (strncmp(fno.fname, "._",2)==0) continue;
-      // strcpy(name, fno.fname);      
-      // if (strstr(name, ".wav") || strstr(name, ".WAV")){
       if (strstr(fno.fname, ".wav") || strstr(fno.fname, ".WAV")){
         strcpy(names_[file_count_],fno.fname);
         names_[file_count_][MAX_FNAME_LEN-1] = '\0';
@@ -106,43 +104,53 @@ bool AudioFileManager::GetWavHeader(FIL* file){
   bool checkData = (header.SubChunk2ID == 0x61746164);
 
   /* ignore files with invalid riff/fmt header info - not compliant with WAV spec */
-  if (!checkRIFF || !checkWAV){ return false; }
+  if (!checkRIFF || !checkWAV){ 
+    DebugPrint(pod_, "no riff or wav");
+    return false; }
   if (checkFmt){
     header_.sample_rate = header.SampleRate;
     header_.channels = header.NbrChannels;
     header_.bit_depth = header.BitPerSample;
-  }
-  if (checkData){
-    header_.file_size = header.SubCHunk2Size;
-  /* find audio len in samples: http://tiny.systems/software/soundProgrammer/WavFormatDocs.pdf */
-    header_.total_samples = header_.file_size / (header_.bit_depth/8);
-  }
-  /* otherwise: data chunk may be misplaced, so search within file for it */
-  if (!checkFmt || !checkData){
+  } else {
     uint32_t chunk_id, chunk_size;
     f_lseek(file, 12); /* skip to usual start of fmt chunk (byte 12) to start looking */
     while (f_read(file, &chunk_id, 4, &bytes_read) == FR_OK && bytes_read == 4) {
       f_read(file, &chunk_size, 4, &bytes_read);
-      
       if (chunk_id==0x20746D66) { /* this is 'fmt' in little endian */
-        
         f_lseek(file, f_tell(file)+6); /* skip chunk size and audio format - 6 bytes */
         /* now get num of channels - 2 bytes*/
         if (f_read(file, &header_.channels, 2, &bytes_read)!=FR_OK || bytes_read!=2){
+          DebugPrint(pod_, "channels read failed ");
           return false;
         }
         /* get sample rate - 4 bytes */
         if (f_read(file, &header_.sample_rate, 4, &bytes_read)!=FR_OK || bytes_read!=4){
+          DebugPrint(pod_, "sample rate read failed ");
           return false;
         }
         f_lseek(file, f_tell(file)+6); /* skip byte rate and block align - 6 bytes */
         /* finally get bit depth - 2 bytes */
         if (f_read(file, &header_.bit_depth, 2, &bytes_read)!=FR_OK || bytes_read!=2){
+          DebugPrint(pod_, "bit depth read failed ");
           return false;
         }
         checkFmt = true;
       }
-      else if (chunk_id==0x61746164){ /* this is 'data' in little endian */
+    }
+  }
+  
+  if (checkData){
+    header_.file_size = header.SubCHunk2Size;
+  /* find audio len in samples: http://tiny.systems/software/soundProgrammer/WavFormatDocs.pdf */
+    header_.total_samples = header_.file_size / (header_.bit_depth/8);
+  }
+  else {
+    uint32_t chunk_id, chunk_size;
+    /* skip to end of fmt chunk (byte 36) to start looking for data */
+    f_lseek(file, 36); 
+    while (f_read(file, &chunk_id, 4, &bytes_read) == FR_OK && bytes_read == 4) {
+      f_read(file, &chunk_size, 4, &bytes_read);
+      if (chunk_id == 0x61746164) {
         header_.file_size = chunk_size;
         checkData = true;
         break;
@@ -150,10 +158,19 @@ bool AudioFileManager::GetWavHeader(FIL* file){
       else {
         f_lseek(file, f_tell(file)+chunk_size);
       }
-      if (checkFmt && checkData) break;
+    }
+    if (chunk_id != 0x61746164){
+      DebugPrint(pod_, "wrong chunk id");
+      return false;
     }
   }
-  if (!checkFmt || !checkData) return false;
+
+  if (!checkFmt || !checkData) {
+    if (!checkData) DebugPrint(pod_, "data check failed");
+    if (!checkFmt) DebugPrint(pod_, "Fmt check failed");
+    return false;
+  }
+
   header_.total_samples = header_.file_size / (header_.bit_depth / 8);
   audio_data_start_ = f_tell(file); 
   FRESULT seek_res = f_lseek(curr_file_, audio_data_start_);

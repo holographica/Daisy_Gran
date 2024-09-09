@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -26,7 +26,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
   23              		.thumb_func
   25              	_ZN5Grain4InitEv:
   26              	.LVL0:
-  27              	.LFB4875:
+  27              	.LFB4874:
   28              		.file 1 "Grain.cpp"
    1:Grain.cpp     **** #include "Grain.h"
    2:Grain.cpp     **** 
@@ -58,7 +58,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
    6:GrainPhasor.h ****       phase_(0.0f), increment_(0.0f), grain_finished_(false) {};
    7:GrainPhasor.h **** 
    8:GrainPhasor.h ****     ~GrainPhasor() {};
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 2
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s 			page 2
 
 
    9:GrainPhasor.h **** 
@@ -100,7 +100,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
   64              	.L2:
   65 001c 00000000 		.word	0
   66              		.cfi_endproc
-  67              	.LFE4875:
+  67              	.LFE4874:
   69              		.section	.text._ZN5Grain7TriggerEjjf,"ax",%progbits
   70              		.align	1
   71              		.global	_ZN5Grain7TriggerEjjf
@@ -109,7 +109,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
   74              		.thumb_func
   76              	_ZN5Grain7TriggerEjjf:
   77              	.LVL2:
-  78              	.LFB4876:
+  78              	.LFB4875:
   15:Grain.cpp     **** 
   16:Grain.cpp     **** /// @brief Causes a grain to start playing and assigns its parameters
   17:Grain.cpp     **** /// @param pos Spawn position of the grain, within the audio buffer 
@@ -118,7 +118,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
   20:Grain.cpp     **** void Grain::Trigger(size_t pos, size_t grain_size, float pitch_ratio) {
   79              		.loc 1 20 71 is_stmt 1 view -0
   80              		.cfi_startproc
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 3
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s 			page 3
 
 
   81              		@ args = 0, pretend = 0, frame = 0
@@ -178,7 +178,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
   60:Grain.cpp     **** /// @param phase Current playback position of the grain within its lifetime (from 0 - 1)
   61:Grain.cpp     **** /// @return Amplitude of the grain after envelope has been applied
   62:Grain.cpp     **** float Grain::ApplyEnvelope(float phase){
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 4
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s 			page 4
 
 
   63:Grain.cpp     ****   /* Hann formula from https://uk.mathworks.com/help/signal/ref/hann.html */
@@ -238,7 +238,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
  130 001c 0370     		strb	r3, [r0]
  131              	.LBB37:
  132              	.LBB28:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 5
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s 			page 5
 
 
   12:GrainPhasor.h ****       grain_finished_ = false;
@@ -298,10 +298,10 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
  177              	.L6:
  178 0030 00000000 		.word	.LANCHOR0
  179              		.cfi_endproc
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 6
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s 			page 6
 
 
- 180              	.LFE4876:
+ 180              	.LFE4875:
  182              		.section	.text._ZN5Grain13ApplyEnvelopeEf,"ax",%progbits
  183              		.align	1
  184              		.global	_ZN5Grain13ApplyEnvelopeEf
@@ -310,7 +310,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
  187              		.thumb_func
  189              	_ZN5Grain13ApplyEnvelopeEf:
  190              	.LVL6:
- 191              	.LFB4878:
+ 191              	.LFB4877:
   62:Grain.cpp     ****   /* Hann formula from https://uk.mathworks.com/help/signal/ref/hann.html */
  192              		.loc 1 62 40 is_stmt 1 view -0
  193              		.cfi_startproc
@@ -358,7 +358,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
   27:constants_utils.h **** 
   28:constants_utils.h **** /* granular synth parameter constants */
   29:constants_utils.h **** constexpr int MIN_GRAINS = 1;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 7
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s 			page 7
 
 
   30:constants_utils.h **** constexpr int MAX_GRAINS = 15;
@@ -418,7 +418,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
   84:constants_utils.h **** 
   85:constants_utils.h **** /* converts number of samples to milliseconds */
   86:constants_utils.h **** static inline constexpr float SamplesToMs(size_t samples){
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 8
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s 			page 8
 
 
   87:constants_utils.h ****   return (static_cast<float>(samples) * 1000.0f) / SAMPLE_RATE_FLOAT; 
@@ -478,7 +478,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
  235              		.loc 3 103 33 view .LVU62
  236 0020 DFED0B7A 		vldr.32	s15, .L9+16
  237 0024 E0EE267A 		vfma.f32	s15, s0, s13
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 9
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s 			page 9
 
 
  238              	.LBE47:
@@ -512,7 +512,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
  263 004c DFB2163D 		.word	1024897759
  264 0050 E1D87F3F 		.word	1065343201
  265              		.cfi_endproc
- 266              	.LFE4878:
+ 266              	.LFE4877:
  268              		.section	.text._ZN5Grain7ProcessE6Sample,"ax",%progbits
  269              		.align	1
  270              		.global	_ZN5Grain7ProcessE6Sample
@@ -521,7 +521,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
  273              		.thumb_func
  275              	_ZN5Grain7ProcessE6Sample:
  276              	.LVL12:
- 277              	.LFB4877:
+ 277              	.LFB4876:
   32:Grain.cpp     ****   if (!is_active_) {
  278              		.loc 1 32 37 is_stmt 1 view -0
  279              		.cfi_startproc
@@ -538,7 +538,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
  288 0002 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
   32:Grain.cpp     ****   if (!is_active_) {
  289              		.loc 1 32 37 is_stmt 0 view .LVU71
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 10
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s 			page 10
 
 
  290 0004 B0EE406A 		vmov.f32	s12, s0
@@ -598,7 +598,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
  326              	.L17:
  327              		.loc 2 25 7 is_stmt 0 view .LVU80
  328              	.LBE63:
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 11
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s 			page 11
 
 
  329              	.LBE62:
@@ -658,7 +658,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
   21:GrainPhasor.h ****     }
  372              		.loc 2 21 7 view .LVU96
   21:GrainPhasor.h ****     }
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 12
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s 			page 12
 
 
  373              		.loc 2 21 7 is_stmt 0 view .LVU97
@@ -718,7 +718,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
  413              		.loc 1 43 27 view .LVU113
  414 0080 1268     		ldr	r2, [r2]
  415 0082 511E     		subs	r1, r2, #1
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 13
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s 			page 13
 
 
   43:Grain.cpp     ****     curr_idx -= audio_len_+1;
@@ -778,7 +778,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
   38:../libDaisy/src/daisy_core.h **** #define F2S8_SCALE 127.0f             /**< (2 ** 7) - 1 */
   39:../libDaisy/src/daisy_core.h **** #define S162F_SCALE 3.0517578125e-05f /**< 1 / (2** 15) */
   40:../libDaisy/src/daisy_core.h **** #define F2S16_SCALE 32767.0f          /**< (2 ** 15) - 1 */
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 14
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s 			page 14
 
 
   41:../libDaisy/src/daisy_core.h **** #define F2S24_SCALE 8388608.0f        /**< 2 ** 23 */
@@ -838,7 +838,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
   95:../libDaisy/src/daisy_core.h **** /** 
   96:../libDaisy/src/daisy_core.h ****     Converts Signed 8-bit to float
   97:../libDaisy/src/daisy_core.h ****     \param x Number to be scaled.
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 15
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s 			page 15
 
 
   98:../libDaisy/src/daisy_core.h ****     \return Scaled number.
@@ -898,7 +898,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
  452              	.LBB74:
  453              		.loc 4 122 23 is_stmt 0 view .LVU129
  454 0092 DFED116A 		vldr.32	s13, .L24+8
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 16
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s 			page 16
 
 
  455              	.LBE74:
@@ -958,7 +958,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
  504              	.LBE82:
  505              	.LBE89:
   55:Grain.cpp     ****   return sample;
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 17
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s 			page 17
 
 
  506              		.loc 1 55 16 view .LVU141
@@ -979,7 +979,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
  519 00d8 00000038 		.word	939524096
  520 00dc 00000000 		.word	.LANCHOR2
  521              		.cfi_endproc
- 522              	.LFE4877:
+ 522              	.LFE4876:
  524              		.section	.text._ZN5Grain11SetSpawnPosEj,"ax",%progbits
  525              		.align	1
  526              		.global	_ZN5Grain11SetSpawnPosEj
@@ -988,7 +988,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
  529              		.thumb_func
  531              	_ZN5Grain11SetSpawnPosEj:
  532              	.LVL28:
- 533              	.LFB4879:
+ 533              	.LFB4878:
   69:Grain.cpp     **** void Grain::SetGrainSize(size_t grain_size) { grain_size_ = grain_size; }
  534              		.loc 1 69 42 is_stmt 1 view -0
  535              		.cfi_startproc
@@ -1004,7 +1004,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
  542              		.loc 1 69 68 view .LVU147
  543 0002 7047     		bx	lr
  544              		.cfi_endproc
- 545              	.LFE4879:
+ 545              	.LFE4878:
  547              		.section	.text._ZN5Grain12SetGrainSizeEj,"ax",%progbits
  548              		.align	1
  549              		.global	_ZN5Grain12SetGrainSizeEj
@@ -1013,12 +1013,12 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
  552              		.thumb_func
  554              	_ZN5Grain12SetGrainSizeEj:
  555              	.LVL29:
- 556              	.LFB4880:
+ 556              	.LFB4879:
   70:Grain.cpp     **** void Grain::SetPitchRatio(float pitch_ratio) { pitch_ratio_ = pitch_ratio; }
  557              		.loc 1 70 45 is_stmt 1 view -0
  558              		.cfi_startproc
  559              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 18
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s 			page 18
 
 
  560              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -1032,7 +1032,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
  565              		.loc 1 70 73 view .LVU151
  566 0002 7047     		bx	lr
  567              		.cfi_endproc
- 568              	.LFE4880:
+ 568              	.LFE4879:
  570              		.section	.text._ZN5Grain13SetPitchRatioEf,"ax",%progbits
  571              		.align	1
  572              		.global	_ZN5Grain13SetPitchRatioEf
@@ -1041,7 +1041,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
  575              		.thumb_func
  577              	_ZN5Grain13SetPitchRatioEf:
  578              	.LVL30:
- 579              	.LFB4881:
+ 579              	.LFB4880:
  580              		.loc 1 71 46 is_stmt 1 view -0
  581              		.cfi_startproc
  582              		@ args = 0, pretend = 0, frame = 0
@@ -1053,7 +1053,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
  588              		.loc 1 71 76 view .LVU155
  589 0004 7047     		bx	lr
  590              		.cfi_endproc
- 591              	.LFE4881:
+ 591              	.LFE4880:
  593              		.global	_ZN5Grain11decay_rate_E
  594              		.global	_ZN5Grain12start_decay_E
  595              		.global	_ZN5Grain10right_buf_E
@@ -1078,7 +1078,7 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
  620              		.align	2
  623              	_ZN5Grain11decay_rate_E:
  624 0000 0000A040 		.word	1084227584
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 19
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s 			page 19
 
 
  625              		.section	.rodata._ZN5Grain12start_decay_E,"a"
@@ -1131,38 +1131,38 @@ ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 1
  674              		.file 46 "../libDaisy/src/dev/sr_595.h"
  675              		.file 47 "Grain.h"
  676              		.file 48 "<built-in>"
-ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s 			page 20
+ARM GAS  /var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s 			page 20
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 Grain.cpp
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s:19     .text._ZN5Grain4InitEv:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s:25     .text._ZN5Grain4InitEv:0000000000000000 _ZN5Grain4InitEv
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s:65     .text._ZN5Grain4InitEv:000000000000001c $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s:70     .text._ZN5Grain7TriggerEjjf:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s:76     .text._ZN5Grain7TriggerEjjf:0000000000000000 _ZN5Grain7TriggerEjjf
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s:178    .text._ZN5Grain7TriggerEjjf:0000000000000030 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s:183    .text._ZN5Grain13ApplyEnvelopeEf:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s:189    .text._ZN5Grain13ApplyEnvelopeEf:0000000000000000 _ZN5Grain13ApplyEnvelopeEf
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s:260    .text._ZN5Grain13ApplyEnvelopeEf:0000000000000040 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s:269    .text._ZN5Grain7ProcessE6Sample:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s:275    .text._ZN5Grain7ProcessE6Sample:0000000000000000 _ZN5Grain7ProcessE6Sample
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s:517    .text._ZN5Grain7ProcessE6Sample:00000000000000d0 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s:525    .text._ZN5Grain11SetSpawnPosEj:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s:531    .text._ZN5Grain11SetSpawnPosEj:0000000000000000 _ZN5Grain11SetSpawnPosEj
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s:548    .text._ZN5Grain12SetGrainSizeEj:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s:554    .text._ZN5Grain12SetGrainSizeEj:0000000000000000 _ZN5Grain12SetGrainSizeEj
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s:571    .text._ZN5Grain13SetPitchRatioEf:0000000000000000 $t
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s:577    .text._ZN5Grain13SetPitchRatioEf:0000000000000000 _ZN5Grain13SetPitchRatioEf
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s:623    .rodata._ZN5Grain11decay_rate_E:0000000000000000 _ZN5Grain11decay_rate_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s:629    .rodata._ZN5Grain12start_decay_E:0000000000000000 _ZN5Grain12start_decay_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s:610    .bss._ZN5Grain10right_buf_E:0000000000000000 _ZN5Grain10right_buf_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s:617    .bss._ZN5Grain9left_buf_E:0000000000000000 _ZN5Grain9left_buf_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s:603    .bss._ZN5Grain10audio_len_E:0000000000000000 _ZN5Grain10audio_len_E
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s:599    .bss._ZN5Grain10audio_len_E:0000000000000000 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s:606    .bss._ZN5Grain10right_buf_E:0000000000000000 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s:613    .bss._ZN5Grain9left_buf_E:0000000000000000 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s:620    .rodata._ZN5Grain11decay_rate_E:0000000000000000 $d
-/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccmiNmHT.s:626    .rodata._ZN5Grain12start_decay_E:0000000000000000 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s:19     .text._ZN5Grain4InitEv:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s:25     .text._ZN5Grain4InitEv:0000000000000000 _ZN5Grain4InitEv
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s:65     .text._ZN5Grain4InitEv:000000000000001c $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s:70     .text._ZN5Grain7TriggerEjjf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s:76     .text._ZN5Grain7TriggerEjjf:0000000000000000 _ZN5Grain7TriggerEjjf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s:178    .text._ZN5Grain7TriggerEjjf:0000000000000030 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s:183    .text._ZN5Grain13ApplyEnvelopeEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s:189    .text._ZN5Grain13ApplyEnvelopeEf:0000000000000000 _ZN5Grain13ApplyEnvelopeEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s:260    .text._ZN5Grain13ApplyEnvelopeEf:0000000000000040 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s:269    .text._ZN5Grain7ProcessE6Sample:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s:275    .text._ZN5Grain7ProcessE6Sample:0000000000000000 _ZN5Grain7ProcessE6Sample
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s:517    .text._ZN5Grain7ProcessE6Sample:00000000000000d0 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s:525    .text._ZN5Grain11SetSpawnPosEj:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s:531    .text._ZN5Grain11SetSpawnPosEj:0000000000000000 _ZN5Grain11SetSpawnPosEj
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s:548    .text._ZN5Grain12SetGrainSizeEj:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s:554    .text._ZN5Grain12SetGrainSizeEj:0000000000000000 _ZN5Grain12SetGrainSizeEj
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s:571    .text._ZN5Grain13SetPitchRatioEf:0000000000000000 $t
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s:577    .text._ZN5Grain13SetPitchRatioEf:0000000000000000 _ZN5Grain13SetPitchRatioEf
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s:623    .rodata._ZN5Grain11decay_rate_E:0000000000000000 _ZN5Grain11decay_rate_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s:629    .rodata._ZN5Grain12start_decay_E:0000000000000000 _ZN5Grain12start_decay_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s:610    .bss._ZN5Grain10right_buf_E:0000000000000000 _ZN5Grain10right_buf_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s:617    .bss._ZN5Grain9left_buf_E:0000000000000000 _ZN5Grain9left_buf_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s:603    .bss._ZN5Grain10audio_len_E:0000000000000000 _ZN5Grain10audio_len_E
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s:599    .bss._ZN5Grain10audio_len_E:0000000000000000 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s:606    .bss._ZN5Grain10right_buf_E:0000000000000000 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s:613    .bss._ZN5Grain9left_buf_E:0000000000000000 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s:620    .rodata._ZN5Grain11decay_rate_E:0000000000000000 $d
+/var/folders/2p/02m_5p7958535cp2tpgps0400000gn/T//ccARBWbu.s:626    .rodata._ZN5Grain12start_decay_E:0000000000000000 $d
 
 NO UNDEFINED SYMBOLS

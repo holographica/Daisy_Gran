@@ -103,42 +103,48 @@ ChordPlaybackMode ChordMode::GetMode(){
   return chord_state_.playback_mode_;
 }
 
-void ChordMode::GetModeName(){
-  switch (chord_state_.playback_mode_){
+std::string ChordMode::GetModeName(){
+  std::string s;
+  switch(chord_state_.playback_mode_){
     case ChordPlaybackMode::Arpeggio:
-      strncpy(s, "Arpeggio\0", 9);
+      s = "switched to Arpeggio mode";
+      break;
     case ChordPlaybackMode::Chord:
-      strncpy(s, "Chord\0", 6);
+      s = "switched to Chord mode";
+      break;
     case ChordPlaybackMode::Scale:
-    default:
-      strncpy(s, "Scale\0", 6);
+      s = "switched to Scale mode";
+      break;
   }
+  return s;
 }
 
-void ChordMode::GetScaleName(){
+std::string ChordMode::GetScaleName(){
+  std::string s;
   switch(chord_state_.curr_scale_){
     case ScaleType::Major:
-      strncpy(s, "Major\0", 6);
+      s = "switched to Major scale";
     case ScaleType::NaturalMinor:
-      strncpy(s, "NatMinor\0", 9);
+      s = "switched to Natural Minor scale";
     case ScaleType::HarmonicMinor:
-      strncpy(s, "HarMinor\0", 9);
+      s = "switched to Harmonic Minor scale";
     case ScaleType::MelodicMinor:
-      strncpy(s, "MelMinor\0",9);
+      s = "switched to Melodic Minor scale";
   }
+  return s;
 }
 
 std::string ChordMode::GetChordName(){
-  std::string s = "";
+  std::string s;
   switch (chord_state_.curr_chord_){
     case ChordType::Major:
-      s = "maj";
+      s = "switched to Major chord";
     case ChordType::Major7th:
-      s = "maj7th";
+      s = "switched to Maj7th chord";
     case ChordType::Minor:
-      s = "min";
+      s = "switched to Minor chord";
     case ChordType::Minor7th:
-      s = "min7th";
+      s = "switched to Min7th chord";
   }
   return s;
 }

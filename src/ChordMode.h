@@ -45,10 +45,12 @@ class ChordMode{
     std::vector<float> GetRatios(size_t direction);
 
     ChordPlaybackMode GetMode();
-    void GetModeName();
-    void GetScaleName();
-    void GetChordName();
+    std::string GetModeName();
+    std::string GetScaleName();
+    std::string GetChordName();
     size_t GetStep();
+
+    char temp_str[10];
 
   private:
     static const int MAX_CHORD_NOTES = 8; 
@@ -66,7 +68,7 @@ class ChordMode{
     ChordState chord_state_;
     std::vector<float> ratios_;
 
-    char s[10];
+    
 
     const std::array<std::vector<size_t>, 4> chord_intervals_ = 
     {{

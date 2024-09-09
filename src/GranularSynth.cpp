@@ -49,7 +49,6 @@ void GranularSynth::SetGrainSize(float knob_val){
 void GranularSynth::SetSpawnPos(float knob_val){
   float rnd = (RngFloat() * 0.1f) + knob_val;
   knob_val = fclamp(rnd, 0.0f, 1.0f);
-  // knob_val = fclamp(knob_val, 0.0f, 1.0f);
   /* convert to samples */
   spawn_pos_ = static_cast<size_t>(knob_val * static_cast<float>(audio_len_-1));
 }

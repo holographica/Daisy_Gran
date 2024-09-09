@@ -154,10 +154,4 @@ class GrannyChordApp {
 
     void DebugPrintState(AppState state);
     void DebugPrintMode(SynthMode mode);
-    // #ifdef DEBUG_MODE
-    void PrintCPULoad();
-    // #endif
-
-
-    size_t counter=0;
 };

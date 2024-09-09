@@ -3,10 +3,16 @@
 class StereoRotator{
   public:
     StereoRotator(){}
-
     void SetFreq(float freq){
       /* map to 0.01Hz to 1.0Hz - don't want it too fast */
       freq_ = fmap(freq, 0.01f, 0.5f, daisysp::Mapping::EXP);
+    }
+    
+    /* keep angle of rotation within bounds +-pi */
+    static inline constexpr float NormaliseRotationAngle(float rotation){
+      while (rotation > M_PI) rotation -= 2*M_PI;
+      while (rotation < -M_PI) rotation += 2*M_PI;
+      return rotation;
     }
 
     Sample Process(Sample in){
@@ -14,7 +20,6 @@ class StereoRotator{
       rotation_  += (2*M_PI*freq_)/SAMPLE_RATE_FLOAT;
       /* normalise angle to keep within bounds of +- pi for accurate-ish(?) results */
       rotation_ = NormaliseRotationAngle(rotation_);
-
       Sample out;
       float cos_rotation = FastCos(rotation_);
       float sin_rotation = FastSin(rotation_);
